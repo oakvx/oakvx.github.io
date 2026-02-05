@@ -1,0 +1,33 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-gradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#logo-gradient)" opacity="0.15"/>
+  
+  <!-- Main Icon -->
+  <g filter="url(#glow)">
+    <!-- Top layer -->
+    <path d="M32 16 L20 24 L32 32 L44 24 Z" fill="url(#logo-gradient)"/>
+    
+    <!-- Middle layers -->
+    <path d="M20 40 L32 48 L44 40 M20 32 L32 40 L44 32" 
+          stroke="url(#logo-gradient)" 
+          stroke-width="3.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          fill="none"/>
+  </g>
+</svg>

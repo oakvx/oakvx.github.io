@@ -1,84 +1,129 @@
 (() => {
-  const prefersReducedMotion =
-    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+  'use strict';
 
-  // ====== Header shadow on scroll ======
+  const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+
+  // ========================================
+  // HEADER SCROLL
+  // ========================================
+  
   const header = document.querySelector('.header');
-  const onScroll = () => {
+  const handleScroll = () => {
     if (!header) return;
-    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    header.classList.toggle('is-scrolled', window.scrollY > 10);
   };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // ====== Mobile nav toggle + overlay ======
-  const toggleBtn = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('#site-nav');
-  const overlay = document.querySelector('[data-nav-overlay]');
+  handleScroll();
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // ========================================
+  // MOBILE NAVIGATION - CORRETTO
+  // ========================================
+
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('siteNav');
+  const navOverlay = document.getElementById('navOverlay');
 
   const setNavOpen = (open) => {
-    if (!toggleBtn || !nav) return;
-
-    nav.classList.toggle('is-open', open);
-    toggleBtn.setAttribute('aria-expanded', String(open));
-    toggleBtn.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
-
-    document.body.classList.toggle('nav-open', open);
-    if (overlay) overlay.hidden = !open;
+    if (!nav || !navToggle || !navOverlay) return;
 
     if (open) {
-      const firstLink = nav.querySelector('a[href^="#"]');
-      firstLink?.focus?.();
+      nav.classList.add('is-open');
+      navOverlay.classList.add('is-visible');
+    } else {
+      nav.classList.remove('is-open');
+      navOverlay.classList.remove('is-visible');
+    }
+
+    navToggle.setAttribute('aria-expanded', String(open));
+
+    if (open) {
+      const firstLink = nav.querySelector('a');
+      setTimeout(() => firstLink?.focus?.(), 100);
     }
   };
 
-  if (toggleBtn && nav) {
-    toggleBtn.addEventListener('click', () => {
-      setNavOpen(!nav.classList.contains('is-open'));
+  if (navToggle && nav) {
+    // Toggle on button click
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = nav.classList.contains('is-open');
+      setNavOpen(!isOpen);
     });
 
     // Close on Escape
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') setNavOpen(false);
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        setNavOpen(false);
+      }
     });
 
-    // Close when clicking outside nav (desktop safe)
+    // Close when clicking outside
     document.addEventListener('click', (e) => {
       if (!nav.classList.contains('is-open')) return;
-      const within = nav.contains(e.target) || toggleBtn.contains(e.target);
-      if (!within) setNavOpen(false);
+      
+      const isClickInsideNav = nav.contains(e.target);
+      const isClickOnToggle = navToggle.contains(e.target);
+      
+      if (!isClickInsideNav && !isClickOnToggle) {
+        setNavOpen(false);
+      }
+    });
+
+    // Close on nav link click
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        setNavOpen(false);
+      });
     });
   }
 
-  if (overlay) {
-    overlay.addEventListener('click', () => setNavOpen(false));
+  // Close nav on overlay click
+  if (navOverlay) {
+    navOverlay.addEventListener('click', () => setNavOpen(false));
   }
 
-  // ====== Smooth scroll for internal anchors (with reduced-motion support) ======
-  document.addEventListener('click', (e) => {
-    const a = e.target?.closest?.('a[href^="#"]');
-    if (!a) return;
-    if (a.classList.contains('skip-link')) return;
+  // ========================================
+  // SMOOTH SCROLL
+  // ========================================
 
-    const href = a.getAttribute('href');
+  document.addEventListener('click', (e) => {
+    const anchor = e.target?.closest?.('a[href^="#"]');
+    if (!anchor || anchor.classList.contains('skip-link')) return;
+
+    const href = anchor.getAttribute('href');
     if (!href || href === '#' || href === '#!') return;
 
     const target = document.querySelector(href);
     if (!target) return;
 
     e.preventDefault();
-    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
 
-    // Keep URL hash in sync (nice for sharing)
-    try { history.pushState(null, '', href); } catch (_) {}
+    // Offset for fixed header
+    const headerHeight = header?.offsetHeight || 72;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
 
-    // Close menu on mobile
+    window.scrollTo({
+      top: targetPosition,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    });
+
+    // Update URL
+    try {
+      history.pushState(null, '', href);
+    } catch (_) {}
+
+    // Close mobile nav
     setNavOpen(false);
   });
 
-  // ====== Active section highlight in nav ======
+  // ========================================
+  // ACTIVE SECTION HIGHLIGHT
+  // ========================================
+
   const navLinks = Array.from(nav?.querySelectorAll('a[href^="#"]') ?? []);
-  const sectionMap = navLinks
+  const sections = navLinks
     .map((link) => {
       const href = link.getAttribute('href');
       const section = href ? document.querySelector(href) : null;
@@ -86,137 +131,279 @@
     })
     .filter(Boolean);
 
-  if (!prefersReducedMotion && 'IntersectionObserver' in window && sectionMap.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const item = sectionMap.find((x) => x.section === entry.target);
-        if (!item) return;
-        if (entry.isIntersecting) {
-          navLinks.forEach((l) => l.classList.remove('is-active'));
-          item.link.classList.add('is-active');
-        }
-      });
-    }, { root: null, threshold: 0.55 });
+  if (!prefersReducedMotion && 'IntersectionObserver' in window && sections.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const item = sections.find((s) => s.section === entry.target);
+          if (!item) return;
 
-    sectionMap.forEach((x) => io.observe(x.section));
-  }
-
-  // ====== Scroll reveal ======
-  const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
-  // Stagger micro-animation (small, premium) — disabled with prefers-reduced-motion
-  if (!prefersReducedMotion) {
-    const bySection = new Map();
-    revealEls.forEach((el) => {
-      const key = el.closest('section')?.id || 'root';
-      const list = bySection.get(key) || [];
-      list.push(el);
-      bySection.set(key, list);
-    });
-
-    bySection.forEach((list) => {
-      list.forEach((el, i) => {
-        const delay = Math.min(i * 60, 240);
-        el.style.setProperty('--reveal-delay', `${delay}ms`);
-      });
-    });
-  }
-
-
-  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries, obs) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
+          if (entry.isIntersecting) {
+            navLinks.forEach((l) => l.classList.remove('is-active'));
+            item.link.classList.add('is-active');
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
       }
-    }, { threshold: 0.12 });
+    );
 
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add('is-visible'));
+    sections.forEach((s) => observer.observe(s.section));
   }
 
-  // ====== FAQ accordion (keeps <details> accessible) ======
-  const faqItems = Array.from(document.querySelectorAll('.faq__item'));
+  // ========================================
+  // SCROLL REVEAL
+  // ========================================
+
+  const revealElements = Array.from(document.querySelectorAll('[data-reveal]'));
+
+  if (!prefersReducedMotion && 'IntersectionObserver' in window && revealElements.length) {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // ========================================
+  // FAQ ACCORDION
+  // ========================================
+
+  const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
   faqItems.forEach((item) => {
     item.addEventListener('toggle', () => {
       if (!item.open) return;
+      
       faqItems.forEach((other) => {
-        if (other !== item) other.open = false;
+        if (other !== item && other.open) {
+          other.open = false;
+        }
       });
     });
   });
 
-  // ====== Contact form: lightweight client-side validation ======
+  // ========================================
+  // CONTACT FORM
+  // ========================================
+
   const form = document.getElementById('contactForm');
   const statusEl = document.getElementById('formStatus');
+
+  const showStatus = (message, type = 'info') => {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.className = 'form-status';
+    if (type === 'success') statusEl.style.color = 'var(--success)';
+    if (type === 'error') statusEl.style.color = 'var(--error)';
+  };
+
+  const clearStatus = () => {
+    if (statusEl) {
+      statusEl.textContent = '';
+      statusEl.className = 'form-status';
+      statusEl.style.color = '';
+    }
+  };
 
   const setFieldInvalid = (fieldEl, invalid) => {
     if (!fieldEl) return;
     fieldEl.classList.toggle('is-invalid', invalid);
   };
 
-  const validate = () => {
-    if (!form) return { ok: true, firstInvalid: null };
+  const validateForm = () => {
+    if (!form) return { valid: true, firstInvalid: null };
 
     const fields = [
-      { id: 'nome', rule: (v) => v.trim().length >= 2 },
-      { id: 'salone', rule: (v) => v.trim().length >= 2 },
-      { id: 'citta', rule: (v) => v.trim().length >= 2 },
-      { id: 'telefono', rule: (v) => v.trim().length >= 6 },
-      { id: 'email', rule: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
-      { id: 'messaggio', rule: (v) => v.trim().length >= 10 },
+      { 
+        id: 'nome', 
+        rule: (v) => v.trim().length >= 2
+      },
+      { 
+        id: 'salone', 
+        rule: (v) => v.trim().length >= 2
+      },
+      { 
+        id: 'citta', 
+        rule: (v) => v.trim().length >= 2
+      },
+      { 
+        id: 'telefono', 
+        rule: (v) => /^[\d\s+()-]{6,}$/.test(v.trim())
+      },
+      { 
+        id: 'email', 
+        rule: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
+      },
+      { 
+        id: 'messaggio', 
+        rule: (v) => v.trim().length >= 10
+      }
     ];
 
+    let valid = true;
     let firstInvalid = null;
-    let ok = true;
 
     fields.forEach(({ id, rule }) => {
       const input = document.getElementById(id);
-      const wrapper = input?.closest('.field');
+      const wrapper = input?.closest('.form-field');
       const value = input?.value ?? '';
       const isValid = rule(value);
 
       setFieldInvalid(wrapper, !isValid);
-      if (!isValid && !firstInvalid) firstInvalid = input;
-      if (!isValid) ok = false;
+
+      if (!isValid) {
+        valid = false;
+        if (!firstInvalid) firstInvalid = input;
+      }
     });
 
-    return { ok, firstInvalid };
+    return { valid, firstInvalid };
   };
 
+  // Clear validation on input
   if (form) {
-    form.addEventListener('submit', (e) => {
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        const wrapper = input.closest('.form-field');
+        if (wrapper?.classList.contains('is-invalid')) {
+          setFieldInvalid(wrapper, false);
+        }
+        clearStatus();
+      });
+    });
+  }
+
+  // Form submission
+  if (form) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const { ok, firstInvalid } = validate();
+      const { valid, firstInvalid } = validateForm();
 
-      if (!ok) {
-        if (statusEl) statusEl.textContent = 'Controlla i campi evidenziati e riprova.';
+      if (!valid) {
+        showStatus('Per favore, controlla i campi evidenziati e riprova.', 'error');
         firstInvalid?.focus?.();
         return;
       }
 
-      // Placeholder: nessun backend. Qui puoi integrare un invio reale.
-      if (statusEl) statusEl.textContent = 'Richiesta inviata. Ti contattiamo a breve.';
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn?.innerHTML;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Invio in corso...</span>';
+      }
 
-      form.reset();
-      document.querySelectorAll('.field.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
+      clearStatus();
+
+      try {
+        const formAction = form.getAttribute('action');
+        
+        if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+          throw new Error('Form endpoint non configurato. Sostituisci YOUR_FORM_ID con il tuo ID Formspree.');
+        }
+
+        const formData = new FormData(form);
+        
+        const response = await fetch(formAction, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          showStatus('✓ Richiesta inviata con successo! Ti ricontatteremo presto.', 'success');
+          form.reset();
+          
+          document.querySelectorAll('.form-field.is-invalid').forEach((field) => {
+            field.classList.remove('is-invalid');
+          });
+
+          setTimeout(() => {
+            statusEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+
+        } else {
+          const data = await response.json();
+          if (data.errors) {
+            const errorMsg = data.errors.map(e => e.message).join(', ');
+            throw new Error(errorMsg);
+          } else {
+            throw new Error('Errore durante l\'invio. Riprova.');
+          }
+        }
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        showStatus(
+          error.message || 'Si è verificato un errore. Riprova o contattaci direttamente.',
+          'error'
+        );
+      } finally {
+        if (submitBtn && originalBtnText) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      }
     });
   }
 
-  // ====== WhatsApp floating CTA (mobile only) ======
+  // ========================================
+  // WHATSAPP FAB
+  // ========================================
+
   const waFab = document.querySelector('.wa-fab');
   if (waFab) {
-    const rawNumber = (waFab.getAttribute('data-wa-number') || '').replace(/\s+/g, '');
-    const text = waFab.getAttribute('data-wa-text') || '';
-    const number = rawNumber.replace(/^\+/, '');
-    const href = number ? `https://wa.me/${number}?text=${encodeURIComponent(text)}` : '#contatti';
-    waFab.setAttribute('href', href);
+    const handleWaFabScroll = () => {
+      const currentScroll = window.scrollY;
+      
+      if (currentScroll > 300) {
+        waFab.classList.add('is-visible');
+      } else {
+        waFab.classList.remove('is-visible');
+      }
+    };
+
+    window.addEventListener('scroll', handleWaFabScroll, { passive: true });
+    handleWaFabScroll();
   }
 
-  // ====== Footer year ======
+  // ========================================
+  // FOOTER YEAR
+  // ========================================
+
   const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+
+  // ========================================
+  // CONSOLE
+  // ========================================
+
+  console.log(
+    '%cSynkris%c\n💜 Assistente WhatsApp per saloni\nFatto con cura in Italia',
+    'font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;',
+    'font-size: 14px; color: #a78bfa; margin-top: 8px;'
+  );
+
 })();

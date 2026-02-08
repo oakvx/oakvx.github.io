@@ -1,3 +1,5 @@
+
+
 /* =========================================
    SYNKRIS - REDESIGNED 2025  
    Space Grotesk + Manrope
@@ -58,7 +60,9 @@
   --space-4: 1rem;
   --space-5: 1.25rem;
   --space-6: 1.5rem;
+  --space-7: 1.75rem;
   --space-8: 2rem;
+  --space-9: 2.25rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
@@ -432,6 +436,25 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: var(--text-lg);
 }
 
+@media (max-width: 640px) {
+  .btn--lg {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-base);
+  }
+}
+
+.btn--sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 640px) {
+  .btn--sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+  }
+}
+
 /* ========================================
    SECTIONS
    ======================================== */
@@ -491,8 +514,8 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(167, 139, 250, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.164) 1px, transparent 1px);
   background-size: 50px 50px;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
 }
@@ -799,11 +822,31 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 767px) {
+  /* evita clipping sul bordo sinistro (anche con safe-area) */
+  .timeline {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
   .timeline::before {
-    left: 30px;
+    left: calc(max(16px, env(safe-area-inset-left, 0px)) + 14px);
+    top: 44px;
+    bottom: 44px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 72px 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+  }
+
+  .timeline-number::after {
+    left: -6px;
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 0 3px var(--bg-secondary);
   }
 }
-
 .timeline-item {
   display: grid;
   gap: var(--space-6);
@@ -961,6 +1004,14 @@ img { max-width: 100%; height: auto; display: block; }
   box-shadow: var(--shadow-xl);
 }
 
+/* Versione “device”: niente rettangolo/box dietro al tablet */
+.dashboard-preview.dashboard-preview--device {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
 .dashboard-window {
   display: flex;
   gap: 6px;
@@ -982,13 +1033,16 @@ img { max-width: 100%; height: auto; display: block; }
   background: #000;
   border-radius: var(--radius-md);
   padding: var(--space-6);
+  overflow: auto;
+  min-width: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-4);
   border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -1037,9 +1091,15 @@ img { max-width: 100%; height: auto; display: block; }
 
 .dashboard-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4);
   margin-bottom: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .stat-card {
@@ -1113,7 +1173,8 @@ img { max-width: 100%; height: auto; display: block; }
 .appointment-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   padding: var(--space-3);
   background: rgba(0,0,0,0.4);
   border-radius: var(--radius-md);
@@ -1707,4 +1768,944 @@ img { max-width: 100%; height: auto; display: block; }
 [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+/* ========================================
+   SCROLLYTELLING DEMO (mobile-first)
+   ======================================== */
+
+.scrolly {
+  --scrolly-gap: var(--space-7);
+  --scrolly-stage-gap: var(--space-5);
+  --scrolly-top: calc(var(--header-h, 84px) + var(--space-4));
+  --scrolly-bottom-pad: clamp(160px, 35vh, 420px);
+}
+
+/* Mobile first: stage (sticky) sopra, steps sotto */
+.scrolly__grid {
+  margin-top: var(--space-9);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--scrolly-gap);
+  align-items: start;
+}
+
+.scrolly__stage {
+  order: 1;
+  min-width: 0;
+  position: sticky;
+  top: var(--scrolly-top);
+  align-self: start;
+  z-index: 2;
+}
+
+/* Steps (tablist): padding in basso per far attivare bene anche l'ultimo step (IntersectionObserver) */
+.scrolly__steps {
+  order: 2;
+  display: grid;
+  gap: var(--space-4);
+  padding-bottom: var(--scrolly-bottom-pad);
+}
+
+/* Tabs wrapper + scroll track (mobile: 1 step visibile alla volta) */
+.scrolly__tabs {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.scrolly__scroll {
+  display: none;
+}
+
+.scrolly-sentinel {
+  height: 1px; /* default: desktop non usa sentinels */
+}
+
+/* Mobile: steps e stage organizzati in modo ottimale */
+@media (max-width: 979px) {
+  .scrolly__grid { 
+    justify-items: center;
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+  }
+  .scrolly__stage,
+  .scrolly__steps {
+    width: min(100%, 480px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Mobile: 1 step alla volta (sticky sotto l’iPhone) + sentinels per scroll-driven */
+@media (max-width: 979px) {
+  .scrolly__steps { padding-bottom: 0; gap: var(--space-3); }
+
+  .scrolly__tabs {
+    position: sticky;
+    top: calc(var(--scrolly-top) + var(--scrolly-stage-h, 520px) + var(--space-6));
+    z-index: 1;
+  }
+
+  /* Mostra solo lo step attivo */
+  .scrolly__tabs .scrolly-step { display: none; }
+  .scrolly__tabs .scrolly-step.is-active { display: grid; }
+
+  /* Track invisibile che crea lo “spazio scroll” e guida l’IntersectionObserver */
+  .scrolly__scroll { 
+    display: block;
+    padding-bottom: var(--scrolly-exit-pad, var(--scrolly-bottom-pad));
+  }
+
+  .scrolly-sentinel {
+    height: clamp(260px, 40vh, 520px);
+  }
+
+  .scrolly-sentinel--tail {
+    height: clamp(180px, 28vh, 420px);
+  }
+
+  /* Fine sezione: evita compenetrazioni quando lo stage “si stacca” al termine del container */
+  .scrolly.is-ending .scrolly__tabs {
+    position: relative;
+    top: 0;
+  }
+
+  .scrolly.is-ending .scrolly__scroll {
+    padding-bottom: var(--space-10);
+  }
+}
+
+
+/* Viewport basse (mobile landscape): evita doppio-sticky */
+@media (max-height: 560px) and (max-width: 979px) {
+  .scrolly__tabs { position: static; top: auto; }
+  .scrolly__tabs .scrolly-step { display: grid; }
+  .scrolly__scroll { display: none; }
+}
+
+
+@media (max-width: 640px) {
+  .scrolly__grid {
+    gap: var(--space-4);
+  }
+  
+  .scrolly__stage,
+  .scrolly__steps {
+    width: 100%;
+  }
+}
+
+/* Card container della demo (evita “aria vuota” e rende tutto più coerente) */
+/* Card container della demo */
+.scrolly__sticky {
+  position: relative;
+  width: min(100%, 520px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-6);
+  border-radius: calc(var(--radius-xl) + 6px);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(167, 139, 250, 0.14);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 640px) {
+  .scrolly__sticky {
+    padding: var(--space-4) var(--space-4) var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+}
+
+@media (max-height: 620px) {
+  .scrolly__stage {
+    position: relative; /* evita stage “incollato” su viewport basse/landscape */
+    top: auto;
+  }
+}
+
+
+.scrolly__devices {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "phone"
+    "controls";
+  gap: var(--space-5);
+  align-items: start;
+  justify-items: center;
+}
+
+@media (max-width: 640px) {
+  .scrolly__devices {
+    gap: var(--space-4);
+  }
+}
+
+.scrolly__device {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+
+/* Layout helpers (grid areas) */
+.scrolly__device--phone { grid-area: phone; }
+.scrolly-controls { grid-area: controls; }
+
+/* Step cards: su mobile devono avere "spazio scroll" per attivarsi una a una */
+.scrolly-step {
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  cursor: pointer;
+  scroll-margin-top: calc(var(--scrolly-top) + var(--space-4));
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+  min-height: clamp(100px, 14vh, 150px);
+  display: grid;
+  align-content: center;
+  gap: var(--space-2);
+  opacity: 0.6;
+}
+
+.scrolly-step.is-active {
+  opacity: 1;
+  border-color: rgba(167, 139, 250, 0.65);
+  background: rgba(167, 139, 250, 0.12);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+}
+
+@media (max-width: 640px) {
+  .scrolly-step {
+    padding: var(--space-5);
+    border-radius: var(--radius-md);
+  }
+  
+  .scrolly-step.is-active {
+    box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.15);
+  }
+}
+
+.scrolly-step:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.scrolly-step:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, 0.55);
+  outline-offset: 3px;
+}
+
+
+.scrolly-step h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .scrolly-step h3 {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+}
+
+.scrolly-step p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .scrolly-step p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+}
+
+
+/* Hint sotto al titolo demo */
+.scrolly-hint {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Controls vicino al telefono */
+.scrolly-controls {
+  width: 100%;
+  max-width: 460px;
+  display: grid;
+  gap: var(--space-3);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .scrolly-controls { gap: var(--space-2); }
+}
+
+.scrolly-controls__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.scrolly-controls__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--surface);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .scrolly-controls__label {
+    font-size: var(--text-xs);
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+.scrolly-controls__nav {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .scrolly-controls__nav {
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .scrolly-controls__nav .btn {
+    flex: 1;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 380px) {
+  .scrolly-controls__meta { gap: var(--space-2); }
+  .scrolly-controls__nav .btn { max-width: 150px; }
+}
+
+/* Calendar sync toast (compare dal passo 3) */
+.scrolly-calendar-toast {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.10);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+  /* hidden state */
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  transition: opacity 220ms ease, transform 220ms ease, max-height 220ms ease, margin-bottom 220ms ease;
+}
+
+.scrolly-calendar-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 220px;
+  margin-bottom: var(--space-4);
+}
+
+.scrolly-calendar-toast .toast-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: rgba(240, 253, 250, 0.95);
+}
+
+.toast-grid {
+  margin: var(--space-2) 0 0 0;
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: rgba(240, 253, 250, 0.85);
+}
+
+.toast-grid > div {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.toast-grid dt {
+  margin: 0;
+  font-weight: 700;
+  color: rgba(240, 253, 250, 0.75);
+}
+
+.toast-grid dd {
+  margin: 0;
+  color: rgba(240, 253, 250, 0.95);
+}
+
+@media (max-width: 380px) {
+  .scrolly-calendar-toast { padding: var(--space-3); }
+  .toast-grid > div { grid-template-columns: 78px 1fr; }
+}
+/* Desktop: due colonne (steps sinistra, stage destra) */
+@media (min-width: 980px) {
+  .scrolly__grid {
+    /* Su schermi grandi: evitare che le 2 colonne “si stirino” fino ai bordi del container.
+       Le larghezze seguono il contenuto e l’intero blocco resta centrato. */
+    grid-template-columns: minmax(340px, 460px) minmax(520px, 620px);
+    /* Più spazio tra colonna step e telefono: evita che il frame/shadow del device “invada” gli step */
+    column-gap: clamp(var(--space-12), 7vw, var(--space-32));
+    row-gap: var(--space-8);
+    justify-content: center;
+    justify-items: center;
+    align-items: stretch;
+    padding-bottom: clamp(var(--space-8), 8vh, var(--space-16));
+
+  }
+  .scrolly__stage { order: 2; }
+  .scrolly__steps { order: 1; }
+
+  /* Desktop: evita che il device (e le sue ombre) si sovrapponga visivamente alla colonna step */
+  .scrolly__steps { position: relative; z-index: 2; }
+  .scrolly__stage { z-index: 1; }
+
+  /* Allinea colonna step e stage (composizione più “centrata” sul device) */
+  .scrolly__steps {
+    justify-self: center;
+    max-width: 440px;
+
+    /* matcha l'altezza dello stage (iPhone + controlli) */
+    align-self: stretch;
+    padding-bottom: 0; /* lo spazio scroll resta sul container (.scrolly__grid) */
+    display: flex;
+  }
+  .scrolly__stage { justify-self: center; }
+
+  /* Più "respiro" tra gli step: riduce i salti percepiti durante lo scroll */
+  .scrolly__tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* “aria” sopra/sotto (ai bordi del blocco) */
+    padding-block: var(--space-5);
+
+    /* gap minimo: il resto lo fa space-between */
+    gap: var(--space-3);
+  }
+  .scrolly-step { min-height: 0; }
+  
+  /* Su desktop: tutti gli step visibili */
+  .scrolly-step:not(.is-active) {
+    display: grid;
+    opacity: 0.5;
+  }
+  
+  .scrolly-step.is-active {
+    opacity: 1;
+  }
+
+  /* Stage desktop: telefono + controlli sotto (layout "a fianco" pulito) */
+  .scrolly__devices {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "phone"
+      "controls";
+    justify-items: center;
+    align-items: start;
+    gap: clamp(var(--space-8), 4vh, var(--space-16));
+  }
+
+  .scrolly__device--phone { 
+    justify-self: center;
+    width: 100%;
+    max-width: 480px;
+    /* scala più stabile su desktop (lascia spazio ai controlli sotto) */
+    --device-scale: clamp(0.78, 0.70 + 0.45vw, 0.90);
+  }
+
+  .scrolly-controls { 
+    max-width: 480px;
+    justify-self: center;
+    padding-top: var(--space-2);
+    margin-top: clamp(var(--space-4), 2vh, var(--space-8));
+  }
+
+
+  /* Card sticky: un filo più larga su desktop (evita compenetrazioni col frame del device) */
+  .scrolly__sticky {
+    width: min(100%, 600px);
+    padding: var(--space-5);
+  }
+}
+
+
+/* Desktop basso in altezza: riduci ancora la scala del device (evita overflow con controlli sotto) */
+@media (min-width: 980px) and (max-height: 860px) {
+  .scrolly__device--phone { --device-scale: clamp(0.72, 0.64 + 0.40vw, 0.86); }
+}
+
+/* Mobile improvements */
+@media (max-width: 979px) {
+  .scrolly__grid {
+    gap: var(--space-5);
+    padding-inline: var(--space-4); /* aria ai lati su mobile */
+  }
+  
+  .scrolly__devices {
+    gap: var(--space-5);
+  }
+  
+  .scrolly-step {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+@media (max-width: 1024px) {
+  .scrolly__stage {
+    padding-inline: var(--space-5);
+  }
+}
+
+
+/* Devices.css (marvel devices) usa dimensioni fisse: usiamo un wrapper "dimensionato"
+   per evitare spazi vuoti (transform non influisce sul flow). */
+.scrolly__device--phone {
+  --device-w: 375px;
+  --device-h: 812px;
+  --device-scale: 0.98;
+
+  width: min(100%, calc(var(--device-w) * var(--device-scale)));
+  height: calc(var(--device-h) * var(--device-scale));
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .scrolly__device--phone { 
+    --device-scale: 0.92;
+    margin: 0 auto;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 641px) {
+  .scrolly__device--phone { --device-scale: clamp(0.72, 0.64 + 0.9vw, 0.88); }
+}
+
+.scrolly__device--phone .synkris-device {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(var(--device-scale));
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* Assicura che il contenuto riempia davvero la screen del device */
+.scrolly__device--phone .synkris-device .screen {
+  display: flex;
+  align-items: stretch;
+}
+.scrolly__device--phone .synkris-device .screen > .scrolly-screen { flex: 1; }
+
+/* Screen wrapper */
+.scrolly-screen {
+  --ios-statusbar-h: 44px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: var(--ios-statusbar-h);
+  background: #0b0b10;
+}
+
+@media (max-width: 640px) {
+  .scrolly-screen { --ios-statusbar-h: 38px; }
+}
+
+/* iOS status bar (mock, per rendere credibile il notch e dare spazio alla chat) */
+.ios-statusbar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  pointer-events: none;
+  height: var(--ios-statusbar-h);
+  padding: 12px 14px 6px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.92);
+  user-select: none;
+  flex: 0 0 auto;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0));
+}
+
+@media (max-width: 640px) {
+  .ios-statusbar { padding: 10px 14px 6px; }
+}
+
+.ios-statusbar__left{ font-variant-numeric: tabular-nums; }
+.ios-statusbar__right{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.ios-statusbar__icon{
+  width: 18px;
+  height: 12px;
+  display:block;
+  opacity: 0.95;
+}
+.ios-statusbar__icon--battery{ width: 26px; height: 12px; }
+
+/* Chat (riuso stile hero) */
+.chat-mockup--scrolly {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-mockup--scrolly .chat-header {
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.chat-body--scrolly {
+  padding: var(--space-4);
+  gap: var(--space-4);
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* scrollbar discreta */
+.chat-body--scrolly::-webkit-scrollbar { width: 10px; }
+.chat-body--scrolly::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.10);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+.chat-body--scrolly { scrollbar-color: rgba(255,255,255,0.12) transparent; }
+
+/* Reveal progressivo dei messaggi */
+.scrolly-msg {
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.scrolly-msg.is-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Home indicator (figurativo) */
+.scrolly-home-indicator {
+  height: 6px;
+  width: 120px;
+  margin: 10px auto 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+}
+
+/* Reduced-motion transcript (versione statica leggibile) */
+.scrolly-transcript {
+  display: none;
+  margin-top: var(--space-12);
+}
+
+.scrolly-transcript__card {
+  max-width: 920px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(167, 139, 250, 0.14);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+}
+
+.scrolly-transcript__title {
+  margin: 0 0 var(--space-2) 0;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+}
+
+.scrolly-transcript__sub {
+  margin: 0 0 var(--space-6) 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.scrolly-transcript__chat {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.scrolly-transcript__line {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+}
+
+.scrolly-transcript__who {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+  color: rgba(167, 139, 250, 0.9);
+}
+
+.scrolly-transcript__txt {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .scrolly-transcript__card { padding: var(--space-6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrolly-transcript { display: block; }
+}
+
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .scrolly__stage { position: static; top: auto; }
+  .chat-body--scrolly { scroll-behavior: auto; }
+  .scrolly-msg { transition: none; }
+  .scrolly-step { transition: none; }
+  .scrolly-controls * { transition: none; }
+  .scrolly-calendar-toast { transition: none; }
+  .scrolly-step:hover { transform: none; }
+  .scrolly .btn:hover { transform: none; }
+}
+
+/* ========================================
+   iPad Pro frame (orizzontale) per il Pannello
+   ======================================== */
+
+.dashboard-preview--device {
+  display: grid;
+  justify-items: center;
+}
+
+.ipad-pro {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+
+.ipad-pro--landscape {
+  /* Constrain anche in viewport bassi: evita tablet enorme/crop */
+  width: min(clamp(320px, 92vw, 980px), calc(72vh * 1.333333));
+  aspect-ratio: 4 / 3;
+}
+
+@supports (height: 1svh) {
+  .ipad-pro--landscape {
+    width: min(clamp(320px, 92vw, 980px), calc(72svh * 1.333333));
+  }
+}
+
+.ipad-pro__bezel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: clamp(14px, 2.2vw, 26px);
+  border-radius: clamp(28px, 3.2vw, 44px);
+
+  /* Look iPad Pro (più “metal + glass”, meno “card colorata”) */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03) 45%, rgba(0,0,0,0.40)),
+    radial-gradient(120% 140% at 30% 20%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(110% 160% at 85% 30%, rgba(255,255,255,0.05), transparent 60%),
+    rgba(10, 10, 14, 1);
+
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.55),
+    0 10px 26px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+
+.ipad-pro__bezel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  /* Rim “metallico” */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(0,0,0,0.55),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.ipad-pro__bezel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  /* Riflesso vetro */
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.10) 18%, transparent 40%),
+    radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,0.08), transparent 55%);
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+
+.ipad-pro__camera {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.22);
+  box-shadow:
+    inset 0 0 0 2px rgba(0,0,0,0.35),
+    0 0 18px rgba(255,255,255,0.10);
+}
+
+.ipad-pro__screen {
+  width: 100%;
+  height: 100%;
+  border-radius: clamp(18px, 2.6vw, 34px);
+  overflow: hidden;
+  background: #0b0b10;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.08),
+    inset 0 8px 24px rgba(255,255,255,0.03);
+}
+
+/* dashboard full-bleed nello schermo */
+.dashboard-content--ipad {
+  border-radius: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+/* Su schermi piccoli: evita “effetto tablet enorme” */
+@media (max-width: 520px) {
+  .ipad-pro--landscape { aspect-ratio: 16 / 10; }
+  .ipad-pro__bezel { padding: 12px; }
+  .ipad-pro__camera { top: 7px; }
+}
+/* ========================================
+   MOBILE POLISH - ULTERIORI MIGLIORAMENTI
+   ======================================== */
+
+@media (max-width: 640px) {
+  /* Hero badge più compatto */
+  .hero__badge {
+    font-size: var(--text-xs);
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  /* Miglior spaziatura per sezioni */
+  .section {
+    padding: var(--space-16) 0;
+  }
+  
+  /* Form inputs più grandi su mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    font-size: 16px !important; /* previene zoom su iOS */
+  }
+  
+  /* Chat messaggi più leggibili */
+  .chat-msg p {
+    font-size: 0.9rem;
+  }
+  
+  /* Container più stretto per evitare overflow */
+  .container {
+    padding: 0 var(--space-4);
+  }
+  
+  /* Migliore leggibilità dei chip orari */
+  .time-chips {
+    gap: var(--space-2);
+  }
+  
+  .chip {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.85rem;
+  }
+  
+  /* Scrolly hint più visibile */
+  .scrolly-hint {
+    font-size: 0.85rem;
+    margin-top: var(--space-2);
+  }
+}
+
+/* Fix per landscape mode su smartphone */
+@media (max-width: 900px) and (max-height: 500px) {
+  .hero {
+    min-height: auto;
+    padding: calc(72px + var(--space-8)) 0 var(--space-12);
+  }
+  
+  .scrolly__stage {
+    position: relative;
+    top: auto;
+  }
+  
+  .scrolly__device--phone {
+    --device-scale: 0.68;
+  }
 }

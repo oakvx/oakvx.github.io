@@ -91,6 +91,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
+<link rel="stylesheet" href="https://marvelapp.github.io/devices.css/assets/devices.min.css"/>
+
 <link rel="stylesheet" href="styles.css"/>
 <script defer src="app.js"></script>
 </head>
@@ -127,6 +129,7 @@
       <nav aria-label="Navigazione principale" class="nav" id="siteNav">
         <a href="#perche">Perché</a>
         <a href="#come">Come funziona</a>
+        <a href="#demo">Demo</a>
         <a href="#funzioni">Cosa fa</a>
         <a href="#pannello">Pannello</a>
         <a href="#prezzi">Piani</a>
@@ -145,7 +148,7 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="hero__bg-grid"></div>
+    <div class="hero__d"></div>
     <div class="container">
       <div class="hero__wrapper">
         
@@ -181,16 +184,17 @@
 
           <div class="hero__stats">
             <div class="stat-item">
-              <div class="stat-value">24/7</div>
               <div class="stat-label">Sempre attivo</div>
+              <div class="stat-value">24/7</div>
+              
             </div>
-            <div class="stat-item">
-              <div class="stat-value">Auto</div>
-              <div class="stat-label">Calendario sync</div>
+            <div class="stat-item"><div class="stat-label">Calendario</div>
+              <div class="stat-value">Automatico</div>
+              
             </div>
-            <div class="stat-item">
-              <div class="stat-value">Staff</div>
-              <div class="stat-label">Pannello semplice</div>
+            <div class="stat-item"><div class="stat-label">Gestionale semplice</div>
+              <div class="stat-value">Per lo staff</div>
+              
             </div>
           </div>
         </div>
@@ -299,8 +303,216 @@
       </div>
     </div>
   </section>
+  <!-- DEMO (SCROLLYTELLING) -->
+  <section class="section scrolly" id="demo" data-scrolly>
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <span class="section-tag">In azione</span>
+        <h2>Guarda Synkris lavorare mentre scorri</h2>
+        <p class="section-subtitle">Ogni step aggiorna la chat con il cliente. È una demo.</p>
+        <p class="scrolly-hint">Scorri o tocca i passaggi. In alternativa usa i controlli qui sotto.</p>
+      </div>
+
+      <div class="scrolly__grid">
+        <div class="scrolly__steps" aria-label="Passaggi demo">
+          <div class="scrolly__tabs" role="tablist" aria-label="Passaggi demo">
+          <button class="scrolly-step is-active" type="button" data-step="0" role="tab" id="scrolly-tab-0" aria-selected="true" aria-controls="scrolly-panel">
+            <h3>1️⃣ Richiesta chiara</h3>
+            <p>Il cliente scrive come sempre su WhatsApp</p>
+          </button>
+          <button class="scrolly-step" type="button" data-step="1" role="tab" id="scrolly-tab-1" aria-selected="false" aria-controls="scrolly-panel">
+            <h3>2️⃣ Proposta orari</h3>
+            <p>Synkris legge disponibilità e propone opzioni dinamiche in base alla tua attività.</p>
+          </button>
+          <button class="scrolly-step" type="button" data-step="2" role="tab" id="scrolly-tab-2" aria-selected="false" aria-controls="scrolly-panel">
+            <h3>3️⃣ Conferma + Calendar sync</h3>
+            <p>Conferma e scrittura immediata di <b>tutti i dettagli</b>su Google Calendar</p>
+          </button>
+          <button class="scrolly-step" type="button" data-step="3" role="tab" id="scrolly-tab-3" aria-selected="false" aria-controls="scrolly-panel">
+            <h3>4️⃣ Reminder anti no‑show</h3>
+            <p>Promemoria automatico e istruzioni pratiche.</p>
+          </button>
+          <button class="scrolly-step" type="button" data-step="4" role="tab" id="scrolly-tab-4" aria-selected="false" aria-controls="scrolly-panel">
+            <h3>5️⃣ Interazione dello staff</h3>
+            <p>Se la richiesta è ambigua, passa la mano a una persona.</p>
+          </button>
+        </div>
+          <div class="scrolly__scroll" aria-hidden="true"></div>
+        </div>
+
+        <div class="scrolly__stage" aria-label="Anteprima sincronizzata">
+          <div class="scrolly__sticky">
+            <div class="scrolly__devices">
+
+              <div class="scrolly-controls" data-scrolly-controls aria-label="Controlli demo">
+                <div class="scrolly-controls__meta">
+                  <span class="scrolly-controls__label" id="scrollyStepLabel">1/5 step</span>
+                </div>
+
+                <div class="scrolly-controls__nav">
+                  <button class="btn btn--ghost btn--sm" type="button" data-scrolly-action="prev">← Indietro</button>
+                  <button class="btn btn--primary btn--sm" type="button" data-scrolly-action="next">Avanti →</button>
+                </div>
+              
+</div>
+
+              <!-- iPhone -->
+              <div class="scrolly__device scrolly__device--phone">
+                <div class="marvel-device iphone-x black synkris-device">
+                  <div class="notch">
+                    <div class="camera"></div>
+                    <div class="speaker"></div>
+                  </div>
+                  <div class="top-bar"></div>
+                  <div class="sleep"></div>
+                  <div class="bottom-bar"></div>
+                  <div class="volume"></div>
+                  <div class="overflow">
+                    <div class="shadow shadow--tr"></div>
+                    <div class="shadow shadow--tl"></div>
+                    <div class="shadow shadow--br"></div>
+                    <div class="shadow shadow--bl"></div>
+                  </div>
+
+                  <div class="screen">
+                    <div class="scrolly-screen">
+                      <div class="ios-statusbar" aria-hidden="true">
+                        <div class="ios-statusbar__left">9:41</div>
+                        <div class="ios-statusbar__right">
+                          <svg class="ios-statusbar__icon ios-statusbar__icon--signal" viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="3" y="14" width="3" height="7" rx="1" fill="currentColor" opacity="0.95"></rect>
+                            <rect x="8" y="11" width="3" height="10" rx="1" fill="currentColor" opacity="0.95"></rect>
+                            <rect x="13" y="8" width="3" height="13" rx="1" fill="currentColor" opacity="0.95"></rect>
+                            <rect x="18" y="5" width="3" height="16" rx="1" fill="currentColor" opacity="0.95"></rect>
+                          </svg>
+                          <svg class="ios-statusbar__icon ios-statusbar__icon--wifi" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2.5 8.5c5.8-5 13.2-5 19 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                            <path d="M5.6 12c4-3.5 8.8-3.5 12.8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                            <path d="M9 15.4c2.2-2 3.8-2 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                            <circle cx="12" cy="18.2" r="1.2" fill="currentColor"></circle>
+                          </svg>
+                          <svg class="ios-statusbar__icon ios-statusbar__icon--battery" viewBox="0 0 34 16" aria-hidden="true">
+                            <rect x="1" y="3" width="28" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"></rect>
+                            <rect x="30.2" y="6" width="2.8" height="4" rx="1" fill="currentColor"></rect>
+                            <rect x="3.2" y="5.2" width="22.2" height="5.6" rx="1.8" fill="currentColor" opacity="0.9"></rect>
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div class="chat-mockup chat-mockup--scrolly">
+                        <div class="chat-header">
+                          <div class="chat-avatar">S</div>
+                          <div>
+                            <div class="chat-name">Synkris</div>
+                            <div class="chat-status">
+                              <span class="status-dot"></span> Online
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="chat-body chat-body--scrolly" id="scrolly-panel" role="tabpanel" aria-live="polite" aria-labelledby="scrolly-tab-0">
+
+                          <!-- Calendar sync overlay (Step 3) -->
+                          <div class="scrolly-calendar-toast" id="scrollyCalendarToast" aria-hidden="true">
+                            <div class="toast-title">✅ Evento creato su Google Calendar</div>
+                            <dl class="toast-grid">
+                              <div><dt>Servizio</dt><dd>Gel</dd></div>
+                              <div><dt>Ora</dt><dd>Domani • 16:00</dd></div>
+                              <div><dt>Operatore</dt><dd>Diana</dd></div>
+                              <div><dt>Note</dt><dd>Prima visita • confermato via WhatsApp</dd></div>
+                            </dl>
+                          </div>
+
+                          <div class="msg msg--in scrolly-msg" data-show-from="0">Ciao! Vorrei un <b>gel</b> domani pomeriggio 🙂</div>
+
+                          <div class="msg msg--out scrolly-msg" data-show-from="1" hidden>
+                            Perfetto. Ecco gli orari disponibili:
+                            <div class="time-chips">
+                              <span class="chip">14:30</span>
+                              <span class="chip">16:00</span>
+                              <span class="chip">18:15</span>
+                            </div>
+                          </div>
+
+                          <div class="msg msg--in scrolly-msg" data-show-from="2" hidden>Va bene <b>16:00</b>. Grazie!</div>
+                          <div class="msg msg--out scrolly-msg" data-show-from="2" hidden>Confermato ✅ Ho inserito l’appuntamento in calendario.</div>
+
+                          <div class="msg msg--out scrolly-msg" data-show-from="3" hidden>Promemoria: ti aspettiamo domani alle 16:00. Se arrivi 5 minuti prima, top 🙌</div>
+
+                          <div class="msg msg--in scrolly-msg" data-show-from="4" hidden>In realtà forse volevo un colore diverso…</div>
+                          <div class="msg msg--out scrolly-msg" data-show-from="4" hidden>Ok! Ti metto in contatto con lo staff per scegliere insieme 💬</div>
+                        </div>
+                      </div>
+
+                      <div class="scrolly-home-indicator" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      
+<div class="scrolly-transcript" aria-label="Trascrizione demo">
+  <div class="scrolly-transcript__card">
+    <h3 class="scrolly-transcript__title">Demo (versione statica)</h3>
+    <p class="scrolly-transcript__sub">Stessa conversazione, senza sticky o animazioni. Utile se preferisci meno movimento.</p>
+
+    <div class="scrolly-transcript__chat">
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Cliente</div>
+        <p class="scrolly-transcript__txt">Ciao! Vorrei un gel domani pomeriggio 🙂</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Synkris</div>
+        <p class="scrolly-transcript__txt">Perfetto. Ecco gli orari disponibili: 14:30 · 16:00 · 18:15</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Cliente</div>
+        <p class="scrolly-transcript__txt">Va bene 16:00. Grazie!</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Synkris</div>
+        <p class="scrolly-transcript__txt">Confermato ✅ Ho inserito l’appuntamento in calendario.</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Synkris · Google Calendar</div>
+        <p class="scrolly-transcript__txt">Evento creato: Gel — Domani 16:00 — Operatore: Diana — Note: Prima visita (confermato via WhatsApp).</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Synkris</div>
+        <p class="scrolly-transcript__txt">Promemoria: ti aspettiamo domani alle 16:00. Se arrivi 5 minuti prima, top 🙌</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Cliente</div>
+        <p class="scrolly-transcript__txt">In realtà forse volevo un colore diverso…</p>
+      </div>
+
+      <div class="scrolly-transcript__line">
+        <div class="scrolly-transcript__who">Synkris</div>
+        <p class="scrolly-transcript__txt">Ok! Ti metto in contatto con lo staff per scegliere insieme 💬</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+
+
 
   <!-- FUNZIONI -->
+
   <section class="section" id="funzioni">
     <div class="container">
       <div class="section-header" data-reveal>
@@ -348,22 +560,19 @@
     <div class="container">
       <div class="section-header" data-reveal>
         <span class="section-tag">Pannello di controllo</span>
-        <h2>Uno strumento vero, non solo una dashboard bella da vedere</h2>
-        <p class="section-subtitle">Il pannello non è lì per impressionare: è fatto per lavorarci. Vedi tutti gli appuntamenti, li gestisci con un click, rispondi ai clienti se serve e tieni traccia di tutto quello che succede.</p>
+        <h2>Uno strumento vero, non solo un gestionale bello da vedere</h2>
+        <p class="section-subtitle">La dashboard non è lì per impressionare: è fatto per lavorarci. Vedi tutti gli appuntamenti, li gestisci con un click, rispondi ai clienti se serve e tieni traccia di tutto quello che succede.</p>
+        <p class="section-subtitle">Su telefono non c'è molto spazio, su computer o tablet rende di piu</p>
       </div>
 
-      <!-- Dashboard Preview Originale -->
+      <!-- Dashboard Preview (iPad) -->
       <div class="dashboard-wrapper" data-reveal>
-        <div class="dashboard-preview">
-          <div class="dashboard-window">
-            <div class="window-dots">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-          
-          <div class="dashboard-content">
+        <div class="dashboard-preview dashboard-preview--device">
+          <div class="ipad-pro ipad-pro--landscape" role="img" aria-label="Pannello staff su iPad Pro (orizzontale)">
+            <div class="ipad-pro__bezel">
+              <div class="ipad-pro__camera" aria-hidden="true"></div>
+              <div class="ipad-pro__screen">
+<div class="dashboard-content dashboard-content--ipad">
             <div class="dashboard-header">
               <div>
                 <h3>Dashboard</h3>
@@ -430,7 +639,12 @@
               </div>
             </div>
           </div>
+              </div>
+            </div>
+          </div>
+          <p class="section-subtitle">Su telefono non c'è molto spazio, su computer o tablet rende di piu</p>
         </div>
+        
       </div>
 
       <!-- Dashboard Features -->
@@ -588,7 +802,7 @@ Dopo 24 ore di test, sei live e pronto per partire!
             </svg>
           </summary>
           <div class="faq-answer">
-            <p>Sì. Gestiamo tutti i dati in conformità GDPR, con crittografia end-to-end. I tuoi clienti rimangono tuoi, sempre.</p>
+            <p>Sì. Applichiamo principi GDPR (minimizzazione, accesso controllato, retention). Il flusso WhatsApp resta protetto sul canale WhatsApp; Synkris opera sul PC del salone e, in modalità on‑prem, non inoltra le conversazioni a servizi esterni. Quando serve, definiamo policy di log e backup in base alle esigenze del salone.</p>
           </div>
         </details>
 
@@ -626,7 +840,7 @@ Dopo 24 ore di test, sei live e pronto per partire!
               </svg>
               <div>
                 <div class="contact-label">Email</div>
-                <a href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
+                <a href="/cdn-cgi/l/email-protection#8beceae9f9e2eee7eee7fee8e2eabbbccbece6eae2e7a5e8e4e6"><span class="__cf_email__" data-cfemail="ee898f8c9c878b828b829b8d878fded9ae89838f8782c08d8183">[email&#160;protected]</span></a>
               </div>
             </div>
             <div class="contact-item">
@@ -780,9 +994,4 @@ Dopo 24 ore di test, sei live e pronto per partire!
 <!-- WhatsApp FAB -->
 <a class="wa-fab" href="https://wa.me/393534043794?text=Ciao!%20Vorrei%20info%20su%20Synkris" target="_blank" rel="noopener noreferrer" aria-label="Contattaci su WhatsApp">
   <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-  </svg>
-</a>
-
-</body>
-</html>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24

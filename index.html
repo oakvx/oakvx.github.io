@@ -1,1005 +1,1192 @@
 <!doctype html>
 <html lang="it">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Synkris — bot WhatsApp per saloni | Prenotazioni e calendario</title>
-<meta name="description" content="Prenotazioni e spostamenti via WhatsApp: Synkris propone orari, aggiorna Google Calendar e invia conferme e promemoria automatici. Riduci no-show e tempo speso nei messaggi."/>
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
-<link rel="canonical" href="https://oakvx.github.io/"/>
-
-<link rel="icon" href="/logo.svg" type="image/svg+xml"/>
-<link rel="alternate icon" href="/favicon.ico" sizes="any"/>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/>
-<link rel="manifest" href="/site.webmanifest"/>
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"/>
-
-<meta content="#0a0514" name="theme-color"/>
-<meta name="author" content="Synkris"/>
-<meta name="application-name" content="Synkris"/>
-<meta name="apple-mobile-web-app-title" content="Synkris"/>
-
-<!-- Open Graph -->
-<meta property="og:type" content="website"/>
-<meta property="og:locale" content="it_IT"/>
-<meta property="og:site_name" content="Synkris"/>
-<meta property="og:title" content="Synkris — bot WhatsApp per saloni"/>
-<meta property="og:description" content="Prenotazioni e spostamenti via WhatsApp: orari disponibili, calendario aggiornato e promemoria automatici. Riduci no-show e tempo perso nei messaggi."/>
-<meta property="og:url" content="https://oakvx.github.io/"/>
-<meta property="og:image" content="https://oakvx.github.io/og-image.jpg"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="Synkris: bot WhatsApp per saloni"/>
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Synkris — bot WhatsApp per saloni"/>
-<meta name="twitter:description" content="Prenotazioni via WhatsApp, Google Calendar sempre aggiornato e promemoria automatici."/>
-<meta name="twitter:image" content="https://oakvx.github.io/og-image.jpg"/>
-
-<!-- Structured data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://oakvx.github.io/#website",
-      "url": "https://oakvx.github.io/",
-      "name": "Synkris",
-      "inLanguage": "it-IT"
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://oakvx.github.io/#organization",
-      "name": "Synkris",
-      "url": "https://oakvx.github.io/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://oakvx.github.io/logo.svg"
-      },
-      "email": "mailto:gabrielelucia07@gmail.com",
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "email": "gabrielelucia07@gmail.com",
-        "availableLanguage": ["it"]
-      }]
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://oakvx.github.io/#app",
-      "name": "Synkris",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "url": "https://oakvx.github.io/",
-      "description": "Bot WhatsApp per saloni: prenotazioni, sincronizzazione calendario e promemoria automatici.",
-      "offers": {
-        "@type": "Offer",
-        "price": "49.00",
-        "priceCurrency": "EUR",
-        "url": "https://oakvx.github.io/#prezzi"
-      }
-    }
-  ]
-}
-</script>
-
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-
-<link rel="stylesheet" href="https://marvelapp.github.io/devices.css/assets/devices.min.css"/>
-
-<link rel="stylesheet" href="styles.css"/>
-<script defer src="app.js"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Synkris — Assistente WhatsApp per Saloni</title>
+    <meta name="description" content="Prenotazioni e spostamenti via WhatsApp: Synkris propone orari liberi, aggiorna Google Calendar e manda conferme e promemoria automatici. Riduci no-show e tempo perso nei messaggi." />
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+    <meta name="author" content="Synkris" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:title" content="Synkris — Assistente WhatsApp per Saloni" />
+    <meta property="og:description" content="Il tuo salone risponde su WhatsApp anche quando sei impegnato. Prenotazioni, spostamenti e promemoria automatici." />
+    <meta name="theme-color" content="#0a0514" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="synkris-extra.css" />
+    <link rel="stylesheet" href="synkris-refined.css" />
+    <script defer src="app.js"></script>
 </head>
+
 <body>
 
-<a class="skip-link" href="#main">Vai al contenuto</a>
+    <a class="skip-link" href="#main">Vai al contenuto</a>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="container">
-    <div class="header__inner">
-      
-      <a aria-label="Vai all'inizio pagina" class="logo" href="#top">
-        <svg aria-hidden="true" class="logo__icon" fill="none" viewBox="0 0 40 40">
-          <defs>
-            <linearGradient id="logo-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#a78bfa"/>
-              <stop offset="100%" stop-color="#7c3aed"/>
-            </linearGradient>
-          </defs>
-          <circle cx="20" cy="20" r="18" fill="url(#logo-grad)" opacity="0.2"/>
-          <path d="M20 10 L14 14 L20 18 L26 14 Z" fill="url(#logo-grad)"/>
-          <path d="M14 22 L20 26 L26 22 M14 18 L20 22 L26 18" stroke="url(#logo-grad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        </svg>
-        <span class="logo__text">Synkris</span>
-      </a>
-      
-      <button aria-expanded="false" aria-label="Menu" class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      
-      <nav aria-label="Navigazione principale" class="nav" id="siteNav">
-        <a href="#perche">Perché</a>
-        <a href="#come">Come funziona</a>
-        <a href="#demo">Demo</a>
-        <a href="#funzioni">Cosa fa</a>
-        <a href="#pannello">Pannello</a>
-        <a href="#prezzi">Piani</a>
-        <a href="#faq">FAQ</a>
-        <a class="nav__cta" href="#contatti">Contatti</a>
-      </nav>
-      
-    </div>
-  </div>
-</header>
-
-<div class="nav-overlay" id="navOverlay"></div>
-
-<!-- MAIN -->
-<main id="main">
-
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero__d"></div>
-    <div class="container">
-      <div class="hero__wrapper">
-        
-        <div class="hero__content" data-reveal>
-          <div class="hero__badge">
-            <span class="badge-pulse"></span>
-            <span>Lancio Pilota • Posti Limitati</span>
-          </div>
-          
-          <h1 class="hero__title">
-            L'assistente che gestisce<br/>
-            <span class="text-gradient">gli appuntamenti del tuo salone</span>
-          </h1>
-          
-          <p class="hero__desc">
-            I tuoi clienti scrivono su WhatsApp come sempre. <strong>Synkris risponde</strong>, propone orari liberi, aggiorna il calendario e manda <strong>conferme automatiche</strong>. Tu controlli tutto dal pannello.
-          </p>
-          
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#contatti">
-              <span>Prenota una demo</span>
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-            <a class="btn btn--ghost" href="#come">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-              </svg>
-              <span>Come funziona</span>
-            </a>
-          </div>
-
-          <div class="hero__stats">
-            <div class="stat-item">
-              <div class="stat-label">Sempre attivo</div>
-              <div class="stat-value">24/7</div>
-              
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a aria-label="Synkris" class="logo" href="#top">
+                    <svg aria-hidden="true" class="logo__icon" fill="none" viewBox="0 0 40 40">
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#a78bfa" />
+                                <stop offset="100%" stop-color="#7c3aed" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="20" cy="20" r="18" fill="url(#logo-grad)" opacity="0.2" />
+                        <path d="M20 10 L14 14 L20 18 L26 14 Z" fill="url(#logo-grad)" />
+                        <path d="M14 22 L20 26 L26 22 M14 18 L20 22 L26 18" stroke="url(#logo-grad)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+                    </svg>
+                    <span class="logo__text">Synkris</span>
+                </a>
+                <button aria-expanded="false" aria-label="Menu" class="nav-toggle" id="navToggle">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav aria-label="Navigazione principale" class="nav" id="siteNav">
+                    <a href="#perche">Perché</a>
+                    <a href="#come">Come funziona</a>
+                    <a href="#funzioni">Funzionalità</a>
+                    <a href="#affiancamento">Supporto</a>
+                    <a href="#pannello">Pannello</a>
+                    <a href="#prezzi">Piani</a>
+                    <a href="#faq">FAQ</a>
+                    <a class="nav__cta" href="#contatti">Prenota demo</a>
+                </nav>
             </div>
-            <div class="stat-item"><div class="stat-label">Calendario</div>
-              <div class="stat-value">Automatico</div>
-              
-            </div>
-            <div class="stat-item"><div class="stat-label">Gestionale semplice</div>
-              <div class="stat-value">Per lo staff</div>
-              
-            </div>
-          </div>
         </div>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
 
-        <!-- Chat Visual -->
-        <div class="hero__visual" data-reveal>
-          <div class="chat-mockup">
-            <div class="chat-header">
-              <div class="chat-avatar">T</div>
-              <div>
-                <div class="chat-name">TheBeautifulRoom di Diana</div>
-                <div class="chat-status">
-                  <span class="status-dot"></span> Online
-                </div>
-              </div>
-            </div>
-            <div class="chat-body">
-              <div class="msg msg--in">Ciao! Vorrei spostare a domani</div>
-              <div class="msg msg--out">
-                Certo! Ecco gli orari disponibili:
-                <div class="time-chips">
-                  <span class="chip">10:00</span>
-                  <span class="chip">14:30</span>
-                  <span class="chip">16:00</span>
-                </div>
-              </div>
-              <div class="msg msg--in">Perfetto 14:30!</div>
-              <div class="msg msg--out">✅ Appuntamento spostato alle 14:30</div>
-            </div>
-          </div>
-          <div class="floating-badge" data-reveal>
-            <svg width="24" height="24" fill="currentColor">
-              <path d="M12 2l2.5 5 5.5 1-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z"/>
-            </svg>
-            <div>
-              <div class="badge-title">AI Integrata</div>
-              <div class="badge-sub">Capisce meglio i clienti!</div>
-            </div>
-          </div>
-        </div>
+    <main id="main">
 
-      </div>
-    </div>
-  </section>
+        <!-- ══════════ HERO ══════════ -->
+        <section class="hero" id="top">
+            <div class="hero__bg-grid"></div>
+            <div class="container">
+                <div class="hero__wrapper">
 
-  <!-- PERCHE' -->
-  <section class="section" id="perche">
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">Il problema</span>
-        <h2>Gestire un salone è già complicato</h2>
-        <p class="section-subtitle">Senza dover stare dietro a messaggi, conferme e appuntamenti spostati all'ultimo.</p>
-      </div>
-
-      <div class="problems-grid">
-        <div class="problem-card" data-reveal>
-          <div class="problem-icon">💬</div>
-          <h3>Messaggi continui</h3>
-          <p>Richieste, spostamenti e conferme arrivano a tutte le ore. Il telefono non smette mai di vibrare.</p>
-        </div>
-        <div class="problem-card" data-reveal>
-          <div class="problem-icon">📅</div>
-          <h3>Calendario confusionario</h3>
-          <p>Buchi imprevisti, sovrapposizioni, appuntamenti dimenticati. Il rischio di errore è sempre dietro l'angolo.</p>
-        </div>
-        <div class="problem-card" data-reveal>
-          <div class="problem-icon">⏰</div>
-          <h3>Promemoria manuali</h3>
-          <p>Chiamare ogni cliente per confermare? Impossibile. Risultato: no-show e perdite economiche.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COME FUNZIONA -->
-  <section class="section section--alt" id="come">
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">Il processo</span>
-        <h2>Come funziona Synkris</h2>
-        <p class="section-subtitle">Tre passaggi per partire. Configurazione personalizzata inclusa.</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-number">01</div>
-          <div class="timeline-content">
-            <h3>Setup personalizzato</h3>
-            <p>Ti chiamiamo, capiamo come lavori, impostiamo servizi, operatori e messaggi. Tutto calibrato sul tuo salone.</p>
-          </div>
-        </div>
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-number">02</div>
-          <div class="timeline-content">
-            <h3>Collegamento WhatsApp</h3>
-            <p>Synkris si collega al numero del salone. I tuoi clienti scrivono come sempre, senza cambiare abitudini.</p>
-          </div>
-        </div>
-        <div class="timeline-item" data-reveal>
-          <div class="timeline-number">03</div>
-          <div class="timeline-content">
-            <h3>Parti e monitora</h3>
-            <p>Il bot risponde automaticamente. Tu e lo staff controllate tutto dal pannello e intervenite quando serve.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- DEMO (SCROLLYTELLING) -->
-  <section class="section scrolly" id="demo" data-scrolly>
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">In azione</span>
-        <h2>Guarda Synkris lavorare mentre scorri</h2>
-        <p class="section-subtitle">Ogni step aggiorna la chat con il cliente. È una demo.</p>
-        <p class="scrolly-hint">Scorri o tocca i passaggi. In alternativa usa i controlli qui sotto.</p>
-      </div>
-
-      <div class="scrolly__grid">
-        <div class="scrolly__steps" aria-label="Passaggi demo">
-          <div class="scrolly__tabs" role="tablist" aria-label="Passaggi demo">
-          <button class="scrolly-step is-active" type="button" data-step="0" role="tab" id="scrolly-tab-0" aria-selected="true" aria-controls="scrolly-panel">
-            <h3>1️⃣ Richiesta chiara</h3>
-            <p>Il cliente scrive come sempre su WhatsApp</p>
-          </button>
-          <button class="scrolly-step" type="button" data-step="1" role="tab" id="scrolly-tab-1" aria-selected="false" aria-controls="scrolly-panel">
-            <h3>2️⃣ Proposta orari</h3>
-            <p>Synkris legge disponibilità e propone opzioni dinamiche in base alla tua attività.</p>
-          </button>
-          <button class="scrolly-step" type="button" data-step="2" role="tab" id="scrolly-tab-2" aria-selected="false" aria-controls="scrolly-panel">
-            <h3>3️⃣ Conferma + Calendar sync</h3>
-            <p>Conferma e scrittura immediata di <b>tutti i dettagli</b>su Google Calendar</p>
-          </button>
-          <button class="scrolly-step" type="button" data-step="3" role="tab" id="scrolly-tab-3" aria-selected="false" aria-controls="scrolly-panel">
-            <h3>4️⃣ Reminder anti no‑show</h3>
-            <p>Promemoria automatico e istruzioni pratiche.</p>
-          </button>
-          <button class="scrolly-step" type="button" data-step="4" role="tab" id="scrolly-tab-4" aria-selected="false" aria-controls="scrolly-panel">
-            <h3>5️⃣ Interazione dello staff</h3>
-            <p>Se la richiesta è ambigua, passa la mano a una persona.</p>
-          </button>
-        </div>
-          <div class="scrolly__scroll" aria-hidden="true"></div>
-        </div>
-
-        <div class="scrolly__stage" aria-label="Anteprima sincronizzata">
-          <div class="scrolly__sticky">
-            <div class="scrolly__devices">
-
-              <div class="scrolly-controls" data-scrolly-controls aria-label="Controlli demo">
-                <div class="scrolly-controls__meta">
-                  <span class="scrolly-controls__label" id="scrollyStepLabel">1/5 step</span>
-                </div>
-
-                <div class="scrolly-controls__nav">
-                  <button class="btn btn--ghost btn--sm" type="button" data-scrolly-action="prev">← Indietro</button>
-                  <button class="btn btn--primary btn--sm" type="button" data-scrolly-action="next">Avanti →</button>
-                </div>
-              
-</div>
-
-              <!-- iPhone -->
-              <div class="scrolly__device scrolly__device--phone">
-                <div class="marvel-device iphone-x black synkris-device">
-                  <div class="notch">
-                    <div class="camera"></div>
-                    <div class="speaker"></div>
-                  </div>
-                  <div class="top-bar"></div>
-                  <div class="sleep"></div>
-                  <div class="bottom-bar"></div>
-                  <div class="volume"></div>
-                  <div class="overflow">
-                    <div class="shadow shadow--tr"></div>
-                    <div class="shadow shadow--tl"></div>
-                    <div class="shadow shadow--br"></div>
-                    <div class="shadow shadow--bl"></div>
-                  </div>
-
-                  <div class="screen">
-                    <div class="scrolly-screen">
-                      <div class="ios-statusbar" aria-hidden="true">
-                        <div class="ios-statusbar__left">9:41</div>
-                        <div class="ios-statusbar__right">
-                          <svg class="ios-statusbar__icon ios-statusbar__icon--signal" viewBox="0 0 24 24" aria-hidden="true">
-                            <rect x="3" y="14" width="3" height="7" rx="1" fill="currentColor" opacity="0.95"></rect>
-                            <rect x="8" y="11" width="3" height="10" rx="1" fill="currentColor" opacity="0.95"></rect>
-                            <rect x="13" y="8" width="3" height="13" rx="1" fill="currentColor" opacity="0.95"></rect>
-                            <rect x="18" y="5" width="3" height="16" rx="1" fill="currentColor" opacity="0.95"></rect>
-                          </svg>
-                          <svg class="ios-statusbar__icon ios-statusbar__icon--wifi" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M2.5 8.5c5.8-5 13.2-5 19 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                            <path d="M5.6 12c4-3.5 8.8-3.5 12.8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                            <path d="M9 15.4c2.2-2 3.8-2 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-                            <circle cx="12" cy="18.2" r="1.2" fill="currentColor"></circle>
-                          </svg>
-                          <svg class="ios-statusbar__icon ios-statusbar__icon--battery" viewBox="0 0 34 16" aria-hidden="true">
-                            <rect x="1" y="3" width="28" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"></rect>
-                            <rect x="30.2" y="6" width="2.8" height="4" rx="1" fill="currentColor"></rect>
-                            <rect x="3.2" y="5.2" width="22.2" height="5.6" rx="1.8" fill="currentColor" opacity="0.9"></rect>
-                          </svg>
+                    <div class="hero__content" data-reveal>
+                        <div class="hero__badge">
+                            <span class="badge-pulse"></span>
+                            <span>Lancio pilota · Posti limitati</span>
                         </div>
-                      </div>
-
-                      <div class="chat-mockup chat-mockup--scrolly">
-                        <div class="chat-header">
-                          <div class="chat-avatar">S</div>
-                          <div>
-                            <div class="chat-name">Synkris</div>
-                            <div class="chat-status">
-                              <span class="status-dot"></span> Online
+                        <h1 class="hero__title">
+                            Il tuo salone risponde su WhatsApp<br />
+                            <span class="text-gradient">anche quando sei impegnato</span>
+                        </h1>
+                        <p class="hero__desc">
+                            I clienti scrivono come sempre. <strong>Synkris risponde</strong>, propone orari liberi, aggiorna il calendario e manda <strong>conferme e promemoria automatici</strong>. Tu controlli tutto dal pannello.
+                        </p>
+                        <div class="hero__cta">
+                            <a class="btn btn--primary" href="#contatti">
+                                <span>Prenota una demo gratuita</span>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <a class="btn btn--ghost" href="#come"><span>Come funziona</span></a>
+                        </div>
+                        <div class="hero__stats">
+                            <div class="stat-item">
+                                <div class="stat-value">24/7</div>
+                                <div class="stat-label">Sempre attivo</div>
                             </div>
-                          </div>
-                        </div>
-
-                        <div class="chat-body chat-body--scrolly" id="scrolly-panel" role="tabpanel" aria-live="polite" aria-labelledby="scrolly-tab-0">
-
-                          <!-- Calendar sync overlay (Step 3) -->
-                          <div class="scrolly-calendar-toast" id="scrollyCalendarToast" aria-hidden="true">
-                            <div class="toast-title">✅ Evento creato su Google Calendar</div>
-                            <dl class="toast-grid">
-                              <div><dt>Servizio</dt><dd>Gel</dd></div>
-                              <div><dt>Ora</dt><dd>Domani • 16:00</dd></div>
-                              <div><dt>Operatore</dt><dd>Diana</dd></div>
-                              <div><dt>Note</dt><dd>Prima visita • confermato via WhatsApp</dd></div>
-                            </dl>
-                          </div>
-
-                          <div class="msg msg--in scrolly-msg" data-show-from="0">Ciao! Vorrei un <b>gel</b> domani pomeriggio 🙂</div>
-
-                          <div class="msg msg--out scrolly-msg" data-show-from="1" hidden>
-                            Perfetto. Ecco gli orari disponibili:
-                            <div class="time-chips">
-                              <span class="chip">14:30</span>
-                              <span class="chip">16:00</span>
-                              <span class="chip">18:15</span>
+                            <div class="stat-item">
+                                <div class="stat-value">−80%</div>
+                                <div class="stat-label">No-show</div>
                             </div>
-                          </div>
-
-                          <div class="msg msg--in scrolly-msg" data-show-from="2" hidden>Va bene <b>16:00</b>. Grazie!</div>
-                          <div class="msg msg--out scrolly-msg" data-show-from="2" hidden>Confermato ✅ Ho inserito l’appuntamento in calendario.</div>
-
-                          <div class="msg msg--out scrolly-msg" data-show-from="3" hidden>Promemoria: ti aspettiamo domani alle 16:00. Se arrivi 5 minuti prima, top 🙌</div>
-
-                          <div class="msg msg--in scrolly-msg" data-show-from="4" hidden>In realtà forse volevo un colore diverso…</div>
-                          <div class="msg msg--out scrolly-msg" data-show-from="4" hidden>Ok! Ti metto in contatto con lo staff per scegliere insieme 💬</div>
+                            <div class="stat-item">
+                                <div class="stat-value">Auto</div>
+                                <div class="stat-label">Calendario sync</div>
+                            </div>
                         </div>
-                      </div>
-
-                      <div class="scrolly-home-indicator" aria-hidden="true"></div>
                     </div>
-                  </div>
+
+                    <div class="hero__visual" data-reveal>
+                        <div class="chat-mockup">
+                            <div class="chat-header">
+                                <div class="chat-avatar">S</div>
+                                <div>
+                                    <div class="chat-name">Salone Diana</div>
+                                    <div class="chat-status"><span class="status-dot"></span> Synkris attivo</div>
+                                </div>
+                                <div class="chat-ai-badge">IA</div>
+                            </div>
+                            <div class="chat-body">
+                                <div class="msg msg--in">Ciao! Vorrei spostare il mio appuntamento a domani</div>
+                                <div class="msg msg--out">
+                                    Certo! Ecco gli orari liberi per domani:
+                                    <div class="time-chips">
+                                        <span class="chip">10:00</span>
+                                        <span class="chip">14:30</span>
+                                        <span class="chip">16:00</span>
+                                    </div>
+                                </div>
+                                <div class="msg msg--in">Perfetto, 14:30!</div>
+                                <div class="msg msg--out">✅ Spostato alle 14:30. Ti mando un promemoria domani mattina!</div>
+                            </div>
+                        </div>
+                        <div class="floating-badge">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div>
+                                <div class="badge-title">Calendario aggiornato</div>
+                                <div class="badge-sub">Google Calendar sincronizzato</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-
             </div>
-          </div>
-        </div>
+        </section>
 
-      </div>
-
-      
-<div class="scrolly-transcript" aria-label="Trascrizione demo">
-  <div class="scrolly-transcript__card">
-    <h3 class="scrolly-transcript__title">Demo (versione statica)</h3>
-    <p class="scrolly-transcript__sub">Stessa conversazione, senza sticky o animazioni. Utile se preferisci meno movimento.</p>
-
-    <div class="scrolly-transcript__chat">
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Cliente</div>
-        <p class="scrolly-transcript__txt">Ciao! Vorrei un gel domani pomeriggio 🙂</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Synkris</div>
-        <p class="scrolly-transcript__txt">Perfetto. Ecco gli orari disponibili: 14:30 · 16:00 · 18:15</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Cliente</div>
-        <p class="scrolly-transcript__txt">Va bene 16:00. Grazie!</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Synkris</div>
-        <p class="scrolly-transcript__txt">Confermato ✅ Ho inserito l’appuntamento in calendario.</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Synkris · Google Calendar</div>
-        <p class="scrolly-transcript__txt">Evento creato: Gel — Domani 16:00 — Operatore: Diana — Note: Prima visita (confermato via WhatsApp).</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Synkris</div>
-        <p class="scrolly-transcript__txt">Promemoria: ti aspettiamo domani alle 16:00. Se arrivi 5 minuti prima, top 🙌</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Cliente</div>
-        <p class="scrolly-transcript__txt">In realtà forse volevo un colore diverso…</p>
-      </div>
-
-      <div class="scrolly-transcript__line">
-        <div class="scrolly-transcript__who">Synkris</div>
-        <p class="scrolly-transcript__txt">Ok! Ti metto in contatto con lo staff per scegliere insieme 💬</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-    </div>
-  </section>
-
-
-
-  <!-- FUNZIONI -->
-
-  <section class="section" id="funzioni">
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">Funzionalità</span>
-        <h2>Cosa fa Synkris per te</h2>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-block" data-reveal>
-          <div class="feature-icon">🤖</div>
-          <h3>Risposte automatiche</h3>
-          <p>Synkris capisce le richieste, propone orari disponibili e conferma gli appuntamenti. H24, anche di notte.</p>
-        </div>
-        <div class="feature-block" data-reveal>
-          <div class="feature-icon">📆</div>
-          <h3>Calendario sincronizzato</h3>
-          <p>Ogni prenotazione o modifica si aggiorna in tempo reale. Zero conflitti, zero doppie prenotazioni.</p>
-        </div>
-        <div class="feature-block" data-reveal>
-          <div class="feature-icon">🔔</div>
-          <h3>Promemoria automatici</h3>
-          <p>Conferme e reminder inviati automaticamente. Riduci drasticamente i no-show.</p>
-        </div>
-        <div class="feature-block" data-reveal>
-          <div class="feature-icon">👥</div>
-          <h3>Gestione staff</h3>
-          <p>Assegna operatori, gestisci disponibilità, controlla chi fa cosa. Tutto dal pannello.</p>
-        </div>
-        <div class="feature-block" data-reveal>
-          <div class="feature-icon">💼</div>
-          <h3>Prodotti e promo</h3>
-          <p>Proponi trattamenti extra e offerte al momento giusto, senza essere invadente.</p>
-        </div>
-        <div class="feature-block" data-reveal>
-          <div class="feature-icon">📊</div>
-          <h3>Report e statistiche</h3>
-          <p>Vedi andamento prenotazioni, no-show rate, servizi più richiesti. Dati chiari per decidere meglio.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PANNELLO - Dashboard Originale -->
-  <section class="section section--alt" id="pannello">
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">Pannello di controllo</span>
-        <h2>Uno strumento vero, non solo un gestionale bello da vedere</h2>
-        <p class="section-subtitle">La dashboard non è lì per impressionare: è fatto per lavorarci. Vedi tutti gli appuntamenti, li gestisci con un click, rispondi ai clienti se serve e tieni traccia di tutto quello che succede.</p>
-        <p class="section-subtitle">Su telefono non c'è molto spazio, su computer o tablet rende di piu</p>
-      </div>
-
-      <!-- Dashboard Preview (iPad) -->
-      <div class="dashboard-wrapper" data-reveal>
-        <div class="dashboard-preview dashboard-preview--device">
-          <div class="ipad-pro ipad-pro--landscape" role="img" aria-label="Pannello staff su iPad Pro (orizzontale)">
-            <div class="ipad-pro__bezel">
-              <div class="ipad-pro__camera" aria-hidden="true"></div>
-              <div class="ipad-pro__screen">
-<div class="dashboard-content dashboard-content--ipad">
-            <div class="dashboard-header">
-              <div>
-                <h3>Dashboard</h3>
-                <p>Oggi, mercoledì 4 febbraio</p>
-              </div>
-              <div class="dashboard-actions">
-                <button class="btn-dash btn-dash--primary">+ Nuovo appuntamento</button>
-                <button class="btn-dash btn-dash--secondary">⚙️</button>
-              </div>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="dashboard-stats">
-              <div class="stat-card stat-card--blue">
-                <div class="stat-card__label">Oggi</div>
-                <div class="stat-card__value">12</div>
-                <div class="stat-card__sub">appuntamenti</div>
-              </div>
-              <div class="stat-card stat-card--green">
-                <div class="stat-card__label">Confermati</div>
-                <div class="stat-card__value">10</div>
-                <div class="stat-card__sub">clienti</div>
-              </div>
-              <div class="stat-card stat-card--orange">
-                <div class="stat-card__label">In attesa</div>
-                <div class="stat-card__value">2</div>
-                <div class="stat-card__sub">da confermare</div>
-              </div>
-              <div class="stat-card stat-card--purple">
-                <div class="stat-card__label">Messaggi</div>
-                <div class="stat-card__value">5</div>
-                <div class="stat-card__sub">nuovi</div>
-              </div>
-            </div>
-
-            <!-- Appointments List -->
-            <div class="appointments-list">
-              <h4>Prossimi appuntamenti</h4>
-              <div class="appointment-items">
-                <div class="appointment-item appointment-item--blue">
-                  <div class="appointment-time">10:00</div>
-                  <div class="appointment-details">
-                    <div class="appointment-name">Maria Rossi</div>
-                    <div class="appointment-service">Taglio + Piega • Sofia</div>
-                  </div>
-                  <div class="appointment-status appointment-status--confirmed">Confermato</div>
+        <!-- ══════════ NUMERI ══════════ -->
+        <section class="numbers-strip">
+            <div class="container">
+                <div class="numbers-strip__grid">
+                    <div class="numbers-strip__item" data-reveal>
+                        <div class="numbers-strip__value">+98%</div>
+                        <div class="numbers-strip__label">Tasso di apertura WhatsApp</div>
+                    </div>
+                    <div class="numbers-strip__sep"></div>
+                    <div class="numbers-strip__item" data-reveal>
+                        <div class="numbers-strip__value">+60%</div>
+                        <div class="numbers-strip__label">Interazione vs email</div>
+                    </div>
+                    <div class="numbers-strip__sep"></div>
+                    <div class="numbers-strip__item" data-reveal>
+                        <div class="numbers-strip__value">−80%</div>
+                        <div class="numbers-strip__label">No-show con promemoria</div>
+                    </div>
+                    <div class="numbers-strip__sep"></div>
+                    <div class="numbers-strip__item" data-reveal>
+                        <div class="numbers-strip__value">3 min</div>
+                        <div class="numbers-strip__label">Risposta media senza Synkris</div>
+                    </div>
                 </div>
-                <div class="appointment-item appointment-item--green">
-                  <div class="appointment-time">11:30</div>
-                  <div class="appointment-details">
-                    <div class="appointment-name">Luca Bianchi</div>
-                    <div class="appointment-service">Colore completo • Marco</div>
-                  </div>
-                  <div class="appointment-status appointment-status--confirmed">Confermato</div>
+            </div>
+        </section>
+
+        <!-- ══════════ PERCHÉ ══════════ -->
+        <section class="section" id="perche">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Il problema</span>
+                    <h2>Gestire un salone è già abbastanza complicato</h2>
+                    <p class="section-subtitle">Senza dover stare dietro a messaggi, conferme e spostamenti all'ultimo minuto.</p>
                 </div>
-                <div class="appointment-item appointment-item--orange">
-                  <div class="appointment-time">14:30</div>
-                  <div class="appointment-details">
-                    <div class="appointment-name">Anna Verdi</div>
-                    <div class="appointment-service">Trattamento • Sofia</div>
-                  </div>
-                  <div class="appointment-status appointment-status--pending">In attesa</div>
+                <div class="problems-grid">
+                    <div class="problem-card" data-reveal>
+                        <div class="problem-icon">💬</div>
+                        <h3>Messaggi a tutte le ore</h3>
+                        <p>Richieste e spostamenti arrivano di notte, nei weekend, mentre sei con un cliente. Il telefono non smette mai.</p>
+                    </div>
+                    <div class="problem-card" data-reveal>
+                        <div class="problem-icon">📅</div>
+                        <h3>Calendario caotico</h3>
+                        <p>Buchi imprevisti, sovrapposizioni, appuntamenti segnati male. Il rischio di errore è sempre in agguato.</p>
+                    </div>
+                    <div class="problem-card" data-reveal>
+                        <div class="problem-icon">🚪</div>
+                        <h3>No-show e perdite</h3>
+                        <p>Senza promemoria automatici i clienti dimenticano. Ogni posto vuoto è fatturato perso che non torna.</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-              </div>
+        </section>
+
+        <!-- ══════════ COME FUNZIONA ══════════ -->
+        <section class="section section--alt" id="come">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Il processo</span>
+                    <h2>Parti in tre passi</h2>
+                    <p class="section-subtitle">Configurazione personalizzata inclusa. Nessuna competenza tecnica richiesta.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-number">01</div>
+                        <div class="timeline-content">
+                            <h3>Setup personalizzato</h3>
+                            <p>Ti chiamiamo, capiamo come lavori e configuriamo servizi, operatori, orari e messaggi su misura per il tuo salone. Niente soluzioni standard.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-number">02</div>
+                        <div class="timeline-content">
+                            <h3>Collegamento WhatsApp</h3>
+                            <p>Synkris si collega al numero del salone. I tuoi clienti scrivono come sempre — non devono installare nulla, non devono cambiare abitudini.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-number">03</div>
+                        <div class="timeline-content">
+                            <h3>Sei live. Monitora e cresci.</h3>
+                            <p>Il bot risponde in automatico. Tu e lo staff controllate tutto dal pannello, vedete le conversazioni e intervenite solo quando volete.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <p class="section-subtitle">Su telefono non c'è molto spazio, su computer o tablet rende di piu</p>
-        </div>
-        
-      </div>
+        </section>
 
-      <!-- Dashboard Features -->
-      <div class="dashboard-features">
-        <div class="feature-item" data-reveal>
-          <div class="feature-item__icon">📅</div>
-          <h3>Vista calendario completa</h3>
-          <p>Tutti gli appuntamenti in un colpo d'occhio. Giorno, settimana o mese: scegli come preferisci.</p>
-        </div>
-        <div class="feature-item" data-reveal>
-          <div class="feature-item__icon">✏️</div>
-          <h3>Crea e modifica appuntamenti</h3>
-          <p>Click, scegli cliente e servizio, conferma. Per spostare un appuntamento, trascini lo slot dove serve.</p>
-        </div>
-        <div class="feature-item" data-reveal>
-          <div class="feature-item__icon">💬</div>
-          <h3>Rispondi ai clienti quando serve</h3>
-          <p>Vedi tutte le conversazioni WhatsApp. Se serve intervenire, prendi controllo e rispondi direttamente.</p>
-        </div>
-      </div>
+        <!-- ══════════ FUNZIONALITÀ — feature split ══════════ -->
+        <section class="section" id="funzioni">
+            <div class="container">
 
-    </div>
-  </section>
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Funzionalità</span>
+                    <h2>Tutto ciò di cui il tuo salone ha bisogno</h2>
+                    <p class="section-subtitle">Dal primo messaggio di un nuovo cliente fino al promemoria post-appuntamento.</p>
+                </div>
 
-  <!-- PREZZI -->
-  <section class="section" id="prezzi">
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">Piani</span>
-        <h2>Scegli il piano per il tuo salone</h2>
-        <p class="section-subtitle">Setup incluso. Nessun costo nascosto.</p>
-      </div>
+                <!-- Feature 1: risponde automaticamente -->
+                <div class="fsplit" data-reveal>
+                    <div class="fsplit__text">
+                        <span class="fsplit__tag">Sempre disponibile</span>
+                        <h3>Risponde a qualsiasi richiesta, H24</h3>
+                        <p>Nuovo cliente, spostamento, cancellazione, domanda sui prezzi — Synkris capisce il linguaggio naturale e risponde correttamente. Di notte, nel weekend, anche mentre sei con un cliente.</p>
+                        <ul class="fsplit__list">
+                            <li>Prenotazioni e spostamenti in automatico</li>
+                            <li>Risponde a domande su servizi e prezzi</li>
+                            <li>Tu puoi intervenire in qualsiasi momento</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--primary">Prenota una demo</a>
+                    </div>
+                    <div class="fsplit__visual">
+                        <div class="fmockup fmockup--chat">
+                            <div class="fmockup__bar">
+                                <div class="fmockup__dot fmockup__dot--r"></div>
+                                <div class="fmockup__dot fmockup__dot--y"></div>
+                                <div class="fmockup__dot fmockup__dot--g"></div>
+                                <span class="fmockup__label">WhatsApp Business · Synkris IA</span>
+                            </div>
+                            <div class="fmockup__convo">
+                                <div class="fconvo__item fconvo__item--in">
+                                    <div class="fconvo__bubble">Ciao! Quanto costa una piega?</div>
+                                    <div class="fconvo__time">09:14</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble">Ciao! La piega parte da 25€. Vuoi prenotare? 😊</div>
+                                    <div class="fconvo__time">09:14</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--in">
+                                    <div class="fconvo__bubble">Sì! Avete posto venerdì mattina?</div>
+                                    <div class="fconvo__time">09:15</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble">
+                                        Venerdì ho disponibile:
+                                        <div class="time-chips" style="margin-top:8px">
+                                            <span class="chip">09:30</span>
+                                            <span class="chip">11:00</span>
+                                            <span class="chip">11:45</span>
+                                        </div>
+                                    </div>
+                                    <div class="fconvo__time">09:15</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--in">
+                                    <div class="fconvo__bubble">11:00 perfetto!</div>
+                                    <div class="fconvo__time">09:16</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble">✅ Prenotato venerdì alle 11:00. A presto!</div>
+                                    <div class="fconvo__time">09:16</div>
+                                </div>
+                            </div>
+                            <div class="fmockup__footer">
+                                <span class="badge-pulse"></span> Gestita in automatico da Synkris
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="pricing-grid">
-        
-        <div class="price-card" data-reveal>
-          <div class="price-header">
-            <h3>Starter</h3>
-            <p>Per saloni piccoli</p>
-          </div>
-          <div class="price-amount">
-            <span class="currency">€</span>
-            <span class="value">49</span>
-            <span class="period">/mese</span>
-          </div>
-          <ul class="price-features">
-            <li>✓ Fino a 100 appuntamenti/mese</li>
-            <li>✓ 1 operatore</li>
-            <li>✓ Risposte automatiche 24/7</li>
-            <li>✓ Calendario sincronizzato</li>
-            <li>✓ Promemoria automatici</li>
-            <li>✓ Setup personalizzato incluso</li>
-          </ul>
-          <a href="#contatti" class="btn btn--outline btn--block">Inizia</a>
-        </div>
+                <!-- Feature 2: calendario -->
+                <div class="fsplit fsplit--rev" data-reveal>
+                    <div class="fsplit__text">
+                        <span class="fsplit__tag">Zero conflitti</span>
+                        <h3>Calendario sempre aggiornato, senza errori</h3>
+                        <p>Ogni prenotazione o cancellazione si riflette istantaneamente su Google Calendar. Niente doppie prenotazioni, niente appuntamenti persi, niente da gestire a mano.</p>
+                        <ul class="fsplit__list">
+                            <li>Sincronizzazione Google Calendar in tempo reale</li>
+                            <li>Gestione multi-operatore con disponibilità separate</li>
+                            <li>Vista giorno, settimana o mese dal pannello</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--ghost">Scopri di più</a>
+                    </div>
+                    <div class="fsplit__visual">
+                        <div class="fmockup fmockup--calendar">
+                            <div class="fcal__header">
+                                <span class="fcal__month">Febbraio 2025</span>
+                                <span class="fcal__nav">◀ ▶</span>
+                            </div>
+                            <div class="fcal__days">
+                                <span>Lu</span><span>Ma</span><span>Me</span><span>Gi</span><span>Ve</span><span>Sa</span><span>Do</span>
+                            </div>
+                            <div class="fcal__grid">
+                                <span class="fcal__cell fcal__cell--empty"></span>
+                                <span class="fcal__cell fcal__cell--empty"></span>
+                                <span class="fcal__cell fcal__cell--empty"></span>
+                                <span class="fcal__cell fcal__cell--empty"></span>
+                                <span class="fcal__cell">1</span>
+                                <span class="fcal__cell">2</span>
+                                <span class="fcal__cell fcal__cell--off">3</span>
+                                <span class="fcal__cell fcal__cell--event">4<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell fcal__cell--event">5<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell fcal__cell--event">6<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell fcal__cell--event">7<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell fcal__cell--today">8<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell">9</span>
+                                <span class="fcal__cell fcal__cell--off">10</span>
+                                <span class="fcal__cell fcal__cell--event">11<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell">12</span>
+                                <span class="fcal__cell fcal__cell--event">13<span class="fcal__dot"></span></span>
+                                <span class="fcal__cell fcal__cell--event">14<span class="fcal__dot"></span></span>
+                            </div>
+                            <div class="fcal__appts">
+                                <div class="fcal__appt fcal__appt--a">10:00 · Maria R. · Taglio + Piega</div>
+                                <div class="fcal__appt fcal__appt--b">11:30 · Luca B. · Colore</div>
+                                <div class="fcal__appt fcal__appt--c">14:30 · Anna V. · Trattamento</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="price-card price-card--featured" data-reveal>
-          <div class="price-badge">Consigliato</div>
-          <div class="price-header">
-            <h3>Professional</h3>
-            <p>Per saloni medi</p>
-          </div>
-          <div class="price-amount">
-            <span class="currency">€</span>
-            <span class="value">99</span>
-            <span class="period">/mese</span>
-          </div>
-          <ul class="price-features">
-            <li>✓ Fino a 300 appuntamenti/mese</li>
-            <li>✓ Fino a 3 operatori</li>
-            <li>✓ Tutto di Starter +</li>
-            <li>✓ Gestione prodotti e promo</li>
-            <li>✓ Report avanzati</li>
-            <li>✓ Supporto prioritario</li>
-          </ul>
-          <a href="#contatti" class="btn btn--primary btn--block">Inizia</a>
-        </div>
+                <!-- Feature 3: promemoria -->
+                <div class="fsplit" data-reveal>
+                    <div class="fsplit__text">
+                        <span class="fsplit__tag">Addio no-show</span>
+                        <h3>Promemoria automatici che funzionano davvero</h3>
+                        <p>Synkris manda un promemoria 24 ore prima e uno 2 ore prima. Il cliente risponde con un semplice messaggio per confermare o disdire. Se disdice, il posto si libera subito per qualcun altro.</p>
+                        <ul class="fsplit__list">
+                            <li>Promemoria personalizzati con nome e orario</li>
+                            <li>Conferma o disdetta con un messaggio</li>
+                            <li>Slot liberato in automatico per altri clienti</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--primary">Prenota una demo</a>
+                    </div>
+                    <div class="fsplit__visual">
+                        <div class="fmockup fmockup--reminder">
+                            <div class="freminder__bar">
+                                <svg width="15" height="15" fill="#25d366" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                </svg>
+                                <span>Salone Diana · Promemoria automatico</span>
+                            </div>
+                            <div class="freminder__msg">
+                                Ciao <strong>Laura</strong>! 👋<br /><br />
+                                Ti ricordiamo il tuo appuntamento di domani:<br />
+                                📅 <strong>Martedì 11 febbraio</strong><br />
+                                🕐 <strong>Ore 11:00</strong> · Taglio + Piega · Sofia<br /><br />
+                                Rispondi <strong>SÌ</strong> per confermare o <strong>NO</strong> per disdire.
+                            </div>
+                            <div class="freminder__actions">
+                                <button class="freminder__btn freminder__btn--yes">✓ &nbsp;Confermo</button>
+                                <button class="freminder__btn freminder__btn--no">✗ &nbsp;Disdico</button>
+                            </div>
+                            <div class="freminder__stat">
+                                <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#10b981" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                                <span>Laura ha confermato · <strong>0 no-show</strong> questo mese</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="price-card" data-reveal>
-          <div class="price-header">
-            <h3>Enterprise</h3>
-            <p>Per catene o grandi saloni</p>
-          </div>
-          <div class="price-amount">
-            <span class="value">Custom</span>
-          </div>
-          <ul class="price-features">
-            <li>✓ Appuntamenti illimitati</li>
-            <li>✓ Operatori illimitati</li>
-            <li>✓ Multi-sede</li>
-            <li>✓ API personalizzate</li>
-            <li>✓ Integrazioni custom</li>
-            <li>✓ Account manager dedicato</li>
-          </ul>
-          <a href="#contatti" class="btn btn--outline btn--block">Contattaci</a>
-        </div>
+                <!-- Feature 4: staff + report -->
+                <div class="fsplit fsplit--rev" data-reveal>
+                    <div class="fsplit__text">
+                        <span class="fsplit__tag">Controllo totale</span>
+                        <h3>Staff, promozioni e report in un unico posto</h3>
+                        <p>Assegna operatori, imposta disponibilità, invia campagne promozionali via WhatsApp ai clienti esistenti e monitora andamento prenotazioni e no-show rate.</p>
+                        <ul class="fsplit__list">
+                            <li>Multi-operatore con calendari separati</li>
+                            <li>Campagne promozionali su WhatsApp</li>
+                            <li>Report: prenotazioni, no-show, servizi richiesti</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--ghost">Scopri di più</a>
+                    </div>
+                    <div class="fsplit__visual">
+                        <div class="fmockup fmockup--stats">
+                            <div class="fstats__title">Report · Febbraio 2025</div>
+                            <div class="fstats__grid">
+                                <div class="fstats__card fstats__card--a">
+                                    <div class="fstats__val">147</div>
+                                    <div class="fstats__lbl">Appuntamenti</div>
+                                </div>
+                                <div class="fstats__card fstats__card--b">
+                                    <div class="fstats__val">2</div>
+                                    <div class="fstats__lbl">No-show</div>
+                                </div>
+                                <div class="fstats__card fstats__card--c">
+                                    <div class="fstats__val">98%</div>
+                                    <div class="fstats__lbl">Confermati</div>
+                                </div>
+                                <div class="fstats__card fstats__card--d">
+                                    <div class="fstats__val">+23</div>
+                                    <div class="fstats__lbl">Nuovi clienti</div>
+                                </div>
+                            </div>
+                            <div class="fstats__bar-title">Servizi più richiesti</div>
+                            <div class="fstats__bars">
+                                <div class="fstats__bar-row">
+                                    <span>Taglio + Piega</span>
+                                    <div class="fstats__bar-track">
+                                        <div class="fstats__bar-fill" style="width:78%"></div>
+                                    </div>
+                                    <span>78%</span>
+                                </div>
+                                <div class="fstats__bar-row">
+                                    <span>Colore</span>
+                                    <div class="fstats__bar-track">
+                                        <div class="fstats__bar-fill fstats__bar-fill--b" style="width:54%"></div>
+                                    </div>
+                                    <span>54%</span>
+                                </div>
+                                <div class="fstats__bar-row">
+                                    <span>Trattamenti</span>
+                                    <div class="fstats__bar-track">
+                                        <div class="fstats__bar-fill fstats__bar-fill--c" style="width:31%"></div>
+                                    </div>
+                                    <span>31%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      </div>
-    </div>
-  </section>
+                <!-- Feature 5: gestione ritardi intelligente -->
+                <div class="fsplit" data-reveal>
+                    <div class="fsplit__text">
+                        <span class="fsplit__tag">Gestione ritardi</span>
+                        <h3>Il cliente è in ritardo? Synkris lo gestisce da solo</h3>
+                        <p>Quando un cliente avvisa che è in ritardo, Synkris capisce la situazione, valuta il calendario e — se possibile — sposta o riorganizza in automatico. Niente più interruzioni mentre sei a lavoro.</p>
+                        <ul class="fsplit__list">
+                            <li>Rileva messaggi di ritardo in linguaggio naturale</li>
+                            <li>Controlla i margini nel calendario e propone soluzioni</li>
+                            <li>Avvisa l'operatore solo se serve davvero un intervento</li>
+                            <li>Mantiene il flusso del salone senza caos</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--primary">Prenota una demo</a>
+                    </div>
+                    <div class="fsplit__visual">
+                        <div class="fmockup fmockup--chat">
+                            <div class="fmockup__bar">
+                                <div class="fmockup__dot fmockup__dot--r"></div>
+                                <div class="fmockup__dot fmockup__dot--y"></div>
+                                <div class="fmockup__dot fmockup__dot--g"></div>
+                                <span class="fmockup__label">WhatsApp Business · Synkris IA</span>
+                            </div>
+                            <div class="fmockup__convo">
+                                <div class="fconvo__item fconvo__item--in">
+                                    <div class="fconvo__bubble">Ciao, sono in ritardo di 20 min, ho preso traffico 😬</div>
+                                    <div class="fconvo__time">10:43</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble">Nessun problema Giulia! Ho controllato il calendario — riesci a arrivare entro le 11:10?</div>
+                                    <div class="fconvo__time">10:43</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--in">
+                                    <div class="fconvo__bubble">Sì sì, ci sono!</div>
+                                    <div class="fconvo__time">10:44</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble">✅ Perfetto, ti aspettiamo. Sofia è avvisata. A tra poco!</div>
+                                    <div class="fconvo__time">10:44</div>
+                                </div>
+                            </div>
+                            <div class="fmockup__footer">
+                                <span class="badge-pulse"></span> Operatore avvisato automaticamente · nessuna interruzione
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  <!-- FAQ -->
-  <section class="section section--alt" id="faq">
-    <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="section-tag">Domande frequenti</span>
-        <h2>FAQs</h2>
-      </div>
+                <!-- Feature 6: vendita prodotti (prototipo in sviluppo) -->
+                <div class="fsplit fsplit--rev" data-reveal>
+                    <div class="fsplit__text">
+                        <div class="fsplit__tag-row">
+                            <span class="fsplit__tag">Vendita prodotti</span>
+                            <span class="fsplit__coming">🚧 In sviluppo</span>
+                        </div>
+                        <h3>Vendi i tuoi prodotti direttamente su WhatsApp</h3>
+                        <p>Presto i tuoi clienti potranno sfogliare il catalogo prodotti del salone, fare domande e acquistare — tutto senza uscire da WhatsApp. Synkris gestirà ordini, disponibilità e notifiche di spedizione.</p>
+                        <ul class="fsplit__list">
+                            <li>Catalogo prodotti consultabile via chat</li>
+                            <li>Ordini e pagamenti integrati in WhatsApp</li>
+                            <li>Notifiche automatiche su stato ordine</li>
+                            <li>Upselling intelligente dopo ogni appuntamento</li>
+                        </ul>
+                        <div class="fsplit__proto-note">
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                            <span>Funzionalità in fase di sviluppo. I clienti del lancio pilota avranno accesso in anteprima assoluta.</span>
+                        </div>
+                    </div>
+                    <div class="fsplit__visual">
+                        <div class="fmockup fmockup--proto">
+                            <div class="fmockup__bar">
+                                <div class="fmockup__dot fmockup__dot--r"></div>
+                                <div class="fmockup__dot fmockup__dot--y"></div>
+                                <div class="fmockup__dot fmockup__dot--g"></div>
+                                <span class="fmockup__label">WhatsApp Business · Catalogo prodotti</span>
+                            </div>
+                            <div class="fmockup__convo">
+                                <div class="fconvo__item fconvo__item--in">
+                                    <div class="fconvo__bubble">Avete lo shampoo che mi avete usato oggi?</div>
+                                    <div class="fconvo__time">15:22</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble">Certo! Ecco i prodotti che Sofia ha usato oggi su di te:</div>
+                                    <div class="fconvo__time">15:22</div>
+                                </div>
+                                <div class="fconvo__item fconvo__item--out">
+                                    <div class="fconvo__bubble fconvo__bubble--product">
+                                        <div class="fproduct">
+                                            <div class="fproduct__emoji">🧴</div>
+                                            <div class="fproduct__info">
+                                                <div class="fproduct__name">Shampoo Kerasilk Repair</div>
+                                                <div class="fproduct__price">€ 18,50</div>
+                                            </div>
+                                        </div>
+                                        <div class="fproduct">
+                                            <div class="fproduct__emoji">✨</div>
+                                            <div class="fproduct__info">
+                                                <div class="fproduct__name">Maschera idratante 200ml</div>
+                                                <div class="fproduct__price">€ 24,00</div>
+                                            </div>
+                                        </div>
+                                        <button class="fproduct__cta">🛒 Aggiungi al carrello</button>
+                                    </div>
+                                    <div class="fconvo__time">15:22</div>
+                                </div>
+                            </div>
+                            <div class="fmockup__proto-banner">
+                                <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+                                    <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                                Funzionalità in sviluppo — disponibile presto
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="faq-container">
-        <details class="faq-item" data-reveal>
-          <summary class="faq-question">
-            <span>Quanto tempo serve per configurare Synkris?</span>
-            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p>Lancia il tuo bot con un setup professionale su misura! Iniziamo con 1–2 ore di chiamata per impostare servizi, operatori, orari e messaggi perfetti per il tuo business.
-Dopo 24 ore di test, sei live e pronto per partire!
-              <br><strong>Attenzione: </strong>la configurazione del bot non è un <i>"click and go"</i>, richiede tempo dedicato che varia in base alla complessità delle tue richieste e dei flussi personalizzati. <strong>Investi nel setup giusto per risultati duraturi</strong>. <br>
-</p>
-          </div>
-        </details>
-
-        <details class="faq-item" data-reveal>
-          <summary class="faq-question">
-            <span>I miei clienti devono scaricare un'app?</span>
-            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p>No. I clienti scrivono al tuo numero WhatsApp come sempre. Synkris risponde automaticamente. Zero app, zero complicazioni.</p>
-          </div>
-        </details>
-
-        <details class="faq-item" data-reveal>
-          <summary class="faq-question">
-            <span>Posso intervenire manualmente nelle conversazioni?</span>
-            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p>Assolutamente sì. Dal pannello puoi prendere controllo di qualsiasi conversazione e rispondere personalmente quando serve.</p>
-          </div>
-        </details>
-
-        <details class="faq-item" data-reveal>
-          <summary class="faq-question">
-            <span>I dati dei miei clienti sono al sicuro?</span>
-            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p>Sì. Applichiamo principi GDPR (minimizzazione, accesso controllato, retention). Il flusso WhatsApp resta protetto sul canale WhatsApp; Synkris opera sul PC del salone e, in modalità on‑prem, non inoltra le conversazioni a servizi esterni. Quando serve, definiamo policy di log e backup in base alle esigenze del salone.</p>
-          </div>
-        </details>
-
-        <details class="faq-item" data-reveal>
-          <summary class="faq-question">
-            <span>Posso disdire in qualsiasi momento?</span>
-            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p>Sì. Nessun vincolo contrattuale. Paghi mese per mese, e puoi disdire quando vuoi con 30 giorni di preavviso.</p>
-          </div>
-        </details>
-
-        
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTATTI -->
-  <section class="section section--contact" id="contatti">
-    <div class="container">
-      <div class="contact-wrapper">
-        
-        <div class="contact-info" data-reveal>
-          <span class="section-tag">Contatti</span>
-          <h2>Prenota una demo gratuita</h2>
-          <p>Compila il form o scrivici direttamente. Ti rispondiamo entro 24 ore lavorative.</p>
-          
-          <div class="contact-details">
-            <div class="contact-item">
-              <svg width="24" height="24" fill="currentColor">
-                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
-              <div>
-                <div class="contact-label">Email</div>
-                <a href="/cdn-cgi/l/email-protection#8beceae9f9e2eee7eee7fee8e2eabbbccbece6eae2e7a5e8e4e6"><span class="__cf_email__" data-cfemail="ee898f8c9c878b828b829b8d878fded9ae89838f8782c08d8183">gabrielelucia07@gmail.com</span></a>
-              </div>
             </div>
-            <div class="contact-item">
-              <svg width="24" height="24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-              </svg>
-              <div>
-                <div class="contact-label">WhatsApp</div>
-                <a href="https://wa.me/393534043794">+39 353 404 3794</a>
-              </div>
+        </section>
+
+        <!-- ══════════ TESTIMONIALS ══════════ -->
+        <section class="section section--alt" id="recensioni">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Chi l'ha già scelto</span>
+                    <h2>I nostri utenti sono i migliori ambasciatori</h2>
+                    <p class="section-subtitle">Synkris è in fase pilota. Questi sono i saloni che l'hanno provato per primi.</p>
+                </div>
+                <div class="tgrid">
+                    <div class="tcard" data-reveal>
+                        <div class="tcard__stars">★★★★★</div>
+                        <p class="tcard__text">"Finalmente non rispondo ai messaggi alle 11 di sera. Synkris gestisce tutto e i clienti sono entusiasti. I no-show sono praticamente spariti."</p>
+                        <div class="tcard__author">
+                            <div class="tcard__av">D</div>
+                            <div>
+                                <div class="tcard__name">Diana M.</div>
+                                <div class="tcard__role">Salone di bellezza · Milano</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tcard" data-reveal>
+                        <div class="tcard__stars">★★★★★</div>
+                        <p class="tcard__text">"Ho provato altri sistemi ma erano tutti complicati. Synkris l'ho capito subito, i clienti lo usano senza problemi e il pannello è chiarissimo."</p>
+                        <div class="tcard__author">
+                            <div class="tcard__av">M</div>
+                            <div>
+                                <div class="tcard__name">Marco V.</div>
+                                <div class="tcard__role">Barbiere · Roma</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tcard" data-reveal>
+                        <div class="tcard__stars">★★★★★</div>
+                        <p class="tcard__text">"Prima avevo 3–4 no-show a settimana. Ora quasi zero. I promemoria automatici si sono ripagati da soli nel primo mese."</p>
+                        <div class="tcard__author">
+                            <div class="tcard__av">S</div>
+                            <div>
+                                <div class="tcard__name">Sara B.</div>
+                                <div class="tcard__role">Centro estetico · Torino</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tcard" data-reveal>
+                        <div class="tcard__stars">★★★★★</div>
+                        <p class="tcard__text">"I miei clienti scrivono come sempre e non sanno nemmeno che c'è un bot. Le risposte sono naturali, precise e veloci. Incredibile."</p>
+                        <div class="tcard__author">
+                            <div class="tcard__av">L</div>
+                            <div>
+                                <div class="tcard__name">Luca P.</div>
+                                <div class="tcard__role">Parrucchiere · Bologna</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tcard" data-reveal>
+                        <div class="tcard__stars">★★★★★</div>
+                        <p class="tcard__text">"Il setup è stato veloce e il team ci ha aiutati passo passo. Ora gestisco 3 operatori senza stress. Consigliato a chiunque abbia un salone."</p>
+                        <div class="tcard__author">
+                            <div class="tcard__av">F</div>
+                            <div>
+                                <div class="tcard__name">Francesca R.</div>
+                                <div class="tcard__role">Hair salon · Napoli</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tcard tcard--cta" data-reveal>
+                        <div class="tcard__cta-icon">💬</div>
+                        <p class="tcard__cta-text">Vuoi essere tra i prossimi a provarlo?</p>
+                        <a href="#contatti" class="btn btn--primary">Prenota la tua demo</a>
+                    </div>
+                </div>
             </div>
-            <div class="contact-item">
-              <svg width="24" height="24" fill="currentColor">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
-              <div>
-                <div class="contact-label">Sede</div>
-                <span>Italia</span>
-              </div>
+        </section>
+
+        <!-- ══════════ AFFIANCAMENTO ══════════ -->
+        <section class="section" id="affiancamento">
+            <div class="container">
+
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Non sei solo</span>
+                    <h2>Ti affianchiamo dall'inizio.<br />Poi sei autonomo.</h2>
+                    <p class="section-subtitle">Synkris non è un software che installi e poi ti auguri buona fortuna. Il primo setup lo facciamo insieme — dopodiché puoi aggiornare il bot da solo, quando vuoi, senza chiamare nessuno.</p>
+                </div>
+
+                <div class="onboarding-timeline" data-reveal>
+
+                    <div class="ob-step">
+                        <div class="ob-step__line">
+                            <div class="ob-step__num">1</div>
+                        </div>
+                        <div class="ob-step__body">
+                            <div class="ob-step__icon">📞</div>
+                            <h3>Chiamata di onboarding</h3>
+                            <p>Prima di toccare qualsiasi impostazione, parliamo. Capiamo come lavori, cosa vuoi automatizzare e cosa vuoi tenere manuale. Nessun template — partiamo da zero insieme.</p>
+                        </div>
+                    </div>
+
+                    <div class="ob-step">
+                        <div class="ob-step__line">
+                            <div class="ob-step__num">2</div>
+                        </div>
+                        <div class="ob-step__body">
+                            <div class="ob-step__icon">⚙️</div>
+                            <h3>Configurazione su misura</h3>
+                            <p>Impostiamo tutto noi: servizi, operatori, orari, tono dei messaggi, flussi personalizzati. Il bot parla come parla il tuo salone, non come un robot generico.</p>
+                        </div>
+                    </div>
+
+                    <div class="ob-step">
+                        <div class="ob-step__line">
+                            <div class="ob-step__num">3</div>
+                        </div>
+                        <div class="ob-step__body">
+                            <div class="ob-step__icon">🧪</div>
+                            <h3>Test reale prima di andare live</h3>
+                            <p>Proviamo insieme ogni scenario: prenotazioni, spostamenti, domande insolite, clienti difficili. Andiamo live solo quando sei soddisfatto al 100%.</p>
+                        </div>
+                    </div>
+
+                    <div class="ob-step">
+                        <div class="ob-step__line">
+                            <div class="ob-step__num">4</div>
+                        </div>
+                        <div class="ob-step__body">
+                            <div class="ob-step__icon">🚀</div>
+                            <h3>Vai live — con noi accanto il primo giorno</h3>
+                            <p>Il giorno del lancio siamo raggiungibili. Se arriva un caso strano o vuoi cambiare qualcosa al volo, ci siamo. Niente ansia da primo giorno.</p>
+                        </div>
+                    </div>
+
+                    <div class="ob-step ob-step--highlight">
+                        <div class="ob-step__line">
+                            <div class="ob-step__num">5</div>
+                        </div>
+                        <div class="ob-step__body">
+                            <div class="ob-step__icon">🎛️</div>
+                            <h3>Da quel momento sei tu al comando</h3>
+                            <p>Vuoi aggiungere un servizio? Cambiare gli orari? Modificare un messaggio? Lo fai <strong>direttamente dal pannello, da solo, in pochi secondi</strong> — senza chiamare noi, senza aspettare nessuno.</p>
+                            <div class="ob-self-serve">
+                                <div class="ob-self-serve__item">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    <span>Aggiungi o rimuovi servizi</span>
+                                </div>
+                                <div class="ob-self-serve__item">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    <span>Modifica orari e disponibilità</span>
+                                </div>
+                                <div class="ob-self-serve__item">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    <span>Personalizza i messaggi del bot</span>
+                                </div>
+                                <div class="ob-self-serve__item">
+                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    <span>Aggiungi nuovi operatori</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ob-step ob-step--last">
+                        <div class="ob-step__line">
+                            <div class="ob-step__num">6</div>
+                        </div>
+                        <div class="ob-step__body">
+                            <div class="ob-step__icon">🤝</div>
+                            <h3>Noi restiamo, ma non avrai bisogno di noi</h3>
+                            <p>Il supporto via WhatsApp è incluso in ogni piano. Siamo qui se serve — ma l'obiettivo è che tu possa gestire tutto in autonomia, senza dipendere da nessuno.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="ob-trust" data-reveal>
+                    <div class="ob-trust__item">
+                        <div class="ob-trust__icon">⏱️</div>
+                        <div class="ob-trust__text">
+                            <strong>Setup in poco tempo</strong>
+                            <span>Dalla chiamata al go-live in meno di un mese</span>
+                        </div>
+                    </div>
+                    <div class="ob-trust__item">
+                        <div class="ob-trust__icon">🎛️</div>
+                        <div class="ob-trust__text">
+                            <strong>Aggiornamenti self-service</strong>
+                            <span>Modifichi il bot da solo dal pannello, senza assistenza</span>
+                        </div>
+                    </div>
+                    <div class="ob-trust__item">
+                        <div class="ob-trust__icon">💬</div>
+                        <div class="ob-trust__text">
+                            <strong>Supporto WhatsApp incluso</strong>
+                            <span>Sempre disponibili se ne hai davvero bisogno</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
+        </section>
 
-          <div class="trust-note">
-            <svg width="20" height="20" fill="currentColor">
-              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-            </svg>
-            <p>I tuoi dati sono protetti. GDPR compliant. Nessuna vendita a terzi.</p>
-          </div>
-        </div>
-
-        <!-- FORM -->
-        <div class="contact-form-wrapper" data-reveal>
-          <form class="contact-form" id="contactForm" action="https://formspree.io/f/xlgwrwpb" method="POST">
-            
-            <div class="form-row">
-              <div class="form-field">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required autocomplete="name"/>
-              </div>
-              <div class="form-field">
-                <label for="salone">Nome salone</label>
-                <input type="text" id="salone" name="salone" required autocomplete="organization"/>
-              </div>
+        <!-- ══════════ PANNELLO ══════════ -->
+        <section class="section" id="pannello">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Pannello di controllo</span>
+                    <h2>Uno strumento vero, non solo una bella dashboard</h2>
+                    <p class="section-subtitle">Vedi tutti gli appuntamenti, gestiscili con un click, leggi le conversazioni WhatsApp e intervieni solo quando serve.</p>
+                </div>
+                <div class="dashboard-wrapper" data-reveal>
+                    <div class="dashboard-preview">
+                        <div class="dashboard-window">
+                            <div class="window-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="dashboard-content">
+                            <div class="dashboard-header">
+                                <div>
+                                    <h3>Dashboard</h3>
+                                    <p>Oggi, venerdì 7 febbraio</p>
+                                </div>
+                                <div class="dashboard-actions">
+                                    <button class="btn-dash btn-dash--primary">+ Nuovo appuntamento</button>
+                                    <button class="btn-dash btn-dash--secondary">⚙️</button>
+                                </div>
+                            </div>
+                            <div class="dashboard-stats">
+                                <div class="stat-card stat-card--blue">
+                                    <div class="stat-card__label">Oggi</div>
+                                    <div class="stat-card__value">12</div>
+                                    <div class="stat-card__sub">appuntamenti</div>
+                                </div>
+                                <div class="stat-card stat-card--green">
+                                    <div class="stat-card__label">Confermati</div>
+                                    <div class="stat-card__value">10</div>
+                                    <div class="stat-card__sub">clienti</div>
+                                </div>
+                                <div class="stat-card stat-card--orange">
+                                    <div class="stat-card__label">In attesa</div>
+                                    <div class="stat-card__value">2</div>
+                                    <div class="stat-card__sub">da confermare</div>
+                                </div>
+                                <div class="stat-card stat-card--purple">
+                                    <div class="stat-card__label">Messaggi</div>
+                                    <div class="stat-card__value">5</div>
+                                    <div class="stat-card__sub">nuovi</div>
+                                </div>
+                            </div>
+                            <div class="appointments-list">
+                                <h4>Prossimi appuntamenti</h4>
+                                <div class="appointment-items">
+                                    <div class="appointment-item appointment-item--blue">
+                                        <div class="appointment-time">10:00</div>
+                                        <div class="appointment-details">
+                                            <div class="appointment-name">Maria Rossi</div>
+                                            <div class="appointment-service">Taglio + Piega · Sofia</div>
+                                        </div>
+                                        <div class="appointment-status appointment-status--confirmed">Confermato</div>
+                                    </div>
+                                    <div class="appointment-item appointment-item--green">
+                                        <div class="appointment-time">11:30</div>
+                                        <div class="appointment-details">
+                                            <div class="appointment-name">Luca Bianchi</div>
+                                            <div class="appointment-service">Colore completo · Marco</div>
+                                        </div>
+                                        <div class="appointment-status appointment-status--confirmed">Confermato</div>
+                                    </div>
+                                    <div class="appointment-item appointment-item--orange">
+                                        <div class="appointment-time">14:30</div>
+                                        <div class="appointment-details">
+                                            <div class="appointment-name">Anna Verdi</div>
+                                            <div class="appointment-service">Trattamento · Sofia</div>
+                                        </div>
+                                        <div class="appointment-status appointment-status--pending">In attesa</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-features">
+                    <div class="feature-item" data-reveal>
+                        <div class="feature-item__icon">📅</div>
+                        <h3>Vista calendario completa</h3>
+                        <p>Tutti gli appuntamenti in un colpo d'occhio. Giorno, settimana o mese: scegli come vuoi.</p>
+                    </div>
+                    <div class="feature-item" data-reveal>
+                        <div class="feature-item__icon">✏️</div>
+                        <h3>Modifica con un click</h3>
+                        <p>Crea, sposta o cancella appuntamenti direttamente dal pannello. Trascina lo slot dove vuoi.</p>
+                    </div>
+                    <div class="feature-item" data-reveal>
+                        <div class="feature-item__icon">💬</div>
+                        <h3>Leggi e rispondi alle chat</h3>
+                        <p>Vedi tutte le conversazioni WhatsApp. Se vuoi intervenire, prendi il controllo con un click.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="form-row">
-              <div class="form-field">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required autocomplete="email"/>
-              </div>
-              <div class="form-field">
-                <label for="telefono">Telefono / WhatsApp</label>
-                <input type="tel" id="telefono" name="telefono" required autocomplete="tel"/>
-              </div>
+        <!-- ══════════ PREZZI ══════════ -->
+        <section class="section section--alt" id="prezzi">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Piani</span>
+                    <h2>Scegli il piano per il tuo salone</h2>
+                    <p class="section-subtitle">Setup incluso. Nessun costo nascosto. Disdici quando vuoi.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="price-card" data-reveal>
+                        <div class="price-header">
+                            <h3>Starter</h3>
+                            <p>Per saloni piccoli o mono-operatore</p>
+                        </div>
+                        <div class="price-amount">
+                            <span class="currency">€</span>
+                            <span class="value">49</span>
+                            <span class="period">/mese</span>
+                        </div>
+                        <ul class="price-features">
+                            <li>✓ Fino a 100 appuntamenti/mese</li>
+                            <li>✓ 1 operatore</li>
+                            <li>✓ Risposte automatiche 24/7</li>
+                            <li>✓ Calendario sincronizzato</li>
+                            <li>✓ Promemoria automatici</li>
+                            <li>✓ Setup personalizzato incluso</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--outline btn--block">Inizia</a>
+                    </div>
+                    <div class="price-card price-card--featured" data-reveal>
+                        <div class="price-badge">Più scelto</div>
+                        <div class="price-header">
+                            <h3>Professional</h3>
+                            <p>Per saloni medi con più operatori</p>
+                        </div>
+                        <div class="price-amount">
+                            <span class="currency">€</span>
+                            <span class="value">99</span>
+                            <span class="period">/mese</span>
+                        </div>
+                        <ul class="price-features">
+                            <li>✓ Fino a 300 appuntamenti/mese</li>
+                            <li>✓ Fino a 3 operatori</li>
+                            <li>✓ Tutto di Starter +</li>
+                            <li>✓ Campagne promozionali WhatsApp</li>
+                            <li>✓ Report avanzati</li>
+                            <li>✓ Supporto prioritario</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--primary btn--block">Inizia</a>
+                    </div>
+                    <div class="price-card" data-reveal>
+                        <div class="price-header">
+                            <h3>Enterprise</h3>
+                            <p>Per catene o grandi strutture</p>
+                        </div>
+                        <div class="price-amount">
+                            <span class="value" style="font-size:var(--text-4xl)">Custom</span>
+                        </div>
+                        <ul class="price-features">
+                            <li>✓ Appuntamenti illimitati</li>
+                            <li>✓ Operatori illimitati</li>
+                            <li>✓ Multi-sede</li>
+                            <li>✓ API personalizzate</li>
+                            <li>✓ Integrazioni custom</li>
+                            <li>✓ Account manager dedicato</li>
+                        </ul>
+                        <a href="#contatti" class="btn btn--outline btn--block">Contattaci</a>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="form-field">
-              <label for="citta">Città</label>
-              <input type="text" id="citta" name="citta" required autocomplete="address-level2"/>
+        <!-- ══════════ FAQ ══════════ -->
+        <section class="section" id="faq">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="section-tag">Domande frequenti</span>
+                    <h2>Hai dubbi? Li abbiamo già sentiti.</h2>
+                </div>
+                <div class="faq-container">
+                    <details class="faq-item" data-reveal>
+                        <summary class="faq-question">
+                            <span>Quanto tempo serve per configurare Synkris?</span>
+                            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Iniziamo con una chiamata di 1–2 ore per configurare servizi, operatori, orari e messaggi su misura. Dopo 24 ore di test sei live. Il setup <strong>non è automatico</strong>: richiede tempo e attenzione per funzionare bene sul tuo specifico salone. È un investimento che vale.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item" data-reveal>
+                        <summary class="faq-question">
+                            <span>I miei clienti devono scaricare qualcosa?</span>
+                            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>No. I clienti scrivono al tuo numero WhatsApp esattamente come fanno adesso. Synkris risponde in automatico. Zero app, zero registrazioni, zero complicazioni per loro.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item" data-reveal>
+                        <summary class="faq-question">
+                            <span>Posso intervenire manualmente nelle conversazioni?</span>
+                            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Assolutamente sì. Dal pannello puoi leggere qualsiasi conversazione e prenderne il controllo con un click. Quando intervieni tu, Synkris si fa da parte e poi puoi riattivarla quando vuoi.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item" data-reveal>
+                        <summary class="faq-question">
+                            <span>I dati dei miei clienti sono al sicuro?</span>
+                            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Sì. Gestiamo tutti i dati in conformità GDPR, con crittografia. I tuoi clienti rimangono tuoi, sempre. Non vendiamo dati a terzi, mai.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item" data-reveal>
+                        <summary class="faq-question">
+                            <span>Posso disdire in qualsiasi momento?</span>
+                            <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Sì. Nessun vincolo contrattuale. Paghi mese per mese e puoi disdire con 30 giorni di preavviso. Vogliamo che tu rimanga perché sei soddisfatto, non perché sei bloccato.</p>
+                        </div>
+                    </details>
+                </div>
             </div>
+        </section>
 
-            <div class="form-field">
-              <label for="messaggio">Raccontaci del tuo salone</label>
-              <textarea id="messaggio" name="messaggio" rows="5" placeholder="Quanti operatori? Quali servizi? Cosa vorresti migliorare?" required></textarea>
+        <!-- ══════════ CONTATTI ══════════ -->
+        <section class="section section--contact" id="contatti">
+            <div class="container">
+                <div class="contact-wrapper">
+
+                    <div class="contact-info" data-reveal>
+                        <span class="section-tag">Prenota una demo</span>
+                        <h2>Vediamoci. Ti mostriamo come funziona.</h2>
+                        <p>Compila il form o scrivici direttamente. Ti rispondiamo entro 24 ore lavorative e organizziamo una demo gratuita sul tuo salone.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                </svg>
+                                <div>
+                                    <div class="contact-label">Email</div>
+                                    <a href="mailto:oakvx7@gmail.com"><span class="__cf_email__" data-cfemail="24434546564d4148414851474d451413644349454d480a474b49">oakvx@gmail.com</span></a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                </svg>
+                                <div>
+                                    <div class="contact-label">WhatsApp</div>
+                                    <a href="https://wa.me/393534043794">+39 353 404 3794</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                </svg>
+                                <div>
+                                    <div class="contact-label">Sede</div>
+                                    <span>Italia</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trust-note">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                            </svg>
+                            <p>I tuoi dati sono protetti. GDPR compliant. Nessuna vendita a terzi.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper" data-reveal>
+                        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xlgwrwpb" method="POST">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="nome">Nome</label>
+                                    <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Il tuo nome" />
+                                </div>
+                                <div class="form-field">
+                                    <label for="salone">Nome salone</label>
+                                    <input type="text" id="salone" name="salone" required autocomplete="organization" placeholder="Es. Salone Diana" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="tu@email.it" />
+                                </div>
+                                <div class="form-field">
+                                    <label for="telefono">Telefono / WhatsApp</label>
+                                    <input type="tel" id="telefono" name="telefono" required autocomplete="tel" placeholder="+39 333 000 0000" />
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="citta">Città</label>
+                                <input type="text" id="citta" name="citta" required autocomplete="address-level2" placeholder="Dove si trova il salone?" />
+                            </div>
+                            <div class="form-field">
+                                <label for="messaggio">Raccontaci del tuo salone</label>
+                                <textarea id="messaggio" name="messaggio" rows="4" placeholder="Quanti operatori? Quali servizi? Cosa vorresti migliorare?" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--block btn--lg">
+                                <span>Invia richiesta</span>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                                </svg>
+                            </button>
+                            <p class="form-note">Risposta entro 24 ore lavorative</p>
+                            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+
+                </div>
             </div>
+        </section>
 
-            <button type="submit" class="btn btn--primary btn--block btn--lg">
-              <span>Invia richiesta</span>
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-              </svg>
-            </button>
+    </main>
 
-            <p class="form-note">Riceverai una risposta entro 24 ore lavorative</p>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          </form>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" fill="none" viewBox="0 0 40 40">
+                            <defs>
+                                <linearGradient id="footer-grad" x1="0" y1="0" x2="40" y2="40">
+                                    <stop offset="0%" stop-color="#a78bfa" />
+                                    <stop offset="100%" stop-color="#7c3aed" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="20" cy="20" r="18" fill="url(#footer-grad)" opacity="0.15" />
+                            <path d="M20 10 L14 14 L20 18 L26 14 Z" fill="url(#footer-grad)" />
+                            <path d="M14 22 L20 26 L26 22 M14 18 L20 22 L26 18" stroke="url(#footer-grad)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+                        </svg>
+                        <span>Synkris</span>
+                    </div>
+                    <p class="footer-desc">Assistente WhatsApp per saloni.<br />Costruito con cura. Fatto per durare.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Prodotto</h4>
+                        <a href="#perche">Perché Synkris</a>
+                        <a href="#come">Come funziona</a>
+                        <a href="#funzioni">Funzionalità</a>
+                        <a href="#prezzi">Prezzi</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Supporto</h4>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contatti">Contatti</a>
+                        <a href="#">Documentazione</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legale</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Termini di servizio</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="year">2025</span> Synkris. Fatto in Italia con 💜</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
+    </footer>
 
-      </div>
-    </div>
-  </section>
+    <a class="wa-fab" href="https://wa.me/393534043794?text=Ciao!%20Vorrei%20info%20su%20Synkris" target="_blank" rel="noopener noreferrer" aria-label="Contattaci su WhatsApp">
+        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 448 512" fill="currentColor">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-156.9zM223.9 438.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.2-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path>
+        </svg>
+    </a>
 
-</main>
+</body>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <svg width="36" height="36" fill="none" viewBox="0 0 40 40">
-            <defs>
-              <linearGradient id="footer-grad" x1="0" y1="0" x2="40" y2="40">
-                <stop offset="0%" stop-color="#a78bfa"/>
-                <stop offset="100%" stop-color="#7c3aed"/>
-              </linearGradient>
-            </defs>
-            <circle cx="20" cy="20" r="18" fill="url(#footer-grad)" opacity="0.15"/>
-            <path d="M20 10 L14 14 L20 18 L26 14 Z" fill="url(#footer-grad)"/>
-            <path d="M14 22 L20 26 L26 22 M14 18 L20 22 L26 18" stroke="url(#footer-grad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          </svg>
-          <span>Synkris</span>
-        </div>
-        <p class="footer-desc">Assistente WhatsApp per saloni.<br/>Costruito con cura. Fatto per durare.</p>
-      </div>
-
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Prodotto</h4>
-          <a href="#perche">Perché Synkris</a>
-          <a href="#come">Come funziona</a>
-          <a href="#funzioni">Funzionalità</a>
-          <a href="#prezzi">Prezzi</a>
-        </div>
-        <div class="footer-col">
-          <h4>Supporto</h4>
-          <a href="#faq">FAQ</a>
-          <a href="#contatti">Contatti</a>
-          <a href="#">Documentazione</a>
-        </div>
-        <div class="footer-col">
-          <h4>Legale</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Termini di servizio</a>
-          <a href="#">GDPR</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p>© <span id="year">2025</span> Synkris. Fatto in Italia con 💜</p>
-      <div class="footer-social">
-        <a href="#" aria-label="LinkedIn">
-          <svg width="20" height="20" fill="currentColor">
-            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-          </svg>
-        </a>
-        <a href="#" aria-label="Instagram">
-          <svg width="20" height="20" fill="currentColor">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-  </div>
-</footer>
-
-<!-- WhatsApp FAB -->
-<a class="wa-fab"
-   href="https://wa.me/393534043794?text=Ciao!%20Vorrei%20info%20su%20Synkris"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Contattaci su WhatsApp">
-
-  <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.86 11.86 0 005.688 1.449h.005c6.557 0 11.892-5.335 11.895-11.893a11.815 11.815 0 00-3.486-8.414z"/>
-  </svg>
-
-</a>
+</html>

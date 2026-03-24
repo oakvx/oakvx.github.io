@@ -1428,6 +1428,7 @@ html{scroll-padding-top:calc(var(--header-shell-h) + var(--header-offset) + 18px
 .nav a{padding:.5rem .8rem; border-radius:999px}
 .nav__cta{padding:.58rem 1.18rem !important; border-radius:999px !important}
 .logo svg{flex-shrink:0}
+.logo-mark{display:block; width:30px; height:30px; object-fit:contain; flex-shrink:0}
 .hero--cinematic{padding-top:calc(var(--header-shell-h) + var(--header-offset) + 4.2rem)}
 .hero__grid-lines{
   background-size:44px 44px;
@@ -1758,4 +1759,72 @@ html{scroll-padding-top:calc(var(--header-shell-h) + var(--header-offset) + 18px
   .work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.295)}
   .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.185)}
   .preview-live__placeholder span{font-size:.62rem; padding:.5rem .72rem}
+}
+
+/* ══════════════════════════════════════
+   readability + mobile preview polish
+══════════════════════════════════════ */
+body{font-size:1.03rem; line-height:1.78}
+p{color:rgba(22,11,42,.76); max-width:72ch}
+.section__header{max-width:760px; margin-bottom:3.9rem}
+.section__header p{font-size:1.08rem; line-height:1.75; color:rgba(22,11,42,.72)}
+.reel-card p,
+.work-card__info p,
+.process-step__content p,
+.product-content p{font-size:.95rem; line-height:1.72; color:rgba(22,11,42,.74)}
+.work-card__lead{line-height:1.68}
+.logo-mark--footer{width:24px; height:24px; filter:brightness(1.15) saturate(1.05)}
+
+.preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.44)}
+.preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.21)}
+.work-card:hover .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.215)}
+.work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.445)}
+
+.container{max-width:1360px}
+.work-card__media--stacked{min-height:520px}
+.preview-viewport--hero-work{height:430px}
+.preview-viewport--work{height:272px}
+
+.device-shell--phone{width:228px; padding:.32rem}
+.preview-viewport--phone{height:262px}
+.preview-live--phone .preview-live__frame{
+  width:430px;
+  height:1180px;
+  left:50%;
+  top:0;
+  transform:translateX(-50%) scale(.31);
+  transform-origin:top center;
+  border-radius:14px;
+}
+.preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.31)}
+
+@media(max-width:899px){
+  .section{padding:clamp(4rem, 8vw, 6.4rem) 0}
+  .section__header{margin-bottom:2.8rem}
+  .section__header p{font-size:1rem}
+  .work-card__media--stacked{min-height:470px}
+  .preview-viewport--hero-work{height:350px}
+  .preview-viewport--work{height:238px}
+  .preview-viewport--phone{height:228px}
+  .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.35)}
+  .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.19)}
+  .work-card:hover .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.195)}
+  .work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.355)}
+  .preview-live--phone .preview-live__frame,
+  .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.27)}
+  .device-shell--phone{width:206px}
+}
+
+@media(max-width:699px){
+  body{font-size:1rem}
+  .preview-viewport--hero-work{height:300px}
+  .preview-viewport--work{height:198px}
+  .preview-viewport--phone{height:212px; border-radius:14px}
+  .device-shell--phone{width:170px; padding:.24rem}
+  .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.285)}
+  .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.17)}
+  .work-card:hover .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.172)}
+  .work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.29)}
+  .preview-live--phone .preview-live__frame,
+  .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.245)}
 }

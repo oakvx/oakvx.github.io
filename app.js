@@ -1,413 +1,197 @@
 (() => {
   'use strict';
+  const reduced = window.matchMedia?.('(prefers-reduced-motion:reduce)')?.matches ?? false;
+  const desktopHeavy = (window.innerWidth || 0) >= 1100;
 
-  const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
 
-  // ========================================
-  // HEADER SCROLL
-  // ========================================
-  
-  const header = document.querySelector('.header');
-  const handleScroll = () => {
-    if (!header) return;
-    header.classList.toggle('is-scrolled', window.scrollY > 10);
-  };
+  /* ═══════════════════════════════════════════ CURSOR */
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mx = 0, my = 0, fx = 0, fy = 0;
+  if (cursor && follower && !reduced && desktopHeavy) {
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    const tick = () => { fx += (mx-fx)*.12; fy += (my-fy)*.12; follower.style.left=fx+'px'; follower.style.top=fy+'px'; requestAnimationFrame(tick); };
+    tick();
+    document.querySelectorAll('a,button,[role="button"],input,textarea,select').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.cssText += 'width:15px;height:15px;'; follower.style.cssText += 'width:46px;height:46px;border-color:rgba(114,40,187,.48);'; });
+      el.addEventListener('mouseleave', () => { cursor.style.cssText += 'width:8px;height:8px;'; follower.style.cssText += 'width:30px;height:30px;border-color:rgba(114,40,187,.33);'; });
+    });
+    document.addEventListener('mouseleave', () => { cursor.style.opacity='0'; follower.style.opacity='0'; });
+    document.addEventListener('mouseenter', () => { cursor.style.opacity='1'; follower.style.opacity='1'; });
+  }
 
-  handleScroll();
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  /* ═══════════════════════════════════════════ HEADER */
+  const header = document.getElementById('header');
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 18);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+/* ═══════════════════════════════════════════ HERO SCROLL */
+const hero = document.querySelector('.hero');
+const setHeroProgress = () => {
+  if (!hero || reduced) return;
+  const rect = hero.getBoundingClientRect();
+  const vh = window.innerHeight || 1;
+  const distance = Math.max(vh * 1.05, 1);
+  const progress = Math.min(1, Math.max(0, (-rect.top) / distance));
+  hero.style.setProperty('--hero-progress', progress.toFixed(3));
+  hero.dataset.phase = progress > .66 ? '3' : progress > .33 ? '2' : '1';
+};
+setHeroProgress();
+window.addEventListener('scroll', setHeroProgress, { passive: true });
+window.addEventListener('resize', setHeroProgress, { passive: true });
 
-  // ========================================
-  // MOBILE NAVIGATION - CORRETTO
-  // ========================================
 
+  /* ═══════════════════════════════════════════ MOBILE NAV */
   const navToggle = document.getElementById('navToggle');
   const nav = document.getElementById('siteNav');
   const navOverlay = document.getElementById('navOverlay');
-
-  const setNavOpen = (open) => {
-    if (!nav || !navToggle || !navOverlay) return;
-
-    if (open) {
-      nav.classList.add('is-open');
-      navOverlay.classList.add('is-visible');
-    } else {
-      nav.classList.remove('is-open');
-      navOverlay.classList.remove('is-visible');
-    }
-
-    navToggle.setAttribute('aria-expanded', String(open));
-
-    // blocca scroll background su mobile
+  const setNav = (open) => {
+    nav?.classList.toggle('is-open', open);
+    navOverlay?.classList.toggle('is-visible', open);
+    navToggle?.setAttribute('aria-expanded', String(open));
     document.documentElement.classList.toggle('nav-open', open);
-    document.body.classList.toggle('nav-open', open);
-
-    if (open) {
-      const firstLink = nav.querySelector('a');
-      setTimeout(() => firstLink?.focus?.(), 100);
-    }
+    if (open) setTimeout(() => nav?.querySelector('a')?.focus(), 100);
   };
+  navToggle?.addEventListener('click', e => { e.stopPropagation(); setNav(!nav.classList.contains('is-open')); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setNav(false); });
+  document.addEventListener('click', e => { if (nav?.classList.contains('is-open') && !nav.contains(e.target) && !navToggle.contains(e.target)) setNav(false); });
+  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNav(false)));
+  navOverlay?.addEventListener('click', () => setNav(false));
 
-  if (navToggle && nav) {
-    // Toggle on button click
-    navToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = nav.classList.contains('is-open');
-      setNavOpen(!isOpen);
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-        setNavOpen(false);
-      }
-    });
-
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!nav.classList.contains('is-open')) return;
-      
-      const isClickInsideNav = nav.contains(e.target);
-      const isClickOnToggle = navToggle.contains(e.target);
-      
-      if (!isClickInsideNav && !isClickOnToggle) {
-        setNavOpen(false);
-      }
-    });
-
-    // Close on nav link click
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        setNavOpen(false);
-      });
-    });
-  }
-
-  // Close nav on overlay click
-  if (navOverlay) {
-    navOverlay.addEventListener('click', () => setNavOpen(false));
-  }
-
-  // ========================================
-  // SMOOTH SCROLL
-  // ========================================
-
-  document.addEventListener('click', (e) => {
-    const anchor = e.target?.closest?.('a[href^="#"]');
-    if (!anchor || anchor.classList.contains('skip-link')) return;
-
-    const href = anchor.getAttribute('href');
-    if (!href || href === '#' || href === '#!') return;
-
+  /* ═══════════════════════════════════════════ SMOOTH SCROLL */
+  document.addEventListener('click', e => {
+    const a = e.target?.closest?.('a[href^="#"]');
+    if (!a || a.classList.contains('skip-link')) return;
+    const href = a.getAttribute('href');
+    if (!href || href === '#') return;
     const target = document.querySelector(href);
     if (!target) return;
-
     e.preventDefault();
-
-    // Offset for fixed header
-    const headerHeight = header?.offsetHeight || 72;
-    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-
-    window.scrollTo({
-      top: targetPosition,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth'
-    });
-
-    // Update URL
-    try {
-      history.pushState(null, '', href);
-    } catch (_) {}
-
-    // Close mobile nav
-    setNavOpen(false);
+    const top = target.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight ?? 70);
+    window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
+    try { history.pushState(null, '', href); } catch (_) {}
+    setNav(false);
   });
 
-  // ========================================
-  // ACTIVE SECTION HIGHLIGHT
-  // ========================================
-
-  const navLinks = Array.from(nav?.querySelectorAll('a[href^="#"]') ?? []);
-  const sections = navLinks
-    .map((link) => {
-      const href = link.getAttribute('href');
-      const section = href ? document.querySelector(href) : null;
-      return section ? { link, section } : null;
-    })
-    .filter(Boolean);
-
-  if (!prefersReducedMotion && 'IntersectionObserver' in window && sections.length) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const item = sections.find((s) => s.section === entry.target);
-          if (!item) return;
-
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove('is-active'));
-            item.link.classList.add('is-active');
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0
-      }
-    );
-
-    sections.forEach((s) => observer.observe(s.section));
-  }
-
-  // ========================================
-  // SCROLL REVEAL
-  // ========================================
-
-  const revealElements = Array.from(document.querySelectorAll('[data-reveal]'));
-
-  if (!prefersReducedMotion && 'IntersectionObserver' in window && revealElements.length) {
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-      }
-    );
-
-    revealElements.forEach((el) => observer.observe(el));
-  } else {
-    revealElements.forEach((el) => el.classList.add('is-visible'));
-  }
-
-  // ========================================
-  // FAQ ACCORDION
-  // ========================================
-
-  const faqItems = Array.from(document.querySelectorAll('.faq-item'));
-
-  faqItems.forEach((item) => {
-    item.addEventListener('toggle', () => {
-      if (!item.open) return;
-      
-      faqItems.forEach((other) => {
-        if (other !== item && other.open) {
-          other.open = false;
-        }
-      });
+  /* ═══════════════════════════════════════════ ACTIVE NAV */
+  if (!reduced && 'IntersectionObserver' in window) {
+    const links = Array.from(nav?.querySelectorAll('a[href^="#"]') ?? []);
+    links.forEach(link => {
+      const sec = document.querySelector(link.getAttribute('href') ?? '');
+      if (!sec) return;
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { links.forEach(l => l.classList.remove('is-active')); link.classList.add('is-active'); }
+      }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 }).observe(sec);
     });
+  }
+
+  /* ═══════════════════════════════════════════ SCROLL REVEAL */
+  document.querySelectorAll('.stagger-group').forEach(group => {
+    Array.from(group.children).forEach((child, index) => child.style.transitionDelay = `${index * 90}ms`);
   });
 
-  // ========================================
-  // CONTACT FORM
-  // ========================================
+  const revEls = Array.from(document.querySelectorAll('[data-reveal]'));
+  if (!reduced && 'IntersectionObserver' in window) {
+    const ro = new IntersectionObserver((entries, obs) => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-visible');
+      obs.unobserve(e.target);
+    }), { threshold: 0.08, rootMargin: '0px 0px -42px 0px' });
+    revEls.forEach(el => ro.observe(el));
+  } else { revEls.forEach(el => el.classList.add('is-visible')); }
 
+  /* ═══════════════════════════════════════════ PARALLAX / TILT */
+  const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+  const setParallax = () => {
+    if (reduced || !desktopHeavy || !parallaxEls.length) return;
+    const vh = window.innerHeight || 1;
+    parallaxEls.forEach(el => {
+      const speed = parseFloat(el.dataset.parallax || '0.08');
+      const rect = el.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const progress = (vh / 2 - center) / vh;
+      el.style.transform = `translate3d(0, ${progress * speed * 180}px, 0)`;
+    });
+  };
+  setParallax();
+  window.addEventListener('scroll', setParallax, { passive: true });
+  window.addEventListener('resize', setParallax, { passive: true });
+
+  /* lighter interactions: CSS hover only in v3 */
+
+  /* ═══════════════════════════════════════════ FAQ */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('toggle', () => { if (!item.open) return; document.querySelectorAll('.faq-item').forEach(o => { if (o !== item && o.open) o.open = false; }); });
+  });
+
+  /* ═══════════════════════════════════════════ CONTACT FORM */
   const form = document.getElementById('contactForm');
-  const statusEl = document.getElementById('formStatus');
-
-  const showStatus = (message, type = 'info') => {
-    if (!statusEl) return;
-    statusEl.textContent = message;
-    statusEl.className = 'form-status';
-    if (type === 'success') statusEl.style.color = 'var(--success)';
-    if (type === 'error') statusEl.style.color = 'var(--error)';
+  const stat = document.getElementById('formStatus');
+  const setStat = (msg, type = 'info') => { if (!stat) return; stat.textContent = msg; stat.style.color = type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--error)' : ''; };
+  const clrStat = () => { if (stat) { stat.textContent = ''; stat.style.color = ''; } };
+  const validate = () => {
+    if (!form) return { valid: true };
+    const rules = [{ id: 'nome', ok: v => v.trim().length >= 2 }, { id: 'azienda', ok: v => v.trim().length >= 2 }, { id: 'email', ok: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) }, { id: 'progetto', ok: v => v.trim().length >= 10 }];
+    let valid = true, first = null;
+    rules.forEach(({ id, ok }) => { const inp = document.getElementById(id); const wrap = inp?.closest('.form-field'); const pass = ok(inp?.value ?? ''); wrap?.classList.toggle('is-invalid', !pass); if (!pass) { valid = false; if (!first) first = inp; } });
+    return { valid, firstInvalid: first };
   };
+  form?.querySelectorAll('input,textarea,select').forEach(inp => inp.addEventListener('input', () => { inp.closest('.form-field')?.classList.remove('is-invalid'); clrStat(); }));
+  form?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const { valid, firstInvalid } = validate();
+    if (!valid) { setStat('Controlla i campi evidenziati e riprova.', 'error'); firstInvalid?.focus(); return; }
+    const btn = form.querySelector('button[type="submit"]'), orig = btn?.innerHTML;
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span>Invio in corso…</span>'; }
+    clrStat();
+    try {
+      const action = form.getAttribute('action');
+      if (!action || action.includes('YOUR_FORM_ID')) throw new Error('Sostituisci YOUR_FORM_ID con il tuo ID Formspree.');
+      const res = await fetch(action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (res.ok) { setStat('✓ Richiesta inviata! Ti risponderemo entro 24 ore.', 'success'); form.reset(); form.querySelectorAll('.is-invalid').forEach(f => f.classList.remove('is-invalid')); setTimeout(() => stat?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100); }
+      else { const d = await res.json(); throw new Error(d.errors?.map(x => x.message).join(', ') || "Errore durante l'invio."); }
+    } catch (err) { setStat(err.message || 'Si è verificato un errore. Riprova.', 'error'); }
+    finally { if (btn && orig) { btn.disabled = false; btn.innerHTML = orig; } }
+  });
 
-  const clearStatus = () => {
-    if (statusEl) {
-      statusEl.textContent = '';
-      statusEl.className = 'form-status';
-      statusEl.style.color = '';
-    }
-  };
 
-  const setFieldInvalid = (fieldEl, invalid) => {
-    if (!fieldEl) return;
-    fieldEl.classList.toggle('is-invalid', invalid);
-  };
-
-  const validateForm = () => {
-    if (!form) return { valid: true, firstInvalid: null };
-
-    const fields = [
-      { 
-        id: 'nome', 
-        rule: (v) => v.trim().length >= 2
-      },
-      { 
-        id: 'salone', 
-        rule: (v) => v.trim().length >= 2
-      },
-      { 
-        id: 'citta', 
-        rule: (v) => v.trim().length >= 2
-      },
-      { 
-        id: 'telefono', 
-        rule: (v) => /^[\d\s+()-]{6,}$/.test(v.trim())
-      },
-      { 
-        id: 'email', 
-        rule: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
-      },
-      { 
-        id: 'messaggio', 
-        rule: (v) => v.trim().length >= 10
-      }
-    ];
-
-    let valid = true;
-    let firstInvalid = null;
-
-    fields.forEach(({ id, rule }) => {
-      const input = document.getElementById(id);
-      const wrapper = input?.closest('.form-field');
-      const value = input?.value ?? '';
-      const isValid = rule(value);
-
-      setFieldInvalid(wrapper, !isValid);
-
-      if (!isValid) {
-        valid = false;
-        if (!firstInvalid) firstInvalid = input;
-      }
-    });
-
-    return { valid, firstInvalid };
-  };
-
-  // Clear validation on input
-  if (form) {
-    const inputs = form.querySelectorAll('input, textarea');
-    inputs.forEach((input) => {
-      input.addEventListener('input', () => {
-        const wrapper = input.closest('.form-field');
-        if (wrapper?.classList.contains('is-invalid')) {
-          setFieldInvalid(wrapper, false);
-        }
-        clearStatus();
-      });
-    });
-  }
-
-  // Form submission
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const { valid, firstInvalid } = validateForm();
-
-      if (!valid) {
-        showStatus('Per favore, controlla i campi evidenziati e riprova.', 'error');
-        firstInvalid?.focus?.();
-        return;
-      }
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn?.innerHTML;
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Invio in corso...</span>';
-      }
-
-      clearStatus();
-
-      try {
-        const formAction = form.getAttribute('action');
-        
-        if (!formAction || formAction.includes('YOUR_FORM_ID')) {
-          throw new Error('Form endpoint non configurato. Sostituisci YOUR_FORM_ID con il tuo ID Formspree.');
-        }
-
-        const formData = new FormData(form);
-        
-        const response = await fetch(formAction, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          showStatus('✓ Richiesta inviata con successo! Ti ricontatteremo presto.', 'success');
-          form.reset();
-          
-          document.querySelectorAll('.form-field.is-invalid').forEach((field) => {
-            field.classList.remove('is-invalid');
-          });
-
-          setTimeout(() => {
-            statusEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 100);
-
-        } else {
-          const data = await response.json();
-          if (data.errors) {
-            const errorMsg = data.errors.map(e => e.message).join(', ');
-            throw new Error(errorMsg);
-          } else {
-            throw new Error('Errore durante l\'invio. Riprova.');
-          }
-        }
-
-      } catch (error) {
-        console.error('Form submission error:', error);
-        showStatus(
-          error.message || 'Si è verificato un errore. Riprova o contattaci direttamente.',
-          'error'
-        );
-      } finally {
-        if (submitBtn && originalBtnText) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalBtnText;
-        }
-      }
-    });
-  }
-
-  // ========================================
-  // WHATSAPP FAB
-  // ========================================
-
-  const waFab = document.querySelector('.wa-fab');
-  if (waFab) {
-    const handleWaFabScroll = () => {
-      const currentScroll = window.scrollY;
-      
-      if (currentScroll > 300) {
-        waFab.classList.add('is-visible');
-      } else {
-        waFab.classList.remove('is-visible');
-      }
+  /* ═══════════════════════════════════════════ LIVE SITE PREVIEWS */
+  const previewBoxes = Array.from(document.querySelectorAll('[data-live-preview]'));
+  const bootFrame = (box) => {
+    if (!box || box.dataset.booted === '1') return;
+    const frame = box.querySelector('.preview-live__frame');
+    if (!frame) return;
+    box.dataset.booted = '1';
+    let settled = false;
+    const done = (ok) => {
+      if (settled) return;
+      settled = true;
+      box.classList.toggle('is-loaded', !!ok);
+      box.classList.toggle('is-error', !ok);
     };
-
-    window.addEventListener('scroll', handleWaFabScroll, { passive: true });
-    handleWaFabScroll();
+    const timer = window.setTimeout(() => done(false), 9000);
+    frame.addEventListener('load', () => { window.clearTimeout(timer); window.setTimeout(() => done(true), 350); }, { once:true });
+    frame.addEventListener('error', () => { window.clearTimeout(timer); done(false); }, { once:true });
+    frame.src = frame.dataset.src || '';
+  };
+  if ('IntersectionObserver' in window) {
+    const po = new IntersectionObserver((entries, obs) => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      bootFrame(entry.target);
+      obs.unobserve(entry.target);
+    }), { rootMargin: '220px 0px', threshold: 0.01 });
+    previewBoxes.forEach(box => po.observe(box));
+  } else {
+    previewBoxes.forEach(bootFrame);
   }
 
-  // ========================================
-  // FOOTER YEAR
-  // ========================================
+  /* ═══════════════════════════════════════════ FOOTER YEAR */
+  const yr = document.getElementById('year');
+  if (yr) yr.textContent = String(new Date().getFullYear());
 
-  const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = String(new Date().getFullYear());
-  }
-
-  // ========================================
-  // CONSOLE
-  // ========================================
-
-  console.log(
-    '%cSynkris%c\n💜 Assistente WhatsApp per saloni\nFatto con cura in Italia',
-    'font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;',
-    'font-size: 14px; color: #a78bfa; margin-top: 8px;'
-  );
-
+  console.log('%csynk%c ✦ Digital Studio — live showcase v9', 'font-size:26px;font-weight:800;font-family:Imbue,serif;letter-spacing:-.04em;color:#7228BB', 'font-size:12px;color:#9050D2');
 })();
+

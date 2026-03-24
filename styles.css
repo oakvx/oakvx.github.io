@@ -1775,56 +1775,32 @@ p{color:rgba(22,11,42,.76); max-width:72ch}
 .work-card__lead{line-height:1.68}
 .logo-mark--footer{width:24px; height:24px; filter:brightness(1.15) saturate(1.05)}
 
-.preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.44)}
-.preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.21)}
-.work-card:hover .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.215)}
-.work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.445)}
-
-.container{max-width:1360px}
-.work-card__media--stacked{min-height:520px}
-.preview-viewport--hero-work{height:430px}
-.preview-viewport--work{height:272px}
-
-.device-shell--phone{width:228px; padding:.32rem}
-.preview-viewport--phone{height:262px}
+.device-shell--phone{padding:.26rem}
+.preview-viewport--phone{height:204px}
 .preview-live--phone .preview-live__frame{
   width:430px;
   height:1180px;
   left:50%;
   top:0;
-  transform:translateX(-50%) scale(.31);
+  transform:translateX(-50%) scale(.27);
   transform-origin:top center;
   border-radius:14px;
 }
-.preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.31)}
+.preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.27)}
 
 @media(max-width:899px){
   .section{padding:clamp(4rem, 8vw, 6.4rem) 0}
   .section__header{margin-bottom:2.8rem}
   .section__header p{font-size:1rem}
-  .work-card__media--stacked{min-height:470px}
-  .preview-viewport--hero-work{height:350px}
-  .preview-viewport--work{height:238px}
-  .preview-viewport--phone{height:228px}
-  .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.35)}
-  .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.19)}
-  .work-card:hover .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.195)}
-  .work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.355)}
+  .preview-viewport--phone{height:188px}
   .preview-live--phone .preview-live__frame,
-  .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.27)}
-  .device-shell--phone{width:206px}
+  .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.25)}
 }
 
 @media(max-width:699px){
   body{font-size:1rem}
-  .preview-viewport--hero-work{height:300px}
-  .preview-viewport--work{height:198px}
-  .preview-viewport--phone{height:212px; border-radius:14px}
-  .device-shell--phone{width:170px; padding:.24rem}
-  .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.285)}
-  .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.17)}
-  .work-card:hover .preview-live--work .preview-live__frame{transform:translateX(-50%) scale(.172)}
-  .work-card:hover .preview-live--desktop .preview-live__frame{transform:translateX(-50%) scale(.29)}
+  .preview-viewport--phone{height:170px; border-radius:14px}
+  .device-shell--phone{width:118px; padding:.24rem}
   .preview-live--phone .preview-live__frame,
-  .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.245)}
+  .preview-live--phone.preview-live.is-loaded .preview-live__frame{transform:translateX(-50%) scale(.22)}
 }

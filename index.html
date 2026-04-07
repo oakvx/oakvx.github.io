@@ -5,27 +5,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>synk | Digital Studio</title>
-    <meta name="description" content="synk è uno studio digitale mobile-first. Progettiamo e sviluppiamo siti ad alto impatto, curiamo la visibilità organica con Orbit e automatizziamo appuntamenti e contatti WhatsApp con Synkris." />
-    <meta name="robots" content="index,follow" />
-    <meta name="theme-color" content="#F6F2EB" />
+    <meta name="description" content="synk è uno studio digitale mobile-first. Progettiamo siti ad alto impatto, curiamo la visibilità con Orbit e automatizziamo WhatsApp con Synkris." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,400;10..100,500;10..100,600;10..100,700;10..100,800&family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="app.js"></script>
+    <script src="app.js" defer></script>
 </head>
 
-<body class="site-showcase">
-
+<body>
     <a class="skip-link" href="#main">Vai al contenuto</a>
     <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursorFollower"></div>
+    <div class="cursor-ring" id="cursorFollower"></div>
 
+    <!-- ── HEADER ── -->
     <header class="header" id="header">
         <div class="container">
             <div class="header__inner">
                 <a class="logo" href="#top" aria-label="synk">
-                    <img class="logo-mark" src="logo.svg" alt="" width="30" height="30" />
+                    <img class="logo-mark" src="logo.svg" alt="" width="28" height="28" />
                     <span>synk</span>
                 </a>
                 <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Menu">
@@ -47,585 +45,486 @@
 
     <main id="main">
 
-        <section class="hero hero--cinematic" id="top">
-            <div class="hero__grid" aria-hidden="true">
-                <div class="hero__grid-lines"></div>
-                <div class="hero__grid-dots"></div>
-                <div class="hero__grid-mask"></div>
-            </div>
-            <div class="hero__orb hero__orb--1" data-parallax="0.09"></div>
-            <div class="hero__orb hero__orb--2" data-parallax="-0.06"></div>
-
+        <!-- ── HERO ── -->
+        <section class="hero" id="top">
             <div class="container">
-                <div class="hero__inner hero__inner--compact">
-                    <div class="hero__content" data-reveal="mask">
+                <div class="hero__inner">
+                    <div class="hero__content" data-reveal>
                         <div class="hero__eyebrow">
-                            <span class="dot-pulse"></span>
-                            <span>Design, sviluppo, motion</span>
+                            <span class="dot-live"></span>
+                            Design · Sviluppo · Motion
                         </div>
-
-                        <h1 class="hero__title hero__title--compact">
-                            Siti che fanno capire <em>subito</em> chi sei, senza giri di parole.
+                        <h1 class="hero__title">
+                            Siti<br />che<br />parlano<br /><em>chiaro.</em>
                         </h1>
-
-                        <p class="hero__desc hero__desc--compact">
-                            Costruiamo siti chiari da leggere, belli da vedere e semplici da usare. Così chi arriva capisce in pochi secondi cosa fai e perché dovrebbe fidarsi.
+                        <p class="hero__desc">
+                            Costruiamo siti chiari, belli e semplici. Chi arriva capisce in pochi secondi cosa fai e perché dovrebbe fidarsi.
                         </p>
-
-                        <div class="hero__actions hero__actions--compact">
-                            <a class="btn btn--primary btn--lg" href="#contatti">
-                                <span>Inizia da qui</span>
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                        <div class="hero__actions">
+                            <a class="btn btn--grad btn--lg" href="#contatti">
+                                Inizia da qui
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                 </svg>
                             </a>
-                            <a class="btn btn--outline" href="#lavori"><span>Guarda i progetti</span></a>
+                            <a class="btn btn--outline" href="#lavori">Guarda i progetti</a>
                         </div>
-
-                        <div class="hero__meta hero__meta--compact">
+                        <div class="hero__chips">
                             <span>Mobile-first</span>
                             <span>Motion UI</span>
                             <span>SEO-ready</span>
+                            <span>Live preview</span>
                         </div>
                     </div>
 
-                    <div class="hero__visual hero__visual--stage" data-reveal="zoom">
-                        <div class="hero-stage">
-                            <div class="hero-stage__beam"></div>
-                            <div class="hero-stage__frame">
-                                <div class="hero-stage__toolbar">
-                                    <span></span><span></span><span></span>
-                                    <div class="hero-stage__url">snakegaragesrl.it</div>
-                                </div>
-                                <div class="hero-stage__canvas">
-                                    <div class="hero-stage__headline">Una presenza che resta.</div>
-                                    <div class="hero-stage__layout">
-                                        <div class="hero-stage__panel hero-stage__panel--secondary">
-                                            <small>Focus progetto</small>
-                                            <strong>Prima il mobile</strong>
-                                        </div>
-                                        <div class="hero-stage__microgrid" aria-hidden="true">
-                                            <span></span><span></span><span></span><span></span>
-                                            <span></span><span></span><span></span><span></span>
-                                        </div>
+                    <div class="hero__polaroids" data-reveal data-reveal-delay="200">
+                        <!-- Polaroid A — Snake Garage desktop preview -->
+                        <div class="polaroid polaroid--a">
+                            <div class="polaroid__img">
+                                <div class="preview-inner">
+                                    <div class="preview-nav"><span></span><span></span><span></span></div>
+                                    <div class="preview-body">
+                                        <div class="preview-hero"></div>
+                                        <div class="preview-line accent"></div>
+                                        <div class="preview-line wide"></div>
+                                        <div class="preview-line mid"></div>
+                                        <div class="preview-cards"><span></span><span></span><span></span></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="hero-stage__card hero-stage__card--left">
-                                <span>UI</span>
-                                <strong>Tutto più leggibile</strong>
+                            <div class="polaroid__label">
+                                <strong>snakegaragesrl.it</strong>
+                                <span>automotive · mobile-first</span>
                             </div>
-                            <div class="hero-stage__card hero-stage__card--right">
-                                <span>Scroll</span>
-                                <strong>Motion pulita</strong>
+                        </div>
+
+                        <!-- Polaroid B — mvCars -->
+                        <div class="polaroid polaroid--b">
+                            <div class="polaroid__img">
+                                <div class="preview-inner">
+                                    <div class="preview-nav"><span></span><span></span><span></span></div>
+                                    <div class="preview-body">
+                                        <div class="preview-hero" style="background:linear-gradient(160deg,rgba(31,146,254,.3),rgba(255,0,0,.15),rgba(255,166,0,.2))"></div>
+                                        <div class="preview-line accent" style="background:linear-gradient(90deg,#1F92FE,#FF0000)"></div>
+                                        <div class="preview-line wide"></div>
+                                        <div class="preview-line short"></div>
+                                        <div class="preview-cards"><span></span><span></span><span></span></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="floating-badge floating-badge--1"><span class="sparkle">✦</span><span>Griglia profonda</span></div>
-                            <div class="floating-badge floating-badge--2"><span class="sparkle">✦</span><span>Prima il mobile</span></div>
+                            <div class="polaroid__label">
+                                <strong>mvCars</strong>
+                                <span>luxury automotive · editorial</span>
+                            </div>
+                        </div>
+
+                        <!-- Polaroid C — Rotax -->
+                        <div class="polaroid polaroid--c">
+                            <div class="polaroid__img">
+                                <div class="preview-inner">
+                                    <div class="preview-nav"><span></span><span></span><span></span></div>
+                                    <div class="preview-body">
+                                        <div class="preview-hero" style="background:linear-gradient(160deg,rgba(255,166,0,.2),rgba(255,0,0,.1))"></div>
+                                        <div class="preview-line mid"></div>
+                                        <div class="preview-line wide"></div>
+                                        <div class="preview-cards"><span></span><span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="polaroid__label">
+                                <strong>Rotax IRMT RE</strong>
+                                <span>aviation · authority</span>
+                            </div>
+                        </div>
+
+                        <!-- Polaroid D — Baschieri -->
+                        <div class="polaroid polaroid--d">
+                            <div class="polaroid__img">
+                                <div class="preview-inner">
+                                    <div class="preview-nav"><span></span><span></span><span></span></div>
+                                    <div class="preview-body">
+                                        <div class="preview-hero" style="background:linear-gradient(160deg,rgba(255,0,0,.15),rgba(31,146,254,.15))"></div>
+                                        <div class="preview-line short"></div>
+                                        <div class="preview-line wide"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="polaroid__label">
+                                <strong>Baschieri</strong>
+                                <span>B2B · landing</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="hero__filmstrip hero__filmstrip--minimal" data-reveal="lift">
-                    <article class="hero-film">
-                        <span class="hero-film__index">01</span>
-                        <div><strong>Direzione visiva</strong>
-                            <p>Chiara, coerente, riconoscibile.</p>
-                        </div>
-                    </article>
-                    <article class="hero-film">
-                        <span class="hero-film__index">02</span>
-                        <div><strong>Anteprime vere</strong>
-                            <p>Lavori reali, non schermate finte.</p>
-                        </div>
-                    </article>
-                    <article class="hero-film">
-                        <span class="hero-film__index">03</span>
-                        <div><strong>Mobile-first</strong>
-                            <p>Leggibile e forte anche da telefono.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <div class="hero__scroll-hint">
-                <div class="scroll-line"></div><span>scroll</span>
+                <hr class="hero__accent-line" />
             </div>
         </section>
 
-        <section class="logos-bar" aria-label="Clienti">
+        <!-- ── MARQUEE ── -->
+        <section class="marquee-bar" aria-label="Clienti">
             <div class="container">
-                <p class="logos-bar__label">Alcuni progetti realizzati</p>
-                <div class="logos-bar__track">
-                    <div class="logos-bar__inner">
-                        <a class="logo-item" href="https://snakegaragesrl.it" target="_blank" rel="noopener">Snake Garage SRL</a>
-                        <a class="logo-item" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">Rotax IRM RE</a>
-                        <a class="logo-item" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">Baschieri</a>
-                        <a class="logo-item" href="https://oakvx.github.io/topGun" target="_blank" rel="noopener">TopGun</a>
-                        <a class="logo-item" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">mvCars</a>
-                        <span class="logo-item">Vitalia SRL</span>
-                        <span class="logo-item">NordEst Foods</span>
-                        <span class="logo-item">Studio Bianchi</span>
-                        <a class="logo-item" href="https://snakegaragesrl.it" target="_blank" rel="noopener">Snake Garage SRL</a>
-                        <a class="logo-item" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">Rotax IRM RE</a>
-                        <a class="logo-item" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">Baschieri</a>
-                        <a class="logo-item" href="https://oakvx.github.io/topGun" target="_blank" rel="noopener">TopGun</a>
-                        <a class="logo-item" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">mvCars</a>
-                        <span class="logo-item">Vitalia SRL</span>
-                        <span class="logo-item">NordEst Foods</span>
-                        <span class="logo-item">Studio Bianchi</span>
+                <p class="marquee-label">Alcuni progetti realizzati</p>
+                <div class="marquee-track">
+                    <div class="marquee-inner">
+                        <a class="marquee-item" href="https://snakegaragesrl.it" target="_blank" rel="noopener">Snake Garage SRL</a>
+                        <a class="marquee-item" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">Rotax IRM Reggio Emilia</a>
+                        <a class="marquee-item" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">Baschieri</a>
+                        <a class="marquee-item" href="https://oakvx.github.io/topGun" target="_blank" rel="noopener">TopGun</a>
+                        <a class="marquee-item" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">mvCars</a>
+                        <span class="marquee-item">Vitalia SRL</span>
+                        <span class="marquee-item">NordEst Foods</span>
+                        <span class="marquee-item">Studio Bianchi</span>
+                        <a class="marquee-item" href="https://snakegaragesrl.it" target="_blank" rel="noopener">Snake Garage SRL</a>
+                        <a class="marquee-item" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">Rotax IRM Reggio Emilia</a>
+                        <a class="marquee-item" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">Baschieri</a>
+                        <a class="marquee-item" href="https://oakvx.github.io/topGun" target="_blank" rel="noopener">TopGun</a>
+                        <a class="marquee-item" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">mvCars</a>
+                        <span class="marquee-item">Vitalia SRL</span>
+                        <span class="marquee-item">NordEst Foods</span>
+                        <span class="marquee-item">Studio Bianchi</span>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ── STATS ── -->
         <section class="section section--stats" id="metodo">
             <div class="container">
-                <div class="stats-shell">
-                    <div class="section__header stats-shell__header" data-reveal>
-                        <span class="section__tag">Metodo</span>
-                        <h2>Un buon sito non è solo estetica</h2>
-                        <p>Partiamo da chiarezza e struttura, poi aggiungiamo stile e movimento dove servono davvero. L'obiettivo è uno: farti capire meglio e convertire di più, soprattutto da telefono.</p>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Metodo</span>
+                    <h2>Un buon sito<br />non è solo estetica</h2>
+                    <p>Partiamo da chiarezza e struttura, poi aggiungiamo stile e movimento. L'obiettivo: farti capire meglio e convertire di più.</p>
+                </div>
+                <div class="stats-grid" data-reveal data-reveal-delay="100">
+                    <div class="stat-block">
+                        <div class="stat-num">40<sup>+</sup></div>
+                        <div class="stat-label">Progetti completati</div>
                     </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-block" data-reveal>
-                            <div class="stat-block__number">40<span>+</span></div>
-                            <div class="stat-block__label">Progetti completati</div>
-                        </div>
-                        <div class="stat-block" data-reveal data-reveal-delay="100">
-                            <div class="stat-block__number">98<span>%</span></div>
-                            <div class="stat-block__label">Clienti soddisfatti</div>
-                        </div>
-                        <div class="stat-block" data-reveal data-reveal-delay="200">
-                            <div class="stat-block__number">100<span>/100</span></div>
-                            <div class="stat-block__label">Approccio orientato alla performance</div>
-                        </div>
-                        <div class="stat-block" data-reveal data-reveal-delay="300">
-                            <div class="stat-block__number">3<span>anni</span></div>
-                            <div class="stat-block__label">Esperienza sul campo</div>
-                        </div>
+                    <div class="stat-block">
+                        <div class="stat-num">98<sup>%</sup></div>
+                        <div class="stat-label">Clienti soddisfatti</div>
+                    </div>
+                    <div class="stat-block">
+                        <div class="stat-num">100</div>
+                        <div class="stat-label">Performance-first</div>
+                    </div>
+                    <div class="stat-block">
+                        <div class="stat-num">3<sup>aa</sup></div>
+                        <div class="stat-label">Esperienza sul campo</div>
                     </div>
                 </div>
             </div>
-
         </section>
 
-        <section class="section section--reel">
+        <!-- ── REEL ── -->
+        <section class="section section--reel" id="servizi">
             <div class="container">
-                <div class="reel-intro" data-reveal="mask">
-                    <span class="section__tag">Capability reel</span>
-                    <h2>Non facciamo solo siti belli. Costruiamo esperienze che tengono insieme design, codice e percezione del valore.</h2>
-                    <p>Questa vetrina serve a mostrare davvero cosa sappiamo fare: direzione creativa, front-end motion, ottimizzazione mobile e portfolio con anteprime reali.</p>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Capability reel</span>
+                    <h2>Non solo siti <em>belli</em></h2>
+                    <p>Design, codice e percezione del valore tenuti insieme da un metodo preciso.</p>
                 </div>
-
-                <div class="reel-grid stagger-group">
-                    <article class="reel-card" data-reveal="zoom" data-tilt-card>
-                        <div class="reel-card__top">
-                            <span class="reel-card__kicker">01 · Direction</span>
-                            <span class="reel-card__line"></span>
+                <div class="reel-grid">
+                    <article class="reel-card" data-reveal>
+                        <span class="reel-card__num">01 · Direction</span>
+                        <h3>Hero forti, gerarchia chiara</h3>
+                        <p>Ritmo, respiro e ordine. La prima impressione funziona davvero, non solo a livello visivo.</p>
+                        <div class="reel-tags">
+                            <span>Tipografia editoriale</span>
+                            <span>Reveal progressivi</span>
+                            <span>Layout mobile-first</span>
                         </div>
-                        <h3>Hero forti, ma con una gerarchia chiara</h3>
-                        <p>Non ci interessa solo l'effetto wow. Ci interessa creare ritmo, respiro e ordine, così la prima impressione funziona davvero.</p>
-                        <ul class="reel-points">
-                            <li>Tipografia editoriale</li>
-                            <li>Reveal progressivi</li>
-                            <li>Layout mobile-first</li>
-                        </ul>
-                        <div class="reel-card__halo"></div>
+                        <div class="reel-card__accent"></div>
                     </article>
-
-                    <article class="reel-card reel-card--featured" data-reveal="zoom" data-reveal-delay="120" data-tilt-card>
-                        <div class="reel-card__top">
-                            <span class="reel-card__kicker">02 · Front-end</span>
-                            <span class="reel-card__line"></span>
+                    <article class="reel-card" data-reveal data-reveal-delay="100">
+                        <span class="reel-card__num">02 · Front-end</span>
+                        <h3>Preview vere e micro-interazioni curate</h3>
+                        <p>Trasformazioni misurate, highlight dinamici e profondità dove serve. Niente effetti messi lì tanto per fare scena.</p>
+                        <div class="reel-tags">
+                            <span>Iframe live</span>
+                            <span>Hover spotlight</span>
+                            <span>Reveal multipli</span>
                         </div>
-                        <h3>Anteprime vere, motion system e micro-interazioni curate</h3>
-                        <p>Il portfolio mostra siti reali, non immagini ferme. L'interfaccia usa trasformazioni misurate, highlight dinamici e profondità dove serve.</p>
-                        <ul class="reel-points">
-                            <li>Iframe live in scala</li>
-                            <li>Hover spotlight</li>
-                            <li>Reveal multipli</li>
-                        </ul>
-                        <div class="reel-card__halo"></div>
+                        <div class="reel-card__accent"></div>
                     </article>
-
-                    <article class="reel-card" data-reveal="zoom" data-reveal-delay="240" data-tilt-card>
-                        <div class="reel-card__top">
-                            <span class="reel-card__kicker">03 · Conversion</span>
-                            <span class="reel-card__line"></span>
+                    <article class="reel-card" data-reveal data-reveal-delay="200">
+                        <span class="reel-card__num">03 · Conversion</span>
+                        <h3>Una presentazione che fa capire il livello</h3>
+                        <p>Prima la qualità, poi i lavori, poi i servizi. Il sito accompagna la lettura in modo naturale.</p>
+                        <div class="reel-tags">
+                            <span>Ordine strategico</span>
+                            <span>Proof integrate</span>
+                            <span>CTA pulite</span>
                         </div>
-                        <h3>Una presentazione che fa capire subito il livello</h3>
-                        <p>Prima mostri la qualità, poi i lavori, poi i servizi. Così il sito accompagna la lettura in modo naturale e non sembra un elenco casuale.</p>
-                        <ul class="reel-points">
-                            <li>Ordine strategico delle sezioni</li>
-                            <li>Proof integrate</li>
-                            <li>CTA pulite</li>
-                        </ul>
-                        <div class="reel-card__halo"></div>
+                        <div class="reel-card__accent"></div>
                     </article>
                 </div>
             </div>
         </section>
 
+        <!-- ── PORTFOLIO ── -->
         <section class="section section--works" id="lavori">
             <div class="container">
-                <div class="section__header section__header--wide" data-reveal="mask">
-                    <span class="section__tag">Portfolio</span>
-                    <h2>Anteprime reali, senza mockup inutili</h2>
-                    <p>Qui vedi i progetti reali, aperti davvero dentro la pagina: niente schermate finte, niente effetto vetrina scollegata dalla realtà.</p>
-                    <div class="showcase-chip-set">
-                        <span>Preview live</span>
-                        <span>Automotive / local / industrial</span>
-                        <span>Mobile-first</span>
-                        <span>Front-end motion</span>
-                    </div>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Portfolio</span>
+                    <h2>Anteprime reali,<br />senza mockup</h2>
+                    <p>Niente schermate finte. Ogni preview carica il sito reale.</p>
                 </div>
 
-                <div class="works-grid works-grid--showcase">
-                    <article class="work-card work-card--hero" data-reveal="zoom">
-                        <div class="work-card__media work-card__media--stacked">
-                            <div class="work-card__shine"></div>
-                            <div class="device-stack device-stack--single">
-                                <div class="device-shell device-shell--desktop">
-                                    <div class="wpf-bar"><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-url">snakegaragesrl.it</span><a class="wpf-ext" href="https://snakegaragesrl.it" target="_blank" rel="noopener">↗</a></div>
-                                    <div class="preview-viewport preview-viewport--hero-work preview-viewport--real">
-                                        <figure class="preview-live preview-live--desktop" data-live-preview>
-                                            <div class="preview-live__placeholder"><span>Carico il sito reale</span></div>
-                                            <iframe class="preview-live__frame" title="Anteprima live del sito Snake Garage SRL" loading="lazy" data-src="https://www.snakegaragesrl.it/" referrerpolicy="no-referrer"></iframe>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="device-shell device-shell--phone">
-                                    <div class="device-shell__top"></div>
-                                    <div class="preview-viewport preview-viewport--phone preview-viewport--real preview-viewport--phone-real">
-                                        <figure class="preview-live preview-live--phone" data-live-preview>
-                                            <div class="preview-live__placeholder"><span>Preview mobile live</span></div>
-                                            <iframe class="preview-live__frame" title="Anteprima mobile live del sito Snake Garage SRL" loading="lazy" data-src="https://www.snakegaragesrl.it/" referrerpolicy="no-referrer"></iframe>
-                                        </figure>
-                                    </div>
+                <div class="works-polaroid-gallery">
+
+                    <!-- Snake Garage -->
+                    <div class="work-pol work-pol--hero" data-reveal>
+                        <div class="work-pol__card">
+                            <div class="work-pol__preview">
+                                <div class="pol-live" data-live-src="https://www.snakegaragesrl.it/">
+                                    <div class="pol-live__ph"><span>Carico il sito</span></div>
+                                    <iframe title="Snake Garage SRL" loading="lazy"></iframe>
                                 </div>
                             </div>
-                            <div class="work-card__badge work-card__badge--top">progetto in evidenza</div>
-                            <div class="work-card__badge work-card__badge--bottom">anteprima reale</div>
-                        </div>
-                        <div class="work-card__info work-card__info--hero">
-                            <div class="work-card__eyebrow">
-                                <span>Progetto in evidenza</span>
-                                <span>Brand + presenza online</span>
+                            <div class="work-pol__bottom">
+                                <strong>Snake Garage SRL</strong>
+                                <p>Hero più solida, navigazione semplice, conversione da mobile.</p>
+                                <div class="work-pol__meta">
+                                    <span>Automotive</span><span>Mobile-first</span><span>Editorial</span>
+                                </div>
+                                <a class="pol-link" href="https://snakegaragesrl.it" target="_blank" rel="noopener">snakegaragesrl.it ↗</a>
                             </div>
-                            <h3>Snake Garage SRL</h3>
-                            <p class="work-card__lead">Un sito più solido e credibile, con una hero che comunica subito competenza e cura.</p>
-                            <p>Abbiamo reso il messaggio più diretto e la navigazione più semplice, così anche chi arriva da mobile trova subito le informazioni giuste.</p>
-                            <ul class="work-card__list">
-                                <li>Hero con più presenza e più ordine</li>
-                                <li>Gerarchia chiara fin dal primo schermo</li>
-                                <li>Preview visibile anche da mobile</li>
-                            </ul>
-                            <div class="work-card__metrics work-card__metrics--chips">
-                                <div><span>Automotive</span><small>Settore</small></div>
-                                <div><span>Editorial</span><small>Direzione</small></div>
-                                <div><span>Mobile-first</span><small>Priorità</small></div>
-                            </div>
-                            <a class="work-card__url" href="https://snakegaragesrl.it" target="_blank" rel="noopener">Apri il progetto ↗</a>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="work-card" data-reveal="zoom" data-reveal-delay="100">
-                        <div class="work-card__media">
-                            <div class="wpf-bar"><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-url">oakvx.github.io/mvCars</span><a class="wpf-ext" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">↗</a></div>
-                            <div class="preview-viewport preview-viewport--work preview-viewport--real">
-                                <figure class="preview-live preview-live--work" data-live-preview>
-                                    <div class="preview-live__placeholder"><span>Carico il sito reale</span></div>
-                                    <iframe class="preview-live__frame" title="Anteprima live del sito mvCars" loading="lazy" data-src="https://oakvx.github.io/mvCars/" referrerpolicy="no-referrer"></iframe>
-                                </figure>
+                    <!-- mvCars -->
+                    <div class="work-pol" data-reveal data-reveal-delay="100">
+                        <div class="work-pol__card">
+                            <div class="work-pol__preview">
+                                <div class="pol-live" data-live-src="https://oakvx.github.io/mvCars/">
+                                    <div class="pol-live__ph"><span>Carico il sito</span></div>
+                                    <iframe title="mvCars" loading="lazy"></iframe>
+                                </div>
                             </div>
-                            <div class="work-card__label">Luxury automotive</div>
-                        </div>
-                        <div class="work-card__info">
-                            <div class="work-card__tags"><span>Concessionario</span><span>Editorial</span></div>
-                            <h3>mvCars</h3>
-                            <p>Una direzione più raffinata, con immagini al centro e un layout che alza il valore percepito già dal primo impatto.</p>
-                            <div class="work-card__metrics">
-                                <div><span>Luxury tone</span><small>Visual</small></div>
-                                <div><span>Adaptive</span><small>Layout</small></div>
+                            <div class="work-pol__bottom">
+                                <strong>mvCars</strong>
+                                <p>Luxury automotive. Immagini al centro, valore percepito alto.</p>
+                                <div class="work-pol__meta">
+                                    <span>Concessionario</span><span>Editorial</span>
+                                </div>
+                                <a class="pol-link" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">Apri il progetto ↗</a>
                             </div>
-                            <a class="work-card__url" href="https://oakvx.github.io/mvCars" target="_blank" rel="noopener">Apri il progetto ↗</a>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="work-card" data-reveal="zoom" data-reveal-delay="180">
-                        <div class="work-card__media">
-                            <div class="wpf-bar"><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-url">rotaxirmtreggioemilia.it</span><a class="wpf-ext" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">↗</a></div>
-                            <div class="preview-viewport preview-viewport--work preview-viewport--real">
-                                <figure class="preview-live preview-live--work" data-live-preview>
-                                    <div class="preview-live__placeholder"><span>Carico il sito reale</span></div>
-                                    <iframe class="preview-live__frame" title="Anteprima live del sito Rotax IRMT Reggio Emilia" loading="lazy" data-src="https://www.rotaxirmtreggioemilia.it/" referrerpolicy="no-referrer"></iframe>
-                                </figure>
+                    <!-- Rotax -->
+                    <div class="work-pol" data-reveal data-reveal-delay="200">
+                        <div class="work-pol__card">
+                            <div class="work-pol__preview">
+                                <div class="pol-live" data-live-src="https://www.rotaxirmtreggioemilia.it/">
+                                    <div class="pol-live__ph"><span>Carico il sito</span></div>
+                                    <iframe title="Rotax IRMT RE" loading="lazy"></iframe>
+                                </div>
                             </div>
-                            <div class="work-card__label">Affidabilità tecnica</div>
-                        </div>
-                        <div class="work-card__info">
-                            <div class="work-card__tags"><span>Aviation</span><span>SEO locale</span></div>
-                            <h3>Rotax IRMT Reggio Emilia</h3>
-                            <p>Un sito tecnico dove servono chiarezza, ordine e fiducia immediata, senza effetti messi lì tanto per fare scena.</p>
-                            <div class="work-card__metrics">
-                                <div><span>Authority</span><small>Struttura</small></div>
-                                <div><span>Local SEO</span><small>Base</small></div>
+                            <div class="work-pol__bottom">
+                                <strong>Rotax IRMT Reggio Emilia</strong>
+                                <p>Sito tecnico: chiarezza, ordine e fiducia immediata.</p>
+                                <div class="work-pol__meta">
+                                    <span>Aviation</span><span>SEO locale</span>
+                                </div>
+                                <a class="pol-link" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">Apri il progetto ↗</a>
                             </div>
-                            <a class="work-card__url" href="https://www.rotaxirmtreggioemilia.it/" target="_blank" rel="noopener">Apri il progetto ↗</a>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="work-card" data-reveal="zoom" data-reveal-delay="260">
-                        <div class="work-card__media">
-                            <div class="wpf-bar"><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-dot"></span><span class="wpf-url">oakvx.github.io/baschieri</span><a class="wpf-ext" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">↗</a></div>
-                            <div class="preview-viewport preview-viewport--work preview-viewport--real">
-                                <figure class="preview-live preview-live--work" data-live-preview>
-                                    <div class="preview-live__placeholder"><span>Carico il sito reale</span></div>
-                                    <iframe class="preview-live__frame" title="Anteprima live del sito Baschieri" loading="lazy" data-src="https://oakvx.github.io/baschieri/" referrerpolicy="no-referrer"></iframe>
-                                </figure>
+                    <!-- Baschieri -->
+                    <div class="work-pol" data-reveal data-reveal-delay="300">
+                        <div class="work-pol__card">
+                            <div class="work-pol__preview">
+                                <div class="pol-live" data-live-src="https://oakvx.github.io/baschieri/">
+                                    <div class="pol-live__ph"><span>Carico il sito</span></div>
+                                    <iframe title="Baschieri" loading="lazy"></iframe>
+                                </div>
                             </div>
-                            <div class="work-card__label">Landing industriale</div>
-                        </div>
-                        <div class="work-card__info">
-                            <div class="work-card__tags"><span>Landing</span><span>B2B</span></div>
-                            <h3>Baschieri</h3>
-                            <p>Una landing più ordinata e leggibile, con un messaggio chiaro e una direzione visiva coerente con il settore.</p>
-                            <div class="work-card__metrics">
-                                <div><span>Clear copy</span><small>Messaggio</small></div>
-                                <div><span>Fast</span><small>Front-end</small></div>
+                            <div class="work-pol__bottom">
+                                <strong>Baschieri</strong>
+                                <p>Landing più ordinata, messaggio chiaro, direzione visiva B2B.</p>
+                                <div class="work-pol__meta">
+                                    <span>B2B</span><span>Landing</span>
+                                </div>
+                                <a class="pol-link" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">Apri la landing ↗</a>
                             </div>
-                            <a class="work-card__url" href="https://oakvx.github.io/baschieri" target="_blank" rel="noopener">Apri la landing ↗</a>
                         </div>
-                    </article>
+                    </div>
+
                 </div>
-
-                <div class="works-proof" data-reveal="mask">
-                    <div class="works-proof__item"><span>01</span>
-                        <p>Le anteprime caricano i siti reali e si attivano solo quando entrano in vista, per mantenere il sito leggero.</p>
-                    </div>
-                    <div class="works-proof__item"><span>02</span>
-                        <p>Il portfolio resta ordinato ma più credibile: quello che vedi è davvero quello che abbiamo pubblicato.</p>
-                    </div>
-                    <div class="works-proof__item"><span>03</span>
-                        <p>Anche da telefono le preview sono più grandi e leggibili, senza effetto miniatura.</p>
-                    </div>
-                </div>
-
-                <div class="works-cta" data-reveal="lift">
-                    <a class="btn btn--outline" href="#contatti">Creiamo una vetrina che faccia capire subito il tuo livello →</a>
+                <div class="works-cta" data-reveal>
+                    <a class="btn btn--outline" href="#contatti">Crea una vetrina che faccia capire subito il tuo livello →</a>
                 </div>
             </div>
         </section>
 
+        <!-- ── PROCESS ── -->
         <section class="section section--process" id="processo">
             <div class="container">
-                <div class="section__header" data-reveal="mask">
-                    <span class="section__tag">Come lavoriamo</span>
-                    <h2>Dal brief al lancio, con un processo chiaro</h2>
-                    <p>Ti aggiorniamo a ogni fase, con passaggi chiari e decisioni condivise. Così sai sempre cosa sta succedendo e perché.</p>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Come lavoriamo</span>
+                    <h2>Dal brief al lancio,<br />con un processo chiaro</h2>
+                    <p>Ti aggiorniamo a ogni fase. Sai sempre cosa sta succedendo e perché.</p>
                 </div>
                 <div class="process-steps">
-                    <div class="process-step" data-reveal>
-                        <div class="process-step__number">01</div>
-                        <div class="process-step__content">
-                            <h3>Discovery &amp; Strategia</h3>
-                            <p>Partiamo da ascolto, analisi del settore e obiettivi concreti. Da lì definiamo una direzione chiara.</p>
-                            <div class="process-step__duration">~1 settimana</div>
-                        </div>
+                    <div class="proc-step" data-reveal>
+                        <div class="proc-num">01</div>
+                        <h3>Discovery &amp; Strategia</h3>
+                        <p>Ascolto, analisi del settore e obiettivi concreti. Da lì una direzione chiara.</p>
+                        <div class="proc-step__dur">~1 settimana</div>
                     </div>
-                    <div class="process-step" data-reveal data-reveal-delay="100">
-                        <div class="process-step__number">02</div>
-                        <div class="process-step__content">
-                            <h3>Design &amp; Prototipo</h3>
-                            <p>Costruiamo wireframe, concept visivo e prototipo interattivo. Prima si valida il ragionamento, poi si sviluppa.</p>
-                            <div class="process-step__duration">~2 settimane</div>
-                        </div>
+                    <div class="proc-step" data-reveal data-reveal-delay="100">
+                        <div class="proc-num">02</div>
+                        <h3>Design &amp; Prototipo</h3>
+                        <p>Wireframe, concept visivo e prototipo interattivo. Prima si valida, poi si sviluppa.</p>
+                        <div class="proc-step__dur">~2 settimane</div>
                     </div>
-                    <div class="process-step" data-reveal data-reveal-delay="200">
-                        <div class="process-step__number">03</div>
-                        <div class="process-step__content">
-                            <h3>Sviluppo &amp; Integrazione</h3>
-                            <p>Scriviamo codice pulito, accessibile e veloce. Testiamo il progetto su schermi e contesti diversi.</p>
-                            <div class="process-step__duration">~3 settimane</div>
-                        </div>
+                    <div class="proc-step" data-reveal data-reveal-delay="200">
+                        <div class="proc-num">03</div>
+                        <h3>Sviluppo &amp; Integrazione</h3>
+                        <p>Codice pulito, accessibile e veloce. Testato su ogni schermo.</p>
+                        <div class="proc-step__dur">~3 settimane</div>
                     </div>
-                    <div class="process-step" data-reveal data-reveal-delay="300">
-                        <div class="process-step__number">04</div>
-                        <div class="process-step__content">
-                            <h3>Lancio &amp; Crescita</h3>
-                            <p>Pubblicazione, controlli finali e ottimizzazioni. Il progetto non viene lasciato a sé stesso dopo il go-live.</p>
-                            <div class="process-step__duration">Continuativo</div>
-                        </div>
+                    <div class="proc-step" data-reveal data-reveal-delay="300">
+                        <div class="proc-num">04</div>
+                        <h3>Lancio &amp; Crescita</h3>
+                        <p>Pubblicazione e ottimizzazioni continue. Non lasciamo il progetto a sé stesso.</p>
+                        <div class="proc-step__dur">Continuativo</div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ── ORBIT ── -->
         <section class="section section--orbit" id="orbit">
             <div class="container">
-                <div class="product-wrapper">
+                <div class="product-wrap">
                     <div class="product-content" data-reveal>
-                        <span class="section__tag">Prodotto</span>
-                        <h2>Cos'è Orbit?</h2>
-                        <p>Orbit è il nostro strumento per migliorare la presenza online. Analizza il sito, individua priorità concrete e ti aiuta a lavorare su visibilità organica, presidio locale e presenza su Google in modo più ordinato.</p>
+                        <span class="tag">Prodotto</span>
+                        <h2>Cos'è <em>Orbit</em>?</h2>
+                        <p>Il nostro strumento per migliorare la presenza online. Analizza il sito, individua priorità concrete e aiuta a lavorare su visibilità organica e presidio locale.</p>
                         <ul class="product-features">
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Analisi SEO tecnica e contenuti in tempo reale</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Focus sulla visibilità locale</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Monitoraggio Google Maps e ricerca organica</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Report automatici e suggerimenti operativi</li>
+                            <li>Analisi SEO tecnica e contenuti in tempo reale</li>
+                            <li>Focus sulla visibilità locale e Google Maps</li>
+                            <li>Monitoraggio organico continuo</li>
+                            <li>Report automatici e suggerimenti operativi</li>
                         </ul>
                         <div class="product-actions">
-                            <a class="btn btn--primary" href="#contatti"><span>Richiedi accesso</span></a>
-                            <a class="btn btn--ghost" href="#contatti"><span>Prenota una demo</span></a>
+                            <a class="btn btn--grad" href="#contatti">Richiedi accesso</a>
+                            <a class="btn btn--outline" href="#contatti">Prenota una demo</a>
                         </div>
                     </div>
                     <div class="product-visual" data-reveal data-reveal-delay="150">
-                        <div class="orbit-dashboard">
-                            <div class="orb-header">
-                                <div class="orb-logo"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="4" />
-                                        <ellipse cx="12" cy="12" rx="10" ry="4" />
-                                        <line x1="12" y1="2" x2="12" y2="22" />
-                                    </svg> orbit</div>
-                                <div class="orb-status">● live</div>
+                        <div class="orbit-mock">
+                            <div class="orb-head">
+                                <span class="orb-brand">● orbit</span>
+                                <span class="orb-live">live</span>
                             </div>
                             <div class="orb-kpis">
                                 <div class="orb-kpi"><span class="orb-kpi__val">+34%</span><span class="orb-kpi__lbl">Visibilità SEO</span></div>
-                                <div class="orb-kpi"><span class="orb-kpi__val">#2</span><span class="orb-kpi__lbl">Posizione Maps</span></div>
+                                <div class="orb-kpi"><span class="orb-kpi__val">#2</span><span class="orb-kpi__lbl">Maps rank</span></div>
                                 <div class="orb-kpi"><span class="orb-kpi__val">92</span><span class="orb-kpi__lbl">Score locale</span></div>
                             </div>
                             <div class="orb-chart">
-                                <div class="orb-bar" style="height:40%"></div>
-                                <div class="orb-bar" style="height:55%"></div>
-                                <div class="orb-bar" style="height:48%"></div>
-                                <div class="orb-bar" style="height:70%"></div>
-                                <div class="orb-bar" style="height:62%"></div>
-                                <div class="orb-bar" style="height:85%"></div>
-                                <div class="orb-bar orb-bar--active" style="height:92%"></div>
+                                <div class="orb-bar" style="height:42%"></div>
+                                <div class="orb-bar" style="height:56%"></div>
+                                <div class="orb-bar" style="height:49%"></div>
+                                <div class="orb-bar" style="height:71%"></div>
+                                <div class="orb-bar" style="height:63%"></div>
+                                <div class="orb-bar" style="height:84%"></div>
+                                <div class="orb-bar orb-bar--on" style="height:92%"></div>
                             </div>
-                            <div class="orb-suggestion"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <line x1="12" y1="8" x2="12" y2="12" />
-                                    <line x1="12" y1="16" x2="12.01" y2="16" />
-                                </svg><span>Ottimizza la scheda Google Business per aumentare i clic locali</span></div>
+                            <div class="orb-tip">Ottimizza la scheda Google Business per aumentare i clic locali</div>
                         </div>
-                        <div class="product-badge product-badge--1"><strong>+34%</strong><span>visibilità</span></div>
-                        <div class="product-badge product-badge--2"><strong>AI</strong><span>a supporto</span></div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ── SYNKRIS ── -->
         <section class="section section--synkris" id="synkris">
             <div class="container">
-                <div class="product-wrapper">
-
-                    <div class="product-visual" data-reveal style="order:2">
-                        <div style="position:relative">
-                            <div class="synkris-phone">
-                                <div class="phone-notch"></div>
-                                <div class="phone-screen">
-                                    <div class="wa-header">
-                                        <div class="wa-avatar">S</div>
-                                        <div>
-                                            <div class="wa-name">Salone Elegance</div>
-                                            <div class="wa-status"><span class="online-dot"></span> Synkris attivo</div>
-                                        </div>
-                                    </div>
-                                    <div class="wa-messages">
-                                        <div class="wa-msg wa-msg--in">
-                                            <p>Ciao! Posso prenotare un taglio venerdì?</p><time>14:02</time>
-                                        </div>
-                                        <div class="wa-msg wa-msg--out">
-                                            <p>Certo! Venerdì ho disponibilità alle <strong>10:00</strong>, <strong>14:30</strong> o <strong>16:00</strong>. Quale preferisci? 😊</p><time>14:02</time>
-                                        </div>
-                                        <div class="wa-msg wa-msg--in">
-                                            <p>14:30 perfetto!</p><time>14:03</time>
-                                        </div>
-                                        <div class="wa-msg wa-msg--out">
-                                            <p>✓ Prenotato! Venerdì 25 alle 14:30. Ti mandiamo un promemoria domani.</p><time>14:03</time>
-                                        </div>
-                                    </div>
-                                    <div class="wa-input">
-                                        <span>Scrivi un messaggio…</span>
-                                        <svg width="18" height="18" fill="#25d366" viewBox="0 0 448 512">
-                                            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-156.9z" />
-                                        </svg>
+                <div class="product-wrap">
+                    <div class="product-visual" data-reveal>
+                        <div class="synk-phone">
+                            <div class="ph-notch"></div>
+                            <div class="ph-screen">
+                                <div class="wa-head">
+                                    <div class="wa-av">S</div>
+                                    <div class="wa-info">
+                                        <span>Salone Elegance</span>
+                                        <div class="wa-status"><span class="online-dot"></span> Synkris attivo</div>
                                     </div>
                                 </div>
+                                <div class="wa-msgs">
+                                    <div class="wa-msg wa-in">
+                                        <p>Ciao! Posso prenotare un taglio venerdì?</p><time>14:02</time>
+                                    </div>
+                                    <div class="wa-msg wa-out">
+                                        <p>Certo! Venerdì ho le <strong>10:00</strong>, <strong>14:30</strong> o <strong>16:00</strong>. Quale preferisci? 😊</p><time>14:02</time>
+                                    </div>
+                                    <div class="wa-msg wa-in">
+                                        <p>14:30 perfetto!</p><time>14:03</time>
+                                    </div>
+                                    <div class="wa-msg wa-out">
+                                        <p>✓ Prenotato! Venerdì 25 alle 14:30. Ti mando un promemoria domani.</p><time>14:03</time>
+                                    </div>
+                                </div>
+                                <div class="wa-bar"><span>Scrivi un messaggio…</span><span>🟢</span></div>
                             </div>
-                            <div class="product-badge product-badge--1"><strong>-80%</strong><span>no-show</span></div>
-                            <div class="product-badge product-badge--2"><strong>24/7</strong><span>sempre attivo</span></div>
                         </div>
                     </div>
-
-                    <div class="product-content" data-reveal data-reveal-delay="100" style="order:1">
-                        <span class="section__tag">Prodotto</span>
-                        <h2>Cos'è Synkris?</h2>
-                        <p>Synkris è il nostro assistente per saloni e attività locali. Risponde su WhatsApp, gestisce richieste e prenotazioni, sincronizza Google Calendar e manda promemoria mentre il team lavora.</p>
+                    <div class="product-content" data-reveal data-reveal-delay="100">
+                        <span class="tag">Prodotto</span>
+                        <h2>Cos'è <em>Synkris</em>?</h2>
+                        <p>Il nostro assistente per saloni e attività locali. Risponde su WhatsApp, gestisce prenotazioni, sincronizza Google Calendar e manda promemoria mentre il team lavora.</p>
                         <ul class="product-features">
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Risponde ai clienti 24/7 su WhatsApp</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Sincronizza automaticamente Google Calendar</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Mostra dati utili su clienti, orari e no-show</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Riduce i no-show fino all'80%</li>
-                            <li><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Include un pannello semplice da usare</li>
+                            <li>Risponde ai clienti 24/7 su WhatsApp</li>
+                            <li>Sincronizza automaticamente Google Calendar</li>
+                            <li>Riduce i no-show fino all'80%</li>
+                            <li>Mostra dati su clienti, orari e no-show</li>
+                            <li>Pannello semplice da usare</li>
                         </ul>
                         <div class="product-actions">
-                            <a class="btn btn--primary" href="https://synkris.it" target="_blank" rel="noopener"><span>Scopri Synkris</span></a>
-                            <a class="btn btn--ghost" href="#contatti"><span>Prenota una demo</span></a>
+                            <a class="btn btn--grad" href="https://synkris.it" target="_blank" rel="noopener">Scopri Synkris</a>
+                            <a class="btn btn--outline" href="#contatti">Prenota una demo</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
+        <!-- ── TESTIMONIALS ── -->
         <section class="section section--testimonials">
             <div class="container">
-                <div class="section__header" data-reveal="mask"><span class="section__tag">Clienti</span>
-                    <h2>Cosa dicono di noi</h2>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Clienti</span>
+                    <h2>Cosa dicono <em>di noi</em></h2>
                 </div>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card" data-reveal="zoom" data-tilt-card>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p>«Il nuovo sito ci rappresenta molto meglio. Oggi sembriamo finalmente all'altezza di come lavoriamo davvero.»</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">SG</div>
+                <div class="testimonials-row">
+                    <div class="test-pol" data-reveal>
+                        <div class="test-stars">★★★★★</div>
+                        <blockquote>«Il nuovo sito ci rappresenta molto meglio. Oggi sembriamo finalmente all'altezza di come lavoriamo davvero.»</blockquote>
+                        <div class="test-author">
+                            <div class="test-av">MR</div>
                             <div><strong>Marco R.</strong><span>Snake Garage SRL</span></div>
                         </div>
                     </div>
-                    <div class="testimonial-card testimonial-card--featured" data-reveal="zoom" data-tilt-card data-reveal-delay="100">
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p>«Il lavoro è stato chiaro dall'inizio alla fine. Nessun passaggio confuso, solo scelte sensate e un risultato fatto bene.»</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">B</div>
+                    <div class="test-pol" data-reveal data-reveal-delay="100">
+                        <div class="test-stars">★★★★★</div>
+                        <blockquote>«Il lavoro è stato chiaro dall'inizio alla fine. Nessun passaggio confuso, solo scelte sensate e un risultato fatto bene.»</blockquote>
+                        <div class="test-author">
+                            <div class="test-av">LB</div>
                             <div><strong>Luca B.</strong><span>Baschieri Utensili</span></div>
                         </div>
                     </div>
-                    <div class="testimonial-card" data-reveal="zoom" data-tilt-card data-reveal-delay="200">
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p>«Con Synkris passiamo meno tempo a rispondere ai messaggi e molto più tempo a lavorare bene con i clienti.»</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">VF</div>
+                    <div class="test-pol" data-reveal data-reveal-delay="200">
+                        <div class="test-stars">★★★★★</div>
+                        <blockquote>«Con Synkris passiamo meno tempo a rispondere ai messaggi e molto più tempo a lavorare bene con i clienti.»</blockquote>
+                        <div class="test-author">
+                            <div class="test-av">VF</div>
                             <div><strong>Valentina F.</strong><span>Salone Elegance</span></div>
                         </div>
                     </div>
@@ -633,116 +532,75 @@
             </div>
         </section>
 
+        <!-- ── PRICING ── -->
         <section class="section section--pricing" id="prezzi">
             <div class="container">
-                <div class="section__header" data-reveal="mask"><span class="section__tag">Investimento</span>
-                    <h2>Piani chiari, senza sorprese</h2>
-                    <p>Prezzi trasparenti per partire bene e crescere con criterio. IVA esclusa.</p>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Investimento</span>
+                    <h2>Piani chiari,<br />senza sorprese</h2>
+                    <p>Prezzi trasparenti. IVA esclusa.</p>
                 </div>
                 <div class="pricing-grid">
-
-                    <div class="pricing-card" data-reveal="zoom" data-tilt-card>
-                        <div class="pricing-card__header">
-                            <h3>Starter</h3>
-                            <p>Per chi vuole iniziare con una presenza online seria</p>
-                        </div>
-                        <div class="pricing-card__price"><span class="price-amount">€1.490</span><span class="price-note">una tantum</span></div>
-                        <ul class="pricing-features">
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Landing page a una pagina</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Design responsive</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> SEO on-page di base</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Consegna in 3 settimane</li>
-                            <li class="disabled"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg> CMS integrato</li>
-                            <li class="disabled"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg> Orbit e Synkris inclusi</li>
+                    <div class="price-card" data-reveal>
+                        <div class="price-name">Starter</div>
+                        <div class="price-desc">Per chi vuole iniziare con una presenza seria</div>
+                        <div class="price-amount">€1.490</div>
+                        <div class="price-note">una tantum</div>
+                        <ul class="price-feats">
+                            <li>Landing page a una pagina</li>
+                            <li>Design responsive</li>
+                            <li>SEO on-page di base</li>
+                            <li>Consegna in 3 settimane</li>
+                            <li class="off">CMS integrato</li>
+                            <li class="off">Orbit e Synkris inclusi</li>
                         </ul>
                         <a class="btn btn--outline btn--block" href="#contatti">Parti da qui</a>
                     </div>
-
-                    <div class="pricing-card pricing-card--popular" data-reveal="zoom" data-tilt-card data-reveal-delay="100">
-                        <div class="pricing-card__badge">Più scelto</div>
-                        <div class="pricing-card__header">
-                            <h3>Growth</h3>
-                            <p>Per attività che vogliono alzare davvero il livello</p>
-                        </div>
-                        <div class="pricing-card__price"><span class="price-amount">€3.900</span><span class="price-note">una tantum</span></div>
-                        <ul class="pricing-features">
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Sito multi-pagina</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Identità visiva inclusa</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> SEO avanzata e analytics</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> CMS per aggiornamenti</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Orbit incluso per 6 mesi</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Consegna in 5 settimane</li>
+                    <div class="price-card price-card--pop" data-reveal data-reveal-delay="100">
+                        <div class="price-badge">Più scelto</div>
+                        <div class="price-name">Growth</div>
+                        <div class="price-desc">Per attività che vogliono alzare davvero il livello</div>
+                        <div class="price-amount">€3.900</div>
+                        <div class="price-note">una tantum</div>
+                        <ul class="price-feats">
+                            <li>Sito multi-pagina</li>
+                            <li>Identità visiva inclusa</li>
+                            <li>SEO avanzata e analytics</li>
+                            <li>CMS per aggiornamenti</li>
+                            <li>Orbit incluso 6 mesi</li>
+                            <li>Consegna in 5 settimane</li>
                         </ul>
-                        <a class="btn btn--primary btn--block" href="#contatti">Parti da qui</a>
+                        <a class="btn btn--grad btn--block" href="#contatti">Parti da qui</a>
                     </div>
-
-                    <div class="pricing-card" data-reveal="zoom" data-tilt-card data-reveal-delay="200">
-                        <div class="pricing-card__header">
-                            <h3>Enterprise</h3>
-                            <p>Per esigenze più complesse e progetti su misura</p>
-                        </div>
-                        <div class="pricing-card__price"><span class="price-amount">Custom</span><span class="price-note">parliamone</span></div>
-                        <ul class="pricing-features">
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> App web complesse</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> E-commerce avanzato</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Orbit completo e Synkris</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Team dedicato</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> SLA garantito</li>
-                            <li><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Supporto prioritario 12 mesi</li>
+                    <div class="price-card" data-reveal data-reveal-delay="200">
+                        <div class="price-name">Enterprise</div>
+                        <div class="price-desc">Per esigenze complesse e progetti su misura</div>
+                        <div class="price-amount">Custom</div>
+                        <div class="price-note">parliamone</div>
+                        <ul class="price-feats">
+                            <li>App web complesse</li>
+                            <li>E-commerce avanzato</li>
+                            <li>Orbit completo + Synkris</li>
+                            <li>Team dedicato</li>
+                            <li>SLA garantito</li>
+                            <li>Supporto prioritario 12 mesi</li>
                         </ul>
                         <a class="btn btn--outline btn--block" href="#contatti">Contattaci</a>
                     </div>
-
                 </div>
             </div>
         </section>
 
+        <!-- ── FAQ ── -->
         <section class="section section--faq" id="faq">
             <div class="container">
-                <div class="section__header" data-reveal="mask"><span class="section__tag">Domande</span>
-                    <h2>Le domande più frequenti</h2>
+                <div class="section__header" data-reveal>
+                    <span class="tag">Domande</span>
+                    <h2>Le domande<br />più frequenti</h2>
                 </div>
                 <div class="faq-list" data-reveal>
                     <details class="faq-item">
-                        <summary class="faq-q"><span>Quanto tempo richiede un progetto?</span><svg class="faq-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <summary class="faq-q"><span>Quanto tempo richiede un progetto?</span><svg class="faq-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg></summary>
                         <div class="faq-a">
@@ -750,7 +608,7 @@
                         </div>
                     </details>
                     <details class="faq-item">
-                        <summary class="faq-q"><span>Cos'è Synkris e come si attiva?</span><svg class="faq-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <summary class="faq-q"><span>Cos'è Synkris e come si attiva?</span><svg class="faq-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg></summary>
                         <div class="faq-a">
@@ -758,89 +616,102 @@
                         </div>
                     </details>
                     <details class="faq-item">
-                        <summary class="faq-q"><span>Cos'è Orbit e come funziona?</span><svg class="faq-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <summary class="faq-q"><span>Cos'è Orbit e come funziona?</span><svg class="faq-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg></summary>
                         <div class="faq-a">
-                            <p>Orbit è il nostro strumento per lavorare sulla visibilità online. Tiene sotto controllo presenza locale, performance SEO e aree da migliorare, così sai dove intervenire davvero.</p>
+                            <p>Orbit è il nostro strumento per lavorare sulla visibilità online. Tiene sotto controllo presenza locale, performance SEO e aree da migliorare.</p>
                         </div>
                     </details>
                     <details class="faq-item">
-                        <summary class="faq-q"><span>Come funziona il processo di revisione?</span><svg class="faq-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <summary class="faq-q"><span>Come funziona il processo di revisione?</span><svg class="faq-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg></summary>
                         <div class="faq-a">
-                            <p>Per il design prevediamo due round di feedback. Per lo sviluppo lavoriamo su staging, così puoi vedere tutto prima della pubblicazione. Non andiamo online finché il progetto non è pronto davvero.</p>
+                            <p>Per il design prevediamo due round di feedback. Per lo sviluppo lavoriamo su staging. Non andiamo online finché il progetto non è pronto davvero.</p>
                         </div>
                     </details>
                     <details class="faq-item">
-                        <summary class="faq-q"><span>Posso gestire i contenuti in autonomia?</span><svg class="faq-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <summary class="faq-q"><span>Posso gestire i contenuti in autonomia?</span><svg class="faq-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg></summary>
                         <div class="faq-a">
-                            <p>Sì. I piani Growth ed Enterprise possono includere un CMS semplice da usare, così puoi aggiornare i contenuti in autonomia senza dover toccare codice.</p>
+                            <p>Sì. I piani Growth ed Enterprise includono un CMS semplice da usare, così puoi aggiornare i contenuti in autonomia senza toccare codice.</p>
                         </div>
                     </details>
                 </div>
             </div>
         </section>
 
+        <!-- ── CONTACT ── -->
         <section class="section section--contact" id="contatti">
             <div class="container">
-                <div class="contact-wrapper">
+                <div class="contact-wrap">
                     <div class="contact-left" data-reveal>
-                        <span class="section__tag">Contatti</span>
-                        <h2>Parliamo del tuo progetto</h2>
-                        <p>Scrivici cosa hai in mente. Ti rispondiamo con un primo parere concreto e ti diciamo come potremmo impostarlo.</p>
+                        <span class="tag">Contatti</span>
+                        <h2>Parliamo del<br />tuo progetto</h2>
+                        <p>Scrivici cosa hai in mente. Ti rispondiamo con un primo parere concreto.</p>
                         <div class="contact-items">
                             <div class="contact-item">
-                                <div class="contact-item__icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <div class="ci-icon">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                         <polyline points="22,6 12,13 2,6" />
-                                    </svg></div>
+                                    </svg>
+                                </div>
                                 <div>
-                                    <p class="contact-item__label">Email</p><a href="mailto:hello@synk.studio">hello@synk.studio</a>
+                                    <p class="ci-lbl">Email</p>
+                                    <a class="ci-val" href="mailto:hello@synk.studio">hello@synk.studio</a>
                                 </div>
                             </div>
                             <div class="contact-item">
-                                <div class="contact-item__icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <div class="ci-icon">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.41 2 2 0 0 1 3.62 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" />
-                                    </svg></div>
+                                    </svg>
+                                </div>
                                 <div>
-                                    <p class="contact-item__label">WhatsApp</p><a href="https://wa.me/393534043794" target="_blank">+39 353 404 3794</a>
+                                    <p class="ci-lbl">WhatsApp</p>
+                                    <a class="ci-val" href="https://wa.me/393534043794" target="_blank">+39 353 404 3794</a>
                                 </div>
                             </div>
                             <div class="contact-item">
-                                <div class="contact-item__icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <div class="ci-icon">
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                                         <circle cx="12" cy="10" r="3" />
-                                    </svg></div>
+                                    </svg>
+                                </div>
                                 <div>
-                                    <p class="contact-item__label">Sede</p><span>Italia | remote-first</span>
+                                    <p class="ci-lbl">Sede</p>
+                                    <span class="ci-val">Italia · remote-first</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="contact-right" data-reveal data-reveal-delay="150">
-                        <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div data-reveal data-reveal-delay="150">
+                        <form class="contact-form" id="contactForm" action="action=" https://formspree.io/f/xlgwrwpb"" method="POST">
                             <div class="form-row">
                                 <div class="form-field"><label for="nome">Nome</label><input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Il tuo nome" /></div>
                                 <div class="form-field"><label for="azienda">Azienda</label><input type="text" id="azienda" name="azienda" required autocomplete="organization" placeholder="Nome azienda" /></div>
                             </div>
                             <div class="form-row">
                                 <div class="form-field"><label for="email">Email</label><input type="email" id="email" name="email" required autocomplete="email" placeholder="tu@email.it" /></div>
-                                <div class="form-field"><label for="budget">Budget indicativo</label><select id="budget" name="budget">
+                                <div class="form-field">
+                                    <label for="budget">Budget indicativo</label>
+                                    <select id="budget" name="budget">
                                         <option value="">Seleziona…</option>
                                         <option>Fino a €2.000</option>
-                                        <option>€2.000 - €5.000</option>
-                                        <option>€5.000 - €10.000</option>
+                                        <option>€2.000 – €5.000</option>
+                                        <option>€5.000 – €10.000</option>
                                         <option>Oltre €10.000</option>
-                                    </select></div>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-field"><label for="progetto">Raccontaci il progetto</label><textarea id="progetto" name="progetto" rows="5" placeholder="Dicci di cosa hai bisogno: sito, app, Synkris, Orbit o altro. Più dettagli ci dai, meglio possiamo aiutarti." required></textarea></div>
-                            <button type="submit" class="btn btn--primary btn--block btn--lg">
+                            <div class="form-field"><label for="progetto">Raccontaci il progetto</label><textarea id="progetto" name="progetto" rows="5" placeholder="Sito, app, Synkris, Orbit o altro. Più dettagli ci dai, meglio possiamo aiutarti." required></textarea></div>
+                            <button type="submit" class="btn btn--grad btn--block btn--lg">
                                 <span>Invia richiesta</span>
-                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                     <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                                 </svg>
                             </button>
@@ -854,42 +725,54 @@
 
     </main>
 
+    <!-- ── FOOTER ── -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand">
+                <div>
                     <div class="footer-logo">
-                        <img class="logo-mark logo-mark--footer" src="logo.svg" alt="" width="24" height="24" />
+                        <img class="logo-mark" src="logo.svg" alt="" width="24" height="24" />
                         <span>synk</span>
                     </div>
                     <p class="footer-tagline">Design digitale curato.<br />Progetti costruiti in Italia con attenzione e metodo.</p>
                     <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="#" aria-label="LinkedIn"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                             </svg></a>
-                        <a href="#" aria-label="Instagram"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="#" aria-label="Instagram"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                             </svg></a>
-                        <a href="https://github.com/oakvx" aria-label="GitHub" target="_blank" rel="noopener"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://github.com/oakvx" aria-label="GitHub" target="_blank" rel="noopener"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                             </svg></a>
                     </div>
                 </div>
                 <div class="footer-nav">
                     <div class="footer-col">
-                        <h4>Studio</h4><a href="#servizi">Servizi</a><a href="#lavori">Portfolio</a><a href="#processo">Processo</a><a href="#prezzi">Prezzi</a>
+                        <h4>Studio</h4>
+                        <a href="#servizi">Servizi</a>
+                        <a href="#lavori">Portfolio</a>
+                        <a href="#processo">Processo</a>
+                        <a href="#prezzi">Prezzi</a>
                     </div>
                     <div class="footer-col">
-                        <h4>Prodotti</h4><a href="#orbit">Orbit</a><a href="#synkris">Synkris</a><a href="#">Template</a>
+                        <h4>Prodotti</h4>
+                        <a href="#orbit">Orbit</a>
+                        <a href="#synkris">Synkris</a>
+                        <a href="#">Template</a>
                     </div>
                     <div class="footer-col">
-                        <h4>Legale</h4><a href="#">Privacy Policy</a><a href="#">Termini</a><a href="#">Cookie</a><a href="#">GDPR</a>
+                        <h4>Legale</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Termini</a>
+                        <a href="#">Cookie</a>
+                        <a href="#">GDPR</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© <span id="year"></span> synk. Fatto in Italia con cura.</p>
-                <p><a href="mailto:hello@synk.studio">hello@synk.studio</a></p>
+                <span>© <span id="year"></span> synk. Fatto in Italia con cura.</span>
+                <a href="mailto:hello@synk.studio">hello@synk.studio</a>
             </div>
         </div>
     </footer>

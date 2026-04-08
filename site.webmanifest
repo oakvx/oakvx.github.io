@@ -1,11 +1,11 @@
 {
-  "name": "Synkris",
-  "short_name": "Synkris",
-  "description": "Bot WhatsApp per saloni: prenotazioni, calendario e promemoria automatici.",
+  "name": "synk | Digital Studio",
+  "short_name": "synk",
+  "description": "synk è uno studio digitale mobile-first. Progettiamo siti ad alto impatto, curiamo la visibilità con Orbit e automatizziamo WhatsApp con Synkris.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0514",
-  "theme_color": "#0a0514",
+  "background_color": "#7228BB",
+  "theme_color": "#7228BB",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

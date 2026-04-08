@@ -5,7 +5,7 @@
 
     /* ═══════════════════════════════════════════ CURSOR */
     const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursorRing');
+    const follower = document.getElementById('cursorFollower');
     let mx = 0,
         my = 0,
         fx = 0,

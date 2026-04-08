@@ -1,1 +1,1 @@
-# Synkris Landing 
+# synk digital studio

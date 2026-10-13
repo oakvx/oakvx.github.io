@@ -1,0 +1,56 @@
+/* Text, not a raster image: the artwork stays sharp in either colour scheme. */
+.ascii-illustration { container-type: inline-size; min-width: 0; color: var(--ink); }
+.ascii-illustration pre {
+  font-family: var(--mono);
+  font-size: 7px;
+  font-size: min(1.9cqw, 8px);
+  font-weight: 400;
+  font-variant-ligatures: none;
+  line-height: 1.1;
+  letter-spacing: 0;
+  white-space: pre;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  user-select: none;
+}
+.story-home .hero { gap: 55px; padding-bottom: 34px; }
+.story-home .profile-panel { padding: 0; background: transparent; color: var(--ink); min-width: 0; }
+.ascii-owl { max-width: 470px; margin: 0 auto 15px; }
+.story-home .profile-alias { border-block: 1px solid var(--line); padding-block: 15px; font-size: 16px; }
+.story-home .profile-alias img { width: 22px; height: 22px; }
+.hero-facts { padding-bottom: 45px; }
+.hero-facts .profile-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.hero-facts .profile-facts > div { border: 0; padding: 12px 0; }
+.hero-facts .profile-facts dt { color: var(--muted); }
+.hero-facts .profile-facts dd { font-size: 14px; }
+.ascii-moth { max-width: 480px; margin: 30px auto; color: var(--ink); }
+.ascii-moth pre { font-size: min(1.77cqw, 8px); }
+html[data-theme="dark"] .story-home .profile-alias img { filter: invert(1); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .story-home .profile-alias img { filter: invert(1); }
+}
+.ascii-illustration { pointer-events: none; }
+.ascii-motion-toggle { background: transparent; color: var(--ink); border: 1px solid var(--line); padding: 11px 13px; font-size: 10px; cursor: pointer; min-height: 44px; }
+.ascii-motion-toggle:hover { border-color: var(--ink); }
+.ascii-motion-toggle:disabled { cursor: default; color: var(--muted); }
+.ascii-motion-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.ascii-motion-toggle:active { transform: translateY(1px); }
+@media (prefers-reduced-motion: no-preference) {
+  .ascii-owl pre { animation: owl-sway 5.6s ease-in-out infinite paused; transform-origin: 50% 94%; }
+  .ascii-moth pre { animation: moth-flight 6s ease-in-out infinite paused; }
+  .ascii-fish pre { animation: fish-swim 4.6s ease-in-out infinite paused; }
+  .ascii-playing pre { animation-play-state: running; }
+  @keyframes owl-sway { 0%,100% { transform: rotate(-2deg); } 45%,60% { transform: rotate(2deg) translateY(-3px); } }
+  @keyframes moth-flight { 0%,100% { transform: translate(0,0) rotate(-3deg); } 35% { transform: translate(12px,-12px) rotate(5deg); } 70% { transform: translate(-8px,-5px) rotate(-4deg); } }
+  @keyframes fish-swim { 0%,100% { transform: translateX(-12px) rotate(-2deg); } 50% { transform: translateX(12px) rotate(2deg); } }
+}
+@media (max-width: 700px) {
+  .story-home .hero { gap: 26px; }
+  .ascii-owl { max-width: 350px; }
+  .hero-facts .profile-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px 24px; }
+  .hero-facts { padding-bottom: 30px; }
+  .hero-facts .profile-facts dd { font-size: 13px; }
+}

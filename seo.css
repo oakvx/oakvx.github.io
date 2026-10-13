@@ -1,0 +1,28 @@
+/* Native language links retain the existing compact language control. */
+.site-header .language-switch [data-lang] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  min-height: 44px;
+  padding: 8px 3px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  text-decoration: none;
+}
+.site-header .language-switch [data-lang]:hover { color: var(--ink); }
+.site-header .language-switch [data-lang][aria-current="page"],
+.site-header .language-switch button[data-lang][aria-pressed="true"] {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--ink);
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+.site-header .language-switch [data-lang]:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}

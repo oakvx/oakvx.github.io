@@ -1,352 +1,209 @@
+'use strict';
+
 (() => {
-    'use strict';
-    const reduced = window.matchMedia?.('(prefers-reduced-motion:reduce)')?.matches ?? false;
-    const desktopHeavy = (window.innerWidth || 0) >= 1100;
+  const root = document.documentElement;
+  const english = {
+    skip: "Skip to content",
+    navLabel: "Main navigation",
+    navProjects: "Projects",
+    navJourney: "Experience",
+    navAbout: "About me",
+    navHistory: "Background",
+    navContact: "Contact",
+    navSkills: "Skills",
+    languageLabel: "Language",
+    themeLabel: "Theme",
+    themeAuto: "Auto",
+    themeLight: "Light",
+    themeDark: "Dark",
+    menuOpen: "Open menu",
+    mobileNavLabel: "Mobile navigation",
+    heroEyebrow: "Developer & graphic designer",
+    heroLine1: "Gabriele",
+    heroLine2: "Lucia",
+    heroDescription: "Developer and graphic designer based in Sassuolo, Italy. I build web applications, create social graphics and design interfaces, and study Computer Engineering at UNIMORE.",
+    heroProjects: "View projects",
+    location: "Sassuolo, Italy",
+    focus: "Full stack + automation",
+    projectsTitle: "Projects",
+    synkOpen: "Explore the Synk project",
+    synkMessage: "Can we book an appointment?",
+    flowIntent: "intent",
+    flowLogic: "logic",
+    flowData: "data",
+    flowResult: "Appointment management",
+    synkAnnotation: "ILLUSTRATIVE DIAGRAM",
+    synkKind: "WhatsApp appointments",
+    synkDescription: "An application that recognises WhatsApp messages and manages appointments. I developed the Node.js backend, PostgreSQL data layer and monitoring interface.",
+    synkDetails: "Synk project details",
+    beautifyOpen: "Explore the Beautify project",
+    crmAppointments: "Appointments",
+    crmCustomer: "Customer",
+    crmService: "Service / operator",
+    beautifyAnnotation: "ILLUSTRATIVE INTERFACE",
+    beautifyKind: "Web CRM",
+    beautifyDescription: "My final diploma project: a CRM for customers, appointments, operators and services. I developed the PHP backend and MySQL database.",
+    beautifyDetails: "Beautify project details",
+    dataModeling: "Data modeling",
+    githubMore: "View GitHub",
+    journeyTitle: "Experience &\neducation",
+    formatDate: "AUG — 04 SEP 2026",
+    experienceTag: "EXPERIENCE",
+    formatRole: "Software & Automation Apprentice",
+    formatDescription: "Supported PLC programming and software development for industrial automation. Wrote T-SQL scripts for backup, data management and archiving on SQL Server.",
+    starboticaDate: "MAY — JUN 2025",
+    starboticaPlace: "· Seville, Spain",
+    starboticaDescription: "Support for Windows environments, Active Directory accounts, local networks and peripherals. Hardware and software troubleshooting and technical documentation in an international team.",
+    universityDate: "2026 — IN PROGRESS",
+    educationTag: "EDUCATION",
+    universityTitle: "Computer Engineering",
+    universityType: "· B.Sc., part-time",
+    diplomaTitle: "IT & Telecommunications",
+    diplomaPlace: "· Sassuolo, diploma",
+    skillsTitle: "Skills",
+    webTitle: "Web development",
+    automationTitle: "Automation",
+    automationSkills: "PLC–software–database integration",
+    automationProcesses: "Process automation",
+    automationBackup: "Backup & data archiving",
+    otherTitle: "Other tools",
+    technicalDocs: "Technical documentation",
+    languagesTitle: "LANGUAGES",
+    italian: "Italian",
+    native: "Native",
+    english: "English",
+    spanish: "Spanish",
+    greek: "Greek",
+    chinese: "Chinese",
+    webExplanation: "HTML and CSS build structure and the interface; JavaScript handles the DOM and interactions. On the server I use Node.js and PHP for application logic, APIs and CRUD workflows.",
+    databaseExplanation: "I model data and relationships and query them with SQL. PostgreSQL in Synk, MySQL in Beautify, and T-SQL on SQL Server during my automation experience.",
+    automationExplanation: "I connect software, PLCs and databases. At Format SRL I supported PLC programming and wrote T-SQL scripts for data backup, management and archiving.",
+    otherExplanation: "Git and GitHub to version and share code. Java, C# and C++ round out my programming foundations, alongside troubleshooting and technical documentation.",
+    contactTitle: "Contact",
+    contactDescription: "You can contact me by email.",
+    contactCTA: "Email me",
+    backTop: "Back to top ↑"
+  };
 
-    /* ═══════════════════════════════════════════ CURSOR */
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursorFollower');
-    let mx = 0,
-        my = 0,
-        fx = 0,
-        fy = 0;
+  const pageConfig = JSON.parse(document.querySelector('#page-translations')?.textContent || '{}');
+  const pageLocale = ['it', 'en'].includes(pageConfig.locale) ? pageConfig.locale : null;
+  Object.assign(english, pageConfig.en || {});
+  Object.assign(english, { bratOpen: 'Explore Brat Animator', bratDescription: "A browser-based lyric video editor with LRC import, text animation and MP4/WebM export.", readProject: "View project" });
+  const italian = {};
+  const textNodes = [...document.querySelectorAll('[data-i18n]')];
+  const ariaNodes = [...document.querySelectorAll('[data-i18n-aria]')];
+  const altNodes = [...document.querySelectorAll('[data-i18n-alt]')];
+  if (!pageLocale) {
+    textNodes.forEach(element => {
+      italian[element.getAttribute('data-i18n')] = [...element.childNodes].map(node => node.nodeName === 'BR' ? '\n' : node.textContent).join('');
+    });
+    ariaNodes.forEach(element => { italian[element.getAttribute('data-i18n-aria')] = element.getAttribute('aria-label'); });
+    altNodes.forEach(element => { italian[element.getAttribute('data-i18n-alt')] = element.getAttribute('alt'); });
+  }
 
-    if (cursor && follower && !reduced && desktopHeavy) {
-        document.addEventListener('mousemove', (e) => {
-            mx = e.clientX;
-            my = e.clientY;
-            cursor.style.left = mx + 'px';
-            cursor.style.top = my + 'px';
-        });
-        const tick = () => {
-            fx += (mx - fx) * .12;
-            fy += (my - fy) * .12;
-            follower.style.left = fx + 'px';
-            follower.style.top = fy + 'px';
-            requestAnimationFrame(tick);
-        };
-        tick();
-        document.querySelectorAll('a,button,[role="button"],input,textarea,select').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.cssText += 'width:15px;height:15px;';
-                follower.style.cssText += 'width:46px;height:46px;border-color:rgba(114,40,187,.48);';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.cssText += 'width:8px;height:8px;';
-                follower.style.cssText += 'width:30px;height:30px;border-color:rgba(114,40,187,.33);';
-            });
-        });
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            follower.style.opacity = '0';
-        });
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '1';
-            follower.style.opacity = '1';
-        });
+  const readPreference = key => { try { return localStorage.getItem(key); } catch { return null; } };
+  const savePreference = (key, value) => { try { localStorage.setItem(key, value); } catch { /* The site also works without storage. */ } };
+  const storedLanguage = readPreference('gl-language');
+  let language = pageLocale || (storedLanguage === 'it' || storedLanguage === 'en' ? storedLanguage : navigator.language.toLowerCase().startsWith('en') ? 'en' : 'it');
+  const themeSelect = document.querySelector('#theme-select');
+  const storedTheme = readPreference('gl-theme');
+  themeSelect.value = ['light', 'dark'].includes(storedTheme) ? storedTheme : 'auto';
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const menuButton = document.querySelector('.menu-toggle');
+  const mobileNav = document.querySelector('#mobile-nav');
+
+  function setText(element, text) {
+    const fragments = String(text).split('\n');
+    element.replaceChildren();
+    fragments.forEach((fragment, index) => {
+      if (index) element.append(document.createElement('br'));
+      element.append(document.createTextNode(fragment));
+    });
+  }
+
+  function updateMenuLabel() {
+    const open = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-label', language === 'it' ? open ? 'Chiudi menu' : 'Apri menu' : open ? 'Close menu' : 'Open menu');
+  }
+
+  function setLanguage(next, persist = true) {
+    language = pageLocale || next;
+    root.lang = language;
+    // Localized HTML already contains its final text and SEO metadata.
+    if (!pageLocale) {
+      const dictionary = language === 'en' ? english : italian;
+      textNodes.forEach(element => { if (dictionary[element.getAttribute('data-i18n')] !== undefined) setText(element, dictionary[element.getAttribute('data-i18n')]); });
+      ariaNodes.forEach(element => { if (dictionary[element.getAttribute('data-i18n-aria')] !== undefined) element.setAttribute('aria-label', dictionary[element.getAttribute('data-i18n-aria')]); });
+      altNodes.forEach(element => { if (dictionary[element.getAttribute('data-i18n-alt')] !== undefined) element.setAttribute('alt', dictionary[element.getAttribute('data-i18n-alt')]); });
+      document.title = pageConfig.title?.[language] || 'Gabriele Lucia / oakvx — Developer & Graphic Designer';
+      const description = pageConfig.description?.[language] || (language === 'it' ? 'Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social, interfacce e progetti personali.' : 'Gabriele Lucia, developer and graphic designer in Sassuolo, Italy. Web applications, social graphics, interfaces and personal projects.');
+      document.querySelector('meta[name="description"]').content = description;
+      document.querySelector('meta[property="og:description"]').content = description;
+      document.querySelector('meta[property="og:title"]').content = document.title;
     }
+    document.querySelectorAll('[data-lang]').forEach(control => {
+      const current = control.dataset.lang === language;
+      if (control.matches('a[href]')) {
+        control.removeAttribute('aria-pressed');
+        if (current) control.setAttribute('aria-current', 'page');
+        else control.removeAttribute('aria-current');
+      } else control.setAttribute('aria-pressed', String(current));
+    });
+    document.dispatchEvent(new CustomEvent('portfolio:language', { detail: language }));
+    updateMenuLabel();
+    if (persist) savePreference('gl-language', language);
+  }
 
-    /* ═══════════════════════════════════════════ HEADER */
-    const header = document.getElementById('header');
-    const onScroll = () => {
-        header?.classList.toggle('is-scrolled', window.scrollY > 18);
-        header?.classList.toggle('scrolled', window.scrollY > 18);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, {
-        passive: true
-    });
+  function updateThemeColor() {
+    const dark = themeSelect.value === 'dark' || (themeSelect.value === 'auto' && systemTheme.matches);
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#240612' : '#f7f7ef';
+  }
 
-    /* ═══════════════════════════════════════════ HERO SCROLL */
-    const hero = document.querySelector('.hero');
-    const setHeroProgress = () => {
-        if (!hero || reduced) return;
-        const rect = hero.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        const distance = Math.max(vh * 1.05, 1);
-        const progress = Math.min(1, Math.max(0, (-rect.top) / distance));
-        hero.style.setProperty('--hero-progress', progress.toFixed(3));
-        hero.dataset.phase = progress > .66 ? '3' : progress > .33 ? '2' : '1';
-    };
-    setHeroProgress();
-    window.addEventListener('scroll', setHeroProgress, {
-        passive: true
-    });
-    window.addEventListener('resize', setHeroProgress, {
-        passive: true
-    });
+  function setTheme(theme) {
+    if (theme === 'auto') delete root.dataset.theme;
+    else root.dataset.theme = theme;
+    savePreference('gl-theme', theme);
+    updateThemeColor();
+  }
 
-    /* ═══════════════════════════════════════════ MOBILE NAV */
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('siteNav');
-    const navOverlay = document.getElementById('navOverlay');
-    const setNav = (open) => {
-        nav?.classList.toggle('is-open', open);
-        navOverlay?.classList.toggle('is-visible', open);
-        navOverlay?.classList.toggle('is-open', open);
-        navToggle?.setAttribute('aria-expanded', String(open));
-        document.documentElement.classList.toggle('nav-open', open);
-        if (open) setTimeout(() => nav?.querySelector('a')?.focus(), 100);
-    };
-    navToggle?.addEventListener('click', e => {
-        e.stopPropagation();
-        setNav(!nav.classList.contains('is-open'));
-    });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') setNav(false);
-    });
-    document.addEventListener('click', e => {
-        if (nav?.classList.contains('is-open') && !nav.contains(e.target) && !navToggle.contains(e.target)) setNav(false);
-    });
-    nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNav(false)));
-    navOverlay?.addEventListener('click', () => setNav(false));
+  function closeMenu() {
+    menuButton.setAttribute('aria-expanded', 'false');
+    mobileNav.hidden = true;
+    updateMenuLabel();
+  }
 
-    /* ═══════════════════════════════════════════ SMOOTH SCROLL */
-    document.addEventListener('click', e => {
-        const a = e.target?.closest?.('a[href^="#"]');
-        if (!a || a.classList.contains('skip-link')) return;
-        const href = a.getAttribute('href');
-        if (!href || href === '#') return;
-        const target = document.querySelector(href);
-        if (!target) return;
-        e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight ?? 70);
-        window.scrollTo({
-            top,
-            behavior: reduced ? 'auto' : 'smooth'
-        });
-        try {
-            history.pushState(null, '', href);
-        } catch (_) {}
-        setNav(false);
-    });
-
-    /* ═══════════════════════════════════════════ ACTIVE NAV */
-    if (!reduced && 'IntersectionObserver' in window) {
-        const links = Array.from(nav?.querySelectorAll('a[href^="#"]') ?? []);
-        links.forEach(link => {
-            const sec = document.querySelector(link.getAttribute('href') ?? '');
-            if (!sec) return;
-            new IntersectionObserver(([e]) => {
-                if (e.isIntersecting) {
-                    links.forEach(l => l.classList.remove('is-active'));
-                    link.classList.add('is-active');
-                }
-            }, {
-                rootMargin: '-20% 0px -60% 0px',
-                threshold: 0
-            }).observe(sec);
-        });
+  document.querySelectorAll('[data-lang]').forEach(control => control.addEventListener('click', event => {
+    if (control.matches('a[href]')) {
+      // Keep normal links, modifier clicks, browser history and no-JS navigation.
+      const plainClick = !event.defaultPrevented && (event.button == null || event.button === 0) && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+      if (plainClick && ['it', 'en'].includes(control.dataset.lang) && (!control.target || control.target === '_self')) savePreference('gl-language', control.dataset.lang);
+      return;
     }
+    if (!pageLocale) setLanguage(control.dataset.lang);
+  }));
+  themeSelect.addEventListener('change', () => setTheme(themeSelect.value));
+  systemTheme.addEventListener('change', updateThemeColor);
+  menuButton.addEventListener('click', () => {
+    const open = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!open));
+    mobileNav.hidden = open;
+    updateMenuLabel();
+  });
+  mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') { closeMenu(); menuButton.focus(); } });
+  window.matchMedia('(min-width: 701px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
 
-    /* ═══════════════════════════════════════════ SCROLL REVEAL */
-    document.querySelectorAll('.stagger-group').forEach(group => {
-        Array.from(group.children).forEach((child, index) => child.style.transitionDelay = `${index * 90}ms`);
+  setLanguage(language, false);
+  updateThemeColor();
+  if ('IntersectionObserver' in window && !reducedMotion.matches) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.08 });
+    root.classList.add('js');
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+    reducedMotion.addEventListener('change', event => {
+      if (event.matches) { observer.disconnect(); document.querySelectorAll('.reveal').forEach(element => element.classList.add('visible')); }
     });
-
-    const revEls = Array.from(document.querySelectorAll('[data-reveal]'));
-    if (!reduced && 'IntersectionObserver' in window) {
-        const ro = new IntersectionObserver((entries, obs) => entries.forEach(e => {
-            if (!e.isIntersecting) return;
-            e.target.classList.add('is-visible');
-            e.target.classList.add('visible');
-            obs.unobserve(e.target);
-        }), {
-            threshold: 0.08,
-            rootMargin: '0px 0px -42px 0px'
-        });
-        revEls.forEach(el => ro.observe(el));
-    } else {
-        revEls.forEach(el => {
-            el.classList.add('is-visible');
-            el.classList.add('visible');
-        });
-    }
-
-    /* ═══════════════════════════════════════════ PARALLAX / TILT */
-    const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
-    const setParallax = () => {
-        if (reduced || !desktopHeavy || !parallaxEls.length) return;
-        const vh = window.innerHeight || 1;
-        parallaxEls.forEach(el => {
-            const speed = parseFloat(el.dataset.parallax || '0.08');
-            const rect = el.getBoundingClientRect();
-            const center = rect.top + rect.height / 2;
-            const progress = (vh / 2 - center) / vh;
-            el.style.transform = `translate3d(0, ${progress * speed * 180}px, 0)`;
-        });
-    };
-    setParallax();
-    window.addEventListener('scroll', setParallax, {
-        passive: true
-    });
-    window.addEventListener('resize', setParallax, {
-        passive: true
-    });
-
-    /* lighter interactions: CSS hover only in v3 */
-
-    /* ═══════════════════════════════════════════ FAQ */
-    document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('toggle', () => {
-            if (!item.open) return;
-            document.querySelectorAll('.faq-item').forEach(o => {
-                if (o !== item && o.open) o.open = false;
-            });
-        });
-    });
-
-    /* ═══════════════════════════════════════════ CONTACT FORM */
-    const form = document.getElementById('contactForm');
-    const stat = document.getElementById('formStatus');
-    const setStat = (msg, type = 'info') => {
-        if (!stat) return;
-        stat.textContent = msg;
-        stat.style.color = type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--error)' : '';
-    };
-    const clrStat = () => {
-        if (stat) {
-            stat.textContent = '';
-            stat.style.color = '';
-        }
-    };
-    const validate = () => {
-        if (!form) return {
-            valid: true
-        };
-        const rules = [{
-            id: 'nome',
-            ok: v => v.trim().length >= 2
-        }, {
-            id: 'azienda',
-            ok: v => v.trim().length >= 2
-        }, {
-            id: 'email',
-            ok: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
-        }, {
-            id: 'progetto',
-            ok: v => v.trim().length >= 10
-        }];
-        let valid = true,
-            first = null;
-        rules.forEach(({
-            id,
-            ok
-        }) => {
-            const inp = document.getElementById(id);
-            const wrap = inp?.closest('.form-field');
-            const pass = ok(inp?.value ?? '');
-            wrap?.classList.toggle('is-invalid', !pass);
-            if (!pass) {
-                valid = false;
-                if (!first) first = inp;
-            }
-        });
-        return {
-            valid,
-            firstInvalid: first
-        };
-    };
-    form?.querySelectorAll('input,textarea,select').forEach(inp => inp.addEventListener('input', () => {
-        inp.closest('.form-field')?.classList.remove('is-invalid');
-        clrStat();
-    }));
-    form?.addEventListener('submit', async e => {
-        e.preventDefault();
-        const {
-            valid,
-            firstInvalid
-        } = validate();
-        if (!valid) {
-            setStat('Controlla i campi evidenziati e riprova.', 'error');
-            firstInvalid?.focus();
-            return;
-        }
-        const btn = form.querySelector('button[type="submit"]'),
-            orig = btn?.innerHTML;
-        if (btn) {
-            btn.disabled = true;
-            btn.innerHTML = '<span>Invio in corso…</span>';
-        }
-        clrStat();
-        try {
-            const action = form.getAttribute('action');
-            if (!action || action.includes('YOUR_FORM_ID')) throw new Error('Sostituisci YOUR_FORM_ID con il tuo ID Formspree.');
-            const res = await fetch(action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: {
-                    Accept: 'application/json'
-                }
-            });
-            if (res.ok) {
-                setStat('✓ Richiesta inviata! Ti risponderemo entro 24 ore.', 'success');
-                form.reset();
-                form.querySelectorAll('.is-invalid').forEach(f => f.classList.remove('is-invalid'));
-                setTimeout(() => stat?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest'
-                }), 100);
-            } else {
-                const d = await res.json();
-                throw new Error(d.errors?.map(x => x.message).join(', ') || "Errore durante l'invio.");
-            }
-        } catch (err) {
-            setStat(err.message || 'Si è verificato un errore. Riprova.', 'error');
-        } finally {
-            if (btn && orig) {
-                btn.disabled = false;
-                btn.innerHTML = orig;
-            }
-        }
-    });
-
-    /* ═══════════════════════════════════════════ LIVE SITE PREVIEWS */
-    const previewBoxes = Array.from(document.querySelectorAll('.pol-live[data-live-src], [data-live-preview]'));
-    const bootFrame = (box) => {
-        if (!box || box.dataset.booted === '1') return;
-        const frame = box.querySelector('.preview-live__frame') || box.querySelector('iframe');
-        if (!frame) return;
-        box.dataset.booted = '1';
-        let settled = false;
-        const done = (ok) => {
-            if (settled) return;
-            settled = true;
-            box.classList.toggle('is-loaded', !!ok);
-            box.classList.toggle('is-error', !ok);
-        };
-        const timer = window.setTimeout(() => done(false), 9000);
-        frame.addEventListener('load', () => {
-            window.clearTimeout(timer);
-            window.setTimeout(() => done(true), 350);
-        }, {
-            once: true
-        });
-        frame.addEventListener('error', () => {
-            window.clearTimeout(timer);
-            done(false);
-        }, {
-            once: true
-        });
-        frame.src = frame.dataset.src || box.dataset.liveSrc || '';
-    };
-    if ('IntersectionObserver' in window) {
-        const po = new IntersectionObserver((entries, obs) => entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            bootFrame(entry.target);
-            obs.unobserve(entry.target);
-        }), {
-            rootMargin: '220px 0px',
-            threshold: 0.01
-        });
-        previewBoxes.forEach(box => po.observe(box));
-    } else {
-        previewBoxes.forEach(bootFrame);
-    }
-
-    /* ═══════════════════════════════════════════ FOOTER YEAR */
-    const yr = document.getElementById('year');
-    if (yr) yr.textContent = String(new Date().getFullYear());
-
-    console.log('%csynk%c ✦ Digital Studio — live showcase v9', 'font-size:26px;font-weight:800;font-family:Imbue,serif;letter-spacing:-.04em;color:#7228BB', 'font-size:12px;color:#9050D2');
+  }
 })();

@@ -1,0 +1,224 @@
+/* Bounded illustrative objects. Type is reset here so display tracking cannot
+   leak into small labels when a scene sits inside a large project heading. */
+.ps-board {
+  width: 100%;
+  max-width: 540px;
+  min-width: 0;
+  margin-inline: auto;
+  container-type: inline-size;
+  color: var(--ink);
+  font-family: Archivo, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  font-stretch: 100%;
+  letter-spacing: normal;
+  line-height: 1.5;
+  text-align: left;
+}
+.ps-board * { box-sizing: border-box; }
+.ps-board :is(strong, p, span, code, time) { letter-spacing: normal; }
+.ps-board p { margin: 0; }
+.ps-board strong { font-weight: 560; }
+.ps-board .ps-label,
+.ps-board :is(code, time, .ps-session-key, .ps-file-name, .ps-file-api, .ps-time-ruler, .ps-word-track) {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  font-stretch: 100%;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+.ps-board .ps-label { display: inline-block; }
+.ps-object-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.ps-object-top > .ps-label { color: var(--muted); text-align: right; }
+.ps-brand-logo { display: block; width: 142px; height: auto; max-width: 44%; }
+.ps-board .ps-project-name { font-size: 23px; font-stretch: 94%; letter-spacing: -.055em; line-height: 1; }
+.ps-object-note { margin-top: 20px !important; font-size: 15px; line-height: 1.6; }
+.ps-drawn-arrow { display: block; width: 110px; height: 39px; flex-shrink: 0; }
+.ps-drawn-arrow path { fill: none; stroke: var(--strawberry-red); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.ps-hand-note { font: italic 17px/1.3 var(--editorial-serif, Georgia, serif); max-width: 22ch; }
+
+/* A salon is the session's working context; the role selects its access. */
+.ps-folder {
+  position: relative;
+  margin-top: 34px;
+  padding: 24px 22px 19px;
+  border: 1.5px solid var(--ink);
+  border-radius: 0 8px 6px 8px;
+  background: var(--surface);
+  box-shadow: 0 4px 0 var(--ink);
+  transform: rotate(-1deg);
+}
+.ps-folder-tab {
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: -1.5px;
+  padding: 7px 15px 6px;
+  border: 1.5px solid var(--ink);
+  border-bottom: 0;
+  border-radius: 8px 12px 0 0;
+  background: var(--surface);
+  font: 400 12px/1.4 var(--mono);
+}
+.ps-session-header { display: flex; align-items: center; gap: 9px; margin-bottom: 21px; font-size: 16px; }
+.ps-status-dot { width: 7px; height: 7px; border: 1px solid var(--ink); border-radius: 50%; background: var(--willow-green); flex-shrink: 0; }
+.ps-session-field { display: grid; gap: 5px; padding-block: 15px; border-block: 1px solid var(--line); }
+.ps-session-field > strong { font-size: 26px; font-stretch: 94%; line-height: 1.1; }
+.ps-session-key { color: var(--muted); }
+.ps-session-route { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 17px; font-size: 14px; }
+.ps-session-route b { color: var(--accent-text); font-weight: 400; }
+.ps-role-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 18px 5px 10px; }
+.ps-role-heading .ps-drawn-arrow { width: 86px; transform: rotate(12deg); }
+.ps-role-slips { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 15px; padding: 3px 4px 5px; }
+.ps-role-slip { padding: 18px 14px; border: 1.5px solid var(--art-ink); border-radius: 6px 9px 5px 7px; color: var(--art-ink); box-shadow: 0 3px 0 var(--ink); }
+.ps-role-owner { background: var(--tea-green); transform: rotate(-2deg); }
+.ps-role-staff { background: var(--tea-green); transform: rotate(2deg); }
+.ps-role-slip > strong { display: block; margin-bottom: 9px; font-size: 23px; font-stretch: 94%; line-height: 1.1; overflow-wrap: anywhere; }
+
+/* A paper agenda: the times and duration are explicitly sample values. */
+.ps-agenda-sheet { padding: 21px 21px 13px; border: 1.5px solid var(--ink); border-radius: 7px 5px 9px 6px; background: var(--paper); box-shadow: 0 4px 0 var(--ink); }
+.ps-agenda-title { display: grid; gap: 6px; margin-bottom: 20px; }
+.ps-agenda-title > strong { font-size: 27px; font-stretch: 94%; letter-spacing: -.035em; line-height: 1.1; }
+.ps-agenda-title > .ps-label { color: var(--muted); }
+.ps-service-ticket { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; padding: 13px 0; border-block: 1px dashed var(--line); }
+.ps-service-ticket > div { display: grid; gap: 4px; }
+.ps-service-ticket strong { font-size: 20px; line-height: 1.2; }
+.ps-agenda-rows { margin-top: 15px; }
+.ps-agenda-row { display: grid; grid-template-columns: 55px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 52px; }
+.ps-agenda-row time { font-size: 13px; }
+.ps-agenda-row > span { position: relative; display: flex; justify-content: space-between; align-items: center; min-width: 0; padding: 9px 12px; font-size: 15px; line-height: 1.3; }
+.ps-slot-free { border-bottom: 1px dashed var(--line); color: var(--muted); }
+.ps-slot-taken { border: 1px solid var(--line); background: var(--surface); }
+.ps-slot-taken i { position: absolute; left: 8px; right: 8px; top: 50%; height: 1px; background: var(--strawberry-red); transform: rotate(-2deg); }
+.ps-slot-picked { border: 1.5px solid var(--art-ink); border-radius: 4px 7px 5px 6px; background: var(--tea-green); color: var(--art-ink); }
+.ps-slot-picked b { margin-left: 8px; font-size: 19px; font-weight: 400; }
+.ps-agenda-margin { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 15px; }
+.ps-agenda-margin .ps-drawn-arrow { width: 80px; transform: rotate(-12deg); }
+
+/* A conceptual filing diagram, rather than a reproduction of the SQL schema. */
+.ps-filing-sheet { padding: 20px; border: 1.5px solid var(--ink); border-radius: 8px 5px 7px 6px; background: var(--paper); box-shadow: 0 4px 0 var(--ink); }
+.ps-storage-top { display: flex; align-items: center; gap: 13px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.ps-storage-top > img { width: 42px; height: 42px; object-fit: contain; }
+.ps-storage-top > div { display: grid; gap: 2px; }
+.ps-storage-top strong { font-size: 22px; }
+.ps-map-stamp { margin-left: auto; max-width: 13ch; padding-left: 12px; border-left: 1px solid var(--line); font: 400 12px/1.4 var(--mono); }
+.ps-relation-root { position: relative; display: grid; gap: 5px; width: fit-content; margin: 21px auto 25px; text-align: center; }
+.ps-relation-root strong { font-size: 25px; font-stretch: 94%; line-height: 1.1; }
+.ps-relation-root::after { content: ''; position: absolute; top: calc(100% + 4px); left: 50%; width: 1px; height: 21px; background: var(--strawberry-red); }
+.ps-relation-branches { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 17px; padding-top: 14px; }
+.ps-relation-branches::before { content: ''; position: absolute; top: 0; left: 23%; right: 23%; height: 1px; background: var(--strawberry-red); }
+.ps-record-slip { position: relative; padding: 15px 10px; border: 1px solid var(--ink); border-radius: 5px; text-align: center; }
+.ps-record-slip::before { content: ''; position: absolute; bottom: 100%; left: 50%; width: 1px; height: 14px; background: var(--strawberry-red); }
+.ps-record-slip strong { font-size: 22px; font-stretch: 94%; }
+.ps-record-slip p { margin-top: 3px; font-size: 13px; }
+.ps-appointment-record { display: grid; gap: 7px; margin-top: 18px; padding: 16px; border: 1.5px solid var(--art-ink); border-radius: 4px 7px 5px 6px; background: var(--tea-green); color: var(--art-ink); }
+.ps-appointment-record strong { font-size: 19px; line-height: 1.3; }
+.ps-record-line { display: flex; justify-content: space-between; gap: 15px; padding-top: 10px; border-top: 1px solid #45092055; font: 400 12px/1.5 var(--mono); }
+.ps-other-records { display: flex; justify-content: space-between; gap: 16px; margin-top: 17px; font-size: 14px; }
+.ps-other-records > span { border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+
+/* A real LRC example, set as a small editing sheet rather than three labels. */
+.ps-editor-sheet { border: 1.5px solid var(--ink); border-radius: 7px 5px 8px 6px; overflow: hidden; background: #240612; color: #eef3e5; box-shadow: 0 4px 0 var(--strawberry-red); transform: rotate(-1deg); }
+.ps-editor-top { display: flex; align-items: center; gap: 13px; padding: 14px 16px; border-bottom: 1px solid #eef3e555; font: 400 13px/1.5 var(--mono); }
+.ps-file-mark { color: var(--tea-green); }
+.ps-editor-dot { width: 6px; height: 6px; margin-left: auto; border-radius: 50%; background: var(--willow-green); }
+.ps-code-labels { display: grid; grid-template-columns: 95px minmax(0, 1fr); gap: 10px; margin: 18px 16px 8px 41px; color: #b7beb0; }
+.ps-code-line { display: grid; grid-template-columns: 16px 95px minmax(0, 1fr); gap: 9px; align-items: center; padding: 14px 16px; }
+.ps-code-line code { font-size: 13px; color: var(--tea-green); }
+.ps-code-line > span:last-child { display: flex; align-items: center; min-width: 0; font-size: 19px; }
+.ps-line-number { color: #a8b09e; font: 400 11px/1.5 var(--mono); }
+.ps-code-active { border-block: 1px solid #eef3e533; background: #2c3529; }
+.ps-code-caret { display: inline-block; width: 1px; height: 20px; margin-left: 4px; background: var(--tea-green); }
+.ps-editor-footer { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 13px; padding: 14px 16px; border-top: 1px solid #eef3e555; color: #b7beb0; }
+.ps-editor-margin { display: flex; align-items: center; gap: 14px; margin-top: 15px; }
+.ps-editor-margin .ps-drawn-arrow { width: 90px; transform: rotate(180deg); }
+
+/* A drawn frame and its timeline share the same sample word and timestamp. */
+.ps-frame-print { margin: 3px 5px 8px; padding: 9px 9px 12px; border: 1.5px solid var(--ink); border-radius: 5px 8px 4px 6px; background: var(--paper); box-shadow: 0 4px 0 var(--ink); transform: rotate(1deg); }
+.ps-frame-top, .ps-frame-caption { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 7px 5px 12px; }
+.ps-frame-surface { position: relative; display: grid; place-items: center; min-height: 180px; aspect-ratio: 1.7; overflow: hidden; background: var(--tea-green); color: var(--art-ink); }
+.ps-canvas-word { display: inline-block; max-width: 100%; padding: 16px; font-family: Arial, sans-serif; font-size: clamp(30px, 5vw, 54px); font-weight: 400; line-height: 1; transform: translateY(calc((1 - var(--scene-progress, .5)) * 7px)); }
+.ps-frame-corner { position: absolute; width: 15px; height: 15px; border: solid var(--art-ink); pointer-events: none; }
+.ps-frame-corner-one { top: 11px; left: 11px; border-width: 1px 0 0 1px; }
+.ps-frame-corner-two { bottom: 11px; right: 11px; border-width: 0 1px 1px 0; }
+.ps-frame-caption { padding: 12px 5px 0; }
+.ps-timeline-sheet { margin-top: 22px; padding: 16px 0 0; border-top: 1px solid var(--line); }
+.ps-timeline-title { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
+.ps-timeline-title > strong { font-size: 20px; font-stretch: 94%; line-height: 1.2; }
+.ps-timeline-title > .ps-label { text-align: right; color: var(--muted); }
+.ps-time-ruler { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.ps-word-track { position: relative; display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 5px; padding-top: 8px; overflow: hidden; }
+.ps-word-track > span { padding: 10px 5px; border: 1px solid var(--art-ink); background: var(--tea-green); color: var(--art-ink); text-align: center; }
+.ps-word-track > span:nth-child(2) { background: var(--tea-green); }
+.ps-word-track > span:nth-child(3) { background: var(--princeton-orange); }
+.ps-timeline-playhead { position: absolute; inset: 0; transform: translateX(calc((var(--scene-progress, .5) - .5) * 20%)); pointer-events: none; }
+.ps-timeline-playhead::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--strawberry-red); }
+.ps-timeline-playhead::after { content: ''; position: absolute; top: 0; left: calc(50% - 4px); width: 10px; height: 7px; background: var(--strawberry-red); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+
+/* Two folded file objects make the API / audio distinction legible. */
+.ps-export-source { display: flex; align-items: center; gap: 18px; padding: 0 5px; }
+.ps-export-source > div:last-child { display: grid; gap: 5px; }
+.ps-export-source strong { font-size: 21px; font-stretch: 94%; line-height: 1.1; }
+.ps-mini-frames { position: relative; width: 82px; height: 66px; flex-shrink: 0; }
+.ps-mini-frames > span { position: absolute; display: grid; place-items: center; width: 66px; height: 44px; border: 1px solid var(--art-ink); border-radius: 2px; background: var(--tea-green); color: var(--art-ink); font-size: 12px; }
+.ps-mini-frames > span:first-child { top: 0; left: 0; transform: rotate(-5deg); }
+.ps-mini-frames > span:nth-child(2) { top: 9px; left: 7px; transform: rotate(3deg); }
+.ps-mini-frames > span:last-child { top: 19px; left: 14px; transform: rotate(-2deg); }
+.ps-export-fork { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: 35px; margin: 2px 24px 12px; }
+.ps-export-fork::before { content: ''; position: absolute; left: 50%; top: 0; height: 18px; width: 1px; background: var(--strawberry-red); }
+.ps-export-fork > span { position: absolute; top: 17px; bottom: 0; left: 24%; width: 26%; border-top: 1px solid var(--strawberry-red); border-left: 1px solid var(--strawberry-red); }
+.ps-export-fork > span:last-child { left: 50%; width: 26%; border-left: 0; border-right: 1px solid var(--strawberry-red); }
+.ps-export-files { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 17px; padding: 2px 4px 6px; }
+.ps-file-object { position: relative; min-width: 0; padding: 25px 17px 18px; border: 1.5px solid var(--art-ink); border-radius: 5px 0 6px 4px; color: var(--art-ink); box-shadow: 0 4px 0 var(--ink); }
+.ps-file-mp4 { background: var(--tea-green); transform: rotate(-1.5deg); }
+.ps-file-webm { background: var(--tea-green); transform: rotate(1.5deg); }
+.ps-file-fold { position: absolute; top: -1.5px; right: -1.5px; width: 21px; height: 21px; border: 1.5px solid var(--art-ink); border-top: 0; border-right: 0; background: var(--paper); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.ps-board .ps-file-kind { display: block; font-size: clamp(42px, 4.3vw, 58px); font-weight: 560; font-stretch: 94%; letter-spacing: -.055em; line-height: 1; }
+.ps-file-name { display: block; margin-top: 7px; }
+.ps-board .ps-file-api { min-height: 44px; margin-top: 25px; font-size: 13px; }
+.ps-file-object > p { margin-top: 12px; font-size: 16px; line-height: 1.45; }
+.ps-file-fact { display: block; margin-top: 15px; padding-block: 9px; border-block: 1px solid #45092055; font-size: 14px; line-height: 1.4; }
+.ps-file-object > .ps-file-footnote { font-size: 12px; line-height: 1.5; }
+
+:root[data-theme="dark"] .ps-brand-logo { filter: invert(1); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ps-brand-logo { filter: invert(1); }
+}
+@container (max-width: 420px) {
+  .ps-role-slips { gap: 11px; }
+  .ps-role-slip { padding: 15px 10px; }
+  .ps-role-slip > strong { font-size: 21px; }
+  .ps-role-heading .ps-drawn-arrow { width: 65px; }
+  .ps-folder, .ps-agenda-sheet, .ps-filing-sheet { padding-inline: 16px; }
+  .ps-service-ticket { gap: 12px; }
+  .ps-agenda-row { grid-template-columns: 48px minmax(0, 1fr); gap: 8px; }
+  .ps-agenda-row > span { padding-inline: 9px; font-size: 14px; }
+  .ps-map-stamp { max-width: 11ch; padding-left: 9px; }
+  .ps-storage-top { gap: 9px; }
+  .ps-storage-top > img { width: 33px; height: 33px; }
+  .ps-record-slip strong { font-size: 20px; }
+  .ps-code-line { grid-template-columns: 14px 88px minmax(0, 1fr); gap: 7px; padding-inline: 12px; }
+  .ps-code-line > span:last-child { font-size: 17px; }
+  .ps-code-labels { grid-template-columns: 88px minmax(0, 1fr); gap: 7px; margin-left: 33px; }
+  .ps-editor-top, .ps-editor-footer { padding-inline: 12px; }
+  .ps-frame-surface { min-height: 155px; }
+  .ps-canvas-word { font-size: 34px; }
+  .ps-timeline-title { display: grid; gap: 5px; }
+  .ps-timeline-title > .ps-label { text-align: left; }
+  .ps-export-files { grid-template-columns: minmax(0, 1fr); gap: 21px; padding-inline: 7px; }
+  .ps-export-fork { height: 26px; }
+  .ps-export-fork::before { height: 26px; }
+  .ps-export-fork > span { display: none; }
+  .ps-board .ps-file-api { min-height: 0; margin-top: 19px; }
+  .ps-file-object { padding: 23px 20px 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ps-canvas-word, .ps-timeline-playhead { transform: none; }
+}
+html[data-motion-paused="true"] :is(.ps-canvas-word, .ps-timeline-playhead) { transform: none; }

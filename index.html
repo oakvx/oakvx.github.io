@@ -55,7 +55,9 @@
     <link rel="preload" href="assets/cascadia-code.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/polaroid/permanent-marker.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/polaroid/site.css">
+    <link rel="stylesheet" href="assets/avatars/avatar.css">
     <script src="assets/polaroid/site.js" defer></script>
+    <script src="assets/avatars/avatar.js" defer></script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -65,7 +67,7 @@
                 "name": "Gabriele Lucia",
                 "alternateName": "oakvx",
                 "url": "https://oakvx.github.io/chi-sono/",
-                "image": "https://oakvx.github.io/assets/gabriele-portrait.webp",
+                "image": "https://oakvx.github.io/assets/avatars/showingoff.png",
                 "sameAs": ["https://github.com/oakvx"],
                 "jobTitle": "Developer e graphic designer"
             }, {
@@ -161,7 +163,7 @@
         <!-- 1 · Testata: il nome come nella scheda social, la Polaroid che esce dalla fessura -->
         <section class="hero" aria-labelledby="hero-title">
             <div class="wrap hero__meta">
-                <p class="hello"><img src="assets/gabriele-avatar.webp" width="40" height="40" alt="" decoding="async"><span data-i18n="hero.hello">Ciao, sono</span></p>
+                <p class="hello"><picture class="avatar avatar--icon" aria-hidden="true"><img src="assets/avatars/showingoff.png" width="512" height="512" alt="" decoding="async"></picture><span data-i18n="hero.hello">Ciao, sono</span></p>
                 <p class="mono hero__place" data-i18n="hero.place">Sassuolo, Italia</p>
                 <p class="mono hero__job">Junior developer &amp; graphic designer</p>
             </div>
@@ -177,7 +179,10 @@
                             <div class="print__in">
                                 <div class="print__photo">
                                     <div class="sunset" aria-hidden="true"></div>
-                                    <img src="assets/gabriele-portrait-cutout-480.webp" srcset="assets/gabriele-portrait-cutout-320.webp 320w, assets/gabriele-portrait-cutout-480.webp 480w, assets/gabriele-portrait-cutout.webp 640w" sizes="(max-width: 759px) 70vw, 27vw" width="480" height="600" alt="Gabriele Lucia, ritratto davanti a un tramonto a strisce anni Settanta" data-i18n-alt="hero.photoAlt" fetchpriority="high" decoding="async">
+                                    <picture class="avatar" data-avatar data-avatar-pose="standing">
+                                        <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/standing-still.webp">
+                                        <img src="assets/avatars/standing.gif" data-avatar-animated="assets/avatars/standing.gif" data-avatar-still="assets/avatars/standing-still.webp" width="512" height="512" alt="Avatar animato di Gabriele Lucia, in piedi davanti a un tramonto a strisce" data-i18n-alt="hero.photoAlt" fetchpriority="high" decoding="async">
+                                    </picture>
                                     <span class="stamp" data-stamp aria-hidden="true">'26 10 19</span>
                                 </div>
                                 <p class="print__cap hand">gabriele, sassuolo</p>
@@ -212,10 +217,13 @@
                     <span class="tape" aria-hidden="true"></span>
                     <div class="print" style="--tilt:-4deg">
                         <div class="print__in">
-                            <div class="print__photo">
-                                <img src="assets/gabriele-portrait-450.webp" srcset="assets/gabriele-portrait-360.webp 360w, assets/gabriele-portrait-450.webp 450w, assets/gabriele-portrait-675.webp 675w" sizes="(max-width: 759px) 66vw, 26vw" width="450" height="600" loading="lazy" decoding="async" alt="Gabriele Lucia, autoscatto allo specchio" data-i18n-alt="about.photoAlt">
+                            <div class="print__photo print__photo--avatar">
+                                <picture class="avatar" data-avatar data-avatar-pose="sitting">
+                                    <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/sitting-still.webp">
+                                    <img src="assets/avatars/sitting.gif" data-avatar-animated="assets/avatars/sitting.gif" data-avatar-still="assets/avatars/sitting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="Avatar animato di Gabriele Lucia, seduto" data-i18n-alt="about.photoAlt">
+                                </picture>
                             </div>
-                            <p class="print__cap hand" data-i18n="about.caption">io, senza filtri</p>
+                            <p class="print__cap hand" data-i18n="about.caption">io, versione digitale</p>
                         </div>
                     </div>
                 </figure>
@@ -301,6 +309,9 @@
                     <div class="work__head">
                         <h2 class="h2" id="work-title" data-i18n-html="work.title">Progetti <em>selezionati.</em></h2>
                         <p class="work__intro"><span data-i18n="work.intro">Tre progetti, dal browser al database.</span> <span class="mono">2023 — 2026</span></p>
+                        <picture class="avatar work__avatar" data-avatar-pose="showingoff" aria-hidden="true">
+                            <img src="assets/avatars/showingoff.png" width="512" height="512" loading="lazy" decoding="async" alt="">
+                        </picture>
                     </div>
                     <div class="work__camera" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
                     <ol class="work__list" data-work-list>
@@ -415,7 +426,7 @@
                             <li><button type="button" class="dicon" data-open="skills" aria-controls="win-skills"><span class="ficon ficon--html" aria-hidden="true">&lt;/&gt;</span><span data-i18n="desk.f.skills">competenze.html</span></button></li>
                             <li><button type="button" class="dicon" data-open="term" aria-controls="win-term"><span class="ficon ficon--sh" aria-hidden="true">$_</span><span>portfolio.sh</span></button></li>
                             <li><button type="button" class="dicon" data-open="faq" aria-controls="win-faq"><span class="ficon ficon--md" aria-hidden="true">MD</span><span>FAQ.md</span></button></li>
-                            <li><button type="button" class="dicon" data-open="photo" aria-controls="win-photo"><span class="ficon ficon--img" aria-hidden="true"><img src="assets/gabriele-avatar.webp" width="40" height="40" alt="" loading="lazy"></span><span>gabriele.png</span></button></li>
+                            <li><button type="button" class="dicon" data-open="photo" aria-controls="win-photo"><span class="ficon ficon--img" aria-hidden="true"><picture class="avatar avatar--icon"><img src="assets/avatars/showingoff.png" width="512" height="512" alt="" loading="lazy"></picture></span><span>gabriele.gif</span></button></li>
                             <li><button type="button" class="dicon" data-open="tools" aria-controls="win-tools"><span class="ficon ficon--dir" aria-hidden="true"></span><span data-i18n="desk.f.tools">strumenti</span></button></li>
                         </ul>
 
@@ -556,15 +567,18 @@ Ingegneria Informatica @ UNIMORE.</p>
                             </div>
                         </section>
 
-                        <!-- gabriele.png -->
+                        <!-- gabriele.gif -->
                         <section class="win win--photo" id="win-photo" data-win="photo" aria-labelledby="win-photo-t" tabindex="-1">
                             <header class="win__bar" data-drag>
-                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi gabriele.png" data-i18n-aria="desk.close.photo"></button><i></i><i></i></span>
-                                <h3 class="win__name" id="win-photo-t">gabriele.png</h3>
+                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi gabriele.gif" data-i18n-aria="desk.close.photo"></button><i></i><i></i></span>
+                                <h3 class="win__name" id="win-photo-t">gabriele.gif</h3>
                             </header>
-                            <div class="win__body viewer">
-                                <img src="assets/gabriele-portrait-cutout-320.webp" width="320" height="400" loading="lazy" decoding="async" alt="Gabriele Lucia, ritratto scontornato" data-i18n-alt="desk.photoAlt">
-                                <p class="viewer__meta mono">640 × 800 · 4:5</p>
+                            <div class="win__body viewer viewer--avatar">
+                                <picture class="avatar" data-avatar data-avatar-pose="dancing">
+                                    <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/dancing-still.webp">
+                                    <img src="assets/avatars/dancing.gif" data-avatar-animated="assets/avatars/dancing.gif" data-avatar-still="assets/avatars/dancing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="Avatar animato di Gabriele Lucia che balla" data-i18n-alt="desk.photoAlt">
+                                </picture>
+                                <p class="viewer__meta mono">512 × 512 · GIF</p>
                             </div>
                         </section>
 
@@ -599,6 +613,12 @@ Ingegneria Informatica @ UNIMORE.</p>
                 <p class="label" data-reveal data-i18n="cta.label">Contatti</p>
                 <h2 class="h2" id="cta-title" data-reveal data-i18n-html="cta.title">Hai un progetto da <em>mettere a fuoco?</em></h2>
                 <p class="cta__intro" data-reveal data-i18n="cta.intro">Scrivimi due righe e continuiamo via email.</p>
+                <div class="cta__avatar" aria-hidden="true">
+                    <picture class="avatar" data-avatar data-avatar-pose="dancing">
+                        <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/dancing-still.webp">
+                        <img src="assets/avatars/dancing.gif" data-avatar-animated="assets/avatars/dancing.gif" data-avatar-still="assets/avatars/dancing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
+                    </picture>
+                </div>
             </div>
             <div class="wrap roller-track" data-roller-track>
                 <a class="roller" href="mailto:gabrielelucia07@gmail.com" data-roller aria-label="Scrivimi un’email" data-i18n-aria="cta.roller">
@@ -637,6 +657,12 @@ Ingegneria Informatica @ UNIMORE.</p>
             <div class="foot__contact">
                 <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
                 <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+                <div class="foot__sleeper" aria-hidden="true">
+                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
+                        <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/sleeping-still.webp">
+                        <img src="assets/avatars/sleeping.gif" data-avatar-animated="assets/avatars/sleeping.gif" data-avatar-still="assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
+                    </picture>
+                </div>
             </div>
             <nav class="foot__nav" aria-label="Collegamenti del piè di pagina" data-i18n-aria="foot.navLabel">
                 <ul>

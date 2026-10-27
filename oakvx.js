@@ -41,7 +41,7 @@
             "internal.documentation": "Documentation",
             "internal.footerRole": "Software development and graphic design",
             "internal.breadcrumb": "Breadcrumb",
-            "about.aboutPortraitAlt": "Portrait of Gabriele Lucia",
+            "about.aboutPortraitAlt": "Gabriele Lucia’s avatar, posing",
             "brat-animator.coverAlt": "Brat Animator 4.0 interface with timeline, video preview and style controls",
             "synk.coverAlt": "Synkris: promotional material for the Synk project",
             "beautify.coverAlt": "Original Beautify logo",
@@ -303,7 +303,11 @@
         'credits.title': 'Materials credits',
         'credits.intro': 'Licences, sources and details for materials used in this portfolio.',
         'credits.typography': 'Typography and local icons',
-        'credits.photo': 'Personal photography',
+        'credits.avatars': 'Avatars and animations',
+        'credits.avatarSource': 'The five poses were supplied by the author for this portfolio and replace the personal photographs. Files are served locally from the avatars/ directory.',
+        'credits.avatarFrames': 'Original 512 × 512 px animations, with transparency and frames preserved.',
+        'credits.avatarStill': 'A static 512 × 512 px pose. The file supplied as showingoff.gif was already a PNG image; only its extension was corrected.',
+        'credits.avatarMotion': 'The *-still.webp versions contain the first frame of each GIF. They are used when animations are paused, the page is in the background or the system requests reduced motion. No external services are required.',
         'credits.projects': 'Project materials',
         'credits.graphics': 'Portfolio graphics',
         'credits.archivoUse': 'is used for text, headings and social cards. The file is a subset of the characters used by the portfolio, preserving Italian accents, punctuation and the original variable axes; glyph shapes and metrics are unchanged.',
@@ -314,15 +318,6 @@
         'credits.deviconUse': 'Technology icons are served locally from',
         'credits.sourceLabel': 'Source:',
         'credits.trademarkNotice': 'The trademarks identify the respective tools and belong to their owners.',
-        'credits.photoProvided': 'is a personal photograph supplied by Gabriele Lucia, resized to 900 × 1200 px and encoded as WebP.',
-        'credits.photoVariantsIntro': 'The variants',
-        'credits.photoVariantsDetails': 'measure 360 × 480, 450 × 600 and 675 × 900 px respectively, for responsive delivery.',
-        'credits.photoAvatar': 'is a 240 × 240 px crop of the same photograph.',
-        'credits.photoUntouched': 'The original files and avatar have not been retouched.',
-        'credits.photoCutoutIntro': 'For the About hero, the variant',
-        'credits.photoCutoutDetails': '(640 × 800 px, 4:5 aspect ratio) was created with background removal authorised by the author using ImageGen.',
-        'credits.photoResponsiveIntro': 'The responsive variants',
-        'credits.photoResponsiveDetails': 'measure 320 × 400 and 480 × 600 px and retain transparency. The source remains the existing personal photograph; no new profile photo was supplied.',
         'credits.bratCapture': 'a real 1440 × 1000 px screenshot of Brat Animator 4.0, captured on 18 October 2026 from',
         'credits.repositoryLabel': 'Repository:',
         'credits.bratDemo': 'The original demo text entered in the editor is “gabriele lucia”, “codice e grafica”, “demo portfolio”. No music or private content was uploaded. The interface was not reconstructed or retouched.',
@@ -339,7 +334,7 @@
         'credits.materialsPrivate': 'Original archives, data, credentials and application configurations are not published.',
         'credits.chameleon': 'The chameleon is an original inline SVG drawing for the portfolio, built in code from flat geometric shapes, outlines, five-band fills and a block shadow. Walking, watering can, tail, eyelid and tongue are animated as poses. The name and water share the same SVG; Canvas with local Archivo measures and samples each glyph. A single requestAnimationFrame loop coordinates the scene, with no raster images or animation libraries.',
         'credits.surfaces': 'The irregular surfaces of pills, buttons, chips and the compact index use six border-radius variations and four original SVG filters with feTurbulence and feDisplacementMap. The filters apply only to background shapes and shadows, keeping text and icons sharp.',
-        'credits.identity': 'The gl. monogram, five-color bands, frames and PNG social cards are original portfolio compositions. The social cards are generated using only the two local fonts and geometric shapes via scripts/build-social.py; they use no external photography or marks. No stickers, GIFs, illustrations or fonts from the previous setup are loaded.'
+        'credits.identity': 'The gl. monogram, five-color bands, frames and PNG social cards are original portfolio compositions. Social cards use local fonts and geometric shapes. The supplied avatars appear in the Polaroids, interactive desktop, contact section and footer.'
     });
     const root = document.documentElement;
     const $ = (selector, scope = document) => scope.querySelector(selector);

@@ -1,0 +1,9 @@
+/* Immagini delle console nel banco di lavoro */
+.fo-bay__mat img.fo-console { position: absolute; inset: auto; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 9px 8px #0009); }
+.fo-bay__mat img.fo-console--3ds { width: 54%; height: 83%; }
+.fo-bay__mat img.fo-console--3ds-left { left: -2%; top: 13%; z-index: 2; transform: rotate(-11deg); }
+.fo-bay__mat img.fo-console--3ds-center { left: 23%; top: 7%; z-index: 3; transform: rotate(-2deg); }
+.fo-bay__mat img.fo-console--3ds-right { left: 48%; top: 13%; z-index: 2; transform: rotate(10deg); }
+.fo-bay__mat img.fo-console--wiiu { width: 96%; height: 90%; }
+.fo-bay__mat img.fo-console--wii { width: 78%; height: 96%; }
+.fo-bay__mat img.fo-console--ps4 { width: 91%; height: 96%; }

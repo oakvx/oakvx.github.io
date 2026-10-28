@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://oakvx.github.io/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/chi-sono/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/chi-sono/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/chi-sono/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/chi-sono/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/chi-sono/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/chi-sono/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/chi-sono/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/chi-sono/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/projects/synk/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/synk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/synk/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/synk/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/projects/synk/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/synk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/synk/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/synk/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/projects/beautify/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/beautify/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/beautify/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/beautify/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/projects/beautify/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/beautify/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/beautify/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/beautify/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/projects/brat-animator/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/brat-animator/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/brat-animator/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/brat-animator/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/projects/brat-animator/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/brat-animator/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/brat-animator/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/brat-animator/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/fuori-orario/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/fuori-orario/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/fuori-orario/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/fuori-orario/"/>
+  </url>
+  <url>
+    <loc>https://oakvx.github.io/fuori-orario/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/fuori-orario/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/fuori-orario/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/fuori-orario/"/>
+  </url>
+</urlset>

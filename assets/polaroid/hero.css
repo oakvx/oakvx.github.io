@@ -1,0 +1,61 @@
+/* Restyling: niente marker, polaroid più pulita, arcobaleno a mezzaluna */
+.hand,
+.print__cap .hand,
+.print__cap.hand {
+    font-family: Cascadia, ui-monospace, monospace;
+    font-weight: 600;
+    font-size: 3.7cqi;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transform: none;
+    color: #2a2540
+}
+
+.print__cap { height: 17cqi }
+
+/* fessura sottile al posto della barra nera */
+.camera-slot { height: 16px; border-radius: 8px; margin-inline: -3% }
+.camera-slot::before { top: 1px; height: 14px; opacity: .9 }
+.camera-slot::after { display: none }
+
+/* fondale: arcobaleno su carta chiara */
+.print--hero .sunset {
+    background:
+        radial-gradient(circle at 50% 104%, #F6F0E4 0 31%, var(--r) 0 37%, var(--o) 0 43%, var(--y) 0 49%, var(--g) 0 55%, var(--b) 0 61%, #F6F0E4 0)
+}
+.print--hero .sunset::before { display: none }
+.print--hero .print__photo { background: #F6F0E4 }
+.print--hero .stamp {
+    left: 5cqi; right: auto; bottom: 3.5cqi;
+    color: #5E584D; text-shadow: none; opacity: .8; font-size: 3.6cqi
+}
+
+/* didascalia: nome a sinistra, quadratino a strisce a destra */
+.print--hero .print__cap {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: 1.5cqi 1cqi
+}
+.print--hero .print__cap::after {
+    content: "";
+    width: 7cqi; height: 7cqi;
+    background: var(--stripes);
+}
+
+.shutter { margin-top: 20px }
+
+/* avatar sulle tappe del percorso: in piedi sulla linea */
+.stop__avatar {
+    position: absolute;
+    right: 2px; bottom: calc(100% - 1px);
+    width: 68px; height: 68px;
+    pointer-events: none;
+    overflow: visible
+}
+.stop__avatar img { transform: scale(1.25); transform-origin: 50% 85%; filter: none }
+@media (max-width: 999px) { .stop__avatar { display: none } }
+
+[data-cycle] { cursor: pointer }
+[data-cycle]:focus-visible { outline: 2px solid var(--y); outline-offset: 4px }
+
+.work__avatar img, .viewer--avatar .avatar img { filter: none }

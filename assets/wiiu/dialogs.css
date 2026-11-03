@@ -1,0 +1,28 @@
+@layer base, theme, motion, preferences;
+@layer motion {
+    .site-dialog {
+        width: min(520px,calc(100% - 32px)); max-height: calc(100dvh - 32px);
+        margin: auto; padding: clamp(24px,5vw,40px); overflow-y: auto; overscroll-behavior: contain;
+        border: 1px solid #b2cedc; border-radius: 32px; background: #fff; color: #33414d;
+        box-shadow: 0 20px 70px #203b5238,0 4px 16px #203b521a;
+    }
+    .site-dialog[open] { animation: site-dialog-in var(--dur-2) var(--spring) both; }
+    .site-dialog::backdrop { background: #20364638; backdrop-filter: blur(6px); }
+    .site-dialog[open]::backdrop { animation: site-backdrop-in var(--dur-1) var(--ease-out) both; }
+    .site-dialog.is-closing { animation: site-dialog-out .12s var(--ease-out) both; }
+    .site-dialog.is-closing::backdrop { animation: site-backdrop-out .12s var(--ease-out) both; }
+    .site-dialog__title { margin: 0 0 28px; font: 900 clamp(25px,4vw,32px)/1.25 var(--font-display); text-align: center; }
+    .site-dialog__actions { display: grid; gap: 12px; }
+    .site-dialog__actions .btn { width: 100%; }
+    .site-dialog__status { min-height: 1.5em; margin: 16px 0 0; color: #33414d; font: 700 14px/1.5 Nunito,sans-serif; text-align: center; }
+    @keyframes site-dialog-in { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+    @keyframes site-dialog-out { to { opacity: 0; transform: scale(.98); } }
+    @keyframes site-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes site-backdrop-out { to { opacity: 0; } }
+}
+@layer preferences {
+    :root:is(.paused,.calm) .site-dialog,:root:is(.paused,.calm) .site-dialog::backdrop { animation: none; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+        .site-dialog,.site-dialog::backdrop { animation: none; transform: none; }
+    }
+}

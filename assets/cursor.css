@@ -1,8 +1,41 @@
-/* Puntatore: freccia bianca con l'ombra a cinque bande, la stessa dei bottoni.
-   Sui link e sui pulsanti diventa gialla. Nessun JavaScript. */
-html, body { cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23E8301E%22 transform=%22translate%287.0 7.0%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F47A00%22 transform=%22translate%285.6 5.6%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F9B600%22 transform=%22translate%284.2 4.2%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%234CB32A%22 transform=%22translate%282.8 2.8%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%230A8FD8%22 transform=%22translate%281.4 1.4%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23fff%22 stroke=%22%23000%22 stroke-width=%221.3%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E") 2 2, auto }
-a[href], button, summary, label[for], select, [role="button"], [role="tab"], [data-cycle], [data-drag] .win__close, .dicon, .roller {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23E8301E%22 transform=%22translate%287.0 7.0%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F47A00%22 transform=%22translate%285.6 5.6%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F9B600%22 transform=%22translate%284.2 4.2%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%234CB32A%22 transform=%22translate%282.8 2.8%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%230A8FD8%22 transform=%22translate%281.4 1.4%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F9B600%22 stroke=%22%23000%22 stroke-width=%221.3%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E") 2 2, pointer !important
+@layer base, theme, motion, preferences;
+@layer preferences {
+    /* PNG fallback and CUR share the same verified hotspot. */
+    @media (hover: hover) and (pointer: fine) {
+        html,body { cursor: url('wiiu/pointer.png') 7 0,auto; }
+        :is(a[href],button,[role="button"],summary,[data-cycle]) { cursor: url('wiiu/pointer.png') 7 0,pointer; }
+        html.wiiu-pointer-ready.wiiu-pointer-visible,
+        html.wiiu-pointer-ready.wiiu-pointer-visible body,
+        html.wiiu-pointer-ready.wiiu-pointer-visible body * { cursor: none; }
+        html.wiiu-pointer-ready .companion.is-pointer { visibility: hidden; }
+        :is(input,textarea,[contenteditable]:not([contenteditable="false"])) { cursor: text; }
+        :is(input[type="button"],input[type="submit"],input[type="reset"],input[type="checkbox"],input[type="radio"],input[type="range"],input[type="color"],select) { cursor: auto; }
+        :is(button:disabled,[aria-disabled="true"]) { cursor: not-allowed; }
+    }
+    .wiiu-pointer[popover] {
+        position: fixed; inset: 0 auto auto 0; margin: 0; padding: 0;
+        width: 32px; height: 32px; border: 0; background: transparent;
+        color: transparent; overflow: visible; pointer-events: none;
+        z-index: 2147483647; visibility: hidden; user-select: none;
+        transform: translate3d(-64px,-64px,0); view-transition-name: none;
+    }
+    .wiiu-pointer[popover]::backdrop { background: transparent; pointer-events: none; }
+    .wiiu-pointer *, .wiiu-pointer *::before { pointer-events: none; }
+    .wiiu-pointer.is-visible { visibility: visible; }
+    .wiiu-pointer__hand,.wiiu-pointer__image { display: block; width: 32px; height: 32px; transform-origin: 7px 0; }
+    .wiiu-pointer__hand { transition: transform var(--dur-1,.18s) var(--spring,ease-out),filter var(--dur-1,.18s); }
+    .wiiu-pointer__image { background: url('wiiu/pointer.png') 0 0 / 32px 32px no-repeat; animation: pointer-breathe 2.8s ease-in-out infinite; }
+    .wiiu-pointer.is-hover .wiiu-pointer__hand { transform: rotate(-8deg) scale(1.15); filter: drop-shadow(0 0 5px #00b7e7b3); }
+    .wiiu-pointer.is-pressed .wiiu-pointer__hand { transform: rotate(-8deg) scale(.88); }
+    .wiiu-pointer__ripple { position: absolute; left: 7px; top: 0; width: 40px; height: 40px; border: 2px solid #00a6d5; border-radius: 50%; opacity: 0; transform: translate(-50%,-50%) scale(.15); }
+    .wiiu-pointer.is-clicked .wiiu-pointer__ripple { animation: pointer-ripple 350ms ease-out; }
+    @keyframes pointer-breathe { 50% { transform: translateY(-1px) scale(1.015); } }
+    @keyframes pointer-ripple { from { opacity: .7; transform: translate(-50%,-50%) scale(.15); } to { opacity: 0; transform: translate(-50%,-50%) scale(1.2); } }
+    :root:is(.paused,.calm) .wiiu-pointer *,
+    :root:is(.paused,.calm) .wiiu-pointer *::before { animation: none; transition: none; }
+    :root:is(.paused,.calm) .wiiu-pointer__hand { transform: none; filter: none; }
+    @media (prefers-reduced-motion: reduce) {
+        .wiiu-pointer *, .wiiu-pointer *::before { animation: none; transition: none; }
+        .wiiu-pointer:is(.is-hover,.is-pressed) .wiiu-pointer__hand { transform: none; filter: none; }
+    }
 }
-input, textarea, [contenteditable] { cursor: text !important }
-button:disabled, [aria-disabled="true"] { cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23E8301E%22 transform=%22translate%287.0 7.0%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F47A00%22 transform=%22translate%285.6 5.6%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23F9B600%22 transform=%22translate%284.2 4.2%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%234CB32A%22 transform=%22translate%282.8 2.8%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%230A8FD8%22 transform=%22translate%281.4 1.4%29%22/%3E%3Cpath d=%22M2 2 L2 20 L6.6 15.8 L10 23.4 L13.2 22 L9.8 14.6 L16.2 14.6 Z%22 fill=%22%23fff%22 stroke=%22%23000%22 stroke-width=%221.3%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E") 2 2, not-allowed !important }

@@ -1,4 +1,4 @@
-/* gl. — sito «Polaroid» (home e pagine interne). Nessuna libreria: tutto qui, una funzione per cosa.
+/* gl. — sito con tessere chiare (home e pagine interne). Nessuna libreria: tutto qui, una funzione per cosa.
    Le funzioni che servono solo alla home si accendono se trovano il loro markup. */
 (() => {
     'use strict';
@@ -12,7 +12,7 @@
     const easeOut = t => 1 - Math.pow(1 - t, 3);
     const TAU = Math.PI * 2;
     const EMAIL = 'gabrielelucia07@gmail.com';
-    const COLORS = ['#0A8FD8', '#4CB32A', '#F9B600', '#F47A00', '#E8301E'];
+    document.addEventListener('visibilitychange', () => root.classList.toggle('is-background', document.hidden));
     const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
     let paused = root.classList.contains('paused');
     const isCalm = () => paused || reduceMQ.matches;
@@ -21,8 +21,12 @@
        Testi: l'italiano sta nell'HTML, qui l'inglese e le frasi dinamiche
        ---------------------------------------------------------------------- */
     const EN = {
+"cta.channelTitle":"Email me.","cta.channelDescription":"It starts with an email.",
+
+"channel.journey.title":"Journey","channel.journey.description":"The stops, from the start to today.","channel.projects.title":"Projects","channel.projects.description":"Ideas that became software.","channel.tools.title":"Toolkit","channel.tools.description":"Skills and small experiments.","channel.about.title":"About me","channel.about.description":"The person behind the code.","channel.contact.title":"Contact","channel.contact.description":"A new project starts here.","channel.after.title":"After hours","channel.after.description":"The things I do out of curiosity.","channel.menuLabel":"Portfolio channels","dock.label":"Channel controls","dock.open":"Open","dock.back":"Back","dock.openLabel":"Open the selected channel","dock.backLabel":"Back: to the previous page",
+
         skip: 'Skip to content',
-        brandLabel: 'gl. — Gabriele Lucia, home',
+        brandLabel: 'gl. Gabriele Lucia / oakvx, home',
         navLabel: 'Main navigation',
         langLabel: 'Language',
         menuLabel: 'Menu',
@@ -33,12 +37,13 @@
         'nav.afterHours': 'After hours',
         'nav.cta': 'Email me',
         'nav.contact': 'Contact',
-        'loader.label': 'developing',
+        'loader.label': 'Opening the portfolio',
         'loader.hint': 'do not shake',
         'hero.hello': 'Hi, I’m',
         'hero.place': 'Sassuolo, Italy',
-        'hero.photoAlt': 'Gabriele Lucia’s animated avatar, standing in front of a striped sunset',
+        'hero.photoAlt': 'Gabriele Lucia’s animated avatar, standing in a light blue channel tile',
         'hero.shutter': 'Take it again',
+        'avatar.changePose': 'Change avatar pose',
         'hero.role': 'Web development. <em>Design and interfaces.</em>',
         'hero.desc': 'I’m Gabriele, a developer and graphic designer from Sassuolo. I build web applications, social graphics and interfaces. I study Computer Engineering at UNIMORE.',
         'hero.write': 'Get in touch',
@@ -75,7 +80,7 @@
         'journey.s4': 'Software and automation · PLC / SQL Server',
         'journey.s5': 'Computer Engineering',
         'work.title': 'Selected <em>projects.</em>',
-        'work.intro': 'Three projects, from the browser to the database.',
+        'work.intro': 'Four projects, from the browser to the database.',
         'work.p1k': 'Lyric video editor',
         'work.p1': 'An editor I built to animate LRC text and export lyric videos directly from the browser.',
         'work.p1alt': 'Brat Animator 4.0: timeline, text editor and video preview',
@@ -92,8 +97,13 @@
         'work.p3alt': 'Original Beautify logo',
         'work.p3c': 'original project logo',
         'work.p3go': 'Explore the Beautify project',
-        'work.prev': 'Previous project',
-        'work.next': 'Next project',
+        'work.p4k': 'Showcase website · demo',
+        'work.p4': 'Structure and styling for an automotive showcase website. The Spinotto Felice demo presents electric vehicle accessories.',
+        'work.p4alt': 'Spinotto Felice: homepage of the demo for electric vehicle accessories',
+        'work.p4c': 'actual screenshot of the demo website',
+        'work.p4go': 'Explore the Spinotto Felice project',
+        'work.prev': 'Back: previous project',
+        'work.next': 'Next: next project',
         'desk.label': 'Tools of the trade',
         'desk.title': 'What I <em>do.</em>',
         'desk.intro': 'A small desktop: skills, frequently asked questions and a terminal that really answers.',
@@ -143,9 +153,8 @@
         'cta.label': 'Contact',
         'cta.title': 'Got a project to <em>bring into focus?</em>',
         'cta.intro': 'Drop me a line and let’s continue by email.',
-        'cta.roller': 'Send me an email',
-        'cta.rollerLabel': '[ email me ]',
-        'cta.drag': '‹ drag me ›',
+        'cta.channel': 'Send me an email',
+        'cta.channelLabel': '[ email me ]',
         'cta.copy': 'Copy email',
         'foot.navLabel': 'Footer links',
         'foot.credits': 'Credits',
@@ -237,7 +246,7 @@
             const [path, hash] = base.split('#');
             a.setAttribute('href', `${path}?lang=en${hash ? `#${hash}` : ''}`);
         });
-        $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
+        $$('button[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
         const seo = SEO && SEO[next];
         if (seo) {
             document.title = seo.title;
@@ -291,7 +300,7 @@
 
     function measureHeader() {
         const h = $('[data-header]')?.offsetHeight;
-        if (h) root.style.setProperty('--hdr', `${h}px`);
+        if (h && root.style.getPropertyValue('--hdr') !== `${h}px`) root.style.setProperty('--hdr', `${h}px`);
     }
 
     /* ----------------------------------------------------------------------
@@ -384,25 +393,35 @@
         toastTimer = setTimeout(() => toastEl.classList.remove('is-on'), 2600);
     }
 
-    async function copyEmail() {
+    async function copyEmail(input, notify = true) {
+        const address = typeof input === 'string' ? input : EMAIL;
+        const host = document.activeElement?.closest('dialog[open]') || document.body;
+        const feedback = ok => {
+            const message = ok ? t('copied') : t('copyFail');
+            if (notify) toast(message);
+            return { ok, message };
+        };
         try {
-            await navigator.clipboard.writeText(EMAIL);
-            toast(t('copied'));
+            await navigator.clipboard.writeText(address);
+            return feedback(true);
         } catch {
             const field = document.createElement('textarea');
-            field.value = EMAIL;
+            field.value = address;
             field.setAttribute('readonly', '');
             field.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-            document.body.append(field);
+            const active = document.activeElement;
+            host.append(field);
             field.select();
             let ok = false;
             try {
                 ok = document.execCommand('copy');
             } catch {}
             field.remove();
-            toast(ok ? t('copied') : t('copyFail'));
+            active?.focus({ preventScroll: true });
+            return feedback(ok);
         }
     }
+    window.portfolioActions = Object.freeze({ copyEmail });
 
     function initMenu() {
         const btn = $('[data-burger]');
@@ -421,12 +440,12 @@
             if (e.target.closest('a')) set(false);
         });
         addEventListener('keydown', e => {
-            if (e.key === 'Escape' && !menu.hidden) {
+            if (e.key === 'Escape' && !menu.hidden && !document.querySelector('dialog[open]')) {
                 set(false);
                 btn.focus();
             }
         });
-        matchMedia('(min-width: 1100px)').addEventListener('change', e => {
+        matchMedia('(min-width: 1200px)').addEventListener('change', e => {
             if (e.matches) set(false);
         });
         onLang.push(() => label.textContent = t(menu.hidden ? 'menuOpen' : 'menuClose'));
@@ -470,47 +489,18 @@
        ---------------------------------------------------------------------- */
     function runLoader(done) {
         const el = $('[data-loader]');
-        if (!el || !root.classList.contains('has-loader')) {
-            el?.remove();
-            done();
-            return;
+        if (!el || !root.classList.contains('has-loader') || isCalm()) {
+            el?.remove(); root.classList.remove('has-loader'); done(); return;
         }
-        try {
-            sessionStorage.setItem('gl-loader', '1');
-        } catch {}
-        const count = $('[data-loader-count]', el);
-        const start = performance.now();
-        const D = 1350;
-        let finished = false;
+        try { sessionStorage.setItem('gl-loader', '1'); } catch {}
         const finish = () => {
-            if (finished) return;
-            finished = true;
-            el.classList.add('is-out');
-            done();
-            setTimeout(() => {
-                el.remove();
-                root.classList.remove('has-loader');
-            }, 1000);
+            el.classList.add('is-out'); root.classList.remove('has-loader'); done();
+            el.addEventListener('transitionend', () => el.remove(), { once: true });
+            if (isCalm()) el.remove();
         };
-        const frame = now => {
-            if (finished) return;
-            const p = clamp((now - start) / D);
-            const e = 1 - Math.pow(1 - p, 2.4);
-            el.style.setProperty('--p', e.toFixed(4));
-            count.textContent = String(Math.round(e * 100)).padStart(3, '0');
-            if (p < 1) requestAnimationFrame(frame);
-            else setTimeout(finish, 220);
-        };
-        requestAnimationFrame(frame);
-        el.addEventListener('click', finish);
-        addEventListener('keydown', finish, {
-            once: true
-        });
+        (document.fonts?.ready || Promise.resolve()).then(finish);
     }
 
-    /* ----------------------------------------------------------------------
-       Hero: la Polaroid esce dalla fessura e si sviluppa
-       ---------------------------------------------------------------------- */
     function initHero() {
         const shot = $('[data-hero-shot]');
         const eject = $('[data-eject]', shot);
@@ -519,73 +509,39 @@
         const stamp = $('[data-stamp]', print);
         const img = $('img', photo);
         const name = $('.name');
-        let timers = [];
+        let tileAnimation;
         stamp.textContent = stampText();
-
-        const clear = () => {
-            timers.forEach(clearTimeout);
-            timers = [];
+        const popTile = () => {
+            tileAnimation?.cancel();
+            eject.classList.remove('is-clipped');
+            if (isCalm() || document.hidden) return;
+            tileAnimation = print.animate([
+                { opacity: .4, transform: 'translateY(12px) scale(.92)' },
+                { opacity: 1, transform: 'translateY(0) scale(1)' }
+            ], { duration: parseFloat(getComputedStyle(root).getPropertyValue('--dur-3'))*1000, easing: getComputedStyle(root).getPropertyValue('--spring').trim() });
         };
-
-        const ejectPrint = () => {
-            clear();
-            if (isCalm()) {
-                eject.classList.remove('is-clipped');
-                print.style.transition = print.style.transform = '';
-                photo.style.transition = '';
-                photo.style.setProperty('--dev', '1');
-                return;
-            }
-            eject.classList.add('is-clipped');
-            print.style.transition = 'none';
-            print.style.transform = 'translateY(-101%) rotate(0deg)';
-            photo.style.transition = 'none';
-            photo.style.setProperty('--dev', '0');
-            print.getBoundingClientRect();
-            requestAnimationFrame(() => {
-                print.style.transition = 'transform 1.3s cubic-bezier(.22,.85,.3,1)';
-                print.style.transform = 'translateY(0) rotate(0deg)';
-                photo.style.transition = '--dev 4.6s cubic-bezier(.35,.05,.3,1) .35s';
-                photo.style.setProperty('--dev', '1');
-                timers.push(setTimeout(() => {
-                    eject.classList.remove('is-clipped');
-                    print.style.transition = 'transform 1s cubic-bezier(.34,1.5,.64,1)';
-                    print.style.transform = 'translateY(0) rotate(var(--tilt))';
-                }, 1300));
-            });
-        };
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) tileAnimation?.cancel();
+        });
 
         let started = false;
         const start = () => {
             if (started) return;
             started = true;
             root.classList.add('hero-on');
-            ejectPrint();
+            popTile();
         };
         const ready = img.complete ? Promise.resolve() : (img.decode?.() ?? Promise.resolve()).catch(() => {});
         heroStart = () => Promise.race([ready, new Promise(r => setTimeout(r, 1800))]).then(start);
 
         $('[data-shutter]').addEventListener('click', () => {
             stamp.textContent = stampText();
-            if (isCalm()) return;
-            shot.classList.remove('is-flash');
-            void shot.offsetWidth;
-            shot.classList.add('is-flash');
-            timers.push(setTimeout(() => shot.classList.remove('is-flash'), 750));
-            ejectPrint();
+            popTile();
         });
         onCalm.push(() => {
-            if (isCalm()) ejectPrint();
+            if (isCalm()) popTile();
         });
 
-        // l'estrusione del nome si allunga un po' mentre si scorre via
-        const lift = () => {
-            if (isCalm()) return name.style.removeProperty('--lift');
-            const v = clamp(scrollY / (innerHeight * .9)) * .9;
-            name.style.setProperty('--lift', v.toFixed(3));
-        };
-        onScroll.push(lift);
-        lift();
     }
     let heroStart = () => Promise.resolve();
 
@@ -639,7 +595,7 @@
         items.forEach(el => {
             const n = groups.get(el.parentElement) || 0;
             groups.set(el.parentElement, n + 1);
-            el.style.setProperty('--rd', `${Math.min(n, 4) * 90}ms`);
+            el.style.setProperty('--rd', 'calc('+(n % 4)+' * var(--dur-1) / 4)');
         });
         const io = new IntersectionObserver(entries => entries.forEach(en => {
             if (!en.isIntersecting) return;
@@ -649,8 +605,10 @@
             rootMargin: '0px 0px -8% 0px',
             threshold: .1
         });
-        items.forEach(el => {
-            const r = el.getBoundingClientRect();
+        // Read all positions together before changing reveal classes.
+        const positions = items.map(el => el.getBoundingClientRect());
+        items.forEach((el, index) => {
+            const r = positions[index];
             if (r.top < innerHeight && r.bottom > 0) el.classList.add('is-in');
             else io.observe(el);
         });
@@ -672,339 +630,36 @@
     }
 
     /* ----------------------------------------------------------------------
-       4 · Percorso: il quadrato rotola su archi di catenaria e diventa ruota
+       4 · Percorso: tappe e indicatore di visibilità
        ---------------------------------------------------------------------- */
     function initJourney() {
-        const sec = $('[data-journey]');
-        if (!sec) return;
-        const canvas = $('[data-journey-canvas]', sec);
-        const ctx = canvas.getContext('2d');
-        const track = $('.journey__track', sec);
-        const stops = $$('[data-stop]', sec);
-        const list = $('.journey__stops', sec);
-        const mobile = matchMedia('(max-width: 899px)');
-        let W = 0,
-            H = 0,
-            R = 60,
-            xStart = 0,
-            xEnd = 0,
-            crestY = 0,
-            xs = [];
-        let live = false,
-            target = 0,
-            prog = 0,
-            raf = 0,
-            active = -1,
-            visible = true;
-        const STATIC_P = .44;
-
-        const layout = () => {
-            live = !isCalm();
-            sec.classList.toggle('is-live', live);
-            const box = canvas.getBoundingClientRect();
-            const dpr = Math.min(2, devicePixelRatio || 1);
-            W = box.width;
-            H = box.height;
-            if (!W || !H) return;
-            canvas.width = Math.round(W * dpr);
-            canvas.height = Math.round(H * dpr);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            const lb = list.getBoundingClientRect();
-            const left = lb.left - box.left;
-            const right = lb.right - box.left;
-            R = clamp(Math.min((H - 56) / 2.5, W * (mobile.matches ? .125 : .082)), 24, 124);
-            xStart = left + R;
-            xEnd = right - R;
-            crestY = H - .32 * R - 34;
-            if (mobile.matches || !live) {
-                xs = stops.map((_, i) => lerp(xStart + R * .2, xEnd - R * .2, i / (stops.length - 1)));
-            } else {
-                xs = stops.map(s => {
-                    const b = s.getBoundingClientRect();
-                    return b.left - box.left + Math.min(b.width * .3, 70);
-                });
-                xs[0] = Math.max(xs[0], xStart);
-            }
-            if (!live) {
-                stops.forEach(s => s.classList.remove('is-on', 'is-past'));
-                active = -1;
-            }
-            draw(live ? prog : STATIC_P);
-        };
-
-        function draw(p) {
-            ctx.clearRect(0, 0, W, H);
-            const X = lerp(xStart, xEnd, p);
-            const n = nEff(4 + 8 * smooth(clamp(p / .8)));
-            const circT = smooth(clamp((p - .68) / .32));
-            const flat = 1 - circT;
-            const a = R * Math.cos(Math.PI / n);
-            const P = 2 * a * Math.asinh(Math.tan(Math.PI / n));
-            const roadAt = x => {
-                const lx = x - xStart;
-                const u = lx - P * Math.round(lx / P);
-                return crestY + (a * Math.cosh(u / a) - a) * flat;
-            };
-
-            // strada
-            ctx.beginPath();
-            for (let x = -2; x <= W + 2; x += 1.5) {
-                const y = roadAt(x);
-                x < 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-            }
-            ctx.strokeStyle = 'rgba(255,255,255,.9)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-
-            // tappe
-            ctx.font = '500 11px Cascadia, monospace';
-            ctx.textAlign = 'center';
-            xs.forEach((x, i) => {
-                const y = roadAt(x) + 14;
-                const on = !live || X >= x - R * .55;
-                ctx.save();
-                ctx.translate(x, y);
-                ctx.rotate(Math.PI / 4);
-                if (on) {
-                    ctx.fillStyle = COLORS[i % 5];
-                    ctx.fillRect(-4.5, -4.5, 9, 9);
-                } else {
-                    ctx.strokeStyle = 'rgba(255,255,255,.35)';
-                    ctx.lineWidth = 1;
-                    ctx.strokeRect(-4, -4, 8, 8);
-                }
-                ctx.restore();
-                ctx.fillStyle = on ? '#fff' : 'rgba(255,255,255,.4)';
-                ctx.fillText(String(i + 1).padStart(2, '0'), x, y + 22);
-            });
-
-            // ruota
-            const lx = X - xStart;
-            const k = Math.round(lx / P);
-            const u = lx - k * P;
-            const th = lerp(k * TAU / n + gd(u / a), lx / R, circT);
-            const axleY = roadAt(X) - shapeR(th, n, a, R, circT);
-
-            ctx.save();
-            ctx.setLineDash([3, 9]);
-            ctx.strokeStyle = 'rgba(255,255,255,.22)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(0, axleY);
-            ctx.lineTo(W, axleY);
-            ctx.stroke();
-            ctx.restore();
-
-            const pts = shapePoints(n, a, R, circT, mobile.matches ? 160 : 300);
-            const trace = () => {
-                ctx.beginPath();
-                pts.forEach((pt, i) => i ? ctx.lineTo(pt[0], pt[1]) : ctx.moveTo(pt[0], pt[1]));
-                ctx.closePath();
-            };
-            ctx.save();
-            ctx.translate(X, axleY);
-            ctx.rotate(th);
-            trace();
-            ctx.save();
-            ctx.clip();
-            ctx.fillStyle = '#000';
-            ctx.fillRect(-R - 2, -R - 2, 2 * R + 4, 2 * R + 4);
-            const band = 2 * R / 5;
-            COLORS.forEach((c, i) => {
-                ctx.fillStyle = c;
-                ctx.fillRect(-R - 2, -R + i * band + 1.2, 2 * R + 4, band - 2.4);
-            });
-            ctx.restore();
-            trace();
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 2;
-            ctx.lineJoin = 'round';
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(0, 0, 4.5, 0, TAU);
-            ctx.fillStyle = '#fff';
-            ctx.fill();
-            ctx.lineWidth = 2.5;
-            ctx.strokeStyle = '#000';
-            ctx.stroke();
-            ctx.restore();
-
-            if (live) {
-                let idx = 0;
-                xs.forEach((x, i) => {
-                    if (X >= x - R * .55) idx = i;
-                });
-                if (idx !== active) {
-                    active = idx;
-                    stops.forEach((s, i) => {
-                        s.classList.toggle('is-on', i === idx);
-                        s.classList.toggle('is-past', i < idx);
-                    });
-                }
-            }
-        }
-
-        const measureTarget = () => {
-            const r = track.getBoundingClientRect();
-            const view = innerHeight - hdrH();
-            return clamp((hdrH() - r.top) / Math.max(1, r.height - view));
-        };
-        const loop = () => {
-            raf = 0;
-            const d = target - prog;
-            prog = Math.abs(d) < .0004 ? target : prog + d * .16;
-            draw(prog);
-            if (prog !== target) raf = requestAnimationFrame(loop);
-        };
-        const scroll = () => {
-            if (!live || !visible) return;
-            target = measureTarget();
-            if (!raf) raf = requestAnimationFrame(loop);
-        };
-        new IntersectionObserver(([en]) => {
-            visible = en.isIntersecting;
-            if (visible) scroll();
-        }, {
-            rootMargin: '100px 0px'
-        }).observe(sec);
-        onScroll.push(scroll);
-        onResize.push(layout);
-        onCalm.push(layout);
-        onLang.push(layout);
-        mobile.addEventListener('change', layout);
-        document.fonts?.ready.then(layout);
-        layout();
-        target = prog = measureTarget();
-        draw(live ? prog : STATIC_P);
+        const stops = $$('[data-journey] .stop');
+        if (!('IntersectionObserver' in window)) return;
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+            entry.target.classList.toggle('is-on', entry.isIntersecting);
+        }), { threshold: .55 });
+        stops.forEach((stop, index) => { stop.style.setProperty('--stop-index', index); observer.observe(stop); });
     }
 
-    /* ----------------------------------------------------------------------
-       5 · Progetti: le foto escono dalla macchina mentre si scorre
-       ---------------------------------------------------------------------- */
     function initWork() {
-        const sec = $('[data-work]');
-        if (!sec) return;
-        const track = $('.work__track', sec);
-        const list = $('[data-work-list]', sec);
-        const items = $$('[data-proj]', sec);
-        const prints = items.map(li => $('[data-print-work]', li));
-        const photos = prints.map(p => $('.print__photo', p));
-        const wide = matchMedia('(min-width: 1000px)');
-        const prev = $('[data-work-prev]', sec);
-        const next = $('[data-work-next]', sec);
-        const count = $('[data-work-count]', sec);
-        let mode = '',
-            target = 0,
-            prog = 0,
-            raf = 0,
-            io;
-
-        const reset = () => {
-            prints.forEach(p => {
-                p.style.transform = p.style.clipPath = p.style.visibility = '';
-            });
-            photos.forEach(ph => ph.style.removeProperty('--dev'));
-            items.forEach(li => li.classList.remove('is-on'));
-            io?.disconnect();
-            io = null;
-        };
-
-        const setMode = () => {
-            const m = wide.matches ? (isCalm() ? 'static' : 'pin') : 'scroll';
-            if (m === mode) return;
-            mode = m;
-            reset();
-            sec.classList.toggle('is-pinned', m === 'pin');
-            sec.classList.toggle('is-scroll', m === 'scroll');
-            if (m === 'pin') {
-                target = prog = measure();
-                render(prog);
-            }
-            if (m === 'scroll') {
-                if (!isCalm()) {
-                    photos.forEach(ph => ph.style.setProperty('--dev', '0'));
-                    io = new IntersectionObserver(entries => entries.forEach(en => {
-                        if (en.isIntersecting) en.target.style.setProperty('--dev', '1');
-                    }), {
-                        root: list,
-                        threshold: .55
-                    });
-                    photos.forEach(ph => io.observe(ph));
-                }
-                updateCount();
-            }
-        };
-
-        const measure = () => {
-            const r = track.getBoundingClientRect();
-            const view = innerHeight - hdrH();
-            const lead = view * .5;
-            return clamp((hdrH() + lead - r.top) / Math.max(1, r.height - view + lead));
-        };
-
-        function render(p) {
-            const s = clamp(p * items.length * 1.08, 0, items.length);
-            let on = 0;
-            prints.forEach((pr, i) => {
-                const tt = clamp(s - i);
-                const e = easeOut(clamp(tt / .7));
-                const settle = smooth(clamp((tt - .62) / .3));
-                const k = (1 - e) * 104;
-                pr.style.visibility = tt <= 0 ? 'hidden' : 'visible';
-                pr.style.transform = `translate3d(0,calc(${(-k).toFixed(2)}% + ${(e * 16).toFixed(1)}px),0) rotate(calc(var(--tilt) * ${settle.toFixed(3)}))`;
-                pr.style.clipPath = k > .05 ? `inset(${k.toFixed(2)}% -60% -60% -60%)` : 'none';
-                photos[i].style.setProperty('--dev', clamp((tt - .05) / .85).toFixed(3));
-                if (tt > .28) on = i;
-            });
-            items.forEach((li, i) => li.classList.toggle('is-on', i === on));
-        }
-
-        const loop = () => {
-            raf = 0;
-            const d = target - prog;
-            prog = Math.abs(d) < .0005 ? target : prog + d * .18;
-            render(prog);
-            if (prog !== target) raf = requestAnimationFrame(loop);
-        };
-        onScroll.push(() => {
-            if (mode !== 'pin') return;
-            target = measure();
-            if (!raf) raf = requestAnimationFrame(loop);
-        });
-
-        const step = () => (items[1]?.offsetLeft ?? 0) - (items[0]?.offsetLeft ?? 0) || list.clientWidth;
-        const updateCount = () => {
-            if (mode !== 'scroll') return;
+        const section = $('[data-work]');
+        const list = $('[data-work-list]');
+        if (!section || !list || section.hasAttribute('data-plaza')) return;
+        const items = $$('[data-proj]', section);
+        const previous = $('[data-work-prev]', section), next = $('[data-work-next]', section), count = $('[data-work-count]', section);
+        const step = () => (items[1]?.offsetLeft || 0) - (items[0]?.offsetLeft || 0) || list.clientWidth;
+        const update = () => {
             const i = clamp(Math.round(list.scrollLeft / step()), 0, items.length - 1);
-            count.textContent = `${String(i + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
-            prev.disabled = list.scrollLeft < 4;
-            next.disabled = list.scrollLeft > list.scrollWidth - list.clientWidth - 4;
+            count.textContent = `${String(i+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}`;
+            previous.disabled = list.scrollLeft < 4;
+            next.disabled = list.scrollLeft >= list.scrollWidth - list.clientWidth - 4;
         };
-        list.addEventListener('scroll', () => requestAnimationFrame(updateCount), {
-            passive: true
-        });
-        const go = dir => list.scrollBy({
-            left: dir * step(),
-            behavior: isCalm() ? 'auto' : 'smooth'
-        });
-        prev.addEventListener('click', () => go(-1));
-        next.addEventListener('click', () => go(1));
-
-        wide.addEventListener('change', setMode);
-        onCalm.push(() => {
-            mode = '';
-            setMode();
-        });
-        onResize.push(() => {
-            if (mode === 'pin') render(prog = target = measure());
-            updateCount();
-        });
-        setMode();
+        previous.addEventListener('click', () => list.scrollBy({ left: -step(), behavior: isCalm() ? 'auto' : 'smooth' }));
+        next.addEventListener('click', () => list.scrollBy({ left: step(), behavior: isCalm() ? 'auto' : 'smooth' }));
+        list.addEventListener('scroll', update, { passive: true });
+        onResize.push(update); update();
     }
 
-    /* ----------------------------------------------------------------------
-       6 · La scrivania: finestre da trascinare, terminale, schede da girare
-       ---------------------------------------------------------------------- */
     function initDesk() {
         const screen = $('[data-desk]');
         if (!screen) return;
@@ -1198,120 +853,7 @@
     }
 
     /* ----------------------------------------------------------------------
-       7 · Contatti: il quadrato si trascina, rotola e diventa un obiettivo
-       ---------------------------------------------------------------------- */
-    function initRoller() {
-        const track = $('[data-roller-track]');
-        const link = $('[data-roller]');
-        if (!track || !link) return;
-        const body = $('[data-roller-body]', link);
-        const shape = $('[data-roller-shape]', link);
-        const clipShape = $('[data-roller-clip]', link);
-        const R = 54;
-        let size = 0,
-            maxX = 0,
-            x = 0,
-            tx = 0,
-            raf = 0,
-            drag = null,
-            moved = false;
-
-        const render = () => {
-            const tt = maxX > 0 ? x / maxX : 0;
-            const n = nEff(4 + 8 * smooth(clamp(tt / .82)));
-            const circT = smooth(clamp((tt - .72) / .28));
-            const a = R * Math.cos(Math.PI / n);
-            const reff = lerp(R * n * Math.sin(Math.PI / n) / Math.PI, R, circT);
-            const th = (x * 120 / Math.max(1, size)) / reff;
-            const pts = shapePoints(n, a, R, circT, 140);
-            // punto più basso dopo la rotazione: è lì che tocca la linea
-            const sin = Math.sin(th),
-                cos = Math.cos(th);
-            let low = 0,
-                high = 0;
-            pts.forEach(([px, py]) => {
-                const y = px * sin + py * cos;
-                low = Math.max(low, y);
-                high = Math.min(high, y);
-            });
-            link.style.setProperty('--sh', `${((low - high + 2) / 120 * size).toFixed(1)}px`);
-            const d = toPath(pts);
-            shape.setAttribute('d', d);
-            clipShape.setAttribute('d', d);
-            body.setAttribute('transform', `translate(0 ${(58 - low).toFixed(2)}) rotate(${(th * 180 / Math.PI).toFixed(2)})`);
-            link.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
-        };
-        const loop = () => {
-            raf = 0;
-            const d = tx - x;
-            x = Math.abs(d) < .3 ? tx : x + d * .12;
-            render();
-            if (x !== tx) raf = requestAnimationFrame(loop);
-        };
-        const moveTo = v => {
-            tx = clamp(v, 0, maxX);
-            if (isCalm() || drag) {
-                x = tx;
-                render();
-            } else if (!raf) raf = requestAnimationFrame(loop);
-        };
-        const layout = () => {
-            size = link.offsetWidth;
-            maxX = Math.max(0, track.clientWidth - size);
-            x = clamp(x, 0, maxX);
-            tx = clamp(tx, 0, maxX);
-            render();
-        };
-
-        track.addEventListener('pointermove', e => {
-            if (e.pointerType !== 'mouse' || drag) return;
-            const r = track.getBoundingClientRect();
-            moveTo(e.clientX - r.left - size / 2);
-        });
-        link.addEventListener('pointerdown', e => {
-            if (e.pointerType === 'mouse') return;
-            drag = {
-                id: e.pointerId,
-                sx: e.clientX,
-                sp: x
-            };
-            moved = false;
-        });
-        link.addEventListener('pointermove', e => {
-            if (!drag || e.pointerId !== drag.id) return;
-            const dx = e.clientX - drag.sx;
-            if (!moved && Math.abs(dx) > 8) {
-                moved = true;
-                try {
-                    link.setPointerCapture(e.pointerId);
-                } catch {}
-            }
-            if (moved) moveTo(drag.sp + dx);
-        });
-        const end = () => {
-            drag = null;
-        };
-        link.addEventListener('pointerup', end);
-        link.addEventListener('pointercancel', end);
-        link.addEventListener('click', e => {
-            if (moved) {
-                e.preventDefault();
-                moved = false;
-            }
-        });
-        link.addEventListener('dragstart', e => e.preventDefault());
-        link.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                e.preventDefault();
-                moveTo(tx + (e.key === 'ArrowRight' ? 1 : -1) * maxX / 8);
-            }
-        });
-        onResize.push(layout);
-        layout();
-    }
-
-    /* ----------------------------------------------------------------------
-       Piè di pagina: la «o» di oakvx passa da quadrato a cerchio, e ritorno
+       7 · Marchio del piè di pagina
        ---------------------------------------------------------------------- */
     function initMark() {
         const mark = $('[data-mark]');
@@ -1361,7 +903,7 @@
         if (lang === 'en') applyLang('en', false);
         else root.classList.remove('i18n-pending');
 
-        $$('[data-lang]').forEach(b => b.addEventListener('click', () => {
+        $$('button[data-lang]').forEach(b => b.addEventListener('click', () => {
             if (b.dataset.lang !== lang) applyLang(b.dataset.lang, true);
         }));
         $$('[data-copy-email]').forEach(b => b.addEventListener('click', copyEmail));
@@ -1378,7 +920,6 @@
             initJourney();
             initWork();
             initDesk();
-            initRoller();
         }
         initMark();
         initCurrentNav();

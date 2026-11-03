@@ -1,0 +1,48 @@
+/* Console application surfaces; the original project figures remain intact. */
+@layer motion {
+    [data-plaza] .proj__print { border-radius: 32px; }
+    [data-plaza] .print__in {
+        padding: 10px; border: 2px solid #fff; border-radius: 32px;
+        background: linear-gradient(155deg,#fff 28%,#e8f0f5 100%);
+        box-shadow: inset 0 0 0 1px #c6d4df,0 4px 0 #d3dfe7,0 14px 24px #3e60782b;
+        transition: transform .32s var(--spring),box-shadow .2s,outline-color .2s;
+        outline: 3px solid transparent; outline-offset: 4px;
+    }
+    [data-plaza] .print__in::before {
+        content: ''; position: absolute; z-index: 1; inset: 10px; border-radius: 22px; pointer-events: none;
+        background: linear-gradient(135deg,#ffffff66,transparent 42%,transparent 74%,#ffffff24);
+    }
+    [data-plaza] .print__in::after { background: linear-gradient(#ffffff1c,transparent 38%,#25445d08); box-shadow: inset 0 2px 0 #fff; }
+    [data-plaza] .print__photo { border-radius: 22px; }
+    [data-plaza] .print__photo::after { border-radius: inherit; box-shadow: inset 0 3px 8px #29435524,inset 0 0 0 1px #57768c38; }
+    [data-plaza] .proj__name { padding: 4px 8px; margin: -4px -8px; border-radius: 9px; background: #fffffff2; }
+    [data-plaza] .proj__n { padding: 2px 3px; margin-inline: -3px; border-radius: 5px; background: #fffffff2; }
+    [data-plaza] .proj:is(:hover,:focus-within,.is-pointer-selected) .print__in {
+        transform: translateY(-10px) scale(1.06); outline-color: #00718f;
+        box-shadow: inset 0 0 0 1px #c6d4df,0 5px 0 #c1d5df,0 0 0 9px #009ac714,0 22px 32px #3e60782e;
+    }
+    [data-plaza] .proj:is(:hover,:focus-within) :is(.proj__name,.proj__n) { background: transparent; }
+    [data-plaza] :is(.proj__head,.orbit):focus-visible { outline: none; }
+    [data-plaza] .orbit { border-radius: 32px; overflow: hidden; isolation: isolate; }
+    [data-plaza] .orbit > span { border-color: #a1b5c3; box-shadow: inset 0 1px 0 #fff,0 2px 4px #33414d14; }
+    [data-plaza] .orbit::after {
+        content: ''; position: absolute; z-index: -1; pointer-events: none;
+        left: var(--project-ripple-x,50%); top: var(--project-ripple-y,50%);
+        width: 250%; aspect-ratio: 1; border-radius: 50%; background: #66cbe6;
+        transform: translate(-50%,-50%) scale(0); opacity: 0;
+    }
+    [data-plaza] .proj.is-rippling .orbit::after { animation: project-icon-ripple .35s ease-out both; }
+    [data-plaza] .proj:has(.orbit:active) .print__in { transform: translateY(-4px) scale(1.02); box-shadow: inset 0 2px 5px #54738730,0 2px 0 #c1d5df,0 8px 14px #3e607826; }
+    @keyframes project-icon-ripple {
+        0% { transform: translate(-50%,-50%) scale(0); opacity: .48; }
+        100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
+    }
+}
+@layer preferences {
+    :root:is(.paused,.calm) [data-plaza] .print__in { transform: none; transition: none; }
+    :root:is(.paused,.calm) [data-plaza] .orbit::after { animation: none; opacity: 0; }
+    @media (prefers-reduced-motion:reduce) {
+        [data-plaza] .print__in { transform: none; transition: none; }
+        [data-plaza] .orbit::after { animation: none; opacity: 0; }
+    }
+}

@@ -19,6 +19,13 @@
     }
 
     const hero = document.querySelector('.print--hero [data-avatar]');
+    addEventListener('wiiu:greet', () => {
+        if (hero && !document.documentElement.classList.contains('calm')) setPose(hero, 'showingoff');
+    });
+    addEventListener('wiiu:plazagreet', () => {
+        const avatar = document.querySelector('[data-plaza] .work__avatar');
+        if (avatar && !document.documentElement.classList.contains('calm')) setPose(avatar, 'showingoff');
+    });
     const heroPoses = ['standing', 'idlewainting', 'laughing', 'angrystomping', 'almostfalling', 'discofever'];
     let hi = 0;
     const shutter = document.querySelector('[data-shutter]');

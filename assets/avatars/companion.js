@@ -8,7 +8,7 @@
     const still = p => `${BASE}${p}-still.webp`;
     const root = document.documentElement;
     const paused = () => document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        root.classList.contains('calm') || root.classList.contains('paused') || root.classList.contains('motion-paused') || root.dataset.motion === 'paused';
+        root.classList.contains('calm') || root.classList.contains('paused') || root.classList.contains('motion-paused') || root.classList.contains('is-navigating') || root.dataset.motion === 'paused';
 
     const box = document.createElement('div');
     box.className = 'companion';

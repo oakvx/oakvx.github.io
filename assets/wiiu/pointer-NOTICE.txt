@@ -1,0 +1,11 @@
+Wii U Player 1 cursor
+Author: Macrowave
+Source: https://www.cursor.cc/?action=icon&file_id=181223
+Preview: https://www.cursor.cc/cursor/223/181/cursor.png
+Licence label on the source page: "Creative Commons, no attribution".
+No more specific Creative Commons version is stated on that page.
+
+pointer.cur is the unmodified base64-decoded CUR embedded in the source page.
+CUR header: reserved=0, type=2, entries=1, dimensions=32x32, hotspot=(7,0).
+pointer.png is its RGBA 32x32 rendering, with transparency retained.
+Credit is included voluntarily. Motion and integration code are local additions.

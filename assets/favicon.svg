@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#000"/><path fill="#0A8FD8" d="M8 13h10v7H8z"/><path fill="#4CB32A" d="M8 21h10v7H8z"/><path fill="#F9B600" d="M8 29h10v7H8z"/><path fill="#F47A00" d="M8 37h10v7H8z"/><path fill="#E8301E" d="M8 45h10v7H8z"/><path fill="#fff" d="M24 28q0-6 7-6 3 0 5 2v-1h6v21q0 9-11 9-5 0-8-3l3-5q2 2 5 2 5 0 5-4v-1q-2 2-5 2-7 0-7-7zm6 1v7q0 2 3 2t3-2v-7q0-2-3-2t-3 2zm16-16h6v30h-6zm10 23h6v7h-6z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs><linearGradient id="tile" x2="0" y2="1"><stop stop-color="#199fbe"/><stop offset="1" stop-color="#007c9f"/></linearGradient></defs>
+<rect x="2" y="2" width="60" height="60" rx="18" fill="url(#tile)" stroke="#bceaf3" stroke-width="2"/>
+<path d="M35 23v20c0 8-18 8-18 2M35 29c0 11-18 11-18 0s18-11 18 0ZM45 17v22c0 3 2 4 5 4" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+<circle cx="53" cy="47" r="3" fill="#fff"/></svg>

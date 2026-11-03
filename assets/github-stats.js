@@ -7,10 +7,26 @@
     const cacheKey = 'oakvx-public-commit-total-v1';
     const cacheTtl = 60 * 60 * 1000;
 
-    // Griglia più fitta = resa più morbida, con anti-aliasing reale.
-    const columns = 96;
-    const rows = 34;
-    const cellPx = 12; // risoluzione del canvas interno usato per campionare i pixel
+    // Original 5 × 7 pixel numerals, on a soft field of rounded squares.
+    const columns = 72;
+    const rows = 40;
+    const glyphs = {
+        '0': ['01110', '10001', '10011', '10101', '11001', '10001', '01110'],
+        '1': ['010', '110', '010', '010', '010', '010', '111'],
+        '2': ['01110', '10001', '00001', '00010', '00100', '01000', '11111'],
+        '3': ['11110', '00001', '00001', '01110', '00001', '00001', '11110'],
+        '4': ['00010', '00110', '01010', '10010', '11111', '00010', '00010'],
+        '5': ['11111', '10000', '10000', '11110', '00001', '00001', '11110'],
+        '6': ['01110', '10000', '10000', '11110', '10001', '10001', '01110'],
+        '7': ['11111', '00001', '00010', '00100', '01000', '01000', '01000'],
+        '8': ['01110', '10001', '10001', '01110', '10001', '10001', '01110'],
+        '9': ['01110', '10001', '10001', '01111', '00001', '00001', '01110'],
+        '.': ['0', '0', '0', '0', '0', '1', '1'],
+        ',': ['00', '00', '00', '00', '01', '01', '10'],
+        'K': ['10001', '10010', '10100', '11000', '10100', '10010', '10001'],
+        'M': ['10001', '11011', '10101', '10101', '10001', '10001', '10001'],
+        '—': ['00000', '00000', '00000', '11111', '00000', '00000', '00000']
+    };
 
     let currentTotal = null;
 
@@ -35,65 +51,42 @@
             }[key] || '');
     }
 
-    // Rumore di sfondo deterministico ma senza pattern a righe/diagonali evidenti.
     function noiseAt(row, col) {
         const h = Math.sin(row * 127.1 + col * 311.7) * 43758.5453;
-        return (h - Math.floor(h)) < 0.08;
+        return h - Math.floor(h);
     }
 
-    function rasterize(text) {
-        const canvas = document.createElement('canvas');
-        canvas.width = columns * cellPx;
-        canvas.height = rows * cellPx;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (text) {
-            ctx.fillStyle = '#fff';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            let fontSize = Math.floor(canvas.height * 0.74);
-            const setFont = size => { ctx.font = '900 ' + size + 'px Archivo, Arial, sans-serif'; };
-            setFont(fontSize);
-            while (ctx.measureText(text).width > canvas.width * 0.92 && fontSize > 12) {
-                fontSize -= 2;
-                setFont(fontSize);
-            }
-            ctx.fillText(text, canvas.width / 2, canvas.height / 2 + fontSize * 0.02);
-        }
-        return ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    function displayTotal(total) {
+        const unit = total >= 1000000 ? 1000000 : total >= 10000 ? 1000 : 1;
+        const value = (total / unit).toLocaleString(locale(), { maximumFractionDigits: unit === 1 ? 0 : 1 });
+        return value + (unit === 1000000 ? 'M' : unit === 1000 ? 'K' : '');
     }
 
     function drawNumber(value) {
-        const text = value === '' ? '' : String(value);
-        const data = rasterize(text);
-        const canvasWidth = columns * cellPx;
-
-        function brightnessAt(col, row) {
-            let sum = 0, count = 0;
-            for (let y = 0; y < cellPx; y++) {
-                for (let x = 0; x < cellPx; x++) {
-                    const px = ((row * cellPx + y) * canvasWidth + (col * cellPx + x)) * 4;
-                    sum += data[px];
-                    count++;
-                }
-            }
-            return sum / count / 255;
-        }
-
+        const shapes = [...value].map(character => glyphs[character]).filter(Boolean);
+        const textWidth = shapes.reduce((width, shape) => width + shape[0].length + 2, -2);
+        const pixels = new Set();
+        let x = Math.floor((columns - textWidth) / 2);
+        const y = Math.floor((rows - 7) / 2);
+        shapes.forEach(shape => {
+            shape.forEach((line, row) => [...line].forEach((pixel, column) => {
+                if (pixel === '1') pixels.add((y + row) * columns + x + column);
+            }));
+            x += shape[0].length + 2;
+        });
+        matrix.style.setProperty('--git-columns', columns);
         const fragment = document.createDocumentFragment();
         for (let row = 0; row < rows; row++) {
             for (let column = 0; column < columns; column++) {
                 const dot = document.createElement('span');
                 dot.className = 'fo-git__dot';
-                const b = brightnessAt(column, row);
-                if (b > 0.05) {
-                    dot.classList.add('is-digit');
-                    if (b > 0.5) dot.classList.add('is-lit');
-                    dot.style.opacity = Math.min(1, 0.2 + b * 0.9).toFixed(2);
-                } else if (noiseAt(row, column)) {
-                    dot.classList.add('is-noise', 'is-lit');
+                const noise = noiseAt(row, column);
+                if (pixels.has(row * columns + column)) {
+                    dot.classList.add('is-digit', 'is-lit');
+                    dot.style.opacity = noise > .65 ? '.88' : '1';
+                } else if (noise < .16) {
+                    dot.classList.add('is-noise');
+                    if (noise < .045) dot.classList.add('is-lit');
                 }
                 fragment.append(dot);
             }
@@ -106,7 +99,7 @@
         matrix.setAttribute('aria-label', locale().startsWith('en')
             ? total.toLocaleString(locale()) + ' public commits across @oakvx and @oakvxish'
             : total.toLocaleString(locale()) + ' commit pubblici tra @oakvx e @oakvxish');
-        drawNumber(total.toLocaleString(locale()));
+        drawNumber(displayTotal(total));
     }
 
     async function fetchAccountTotal(account) {
@@ -164,11 +157,15 @@
 
     const cache = readCache();
     if (cache) render(cache.total);
-    drawNumber(cache ? cache.total.toLocaleString(locale()) : '');
+    else drawNumber('—');
 
-    // Ridisegna con il font vero quando è pronto, per evitare un primo render col fallback.
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => { if (currentTotal !== null) render(currentTotal); });
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+            matrix.classList.add('is-entered');
+            observer.disconnect();
+        }, { threshold: .15 });
+        observer.observe(matrix);
     }
 
     new MutationObserver(() => {

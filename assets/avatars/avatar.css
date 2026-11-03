@@ -1,4 +1,6 @@
-/* Local avatar assets. The source animations keep their original frames. */
+@layer base, theme, motion, preferences;
+@layer base {
+/* Shared layout and behavior states. Visual theme: assets/wiiu/theme.css. */
 .avatar {
     position: relative;
     display: block;
@@ -41,7 +43,6 @@
     height: 40px;
     border: 1px solid #9275bd66;
     border-radius: 50%;
-    background: #e6d9f7;
 }
 
 .ficon .avatar--icon {
@@ -55,16 +56,11 @@
     transform-origin: 47% 33%;
 }
 
-.print__photo--avatar {
-    background: #ded1ef;
-}
-
 .print__photo--avatar::before {
     content: "";
     position: absolute;
     inset: 69% -10% -20%;
     border-radius: 50% 50% 0 0;
-    background: #c3a9df;
 }
 
 .avatar[data-avatar-pose="sitting"] img {
@@ -89,7 +85,6 @@
     margin: 0;
     font-size: 10px;
     text-align: center;
-    color: #4f415d;
 }
 
 .work__head {
@@ -108,11 +103,6 @@
     grid-column: 2;
     grid-row: 1 / 3;
     pointer-events: none;
-}
-
-.work.is-pinned .work__head {
-    grid-template-columns: minmax(0, 1fr) 100px;
-    column-gap: 8px;
 }
 
 .cta__head {
@@ -153,7 +143,6 @@
 
 .about-portrait--avatar {
     width: 100%;
-    background: radial-gradient(ellipse at 50% 35%, #7960a2 0, #35264b 55%, #17111e 100%);
 }
 
 .about-portrait--avatar .avatar {
@@ -172,6 +161,7 @@
         width: 180px;
         bottom: -30px;
     }
+
     .cta__head .h2 {
         max-width: min(15ch, calc(100% - 160px));
     }
@@ -182,6 +172,7 @@
         grid-template-columns: minmax(0, 1fr) 90px;
         column-gap: 8px;
     }
+
     .cta__avatar {
         position: relative;
         justify-self: end;
@@ -189,10 +180,14 @@
         margin: -10px 0 -30px;
         bottom: auto;
     }
+
     .cta__head .h2 {
         max-width: 15ch;
     }
+
     .foot__sleeper {
         width: 190px;
     }
+}
+
 }

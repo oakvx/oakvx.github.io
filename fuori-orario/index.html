@@ -4,15 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F4F7FA">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
 <noscript id="oakvx-full-css-fallback"></noscript>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preload" href="../assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/polaroid/site.css">
+<link rel="stylesheet" href="../assets/avatars/avatar.css">
+<link rel="stylesheet" href="../assets/polaroid/pages.css">
+<link rel="stylesheet" href="../assets/polaroid/fuori-orario.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../assets/avatars/pages.css">
+<link rel="stylesheet" href="../assets/cursor.css">
+<script src="../assets/polaroid/pages-en.js" defer></script>
+<script src="../assets/polaroid/site.js" defer blocking="render"></script>
+<link rel="stylesheet" href="../assets/wiiu/motion.css">
+<link rel="stylesheet" href="../assets/wiiu/buttons.css">
+<link rel="stylesheet" href="../assets/wiiu/dialogs.css">
+<link rel="stylesheet" href="../assets/wiiu/theme.css">
+<script src="../assets/wiiu/motion.js"></script>
 <title>Fuori orario | Gabriele Lucia — Developer e Graphic Designer</title>
 <meta name="description" content="Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.">
 <meta name="author" content="Gabriele Lucia">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://oakvx.github.io/fuori-orario/">
 <link rel="alternate" hreflang="it" href="https://oakvx.github.io/fuori-orario/">
 <link rel="alternate" hreflang="en" href="https://oakvx.github.io/fuori-orario/?lang=en">
@@ -35,28 +52,17 @@
 <meta name="twitter:description" content="Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.">
 <meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
 <meta name="twitter:image:alt" content="Gabriele Lucia / oakvx — fuori orario.">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/fuori-orario/","image":"https://oakvx.github.io/assets/avatars/showingoff.png","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"ProfilePage","@id":"https://oakvx.github.io/fuori-orario/#webpage","url":"https://oakvx.github.io/fuori-orario/","name":"Chi sono | Gabriele Lucia — Developer e Graphic Designer","description":"Il percorso di Gabriele Lucia: sviluppo web e grafica, Erasmus a Siviglia, software per automazione e Ingegneria Informatica a UNIMORE.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/fuori-orario/#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/#person"},"breadcrumb":{"@id":"https://oakvx.github.io/fuori-orario/#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/fuori-orario/#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — il mio percorso tra sviluppo software, grafica e università.","inLanguage":"it"},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/fuori-orario/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Chi sono","item":"https://oakvx.github.io/fuori-orario/"}]}]}</script>
-<script type="application/json" id="seo-translations">{"it": {"title": "Fuori orario | Gabriele Lucia — Developer e Graphic Designer", "description": "Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.", "canonical": "https://oakvx.github.io/fuori-orario/", "image": "https://oakvx.github.io/assets/social-home-it.png", "image_alt": "Gabriele Lucia / oakvx — fuori orario."}, "en": {"title": "Fuori orario | Gabriele Lucia — Developer e Graphic Designer", "description": "Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.", "canonical": "https://oakvx.github.io/fuori-orario/?lang=en", "image": "https://oakvx.github.io/assets/social-home-en.png", "image_alt": "Gabriele Lucia / oakvx — fuori orario."}}</script>
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="preload" href="../assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/cascadia-code.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/polaroid/site.css">
-<link rel="stylesheet" href="../assets/avatars/avatar.css">
-<link rel="stylesheet" href="../assets/polaroid/pages.css">
-<link rel="stylesheet" href="../assets/polaroid/fuori-orario.css">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="../assets/avatars/pages.css">
-<link rel="stylesheet" href="../assets/cursor.css">
-<script src="../assets/polaroid/pages-en.js" defer></script>
-<script src="../assets/polaroid/site.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/fuori-orario/#webpage","url":"https://oakvx.github.io/fuori-orario/","name":"Fuori orario | Gabriele Lucia — Developer e Graphic Designer","description":"Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/fuori-orario/#primaryimage"},"breadcrumb":{"@id":"https://oakvx.github.io/fuori-orario/#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/fuori-orario/#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — fuori orario.","inLanguage":"it"},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/fuori-orario/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Fuori orario","item":"https://oakvx.github.io/fuori-orario/"}]}]}</script>
+<script type="application/json" id="seo-translations">{"it":{"title":"Fuori orario | Gabriele Lucia — Developer e Graphic Designer","description":"Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.","canonical":"https://oakvx.github.io/fuori-orario/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — fuori orario."},"en":{"title":"Fuori orario | Gabriele Lucia — Developer e Graphic Designer","description":"Cosa faccio fuori orario, in italiano, inglese, spagnolo e greco.","canonical":"https://oakvx.github.io/fuori-orario/?lang=en","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — fuori orario."}}</script>
 </head>
 <body data-page="about">
+<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
 <a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
 
     <header class="hdr" data-header>
         <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         <div class="wrap hdr__in">
-            <a class="brand" href="../" data-langlink aria-label="gl. — Gabriele Lucia, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
+            <a class="brand" href="../" data-langlink aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="../assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
             <nav class="hdr__nav" aria-label="Navigazione principale" data-i18n-aria="navLabel">
                 <a href="../#percorso" data-langlink data-i18n="nav.path">Percorso</a>
                 <a href="../#progetti" data-langlink data-i18n="nav.projects">Progetti</a>
@@ -67,8 +73,8 @@
             <div class="hdr__tools">
                 <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
                 <div class="lang" role="group" aria-label="Lingua" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Ferma animazioni</span></button>
-                <a class="pill" href="../#contatti" data-langlink data-i18n="nav.cta">Scrivimi</a>
+                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Ferma animazioni</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Attiva audio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/><path class="sound__mute" d="m17 10 4 4m0-4-4 4"/></svg><span class="sr-only" data-sound-label>Attiva audio</span></button>
+                <a class="pill" href="mailto:gabrielelucia07@gmail.com" data-langlink><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="nav.cta">Scrivimi</span></a>
                 <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Apri menu</span></button>
             </div>
         </div>
@@ -99,7 +105,7 @@
   <div class="fo-tabs" role="tablist" aria-label="Lingua del testo">
    <button type="button" role="tab" data-fo-go="0" aria-selected="true">IT</button><button type="button" role="tab" data-fo-go="1" aria-selected="false">EN</button><button type="button" role="tab" data-fo-go="2" aria-selected="false">ES</button><button type="button" role="tab" data-fo-go="3" aria-selected="false">ΕΛ</button>
   </div>
-  <div class="fo-arrows"><button type="button" data-fo-prev aria-label="Lingua precedente">←</button><button type="button" data-fo-next aria-label="Lingua successiva">→</button></div>
+  <div class="fo-arrows"><button type="button" data-fo-prev data-i18n-aria="controls.previousLanguage" aria-label="Indietro: lingua precedente"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 6-6 6 6 6m-6-6h13"/></svg><span data-i18n="controls.back">Indietro</span></button><button type="button" data-fo-next data-i18n-aria="controls.nextLanguage" aria-label="Avanti: lingua successiva"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 6 6 6-6 6m6-6H4"/></svg><span data-i18n="controls.next">Avanti</span></button></div>
  </div>
  <div class="fo-track" data-fo-track tabindex="0" aria-live="polite">
   <article class="fo-slide" id="fo-it" lang="it" role="group" aria-roledescription="slide" aria-label="Italiano (1/4)">
@@ -109,7 +115,7 @@
     <p>Con le lingue funziona più o meno così: l’inglese lo uso tutti i giorni, lo spagnolo l’ho messo alla prova vivendo un po’ a Siviglia, il greco l’ho scelto per curiosità. Se mi scrivi in una di queste, provo a risponderti nella stessa, errori compresi.</p>
    </div>
    <figure class="fo-print" style="--tilt:-3deg">
-    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="sitting" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/sitting-still.webp"><img src="../assets/avatars/sitting.gif" data-avatar-animated="../assets/avatars/sitting.gif" data-avatar-still="../assets/avatars/sitting-still.webp" width="512" height="512" decoding="async" alt=""></picture></div><span class="fo-print__cap">it</span></div>
+    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="sitting" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/sitting-still.webp"><img src="../assets/avatars/sitting-still.webp" data-avatar-animated="../assets/avatars/sitting.gif" data-avatar-still="../assets/avatars/sitting-still.webp" width="512" height="512" decoding="async" alt=""></picture></div><span class="fo-print__cap">it</span></div>
    </figure>
   </article>
   <article class="fo-slide" id="fo-en" lang="en" role="group" aria-roledescription="slide" aria-label="English (2/4)">
@@ -119,7 +125,7 @@
     <p>Languages work the same way: I use English every day, I put my Spanish to the test living in Seville for a while, and I picked up Greek out of curiosity. If you write to me in any of these, I’ll try to answer in the same one, mistakes included.</p>
    </div>
    <figure class="fo-print" style="--tilt:2.5deg">
-    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="idlewainting" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/idlewainting-still.webp"><img src="../assets/avatars/idlewainting.gif" data-avatar-animated="../assets/avatars/idlewainting.gif" data-avatar-still="../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></div><span class="fo-print__cap">en</span></div>
+    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="idlewainting" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/idlewainting-still.webp"><img src="../assets/avatars/idlewainting-still.webp" data-avatar-animated="../assets/avatars/idlewainting.gif" data-avatar-still="../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></div><span class="fo-print__cap">en</span></div>
    </figure>
   </article>
   <article class="fo-slide" id="fo-es" lang="es" role="group" aria-roledescription="slide" aria-label="Español (3/4)">
@@ -129,7 +135,7 @@
     <p>Con los idiomas pasa algo parecido: uso inglés todos los días, puse a prueba mi español viviendo una temporada en Sevilla, y aprendí griego por curiosidad. Si me escribes en uno de estos, intento responderte en el mismo, errores incluidos.</p>
    </div>
    <figure class="fo-print" style="--tilt:-2deg">
-    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="dancing" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/dancing-still.webp"><img src="../assets/avatars/dancing.gif" data-avatar-animated="../assets/avatars/dancing.gif" data-avatar-still="../assets/avatars/dancing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></div><span class="fo-print__cap">es</span></div>
+    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="dancing" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/dancing-still.webp"><img src="../assets/avatars/dancing-still.webp" data-avatar-animated="../assets/avatars/dancing.gif" data-avatar-still="../assets/avatars/dancing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></div><span class="fo-print__cap">es</span></div>
    </figure>
   </article>
   <article class="fo-slide" id="fo-el" lang="el" role="group" aria-roledescription="slide" aria-label="Ελληνικά (4/4)">
@@ -139,7 +145,7 @@
     <p>Με τις γλώσσες γίνεται κάτι παρόμοιο: χρησιμοποιώ αγγλικά κάθε μέρα, δοκίμασα τα ισπανικά μου ζώντας για ένα διάστημα στη Σεβίλλη, και έμαθα ελληνικά από περιέργεια. Αν μου γράψεις σε μία από αυτές, προσπαθώ να σου απαντήσω στην ίδια, με όποιο λάθος.</p>
    </div>
    <figure class="fo-print" style="--tilt:3deg">
-    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="drunkwandering" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/drunkwandering-still.webp"><img src="../assets/avatars/drunkwandering.webp" data-avatar-animated="../assets/avatars/drunkwandering.webp" data-avatar-still="../assets/avatars/drunkwandering-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></div><span class="fo-print__cap">el</span></div>
+    <div class="fo-print__in"><div class="fo-print__photo"><picture class="avatar" data-avatar data-avatar-pose="drunkwandering" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/drunkwandering-still.webp"><img src="../assets/avatars/drunkwandering-still.webp" data-avatar-animated="../assets/avatars/drunkwandering.webp" data-avatar-still="../assets/avatars/drunkwandering-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></div><span class="fo-print__cap">el</span></div>
    </figure>
   </article>
  </div>
@@ -150,10 +156,10 @@
   <p data-i18n="fo.writeText">Si apre una mail già pronta nella lingua che scegli. Rispondo nella stessa.</p>
  </div>
  <div class="fo-write__links">
-  <a href="mailto:gabrielelucia07@gmail.com?subject=Ciao%20dal%20tuo%20portfolio&body=Ciao%20Gabriele%2C%0A%0A" lang="it">Italiano <span aria-hidden="true">↗</span></a>
-  <a href="mailto:gabrielelucia07@gmail.com?subject=Hello%20from%20your%20portfolio&body=Hi%20Gabriele%2C%0A%0A" lang="en">English <span aria-hidden="true">↗</span></a>
-  <a href="mailto:gabrielelucia07@gmail.com?subject=Hola%20desde%20tu%20portfolio&body=Hola%20Gabriele%2C%0A%0A" lang="es">Español <span aria-hidden="true">↗</span></a>
-  <a href="mailto:gabrielelucia07@gmail.com?subject=%CE%93%CE%B5%CE%B9%CE%B1%20%CE%B1%CF%80%CF%8C%20%CF%84%CE%BF%20portfolio%20%CF%83%CE%BF%CF%85&body=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%20Gabriele%2C%0A%0A" lang="el">Ελληνικά <span aria-hidden="true">↗</span></a>
+  <a class="btn btn--ghost" href="mailto:gabrielelucia07@gmail.com?subject=Ciao%20dal%20tuo%20portfolio&body=Ciao%20Gabriele%2C%0A%0A" lang="it"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg>Italiano </a>
+  <a class="btn btn--ghost" href="mailto:gabrielelucia07@gmail.com?subject=Hello%20from%20your%20portfolio&body=Hi%20Gabriele%2C%0A%0A" lang="en"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg>English </a>
+  <a class="btn btn--ghost" href="mailto:gabrielelucia07@gmail.com?subject=Hola%20desde%20tu%20portfolio&body=Hola%20Gabriele%2C%0A%0A" lang="es"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg>Español </a>
+  <a class="btn btn--ghost" href="mailto:gabrielelucia07@gmail.com?subject=%CE%93%CE%B5%CE%B9%CE%B1%20%CE%B1%CF%80%CF%8C%20%CF%84%CE%BF%20portfolio%20%CF%83%CE%BF%CF%85&body=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%20Gabriele%2C%0A%0A" lang="el"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg>Ελληνικά </a>
  </div>
 </section>
 <section class="fo-lab wrap" aria-labelledby="fo-lab-title">
@@ -201,15 +207,15 @@
   <h2 id="fo-shelf-title" data-i18n="fo.shelfTitle">Scaffale</h2>
  </div>
  <div class="fo-shelf__row">
-  <figure class="fo-game" style="--tilt:-2deg;--game:var(--g)">
+  <figure class="fo-game" style="--tilt:-2deg;--game:var(--accent)">
    <div class="fo-game__in"><div class="fo-game__art"><span class="extrude" aria-hidden="true">RL</span><img class="fo-game__cover--top" src="../assets/fuori-orario/rayman-legends.jpg" alt="Rayman Legends" width="600" height="600" loading="lazy" onerror="this.remove()"></div><figcaption>Rayman Legends</figcaption></div>
    <p data-i18n="fo.gameRayman">Tra i miei giochi preferiti.</p>
   </figure>
-  <figure class="fo-game" style="--tilt:1.5deg;--game:var(--b)">
+  <figure class="fo-game" style="--tilt:1.5deg;--game:var(--accent)">
    <div class="fo-game__in"><div class="fo-game__art"><span class="extrude" aria-hidden="true">2</span><img src="../assets/fuori-orario/yokai-watch-2.png" alt="Yo-kai Watch 2: Bony Spirits" width="600" height="600" loading="lazy" onerror="this.remove()"></div><figcaption>Yo-kai Watch 2: Bony Spirits</figcaption></div>
    <p data-i18n="fo.gameYokai">Mi piace tutta la saga, ma il mio preferito è il 2.</p>
   </figure>
-  <figure class="fo-game" style="--tilt:-1deg;--game:var(--y)">
+  <figure class="fo-game" style="--tilt:-1deg;--game:var(--accent)">
    <div class="fo-game__in"><div class="fo-game__art"><span class="extrude" aria-hidden="true">17</span><img class="fo-game__cover--top" src="../assets/fuori-orario/just-dance-2017.jpg" alt="Just Dance 2017" width="600" height="600" loading="lazy" onerror="this.remove()"></div><figcaption>Just Dance 2017</figcaption></div>
    <p data-i18n="fo.gameJd">Mi piacciono tutti, ma è quello a cui sono più affezionato.</p>
   </figure>
@@ -227,17 +233,17 @@
 <section class="fo-interlude wrap">
  <div class="fo-interlude__row">
   <div class="fo-interlude__group">
-   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="discofever"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/discofever-still.webp"><img src="../assets/avatars/discofever.gif" data-avatar-animated="../assets/avatars/discofever.gif" data-avatar-still="../assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
-   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="idlewainting"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/idlewainting-still.webp"><img src="../assets/avatars/idlewainting.gif" data-avatar-animated="../assets/avatars/idlewainting.gif" data-avatar-still="../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
-   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="showingoff"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/showingoff-still.webp"><img src="../assets/avatars/showingoff.webp" data-avatar-animated="../assets/avatars/showingoff.webp" data-avatar-still="../assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
+   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="discofever"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/discofever-still.webp"><img src="../assets/avatars/discofever-still.webp" data-avatar-animated="../assets/avatars/discofever.gif" data-avatar-still="../assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
+   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="idlewainting"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/idlewainting-still.webp"><img src="../assets/avatars/idlewainting-still.webp" data-avatar-animated="../assets/avatars/idlewainting.gif" data-avatar-still="../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
+   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="showingoff"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/showingoff-still.webp"><img src="../assets/avatars/showingoff-still.webp" data-avatar-animated="../assets/avatars/showingoff.webp" data-avatar-still="../assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
   </div>
   <div class="fo-interlude__text">
    <p data-i18n="fo.interludeText">Quando un’idea mi piace davvero, la porto fino in fondo.</p>
   </div>
   <div class="fo-interlude__group">
-   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="laughing"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/laughing-still.webp"><img src="../assets/avatars/laughing.gif" data-avatar-animated="../assets/avatars/laughing.gif" data-avatar-still="../assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
-   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="angrystomping"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/angrystomping-still.webp"><img src="../assets/avatars/angrystomping.gif" data-avatar-animated="../assets/avatars/angrystomping.gif" data-avatar-still="../assets/avatars/angrystomping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
-   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="almostfalling"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/almostfalling-still.webp"><img src="../assets/avatars/almostfalling.gif" data-avatar-animated="../assets/avatars/almostfalling.gif" data-avatar-still="../assets/avatars/almostfalling-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
+   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="laughing"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/laughing-still.webp"><img src="../assets/avatars/laughing-still.webp" data-avatar-animated="../assets/avatars/laughing.gif" data-avatar-still="../assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
+   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="angrystomping"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/angrystomping-still.webp"><img src="../assets/avatars/angrystomping-still.webp" data-avatar-animated="../assets/avatars/angrystomping.gif" data-avatar-still="../assets/avatars/angrystomping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
+   <span class="fo-interlude__mii"><picture class="avatar" data-avatar data-avatar-pose="almostfalling"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/almostfalling-still.webp"><img src="../assets/avatars/almostfalling-still.webp" data-avatar-animated="../assets/avatars/almostfalling.gif" data-avatar-still="../assets/avatars/almostfalling-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture></span>
   </div>
  </div>
 </section>
@@ -260,6 +266,7 @@
 </section>
 </main>
 
+<nav class="system-dock" aria-label="Comandi dei canali" data-i18n-aria="dock.label"><div class="system-dock__clock"><span data-clock-short>--:--</span><span data-dock-date></span></div><span class="system-dock__online"><i aria-hidden="true"></i><span data-network-status>Online</span></span><div class="system-dock__action"><button type="button" class="system-dock__button" data-channel-open aria-label="Apri il canale selezionato" data-i18n-aria="dock.openLabel"><span class="btn__key" aria-hidden="true">↵</span></button><span data-i18n="dock.open">Apri</span></div><div class="system-dock__action"><button type="button" class="system-dock__button" data-channel-back aria-label="Indietro: torna alla pagina precedente" data-i18n-aria="dock.backLabel"><span class="btn__key" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 6-6 6 6 6m-6-6h13"/></svg></span></button><span data-i18n="dock.back">Indietro</span></div></nav>
     <footer class="foot">
         <div class="wrap foot__top">
             <div class="foot__contact">
@@ -268,7 +275,7 @@
                 <div class="foot__sleeper" aria-hidden="true">
                     <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
                         <source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/sleeping-still.webp">
-                        <img src="../assets/avatars/sleeping.gif" data-avatar-animated="../assets/avatars/sleeping.gif" data-avatar-still="../assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
+                        <img src="../assets/avatars/sleeping-still.webp" data-avatar-animated="../assets/avatars/sleeping.gif" data-avatar-still="../assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
                     </picture>
                 </div>
             </div>
@@ -299,9 +306,13 @@
     <p class="toast" role="status" aria-live="polite" data-toast></p>
 <script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
 <script src="../assets/github-stats.js" defer></script>
-<script src="../assets/avatars/avatar.js" defer></script>
+<script src="../assets/avatars/avatar.js" defer blocking="render"></script>
 <script src="../assets/polaroid/fuori-orario.js" defer></script>
-<script src="../assets/avatars/poses.js" defer></script>
-<script src="../assets/avatars/companion.js" defer></script>
+<script src="../assets/avatars/poses.js" defer blocking="render"></script>
+<script src="../assets/avatars/companion.js" defer blocking="render"></script>
+<script src="../assets/wiiu/sound.js" defer></script>
+<script src="../assets/wiiu/music.js" defer></script>
+<script src="../assets/wiiu/pointer.js" defer></script>
+<script src="../assets/wiiu/dialogs.js" defer></script>
 </body>
 </html>

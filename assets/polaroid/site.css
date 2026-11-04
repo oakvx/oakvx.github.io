@@ -2297,7 +2297,7 @@ html.ready:not(.calm) [data-reveal]:not(.is-in) {
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 469px) {
     .pill {
         display: none;
     }

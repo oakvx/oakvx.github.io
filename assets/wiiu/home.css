@@ -54,6 +54,10 @@
     [data-home][data-home-paged] .home-page-arrow { display: inline-flex; }
     .home-page-arrow[data-direction="back"] svg { transform: rotate(180deg); }
     [data-home] .system-dock { display: flex; width: min(1020px,calc(100% - 32px)); gap: 16px; padding: 10px 20px; }
+    @media (min-width: 768px) {
+        /* Leave room for the companion avatar on the left. */
+        [data-home] .system-dock { width: min(1020px,calc(100% - 160px)); }
+    }
     .home-shortcuts { display: flex; align-items: center; justify-content: center; gap: 10px; margin-inline: auto; }
     .home-shortcut { --shortcut-bg: #dceef6; --shortcut-ink: #315b76; display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px; border: 2px solid #fff; border-radius: 50%; background: var(--shortcut-bg); color: var(--shortcut-ink); box-shadow: 0 0 0 1px #adbfcc,0 3px 5px #3e60781c; transition: transform .25s var(--spring),box-shadow .18s; }
     .home-shortcut__icon { width: 24px; height: 24px; }

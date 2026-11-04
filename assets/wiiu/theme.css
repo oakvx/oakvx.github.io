@@ -348,6 +348,11 @@ code { font-family: Cascadia,ui-monospace,monospace; }
     .companion__x { opacity: 1; }
     .companion:not(.is-pointer) { bottom: 8px; }
 }
+@media (max-width: 767px) {
+    /* The home dock is fixed at the bottom; keep the companion above it. */
+    .companion:not(.is-pointer) { bottom: 84px; }
+    [data-home] .toast { bottom: 84px; }
+}
 @media (max-width: 380px) {
     .brand__avatar { display: none; }
 }

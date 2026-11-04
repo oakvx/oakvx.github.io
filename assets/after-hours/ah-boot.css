@@ -1,0 +1,32 @@
+/* SPDX-License-Identifier: GPL-2.0-only
+   Isolated channel-launch overlay. No existing menu selectors are restyled. */
+.channel-boot {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  background: #fff;
+  opacity: 1;
+  touch-action: manipulation;
+  cursor: default;
+}
+.channel-boot-water { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.channel-boot-skip {
+  position: absolute;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  min-height: 44px;
+  padding: 7px 15px;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 5px;
+  color: #fff;
+  background: rgba(14,69,96,.8);
+  font: 14px "DroidAH", sans-serif;
+  cursor: pointer;
+}
+.channel-boot-skip:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.channel-boot-skip:disabled { visibility: hidden; }
+/* These overrides exist only during boot, never inside HOMEBREW_INTERFACE. */
+body[data-channel-state="CHANNEL_BOOT"] #cursor,
+body[data-channel-state="CHANNEL_BOOT"] .touch-remote { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .channel-boot { will-change: auto; } }

@@ -1,0 +1,699 @@
+{
+  "source": {
+    "titleId": "0000000100000002",
+    "version": 514,
+    "region": "PAL Europe 4.3E",
+    "source": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+    "metadata": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/tmd.514",
+    "content": {
+      "id": "0000009a",
+      "index": 1,
+      "type": 1,
+      "size": 7688807,
+      "sha1": "43de2fd9b4d1b8e23ecad352e8c93e85573d97c5"
+    },
+    "sha256": "28afd17d2473361bf94c60753d410bcd85ae7fbaeb4832b970255e780aa7e6fa",
+    "integrity": "Decrypted bytes match SHA1 in public Nintendo update TMD; signature authenticity not independently verified.",
+    "members": [
+      "corrupt_icon.ash",
+      "corrupt_texture.tpl",
+      "my_question.jpg",
+      "tmptitle_icon.ash",
+      "www.arc",
+      "FINAL/EU2/main.sel",
+      "font/font.ash",
+      "homebutton/config.txt",
+      "homebutton/home.csv",
+      "homebutton/homeBtnIcon.tpl",
+      "homebutton/SpeakerSe.arc",
+      "html/BG_16x9.tpl",
+      "html/EU2/iplsetting.ash",
+      "layout/common/address.ash",
+      "layout/common/balloon.ash",
+      "layout/common/board.ash",
+      "layout/common/calendar.ash",
+      "layout/common/chanEdit.ash",
+      "layout/common/chanSel.ash",
+      "layout/common/chanTtl.ash",
+      "layout/common/cmnBtn.ash",
+      "layout/common/cursor.ash",
+      "layout/common/diskBann.ash",
+      "layout/common/diskThum.ash",
+      "layout/common/dlgWdw.ash",
+      "layout/common/exBtn.ash",
+      "layout/common/faceSel.ash",
+      "layout/common/GCBann.ash",
+      "layout/common/gcMem.ash",
+      "layout/common/health.ash",
+      "layout/common/homeBtn1.ash",
+      "layout/common/letter.ash",
+      "layout/common/limitOver.ash",
+      "layout/common/memory.ash",
+      "layout/common/mlAdSel.ash",
+      "layout/common/prntDlg.ash",
+      "layout/common/sdButton.ash",
+      "layout/common/sdChanSel.ash",
+      "layout/common/sdChanTtl.ash",
+      "layout/common/setting.ash",
+      "layout/common/setupBg.ash",
+      "layout/common/setupBtn.ash",
+      "layout/common/setupSel.ash",
+      "layout/common/sofkeybd.ash",
+      "layout/common/wiiMem.ash",
+      "layout/eng/homeBtn1.ash",
+      "layout/fra/homeBtn1.ash",
+      "layout/ger/homeBtn1.ash",
+      "layout/ita/homeBtn1.ash",
+      "layout/jpn/homeBtn1.ash",
+      "layout/ned/homeBtn1.ash",
+      "layout/spa/homeBtn1.ash",
+      "message/eng/ipl_common_noe.bmg",
+      "message/fra/ipl_common_noe.bmg",
+      "message/ger/ipl_common.bmg",
+      "message/ita/ipl_common.bmg",
+      "message/jpn/dvdhome.bmg",
+      "message/jpn/home.bmg",
+      "message/jpn/ipl_common.bmg",
+      "message/jpn/sample.bmg",
+      "message/ned/ipl_common.bmg",
+      "message/spa/ipl_common_noe.bmg",
+      "sound/IplSound.brsar"
+    ]
+  },
+  "clock": {
+    "digits": [
+      "clock/0.png",
+      "clock/1.png",
+      "clock/2.png",
+      "clock/3.png",
+      "clock/4.png",
+      "clock/5.png",
+      "clock/6.png",
+      "clock/7.png",
+      "clock/8.png",
+      "clock/9.png"
+    ],
+    "colon": "clock/colon.png",
+    "width": 48,
+    "height": 48,
+    "digitAdvance": 30,
+    "colonAdvance": 18,
+    "nativeScale": 0.88,
+    "tint": "#9b9b9b",
+    "mode": "white glyph alpha must be rendered as native material grey; CSS mask-image preserves original glyph shape",
+    "centers": [
+      -54,
+      -24,
+      0,
+      24,
+      54
+    ],
+    "widescreenProjection": [
+      832,
+      456
+    ],
+    "stage960x540": {
+      "glyphWidth": 48.73846153846154,
+      "glyphHeight": 50.021052631578954,
+      "digitAdvance": 30.46153846153846,
+      "colonAdvance": 18.276923076923076,
+      "totalAdvanceHHMM": 140.12307692307692
+    }
+  },
+  "health": {
+    "body": "health/italian-body.png",
+    "prompt": "health/italian-prompt.png",
+    "layoutWidth": 608,
+    "layoutHeight": 456,
+    "widescreenProjectionWidth": 832,
+    "widescreenWidthFraction": 0.7307692307692307,
+    "bodyWidth": 608,
+    "bodyHeight": 456,
+    "promptWidth": 608,
+    "promptHeight": 88,
+    "promptBottom": 0,
+    "seenInFrames": 31,
+    "promptWaitFrames": 60,
+    "seenOutFrames": 31,
+    "promptLoopFrames": 60,
+    "frameRate": 60,
+    "curves": {
+      "it_Has_a_Push": {
+        "frames": 60,
+        "loop": true,
+        "targets": [
+          {
+            "name": "N_Push",
+            "type": 0,
+            "tracks": [
+              {
+                "kind": "RLVC",
+                "id": 0,
+                "target": 16,
+                "curveType": 2,
+                "keys": [
+                  {
+                    "frame": 0.0,
+                    "value": 0.0,
+                    "slope": 0.0
+                  },
+                  {
+                    "frame": 30.0,
+                    "value": 255.0,
+                    "slope": 0.0
+                  },
+                  {
+                    "frame": 60.0,
+                    "value": 0.0,
+                    "slope": 0.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "N_All",
+            "type": 0,
+            "tracks": [
+              {
+                "kind": "RLVC",
+                "id": 0,
+                "target": 16,
+                "curveType": 2,
+                "keys": [
+                  {
+                    "frame": 0.0,
+                    "value": 0.0,
+                    "slope": 0.0
+                  },
+                  {
+                    "frame": 30.0,
+                    "value": 255.0,
+                    "slope": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "textures": []
+      },
+      "it_Has_a_SeenIn": {
+        "frames": 31,
+        "loop": false,
+        "targets": [
+          {
+            "name": "N_Push",
+            "type": 0,
+            "tracks": [
+              {
+                "kind": "RLVC",
+                "id": 0,
+                "target": 16,
+                "curveType": 2,
+                "keys": [
+                  {
+                    "frame": 0.0,
+                    "value": 0.0,
+                    "slope": 0.0
+                  },
+                  {
+                    "frame": 30.0,
+                    "value": 255.0,
+                    "slope": 0.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "N_All",
+            "type": 0,
+            "tracks": [
+              {
+                "kind": "RLVC",
+                "id": 0,
+                "target": 16,
+                "curveType": 2,
+                "keys": [
+                  {
+                    "frame": 0.0,
+                    "value": 0.0,
+                    "slope": 0.0
+                  },
+                  {
+                    "frame": 30.0,
+                    "value": 255.0,
+                    "slope": 0.0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "textures": []
+      },
+      "it_Has_a_SeenOut": {
+        "frames": 31,
+        "loop": false,
+        "targets": [
+          {
+            "name": "N_Push",
+            "type": 0,
+            "tracks": [
+              {
+                "kind": "RLVC",
+                "id": 0,
+                "target": 16,
+                "curveType": 2,
+                "keys": [
+                  {
+                    "frame": -140.0,
+                    "value": 0.0,
+                    "slope": 0.0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "N_All",
+            "type": 0,
+            "tracks": [
+              {
+                "kind": "RLVC",
+                "id": 0,
+                "target": 16,
+                "curveType": 2,
+                "keys": [
+                  {
+                    "frame": 0.0,
+                    "value": 255.0,
+                    "slope": 0.0
+                  },
+                  {
+                    "frame": 30.0,
+                    "value": 0.0,
+                    "slope": -8.5
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "textures": []
+      }
+    },
+    "cssSeenInBezier": [
+      0.3333333333333333,
+      0,
+      0.6666666666666666,
+      1
+    ],
+    "cssSeenOutBezier": [
+      0.3333333333333333,
+      0,
+      0.6666666666666666,
+      0.6666666666666666
+    ],
+    "opacityDurationFrames": 30,
+    "readyAfterUpdates": 91
+  },
+  "ui": {
+    "sd-unavailable": "ui/sd-unavailable.png",
+    "sd": "ui/sd.png",
+    "arrow-right": "ui/arrow-right.png",
+    "arrow-left": "ui/arrow-left.png",
+    "wii-button": "ui/wii-button.png",
+    "mail-button-base": "ui/mail-button-base.png",
+    "mail-symbol": "ui/mail-symbol.png",
+    "button-ring": "ui/button-ring.png",
+    "calendar": "ui/calendar.png",
+    "write-message": "ui/write-message.png",
+    "bottom-curve-fill": "ui/bottom-curve-fill.png",
+    "bottom-curve-line": "ui/bottom-curve-line.png",
+    "bottom-curve-shadow": "ui/bottom-curve-shadow.png",
+    "channel-mask-16x9": "ui/channel-mask-16x9.png",
+    "channel-mask-edge-16x9": "ui/channel-mask-edge-16x9.png",
+    "channel-shade-16x9": "ui/channel-shade-16x9.png",
+    "channel-frame-corner": "ui/channel-frame-corner.png",
+    "channel-fill-corner": "ui/channel-fill-corner.png",
+    "pointer-hand": "ui/pointer-hand.png",
+    "pointer-grab": "ui/pointer-grab.png",
+    "pointer-open": "ui/pointer-open.png",
+    "pointer-player1": "ui/pointer-player1.png",
+    "settings-button-left": "ui/settings-button-left.png",
+    "settings-button-middle": "ui/settings-button-middle.png",
+    "settings-button-right": "ui/settings-button-right.png"
+  },
+  "notes": [
+    "Individual UI sprites include only the original texture layer; shadows, rings, material colours and pane geometry remain separate.",
+    "bottom-curve-* are matching fill/line/shadow layers for a curve segment, not a complete bottom bar.",
+    "channel-mask-* and channel-frame-corner are masks/corner textures, not a whole thumbnail image.",
+    "pointer-hand is a white/black hand; native player1 texture and material tint are a separate layer."
+  ],
+  "assets": [
+    {
+      "file": "clock/0.png",
+      "sourceFile": "textures/chanSel/my_Clock_a0.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "3519d2c7f2c683fc443bffc3659a64c4c409a268e83ef11fdebd4cd881e8ee9e",
+      "bytes": 295,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/1.png",
+      "sourceFile": "textures/chanSel/my_Clock_a1.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "1cdb743706229db562a698ad2d6ce0e881c8d553e0f2a21f14fa3aa2eb179bc9",
+      "bytes": 191,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/2.png",
+      "sourceFile": "textures/chanSel/my_Clock_a2.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "9052028cccd6783377343677a732cb466ac5be649a321687a99eea5300ece646",
+      "bytes": 309,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/3.png",
+      "sourceFile": "textures/chanSel/my_Clock_a3.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "b8d4054370f3ed2bbb0524c0d63a0f87129efc53bbf21202ab1e5b23fc6a622d",
+      "bytes": 253,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/4.png",
+      "sourceFile": "textures/chanSel/my_Clock_a4.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "5da535ae25fbf970d322f686ddca79364dc03cd428bcef79d3766379d2d0ae0e",
+      "bytes": 274,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/5.png",
+      "sourceFile": "textures/chanSel/my_Clock_a5.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "83992ba0e3194ffb8e0b7ed3af03d8defeff856de10e6a3f80308e4c9e0ed043",
+      "bytes": 309,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/6.png",
+      "sourceFile": "textures/chanSel/my_Clock_a6.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "8135135dd0684071c7e4e2f8e0d774e0118d5e232e7c6d7ab3d4fdc18d9c9143",
+      "bytes": 312,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/7.png",
+      "sourceFile": "textures/chanSel/my_Clock_a7.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "47ddcbc43e2171ef117a06c95e40fbd2a2c9e7b8e13ac659c7d4273d1080f3e7",
+      "bytes": 286,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/8.png",
+      "sourceFile": "textures/chanSel/my_Clock_a8.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "d98087914bf2c269f0e3c981cf108f90c83062693834ca426142bc2c176a92d5",
+      "bytes": 315,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/9.png",
+      "sourceFile": "textures/chanSel/my_Clock_a9.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "0de06c9e7b8c33ef63bee9103847e992da6697db77e9c0c3d935f239a3474ad8",
+      "bytes": 321,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "clock/colon.png",
+      "sourceFile": "textures/chanSel/my_Clock_ab.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "55fba2812067c00af52464b8361da38e8af7d21e5642b69683a5ed50dad13078",
+      "bytes": 139,
+      "width": 48,
+      "height": 48
+    },
+    {
+      "file": "health/italian-body.png",
+      "sourceFile": "textures/health/it_Has_a_EU_ITA.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "e7703e07e0e147ad15a0629d744c67eb6e90bc3c006aed44394ad1b038dc64e5",
+      "bytes": 58817,
+      "width": 608,
+      "height": 456
+    },
+    {
+      "file": "health/italian-prompt.png",
+      "sourceFile": "textures/health/it_Has_b_EU_ITA.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "6dbac45fb33d17d52290e50762c940a42e31fd5481a2a36a268210974a6d562e",
+      "bytes": 2329,
+      "width": 608,
+      "height": 88
+    },
+    {
+      "file": "ui/sd-unavailable.png",
+      "sourceFile": "textures/cmnBtn/mn_Top_SdCard_a.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "b02b42d857ff66dcd7368d2389ca1a0ea830e07c1f6a1dfa24eb7ca7735de302",
+      "bytes": 531,
+      "width": 38,
+      "height": 48
+    },
+    {
+      "file": "ui/sd.png",
+      "sourceFile": "textures/cmnBtn/mn_Top_SdCard_b.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "2f2f900c660e9057d053fe0ad0346deb0a8411ac2e2a56dcd6b9784b832431dd",
+      "bytes": 671,
+      "width": 38,
+      "height": 48
+    },
+    {
+      "file": "ui/arrow-right.png",
+      "sourceFile": "textures/cmnBtn/my_arw_a.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "8cd01b6419c5ae04577cb8473bb8c2200bf0a9f2cf6e850991964e367f43e6f6",
+      "bytes": 792,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/arrow-left.png",
+      "sourceFile": "textures/cmnBtn/my_arw_b.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "3f0e0c52572af9c45743d02d55fd1774049458c83c6dceb5292d9fce9950a632",
+      "bytes": 850,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/wii-button.png",
+      "sourceFile": "textures/cmnBtn/my_TopBtn_c.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "10a3df98ab5edcdf2667d0bf40fe51410db51679c43e0ed2370213e0022750bd",
+      "bytes": 2889,
+      "width": 80,
+      "height": 80
+    },
+    {
+      "file": "ui/mail-button-base.png",
+      "sourceFile": "textures/cmnBtn/my_TopBtn_a.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "b6b94a0239c1d2e19352edfbe1d0925cbb13d47f80ffa553f01da3b46ff3b4ac",
+      "bytes": 2511,
+      "width": 80,
+      "height": 80
+    },
+    {
+      "file": "ui/mail-symbol.png",
+      "sourceFile": "textures/cmnBtn/my_TopBtn_a0.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "b62fb9f4957a42138eb1570e087b04b023b2efc9588169bd070ea5935fae3f2a",
+      "bytes": 325,
+      "width": 48,
+      "height": 32
+    },
+    {
+      "file": "ui/button-ring.png",
+      "sourceFile": "textures/cmnBtn/my_TopBtn_h.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "cf21fbb74570526bdc7ec339b5da8a781d15d79f7928f9017da68ce9cb92fa04",
+      "bytes": 1052,
+      "width": 80,
+      "height": 80
+    },
+    {
+      "file": "ui/calendar.png",
+      "sourceFile": "textures/cmnBtn/my_TopBtn_d.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "f80059e9240aad750b44a633064d3eaa8bf3a6290a1d0b904633d1a0100b1aa5",
+      "bytes": 1418,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/write-message.png",
+      "sourceFile": "textures/cmnBtn/my_TopBtn_e.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "80784e6de94a21bd51a68f764df83e0d02f4ef2e2f5f1e29c275fb1ba5b8ca42",
+      "bytes": 1523,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/bottom-curve-fill.png",
+      "sourceFile": "textures/chanSel/my_TVSheet_e.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "2cd43af167e83b7cdfcaa7dc9716a192c71deee1a5345be1f6c2494d45041bc3",
+      "bytes": 506,
+      "width": 256,
+      "height": 64
+    },
+    {
+      "file": "ui/bottom-curve-line.png",
+      "sourceFile": "textures/chanSel/my_TVSheet_f.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "7f72842ff226aa84de17446925b36f74dbffb31b5e5a06079dc3d17315a22655",
+      "bytes": 625,
+      "width": 256,
+      "height": 64
+    },
+    {
+      "file": "ui/bottom-curve-shadow.png",
+      "sourceFile": "textures/chanSel/my_TVSheet_g.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "ed6d98d80fd1629baf4a60c29d5c7c56e600591a78e1048aa7a98632a9fc9b76",
+      "bytes": 4154,
+      "width": 256,
+      "height": 96
+    },
+    {
+      "file": "ui/channel-mask-16x9.png",
+      "sourceFile": "textures/chanSel/IplTopMask16x9.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "2e6ba7bb2c10e717f019d41fd6b17431edd117118922cdb016b88f2d3df56e78",
+      "bytes": 364,
+      "width": 128,
+      "height": 64
+    },
+    {
+      "file": "ui/channel-mask-edge-16x9.png",
+      "sourceFile": "textures/chanSel/IplTopMaskEdge16x9.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "f7d8cab14660d26ceff306a5c4d5b35aa697b395b2e78ff9f375b0567ec6103a",
+      "bytes": 589,
+      "width": 128,
+      "height": 64
+    },
+    {
+      "file": "ui/channel-shade-16x9.png",
+      "sourceFile": "textures/chanSel/IplTopTVShade16x9.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "b9d2381f5d9d908d92574b6ae03e400c3e95e841e5cb62335a64ded95084b82f",
+      "bytes": 4183,
+      "width": 168,
+      "height": 96
+    },
+    {
+      "file": "ui/channel-frame-corner.png",
+      "sourceFile": "textures/chanSel/my_TV_f.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "4d57adb3225b1b8eebeac503bbda286e476fce9c14fca1cd1da135877b971db2",
+      "bytes": 447,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/channel-fill-corner.png",
+      "sourceFile": "textures/chanSel/my_TV_e.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "4b716914fae531d436fd89c0ddbfe1ddae82c7c23bfcf32518f1dd2808f3ba36",
+      "bytes": 346,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/pointer-hand.png",
+      "sourceFile": "textures/cursor/defcursor_final64_a.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "f6fb73ac9ca3955f6ac3098cd3688a73b3ec38a0141e3b0353f006943429585a",
+      "bytes": 600,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/pointer-grab.png",
+      "sourceFile": "textures/cursor/defcursor_final64_b.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "0eea22bdb38d8317dac01e17c1f4b1ae75ce5ddfb151bcd7dc2ef5684c893b3f",
+      "bytes": 588,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/pointer-open.png",
+      "sourceFile": "textures/cursor/defcursor_final64_c.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "9cc2025f96cc06c07f4dd622a2da76a10acc12885b22daa1036c4d2ae1573c9e",
+      "bytes": 959,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/pointer-player1.png",
+      "sourceFile": "textures/cursor/defcursor_final_p1.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "76f200b3f673825f8b88a89effede26d276635dfa91b90026a0999da9bd845c8",
+      "bytes": 518,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "ui/settings-button-left.png",
+      "sourceFile": "textures/setting/SetBtn_a0.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "a866254a93b04154f111c0172a7840ae64e827ba7530cefee5bfb3af0acfd8a1",
+      "bytes": 545,
+      "width": 32,
+      "height": 64
+    },
+    {
+      "file": "ui/settings-button-middle.png",
+      "sourceFile": "textures/setting/SetBtn_a1.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "34e2406921d8715bcec39161a3bc674b75c5b2536ce04fe8c3bf9ff011609127",
+      "bytes": 142,
+      "width": 8,
+      "height": 64
+    },
+    {
+      "file": "ui/settings-button-right.png",
+      "sourceFile": "textures/setting/SetBtn_a2.png",
+      "sourceContent": "http://nus.cdn.shop.wii.com/ccs/download/0000000100000002/0000009a",
+      "sha256": "9958c46b9235d1f7f0f992e463b42deec8caca9b14ed93c105c29aabb3b85d03",
+      "bytes": 568,
+      "width": 32,
+      "height": 64
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+/* Laptop-only layout and controls; window contents keep their original markup. */
+@layer motion {
+    [data-desk] { isolation: isolate; align-items: stretch; }
+    [data-desk-workspace] { display: contents; }
+    [data-desk] .win[hidden] { display: none; }
+    [data-desk] .win { min-height: 0; }
+    [data-desk] .win__bar { display: grid; grid-template-columns: 32px minmax(0,1fr) 32px; align-items: center; gap: 6px; height: 46px; min-height: 46px; padding: 6px 10px; }
+    [data-desk] .win__bar::after { content: ''; }
+    [data-desk] .win__dots { position: static; transform: none; display: flex; align-items: center; gap: 5px; }
+    [data-desk] .win__dots::before,[data-desk] .win__dots i { flex: none; width: 6px; height: 6px; }
+    [data-desk] .win__name { min-width: 0; font-size: 12px; line-height: 1.4; text-align: center; }
+    /* More specific than :is(... .fo-tabs button ...) in the shared button rules. */
+    [data-desk] .win__close { display: none; flex: 0 0 32px; min-width: 32px; min-height: 32px; width: 32px; height: 32px; padding: 0; border-radius: 9px; color: #285369; }
+    [data-desk] .win__close::before,[data-desk] .win__close::after { display: none; }
+    [data-desk] .card__flip { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; min-height: 36px; width: 36px; height: 36px; padding: 0; color: #285369; }
+    [data-desk] :is(.win__close,.card__flip) .btn__icon { flex: none; min-width: 18px; width: 18px; height: 18px; }
+    [data-desk] :is(.win__close,.card__flip):focus-visible { outline: 3px solid #006e8d; outline-offset: 2px; }
+    [data-desk] .win__body { padding: 14px; container-name: desk-body; scrollbar-width: thin; scrollbar-color: #8ca7b9 #f1f7fa; scrollbar-gutter: stable; overscroll-behavior: contain; }
+    [data-desk] .win--skills .win__body { display: block; }
+    [data-desk] .cards { grid-template-columns: repeat(auto-fit,minmax(min(100%,190px),1fr)); gap: 12px; flex: none; }
+    [data-desk] .card__in { min-width: 0; }
+    [data-desk] .card__face { min-width: 0; overflow-wrap: anywhere; }
+    [data-desk] .card__front { pointer-events: auto; }
+    [data-desk] .card__back { pointer-events: none; }
+    [data-desk] .card.is-flipped .card__front { pointer-events: none; }
+    [data-desk] .card.is-flipped .card__back { pointer-events: auto; }
+    [data-desk] .card__list li { min-width: 0; }
+    [data-desk] .win__foot { margin-top: 16px; }
+    [data-desk] .term { min-width: 0; padding: 14px; overflow: hidden; }
+    [data-desk] .term__out { min-height: 96px; scrollbar-gutter: stable; overscroll-behavior: contain; }
+    [data-desk] .term__form,[data-desk] .term__chips { flex-shrink: 0; }
+    [data-desk] .term__form { gap: 8px; }
+    [data-desk] .term__form input { width: 0; flex: 1 1 0; }
+    [data-desk] .term__chips { gap: 6px; }
+    [data-desk] .term__chips button { min-height: 32px; padding: 6px 10px; font-size: 11px; }
+    [data-desk] .faq { padding-left: 0; }
+    [data-desk] .faq > * { padding-left: 40px; }
+    [data-desk] .viewer--avatar { gap: 8px; }
+    [data-desk] .viewer--avatar .avatar { width: min(100%,240px); }
+    [data-desk] .viewer--avatar .avatar img { transform: none; }
+    [data-desk] .viewer__meta { margin: 0; padding: 8px; font-size: 10px; line-height: 1.4; overflow-wrap: anywhere; }
+    [data-desk] .win__status { margin: 12px 0 0; padding: 8px 0 0; border-color: #cad9e3; }
+    [data-desk] .tools { grid-template-columns: repeat(auto-fit,minmax(min(100%,76px),1fr)); gap: 12px 8px; }
+    [data-desk].is-floating { height: clamp(760px,58vw,860px); }
+    [data-desk].is-floating [data-desk-workspace] { --desk-left-width: calc((100% - 14px)*.6); --desk-right-width: calc((100% - 14px)*.4); --desk-right-start: calc(var(--desk-left-width) + 14px); position: absolute; inset: 50px 14px 112px; display: block; isolation: isolate; z-index: 2; }
+    [data-desk].is-floating .win { max-width: 100%; max-height: 100%; box-shadow: 0 6px 16px #285a781f; }
+    [data-desk].is-floating .win.is-front { box-shadow: 0 10px 24px #285a7830,0 0 0 1px #65a8bf; }
+    [data-desk].is-floating .win__bar { touch-action: none; }
+    [data-desk].is-floating .win__close { display: inline-flex; }
+    [data-desk].is-floating .win__dots i { display: none; }
+    [data-desk].is-floating .win--skills { left: 0; top: 0; width: var(--desk-left-width); height: 100%; }
+    [data-desk].is-floating .win--term { left: var(--desk-right-start); top: 0; width: var(--desk-right-width); height: calc((100% - 14px)*.57); }
+    [data-desk].is-floating .win--faq { left: var(--desk-right-start); top: calc((100% - 14px)*.57 + 14px); width: calc((var(--desk-right-width) - 14px)*.6); height: calc((100% - 14px)*.43); }
+    [data-desk].is-floating .win--photo { left: auto; right: 0; top: calc((100% - 14px)*.57 + 14px); width: calc((var(--desk-right-width) - 14px)*.4); height: calc((100% - 14px)*.43); }
+    [data-desk].is-floating .win--tools { left: 26%; top: 12%; width: min(420px,65%); height: min(400px,85%); }
+    [data-desk].is-floating .viewer--avatar { display: grid; grid-template-rows: minmax(0,1fr) auto; overflow: hidden; }
+    [data-desk].is-floating .viewer--avatar .avatar { width: 100%; height: 100%; max-width: 220px; max-height: 220px; aspect-ratio: auto; }
+    [data-desk] .screen__bar { height: 34px; z-index: 4; gap: 12px; }
+    [data-desk].is-floating .dicons { position: absolute; inset: auto 14px 26px; z-index: 3; width: auto; height: 68px; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; padding: 8px; border: 1px solid #b5cbd8; border-radius: 20px; background: #f6fbfdeb; }
+    [data-desk] .dicon { position: relative; display: grid; grid-template-columns: 32px minmax(0,1fr); align-items: center; justify-items: start; gap: 8px; min-height: 50px; height: 100%; padding: 6px 8px; border: 1px solid transparent; border-radius: 12px; text-align: left; }
+    [data-desk] .dicon > span:last-child { min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    [data-desk] .dicon.is-open { background: #fff; border-color: #c9d9e3; }
+    [data-desk] .dicon.is-current { background: #e4f4f9; border-color: #00718f; }
+    [data-desk] .ficon { width: 30px; height: 34px; }
+    [data-desk] .ficon--img { height: 30px; padding: 2px; border-radius: 6px; overflow: hidden; }
+    [data-desk].is-floating .screen__hint { left: 14px; bottom: 7px; z-index: 3; max-width: calc(100% - 28px); font-size: 10px; letter-spacing: .04em; }
+    [data-desk].is-floating .wall__text { bottom: 120px; opacity: .18; }
+    @container desk-body (max-width: 593px) { .cards > .card:last-child { grid-column: 1 / -1; } }
+    @media (max-width:999px) { [data-desk] { grid-template-columns: minmax(0,1fr); } }
+    @media (min-width:1000px) and (max-width:1239px) { [data-desk] .term__out { max-height: none; } }
+    @media (max-width:399px) { [data-desk] .win__body,[data-desk] .term { padding: 12px; } [data-desk] .faq { padding-left: 0; } }
+}
+@layer preferences {
+    html:not(.js) [data-desk] .card__flip { display: none; }
+}

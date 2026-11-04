@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script data-wii-boot-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-wii-launched')==='1'}catch{}const p=new URLSearchParams(location.search),debug=['menu','preview'].includes(p.get('wii')),skip=p.has('nowii')||p.has('skipwii'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit/i.test(navigator.userAgent);if(!skip&&(!seen||debug)&&(!bot||debug)){window.__oakvxBootWaiting=true;r.classList.add('wii-boot-pending');window.__wiiBootTimer=setTimeout(()=>{window.__oakvxBootExpired=true;window.__oakvxBootWaiting=false;r.classList.remove('wii-boot-pending','wii-boot-active','wii-boot-background-paused','home-loading');dispatchEvent(new CustomEvent('wii-boot:ready',{detail:{reason:'fallback'}}))},4000)}})();</script>
+<link rel="stylesheet" href="../../assets/wii-boot/wii-boot.css">
+<script src="../../assets/wii-boot/wii-content.js" defer></script>
+<script src="../../assets/wii-boot/wii-audio.js" defer></script>
+
+<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F4F7FA">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<noscript id="oakvx-full-css-fallback"></noscript>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preload" href="../../assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/polaroid/site.css">
+<link rel="stylesheet" href="../../assets/avatars/avatar.css">
+<link rel="stylesheet" href="../../assets/polaroid/pages.css">
+<link rel="stylesheet" href="../../assets/avatars/pages.css">
+<link rel="stylesheet" href="../../assets/cursor.css">
+<script src="../../assets/polaroid/pages-en.js" defer></script>
+<script src="../../assets/polaroid/site.js" defer blocking="render"></script>
+<link rel="stylesheet" href="../../assets/wiiu/motion.css">
+<link rel="stylesheet" href="../../assets/wiiu/buttons.css">
+<link rel="stylesheet" href="../../assets/wiiu/dialogs.css">
+<link rel="stylesheet" href="../../assets/wiiu/theme.css">
+<script src="../../assets/wiiu/motion.js"></script>
+<title>Synk: prenotazioni via WhatsApp | Gabriele Lucia</title>
+<meta name="description" content="Il progetto Synk di Gabriele Lucia: messaggi WhatsApp, stato della conversazione e prenotazioni con Node.js, Regex e PostgreSQL.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/projects/synk/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/synk/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/projects/synk/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/synk/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="Synk: prenotazioni via WhatsApp | Gabriele Lucia">
+<meta property="og:description" content="Il progetto Synk di Gabriele Lucia: messaggi WhatsApp, stato della conversazione e prenotazioni con Node.js, Regex e PostgreSQL.">
+<meta property="og:url" content="https://oakvx.github.io/projects/synk/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-synk-it.png">
+<meta property="og:image:secure_url" content="https://oakvx.github.io/assets/social-synk-it.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Synk — progetto Node.js e PostgreSQL per gestire appuntamenti attraverso messaggi WhatsApp.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Synk: prenotazioni via WhatsApp | Gabriele Lucia">
+<meta name="twitter:description" content="Il progetto Synk di Gabriele Lucia: messaggi WhatsApp, stato della conversazione e prenotazioni con Node.js, Regex e PostgreSQL.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-synk-it.png">
+<meta name="twitter:image:alt" content="Synk — progetto Node.js e PostgreSQL per gestire appuntamenti attraverso messaggi WhatsApp.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/projects/synk/#webpage","url":"https://oakvx.github.io/projects/synk/","name":"Synk: prenotazioni via WhatsApp | Gabriele Lucia","description":"Il progetto Synk di Gabriele Lucia: messaggi WhatsApp, stato della conversazione e prenotazioni con Node.js, Regex e PostgreSQL.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/projects/synk/#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/projects/synk/#project"},"about":{"@id":"https://oakvx.github.io/projects/synk/#project"},"breadcrumb":{"@id":"https://oakvx.github.io/projects/synk/#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/projects/synk/#primaryimage","url":"https://oakvx.github.io/assets/social-synk-it.png","contentUrl":"https://oakvx.github.io/assets/social-synk-it.png","width":1200,"height":630,"caption":"Synk — progetto Node.js e PostgreSQL per gestire appuntamenti attraverso messaggi WhatsApp.","inLanguage":"it"},{"@type":"CreativeWork","@id":"https://oakvx.github.io/projects/synk/#project","name":"Synk","description":"Il progetto Synk di Gabriele Lucia: messaggi WhatsApp, stato della conversazione e prenotazioni con Node.js, Regex e PostgreSQL.","creator":{"@id":"https://oakvx.github.io/#person"},"url":"https://oakvx.github.io/projects/synk/","mainEntityOfPage":{"@id":"https://oakvx.github.io/projects/synk/#webpage"}},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/projects/synk/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Synk","item":"https://oakvx.github.io/projects/synk/"}]}]}</script>
+<script type="application/json" id="seo-translations">{"it":{"title":"Synk: prenotazioni via WhatsApp | Gabriele Lucia","description":"Il progetto Synk di Gabriele Lucia: messaggi WhatsApp, stato della conversazione e prenotazioni con Node.js, Regex e PostgreSQL.","canonical":"https://oakvx.github.io/projects/synk/","image":"https://oakvx.github.io/assets/social-synk-it.png","image_alt":"Synk — progetto Node.js e PostgreSQL per gestire appuntamenti attraverso messaggi WhatsApp."},"en":{"title":"Synk: WhatsApp appointment booking | Gabriele Lucia","description":"Synk by Gabriele Lucia: WhatsApp messages, conversation state and appointment booking with Node.js, Regex and PostgreSQL.","canonical":"https://oakvx.github.io/projects/synk/?lang=en","image":"https://oakvx.github.io/assets/social-synk-en.png","image_alt":"Synk — a Node.js and PostgreSQL project for managing appointments through WhatsApp messages."}}</script>
+</head>
+<body data-page="synk">
+<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
+<a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
+
+    <header class="hdr" data-header>
+        <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="wrap hdr__in">
+            <a class="brand" href="../../" data-langlink aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="../../assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
+            <nav class="hdr__nav" aria-label="Navigazione principale" data-i18n-aria="navLabel">
+                <a href="../../#percorso" data-langlink data-i18n="nav.path">Percorso</a>
+                <a href="../../#progetti" data-langlink data-i18n="nav.projects">Progetti</a>
+                <a href="../../#strumenti" data-langlink data-i18n="nav.tools">Strumenti</a>
+                <a href="../../chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a>
+                <a href="../../fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
+            </nav>
+            <div class="hdr__tools">
+                <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
+                <div class="lang" role="group" aria-label="Lingua" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Ferma animazioni</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Attiva audio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/><path class="sound__mute" d="m17 10 4 4m0-4-4 4"/></svg><span class="sr-only" data-sound-label>Attiva audio</span></button>
+                <a class="pill" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="nav.cta">Scrivimi</span></a>
+                <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Apri menu</span></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu" id="menu" data-menu hidden>
+        <nav class="menu__nav wrap" aria-label="Menu" data-i18n-aria="menuLabel">
+            <a href="../../#percorso" class="extrude" data-langlink data-i18n="nav.path">Percorso</a>
+            <a href="../../#progetti" class="extrude" data-langlink data-i18n="nav.projects">Progetti</a>
+            <a href="../../#strumenti" class="extrude" data-langlink data-i18n="nav.tools">Strumenti</a>
+            <a href="../../chi-sono/" class="extrude" data-langlink data-i18n="nav.about">Chi sono</a>
+            <a href="../../fuori-orario/" class="extrude" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
+            <a href="#contatti" class="extrude" data-i18n="nav.contact">Contatti</a>
+        </nav>
+        <div class="menu__foot wrap">
+            <a class="mono" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
+            <a class="mono" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx ↗</a>
+            <p class="mono menu__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+        </div>
+    </div>
+
+    <main id="main">
+<section class="page-hero wrap"><a class="breadcrumb btn btn--ghost btn--back" href="../../#progetti" data-langlink><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 6-6 6 6 6m-6-6h13"/></svg> <span data-i18n="internal.allProjects">Tutti i progetti</span></a><div class="project-wordmark"><span class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><h1 class="display-title extrude">Synk.</h1></div><p class="page-intro" data-i18n="synk.caseSummary">Synk gestisce le richieste e gli appuntamenti che arrivano su WhatsApp. Dietro la chat ci sono un intent picker, un database locale, Google Calendar e una dashboard per chi segue l’attività.</p><div class="project-actions"><a class="btn" href="#storytelling"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="synk.caseHeroCTA">Esplora il sistema</span> </a></div><dl class="metadata"><div><dt data-i18n="synk.caseRoleLabel">Il mio ruolo</dt><dd data-i18n="synk.caseRoleLabelValue">Intent picker, backend, dashboard e fine-tuning</dd></div><div><dt data-i18n="synk.caseStackLabel">Stack</dt><dd data-i18n="synk.caseStackLabelValue">Node.js / PostgreSQL / llama.cpp</dd></div><div><dt data-i18n="synk.caseFocusLabel">Focus</dt><dd data-i18n="synk.caseFocusLabelValue">Automazione conversazionale</dd></div><div><dt data-i18n="synk.caseTypeLabel">Progetto</dt><dd data-i18n="synk.caseTypeLabelValue">Applicazione web</dd></div></dl><figure class="project-cover glass-frame"><img src="../../assets/work/synk-cover.webp" srcset="../../assets/work/synk-cover-small.webp 720w, ../../assets/work/synk-cover.webp 1600w" sizes="(max-width:599px) calc(100vw - 54px), (max-width:899px) calc(100vw - 70px), (max-width:1199px) calc(100vw - 94px), 1298px" width="1600" height="813" alt="Synkris: materiale promozionale del progetto Synk" data-i18n-alt="synk.coverAlt" decoding="async" fetchpriority="high"><figcaption data-i18n="synk.caseArtNote">Synkris / materiale promozionale fornito</figcaption></figure></section><div class="article-layout wrap"><nav class="article-nav" aria-label="In questa pagina" data-i18n-aria="internal.contents"><a href="#overview" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="synk.casePageOverview">Il progetto</span></a><a href="#storytelling" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="synk.casePageStory">Come funziona</span></a><a href="#details" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="synk.casePageBuild">Il mio lavoro</span></a><a href="#stack" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="synk.stackNav">Tecnologie</span></a></nav><div class="article-body"><section class="chapter" data-reveal id="overview"><picture class="chapter-avatar" data-avatar data-avatar-pose="idlewainting" data-cycle="idlewainting,laughing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/idlewainting-still.webp"><img src="../../assets/avatars/idlewainting-still.webp" data-avatar-animated="../../assets/avatars/idlewainting.gif" data-avatar-still="../../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="synk.synkStartTitle">Il progetto</h2><p data-i18n="synk.synkStartText">Chi scrive resta su WhatsApp e può parlare in modo naturale. Synk riconosce il motivo del messaggio e apre la conversazione giusta.</p></section><section class="chapter" data-reveal id="storytelling"><picture class="chapter-avatar" data-avatar data-avatar-pose="showingoff" data-cycle="showingoff,dancing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/showingoff-still.webp"><img src="../../assets/avatars/showingoff-still.webp" data-avatar-animated="../../assets/avatars/showingoff.webp" data-avatar-still="../../assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="synk.synk-storyHeading">Come funziona</h2><article class="technical-step" id="synk-story-messaggio"><h3 data-i18n="synk.synk-story-messaggioTitle">Il messaggio</h3><p data-i18n="synk.synk-story-messaggioText0">Il nucleo riceve il messaggio della conversazione, normalizza il testo e controlla i duplicati. Il contesto della chat permette di riprendere una prenotazione già iniziata.</p></article><article class="technical-step" id="synk-story-intento"><h3 data-i18n="synk.synk-story-intentoTitle">Tre richieste, tre strade</h3><p data-i18n="synk.synk-story-intentoText0">Si può scrivere con parole proprie: Synk capisce cosa serve e apre la conversazione adatta.</p><p data-i18n="synk.synk-story-intentoText1">Durante lo scambio raccoglie i dettagli necessari prima di passare la richiesta al sistema gestionale.</p></article><div class="synk-flow" aria-label="Il percorso da WhatsApp alla gestione" data-i18n-aria="synk.flowLabel"><p class="synk-flow__title" data-i18n="synk.flowTitle">Dalla chat al lavoro fatto.</p><ol class="synk-flow__steps"><li><span class="synk-flow__number">01</span><h3 data-i18n="synk.flowWhatsapp">Messaggio WhatsApp</h3><p data-i18n="synk.flowWhatsappText">La persona scrive al salone.</p></li><li><span class="synk-flow__number">02</span><h3 data-i18n="synk.flowPicker">Intent picker</h3><p data-i18n="synk.flowPickerText">Synk capisce che cosa le serve.</p></li><li><span class="synk-flow__number">03</span><h3 data-i18n="synk.flowBranch">Il flusso giusto</h3><p class="synk-flow__branches"><span data-i18n="synk.flowInfo">Informazioni</span><span data-i18n="synk.flowEdit">Modifica</span><span data-i18n="synk.flowBooking">Nuova prenotazione</span></p></li><li><span class="synk-flow__number">04</span><h3 data-i18n="synk.flowManage">Gestione</h3><p data-i18n="synk.flowManageText">Database, Google Calendar e dashboard.</p></li></ol></div><article class="technical-step" id="synk-story-prenotazione"><h3 data-i18n="synk.synk-story-prenotazioneTitle">Il calendario e i dati</h3><p data-i18n="synk.synk-story-prenotazioneText0">Gli appuntamenti vengono salvati nel database locale e su Google Calendar, così chi li gestisce li ritrova in entrambi i posti.</p><p data-i18n="synk.synk-story-prenotazioneText1">Nel database ci sono anche i servizi, le persone che lavorano nell’attività e le altre informazioni necessarie.</p><p data-i18n="synk.synk-story-prenotazioneText2">La dashboard permette di modificare i dati e consultare le analitiche sull’attività.</p></article></section><section class="chapter" data-reveal id="details"><picture class="chapter-avatar" data-avatar data-avatar-pose="discofever" data-cycle="discofever,flyspinning" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/discofever-still.webp"><img src="../../assets/avatars/discofever-still.webp" data-avatar-animated="../../assets/avatars/discofever.gif" data-avatar-still="../../assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="synk.synkBuildTitle">Il mio lavoro</h2><p data-i18n="synk.synkBuildText">Ho lavorato sul backend Node.js e sul pannello gestionale. Ho anche fatto fine-tuning di modelli quantizzati da 4B con llama.cpp.</p><div class="stack-grid"><article class="stack-item"><h3 data-i18n="synk.synkLayer01Title">Intent picker</h3><p data-i18n="synk.synkLayer01Text">Capisce il motivo del messaggio e seleziona il percorso adatto.</p></article><article class="stack-item"><h3 data-i18n="synk.synkLayer02Title">Database + Google Calendar</h3><p data-i18n="synk.synkLayer02Text">Il database locale raccoglie appuntamenti, servizi, persone del team e dati dell’attività. Gli appuntamenti si ritrovano anche in Google Calendar.</p></article><article class="stack-item"><h3 data-i18n="synk.synkLayer03Title">Dashboard gestionale</h3><p data-i18n="synk.synkLayer03Text">Da qui il team aggiorna i dati e consulta le analitiche.</p></article><article class="stack-item"><h3 data-i18n="synk.synkLayer04Title">Fine-tuning</h3><p class="stack-role" data-i18n="synk.synkLayer04Role">MODELLI QUANTIZZATI · 4B</p><p data-i18n="synk.synkLayer04Text">Ho fatto fine-tuning di modelli quantizzati da 4B usando llama.cpp.</p></article></div></section><section class="chapter" data-reveal id="stack"><picture class="chapter-avatar" data-avatar data-avatar-pose="laughing" data-cycle="laughing,almostfalling" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/laughing-still.webp"><img src="../../assets/avatars/laughing-still.webp" data-avatar-animated="../../assets/avatars/laughing.gif" data-avatar-still="../../assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="synk.stackTitle">Tecnologie</h2><div class="stack-grid"><article class="stack-item"><h3>Node.js</h3><p class="stack-role" data-i18n="synk.stackTool0Role">BACKEND</p><p data-i18n="synk.stackTool0Usage">Collega i messaggi in arrivo ai flussi di Synk e coordina chat, dati e calendario.</p><a class="link" href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>Regex</h3><p class="stack-role" data-i18n="synk.stackTool1Role">RICONOSCIMENTO TESTO</p><p data-i18n="synk.stackTool1Usage">Lavorano insieme alla logica personalizzata per riconoscere i messaggi ricevuti tramite WhatsApp.</p><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>PostgreSQL</h3><p class="stack-role" data-i18n="synk.stackTool2Role">DATABASE RELAZIONALE</p><p data-i18n="synk.stackTool2Usage">Conserva i dati dell’attività e li rende disponibili per gli aggiornamenti e le analitiche in dashboard.</p><a class="link" href="https://www.postgresql.org/about/" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>llama.cpp</h3><p class="stack-role" data-i18n="synk.stackTool3Role">FINE-TUNING · 4B</p><p data-i18n="synk.stackTool3Usage">Fine-tuning di modelli quantizzati da 4B.</p><a class="link" href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article></div></section></div></div><section class="project-next wrap" data-reveal><div class="project-next-grid"><a href="../beautify/" data-langlink><span class="project-next-number">03</span><h2>Beautify</h2><p data-i18n="beautify.kind">Gestionale multisalone</p><span aria-hidden="true">↗</span></a><a href="../brat-animator/" data-langlink><span class="project-next-number">01</span><h2>Brat Animator</h2><p data-i18n="brat-animator.kind">Editor di lyric video</p><span aria-hidden="true">↗</span></a></div></section>
+<section class="contact wrap" data-reveal id="contatti">
+ <h2 class="contact-title extrude" data-extrude><span data-i18n="internal.contactTitle">Scrivimi.</span></h2>
+ <p class="contact-intro" data-i18n="internal.contactIntro">Continuiamo via email.</p>
+ <a class="contact-email" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com <span aria-hidden="true">↗</span></a>
+ <div class="project-actions"><a class="btn" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="internal.emailAction">Scrivimi</span></a><a class="btn btn--ghost" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10m12-10v2c0 4-12 1-12 5"/></svg>GitHub </a></div>
+</section>
+</main>
+
+    <footer class="foot">
+        <div class="wrap foot__top">
+            <div class="foot__contact">
+                <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
+                <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+                <div class="foot__sleeper" aria-hidden="true">
+                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
+                        <source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/sleeping-still.webp">
+                        <img src="../../assets/avatars/sleeping-still.webp" data-avatar-animated="../../assets/avatars/sleeping.gif" data-avatar-still="../../assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
+                    </picture>
+                </div>
+            </div>
+            <nav class="foot__nav" aria-label="Collegamenti del piè di pagina" data-i18n-aria="foot.navLabel">
+                <ul>
+                    <li><a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+                    <li><a href="../../chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a></li>
+                    <li><a href="../../fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a></li>
+                    <li><a href="../../assets/CREDITS.html" data-langlink data-i18n="foot.credits">Crediti</a></li>
+                </ul>
+                <ul>
+                    <li><a href="../../#percorso" data-langlink data-i18n="nav.path">Percorso</a></li>
+                    <li><a href="../../#progetti" data-langlink data-i18n="nav.projects">Progetti</a></li>
+                    <li><a href="../../#strumenti" data-langlink data-i18n="nav.tools">Strumenti</a></li>
+                    <li><a href="../../#contatti" data-langlink data-i18n="nav.contact">Contatti</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrap foot__mark" aria-hidden="true" data-mark>
+            <svg class="mark__o" viewBox="-60 -60 120 120"><path data-mark-o d="M0,-50A50,50 0 1,1 0,-50Z" /></svg><span class="mark__rest extrude">akvx</span>
+        </div>
+        <div class="wrap foot__bottom">
+            <p>© 2026 Gabriele Lucia</p>
+            <a href="#main"><span data-i18n="foot.top">Torna su</span> <span aria-hidden="true">↑</span></a>
+        </div>
+    </footer>
+
+    <p class="toast" role="status" aria-live="polite" data-toast></p>
+<script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
+<script src="../../assets/avatars/avatar.js" defer blocking="render"></script>
+<script src="../../assets/avatars/poses.js" defer blocking="render"></script>
+<script src="../../assets/avatars/companion.js" defer blocking="render"></script>
+<script src="../../assets/wiiu/sound.js" defer></script>
+<script src="../../assets/wiiu/music.js" defer></script>
+<script src="../../assets/wiiu/pointer.js" defer></script>
+<script src="../../assets/wiiu/dialogs.js" defer></script>
+<script src="../../assets/wii-boot/wii-boot.js" defer></script>
+</body>
+</html>

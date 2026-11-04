@@ -1,0 +1,54 @@
+{
+  "synk-cover.webp": {
+    "source": "synk_site.zip / synk_fixed/og-image.jpg",
+    "source_sha256": "2716d57ad761ad9eda6af3694646b3aeb59b1faf02c7af6856cb77425fe5aece",
+    "source_dimensions": [
+      1867,
+      949
+    ],
+    "dimensions": [
+      1600,
+      813
+    ],
+    "kind": "supplied promotional image, not a production dashboard screenshot",
+    "bytes": 55582,
+    "sha256": "3d0a578f6f5608d061f1896f8cc295e28afa8a82b9435f87313c5d86036f2463"
+  },
+  "brat-editor.webp": {
+    "source": "https://oakvx.github.io/bratAnimator/",
+    "repository": "https://github.com/oakvx/bratAnimator",
+    "dimensions": [
+      1440,
+      1000
+    ],
+    "capture_date": "2026-10-18",
+    "kind": "real Brat Animator 4.0 UI screenshot",
+    "demo_text": [
+      "[00:00.00] gabriele lucia",
+      "[00:02.00] codice e grafica",
+      "[00:04.00] demo portfolio"
+    ],
+    "bytes": 39944,
+    "sha256": "e84b2c5b9d18ba129aa9ed567e2112c76ba292f10c28e08cd016705af74c36d3"
+  },
+  "brat-editor-small.webp": {
+    "source": "brat-editor.webp",
+    "adaptation": "proportional resize for responsive display; no content edits",
+    "dimensions": [
+      720,
+      500
+    ],
+    "bytes": 13450,
+    "sha256": "43eebaef0323171ab7734b600085b7a4985d6b620026716b0551b787b2b7559c"
+  },
+  "synk-cover-small.webp": {
+    "source": "synk-cover.webp",
+    "adaptation": "proportional resize for responsive display; no content edits",
+    "dimensions": [
+      720,
+      366
+    ],
+    "bytes": 16058,
+    "sha256": "cd399b3bbd6b65696b5e9c8452585674867dc16cc2c2b9904713dbf51e88f732"
+  }
+}

@@ -1,0 +1,288 @@
+/* Wii PAL widescreen stage. Original resource provenance: original/NOTICE.md. */
+@font-face{font-family:Wii;src:url('original/fonts/menu.woff2') format('woff2');font-display:swap}
+@font-face{font-family:OakvxGame;src:url('../wiiu/rounded-900-latin.woff2') format('woff2');font-weight:900;font-display:swap}
+html.wii-boot-pending{background:#000;overflow:hidden}
+html.wii-boot-pending body>*{opacity:0!important}
+html.wii-boot-active{overflow:hidden}
+html.wii-boot-active :is(#cursor,[data-home-loader]){visibility:hidden!important}
+html.wii-boot-background-paused body>:not(#wii-boot):not(.wiiu-pointer),html.wii-boot-background-paused body>:not(#wii-boot):not(.wiiu-pointer) *{animation-play-state:paused!important}
+#wii-boot{--wb-blue:#36b7eb;--wb-ink:#555;--wb-line:#a7aaac;--wb-paper:#eceef1;position:fixed;inset:0;box-sizing:border-box;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#08090b;color:var(--wb-ink);font:22px/1.35 Wii,Arial,sans-serif;overflow:hidden;user-select:none;touch-action:manipulation}
+#wii-boot::backdrop{background:transparent}
+#wii-boot *,#wii-boot *::before,#wii-boot *::after{box-sizing:border-box}
+#wii-boot :is(h1,h2,p){margin:0;font:inherit}
+#wii-boot button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#wii-boot button:not(.wb-btn){padding:0;border:0;background:none}
+#wii-boot button:disabled{cursor:default;opacity:.45}
+#wii-boot button:focus-visible{outline:3px solid #0879bd;outline-offset:3px}
+#wii-boot [hidden]{display:none!important}
+#wii-boot .wb-stage{position:absolute;left:50%;top:calc(50% - 14px);width:960px;height:540px;transform-origin:center;overflow:hidden;background:#eee;isolation:isolate}
+#wii-boot #wb-content{position:absolute;inset:0;outline:none}
+#wii-boot .wb-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#wii-boot .wb-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:170px;height:62px;padding:0 24px;background:#f7f7f7;color:#555;border:2px solid #a3a7aa;border-radius:32px;box-shadow:inset 0 2px 4px #fff,0 3px 1px #0002;white-space:normal;line-height:1.2;transition:border-color 100ms,box-shadow 100ms,transform 100ms}
+#wii-boot .wb-btn:hover,#wii-boot .wb-btn:focus-visible{border-color:#36b7eb;box-shadow:inset 0 2px 4px #fff,0 0 0 3px #7bd9ff70,0 3px 1px #0002;transform:scale(1.025)}
+#wii-boot .wb-btn:active{transform:scale(.985)}
+#wii-boot .wb-web-controls{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;white-space:nowrap}
+#wii-boot .wb-web-controls .wb-btn{height:32px;min-width:0;padding:0 14px;font:12px/1 Wii,Arial,sans-serif;background:#171a20;color:#e4e7eb;border:1px solid #626974;box-shadow:none}
+#wii-boot .wb-web-controls .wb-btn:hover{border-color:#58caff;background:#252a32}
+#wii-boot .wb-rotate-hint{display:none;position:absolute;top:calc(50% + 120px);left:12px;right:12px;text-align:center;color:#c5cbd1;font-size:12px}
+#wii-boot.wb-portrait .wb-rotate-hint{display:block}
+/* Health and safety. Layout follows the Italian console capture. */
+#wii-boot .wb-health{position:absolute;inset:0;background:#000;color:#d8e9ee;text-align:center}
+#wii-boot .wb-health-native{position:absolute;top:0;left:13.46155%;width:73.0769%;height:100%;animation:wb-health-in 500ms cubic-bezier(.333333,0,.666667,1) both}
+#wii-boot .wb-health-continue{position:absolute;left:13.46155%;bottom:0;width:73.0769%;height:19.29825%;animation:wb-prompt 1s linear infinite}
+#wii-boot .wb-health-continue img{width:100%;height:100%;display:block}
+#wii-boot .wb-health-continue:disabled{visibility:hidden}
+@keyframes wb-health-in{from{opacity:0}to{opacity:1}}
+@keyframes wb-health-out{to{opacity:0}}
+#wii-boot.wb-health-leaving .wb-health-native{animation:wb-health-out 500ms cubic-bezier(.333333,0,.666667,.666667) forwards}
+#wii-boot.wb-health-leaving .wb-health-continue{opacity:0;animation:none}
+@keyframes wb-prompt{0%,100%{opacity:0;animation-timing-function:cubic-bezier(.333333,0,.666667,1)}50%{opacity:1;animation-timing-function:cubic-bezier(.333333,0,.666667,1)}}
+/* Four pages of twelve channels. */
+#wii-boot .wb-menu{position:absolute;inset:0;background:#c5c5c5}
+#wii-boot .wb-menu::after{content:'';position:absolute;inset:0;z-index:1;background:url('original/native/ui/menu-chrome.webp') 0 0/100% 100% no-repeat;pointer-events:none}
+#wii-boot .wb-grid-viewport{position:absolute;inset:41.44737px 0 auto;height:341.05263px;overflow:hidden;background:#eee url('original/ui/bg-pattern.png') repeat;background-size:9px 5px}
+#wii-boot .wb-grid-track{display:flex;width:3840px;height:100%;transition:transform 333ms cubic-bezier(.2,.65,.25,1)}
+#wii-boot .wb-grid{flex:0 0 960px;display:grid;grid-template-columns:repeat(4,196.15385px);grid-template-rows:repeat(3,113.68421px);column-gap:5.95141px;row-gap:0;padding:0 78.76518px}
+#wii-boot .wb-tile{position:relative;min-width:0;width:100%;height:113.68421px;border-radius:15px;outline-offset:0;background:linear-gradient(#fff,#eee);overflow:visible;isolation:isolate;transition:transform 166ms}
+#wii-boot .wb-tile::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2}
+#wii-boot button.wb-tile:hover,#wii-boot button.wb-tile:focus-visible{transform:scale(1.035);z-index:3;outline:none}
+#wii-boot button.wb-tile:hover::after,#wii-boot button.wb-tile:focus-visible::after{inset:-10px;background:url('original/native/ui/focus-chrome.webp') center/100% 100% no-repeat}
+#wii-boot .wb-tile-face{position:absolute;inset:1px;border-radius:14px;overflow:hidden;background:#fff}
+#wii-boot .wb-channel-art{position:absolute;inset:0;overflow:hidden;background:white;display:block}
+#wii-boot .wb-channel-art>img{display:block;width:100%;height:100%;object-fit:fill}
+#wii-boot .wb-image-unavailable::before{content:attr(data-fallback);position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:12px;background:#f6f6f6;color:#555;font-size:20px}
+#wii-boot .wb-art-oakvx{background:linear-gradient(#fff,#f4f4f4);color:#777}
+#wii-boot .wb-art-oakvx .wb-disc-mini{position:absolute;right:8px;top:11px;width:87px;height:88px;object-fit:contain}
+#wii-boot .wb-oakvx-wordmark{position:absolute;left:13px;top:32px;font-size:24px;letter-spacing:-1px}
+#wii-boot .wb-oakvx-caption{position:absolute;left:14px;top:64px;font-size:8px}
+#wii-boot .wb-empty{background:repeating-linear-gradient(#d9d9d9 0 2px,#c9c9c9 2px 3px);box-shadow:inset 0 2px 14px #0002;display:flex;align-items:center;justify-content:center}
+#wii-boot .wb-empty{background:#ccc url('original/native/ui/empty-chrome.webp') center/100% 100% no-repeat}
+#wii-boot .wb-empty span{visibility:hidden}
+#wii-boot .wb-page-arrow{position:absolute;top:204px;width:34px;height:60px;background-position:center!important;background-repeat:no-repeat!important;background-size:22px 39px!important;z-index:5;transition:transform 100ms}
+#wii-boot .wb-page-arrow.left{left:14px;background-image:url('original/ui/arrow-left.png')!important}
+#wii-boot .wb-page-arrow.right{right:14px;background-image:url('original/ui/arrow-right.png')!important}
+#wii-boot .wb-page-arrow:hover,#wii-boot .wb-page-arrow:focus-visible{transform:scale(1.12)}
+#wii-boot .wb-bottombar{position:absolute;bottom:0;width:100%;height:120px;background:url('original/ui/bottom-bg.png') repeat-x center bottom;background-size:auto 120px}
+#wii-boot .wb-bar-curve{position:absolute;inset:0;width:100%;height:120px;opacity:.8}
+#wii-boot .wb-circle-btn{position:absolute;bottom:9px;width:84px;height:84px;transition:transform 166ms;z-index:2}
+#wii-boot .wb-circle-btn img{width:100%;height:100%;object-fit:contain}
+#wii-boot .wb-circle-btn::after{content:'';position:absolute;inset:0;pointer-events:none;background:#37b8e4;mask:url('original/native/ui/button-ring.png') center/100% 100% no-repeat}
+#wii-boot .wb-native-mail{display:block;position:relative;width:100%;height:100%}
+#wii-boot .wb-native-mail img.wb-mail-symbol{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:50.4px;height:33.6px}
+#wii-boot .wb-circle-btn:hover{transform:scale(1.07)}
+#wii-boot .wb-wii{left:30px}#wii-boot .wb-mail{right:30px}
+#wii-boot .wb-sd{position:absolute;left:116px;bottom:5px;width:72px;height:72px;filter:grayscale(0);transition:transform 166ms}
+#wii-boot .wb-sd img{position:absolute;left:9px;top:9px;width:32px;height:41px;object-fit:contain}
+#wii-boot .wb-sd:hover{transform:scale(1.1)}
+#wii-boot .wb-clockbox{position:absolute;left:50%;top:27px;transform:translateX(-50%);text-align:center;line-height:1.15;color:#62676b}
+#wii-boot .wb-clock{position:relative;width:160px;height:51px}
+#wii-boot .wb-clock-glyph{position:absolute;top:0;left:calc(50% + var(--wb-clock-x)*1.015385 - 24.36923px);width:48.7385px;height:50.0211px;background:#9b9b9b;mask-image:var(--wb-clock-image);mask-size:100% 100%;mask-repeat:no-repeat}
+#wii-boot .wb-date{font-size:20px;margin-top:16px}
+#wii-boot .wb-menu-page{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#wii-boot .wb-hover-label{position:absolute;bottom:103px;left:50%;transform:translateX(-50%);max-width:650px;padding:9px 24px;border:1px solid #bfc4c5;border-radius:28px;background:#fffe;box-shadow:0 2px 3px #0002;color:#555;line-height:1.1;white-space:nowrap;opacity:0;z-index:10;pointer-events:none}
+#wii-boot .wb-hover-label.is-visible{opacity:1}
+/* Coordinates are projected from PAL BRLYT into the uniformly scaled stage. */
+#wii-boot .wb-bottombar{z-index:2;height:149.21053px;background:none}
+#wii-boot .wb-bottombar .wb-bar-curve{display:none}
+#wii-boot .wb-bottombar .wb-circle-btn{top:15.4px;bottom:auto;width:92.30769px;height:94.73684px}
+#wii-boot .wb-bottombar .wb-wii{left:40.44538px}
+#wii-boot .wb-bottombar .wb-mail{right:40.02028px}
+#wii-boot .wb-bottombar .wb-sd{left:164.8px;bottom:29px}
+#wii-boot .wb-bottombar .wb-clockbox{top:0}
+#wii-boot .wb-menu>.wb-page-arrow{top:169.34px;height:75.79px;width:73.85px;background-size:26px 40px!important}
+#wii-boot .wb-menu>.wb-page-arrow.right{right:7.71px}
+#wii-boot .wb-menu>.wb-page-arrow.left{left:7.71px}
+/* Suppress inherited portfolio button decorations inside console controls. */
+#wii-boot button::before{content:none!important}
+#wii-boot button:not(.wb-tile):not(.wb-circle-btn)::after{content:none!important}
+/* Channel preview: original banner area and native-style launch buttons. */
+#wii-boot .wb-preview{position:absolute;inset:0;background:#e8e8e8 url('original/ui/bg-pattern.png') repeat}
+#wii-boot .wb-banner-area{position:absolute;left:40px;top:23px;width:880px;height:387px;overflow:hidden;background:white;border:2px solid #c3c5c6;border-radius:9px;box-shadow:0 1px 4px #0002}
+#wii-boot .wb-game,#wii-boot .wb-original-banner,#wii-boot .wb-static-banner{position:absolute;inset:0}
+#wii-boot .wb-original-banner img,#wii-boot .wb-static-banner img{display:block;width:100%;height:100%;object-fit:contain;background:#fff}
+#wii-boot .wb-art-large>img{object-fit:contain}
+#wii-boot .wb-buttonbar{position:absolute;inset:auto 0 0;height:112px;border-top:2px solid #b2b6b8;display:flex;align-items:center;justify-content:center;gap:60px;background:linear-gradient(#eee,#ddd)}
+#wii-boot .wb-buttonbar .wb-btn{width:310px;height:66px;font-size:28px;background:linear-gradient(#fff,#f6f6f6 60%,#e8e8e8)}
+#wii-boot .wb-preview .wb-page-arrow{top:180px;width:29px}
+#wii-boot .wb-preview .wb-page-arrow.left{left:6px}#wii-boot .wb-preview .wb-page-arrow.right{right:6px}
+#wii-boot .wb-preview::after{content:'';position:absolute;inset:0;background:url('original/native/ui/preview-chrome.webp') center/100% 100%;pointer-events:none;z-index:2}
+#wii-boot .wb-preview .wb-banner-area{left:0;top:0;width:960px;height:401.44737px;border:0;border-radius:0;box-shadow:none}
+#wii-boot .wb-preview .wb-buttonbar{inset:0;z-index:3;height:540px;border:0;background:none;display:block;pointer-events:none}
+#wii-boot .wb-preview .wb-buttonbar .wb-btn{position:absolute;top:417.43421px;left:182.24696px;width:279.23077px;height:84.07895px;min-width:0;padding:0;background:none;filter:none;color:#555;font-size:32px;box-shadow:none;pointer-events:auto}
+#wii-boot .wb-preview .wb-buttonbar .wb-btn+button{left:498.52227px}
+#wii-boot .wb-preview .wb-buttonbar .wb-btn:is(:hover,:focus-visible){outline:2px solid #5ac8ed;outline-offset:-5px;border-radius:42px}
+#wii-boot .wb-reading{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 52% 78%,#e4f3f9,transparent 66%),#fbfdfe}
+#wii-boot .wb-drive-scene{position:absolute;inset:0}
+#wii-boot .wb-drive-shadow{position:absolute;left:155px;right:128px;top:299px;height:26px;border-radius:50%;background:radial-gradient(ellipse,#779caf30,transparent 70%)}
+#wii-boot .wb-drive-console{position:absolute;left:650px;top:49px;width:133px;height:264px;border:1px solid #b8c9d2;border-radius:5px 12px 13px 5px;background:linear-gradient(90deg,#e1e9ed,#fff 12%,#fff 80%,#e5ecf0);box-shadow:9px 7px 0 #d9e3e9,12px 12px 16px #738b9b22}
+#wii-boot .wb-drive-console::after{content:'';position:absolute;left:19px;right:17px;bottom:35px;height:1px;background:#dce5e9;box-shadow:0 5px #e5edf0}
+#wii-boot .wb-drive-mark{position:absolute;top:21px;right:20px;color:#007d9e;font:900 25px/1 OakvxGame,Arial,sans-serif;letter-spacing:-2px}
+#wii-boot .wb-drive-power{position:absolute;right:25px;bottom:17px;width:5px;height:5px;border-radius:50%;background:#8db870;box-shadow:0 0 5px #98c47d80}
+#wii-boot .wb-drive-slot{position:absolute;left:644px;top:63px;width:10px;height:236px;border:2px solid #cad6dd;border-radius:7px;background:#172b38;box-shadow:0 0 0 2px #e8f0f4,0 0 12px #55cbf470;z-index:3}
+#wii-boot .wb-drive-light{position:absolute;inset:0 2px;border-radius:4px;background:#50ccff;box-shadow:0 0 9px 3px #54cfff90;opacity:.65}
+#wii-boot .wb-disc-path{position:absolute;left:0;top:0;width:649px;height:324px;overflow:hidden;z-index:2}
+#wii-boot .wb-inserting-disc{position:absolute;left:200px;top:62px;width:238px;height:238px;filter:drop-shadow(0 9px 7px #54788c24)}
+#wii-boot .wb-inserting-disc img{display:block;width:100%;height:100%;object-fit:contain}
+#wii-boot .wb-reading .wb-drive-status{position:absolute;left:80px;right:80px;bottom:33px;text-align:center;font-size:20px;color:#586e7c}
+/* The loaded title is the portfolio's own game banner, with its existing Mii. */
+#wii-boot .wb-oakvx-banner{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 78% 40%,#cfedf3,transparent 49%),linear-gradient(120deg,#fafdff 35%,#ebf6f9);color:#31434f}
+#wii-boot .wb-oakvx-banner::before{content:'';position:absolute;inset:0;opacity:.35;background-image:radial-gradient(#81a8bc45 .65px,transparent .8px);background-size:5px 5px;mask-image:linear-gradient(90deg,transparent,#000)}
+#wii-boot .wb-oakvx-banner::after{content:'';position:absolute;left:-90px;right:-90px;bottom:-98px;height:160px;border-radius:50%;background:#c9e8ef;border-top:1px solid #b7dae5;box-shadow:0 -12px 0 #e6f4f8}
+#wii-boot .wb-oakvx-orbit{position:absolute;right:95px;top:43px;width:288px;height:288px;border-radius:50%;border:1px solid #9ac9d98c;background:radial-gradient(circle at 40% 30%,#fff9,#d4eef47a);box-shadow:0 0 0 19px #fff3,0 0 0 20px #b7d9e566,0 0 0 42px #fff2}
+#wii-boot .wb-oakvx-title{position:absolute;left:76px;top:65px;z-index:2}
+#wii-boot .wb-oakvx-title p{display:flex;align-items:center;gap:12px;font-size:15px;color:#5c7483}
+#wii-boot .wb-oakvx-title p b{display:inline-grid;place-items:center;width:43px;height:43px;background:#fff;border:1px solid #bed9e4;border-radius:13px;box-shadow:0 3px 0 #b7d5e14d;font:900 26px/1 OakvxGame,Arial,sans-serif;letter-spacing:-2px;color:#007b99}
+#wii-boot .wb-oakvx-title h1{margin-top:13px;font:900 100px/1.02 OakvxGame,Arial,sans-serif;letter-spacing:-6px;color:#30434f;text-shadow:0 3px #fff,0 6px 0 #b7d3df66}
+#wii-boot .wb-oakvx-title>span{display:block;margin-top:14px;font-size:25px;color:#007d9d}
+#wii-boot .wb-oakvx-title>small{display:block;margin-top:9px;font-size:16px;color:#526c7c}
+#wii-boot .wb-oakvx-character{position:absolute;right:87px;top:23px;width:300px;height:348px;z-index:1;transform-origin:50% 85%}
+#wii-boot .wb-oakvx-avatar{position:absolute;left:-70px;top:-55px;width:470px;height:470px;max-width:none;object-fit:contain;filter:drop-shadow(3px 8px 3px #426a8520)}
+#wii-boot .wb-oakvx-platform{position:absolute;left:72px;bottom:8px;width:170px;height:29px;border-radius:50%;background:radial-gradient(ellipse,#78b4c75c,#c0e6ef80 60%,#f3fcff);border:1px solid #a8d4e3;box-shadow:0 4px 0 #b4d9e6,0 8px 12px #659db32e}
+#wii-boot .wb-oakvx-tagline{position:absolute;left:80px;bottom:45px;font-size:16px;z-index:2;color:#4a6b7e}
+#wii-boot .wb-oakvx-edition{position:absolute;right:109px;top:28px;font-size:10px;letter-spacing:2px;color:#4d7b90}
+#wii-boot .wb-zoom{position:absolute!important;z-index:20;transform-origin:0 0;pointer-events:none;overflow:hidden;will-change:transform,opacity}
+/* System settings, data management and unfinished feature shells. */
+#wii-boot .wb-system{position:absolute;inset:0;background:repeating-linear-gradient(#080808 0 2px,#101010 2px 4px);color:#ddd}
+#wii-boot .wb-system-header{height:82px;padding:24px 45px 0;border-bottom:2px solid #646464;background:linear-gradient(#161616,#050505);display:flex;align-items:flex-end;justify-content:space-between}
+#wii-boot .wb-system-header h1{font-size:24px;line-height:1.25;max-width:805px;min-width:420px;padding:6px 28px 4px;background:linear-gradient(#fff,#d1d1d1);border-radius:15px 15px 0 0;color:#555}
+#wii-boot .wb-system-header>span{font-size:27px;color:#bbb;letter-spacing:-2px;align-self:center;margin-bottom:15px}
+#wii-boot .wb-system-content{position:absolute;inset:91px 0 100px;overflow:hidden}
+#wii-boot .wb-system-footer{position:absolute;inset:auto 0 0;height:100px;display:flex;align-items:center;gap:22px;padding:0 40px;background:linear-gradient(#141414,#050505);border-top:2px solid #777;color:#555}
+#wii-boot .wb-system-footer .wb-btn{height:59px;font-size:24px;min-width:205px}
+#wii-boot .wb-options,#wii-boot .wb-data-choices{position:absolute;inset:45px 90px 32px;display:grid;grid-template-columns:1fr 1fr;gap:46px}
+#wii-boot .wb-options .wb-btn,#wii-boot .wb-data-choices .wb-btn{height:100%;min-width:0;padding:166px 15px 13px;font-size:24px;border-radius:13px;line-height:1.25;background:linear-gradient(#f1f1f1,#ddd 68%,#f9f9f9 69%,#f5f5f5)}
+#wii-boot .wb-option-settings::before{content:'';position:absolute;left:50%;top:14px;width:200px;height:143px;transform:translateX(-50%);background:url('original/ui/wii-settings.png') center top/220px auto no-repeat}
+#wii-boot .wb-option-data::before,#wii-boot .wb-option-saves::before{content:'▦';position:absolute;top:9px;left:0;right:0;text-align:center;font-size:120px;color:#9fa3a4;line-height:1.15}
+#wii-boot .wb-option-channels::before{content:'▦';position:absolute;top:12px;left:0;right:0;text-align:center;color:#969ca0;font-size:119px;line-height:1.1}
+#wii-boot .wb-option-wii::before{content:'Wii';position:absolute;top:38px;left:0;right:0;text-align:center;font-size:82px;color:#a1a6a8;letter-spacing:-7px}
+#wii-boot .wb-option-gamecube::before{content:'◈';position:absolute;top:18px;left:0;right:0;text-align:center;font-size:126px;line-height:1.05;color:#777381}
+#wii-boot .wb-settings-list{position:absolute;inset:32px 156px 17px;display:grid;gap:13px;grid-template-rows:repeat(4,1fr)}
+#wii-boot .wb-settings-list .wb-btn{height:auto;border-radius:17px;justify-content:center;font-size:24px;background:linear-gradient(#fff,#e9e9e9);color:#555}
+#wii-boot .wb-version{position:absolute;right:39px;top:13px;font-size:15px;color:#ddd}
+#wii-boot .wb-system-content>.wb-page-arrow{top:138px}
+#wii-boot .wb-page-number{margin-left:auto;margin-right:68px;display:flex;gap:19px}
+#wii-boot .wb-page-number span{display:inline-grid;place-items:center;border:2px solid #b9bcbc;border-radius:4px;width:38px;height:37px;background:#eee;color:#888}
+#wii-boot .wb-page-number .active{border-color:#3bb6e4;background:#f8fdff;color:#3f657a}
+#wii-boot .wb-setting-choices{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;height:100%;padding:25px 120px}
+#wii-boot .wb-setting-choices .wb-btn{width:100%;max-width:600px;height:62px;flex-shrink:1;border-radius:14px;color:#555}
+#wii-boot .wb-choices-grid{display:grid;grid-template-columns:1fr 1fr}
+#wii-boot .wb-wip{display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%;gap:13px;text-align:center;padding:20px 70px}
+#wii-boot .wb-wip-mark{font-size:63px;letter-spacing:-5px;color:#aaa}
+#wii-boot .wb-wip h2{font-size:25px}#wii-boot .wb-wip p[lang]{font-size:26px;color:#4b809d}
+#wii-boot .wb-wip p:last-child{font-size:18px;color:#b9b9b9}
+#wii-boot .wb-storage-tabs{display:flex;gap:2px;position:absolute;left:74px;right:74px;top:17px;height:43px}
+#wii-boot .wb-storage-tabs button{flex:1!important;background:#b9c1c7!important;border:2px solid #969fa5!important;border-radius:12px 12px 0 0;color:#555}
+#wii-boot .wb-storage-tabs .active{background:#fff!important;border-bottom-color:#fff!important}
+#wii-boot .wb-storage-grid{position:absolute;left:74px;right:74px;top:62px;bottom:39px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:5px;padding:8px;background:#f6f6f6;border:2px solid #a6aeb3}
+#wii-boot .wb-storage-item{position:relative;border:2px solid #aaa!important;border-radius:5px;background:#e1e3e5!important;overflow:hidden}
+#wii-boot button.wb-storage-item:hover{border-color:#36b7eb!important}
+#wii-boot .wb-blocks{position:absolute;bottom:10px;right:75px;font-size:16px;color:#ccc}
+#wii-boot .wb-data-preview{position:absolute;left:340px;top:30px;width:280px;height:150px;border:2px solid #aaa;border-radius:10px;overflow:hidden}
+#wii-boot .wb-data-actions{position:absolute;left:100px;right:100px;bottom:45px;display:flex;justify-content:center;gap:16px}
+/* Native SettingSelect poses retain the original cards, icons and hierarchy. */
+#wii-boot[data-view="options"] .wb-system{background:#070707 url('original/native/ui/options-chrome.webp') center/100% 100%}
+#wii-boot[data-view="data"] .wb-system{background:#070707 url('original/native/ui/data-chrome.webp') center/100% 100%}
+#wii-boot[data-view="saves"] .wb-system{background:#070707 url('original/native/ui/saves-chrome.webp') center/100% 100%}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) .wb-system-header{border:0;background:none}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) .wb-system-header h1{position:absolute;width:1px;height:1px;min-width:0;overflow:hidden;clip-path:inset(50%)}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) .wb-system-content{inset:0}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) :is(.wb-options,.wb-data-choices){inset:145.6px 120px auto;height:232.1px;grid-template-columns:288px 288px;gap:144px}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) :is(.wb-options,.wb-data-choices) .wb-btn{padding:166px 15px 13px;color:#555;background:none;border:0;box-shadow:none;filter:none}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) .wb-system-header>span{display:none}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) .wb-system-footer{inset:446px 0 auto;height:68px;border:0;background:none;padding:0 93px}
+#wii-boot:is([data-view="options"],[data-view="data"],[data-view="saves"]) .wb-system-footer .wb-btn{width:244px;min-width:0;height:68px;color:#555;background:none;font-size:28px}
+/* Original Opera settings chrome and source coordinates (608 by 456). */
+#wii-boot[data-view="settings"] .wb-system{background:#080808 url('original/native/ui/BG_common.gif') top/auto 540px repeat-x}
+#wii-boot[data-view="settings"] .wb-system-header{height:85px;padding:32px 38px 0;border:0;background:none}
+#wii-boot[data-view="settings"] .wb-system-header h1{height:42.63px;min-width:644px;background:url('original/native/ui/Tab_White_L.gif') left top/100% 100%;border-radius:0;padding:3px 12px;color:#333;font-size:28px}
+#wii-boot[data-view="settings"] .wb-system-header>span{display:none}
+#wii-boot[data-view="settings"] .wb-system-content{inset:0}
+#wii-boot[data-view="settings"] .wb-settings-list{inset:85.26316px auto auto 37.89474px;width:884.21053px;height:341.05263px;gap:0;grid-template-rows:repeat(4,85.26316px)}
+#wii-boot[data-view="settings"] .wb-settings-list .wb-btn{border:0;border-radius:0;background:url('original/native/ui/Btn_List03.gif') center/100% 100%;padding:0;font-size:28.42105px;font-weight:700;filter:none;color:#333}
+#wii-boot[data-view="settings"] .wb-settings-list .wb-btn:is(:hover,:focus-visible){background-image:url('original/native/ui/List03_on.png'),url('original/native/ui/Btn_List03.gif');background-size:631.57895px 71.05263px,100% 100%;background-repeat:no-repeat;box-shadow:none;transform:none}
+#wii-boot[data-view="settings"] .wb-version{right:52.1px;top:40.26316px;font-size:21.3px}
+#wii-boot[data-view="settings"] .wb-system-footer{inset:439.34211px 0 auto;height:85.26316px;padding:0 44.21053px;background:none;border:0}
+#wii-boot[data-view="settings"] .wb-system-footer .wb-btn{width:429.47368px;height:85.26316px;background:url('original/native/ui/Under.gif') center/100% 100%;filter:none;font-weight:700;color:#333}
+#wii-boot[data-view="settings"] .wb-system-footer .wb-btn:is(:hover,:focus-visible){background-image:url('original/native/ui/Under_on.png'),url('original/native/ui/Under.gif');background-repeat:no-repeat;transform:none}
+#wii-boot[data-view="settings"] .wb-system-content>.wb-page-arrow{top:213.15789px}
+/* SD card menu (empty virtual card, twenty pages). */
+#wii-boot .wb-sd-screen{position:absolute;inset:0;background:repeating-linear-gradient(#343434 0 2px,#383838 2px 4px);color:#fff}
+#wii-boot .wb-sd-grid{position:absolute;left:62px;right:62px;top:28px;bottom:144px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:12px}
+#wii-boot .wb-sd-empty{border:2px solid #85888a;border-radius:12px;background:linear-gradient(#55585b,#66696b);box-shadow:inset 0 1px 4px #0005}
+#wii-boot .wb-sd-screen footer{position:absolute;inset:auto 0 0;height:120px;border-top:2px solid #a4a4a4;background:linear-gradient(#ddd,#babcc1);color:#666}
+#wii-boot .wb-sd-footer-label{position:absolute;left:50%;top:9px;transform:translateX(-50%);text-align:center}
+#wii-boot .wb-sd-footer-label p{font-size:20px;margin-bottom:13px;color:#333}
+#wii-boot .wb-sd-footer-label h1{font-size:27px;white-space:nowrap}
+#wii-boot .wb-sd-help{position:absolute;right:36px;top:31px;border-radius:50%;width:62px;min-width:0;height:62px;font-size:35px;color:#666}
+/* Wii Message Board and its local navigation shells. */
+#wii-boot .wb-board{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#b5b5ae 0 2px,#bdbdb6 2px 4px);color:#555}
+#wii-boot .wb-board header{position:absolute;left:0;right:0;top:0;padding:17px 80px;background:#e5e5dccc;border-bottom:2px solid #9e9e96;display:flex;justify-content:space-between;align-items:center;font-size:23px}
+#wii-boot .wb-board header p{font-size:20px}
+#wii-boot .wb-board{background:#bdbdb6 url('original/native/ui/board-chrome.webp') center/100% 100%}
+#wii-boot .wb-board-posts{position:absolute;inset:80px 80px 110px}
+#wii-boot .wb-letter{position:absolute;left:248px;top:44px;width:290px;height:182px;white-space:pre-line;text-align:center;border-radius:2px;transform:rotate(-3deg);border-color:#c5bc9d;background:repeating-linear-gradient(#fffbea 0 22px,#d8d5c4 22px 23px);box-shadow:2px 4px 6px #0003;font-size:21px}
+#wii-boot .wb-letter::before{content:'';position:absolute;left:133px;top:-10px;width:15px;height:15px;border-radius:50%;background:#ec6666;box-shadow:1px 2px 2px #0004}
+#wii-boot .wb-board footer{position:absolute;inset:auto 0 0;height:100px;display:flex;gap:40px;justify-content:center;align-items:center;background:#e1e1d8cc;border-top:2px solid #92938c}
+#wii-boot .wb-board footer .wb-btn{height:58px;min-width:220px;font-size:21px}
+#wii-boot .wb-calendar-heading{display:flex;align-items:center;justify-content:center;gap:40px;height:63px}
+#wii-boot .wb-calendar-heading h2{font-size:26px;min-width:300px;text-align:center;text-transform:capitalize}
+#wii-boot .wb-calendar-heading .wb-btn{height:40px;min-width:45px;padding:0 10px}
+#wii-boot .wb-calendar{display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:37px;gap:5px;padding:0 130px;text-align:center;font-size:20px}
+#wii-boot .wb-calendar button{border-radius:3px;border:1px solid #b1b4b5!important;background:#fdfdfd!important;color:#555}
+#wii-boot .wb-calendar button.active{background:#bfe7f8!important;border-color:#229bcc!important}
+#wii-boot .wb-calendar button:hover{background:#d5f1fc!important}
+#wii-boot .wb-message{position:absolute;inset:22px 120px 24px;padding:22px 30px;background:#fffbea;color:#555;box-shadow:1px 2px 4px #0003;border:1px solid #c7c2b0;font-size:21px}
+#wii-boot .wb-message h2{font-size:28px;margin-bottom:15px}
+#wii-boot .wb-message p{margin-bottom:15px}
+#wii-boot .wb-message .wb-btn{height:42px;min-width:140px;font-size:18px;margin-right:14px}
+#wii-boot .wb-create{position:absolute;inset:75px 65px;display:flex;gap:25px;align-items:center;justify-content:center}
+#wii-boot .wb-create .wb-btn{height:150px;min-width:245px;border-radius:10px;padding-top:60px}
+#wii-boot .wb-create .wb-btn::before{content:'✉';position:absolute;top:10px;left:0;right:0;text-align:center;font:60px/1 Arial,sans-serif;color:#8e9da5}
+#wii-boot .wb-memo{position:absolute;inset:30px 130px;background:#fffbea;color:#555;border:1px solid #c1baa2;padding:30px;text-align:center}
+#wii-boot .wb-memo p{margin-bottom:65px}
+#wii-boot .wb-empty-message{text-align:center;padding-top:85px}
+#wii-boot .wb-register{position:absolute;left:365px;bottom:65px}
+/* HOME overlay and a single connected, virtual Wii Remote. */
+#wii-boot .wb-home{position:absolute;inset:0;color:#ddd;background:repeating-linear-gradient(#080808 0 2px,#101010 2px 4px)}
+#wii-boot .wb-home header{height:94px;display:flex;align-items:center;justify-content:space-between;padding:0 43px;border-bottom:2px solid #777;background:linear-gradient(#181818,#070707)}
+#wii-boot .wb-home h1{font-size:32px;letter-spacing:-1px}
+#wii-boot .wb-home-close{height:48px;min-width:160px;color:#555}
+#wii-boot .wb-home-actions{display:flex;align-items:center;justify-content:center;gap:90px;padding-top:56px}
+#wii-boot .wb-home-actions .wb-btn{width:300px;height:90px;border-radius:45px;font-size:28px;color:#555}
+#wii-boot .wb-home-guide{display:block;position:absolute;left:310px;top:286px;width:340px;height:80px;border-radius:42px;color:#555;white-space:normal;padding:0 30px}
+#wii-boot .wb-remotes{position:absolute;left:125px;right:82px;bottom:105px;display:flex;justify-content:center;gap:0;height:35px;color:#aaa;border:2px solid #757575;border-radius:18px}
+#wii-boot .wb-remotes>div{position:relative;display:flex;gap:14px;align-items:center;justify-content:center;width:25%;text-align:center;opacity:.35;font-size:20px}
+#wii-boot .wb-remotes>div.connected{opacity:1;color:#64c7ed}
+#wii-boot .wb-remotes>div>img{display:block;width:28px;height:110px;object-fit:contain;margin:7px auto}
+#wii-boot .wb-battery img{width:32px;height:26px;object-fit:contain}
+#wii-boot .wb-home footer{position:absolute;inset:auto 0 0;height:95px;border-top:2px solid #777;background:linear-gradient(#181818,#070707);display:flex;align-items:center;justify-content:center}
+#wii-boot .wb-home footer .wb-btn{width:650px;height:48px;font-size:25px;background:none;border:0;color:#ccc;box-shadow:none;justify-content:flex-start;padding-left:20px}
+#wii-boot .wb-home-remote{position:absolute;left:35px;top:-30px;width:65px;height:260px;object-fit:contain;filter:grayscale(1)}
+#wii-boot .wb-remote-options{padding:24px 120px;text-align:center;font-size:22px}
+#wii-boot .wb-remote-options>div{display:flex;align-items:center;justify-content:center;gap:22px;margin:6px 0 10px}
+#wii-boot .wb-remote-options h2{margin:6px 0 10px}
+#wii-boot .wb-remote-options .wb-btn{height:42px;min-width:100px;margin:0 8px}
+#wii-boot .wb-remote-options meter{width:230px;height:25px;accent-color:#45bceb}
+#wii-boot .wb-home{background:#080808 url('original/native/ui/home-chrome.webp') center/100% 100% no-repeat}
+#wii-boot .wb-home header{background:none;border:0}
+#wii-boot .wb-home header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#wii-boot .wb-home .wb-home-close{background:none;color:transparent;box-shadow:none;border:0;position:absolute;left:735px;top:25px;width:210px;height:65px}
+#wii-boot .wb-home .wb-remotes{visibility:hidden}
+#wii-boot .wb-home footer{background:none;border:0}
+#wii-boot .wb-home footer .wb-btn{color:transparent;position:absolute;inset:0;width:100%;height:100%}
+#wii-boot .wb-home .wb-home-remote{display:none}
+#wii-boot .wb-home-actions .wb-btn,#wii-boot .wb-home .wb-home-guide{background:url('original/native/ui/home-button.webp') center/100% 100% no-repeat!important;border:0;border-radius:0;box-shadow:none;filter:none}
+#wii-boot :is(.wb-buttonbar,.wb-system-footer,.wb-settings-list,.wb-setting-choices,.wb-data-actions,.wb-home-actions,.wb-remote-options) .wb-btn,#wii-boot .wb-home-close,#wii-boot .wb-home-guide{
+  padding-left:32px;padding-right:32px;border:0;border-radius:0;box-shadow:none;background-color:transparent;
+  background-image:url('original/native/ui/settings-button-left.png'),url('original/native/ui/settings-button-right.png'),url('original/native/ui/settings-button-middle.png');
+  background-position:left center,right center,center;background-size:32px 100%,32px 100%,8px 100%;background-repeat:no-repeat,no-repeat,repeat-x;
+  background-origin:border-box,border-box,content-box;background-clip:border-box,border-box,content-box;filter:grayscale(1)
+}
+#wii-boot :is(.wb-buttonbar,.wb-system-footer,.wb-settings-list,.wb-setting-choices,.wb-data-actions,.wb-home-actions,.wb-remote-options) .wb-btn:is(:hover,:focus-visible),#wii-boot .wb-home-close:is(:hover,:focus-visible),#wii-boot .wb-home-guide:is(:hover,:focus-visible){filter:none}
+#wii-boot.wb-launching .wb-stage{animation:wb-blackout 280ms cubic-bezier(.4,0,.2,1) forwards}
+@keyframes wb-blackout{to{opacity:0}}
+#wii-boot.wb-revealing{pointer-events:none;animation:wb-blackout 440ms cubic-bezier(.22,.61,.36,1) both}
+#wii-boot.wb-revealing .wb-web-controls,#wii-boot.wb-revealing .wb-rotate-hint{visibility:hidden}
+#wii-boot.wb-calm.wb-revealing{animation:none;opacity:0}
+#wii-boot.wb-calm *,#wii-boot.wb-calm *::before,#wii-boot.wb-calm *::after{animation:none!important;transition:none!important}
+@media(max-width:400px){#wii-boot .wb-web-controls{gap:6px}#wii-boot .wb-web-controls .wb-btn{padding:0 10px;font-size:11px}}

@@ -71,15 +71,52 @@
     [data-home] .system-dock__button { border-radius: 50%; }
     [data-home] [data-channel-open] { background: #e1f3f7; }
     [data-home] [data-channel-back] { background: #eee5f5; }
-    [data-home] .loader { position: fixed; inset: 0; z-index: 110; display: block; opacity: 0; visibility: hidden; pointer-events: none; background: #f4f7faf5; transition: opacity .12s,visibility .12s; }
-    [data-home].home-loading .loader { opacity: 1; visibility: visible; animation: home-loader-failsafe 0s 1.2s forwards; }
-    [data-home] .loader__dots { width: 64px; height: 64px; }
-    [data-home] .loader__dots i::before { width: 7px; height: 7px; background: #009ac7; box-shadow: 0 1px 2px #00718f22; animation: home-loading-dot .8s ease-in-out infinite; animation-delay: calc(var(--dot)*.1s); }
+    [data-home] .loader {
+        position: fixed;
+        inset: 0;
+        z-index: 110;
+        display: block;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        background: #07111d;
+        color: #fff;
+        transition: opacity .38s var(--ease-out), visibility .38s;
+    }
+    [data-home].home-loading .loader { opacity: 1; visibility: visible; pointer-events: auto; }
+    [data-home].home-loading .loader .wiiu-loader__tile { animation: wiiu-tile-in .7s var(--spring) both; }
+    [data-home].home-loading .loader .wiiu-loader__title,
+    [data-home].home-loading .loader .wiiu-loader__bar,
+    [data-home].home-loading .loader .wiiu-loader__status { animation: wiiu-fade-up .5s var(--ease-out) both; }
+    [data-home].home-loading .loader .wiiu-loader__bar { animation-delay: .12s; }
+    [data-home].home-loading .loader .wiiu-loader__status { animation-delay: .18s; }
+    .wiiu-loader__bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 42%, #1d4f7a 0%, #0d2238 45%, #07111d 100%); }
+    .wiiu-loader__glow { position: absolute; left: 50%; top: 42%; width: min(70vw, 700px); aspect-ratio: 1; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, #2b9fd0 0%, #1a6f9e 35%, transparent 70%); opacity: .35; filter: blur(20px); animation: wiiu-glow 2.4s ease-in-out infinite; }
+    .wiiu-loader__grid { position: absolute; inset: 0; background-image: linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 0%, transparent 75%); mask-image: radial-gradient(ellipse at 50% 45%, #000 0%, transparent 75%); }
+    .wiiu-loader__top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: clamp(16px, 3vw, 32px) clamp(20px, 4vw, 48px); font: 800 11px/1 Nunito, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #bfe6f5; }
+    .wiiu-loader__wiiu { font: 900 20px/1 Nunito, sans-serif; letter-spacing: -.04em; text-transform: none; color: #fff; }
+    .wiiu-loader__wiiu::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #00b7e7; box-shadow: 0 0 10px #00b7e7; }
+    .wiiu-loader__channel { color: #8fd8ee; }
+    .wiiu-loader__center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 18px; width: min(86vw, 420px); text-align: center; }
+    .wiiu-loader__tile { position: relative; width: clamp(112px, 22vw, 176px); aspect-ratio: 1; padding: 10px; border-radius: 22%; background: linear-gradient(145deg, #ffffff, #cfe9f4); box-shadow: 0 0 0 2px #ffffff55, 0 18px 40px #00000066, 0 0 60px #00b7e744; overflow: hidden; }
+    .wiiu-loader__tile img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 16%; }
+    .wiiu-loader__shine { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
+    .wiiu-loader__shine::after { content: ''; position: absolute; top: -50%; left: 0; width: 40%; height: 200%; background: linear-gradient(90deg, transparent, #ffffffaa, transparent); transform: translateX(-150%) rotate(20deg); animation: wiiu-shine 2.2s ease-in-out infinite; }
+    .wiiu-loader__title { margin: 0; font: 900 clamp(24px, 4.5vw, 38px)/1.05 Nunito, sans-serif; letter-spacing: -.03em; color: #fff; text-shadow: 0 2px 20px #00000088; }
+    .wiiu-loader__title span { color: #8fd8ee; font-weight: 700; }
+    .wiiu-loader__bar { width: min(100%, 320px); height: 6px; border-radius: 999px; background: #ffffff1f; overflow: hidden; box-shadow: inset 0 1px 2px #00000066; }
+    .wiiu-loader__bar i { display: block; width: 100%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #00b7e7, #7fe3ff); transform: scaleX(0); transform-origin: left center; box-shadow: 0 0 12px #00b7e7aa; }
+    .wiiu-loader__status { display: flex; justify-content: space-between; width: min(100%, 320px); margin: 0; font: 700 11px/1 Nunito, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #9fc9db; }
+    .wiiu-loader__pct { color: #fff; font-variant-numeric: tabular-nums; }
+    .wiiu-loader__hint { position: absolute; bottom: clamp(16px, 3vw, 28px); left: 50%; transform: translateX(-50%); margin: 0; font: 700 10px/1 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #6f93a8; white-space: nowrap; }
     @keyframes home-channel-enter { from { opacity: 0; transform: translateY(18px) scale(.92); } to { opacity: 1; transform: none; } }
     @keyframes home-bracket-pulse { 0%,100% { opacity: .65; transform: scale(1); } 50% { opacity: 1; transform: scale(1.012); } }
     @keyframes home-gloss { 0%,12% { opacity: 0; transform: translateX(-80%); } 22% { opacity: .8; } 42%,100% { opacity: 0; transform: translateX(80%); } }
-    @keyframes home-loading-dot { 0%,100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.12); } }
-    @keyframes home-loader-failsafe { to { opacity: 0; visibility: hidden; } }
+    @keyframes wiiu-tile-in { 0% { opacity: 0; transform: rotate(-8deg) scale(.7); } 60% { opacity: 1; transform: rotate(2deg) scale(1.04); } 100% { opacity: 1; transform: rotate(-3deg) scale(1); } }
+    @keyframes wiiu-glow { 0%,100% { opacity: .28; transform: translate(-50%,-50%) scale(1); } 50% { opacity: .45; transform: translate(-50%,-50%) scale(1.08); } }
+    @keyframes wiiu-shine { 0% { transform: translateX(-150%) rotate(20deg); } 100% { transform: translateX(250%) rotate(20deg); } }
+    @keyframes wiiu-fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
     @media (min-width:768px) and (max-width:1099px) {
         [data-home] .hero__grid { grid-template-columns: 140px minmax(0,1fr) 42px; column-gap: 20px; }
         [data-home] .hero__shot { width: 140px; }

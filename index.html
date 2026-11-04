@@ -26,7 +26,7 @@
             const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (paused || reduce) root.classList.add('calm');
             if (paused) root.classList.add('paused');
-            if (!paused && !reduce && firstHome) root.classList.add('home-loading');
+            if (!paused && !reduce) root.classList.add('home-loading');
         })();
     </script>
     <meta name="color-scheme" content="light">
@@ -85,8 +85,27 @@
 <div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
     <a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
 
-    <!-- Puntini originali, solo al primo accesso della sessione -->
-    <div class="loader" data-home-loader aria-hidden="true"><div class="loader__dots"><i style="--dot:0"></i><i style="--dot:1"></i><i style="--dot:2"></i><i style="--dot:3"></i><i style="--dot:4"></i><i style="--dot:5"></i><i style="--dot:6"></i><i style="--dot:7"></i></div><span class="loader__label" data-i18n="loader.label">Apro il portfolio</span></div>
+    <!-- Banner di avvio in stile Wii U, solo nella home -->
+    <div class="loader wiiu-loader" data-home-loader role="status" aria-live="polite" aria-label="Caricamento del portfolio" data-i18n-aria="loader.aria">
+        <div class="wiiu-loader__bg" aria-hidden="true">
+            <span class="wiiu-loader__glow"></span>
+            <span class="wiiu-loader__grid"></span>
+        </div>
+        <div class="wiiu-loader__top" aria-hidden="true">
+            <span class="wiiu-loader__wiiu">Wii U</span>
+            <span class="wiiu-loader__channel">oakvx channel</span>
+        </div>
+        <div class="wiiu-loader__center">
+            <div class="wiiu-loader__tile">
+                <span class="wiiu-loader__shine" aria-hidden="true"></span>
+                <img src="assets/avatars/showingoff-still.webp" width="512" height="512" alt="">
+            </div>
+            <p class="wiiu-loader__title">Gabriele Lucia <span>/ oakvx</span></p>
+            <div class="wiiu-loader__bar" role="progressbar" aria-label="Avvio del portfolio" data-i18n-aria="loader.progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i data-loader-bar></i></div>
+            <p class="wiiu-loader__status"><span data-loader-status data-i18n="loader.status">Caricamento</span><span class="wiiu-loader__pct" data-loader-pct>0%</span></p>
+        </div>
+        <p class="wiiu-loader__hint" data-i18n="loader.hint">Non spegnere la console.</p>
+    </div>
 
     <header class="hdr" data-header>
         <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>

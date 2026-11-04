@@ -60,7 +60,7 @@
         if(finished)return;
         finished=true;clearTimeout(loaderTimer);root.classList.remove('home-loading');
         const loader=document.querySelector('[data-home-loader]');
-        if(loader)setTimeout(()=>loader.remove(),140);
+        if(loader)setTimeout(()=>loader.remove(),420);
         if(root.dataset.homeFirst==='true'&&!stopped()&&!document.hidden)menu.classList.add('home-enter');
     }
     menu.addEventListener('animationend',event=>{
@@ -77,9 +77,25 @@
     showPage(0);
     if(root.classList.contains('home-loading')) {
         const elapsed=performance.now()-Number(root.dataset.homeBoot || 0);
-        loaderTimer=setTimeout(finish,Math.max(0,650-elapsed));
+        const bar=document.querySelector('[data-loader-bar]');
+        const pct=document.querySelector('[data-loader-pct]');
+        const status=document.querySelector('[data-loader-status]');
+        const en=root.lang==='en';
+        if(bar&&pct){
+            const duration=Math.max(1,800-elapsed), start=performance.now();
+            const tick=now=>{
+                const p=Math.min(1,(now-start)/duration);
+                bar.style.transform=`scaleX(${p})`;
+                pct.textContent=`${Math.round(p*100)}%`;
+                bar.parentElement?.setAttribute('aria-valuenow',String(Math.round(p*100)));
+                if(p<1)requestAnimationFrame(tick);
+                else if(status)status.textContent=en?'Ready':'Pronto';
+            };
+            requestAnimationFrame(tick);
+        }
+        loaderTimer=setTimeout(finish,Math.max(0,900-elapsed));
         Promise.all([
-            new Promise(resolve=>setTimeout(resolve,Math.max(0,280-elapsed))),
+            new Promise(resolve=>setTimeout(resolve,Math.max(0,900-elapsed))),
             (document.fonts?.ready || Promise.resolve()).catch(()=>{})
         ]).then(finish);
     } else finish();

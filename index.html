@@ -47,7 +47,6 @@
 <link rel="stylesheet" href="assets/wiiu/buttons.css">
 <link rel="stylesheet" href="assets/wiiu/dialogs.css">
 <link rel="stylesheet" href="assets/wiiu/plaza.css">
-<link rel="stylesheet" href="assets/wiiu/project-icons.css">
 <link rel="stylesheet" href="assets/wiiu/home.css">
 <link rel="stylesheet" href="assets/wiiu/theme.css">
 <script src="assets/wiiu/home.js" defer blocking="render"></script>
@@ -290,120 +289,139 @@
             </div>
         </section>
 
-        <!-- 5 · Progetti: lista semantica con una piazza decorativa progressiva -->
-        <section class="work paper" id="progetti" aria-labelledby="work-title" data-work data-plaza>
-            <div class="work__track">
-                <div class="wrap work__stage">
-                    <div class="work__head">
-                        <h2 class="h2" id="work-title" data-i18n-html="work.title">Progetti <em>selezionati.</em></h2>
-                        <p class="work__intro"><span data-i18n="work.intro">Quattro progetti, dal browser al database.</span> <span class="mono">2023 — 2026</span></p>
-                        <picture class="avatar work__avatar" data-avatar data-avatar-pose="standing" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/standing-still.webp"><img src="assets/avatars/standing-still.webp" data-avatar-animated="assets/avatars/standing.gif" data-avatar-still="assets/avatars/standing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
-                    </div>
+        <!-- 5 · Progetti: i repository pubblici di github.com/oakvx in una piazza decorativa.
+             La lista ordinata è il contenuto; canvas, Mii e fumetti sono solo scenografia. -->
+        <section class="plaza" id="progetti" aria-labelledby="work-title" data-work data-plaza>
+            <div class="wrap plaza__head">
+                <h2 class="h2" id="work-title" data-i18n-html="work.title">I miei <em>repository.</em></h2>
+                <p class="plaza__intro"><span data-i18n="work.intro">Tutti i progetti pubblici su GitHub, radunati in piazza. Più la folla è grande, più il repository è attivo.</span> <a class="mono plaza__count" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-plaza-count>6</span> repo · github.com/oakvx ↗</a></p>
+                <p class="plaza__hint mono" aria-hidden="true" data-i18n="work.hint">Passa su un’icona · clicca un Mii per farlo parlare</p>
+            </div>
 
-                    <ol class="work__list" data-work-list>
-                        <li class="proj" data-proj style="--tilt:-3deg" data-project="brat-animator">
-                            <a class="proj__head" href="projects/brat-animator/" data-langlink>
-                                <span class="proj__n mono">01.</span>
-                                <span class="proj__name">Brat Animator</span>
-                                <span class="proj__kind" data-i18n="work.p1k">Editor di lyric video</span>
-                                <span class="proj__tags mono">JavaScript · Canvas · WebCodecs</span>
+            <div class="plaza__stage" data-plaza-stage>
+                <picture class="avatar work__avatar plaza__me" data-avatar data-avatar-pose="standing" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/standing-still.webp"><img src="assets/avatars/standing-still.webp" data-avatar-animated="assets/avatars/standing.gif" data-avatar-still="assets/avatars/standing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
+
+                <ol class="plaza__list" data-work-list>
+                    <li class="repo" data-proj data-project="brat-animator" data-repo="bratAnimator" data-stars="4" data-size="1224" data-pushed="2026-11-01" data-lang="JavaScript" style="--lang:#f1e05a">
+                        <figure class="repo__icon" data-print-work>
+                            <a class="repo__glass" href="projects/brat-animator/" data-langlink aria-describedby="repo-1-kind">
+                                <img class="repo__thumb" src="assets/work/brat-editor-small.webp" width="720" height="500" loading="lazy" decoding="async" alt="Brat Animator" style="object-position:0 0">
                             </a>
-                            <p class="proj__text" data-i18n="work.p1">Un editor che ho costruito per animare testi LRC ed esportare lyric video direttamente dal browser.</p>
-                            <figure class="proj__print print" data-print-work>
-                                <div class="print__in">
-                                    <div class="print__photo print__photo--wide">
-                                        <img src="assets/work/brat-editor-small.webp" srcset="assets/work/brat-editor-small.webp 720w, assets/work/brat-editor.webp 1440w" sizes="(max-width: 999px) 80vw, 40vw" width="720" height="500" loading="lazy" decoding="async" alt="Brat Animator 4.0: timeline, editor di testo e anteprima video" data-i18n-alt="work.p1alt" style="object-position:0 0">
-                                    </div>
-                                    <p class="print__cap">
-                                        <span class="caption-text">brat animator 4.0</span>
-                                        <span class="print__credit mono" data-i18n="work.p1c">interfaccia reale, testo dimostrativo</span>
-                                    </p>
-                                </div>
-                                <a class="orbit" href="projects/brat-animator/" data-langlink aria-label="Esplora il progetto Brat Animator" data-i18n-aria="work.p1go">
-                                    <svg viewBox="0 0 120 120" aria-hidden="true"><text><textPath href="#orbit-path" textLength="282" lengthAdjust="spacing" data-i18n="work.orbit">esplora il progetto • esplora il progetto • </textPath></text></svg>
-                                    <span aria-hidden="true">↗</span>
-                                </a>
-                            </figure>
-                        </li>
-                        <li class="proj" data-proj style="--tilt:2.5deg" data-project="synk">
-                            <a class="proj__head" href="projects/synk/" data-langlink>
-                                <span class="proj__n mono">02.</span>
-                                <span class="proj__name">Synk</span>
-                                <span class="proj__kind" data-i18n="work.p2k">Intent picker e dashboard gestionale</span>
-                                <span class="proj__tags mono">Node.js · PostgreSQL · Regex</span>
+                        </figure>
+                        <div class="repo__card">
+                            <p class="repo__name">Brat Animator</p>
+                            <div class="repo__more"><div>
+                                <p class="repo__kind" id="repo-1-kind" data-i18n="work.r1k">Editor di lyric video</p>
+                                <p class="repo__text" data-i18n="work.r1">Anima testi sincronizzati (LRC, TTML, SRT…) in stile brat ed esporta il video direttamente dal browser, senza backend.</p>
+                                <p class="repo__meta mono"><span class="repo__lang">JavaScript</span><span data-repo-stars>★ 4</span><a href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer">oakvx/bratAnimator ↗</a></p>
+                            </div></div>
+                        </div>
+                        <ul class="repo__posts" hidden>
+                            <li data-i18n="work.r1a">Versione 5.0: editor semplice e avanzato!</li>
+                            <li data-i18n="work.r1b">Ora legge anche TTML, YAML e WebVTT</li>
+                            <li data-i18n="work.r1c">Esporto MP4 e WebM senza server</li>
+                        </ul>
+                    </li>
+                    <li class="repo" data-proj data-project="autoofficina" data-repo="autoOfficina" data-stars="0" data-size="1365" data-pushed="2026-10-20" data-lang="CSS" style="--lang:#663399">
+                        <figure class="repo__icon" data-print-work>
+                            <a class="repo__glass" href="projects/autoofficina/" data-langlink aria-describedby="repo-2-kind">
+                                <img class="repo__thumb" src="assets/work/autoofficina-cover-small.webp" width="720" height="500" loading="lazy" decoding="async" alt="Spinotto Felice" style="object-position:30% 0">
                             </a>
-                            <p class="proj__text" data-i18n="work.p2">Synk smista le richieste che arrivano su WhatsApp. Il team gestisce gli appuntamenti su Google Calendar e i dati dell’attività dal pannello.</p>
-                            <figure class="proj__print print" data-print-work>
-                                <div class="print__in">
-                                    <div class="print__photo print__photo--wide">
-                                        <img src="assets/work/synk-cover-small.webp" srcset="assets/work/synk-cover-small.webp 720w, assets/work/synk-cover.webp 1600w" sizes="(max-width: 999px) 80vw, 40vw" width="720" height="366" loading="lazy" decoding="async" alt="Synkris: materiale promozionale del progetto Synk" data-i18n-alt="work.p2alt" style="object-position:12% 50%">
-                                    </div>
-                                    <p class="print__cap">
-                                        <span class="caption-text">synk</span>
-                                        <span class="print__credit mono" data-i18n="work.p2c">Synkris / materiale fornito</span>
-                                    </p>
-                                </div>
-                                <a class="orbit" href="projects/synk/" data-langlink aria-label="Esplora il progetto Synk" data-i18n-aria="work.p2go">
-                                    <svg viewBox="0 0 120 120" aria-hidden="true"><text><textPath href="#orbit-path" textLength="282" lengthAdjust="spacing" data-i18n="work.orbit">esplora il progetto • esplora il progetto • </textPath></text></svg>
-                                    <span aria-hidden="true">↗</span>
-                                </a>
-                            </figure>
-                        </li>
-                        <li class="proj" data-proj style="--tilt:-1.5deg" data-project="beautify">
-                            <a class="proj__head" href="projects/beautify/" data-langlink>
-                                <span class="proj__n mono">03.</span>
-                                <span class="proj__name">Beautify</span>
-                                <span class="proj__kind" data-i18n="work.p3k">Progetto di diploma</span>
-                                <span class="proj__tags mono">PHP · MySQL · CRUD</span>
+                        </figure>
+                        <div class="repo__card">
+                            <p class="repo__name">Spinotto Felice</p>
+                            <div class="repo__more"><div>
+                                <p class="repo__kind" id="repo-2-kind" data-i18n="work.r2k">Sito vetrina · demo</p>
+                                <p class="repo__text" data-i18n="work.r2">Un modello di sito vetrina compilato per un’attività inventata: accessori per auto elettriche, in tema chiaro e scuro.</p>
+                                <p class="repo__meta mono"><span class="repo__lang">CSS · HTML</span><span data-repo-stars>★ 0</span><a href="https://github.com/oakvx/autoOfficina" target="_blank" rel="noopener noreferrer">oakvx/autoOfficina ↗</a></p>
+                            </div></div>
+                        </div>
+                        <ul class="repo__posts" hidden>
+                            <li data-i18n="work.r2a">Tema chiaro e tema scuro!</li>
+                            <li data-i18n="work.r2b">Spinotto Felice non esiste davvero</li>
+                            <li data-i18n="work.r2c">Un modello che si riusa per ogni attività</li>
+                        </ul>
+                    </li>
+                    <li class="repo" data-proj data-repo="oakvx.github.io" data-stars="2" data-size="15524" data-pushed="2026-11-03" data-lang="HTML" style="--lang:#e34c26">
+                        <figure class="repo__icon" data-print-work>
+                            <a class="repo__glass" href="https://github.com/oakvx/oakvx.github.io" target="_blank" rel="noopener noreferrer" aria-describedby="repo-3-kind">
+                                <img class="repo__thumb" src="assets/work/repo-portfolio-256.webp" srcset="assets/work/repo-portfolio-256.webp 256w, assets/work/repo-portfolio-512.webp 512w" sizes="200px" width="256" height="256" loading="lazy" decoding="async" alt="oakvx.github.io">
                             </a>
-                            <p class="proj__text" data-i18n="work.p3">Un gestionale multisalone per clienti, appuntamenti, operatori e servizi. Backend PHP e database MySQL.</p>
-                            <figure class="proj__print print" data-print-work>
-                                <div class="print__in">
-                                    <div class="print__photo print__photo--wide print__photo--logo">
-                                        <img src="assets/beautify-logo.svg" width="805" height="195" loading="lazy" decoding="async" alt="Logo originale di Beautify" data-i18n-alt="work.p3alt">
-                                    </div>
-                                    <p class="print__cap">
-                                        <span class="caption-text">beautify</span>
-                                        <span class="print__credit mono" data-i18n="work.p3c">logo originale del progetto</span>
-                                    </p>
-                                </div>
-                                <a class="orbit" href="projects/beautify/" data-langlink aria-label="Esplora il progetto Beautify" data-i18n-aria="work.p3go">
-                                    <svg viewBox="0 0 120 120" aria-hidden="true"><text><textPath href="#orbit-path" textLength="282" lengthAdjust="spacing" data-i18n="work.orbit">esplora il progetto • esplora il progetto • </textPath></text></svg>
-                                    <span aria-hidden="true">↗</span>
-                                </a>
-                            </figure>
-                        </li>
-                    <li class="proj" data-project="autoofficina" data-proj style="--tilt:2deg">
-                            <a class="proj__head" href="projects/autoofficina/" data-langlink>
-                                <span class="proj__n mono">04.</span>
-                                <span class="proj__name">Spinotto Felice</span>
-                                <span class="proj__kind" data-i18n="work.p4k">Sito vetrina · demo</span>
-                                <span class="proj__tags mono">HTML · CSS · JavaScript</span>
+                        </figure>
+                        <div class="repo__card">
+                            <p class="repo__name" data-i18n="work.r3n">Questo portfolio</p>
+                            <div class="repo__more"><div>
+                                <p class="repo__kind" id="repo-3-kind" data-i18n="work.r3k">Sito personale · oakvx.github.io</p>
+                                <p class="repo__text" data-i18n="work.r3">Il sito che stai guardando: tema da console, transizioni tra le pagine e nessuna libreria esterna.</p>
+                                <p class="repo__meta mono"><span class="repo__lang">HTML · CSS · JS</span><span data-repo-stars>★ 2</span><a href="https://github.com/oakvx/oakvx.github.io" target="_blank" rel="noopener noreferrer">oakvx/oakvx.github.io ↗</a></p>
+                            </div></div>
+                        </div>
+                        <ul class="repo__posts" hidden>
+                            <li data-i18n="work.r3a">Sei proprio qui, in questa piazza!</li>
+                            <li data-i18n="work.r3b">Niente librerie: solo HTML, CSS e JS</li>
+                            <li data-i18n="work.r3c">Ogni Mii è disegnato dal codice</li>
+                        </ul>
+                    </li>
+                    <li class="repo" data-proj data-repo="topGun" data-stars="0" data-size="103" data-pushed="2026-10-19" data-lang="HTML" style="--lang:#e34c26">
+                        <figure class="repo__icon" data-print-work>
+                            <a class="repo__glass" href="https://oakvx.github.io/topGun/" target="_blank" rel="noopener noreferrer" aria-describedby="repo-4-kind">
+                                <img class="repo__thumb" src="assets/work/repo-topgun-256.webp" srcset="assets/work/repo-topgun-256.webp 256w, assets/work/repo-topgun-512.webp 512w" sizes="200px" width="256" height="256" loading="lazy" decoding="async" alt="Top Gun Fly School">
                             </a>
-                            <p class="proj__text" data-i18n="work.p4">Struttura e stile di un sito vetrina automotive. La demo Spinotto Felice presenta accessori per auto elettriche.</p>
-                            <figure class="proj__print print" data-print-work>
-                                <div class="print__in">
-                                    <div class="print__photo print__photo--wide">
-                                        <img src="assets/work/autoofficina-cover-small.webp" srcset="assets/work/autoofficina-cover-small.webp 720w, assets/work/autoofficina-cover.webp 1440w" sizes="(max-width: 999px) 80vw, 40vw" width="720" height="500" loading="lazy" decoding="async" alt="Spinotto Felice: homepage della demo per accessori auto elettriche" data-i18n-alt="work.p4alt" style="object-position:0 0">
-                                    </div>
-                                    <p class="print__cap">
-                                        <span class="hand">spinotto felice</span>
-                                        <span class="print__credit mono" data-i18n="work.p4c">schermata reale del sito demo</span>
-                                    </p>
-                                </div>
-                                <a class="orbit" href="projects/autoofficina/" data-langlink aria-label="Esplora il progetto Spinotto Felice" data-i18n-aria="work.p4go">
-                                    <svg viewBox="0 0 120 120" aria-hidden="true"><text><textPath href="#orbit-path" textLength="282" lengthAdjust="spacing" data-i18n="work.orbit">esplora il progetto • esplora il progetto • </textPath></text></svg>
-                                    <span aria-hidden="true">↗</span>
-                                </a>
-                            </figure>
-                        </li>
-</ol>
-                    <div class="work__nav" data-work-nav>
-                        <button type="button" data-work-prev aria-label="Indietro: progetto precedente" data-i18n-aria="work.prev"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 6-6 6 6 6m-6-6h13"/></svg><span data-i18n="controls.back">Indietro</span></button>
-                        <span class="mono" data-work-count aria-hidden="true">01 / 03</span>
-                        <button type="button" data-work-next aria-label="Avanti: progetto successivo" data-i18n-aria="work.next"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 6 6 6-6 6m6-6H4"/></svg><span data-i18n="controls.next">Avanti</span></button>
-                    </div>
-                </div>
+                        </figure>
+                        <div class="repo__card">
+                            <p class="repo__name">Top Gun Fly School</p>
+                            <div class="repo__more"><div>
+                                <p class="repo__kind" id="repo-4-kind" data-i18n="work.r4k">Landing page · sito non ufficiale</p>
+                                <p class="repo__text" data-i18n="work.r4">Una pagina per una scuola di volo ultraleggero di Reggio Emilia, scritta in un unico file HTML. Progetto dimostrativo.</p>
+                                <p class="repo__meta mono"><span class="repo__lang">HTML</span><span data-repo-stars>★ 0</span><a href="https://github.com/oakvx/topGun" target="_blank" rel="noopener noreferrer">oakvx/topGun ↗</a></p>
+                            </div></div>
+                        </div>
+                        <ul class="repo__posts" hidden>
+                            <li data-i18n="work.r4a">Si vola sopra Reggio Emilia!</li>
+                            <li data-i18n="work.r4b">Tutto in un solo file HTML</li>
+                            <li data-i18n="work.r4c">Sito non ufficiale, solo una demo</li>
+                        </ul>
+                    </li>
+                    <li class="repo" data-proj data-repo="oakvx" data-stars="0" data-size="2764" data-pushed="2026-11-02" data-lang="Markdown" style="--lang:#083fa1">
+                        <figure class="repo__icon" data-print-work>
+                            <a class="repo__glass" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer" aria-describedby="repo-5-kind">
+                                <img class="repo__thumb" src="assets/work/repo-profile-256.webp" srcset="assets/work/repo-profile-256.webp 256w, assets/work/repo-profile-512.webp 512w" sizes="200px" width="256" height="256" loading="lazy" decoding="async" alt="oakvx">
+                            </a>
+                        </figure>
+                        <div class="repo__card">
+                            <p class="repo__name" data-i18n="work.r5n">Profilo GitHub</p>
+                            <div class="repo__more"><div>
+                                <p class="repo__kind" id="repo-5-kind" data-i18n="work.r5k">README del profilo · oakvx</p>
+                                <p class="repo__text" data-i18n="work.r5">La pagina del mio profilo, ispirata alla home di una console dei primi anni 2010. Solo Markdown e immagini disegnate da zero.</p>
+                                <p class="repo__meta mono"><span class="repo__lang">Markdown</span><span data-repo-stars>★ 0</span><a href="https://github.com/oakvx/oakvx" target="_blank" rel="noopener noreferrer">oakvx/oakvx ↗</a></p>
+                            </div></div>
+                        </div>
+                        <ul class="repo__posts" hidden>
+                            <li data-i18n="work.r5a">Benvenuto nel mio profilo!</li>
+                            <li data-i18n="work.r5b">Solo Markdown: niente CSS né JS</li>
+                        </ul>
+                    </li>
+                    <li class="repo" data-proj data-repo="unibattle" data-stars="0" data-size="0" data-pushed="2026-10-16" data-lang="" style="--lang:#8a99a8">
+                        <figure class="repo__icon" data-print-work>
+                            <a class="repo__glass" href="https://github.com/oakvx/unibattle" target="_blank" rel="noopener noreferrer" aria-describedby="repo-6-kind">
+                                <span class="repo__thumb repo__thumb--glyph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10l20 20m-4 4 4-4 4 4-4 4zM38 10 18 30m4 4-4-4-4 4 4 4z"/><path d="M10 10h5v5M38 10h-5v5"/></svg></span>
+                                <span class="sr-only">UniBattle</span>
+                            </a>
+                        </figure>
+                        <div class="repo__card">
+                            <p class="repo__name">UniBattle</p>
+                            <div class="repo__more"><div>
+                                <p class="repo__kind" id="repo-6-kind" data-i18n="work.r6k">In arrivo · repository appena aperto</p>
+                                <p class="repo__text" data-i18n="work.r6">Un repository ancora vuoto. Per ora la piazza gli tiene il posto.</p>
+                                <p class="repo__meta mono"><span class="repo__lang" data-i18n="work.wip">work in progress</span><a href="https://github.com/oakvx/unibattle" target="_blank" rel="noopener noreferrer">oakvx/unibattle ↗</a></p>
+                            </div></div>
+                        </div>
+                        <ul class="repo__posts" hidden>
+                            <li data-i18n="work.r6a">Qualcosa sta per arrivare…</li>
+                            <li data-i18n="work.r6b">Repository appena creato!</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
         </section>
 
@@ -685,7 +703,6 @@ Ingegneria Informatica @ UNIMORE.</p>
 <script src="assets/wiiu/pointer.js" defer></script>
 <script src="assets/wiiu/dialogs.js" defer></script>
 <script src="assets/wiiu/plaza.js" defer></script>
-<script src="assets/wiiu/project-icons.js" defer></script>
 </body>
 
 </html>

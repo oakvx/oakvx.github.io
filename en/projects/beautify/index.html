@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" data-lang-en-url="/en/projects/beautify/" data-static-lang="en" data-lang-it-url="/projects/beautify/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script data-wii-boot-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-wii-launched')==='1'}catch{}const p=new URLSearchParams(location.search),debug=['menu','preview'].includes(p.get('wii')),skip=p.has('nowii')||p.has('skipwii'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit/i.test(navigator.userAgent);if(!skip&&(!seen||debug)&&(!bot||debug)){window.__oakvxBootWaiting=true;r.classList.add('wii-boot-pending');window.__wiiBootTimer=setTimeout(()=>{window.__oakvxBootExpired=true;window.__oakvxBootWaiting=false;r.classList.remove('wii-boot-pending','wii-boot-active','wii-boot-background-paused','home-loading');dispatchEvent(new CustomEvent('wii-boot:ready',{detail:{reason:'fallback'}}))},4000)}})();</script>
+<link rel="stylesheet" href="/assets/wii-boot/wii-boot.css">
+<script src="/assets/wii-boot/wii-content.js" defer></script>
+<script src="/assets/wii-boot/wii-audio.js" defer></script>
+
+<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F4F7FA">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<noscript id="oakvx-full-css-fallback"></noscript>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preload" href="/assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/polaroid/site.css">
+<link rel="stylesheet" href="/assets/avatars/avatar.css">
+<link rel="stylesheet" href="/assets/polaroid/pages.css">
+<link rel="stylesheet" href="/assets/avatars/pages.css">
+<link rel="stylesheet" href="/assets/cursor.css">
+<script src="/assets/polaroid/pages-en.js" defer></script>
+<script src="/assets/polaroid/site.js" defer blocking="render"></script>
+<link rel="stylesheet" href="/assets/wiiu/motion.css">
+<link rel="stylesheet" href="/assets/wiiu/buttons.css">
+<link rel="stylesheet" href="/assets/wiiu/dialogs.css">
+<link rel="stylesheet" href="/assets/wiiu/theme.css">
+<script src="/assets/wiiu/motion.js"></script>
+<title>Beautify: PHP and MySQL salon CRM | Gabriele Lucia</title>
+<meta name="description" content="Beautify, Gabriele Lucia’s diploma project: a multi-salon PHP and MySQL CRM for customers, services, appointments, inventory and analytics.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/en/projects/beautify/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/beautify/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/projects/beautify/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/beautify/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="Beautify: PHP and MySQL salon CRM | Gabriele Lucia">
+<meta property="og:description" content="Beautify, Gabriele Lucia’s diploma project: a multi-salon PHP and MySQL CRM for customers, services, appointments, inventory and analytics.">
+<meta property="og:url" content="https://oakvx.github.io/en/projects/beautify/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-beautify-en.png">
+<meta property="og:image:secure_url" content="https://oakvx.github.io/assets/social-beautify-en.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Beautify — a multi-salon PHP and MySQL CRM, Gabriele Lucia’s diploma project.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Beautify: PHP and MySQL salon CRM | Gabriele Lucia">
+<meta name="twitter:description" content="Beautify, Gabriele Lucia’s diploma project: a multi-salon PHP and MySQL CRM for customers, services, appointments, inventory and analytics.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-beautify-en.png">
+<meta name="twitter:image:alt" content="Beautify — a multi-salon PHP and MySQL CRM, Gabriele Lucia’s diploma project.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/en/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/en/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/en/projects/beautify#webpage","url":"https://oakvx.github.io/en/projects/beautify/","name":"Beautify: PHP and MySQL salon CRM | Gabriele Lucia","description":"Beautify, Gabriele Lucia’s diploma project: a multi-salon PHP and MySQL CRM for customers, services, appointments, inventory and analytics.","inLanguage":"en","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/en/projects/beautify#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/en/projects/beautify#project"},"about":{"@id":"https://oakvx.github.io/en/projects/beautify#project"},"breadcrumb":{"@id":"https://oakvx.github.io/en/projects/beautify#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/en/projects/beautify#primaryimage","url":"https://oakvx.github.io/assets/social-beautify-en.png","contentUrl":"https://oakvx.github.io/assets/social-beautify-en.png","width":1200,"height":630,"caption":"Beautify — a multi-salon PHP and MySQL CRM, Gabriele Lucia’s diploma project.","inLanguage":"en"},{"@type":"CreativeWork","@id":"https://oakvx.github.io/en/projects/beautify#project","name":"Beautify","description":"Beautify, progetto di diploma di Gabriele Lucia: gestionale multisalone in PHP e MySQL per clienti, servizi, appuntamenti, magazzino e analitiche.","creator":{"@id":"https://oakvx.github.io/#person"},"url":"https://oakvx.github.io/en/projects/beautify/","mainEntityOfPage":{"@id":"https://oakvx.github.io/en/projects/beautify#webpage"}},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/en/projects/beautify#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/en/"},{"@type":"ListItem","position":2,"name":"Beautify","item":"https://oakvx.github.io/en/projects/beautify/"}]}]}</script>
+<script type="application/json" id="seo-translations">{"it":{"title":"Beautify: gestionale PHP e MySQL | Gabriele Lucia","description":"Beautify, progetto di diploma di Gabriele Lucia: gestionale multisalone in PHP e MySQL per clienti, servizi, appuntamenti, magazzino e analitiche.","canonical":"https://oakvx.github.io/projects/beautify/","image":"https://oakvx.github.io/assets/social-beautify-it.png","image_alt":"Beautify — gestionale multisalone in PHP e MySQL, progetto di diploma di Gabriele Lucia."},"en":{"title":"Beautify: PHP and MySQL salon CRM | Gabriele Lucia","description":"Beautify, Gabriele Lucia’s diploma project: a multi-salon PHP and MySQL CRM for customers, services, appointments, inventory and analytics.","canonical":"https://oakvx.github.io/en/projects/beautify/","image":"https://oakvx.github.io/assets/social-beautify-en.png","image_alt":"Beautify — a multi-salon PHP and MySQL CRM, Gabriele Lucia’s diploma project."}}</script>
+</head>
+<body data-page="beautify">
+<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+    <header class="hdr" data-header>
+        <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="wrap hdr__in">
+            <a class="brand" href="/en/" data-langlink aria-label="gl. Gabriele Lucia / oakvx, home" data-i18n-aria="brandLabel" data-en-href="/en/" data-it-href="/"><span class="brand__avatar" aria-hidden="true"><img src="/assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
+            <nav class="hdr__nav" aria-label="Main navigation" data-i18n-aria="navLabel">
+                <a href="/en/#percorso" data-langlink data-i18n="nav.path" data-en-href="/en/#percorso" data-it-href="/#percorso">Journey</a>
+                <a href="/en/#progetti" data-langlink data-i18n="nav.projects" data-en-href="/en/#progetti" data-it-href="/#progetti">Projects</a>
+                <a href="/en/#strumenti" data-langlink data-i18n="nav.tools" data-en-href="/en/#strumenti" data-it-href="/#strumenti">Toolkit</a>
+                <a href="/en/chi-sono/" data-langlink data-i18n="nav.about" data-en-href="/en/chi-sono/" data-it-href="/chi-sono/">About me</a>
+                <a href="/en/fuori-orario/" data-langlink data-i18n="nav.afterHours" data-en-href="/en/fuori-orario/" data-it-href="/fuori-orario/">After hours</a>
+            </nav>
+            <div class="hdr__tools">
+                <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
+                <div class="lang" role="group" aria-label="Language" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Pause animations</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Enable sound"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"></path><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"></path><path class="sound__mute" d="m17 10 4 4m0-4-4 4"></path></svg><span class="sr-only" data-sound-label aria-label="Enable sound">Enable sound</span></button>
+                <a class="pill" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"></path></svg><span data-i18n="nav.cta">Email me</span></a>
+                <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Open menu</span></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu" id="menu" data-menu hidden>
+        <nav class="menu__nav wrap" aria-label="Menu" data-i18n-aria="menuLabel">
+            <a href="/en/#percorso" class="extrude" data-langlink data-i18n="nav.path" data-en-href="/en/#percorso" data-it-href="/#percorso">Journey</a>
+            <a href="/en/#progetti" class="extrude" data-langlink data-i18n="nav.projects" data-en-href="/en/#progetti" data-it-href="/#progetti">Projects</a>
+            <a href="/en/#strumenti" class="extrude" data-langlink data-i18n="nav.tools" data-en-href="/en/#strumenti" data-it-href="/#strumenti">Toolkit</a>
+            <a href="/en/chi-sono/" class="extrude" data-langlink data-i18n="nav.about" data-en-href="/en/chi-sono/" data-it-href="/chi-sono/">About me</a>
+            <a href="/en/fuori-orario/" class="extrude" data-langlink data-i18n="nav.afterHours" data-en-href="/en/fuori-orario/" data-it-href="/fuori-orario/">After hours</a>
+            <a href="#contatti" class="extrude" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="menu__foot wrap">
+            <a class="mono" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
+            <a class="mono" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx ↗</a>
+            <p class="mono menu__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+        </div>
+    </div>
+
+    <main id="main">
+<section class="page-hero wrap"><a class="breadcrumb btn btn--ghost btn--back" href="/en/#progetti" data-langlink data-en-href="/en/#progetti" data-it-href="/#progetti"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 6-6 6 6 6m-6-6h13"></path></svg> <span data-i18n="internal.allProjects">All projects</span></a><div class="project-wordmark"><span class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><h1 class="display-title extrude">Beautify.</h1></div><p class="page-intro" data-i18n="beautify.caseSummary">A CRM for multiple salons: customers, services, availability and appointments share the same context. My final diploma project, developed in PHP and MySQL.</p><div class="project-actions"><a class="btn" href="#storytelling"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="beautify.caseHeroCTA">Explore the data</span> </a><a class="btn btn--ghost" href="https://github.com/oakvxish/maturita" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"></circle><circle cx="18" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><path d="M6 7v10m12-10v2c0 4-12 1-12 5"></path></svg>GitHub </a></div><dl class="metadata"><div><dt data-i18n="beautify.caseRoleLabel">My role</dt><dd data-i18n="beautify.caseRoleLabelValue">Primary technical role</dd></div><div><dt data-i18n="beautify.caseStackLabel">Stack</dt><dd data-i18n="beautify.caseStackLabelValue">PHP / MySQL</dd></div><div><dt data-i18n="beautify.caseFocusLabel">Focus</dt><dd data-i18n="beautify.caseFocusLabelValue">CRUD &amp; relational data</dd></div><div><dt data-i18n="beautify.caseTypeLabel">Project</dt><dd data-i18n="beautify.caseTypeLabelValue">Final diploma project</dd></div></dl><figure class="project-cover glass-frame logo-cover"><img src="/assets/beautify-logo.svg" width="805" height="195" alt="Original Beautify logo" data-i18n-alt="beautify.coverAlt" decoding="async" fetchpriority="high"><figcaption data-i18n="beautify.caseArtNote">Beautify / original project logo</figcaption></figure></section><div class="article-layout wrap"><nav class="article-nav" aria-label="On this page" data-i18n-aria="internal.contents"><a href="#overview" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="beautify.casePageOverview">The project</span></a><a href="#storytelling" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="beautify.casePageStory">How it works</span></a><a href="#details" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="beautify.casePageBuild">My work</span></a><a href="#stack" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="beautify.stackNav">Technologies</span></a></nav><div class="article-body"><section class="chapter" data-reveal id="overview"><picture class="chapter-avatar" data-avatar data-avatar-pose="idlewainting" data-cycle="idlewainting,laughing" aria-label="Change avatar pose" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="/assets/avatars/idlewainting-still.webp"><img src="/assets/avatars/idlewainting-still.webp" data-avatar-animated="../../assets/avatars/idlewainting.gif" data-avatar-still="../../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="beautify.beautifyStartTitle">The project</h2><p data-i18n="beautify.beautifyStartText">Beautify manages customers, appointments, users and services across multiple salons. It includes public booking, inventory and analytics, with separate sections for owners and employees.</p></section><section class="chapter" data-reveal id="storytelling"><picture class="chapter-avatar" data-avatar data-avatar-pose="showingoff" data-cycle="showingoff,dancing" aria-label="Change avatar pose" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="/assets/avatars/showingoff-still.webp"><img src="/assets/avatars/showingoff-still.webp" data-avatar-animated="../../assets/avatars/showingoff.webp" data-avatar-still="../../assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="beautify.beautify-storyHeading">How it works</h2><article class="technical-step" id="beautify-story-salone"><h3 data-i18n="beautify.beautify-story-saloneTitle">A salon and its users</h3><p data-i18n="beautify.beautify-story-saloneText0">After login, the session identifies the active salon. Users can belong to multiple salons; owner and employee roles determine which sections they can access.</p></article><article class="technical-step" id="beautify-story-disponibilita"><h3 data-i18n="beautify.beautify-story-disponibilitaTitle">Finding a time</h3><p data-i18n="beautify.beautify-story-disponibilitaText0">The public booking flow selects a salon, service and date. PHP logic calculates slots using duration, opening windows and staff capacity.</p><p data-i18n="beautify.beautify-story-disponibilitaText1">Shared checks between the agenda and public booking compare occupied time intervals. The supplied version proposes slots every 30 minutes and applies a minimum lead time of 15 minutes.</p></article><article class="technical-step" id="beautify-story-gestione"><h3 data-i18n="beautify.beautify-story-gestioneTitle">Managing data</h3><p data-i18n="beautify.beautify-story-gestioneText0">The PHP backend uses mysqli for customers, services, appointments and settings. Queries include the active salon to separate each business’s data.</p><p data-i18n="beautify.beautify-story-gestioneText1">The CRM includes customer history, inventory and analytics. The database also contains user-to-salon associations and account recovery tables.</p></article></section><section class="chapter" data-reveal id="details"><picture class="chapter-avatar" data-avatar data-avatar-pose="discofever" data-cycle="discofever,flyspinning" aria-label="Change avatar pose" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="/assets/avatars/discofever-still.webp"><img src="/assets/avatars/discofever-still.webp" data-avatar-animated="../../assets/avatars/discofever.gif" data-avatar-still="../../assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="beautify.beautifyBuildTitle">My work</h2><p data-i18n="beautify.beautifyBuildText">I developed the PHP backend and MySQL database, including CRUD workflows, salon context and shared availability checks for the agenda and public booking.</p><div class="stack-grid"><article class="stack-item"><h3 data-i18n="beautify.beautifyBackendTitle">PHP, server side</h3><p data-i18n="beautify.beautifyBackendText">The backend handles the CRM’s application workflows. My work includes creating, reading, updating and deleting data.</p></article><article class="stack-item"><h3 data-i18n="beautify.beautifyDatabaseTitle">MySQL, data side</h3><p data-i18n="beautify.beautifyDatabaseText">The schema links salons, customers, services and appointments, with associations between users and salons. Queries include the active salon.</p></article></div></section><section class="chapter" data-reveal id="stack"><picture class="chapter-avatar" data-avatar data-avatar-pose="laughing" data-cycle="laughing,almostfalling" aria-label="Change avatar pose" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="/assets/avatars/laughing-still.webp"><img src="/assets/avatars/laughing-still.webp" data-avatar-animated="../../assets/avatars/laughing.gif" data-avatar-still="../../assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="beautify.stackTitle">Technologies</h2><div class="stack-grid"><article class="stack-item"><h3>PHP</h3><p class="stack-role" data-i18n="beautify.stackTool0Role">SERVER-SIDE LOGIC</p><p data-i18n="beautify.stackTool0Usage">I developed the backend with mysqli, sessions, permissions and CRUD operations. Pages are server-rendered; forms send GET and POST requests.</p><a class="link" href="https://www.php.net/manual/en/intro-whatis.php" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentation</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>MySQL</h3><p class="stack-role" data-i18n="beautify.stackTool1Role">DATA &amp; RELATIONSHIPS</p><p data-i18n="beautify.stackTool1Usage">The schema links salons, customers, services and appointments. User-to-salon associations support multiple businesses with distinct roles.</p><a class="link" href="https://dev.mysql.com/doc/refman/8.4/en/what-is-mysql.html" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentation</span> <span aria-hidden="true">↗</span></a></article></div></section></div></div><section class="project-next wrap" data-reveal><div class="project-next-grid"><a href="/en/projects/brat-animator/" data-langlink data-en-href="/en/projects/brat-animator/" data-it-href="/projects/brat-animator/"><span class="project-next-number">01</span><h2>Brat Animator</h2><p data-i18n="brat-animator.kind">Lyric video editor</p><span aria-hidden="true">↗</span></a><a href="/en/projects/synk/" data-langlink data-en-href="/en/projects/synk/" data-it-href="/projects/synk/"><span class="project-next-number">02</span><h2>Synk</h2><p data-i18n="synk.kind">Intent routing &amp; salon dashboard</p><span aria-hidden="true">↗</span></a></div></section>
+<section class="contact wrap" data-reveal id="contatti">
+ <h2 class="contact-title extrude" data-extrude><span data-i18n="internal.contactTitle">Email me.</span></h2>
+ <p class="contact-intro" data-i18n="internal.contactIntro">Let’s continue by email.</p>
+ <a class="contact-email" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com <span aria-hidden="true">↗</span></a>
+ <div class="project-actions"><a class="btn" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"></path></svg><span data-i18n="internal.emailAction">Email me</span></a><a class="btn btn--ghost" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"></circle><circle cx="18" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><path d="M6 7v10m12-10v2c0 4-12 1-12 5"></path></svg>GitHub </a></div>
+</section>
+</main>
+
+    <footer class="foot">
+        <div class="wrap foot__top">
+            <div class="foot__contact">
+                <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
+                <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+                <div class="foot__sleeper" aria-hidden="true">
+                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
+                        <source media="(prefers-reduced-motion: reduce)" srcset="/assets/avatars/sleeping-still.webp">
+                        <img src="/assets/avatars/sleeping-still.webp" data-avatar-animated="../../assets/avatars/sleeping.gif" data-avatar-still="../../assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
+                    </picture>
+                </div>
+            </div>
+            <nav class="foot__nav" aria-label="Footer links" data-i18n-aria="foot.navLabel">
+                <ul>
+                    <li><a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+                    <li><a href="/en/chi-sono/" data-langlink data-i18n="nav.about" data-en-href="/en/chi-sono/" data-it-href="/chi-sono/">About me</a></li>
+                    <li><a href="/en/fuori-orario/" data-langlink data-i18n="nav.afterHours" data-en-href="/en/fuori-orario/" data-it-href="/fuori-orario/">After hours</a></li>
+                    <li><a href="/en/assets/CREDITS.html" data-langlink data-i18n="foot.credits" data-en-href="/en/assets/CREDITS.html" data-it-href="/assets/CREDITS.html">Credits</a></li>
+                </ul>
+                <ul>
+                    <li><a href="/en/#percorso" data-langlink data-i18n="nav.path" data-en-href="/en/#percorso" data-it-href="/#percorso">Journey</a></li>
+                    <li><a href="/en/#progetti" data-langlink data-i18n="nav.projects" data-en-href="/en/#progetti" data-it-href="/#progetti">Projects</a></li>
+                    <li><a href="/en/#strumenti" data-langlink data-i18n="nav.tools" data-en-href="/en/#strumenti" data-it-href="/#strumenti">Toolkit</a></li>
+                    <li><a href="/en/#contatti" data-langlink data-i18n="nav.contact" data-en-href="/en/#contatti" data-it-href="/#contatti">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrap foot__mark" aria-hidden="true" data-mark>
+            <svg class="mark__o" viewbox="-60 -60 120 120"><path data-mark-o d="M0,-50A50,50 0 1,1 0,-50Z"></path></svg><span class="mark__rest extrude">akvx</span>
+        </div>
+        <div class="wrap foot__bottom">
+            <p>© 2026 Gabriele Lucia</p>
+            <a href="#main"><span data-i18n="foot.top">Back to top</span> <span aria-hidden="true">↑</span></a>
+        </div>
+    </footer>
+
+    <p class="toast" role="status" aria-live="polite" data-toast></p>
+<script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
+<script src="/assets/avatars/avatar.js" defer blocking="render"></script>
+<script src="/assets/avatars/poses.js" defer blocking="render"></script>
+<script src="/assets/avatars/companion.js" defer blocking="render"></script>
+<script src="/assets/wiiu/sound.js" defer></script>
+<script src="/assets/wiiu/music.js" defer></script>
+<script src="/assets/wiiu/pointer.js" defer></script>
+<script src="/assets/wiiu/dialogs.js" defer></script>
+<script src="/assets/wii-boot/wii-boot.js" defer></script>
+</body>
+</html>

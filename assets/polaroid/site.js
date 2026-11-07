@@ -80,8 +80,33 @@
         'journey.s4d': 'aug — sep 2026',
         'journey.s4': 'Software and automation · PLC / SQL Server',
         'journey.s5': 'Computer Engineering',
-        'work.title': 'Latest <em>projects.</em>',
-        'work.intro': 'The public projects I worked on most recently, ordered by their latest push to GitHub. The bigger the crowd, the more active the project.',
+        'featured.eyebrow': 'Selected work',
+        'featured.title': 'From the problem <em>to the project.</em>',
+        'featured.intro': 'Three projects where design and development meet: a creative editor, a management system and a conversational workflow.',
+        'featured.openBrat': 'Open the Brat Animator case study',
+        'featured.openSynk': 'Open the Synk case study',
+        'featured.openBeautify': 'Open the Beautify case study',
+        'featured.technologies': 'Technologies',
+        'featured.brat.alt': 'Brat Animator interface with timeline and video preview',
+        'featured.brat.kind': 'Creative browser editor',
+        'featured.brat.description': 'An editor for turning synced lyrics into lyric videos, with a timeline and rendering directly in the browser.',
+        'featured.brat.role': 'Application development · Canvas · video export',
+        'featured.synk.alt': 'Promotional material supplied for the Synk project',
+        'featured.synk.kind': 'Conversational automation',
+        'featured.synk.description': 'A WhatsApp workflow that understands requests and connects appointments, Google Calendar and a management dashboard.',
+        'featured.synk.role': 'Intent picker · backend · dashboard · fine-tuning',
+        'featured.beautify.alt': 'Beautify project logo',
+        'featured.beautify.kind': 'Multi-salon CRM · diploma project',
+        'featured.beautify.description': 'A CRM for multiple salons: customers, services, availability and appointments share the same context.',
+        'featured.beautify.role': 'PHP backend · MySQL database · availability logic',
+        'featured.caseStudy': 'Case study',
+        'featured.caseStudyBrat': 'Read the Brat Animator case study',
+        'featured.caseStudySynk': 'Read the Synk case study',
+        'featured.caseStudyBeautify': 'Read the Beautify case study',
+        'featured.openApp': 'Open the app',
+        'featured.github': 'See recent GitHub activity ↓',
+        'work.title': 'Recent <em>GitHub activity.</em>',
+        'work.intro': 'Public repositories updated recently, ordered by their latest push. The selected projects are above.',
         'work.hint': 'Hover an icon · click a Mii to make it talk',
         'work.wip': 'work in progress',
         'work.r1k': 'Lyric video editor',
@@ -210,6 +235,19 @@
     };
 
     let lang = root.dataset.lang === 'en' ? 'en' : 'it';
+    if (root.dataset.staticLang !== 'en' && lang === 'en' && root.dataset.langEnUrl) {
+        try {
+            const current = new URL(location.href);
+            const destination = new URL(root.dataset.langEnUrl, location.href);
+            current.searchParams.delete('lang');
+            destination.search = current.searchParams.toString();
+            destination.hash = current.hash;
+            if (destination.pathname !== current.pathname) {
+                try { localStorage.setItem('lang', 'en'); } catch {}
+                location.replace(destination.href);
+            }
+        } catch {}
+    }
     const t = key => DYN[lang][key] ?? key;
     const originals = new WeakMap();
     const keep = (el, slot, value) => {
@@ -226,6 +264,18 @@
     } catch {}
 
     function applyLang(next, save) {
+        if (save && next !== lang) {
+            const destination = next === 'en'
+                ? root.dataset.langEnUrl
+                : root.dataset.staticLang === 'en' ? root.dataset.langItUrl : null;
+            if (destination) {
+                try { localStorage.setItem('lang', next); } catch {}
+                const url = new URL(destination, location.href);
+                if (location.hash && !url.hash) url.hash = location.hash;
+                location.assign(url.href);
+                return;
+            }
+        }
         lang = next;
         root.lang = next;
         root.dataset.lang = next;
@@ -253,8 +303,11 @@
         $$('[data-langlink]').forEach(a => {
             const base = keep(a, 'href', a.getAttribute('href'));
             if (!en) return a.setAttribute('href', base);
+            const staticHref = a.getAttribute('data-en-href');
+            if (staticHref) return a.setAttribute('href', staticHref);
             const [path, hash] = base.split('#');
-            a.setAttribute('href', `${path}?lang=en${hash ? `#${hash}` : ''}`);
+            const query = path.includes('?') ? '&lang=en' : '?lang=en';
+            a.setAttribute('href', `${path}${query}${hash ? `#${hash}` : ''}`);
         });
         $$('button[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
         const seo = SEO && SEO[next];
@@ -278,9 +331,10 @@
                 localStorage.setItem('lang', next);
             } catch {}
             const url = new URL(location.href);
-            if (en) url.searchParams.set('lang', 'en');
+            if (root.dataset.staticLang === 'en') url.searchParams.delete('lang');
+            else if (en) url.searchParams.set('lang', 'en');
             else url.searchParams.delete('lang');
-            history.replaceState(history.state, '', url);
+            if (url.href !== location.href) history.replaceState(history.state, '', url);
         }
         onLang.forEach(fn => fn());
     }

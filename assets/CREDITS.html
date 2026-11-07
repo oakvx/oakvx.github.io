@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" data-lang-en-url="/en/assets/CREDITS.html">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,7 +8,7 @@
 <script src="wii-boot/wii-content.js" defer></script>
 <script src="wii-boot/wii-audio.js" defer></script>
 
-<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
+<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F4F7FA">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -33,7 +33,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://oakvx.github.io/assets/CREDITS.html">
 <link rel="alternate" hreflang="it" href="https://oakvx.github.io/assets/CREDITS.html">
-<link rel="alternate" hreflang="en" href="https://oakvx.github.io/assets/CREDITS.html?lang=en">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/assets/CREDITS.html">
 <link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/assets/CREDITS.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gabriele Lucia / oakvx">
@@ -54,7 +54,7 @@
 <meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
 <meta name="twitter:image:alt" content="Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/assets/CREDITS.html#webpage","url":"https://oakvx.github.io/assets/CREDITS.html","name":"Crediti dei materiali | Gabriele Lucia (oakvx)","description":"Font, icone, fotografie e materiali dei progetti: licenze e provenienza dei contenuti usati nel portfolio di Gabriele Lucia.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/assets/CREDITS.html#primaryimage"},"breadcrumb":{"@id":"https://oakvx.github.io/assets/CREDITS.html#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/assets/CREDITS.html#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.","inLanguage":"it"},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/assets/CREDITS.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Crediti","item":"https://oakvx.github.io/assets/CREDITS.html"}]}]}</script>
-<script type="application/json" id="seo-translations">{"it":{"title":"Crediti dei materiali | Gabriele Lucia (oakvx)","description":"Font, icone, fotografie e materiali dei progetti: licenze e provenienza dei contenuti usati nel portfolio di Gabriele Lucia.","canonical":"https://oakvx.github.io/assets/CREDITS.html","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"Materials credits | Gabriele Lucia (oakvx)","description":"Fonts, icons, photographs and project materials: licences and sources for content used in Gabriele Lucia’s portfolio.","canonical":"https://oakvx.github.io/assets/CREDITS.html?lang=en","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
+<script type="application/json" id="seo-translations">{"it":{"title":"Crediti dei materiali | Gabriele Lucia (oakvx)","description":"Font, icone, fotografie e materiali dei progetti: licenze e provenienza dei contenuti usati nel portfolio di Gabriele Lucia.","canonical":"https://oakvx.github.io/assets/CREDITS.html","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"Materials credits | Gabriele Lucia (oakvx)","description":"Fonts, icons, photographs and project materials: licences and sources for content used in Gabriele Lucia’s portfolio.","canonical":"https://oakvx.github.io/en/assets/CREDITS.html","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
 </head>
 <body data-page="credits">
 <div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>

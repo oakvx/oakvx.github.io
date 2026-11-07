@@ -1,0 +1,31 @@
+name: Site checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regenerate English pages and sitemap
+        run: python3 scripts/build_static.py
+      - name: Run syntax, links, SEO, accessibility and sitemap checks
+        run: python3 scripts/check_site.py
+      - name: Ensure generated pages are committed
+        run: test -z "$(git status --porcelain -- en sitemap.xml)"

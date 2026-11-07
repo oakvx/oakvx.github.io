@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" data-lang-en-url="/en/404.html">
 <head>
 <base id="site-base" href="/">
 <meta charset="utf-8">
@@ -9,7 +9,7 @@
 <script src="assets/wii-boot/wii-content.js" defer></script>
 <script src="assets/wii-boot/wii-audio.js" defer></script>
 
-<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
+<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F4F7FA">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -34,7 +34,7 @@
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://oakvx.github.io/404.html">
 <link rel="alternate" hreflang="it" href="https://oakvx.github.io/404.html">
-<link rel="alternate" hreflang="en" href="https://oakvx.github.io/404.html?lang=en">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/404.html">
 <link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/404.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gabriele Lucia / oakvx">
@@ -55,7 +55,7 @@
 <meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
 <meta name="twitter:image:alt" content="Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/404.html#webpage","url":"https://oakvx.github.io/404.html","name":"404 — Pagina non trovata | Gabriele Lucia","description":"La pagina che cerchi non esiste o è stata spostata. Torna alla home o esplora i progetti di Gabriele Lucia.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/404.html#primaryimage"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/404.html#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.","inLanguage":"it"}]}</script>
-<script type="application/json" id="seo-translations">{"it":{"title":"404 — Pagina non trovata | Gabriele Lucia","description":"La pagina che cerchi non esiste o è stata spostata. Torna alla home o esplora i progetti di Gabriele Lucia.","canonical":"https://oakvx.github.io/404.html","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"404 — Page not found | Gabriele Lucia","description":"The page you are looking for does not exist or has moved. Return home or explore Gabriele Lucia’s projects.","canonical":"https://oakvx.github.io/404.html?lang=en","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
+<script type="application/json" id="seo-translations">{"it":{"title":"404 — Pagina non trovata | Gabriele Lucia","description":"La pagina che cerchi non esiste o è stata spostata. Torna alla home o esplora i progetti di Gabriele Lucia.","canonical":"https://oakvx.github.io/404.html","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"404 — Page not found | Gabriele Lucia","description":"The page you are looking for does not exist or has moved. Return home or explore Gabriele Lucia’s projects.","canonical":"https://oakvx.github.io/en/404.html","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
 </head>
 <body data-page="not-found">
 <div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>

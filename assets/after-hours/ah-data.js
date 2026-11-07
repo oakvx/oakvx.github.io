@@ -94,7 +94,7 @@ AH.apps = [
     version: null,
     /* ordine di pubblicazione del contenuto nella pagina originale */
     order: 1,
-    icon: { img: "../assets/avatars/showingoff-still.webp", fit: "cover", pos: "50% 32%", glyph: null },
+    icon: { img: "/assets/avatars/showingoff-still.webp", fit: "cover", pos: "50% 32%", glyph: null },
     long:
       "Fuori orario scrivo codice che non serve a niente in particolare, soprattutto perché mi piace capire come funzionano le cose. Ogni tanto rifaccio da zero qualcosa che già andava bene, solo perché nel frattempo avevo capito un modo migliore di farla.\n\n" +
       "Il computer resta acceso un po’ più del dovuto. Di solito è così che vanno le cose.\n\n" +
@@ -142,9 +142,9 @@ AH.apps = [
 
       <h3>Quando un’idea mi piace davvero</h3>
       <div class="entry">
-        <div class="e-thumb"><img src="../assets/avatars/discofever-still.webp" alt=""></div>
-        <div class="e-thumb"><img src="../assets/avatars/idlewainting-still.webp" alt=""></div>
-        <div class="e-thumb"><img src="../assets/avatars/showingoff-still.webp" alt=""></div>
+        <div class="e-thumb"><img src="/assets/avatars/discofever-still.webp" alt=""></div>
+        <div class="e-thumb"><img src="/assets/avatars/idlewainting-still.webp" alt=""></div>
+        <div class="e-thumb"><img src="/assets/avatars/showingoff-still.webp" alt=""></div>
       </div>
       <p class="word-meta" style="margin-top:-4px">Quando un’idea mi piace davvero, la porto fino in fondo.</p>
 
@@ -168,7 +168,7 @@ AH.apps = [
     coder: "Gabriele Lucia (oakvx)",
     version: null,
     order: 2,
-    icon: { img: "../assets/work/brat-editor.webp", fit: "cover", pos: "50% 20%", glyph: null },
+    icon: { img: "/assets/work/brat-editor.webp", fit: "cover", pos: "50% 20%", glyph: null },
     long:
       "Qualche progetto in più. Tre idee nate per imparare qualcosa, diventate abbastanza complete da meritare una pagina tutta loro.\n\n" +
       "Brat Animator — un editor nel browser che trasforma testi LRC in lyric video animati.\n" +
@@ -180,7 +180,7 @@ AH.apps = [
         una pagina tutta loro.</p>
 
       <div class="entry">
-        <div class="e-thumb"><img src="../assets/work/brat-editor.webp" alt="Interfaccia di Brat Animator"></div>
+        <div class="e-thumb"><img src="/assets/work/brat-editor.webp" alt="Interfaccia di Brat Animator"></div>
         <div class="e-body">
           <p class="e-kicker">01 / Canvas · JavaScript</p>
           <p class="e-title">Brat Animator</p>
@@ -190,7 +190,7 @@ AH.apps = [
       </div>
 
       <div class="entry">
-        <div class="e-thumb"><img src="../assets/work/synk-cover.webp" alt="Materiale promozionale di Synk"></div>
+        <div class="e-thumb"><img src="/assets/work/synk-cover.webp" alt="Materiale promozionale di Synk"></div>
         <div class="e-body">
           <p class="e-kicker">02 / Node.js</p>
           <p class="e-title">Synk</p>
@@ -201,7 +201,7 @@ AH.apps = [
       </div>
 
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/beautify-logo.svg" alt="Logo di Beautify"></div>
+        <div class="e-thumb contain"><img src="/assets/beautify-logo.svg" alt="Logo di Beautify"></div>
         <div class="e-body">
           <p class="e-kicker">03 / PHP + MySQL · Progetto di diploma</p>
           <p class="e-title">Beautify</p>
@@ -221,7 +221,7 @@ AH.apps = [
     coder: "Gabriele Lucia (oakvx)",
     version: null,
     order: 3,
-    icon: { img: "../assets/fuori-orario/3ds-cutout.png", fit: "contain", pos: "50% 50%", glyph: null },
+    icon: { img: "/assets/fuori-orario/3ds-cutout.png", fit: "contain", pos: "50% 50%", glyph: null },
     long:
       "Oltre il codice, un banco di lavoro: le console che ho modificato.\n\n" +
       "Nintendo 3DS (tre esemplari), Wii U, Wii, PlayStation 4. La Wii è anche il motivo per cui esiste questo canale.",
@@ -230,28 +230,28 @@ AH.apps = [
       <p>Le console che ho modificato.</p>
 
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/3ds-cutout.png" alt="Nintendo 3DS"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/3ds-cutout.png" alt="Nintendo 3DS"></div>
         <div class="e-body">
           <p class="e-kicker">×3</p>
           <p class="e-title">Nintendo 3DS</p>
         </div>
       </div>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/wii-u.png" alt="Wii U"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/wii-u.png" alt="Wii U"></div>
         <div class="e-body">
           <p class="e-kicker">Nintendo</p>
           <p class="e-title">Wii U</p>
         </div>
       </div>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/wii.png" alt="Wii"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/wii.png" alt="Wii"></div>
         <div class="e-body">
           <p class="e-kicker">Nintendo</p>
           <p class="e-title">Wii</p>
         </div>
       </div>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/ps4-cutout.png" alt="PlayStation 4"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/ps4-cutout.png" alt="PlayStation 4"></div>
         <div class="e-body">
           <p class="e-kicker">Sony</p>
           <p class="e-title">PlayStation 4</p>
@@ -271,7 +271,7 @@ AH.apps = [
     coder: "Gabriele Lucia (oakvx)",
     version: null,
     order: 4,
-    icon: { img: "../assets/fuori-orario/rayman-legends.jpg", fit: "cover", pos: "50% 45%", glyph: null },
+    icon: { img: "/assets/fuori-orario/rayman-legends.jpg", fit: "cover", pos: "50% 45%", glyph: null },
     long:
       "I preferiti dello scaffale.\n\n" +
       "Rayman Legends — tra i miei giochi preferiti.\n" +
@@ -282,7 +282,7 @@ AH.apps = [
       <p>Tre giochi che restano installati.</p>
 
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/rayman-legends.jpg" alt="Rayman Legends"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/rayman-legends.jpg" alt="Rayman Legends"></div>
         <div class="e-body">
           <p class="e-kicker">RL</p>
           <p class="e-title">Rayman Legends</p>
@@ -290,7 +290,7 @@ AH.apps = [
         </div>
       </div>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/yokai-watch-2.png" alt="Yo-kai Watch 2: Bony Spirits"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/yokai-watch-2.png" alt="Yo-kai Watch 2: Bony Spirits"></div>
         <div class="e-body">
           <p class="e-kicker">2</p>
           <p class="e-title">Yo-kai Watch 2: Bony Spirits</p>
@@ -298,7 +298,7 @@ AH.apps = [
         </div>
       </div>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/fuori-orario/just-dance-2017.jpg" alt="Just Dance 2017"></div>
+        <div class="e-thumb contain"><img src="/assets/fuori-orario/just-dance-2017.jpg" alt="Just Dance 2017"></div>
         <div class="e-body">
           <p class="e-kicker">17</p>
           <p class="e-title">Just Dance 2017</p>
@@ -412,7 +412,7 @@ AH.apps = [
 
       <h3>Profili</h3>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/icons/git.svg" alt=""></div>
+        <div class="e-thumb contain"><img src="/assets/icons/git.svg" alt=""></div>
         <div class="e-body">
           <p class="e-kicker">Profilo principale</p>
           <p class="e-title">github.com/oakvx</p>
@@ -420,7 +420,7 @@ AH.apps = [
         </div>
       </div>
       <div class="entry">
-        <div class="e-thumb contain"><img src="../assets/icons/git.svg" alt=""></div>
+        <div class="e-thumb contain"><img src="/assets/icons/git.svg" alt=""></div>
         <div class="e-body">
           <p class="e-kicker">Secondo profilo</p>
           <p class="e-title">github.com/oakvxish</p>

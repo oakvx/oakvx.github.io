@@ -237,12 +237,17 @@
     const data=window.OAKVX_WII_CONTENT,soundModule=window.OAKVX_WII_AUDIO;
     if(!data||!soundModule)throw new Error('Wii screen or audio module unavailable');
     ({channels,screens,button,image,channelArt,arrow,systemScreen}=data);if(window.__oakvxBootExpired&&!debug){ready('fallback');return;}
-    el=document.createElement('dialog');el.id='wii-boot';el.lang='it';el.setAttribute('aria-label','Console Wii · Avvio OAKVX');
-    el.innerHTML=`<div class="wb-stage"><div id="wb-content" tabindex="-1"></div></div><div class="wb-web-controls" aria-label="Controlli del sito">${button('Audio: disattivato','sound')}${button('HOME','home')}${button('Salta intro','skip')}</div><p class="wb-rotate-hint">Ruota il telefono per una visuale più grande.</p><p class="wb-sr" id="wb-live" aria-live="polite"></p>`;
+    const english=root.lang==='en';
+    el=document.createElement('dialog');el.id='wii-boot';el.lang=english?'en':'it';el.setAttribute('aria-label',english?'Wii console · OAKVX startup':'Console Wii · Avvio OAKVX');
+    const skipLabel=english?'Skip intro · go to portfolio':'Salta intro · vai al portfolio';
+    const controlsLabel=english?'Website controls':'Controlli del sito';
+    const rotateHint=english?'Rotate your phone for a larger view.':'Ruota il telefono per una visuale più grande.';
+    el.innerHTML=`<div class="wb-stage" lang="it"><div id="wb-content" tabindex="-1"></div></div><div class="wb-web-controls" lang="${root.lang}" aria-label="${controlsLabel}">${button(english?'Audio: off':'Audio: disattivato','sound')}${button('HOME','home')}${button(skipLabel,'skip',{},'wb-skip-action')}</div><p class="wb-rotate-hint" lang="${root.lang}">${rotateHint}</p><p class="wb-sr" id="wb-live" lang="it" aria-live="polite"></p>`;
+    el.querySelector('[data-action="skip"]').lang=root.lang;
     stage=el.querySelector('.wb-stage');content=el.querySelector('#wb-content');document.body.append(el);
     if(getComputedStyle(stage).position!=='absolute')throw new Error('Wii stylesheet unavailable');
     root.classList.add('wii-boot-active','wii-boot-background-paused');root.classList.remove('wii-boot-pending');clearTimeout(window.__wiiBootTimer);
-    window.wiiuSound?.setScene('wii');audio=soundModule.createWiiAudio(base,window.wiiuSound,sound=>{const toggle=el.querySelector('[data-action="sound"]');toggle.textContent=!sound.available?'Audio non disponibile':sound.enabled?'Audio: attivato':'Audio: disattivato';toggle.setAttribute('aria-pressed',String(sound.enabled));toggle.disabled=!sound.available;});audio.setVolume(volume);
+    window.wiiuSound?.setScene('wii');audio=soundModule.createWiiAudio(base,window.wiiuSound,sound=>{const toggle=el.querySelector('[data-action="sound"]');toggle.textContent=!sound.available?(english?'Audio unavailable':'Audio non disponibile'):sound.enabled?(english?'Audio: on':'Audio: attivato'):(english?'Audio: off':'Audio: disattivato');toggle.setAttribute('aria-pressed',String(sound.enabled));toggle.disabled=!sound.available;});audio.setVolume(volume);
     if(debug)model.screen='menu';render();fit();el.showModal();focus(model.screen==='health'?'[data-action="continue"]':'[data-action="disc"]');
     if(!debug)later(calm()?0:(31+60)/60*1000,()=>{healthReady=true;const b=content.querySelector('[data-action="continue"]');if(b){b.disabled=false;b.focus({preventScroll:true});}});
     clockTimer=setInterval(clock,30000);motionObserver=new MutationObserver(motion);motionObserver.observe(root,{attributes:true,attributeFilter:['class']});

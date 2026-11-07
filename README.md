@@ -39,7 +39,7 @@ ridotto, il tag `picture` seleziona la versione statica anche senza JavaScript.
 
 ## Avvio locale
 
-Non servono installazione di pacchetti o build. Dalla cartella del sito:
+Per visualizzare il sito non servono pacchetti o build. Dalla cartella del sito:
 
 ```bash
 python3 -m http.server 8000
@@ -94,3 +94,20 @@ pagina e gli stessi token di colore.
 - Traduzioni: si usa `data-i18n`, `data-i18n-aria`, `data-i18n-alt`.
 - Dove una pagina ha un proprio `#contatti` il pulsante «Scrivimi» scorre lì,
   altrimenti porta ai contatti della home.
+
+## Pagine inglesi e controlli automatici
+
+Le copie inglesi indicizzabili sono generate in `en/` dall’HTML italiano e dai
+dizionari esistenti (`site.js` e `pages-en.js`). Dopo aver aggiornato contenuti o
+traduzioni, rigenerarle e lanciare i controlli:
+
+```bash
+python3 scripts/build_static.py
+python3 scripts/check_site.py
+```
+
+Il controllo non richiede pacchetti Python aggiuntivi: verifica la sintassi
+JavaScript, i link e le immagini locali, alt text e nomi accessibili dei controlli,
+i metadati SEO, la sitemap
+e la presenza delle pagine IT/EN. GitHub Actions esegue gli stessi controlli su
+push e pull request e verifica che `en/` e `sitemap.xml` siano aggiornati.

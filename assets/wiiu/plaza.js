@@ -931,7 +931,7 @@
         return true;
     }
     async function refreshRepos() {
-        if (repoRequest || document.hidden) return;
+        if (repoRequest || document.hidden || !visible || suspended) return;
         lastRepoCheck = Date.now();
         const request = repoRequest = new AbortController(), timeout = setTimeout(() => request.abort(), 10000);
         try {
@@ -942,6 +942,9 @@
             applyRepos(repos);
             try { localStorage.setItem(CACHE, JSON.stringify({ t: Date.now(), repos })); } catch {}
         } catch {} finally { clearTimeout(timeout); if (repoRequest === request) repoRequest = null; }
+    }
+    function maybeRefreshRepos() {
+        if (visible && !document.hidden && !suspended && Date.now() - lastRepoCheck >= RECHECK) refreshRepos();
     }
 
     /* ------------------------------------------- 10. input, ciclo, ciclo di vita */
@@ -1074,18 +1077,21 @@
     let layoutMobile = narrow.matches;
     populate();
     new ResizeObserver(fit).observe(stage);
-    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }, { rootMargin: '80px 0px' }).observe(section);
+    new IntersectionObserver(entries => {
+        visible = entries[0].isIntersecting;
+        sync();
+        if (visible) maybeRefreshRepos();
+    }, { rootMargin: '280px 0px' }).observe(section);
     new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['class'] });
     new MutationObserver(() => { clearBubbles(); updateRepoDates(); }).observe(root, { attributes: true, attributeFilter: ['lang'] });
-    document.addEventListener('visibilitychange', () => { sync(); if (!document.hidden && Date.now() - lastRepoCheck >= RECHECK) refreshRepos(); });
+    document.addEventListener('visibilitychange', () => { sync(); maybeRefreshRepos(); });
     reduced.addEventListener('change', sync);
     narrow.addEventListener('change', () => { if (layoutMobile !== narrow.matches) rebuild(); });
     addEventListener('pagehide', () => { suspended = true; repoRequest?.abort(); sync(); });
-    addEventListener('pageshow', () => { suspended = false; sync(); if (Date.now() - lastRepoCheck >= RECHECK) refreshRepos(); });
+    addEventListener('pageshow', () => { suspended = false; sync(); maybeRefreshRepos(); });
     fit();
     // Keep the last successful public selection usable when GitHub is unavailable.
     const fallback = [...cards.values()].map(el => ({ name: el.dataset.repo, full_name: 'oakvx/' + el.dataset.repo, size: el.dataset.size, pushed_at: el.dataset.pushed, stargazers_count: el.dataset.stars }));
     applyRepos(fallback);
     try { const cached = JSON.parse(localStorage.getItem(CACHE) || 'null'); if (cached) applyRepos(cached.repos); } catch {}
-    refreshRepos();
 })();

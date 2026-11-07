@@ -258,3 +258,8 @@
         [data-home] .home-wii-hover-label { transition: none; }
     }
 }
+
+/* Reuse the original Wii menu typeface for homepage titles and section headings. */
+html[data-home] :is(h1,h2,h3,h4,.hero__role) {
+    font-family: Wii,Arial,sans-serif;
+}

@@ -421,7 +421,8 @@ def translate_document(doc: Element, source_file: str, en: dict[str, str], dyn: 
                 pass
 
     # Static files live one directory deeper than their Italian source. Root
-    # URLs keep CSS, scripts, images and in-page links stable from every route.
+    # URLs keep CSS, scripts, images (including JS-switched avatar variants)
+    # and in-page links stable from every route.
     for node in walk(doc):
         if node.tag == "link":
             rel = (node.get("rel") or "").lower().split()
@@ -449,7 +450,7 @@ def translate_document(doc: Element, source_file: str, en: dict[str, str], dyn: 
                     node.set("href", translated_url(path, query, fragment))
                 else:
                     node.set("href", italian_href)
-        for attr in ("src", "poster", "formaction"):
+        for attr in ("src", "poster", "formaction", "data-avatar-animated", "data-avatar-still"):
             value = node.get(attr)
             if value:
                 resolved = resolve_local(value, route)

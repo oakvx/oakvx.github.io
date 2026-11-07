@@ -118,7 +118,7 @@ def audit_page(relative: str, language: str, route: str, check_seo: bool = False
                 if "noopener" not in rel:
                     raise AssertionError(f"{relative}: target=_blank link should use rel=noopener")
             refs = []
-            for name in ("href", "src", "poster", "formaction"):
+            for name in ("href", "src", "poster", "formaction", "data-avatar-animated", "data-avatar-still"):
                 value = attrs.get(name)
                 if value:
                     refs.append(value)
@@ -149,6 +149,8 @@ def audit_wii_home(relative: str) -> None:
     css = (ROOT / "assets/wiiu/home.css").read_text(encoding="utf-8")
     if "aspect-ratio: 16 / 9" not in css or "grid-template-columns: repeat(4,minmax(0,1fr))" not in css or "width: 400%" not in css:
         raise AssertionError("homepage Wii menu must preserve its 16:9, four-column, four-page layout")
+    if "font-family: Wii,Arial,sans-serif" not in css:
+        raise AssertionError("homepage titles should use the preserved Wii menu font")
     resources = (
         "assets/wii-boot/original/native/ui/menu-chrome.webp",
         "assets/wii-boot/original/native/ui/focus-chrome.webp",
@@ -163,6 +165,7 @@ def audit_wii_home(relative: str) -> None:
         "assets/wii-boot/original/ui/arrow-right.png",
         "assets/wii-boot/original/native/clock/0.png",
         "assets/wii-boot/original/native/clock/colon.png",
+        "assets/wii-boot/original/fonts/menu.woff2",
     )
     missing = [asset for asset in resources if not (ROOT / asset).is_file()]
     if missing:

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it" data-home>
+<html lang="it" data-home data-lang-en-url="/en/">
 
 <head>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
             root.classList.add('js');
             let lang, paused = false, firstHome = false;
             try {
-                lang = new URL(location.href).searchParams.get('lang') || localStorage.getItem('lang');
+                lang = root.dataset.staticLang || new URL(location.href).searchParams.get('lang') || localStorage.getItem('lang');
                 paused = localStorage.getItem('motion') === 'paused';
             } catch {}
             try {
@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="assets/polaroid/site.css">
     <link rel="stylesheet" href="assets/avatars/avatar.css">
     <link rel="stylesheet" href="assets/polaroid/hero.css">
-    <script src="assets/polaroid/site.js?v=20261104-recent" defer blocking="render"></script>
+    <script src="assets/polaroid/site.js?v=20261107-static-en" defer blocking="render"></script>
     <script src="assets/avatars/avatar.js" defer blocking="render"></script>
     <script src="assets/avatars/poses.js" defer blocking="render"></script>
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -55,6 +55,7 @@
 <link rel="stylesheet" href="assets/wiiu/home.css?v=20261104-square">
 <link rel="stylesheet" href="assets/wiiu/desktop.css">
 <link rel="stylesheet" href="assets/wiiu/theme.css">
+<link rel="stylesheet" href="assets/polaroid/featured.css">
 <script src="assets/wiiu/home.js?v=20261104-square" defer blocking="render"></script>
 <script src="assets/wiiu/motion.js"></script>
 <title>Gabriele Lucia (oakvx) | Developer e Graphic Designer</title>
@@ -63,7 +64,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://oakvx.github.io/">
 <link rel="alternate" hreflang="it" href="https://oakvx.github.io/">
-<link rel="alternate" hreflang="en" href="https://oakvx.github.io/?lang=en">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/">
 <link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gabriele Lucia / oakvx">
@@ -84,7 +85,7 @@
 <meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
 <meta name="twitter:image:alt" content="Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/#webpage","url":"https://oakvx.github.io/","name":"Gabriele Lucia (oakvx) | Developer e Graphic Designer","description":"Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social e interfacce. Studio Ingegneria Informatica a UNIMORE.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/#person"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.","inLanguage":"it"}]}</script>
-<script type="application/json" id="seo-translations">{"it":{"title":"Gabriele Lucia (oakvx) | Developer e Graphic Designer","description":"Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social e interfacce. Studio Ingegneria Informatica a UNIMORE.","canonical":"https://oakvx.github.io/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"Gabriele Lucia (oakvx) | Developer & Graphic Designer","description":"Gabriele Lucia, developer and graphic designer in Sassuolo, Italy. Web applications, social graphics and interfaces. Computer Engineering student at UNIMORE.","canonical":"https://oakvx.github.io/?lang=en","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
+<script type="application/json" id="seo-translations">{"it":{"title":"Gabriele Lucia (oakvx) | Developer e Graphic Designer","description":"Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social e interfacce. Studio Ingegneria Informatica a UNIMORE.","canonical":"https://oakvx.github.io/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"Gabriele Lucia (oakvx) | Developer & Graphic Designer","description":"Gabriele Lucia, developer and graphic designer in Sassuolo, Italy. Web applications, social graphics and interfaces. Computer Engineering student at UNIMORE.","canonical":"https://oakvx.github.io/en/","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
 </head>
 
 <body>
@@ -97,7 +98,7 @@
     <header class="hdr" data-header>
         <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         <div class="wrap hdr__in">
-            <a class="brand" href="./" aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
+            <a class="brand" href="./" data-langlink aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
             <nav class="hdr__nav" aria-label="Navigazione principale" data-i18n-aria="navLabel">
                 <a href="#percorso" data-i18n="nav.path">Percorso</a>
                 <a href="#progetti" data-i18n="nav.projects">Progetti</a>
@@ -189,7 +190,7 @@
             <div class="wrap about__grid">
                 <p class="label" data-reveal data-i18n="about.label">Chi sono</p>
                 <h2 class="h2 about__title" id="about-title" data-reveal data-i18n-html="about.title">Mi sono avvicinato alla programmazione <em>per curiosità.</em></h2>
-                <figure class="about__shot" data-reveal data-cycle="sitting,laughing" title="clicca">
+                <figure class="about__shot" data-reveal data-cycle="sitting,laughing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose">
                     <span class="tape" aria-hidden="true"></span>
                     <div class="print" style="--tilt:-4deg">
                         <div class="print__in">
@@ -278,12 +279,78 @@
             </div>
         </section>
 
-        <!-- 5 · Progetti: i repository pubblici di github.com/oakvx in una piazza decorativa.
-             La lista ordinata è il contenuto; canvas, Mii e fumetti sono solo scenografia. -->
-        <section class="plaza" id="progetti" aria-labelledby="work-title" data-work data-plaza>
+        <!-- Progetti scelti: una selezione stabile, non dipendente dall'ultimo push. -->
+        <section class="featured wrap" id="progetti" aria-labelledby="featured-title">
+            <div class="featured__head">
+                <p class="label" data-reveal data-i18n="featured.eyebrow">Progetti selezionati</p>
+                <h2 class="h2" id="featured-title" data-reveal data-i18n-html="featured.title">Dal problema <em>al progetto.</em></h2>
+                <p class="featured__intro" data-reveal data-i18n="featured.intro">Tre lavori che mostrano come progetto e sviluppo si incontrano: un editor creativo, un gestionale e un flusso conversazionale.</p>
+            </div>
+            <div class="featured__grid">
+                <article class="featured-card featured-card--brat" data-reveal>
+                    <a class="featured-card__media" href="projects/brat-animator/" data-langlink aria-label="Apri il caso studio Brat Animator" data-i18n-aria="featured.openBrat">
+                        <img src="assets/work/brat-editor-small.webp" srcset="assets/work/brat-editor-small.webp 720w, assets/work/brat-editor.webp 1440w" sizes="(max-width: 760px) calc(100vw - 48px), (max-width: 1100px) 42vw, 520px" width="1440" height="1000" loading="lazy" decoding="async" alt="Interfaccia di Brat Animator con timeline e anteprima video" data-i18n-alt="featured.brat.alt">
+                        <span class="featured-card__index" aria-hidden="true">01 / 03</span>
+                    </a>
+                    <div class="featured-card__body">
+                        <p class="featured-card__kind mono" data-i18n="featured.brat.kind">Editor creativo · browser</p>
+                        <h3><a href="projects/brat-animator/" data-langlink>Brat Animator</a></h3>
+                        <p class="featured-card__description" data-i18n="featured.brat.description">Un editor per trasformare testi sincronizzati in lyric video, con timeline e rendering direttamente nel browser.</p>
+                        <p class="featured-card__role" data-i18n="featured.brat.role">Sviluppo dell’applicazione · Canvas · export video</p>
+                        <ul class="featured-card__tags" aria-label="Tecnologie" data-i18n-aria="featured.technologies">
+                            <li>JavaScript</li><li>Canvas</li><li>WebCodecs</li>
+                        </ul>
+                        <div class="featured-card__actions">
+                            <a class="link" href="projects/brat-animator/" data-langlink aria-label="Leggi il caso studio di Brat Animator" data-i18n-aria="featured.caseStudyBrat"><span data-i18n="featured.caseStudy">Caso studio</span> <span aria-hidden="true">↗</span></a>
+                            <a class="link" href="https://oakvx.github.io/bratAnimator/" target="_blank" rel="noopener noreferrer"><span data-i18n="featured.openApp">Apri l’app</span> <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="featured-card featured-card--synk" data-reveal>
+                    <a class="featured-card__media featured-card__media--contain" href="projects/synk/" data-langlink aria-label="Apri il caso studio Synk" data-i18n-aria="featured.openSynk">
+                        <img src="assets/work/synk-cover-small.webp" srcset="assets/work/synk-cover-small.webp 720w, assets/work/synk-cover.webp 1600w" sizes="(max-width: 760px) calc(100vw - 48px), (max-width: 1100px) 42vw, 520px" width="1600" height="813" loading="lazy" decoding="async" alt="Materiale promozionale fornito per il progetto Synk" data-i18n-alt="featured.synk.alt">
+                        <span class="featured-card__index" aria-hidden="true">02 / 03</span>
+                    </a>
+                    <div class="featured-card__body">
+                        <p class="featured-card__kind mono" data-i18n="featured.synk.kind">Automazione conversazionale</p>
+                        <h3><a href="projects/synk/" data-langlink>Synk</a></h3>
+                        <p class="featured-card__description" data-i18n="featured.synk.description">Un flusso WhatsApp che interpreta le richieste e collega prenotazioni, Google Calendar e dashboard gestionale.</p>
+                        <p class="featured-card__role" data-i18n="featured.synk.role">Intent picker · backend · dashboard · fine-tuning</p>
+                        <ul class="featured-card__tags" aria-label="Tecnologie" data-i18n-aria="featured.technologies">
+                            <li>Node.js</li><li>PostgreSQL</li><li>llama.cpp</li>
+                        </ul>
+                        <div class="featured-card__actions">
+                            <a class="link" href="projects/synk/" data-langlink aria-label="Leggi il caso studio di Synk" data-i18n-aria="featured.caseStudySynk"><span data-i18n="featured.caseStudy">Caso studio</span> <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="featured-card featured-card--beautify" data-reveal>
+                    <a class="featured-card__media featured-card__media--logo" href="projects/beautify/" data-langlink aria-label="Apri il caso studio Beautify" data-i18n-aria="featured.openBeautify">
+                        <img src="assets/beautify-logo.svg" width="512" height="256" loading="lazy" decoding="async" alt="Logo del progetto Beautify" data-i18n-alt="featured.beautify.alt">
+                        <span class="featured-card__index" aria-hidden="true">03 / 03</span>
+                    </a>
+                    <div class="featured-card__body">
+                        <p class="featured-card__kind mono" data-i18n="featured.beautify.kind">Gestionale multisalone · progetto di diploma</p>
+                        <h3><a href="projects/beautify/" data-langlink>Beautify</a></h3>
+                        <p class="featured-card__description" data-i18n="featured.beautify.description">Un CRM per più saloni: clienti, servizi, disponibilità e appuntamenti condividono lo stesso contesto.</p>
+                        <p class="featured-card__role" data-i18n="featured.beautify.role">Backend PHP · database MySQL · disponibilità</p>
+                        <ul class="featured-card__tags" aria-label="Tecnologie" data-i18n-aria="featured.technologies">
+                            <li>PHP</li><li>MySQL</li><li>CRUD</li>
+                        </ul>
+                        <div class="featured-card__actions">
+                            <a class="link" href="projects/beautify/" data-langlink aria-label="Leggi il caso studio di Beautify" data-i18n-aria="featured.caseStudyBeautify"><span data-i18n="featured.caseStudy">Caso studio</span> <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <a class="featured__all link" href="#attivita-github" data-i18n="featured.github">Vedi le attività recenti su GitHub <span aria-hidden="true">↓</span></a>
+        </section>
+
+        <!-- Repository recenti: contenuto live GitHub e piazza interattiva. -->
+        <section class="plaza" id="attivita-github" aria-labelledby="activity-title" data-work data-plaza>
             <div class="wrap plaza__head">
-                <h2 class="h2" id="work-title" data-i18n-html="work.title">Ultimi <em>progetti.</em></h2>
-                <p class="plaza__intro"><span data-i18n="work.intro">I progetti pubblici su cui ho lavorato più di recente, ordinati per ultimo push su GitHub. Più la folla è grande, più il progetto è attivo.</span> <a class="mono plaza__count" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-plaza-count>5</span> repo · github.com/oakvx ↗</a></p>
+                <h2 class="h2" id="activity-title" data-i18n-html="work.title">Attività recente su <em>GitHub.</em></h2>
+                <p class="plaza__intro"><span data-i18n="work.intro">Repository pubblici aggiornati di recente, ordinati per ultimo push. I progetti selezionati sono sopra.</span> <a class="mono plaza__count" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-plaza-count>5</span> repo · github.com/oakvx ↗</a></p>
                 <p class="plaza__hint mono" aria-hidden="true" data-i18n="work.hint">Passa su un’icona · clicca un Mii per farlo parlare</p>
             </div>
 
@@ -571,7 +638,7 @@ Ingegneria Informatica @ UNIMORE.</p>
                                 <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi gabriele.gif" data-i18n-aria="desk.close.photo"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button><i></i><i></i></span>
                                 <h3 class="win__name" id="win-photo-t">gabriele.gif</h3>
                             </header>
-                            <div class="win__body viewer viewer--avatar" data-cycle="discofever,flyspinning,dancing">
+                            <div class="win__body viewer viewer--avatar" data-cycle="discofever,flyspinning,dancing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose">
                                 <picture class="avatar" data-avatar data-avatar-pose="discofever"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/discofever-still.webp"><img src="assets/avatars/discofever-still.webp" data-avatar-animated="assets/avatars/discofever.gif" data-avatar-still="assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="Avatar animato di Gabriele Lucia: clicca per cambiare posa"></picture>
                                 <p class="viewer__meta mono">512 × 512 · clicca per cambiare</p>
                             </div>
@@ -672,7 +739,7 @@ Ingegneria Informatica @ UNIMORE.</p>
 <script src="assets/wiiu/music.js" defer></script>
 <script src="assets/wiiu/pointer.js" defer></script>
 <script src="assets/wiiu/dialogs.js" defer></script>
-<script src="assets/wiiu/plaza.js?v=20261104-recent" defer></script>
+<script src="assets/wiiu/plaza.js?v=20261107-lazy-api" defer></script>
 <script src="assets/wii-boot/wii-boot.js" defer></script>
 </body>
 

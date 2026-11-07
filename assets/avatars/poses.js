@@ -32,6 +32,10 @@
         let i = Math.max(0, poses.indexOf(picture.dataset.avatarPose));
         el.tabIndex = 0;
         el.setAttribute('role', 'button');
+        if (!el.hasAttribute('aria-label') && !el.hasAttribute('aria-labelledby')) {
+            el.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Change avatar pose' : 'Cambia posa dell’avatar');
+        }
+        el.setAttribute('aria-keyshortcuts', 'Enter Space');
         const next = () => { i = (i + 1) % poses.length; setPose(picture, poses[i]); };
         el.addEventListener('click', next);
         el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); next(); } });

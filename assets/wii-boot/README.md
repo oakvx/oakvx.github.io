@@ -3,8 +3,9 @@
 L'avvio interattivo fornito in `oakvx-wii-boot.zip` precede il portfolio
 una volta per sessione del browser. Il disco OAKVX apre l'anteprima e Start
 mostra la pagina richiesta senza redirect, conservando lingua, query e frammento.
-Salta intro chiude l'avvio immediatamente. ESC torna al menu dall'anteprima
-e salta dal menu. Tutti i dieci canali sono navigabili; quelli Nintendo aprono
+Salta intro chiude l'avvio immediatamente; il pulsante ben visibile, ampio e
+adatto al tocco usa la lingua della pagina (IT/EN). ESC torna al menu
+dall'anteprima e salta dal menu. Tutti i dieci canali sono navigabili; quelli Nintendo aprono
 un WIP identificato dal nome del canale, con ritorno funzionante.
 
 L'integrazione è vanilla HTML/CSS/JavaScript e usa un dialogo nativo.

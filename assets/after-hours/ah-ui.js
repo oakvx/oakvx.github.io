@@ -27,7 +27,7 @@ AH.App = (() => {
   }
   function avatar(pose, cls='', animated=false) {
     const pic=node('span','mii '+cls);pic.setAttribute('aria-hidden','true');
-    const img=node('img');img.src='../assets/avatars/'+pose+'-still.webp';img.width=144;img.height=144;img.alt='';img.decoding='async';
+    const img=node('img');img.src='/assets/avatars/'+pose+'-still.webp';img.width=144;img.height=144;img.alt='';img.decoding='async';
     if(animated)img.dataset.poseMotion=pose;pic.append(img);return pic;
   }
   function button(label, onClick, cls='btn', glyph) {
@@ -40,7 +40,14 @@ AH.App = (() => {
   }
   function localLink(href) {
     const u=new URL(href,location.href);
-    if(u.origin===location.origin&&/^https?:$/.test(u.protocol))u.searchParams.set('lang',s.lang);
+    if(u.origin===location.origin&&/^https?:$/.test(u.protocol)){
+      let path=u.pathname;
+      if(path.startsWith('/en/assets/'))path=path.slice(3);
+      if(s.lang==='en'&&!path.startsWith('/en/'))path='/en'+(path.startsWith('/')?path:'/'+path);
+      if(s.lang==='it'&&path.startsWith('/en/'))path=path.slice(3)||'/';
+      u.pathname=path;
+      u.searchParams.delete('lang');
+    }
     return u.href;
   }
   function appList() { return AH.apps.slice().sort(s.sort==='date'?(a,b)=>a.order-b.order:(a,b)=>a.name.localeCompare(b.name,s.lang)); }
@@ -51,8 +58,8 @@ AH.App = (() => {
     const e=node('span','icon icon--'+app.id),ic=app.icon||{};
     if(ic.img){const img=node('img','ic-img');img.src=ic.img;img.alt='';img.width=384;img.height=144;img.decoding='async';img.style.objectFit=ic.fit||'cover';img.style.objectPosition=ic.pos||'50% 50%';e.append(img);}
     else if(app.id==='languages')e.innerHTML='<span class="ic-langs"><b>IT</b><b>EN</b><b>ES</b><b lang="el">ΕΛ</b></span>';
-    else if(app.id==='github')e.innerHTML='<img class="ic-mark" src="../assets/icons/git.svg" width="48" height="48" alt=""><span class="ic-code">/oakvx</span>';
-    else if(app.id==='tools')e.innerHTML='<span class="ic-tools"><img src="../assets/icons/javascript.svg" width="32" height="32" alt=""><img src="../assets/icons/nodejs.svg" width="32" height="32" alt=""><img src="../assets/icons/php.svg" width="42" height="32" alt=""></span><span class="ic-code">&lt;/&gt;</span>';
+    else if(app.id==='github')e.innerHTML='<img class="ic-mark" src="/assets/icons/git.svg" width="48" height="48" alt=""><span class="ic-code">/oakvx</span>';
+    else if(app.id==='tools')e.innerHTML='<span class="ic-tools"><img src="/assets/icons/javascript.svg" width="32" height="32" alt=""><img src="/assets/icons/nodejs.svg" width="32" height="32" alt=""><img src="/assets/icons/php.svg" width="42" height="32" alt=""></span><span class="ic-code">&lt;/&gt;</span>';
     else e.append(node('span','ic-glyph','?'));
     e.append(node('span','ic-scrim'));return e;
   }
@@ -109,7 +116,14 @@ AH.App = (() => {
     });
   }
   function setLanguage(lang) {
-    if(s.lang===lang)return;s.lang=lang;root.lang=lang;root.dataset.lang=lang;save('lang',lang);
+    if(s.lang===lang)return;
+    const destination=lang==='en'?root.dataset.langEnUrl:root.dataset.staticLang==='en'?root.dataset.langItUrl:null;
+    if(destination){
+      save('lang',lang);
+      const url=new URL(destination,location.href);if(location.hash&&!url.hash)url.hash=location.hash;
+      location.assign(url.href);return;
+    }
+    s.lang=lang;root.lang=lang;root.dataset.lang=lang;save('lang',lang);
     try{const url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url);}catch{}
     if(dialog)closeDialog(false);renderBrowser();updateClock();
   }
@@ -261,7 +275,7 @@ AH.App = (() => {
   }
   function syncMotion() {
     const still=!moving();root.classList.toggle('ah-still',still);
-    document.querySelectorAll('img[data-pose-motion]').forEach(img=>{const pose=img.dataset.poseMotion,ext={showingoff:'webp',flyspinning:'webp'}[pose]||'gif';const src='../assets/avatars/'+pose+(still?'-still.webp':'.'+ext);if(img.getAttribute('src')!==src)img.src=src;});
+    document.querySelectorAll('img[data-pose-motion]').forEach(img=>{const pose=img.dataset.poseMotion,ext={showingoff:'webp',flyspinning:'webp'}[pose]||'gif';const src='/assets/avatars/'+pose+(still?'-still.webp':'.'+ext);if(img.getAttribute('src')!==src)img.src=src;});
     wasStatic=false;syncChrome();schedule();
   }
   function toggleMotion() { const paused=root.classList.toggle('paused');root.classList.toggle('calm',paused);save('motion',paused?'paused':'running');syncMotion();window.dispatchEvent(new CustomEvent('wiiu:motionchange')); }
@@ -273,8 +287,12 @@ AH.App = (() => {
   }
   function init() {
     if(dom.ui)return;
-    let lang;try{lang=new URLSearchParams(location.search).get('lang');}catch{}
-    s.lang=['it','en'].includes(lang)?lang:read('lang',(navigator.language||'').startsWith('en')?'en':'it');if(!['it','en'].includes(s.lang))s.lang='it';root.lang=s.lang;root.dataset.lang=s.lang;
+    let lang;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang');}catch{}
+    s.lang=['it','en'].includes(lang)?lang:read('lang',(navigator.language||'').startsWith('en')?'en':'it');if(!['it','en'].includes(s.lang))s.lang='it';
+    if(!root.dataset.staticLang&&s.lang==='en'&&root.dataset.langEnUrl){
+      try{const current=new URL(location.href),destination=new URL(root.dataset.langEnUrl,location.href);current.searchParams.delete('lang');destination.search=current.searchParams.toString();destination.hash=current.hash;if(destination.pathname!==current.pathname){save('lang','en');location.replace(destination.href);return;}}catch{}
+    }
+    root.lang=s.lang;root.dataset.lang=s.lang;
     for(const [key,values] of Object.entries({mode:['grid','list'],sort:['name','date'],cursor:['wii','native']})){const value=read('ah-'+key,s[key]);if(values.includes(value))s[key]=value;}
     dom.screen=document.getElementById('screen');dom.ui=document.getElementById('ui');dom.cursor=document.getElementById('cursor');
     dom.cursor.setAttribute('popover','manual');dom.cursor.inert=true;document.body.append(dom.cursor);

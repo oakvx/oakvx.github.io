@@ -1,113 +1,115 @@
-# Portfolio oakvx — avatar distribuiti nel sito
+# oakvx.github.io
 
-Versione completa del repository `oakvx/oakvx.github.io`, basata sul commit
-`3d4877780bd6082a94db4a12df933ea7c4c4ccfb` del ramo `main`.
+<p>
+  <a href="https://github.com/oakvx/oakvx.github.io/actions/workflows/site-check.yml"><img alt="Site checks" src="https://img.shields.io/github/actions/workflow/status/oakvx/oakvx.github.io/site-check.yml?style=flat-square&label=site%20checks"></a>
+  <a href="https://github.com/oakvx/oakvx.github.io/commits"><img alt="Ultimo commit" src="https://img.shields.io/github/last-commit/oakvx/oakvx.github.io?style=flat-square"></a>
+  <img alt="Linguaggio principale" src="https://img.shields.io/github/languages/top/oakvx/oakvx.github.io?style=flat-square">
+  <img alt="Dimensione repository" src="https://img.shields.io/github/repo-size/oakvx/oakvx.github.io?style=flat-square">
+  <img alt="Hosting: GitHub Pages" src="https://img.shields.io/badge/hosting-GitHub%20Pages-64748B?style=flat-square">
+  <img alt="Lingue: IT / EN" src="https://img.shields.io/badge/lingue-IT%20%2F%20EN-64748B?style=flat-square">
+</p>
 
-## Posizioni delle cinque pose
+Sito portfolio statico di Gabriele Lucia, pubblicato su GitHub Pages: <https://oakvx.github.io/>. HTML, CSS e JavaScript vanilla, **nessun bundler e nessuna dipendenza di runtime**. Bilingue (IT/EN) con pagine inglesi generate e verificate in CI.
 
-| File | Posizione principale |
+## Indice
+
+- [Stack](#stack)
+- [Struttura del repository](#struttura-del-repository)
+- [Sistema di pagine](#sistema-di-pagine)
+- [Internazionalizzazione](#internazionalizzazione)
+- [Avatar e movimento ridotto](#avatar-e-movimento-ridotto)
+- [Contatore commit GitHub](#contatore-commit-github)
+- [Sviluppo locale](#sviluppo-locale)
+- [Build e controlli](#build-e-controlli)
+- [Crediti](#crediti)
+
+## Stack
+
+| Area | Scelta |
 | --- | --- |
-| `standing.gif` | Polaroid nella sezione iniziale |
-| `sitting.gif` | Polaroid della sezione “Chi sono” nella home |
-| `showingoff.png` | Accanto al titolo “Progetti selezionati” |
-| `dancing.gif` | Sezione “Contatti” |
-| `sleeping.gif` | Piè di pagina, sotto email e orologio |
+| Markup, stile, script | HTML5, CSS3, JavaScript ES (vanilla) |
+| Hosting | GitHub Pages (`.nojekyll`, nessuna build Jekyll) |
+| Font | Archivo e Cascadia Code, self-hosted in `.woff2` (licenza OFL inclusa) |
+| Strumenti | Python 3 (generazione e controlli, solo libreria standard), Node.js 22 in CI |
+| Accessibilità | `prefers-reduced-motion`, testi alternativi, nomi accessibili, comando "Ferma animazioni" |
+| SEO | Metadati Person, anteprime social per pagina e lingua, `sitemap.xml`, `robots.txt` |
 
-La posa `showingoff` sostituisce anche il ritratto nella pagina `chi-sono/`
-e le piccole icone del volto. La finestra `gabriele.gif` nel desktop mostra
-la posa che balla. Ogni sezione ha la propria posa: non esiste un selettore
-che raccolga le cinque pose.
+## Struttura del repository
 
-## File modificati
+```text
+index.html                 home (italiano)
+chi-sono/                  pagina "Chi sono"
+fuori-orario/              pagina "Fuori orario" (slider IT/EN/ES/EL)
+projects/                  case study: autoofficina, beautify, brat-animator, synk
+en/                        pagine inglesi GENERATE: non modificare a mano
+404.html
+assets/
+  polaroid/                sistema di pagine condiviso: site.css/js, pages.css, hero.css,
+                           fuori-orario.css/js, pages-en.js
+  avatars/                 pose (GIF, WebP animato, primi fotogrammi -still.webp), poses.js,
+                           companion.js
+  cursor.css               puntatore solo CSS
+  github-stats.js          contatore di commit pubblici
+  CREDITS.html             provenienza dei materiali
+scripts/
+  build_static.py          genera en/ e sitemap.xml
+  check_site.py            controlli statici
+  extract-translations.cjs utility Node per le traduzioni
+.github/workflows/site-check.yml
+```
 
-- `index.html`: sostituzione delle fotografie e distribuzione delle pose.
-- `chi-sono/index.html`: ritratto sostituito con l’avatar e preload aggiornato.
-- `assets/avatars/`: quattro GIF originali, posa PNG, primi fotogrammi WebP,
-  foglio di stile e gestione della pausa.
-- `assets/polaroid/site.js` e `pages-en.js`: testi alternativi e traduzioni.
-- `assets/CREDITS.html`: provenienza e descrizione dei nuovi materiali.
-- Metadati Person di tutte le pagine: nuova immagine dell’avatar.
+## Sistema di pagine
 
-Il file ricevuto come `showingoff.gif` era un PNG statico. È stato salvato come
-`showingoff.png` mantenendone esattamente i byte. Anche le quattro GIF sono
-conservate senza modificare i fotogrammi o la velocità originale.
+Tutte le pagine (home, chi-sono, progetti, fuori-orario, 404, crediti) condividono lo stesso sistema "Polaroid": testata, menu mobile, piè di pagina e token di colore.
 
-Le immagini `*-still.webp` sono copie statiche del primo fotogramma. Il comando
-“Ferma animazioni”, la preferenza di sistema `prefers-reduced-motion` e il
-passaggio della scheda in background fermano anche le GIF. Con movimento
-ridotto, il tag `picture` seleziona la versione statica anche senza JavaScript.
+- `assets/polaroid/site.css` e `site.js` sono la base comune. Le funzioni della home (hero, percorso, progetti, scrivania) si attivano solo se trovano il proprio markup.
+- `assets/polaroid/pages.css` contiene i componenti delle pagine interne; `fuori-orario.css/js` quelli della pagina omonima.
+- Dove una pagina ha un proprio `#contatti`, il pulsante «Scrivimi» scorre lì; altrimenti porta ai contatti della home.
+- Navigazione di `fuori-orario/`: scroll-snap con tab, frecce e tastiera; hash `#it`, `#en`, `#es`, `#el`.
 
-## Avvio locale
+## Internazionalizzazione
 
-Per visualizzare il sito non servono pacchetti o build. Dalla cartella del sito:
+- L'italiano vive nell'HTML sorgente. Titoli e anteprime social sono nel blocco `#seo-translations`.
+- Le traduzioni inglesi stanno in `assets/polaroid/site.js` (home) e `pages-en.js` (pagine interne), referenziate con `data-i18n`, `data-i18n-aria` e `data-i18n-alt`.
+- `scripts/build_static.py` genera da HTML e dizionari le copie inglesi indicizzabili in `en/` e aggiorna `sitemap.xml`. **Dopo ogni modifica a contenuti o traduzioni va rieseguito**, altrimenti la CI fallisce.
+
+## Avatar e movimento ridotto
+
+- Ogni sezione ha la propria posa; non esiste un selettore globale. `assets/avatars/poses.js` gestisce il cambio posa (hero, polaroid "chi sono", finestra desktop).
+- `assets/avatars/companion.js` è l'avatar fisso in basso a sinistra: reagisce allo scroll, balla a fine pagina, si addormenta dopo 25 s di inattività; il click sceglie una posa casuale, × lo nasconde per la sessione.
+- Ogni posa ha una copia statica `*-still.webp` (primo fotogramma). Le animazioni si fermano con il comando "Ferma animazioni", con `prefers-reduced-motion` e quando la scheda va in background. Con movimento ridotto l'elemento `<picture>` seleziona la versione statica anche senza JavaScript.
+- Le GIF originali sono conservate senza modificare fotogrammi o velocità; le pose più pesanti sono servite come WebP animato.
+- `assets/cursor.css`: puntatore interamente CSS, senza JavaScript; i campi di testo mantengono il cursore di testo.
+
+## Contatore commit GitHub
+
+`assets/github-stats.js` mostra in "Fuori orario" il totale dei commit pubblici degli account `oakvx` e `oakvxish`, disegnato come matrice di punti 72×40 con numeri in pixel art.
+
+- Interroga `GET https://api.github.com/search/commits?q=author:<account> is:public&per_page=1` per ciascun account e somma `total_count`; scarta i risultati con `incomplete_results`.
+- Chiamate **non autenticate**, quindi soggette ai limiti di frequenza della Search API. Per questo il totale è messo in cache in `localStorage` (chiave `oakvx-public-commit-total-v1`, TTL 1 ora) e, in caso di errore, il nuovo tentativo avviene dopo 5 minuti.
+- Ridisegna la matrice al cambio di `lang` e annuncia lo stato tramite regione per screen reader.
+
+## Sviluppo locale
+
+Nessun pacchetto da installare:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Aprire `http://localhost:8000/`. Il sito rimane compatibile con GitHub Pages.
+Aprire `http://localhost:8000/`. Il sito resta compatibile con GitHub Pages.
 
-## Applicare il contenuto dello ZIP
-
-La cartella `oakvx.github.io/` contiene il sito completo. Copiarne il contenuto
-nella propria copia del repository, aggiungendo i nuovi file e sostituendo quelli
-esistenti. Se si sovrappongono i file a una vecchia copia, eliminare da `assets/`
-le precedenti fotografie `gabriele-avatar.webp` e `gabriele-portrait*.webp`,
-che non sono più utilizzate e non sono incluse nello ZIP.
-
-L’archivio non contiene la cartella `.git`. Non è stato effettuato alcun push
-o deploy del sito pubblico.
-
-## Aggiornamento: restyling hero, più pose, "Fuori orario"
-
-- Nuove pose in `assets/avatars/`: idlewainting, laughing, angrystomping, almostfalling, discofever (GIF) e showingoff, drunkwandering, flyspinning (WebP animato, GIF originali da 3 MB convertite a ~1 MB). Ogni posa ha il suo `-still.webp`.
-- `assets/avatars/poses.js`: "Scatta di nuovo" cambia posa nella hero; click su polaroid "chi sono" (sitting/laughing) e sulla finestra gabriele.gif (discofever/flyspinning/dancing).
-- `assets/polaroid/hero.css`: niente font marker, polaroid con arcobaleno a mezzaluna, didascalia in mono con quadratino a strisce.
-- Percorso: ogni tappa ha il suo avatar in piedi sulla linea (solo da 1000px in su).
-- Nuova pagina `fuori-orario/`: slider IT/EN/ES/EL (scroll-snap, tab, frecce, tastiera, `#it #en #es #el`). Aggiunta a menu, footer e sitemap.
-
-## Aggiornamento 2: avatar compagno, Fuori orario ovunque
-
-- `assets/avatars/companion.js` + `pages.css`: avatar fisso in basso a sinistra su tutte le pagine. Barcollante mentre scorri, balla in fondo alla pagina, si addormenta dopo 25 s di inattività e si sveglia di soprassalto. Click = posa casuale con fumetto, × lo nasconde per la sessione. Rispetta "Ferma animazioni" e reduced-motion.
-- Sottopagine (chi-sono, 3 progetti, crediti): un avatar per capitolo, cliccabile per cambiare posa (da 1100px in su).
-- 404: avatar che barcolla sul "404", cliccabile.
-- "Fuori orario" aggiunto a header e footer di tutte le pagine.
-
-## Aggiornamento 3: puntatore
-
-- `assets/cursor.css`: freccia bianca con ombra a cinque bande (la stessa dei bottoni), gialla su link e pulsanti. Solo CSS, nessun JavaScript, su tutte le pagine. I campi di testo mantengono il cursore di testo.
-
-## Struttura condivisa
-
-Tutte le pagine (home, chi-sono, progetti, fuori-orario, 404, crediti) usano lo
-stesso sistema «Polaroid»: stessa testata, stesso menu mobile, stesso piè di
-pagina e gli stessi token di colore.
-
-- `assets/polaroid/site.css` e `site.js`: base comune a tutte le pagine. Le
-  funzioni della home (hero, percorso, progetti, scrivania) si attivano solo se
-  trovano il loro markup.
-- `assets/polaroid/pages.css`: componenti delle pagine interne.
-- `assets/polaroid/fuori-orario.css` e `fuori-orario.js`: parti proprie di
-  Fuori orario.
-- `assets/polaroid/pages-en.js`: inglese delle pagine interne (l’italiano sta
-  nell’HTML, titoli e anteprime social nel blocco `#seo-translations`).
-- Traduzioni: si usa `data-i18n`, `data-i18n-aria`, `data-i18n-alt`.
-- Dove una pagina ha un proprio `#contatti` il pulsante «Scrivimi» scorre lì,
-  altrimenti porta ai contatti della home.
-
-## Pagine inglesi e controlli automatici
-
-Le copie inglesi indicizzabili sono generate in `en/` dall’HTML italiano e dai
-dizionari esistenti (`site.js` e `pages-en.js`). Dopo aver aggiornato contenuti o
-traduzioni, rigenerarle e lanciare i controlli:
+## Build e controlli
 
 ```bash
-python3 scripts/build_static.py
-python3 scripts/check_site.py
+python3 scripts/build_static.py   # rigenera en/ e sitemap.xml
+python3 scripts/check_site.py     # nessuna dipendenza aggiuntiva
 ```
 
-Il controllo non richiede pacchetti Python aggiuntivi: verifica la sintassi
-JavaScript, i link e le immagini locali, alt text e nomi accessibili dei controlli,
-i metadati SEO, la sitemap
-e la presenza delle pagine IT/EN. GitHub Actions esegue gli stessi controlli su
-push e pull request e verifica che `en/` e `sitemap.xml` siano aggiornati.
+`check_site.py` verifica: sintassi JavaScript, link e immagini locali, testi alternativi e nomi accessibili dei controlli, metadati SEO, sitemap e presenza delle pagine IT/EN.
+
+La CI ([`site-check.yml`](.github/workflows/site-check.yml), su push, pull request e avvio manuale, permessi `contents: read`) esegue gli stessi controlli e inoltre rigenera `en/` e `sitemap.xml`, fallendo se `git status` mostra differenze: le pagine generate devono essere committate.
+
+## Crediti
+
+Provenienza e descrizione dei materiali: [`assets/CREDITS.html`](assets/CREDITS.html). Font con licenza OFL (`Archivo-OFL.txt`, `CascadiaCode-OFL.txt`). Grafiche e avatar sono opera dell'autore.

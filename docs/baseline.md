@@ -1,0 +1,51 @@
+# Baseline prima del redesign — 2026-11-21
+
+Commit `cc416126f1113328e9735dee62fe7c9a8d17b876`, home IT servita in locale da `python3 -m http.server 8080`. Una navigazione Lighthouse 13.6.0 (profilo mobile predefinito, throttling simulato), Headless Chrome 153.0.8010.0: **Performance 62, Accessibilità 100, SEO 100**. LCP **4,1 s**, TBT **560 ms**, CLS **0**. Non sono dati sul campo.
+
+Profiler Chrome DevTools (CDP `devtools.timeline`): desktop 1440×900, cache di una nuova pagina nello stesso browser, attesa di 3,5 s dopo DOMContentLoaded, senza input. 4.297 eventi, nessun `RunTask` ≥50 ms nel trace desktop non rallentato. Questo non misura la fluidità delle interazioni e non è confrontabile direttamente col TBT mobile simulato.
+
+## Confronto dopo il prototipo
+
+Stesso URL locale, browser, versione Lighthouse e procedura; una singola navigazione per il dato riportato.
+
+| Metrica | Prima | Prototipo |
+|---|---:|---:|
+| Lighthouse Performance mobile | 62 | 100 |
+| Lighthouse Accessibilità mobile | 100 | 100 |
+| Lighthouse SEO mobile | 100 | 100 |
+| LCP | 4,1 s | 1,3 s |
+| TBT | 560 ms | 0 ms |
+| CLS | 0 | 0 |
+| RunTask ≥50 ms, trace desktop | 0 | 0 |
+
+Trace desktop: 2.215 eventi nel prototipo. Questi valori sono una verifica locale, non un risultato garantito su GitHub Pages o su dispositivi reali. Il trace non è un benchmark FPS; sequenza e transizione sono documentate separatamente dalla registrazione.
+
+## Ripetizione pre-Fase 3 — tre run
+
+La preview HTTPS esposta al browser e `https://oakvx.github.io/` non erano raggiungibili dal sandbox (`curl` falliva nell’handshake TLS; l’accesso in uscita è limitato). **Questa non è una misura del dominio pubblicato:** è il processo che serve la preview, raggiunto via `http://localhost:8080/`, commit `1a16068`, Lighthouse 13.6.0 / Chromium 153, preset mobile con throttling simulato.
+
+| Metrica | 1 | 2 | 3 | Mediana |
+|---|---:|---:|---:|---:|
+| Performance | 100 | 100 | 100 | 100 |
+| Accessibilità | 100 | 100 | 100 | 100 |
+| SEO | 100 | 100 | 100 | 100 |
+| LCP | 1,3 s | 1,2 s | 0,9 s | 1,2 s |
+| TBT | 0 ms | 0 ms | 10 ms | 0 ms |
+| CLS | 0 | 0 | 0 | 0 |
+
+Per la misura pubblicata, eseguire tre audit sullo stesso URL HTTPS della preview con profilo Mobile, throttling simulato e storage pulito; salvare i tre report e calcolare la mediana per metrica. Non usare questi numeri locali come sostituti.
+
+## Fase 4 — candidato finale, prima della sottrazione
+
+Misurato sul codice `9b1ab89`, **in locale** (`http://localhost:8080/`), Chromium 153 / Lighthouse 13.6.0, profilo mobile con throttling simulato e tre navigazioni distinte. Accesso HTTPS alla preview e a GitHub Pages ancora non disponibile dal sandbox (errore TLS). Il browser di misura espone due core: il governor sceglie Ridotta al primo accesso; questo risultato mobile non misura l’effetto della qualità Alta desktop o del party avviato volontariamente.
+
+| Metrica | Run 1 | Run 2 | Run 3 | Mediana |
+|---|---:|---:|---:|---:|
+| Performance | 100 | 100 | 100 | 100 |
+| Accessibilità | 100 | 100 | 100 | 100 |
+| SEO | 100 | 100 | 100 | 100 |
+| LCP | 0,9 s | 1,4 s | 0,9 s | 0,9 s |
+| TBT | 0 ms | 10 ms | 0 ms | 0 ms |
+| CLS | 0 | 0 | 0 | 0 |
+
+Trace desktop non rallentato, senza input e qualità automatica: **0 task ≥50 ms** in tutte e tre le acquisizioni da 3,5 s. Il governor è stato testato separatamente con frame simulati a ~29 fps (Alta → Media → Ridotta e limite conservato al reload). La demo è stata verificata anche fuori viewport e con `visibilitychange` simulato: i pixel restano invariati durante la pausa e tornano ad aggiornarsi alla ripresa. Ripetere le tre misure se il candidato cambia dopo l’approvazione della sottrazione.

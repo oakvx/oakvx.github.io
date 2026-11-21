@@ -25,6 +25,7 @@ const toggle = document.querySelector('[data-motion]');
 function setMotion(off) {
   root.dataset.motion = off ? 'off' : 'on';
   toggle.setAttribute('aria-pressed', String(off));
+  document.querySelector('[data-menu-motion]').setAttribute('aria-pressed', String(off));
   toggle.textContent = off ? (en ? 'Resume animations' : 'Riattiva animazioni') : (en ? 'Pause animations' : 'Ferma animazioni');
   document.dispatchEvent(new Event('gl-motion'));
 }
@@ -50,8 +51,29 @@ document.addEventListener('keydown', event => {
   if (event.key.toLowerCase() !== 'h' || event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,select,textarea,[contenteditable]')) return;
   event.preventDefault(); if (menu.open) menu.close(); else openMenu();
 });
-if (config.cvUrl) document.querySelector('[data-cv]')?.setAttribute('href', config.cvUrl);
-if (config.linkedinUrl) document.querySelector('[data-linkedin]')?.setAttribute('href', config.linkedinUrl);
+for (const [key, title] of [['cv','CV'], ['linkedin','LinkedIn']]) {
+  const url = config[`${key}Url`];
+  if (!url) continue;
+  const link = document.createElement('a');
+  link.href = url; link.textContent = title; link.rel = 'noopener';
+  if (key === 'cv') link.download = '';
+  menu.querySelector(`[data-${key}-slot]`).replaceChildren(link);
+}
+menu.querySelectorAll('[data-jump]').forEach(link => link.addEventListener('click', event => {
+  event.preventDefault(); document.querySelector(link.hash)?.focus();
+}));
+menu.querySelector('[data-copy]').addEventListener('click', async () => {
+  const email = menu.querySelector('[data-email]');
+  const status = menu.querySelector('[data-copy-status]');
+  try {
+    await navigator.clipboard.writeText(email.textContent);
+    status.textContent = en ? 'Email copied.' : 'Email copiata.';
+  } catch {
+    const range = document.createRange(); range.selectNodeContents(email);
+    const selection = getSelection(); selection.removeAllRanges(); selection.addRange(range);
+    status.textContent = en ? 'Email selected. Copy it manually.' : 'Email selezionata. Copiala manualmente.';
+  }
+});
 const audio = document.querySelector('[data-audio]');
 let context;
 audio.hidden = false;
@@ -68,5 +90,11 @@ export function sound(kind) {
   volume.gain.setValueAtTime(.001,time); volume.gain.exponentialRampToValueAtTime(.035,time+.015); volume.gain.exponentialRampToValueAtTime(.001,time+.11);
   note.connect(volume).connect(context.destination); note.start(time); note.stop(time+.12);
 }
+
+const menuAudio = document.querySelector('[data-menu-audio]');
+menuAudio.onclick = () => audio.click();
+document.querySelector('[data-menu-motion]').onclick = () => toggle.click();
+new MutationObserver(() => menuAudio.setAttribute('aria-pressed', audio.getAttribute('aria-pressed')))
+  .observe(audio, {attributes:true, attributeFilter:['aria-pressed']});
 
 connectLaunch(still);

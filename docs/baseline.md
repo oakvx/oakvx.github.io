@@ -19,3 +19,18 @@ Stesso URL locale, browser, versione Lighthouse e procedura; una singola navigaz
 | RunTask ≥50 ms, trace desktop | 0 | 0 |
 
 Trace desktop: 2.215 eventi nel prototipo. Questi valori sono una verifica locale, non un risultato garantito su GitHub Pages o su dispositivi reali. Il trace non è un benchmark FPS; sequenza e transizione sono documentate separatamente dalla registrazione.
+
+## Ripetizione pre-Fase 3 — tre run
+
+La preview HTTPS esposta al browser e `https://oakvx.github.io/` non erano raggiungibili dal sandbox (`curl` falliva nell’handshake TLS; l’accesso in uscita è limitato). **Questa non è una misura del dominio pubblicato:** è il processo che serve la preview, raggiunto via `http://localhost:8080/`, commit `1a16068`, Lighthouse 13.6.0 / Chromium 153, preset mobile con throttling simulato.
+
+| Metrica | 1 | 2 | 3 | Mediana |
+|---|---:|---:|---:|---:|
+| Performance | 100 | 100 | 100 | 100 |
+| Accessibilità | 100 | 100 | 100 | 100 |
+| SEO | 100 | 100 | 100 | 100 |
+| LCP | 1,3 s | 1,2 s | 0,9 s | 1,2 s |
+| TBT | 0 ms | 0 ms | 10 ms | 0 ms |
+| CLS | 0 | 0 | 0 | 0 |
+
+Per la misura pubblicata, eseguire tre audit sullo stesso URL HTTPS della preview con profilo Mobile, throttling simulato e storage pulito; salvare i tre report e calcolare la mediana per metrica. Non usare questi numeri locali come sostituti.

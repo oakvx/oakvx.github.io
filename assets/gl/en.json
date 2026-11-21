@@ -47,5 +47,13 @@
   "gl.missing": "This tile does not exist",
   "about.aboutLead": "I’m a Junior developer & graphic designer from Sassuolo. I study Computer Engineering at UNIMORE.",
   "credits.motion": "The interface, icons and illustrations use original CSS, SVG and JavaScript.",
-  "credits.identity": "The gl. monogram, favicon and social cards are original portfolio compositions."
+  "credits.identity": "The gl. monogram, favicon and social cards are original portfolio compositions.",
+  "gl.contactsTitle": "Contact",
+  "gl.emailCopy": "Copy email",
+  "gl.emailCta": "Send an email",
+  "gl.preferences": "Preferences",
+  "gl.motionSetting": "Reduce motion",
+  "gl.menuHint": "H opens HOME · Esc closes",
+  "gl.404back": "Back to GL Menu",
+  "gl.404desc": "The address doesn’t match a tile. Go back to the menu to find a project."
 }

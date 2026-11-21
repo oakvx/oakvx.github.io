@@ -440,7 +440,7 @@ def translate_document(doc: Element, source_file: str, en: dict[str, str], dyn: 
                 node.set("aria-current", "page")
             else:
                 node.remove("aria-current")
-        if node.tag == "a" and node.get("href") and not node.has("data-language"):
+        if node.tag == "a" and node.get("href") and not (node.has("data-language") or node.has("data-fixed-language")):
             original = node.get("href") or ""
             resolved = resolve_local(original, route)
             if resolved:

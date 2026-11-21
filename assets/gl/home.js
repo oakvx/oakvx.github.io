@@ -1,3 +1,4 @@
+import "./parallax.js";
 import "./cable.js";
 import "./brat-demo.js";
 import { boot, tilt } from './signature.js';

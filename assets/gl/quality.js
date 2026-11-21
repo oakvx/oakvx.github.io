@@ -9,8 +9,7 @@ export function connectQuality({ motion, still, recall, remember }) {
   let preference = recall('quality-choice');
   let limit = config.performanceGovernor && validated(recall('quality-cap')) ? rank(recall('quality-cap')) : 2;
   const weak = (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 2) || (navigator.deviceMemory > 0 && navigator.deviceMemory <= 2);
-  if (config.performanceGovernor && weak) limit = 0;
-  if (!validated(preference)) preference = 'high';
+  if (!validated(preference)) preference = config.performanceGovernor && weak ? 'low' : 'high';
   const caption = document.createElement('label');
   const select = document.createElement('select');
   const status = document.createElement('small');

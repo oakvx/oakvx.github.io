@@ -38,3 +38,10 @@ main:not(.home){width:min(960px,calc(100% - 36px));margin:32px auto;padding:clam
 .quality-note{color:var(--muted);font-size:.81rem}.quality-note:empty{display:none}
 .party-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}.party-note:not(:empty){position:fixed;bottom:70px;right:18px;z-index:5;margin:0;padding:8px 14px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}[data-party-moving] .tile-icon{animation:party-hop .85s ease-in-out infinite alternate}[data-party-moving] li:nth-child(even) .tile-icon{animation-delay:-.42s}@keyframes party-hop{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-5px) rotate(4deg)}}
 .secret-keys{padding-left:1.1rem}.secret-keys li+li{margin-top:8px}kbd{font:inherit;font-weight:750;background:var(--surface);padding:2px 5px;border:1px solid var(--line);border-radius:5px}
+/* Control boundaries are stronger than decorative dividers. */
+:root{--control-line:#657f93}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--control-line:#849aaf}}
+:root[data-theme=dark]{--control-line:#849aaf}
+button,select,.tile,.repo-list summary{border-color:var(--control-line)}
+.tile:is(:hover,:focus-visible,[aria-current]),button[aria-pressed=true],.repo-list details[open] summary{border-color:var(--link)}
+button:disabled,select:disabled{color:var(--muted);background:var(--surface);cursor:default;opacity:1}

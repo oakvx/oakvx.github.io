@@ -41,6 +41,7 @@ for (const [i,tile] of tiles.entries()) {
     if (!desktop.matches && event.detail > 0) {
       event.preventDefault(); trigger = tile;
       const copy = previews[i].cloneNode(true); copy.hidden = false;
+      copy.querySelector('.brat-demo')?.remove();
       sheet.querySelector('[data-sheet-content]').replaceChildren(copy); sheet.showModal(); sound('click');
     } else sound('launch');
   });

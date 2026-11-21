@@ -12,7 +12,7 @@ if (config.bratDemo && art) whenIdle(() => {
   const english = document.documentElement.lang === 'en';
   const lines = english ? ['gabriele lucia','code and design','lyrics in motion'] : ['gabriele lucia','codice e grafica','testi in movimento'];
   let clock = 0, paint = 0;
-  visibleFrames(art, (now, delta) => {
+  visibleFrames(tv, (now, delta) => {
     clock += delta;
     if (now - paint < 32 && !canvas.hidden) return;
     paint = now;
@@ -27,5 +27,5 @@ if (config.bratDemo && art) whenIdle(() => {
     ctx.fillText(line,0,0,720); ctx.restore();
     ctx.fillStyle = '#233006'; ctx.fillRect(28,282,744*phase,3);
     canvas.hidden = false;
-  }, {enabled: () => document.documentElement.dataset.quality !== 'low', pause: () => {canvas.hidden = true;}});
+  }, {enabled: () => !art.closest('[hidden]') && matchMedia('(min-width: 1024px)').matches && document.documentElement.dataset.quality !== 'low', pause: () => {canvas.hidden = true;}});
 });

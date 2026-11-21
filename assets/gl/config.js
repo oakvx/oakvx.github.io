@@ -6,6 +6,7 @@ export const config = Object.freeze({
   signalCable: true,
   parallax: true,
   pointerCompanion: true,
+  performanceGovernor: true,
   plazaLive: true,
   plazaWalk: true,
   plazaDaylight: true,

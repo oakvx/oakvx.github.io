@@ -27,7 +27,9 @@ function stage(plaza) {
     if (!width || !height) return;
     ctx.clearRect(0,0,width,height);
     const spriteSize = 36;
+    const medium = document.documentElement.dataset.quality === 'medium';
     for (const [i, actor] of actors.entries()) {
+      if (medium && i > 2) break;
       if (!actor.image.complete || !actor.image.naturalWidth) continue;
       if (actor.pause > 0) actor.pause -= delta;
       else actor.x += actor.dir*actor.pace*delta;
@@ -47,7 +49,7 @@ function stage(plaza) {
       ctx.restore();
     }
   }
-  function ready() { return visible && !document.hidden && !still(); }
+  function ready() { return visible && !document.hidden && !still() && document.documentElement.dataset.quality !== 'low'; }
   function loop(time) {
     frame = 0;
     if (!ready()) return;
@@ -56,7 +58,7 @@ function stage(plaza) {
     frame = requestAnimationFrame(loop);
   }
   function update() {
-    canvas.hidden = still(); plaza.toggleAttribute('data-plaza-scene', !canvas.hidden);
+    canvas.hidden = still() || document.documentElement.dataset.quality === 'low'; plaza.toggleAttribute('data-plaza-scene', !canvas.hidden);
     if (ready()) { if (!frame) { size(); last=performance.now(); frame=requestAnimationFrame(loop); } }
     else { cancelAnimationFrame(frame); frame = 0; }
   }
@@ -65,6 +67,7 @@ function stage(plaza) {
   const resize = new ResizeObserver(size); resize.observe(canvas);
   document.addEventListener('visibilitychange',update);
   document.addEventListener('gl-motion',update);
+  document.addEventListener('gl-quality',update);
   motion.addEventListener('change',update);
   canvas.addEventListener('pointermove',e => { pointer=e.offsetX; },{passive:true});
   canvas.addEventListener('pointerleave',() => {pointer=undefined;});

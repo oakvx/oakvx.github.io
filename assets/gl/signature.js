@@ -4,7 +4,7 @@ import { motion, recall, remember, still } from './shell.js';
 export function boot(tiles) {
   const seen = recall('boot');
   remember('boot', '1');
-  if (!config.boot || seen || still() || document.hidden || location.hash) return;
+  if (!config.boot || seen || still() || document.documentElement.dataset.quality === 'low' || document.hidden || location.hash) return;
   const origin = { x:innerWidth / 2, y:innerHeight / 2 };
   const targets = tiles.map(tile => tile.querySelector('.tile-icon').getBoundingClientRect());
   const stage = document.createElement('dialog');
@@ -76,7 +76,7 @@ export function tilt(tiles) {
       for (const prop of ['--rx','--ry','--shine-x','--shine-y']) tile.style.removeProperty(prop);
     };
     hit.addEventListener('pointermove', event => {
-      if (still() || event.pointerType !== 'mouse') return;
+      if (still() || document.hidden || document.documentElement.dataset.quality !== 'high' || event.pointerType !== 'mouse') return;
       rect ||= hit.getBoundingClientRect();
       point = [event.clientX,event.clientY];
       if (frame) return;
@@ -94,7 +94,7 @@ export function tilt(tiles) {
     }, {passive:true});
     hit.addEventListener('pointerleave', reset);
     motion.addEventListener('change', reset);
-    document.addEventListener('gl-motion', reset);
+    for (const event of ['gl-motion','gl-quality','visibilitychange']) document.addEventListener(event, reset);
     addEventListener('scroll', reset, {passive:true});
     addEventListener('resize', reset);
   }

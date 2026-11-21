@@ -1,3 +1,4 @@
+import { connectQuality } from "./quality.js";
 import { connectLaunch } from './launch.js';
 import { config } from './config.js';
 const root = document.documentElement;
@@ -102,4 +103,5 @@ document.querySelector('[data-menu-motion]').onclick = () => toggle.click();
 new MutationObserver(() => menuAudio.setAttribute('aria-pressed', audio.getAttribute('aria-pressed')))
   .observe(audio, {attributes:true, attributeFilter:['aria-pressed']});
 
+connectQuality({ motion, still, recall, remember });
 connectLaunch(still);

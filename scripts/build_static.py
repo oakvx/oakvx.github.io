@@ -281,14 +281,14 @@ def get_seo(root: Element, route: str) -> dict[str, str]:
     seo = dict(translations.get("en", {}))
     if route == "/fuori-orario/":
         seo.update({
-            "title": "AFTER HOURS | Gabriele Lucia — Junior developer & graphic designer",
+            "title": "AFTER HOURS | Gabriele Lucia — Developer & Graphic Designer",
             "description": "AFTER HOURS: the channel for what stays open after I log off. Personal projects, consoles, games, languages and curiosities by Gabriele Lucia (oakvx).",
             "image": ORIGIN + "/assets/social-home-en.png",
             "image_alt": "Gabriele Lucia / oakvx — After Hours.",
         })
     elif route == "/fuori-orario/classic/":
         seo.update({
-            "title": "After Hours | Gabriele Lucia — Junior developer & graphic designer",
+            "title": "After Hours | Gabriele Lucia — Developer & Graphic Designer",
             "description": "The classic AFTER HOURS page: projects, consoles, games, languages and curiosities by Gabriele Lucia (oakvx).",
             "image": ORIGIN + "/assets/social-home-en.png",
             "image_alt": "Gabriele Lucia / oakvx — After Hours.",
@@ -435,12 +435,7 @@ def translate_document(doc: Element, source_file: str, en: dict[str, str], dyn: 
                 alternate_en_route = ROUTE_TO_EN[alternate_route]
                 node.set("href", public(alternate_en_route if hreflang == "en" else alternate_route))
                 continue
-        if node.tag == "a" and node.has("data-language"):
-            if node.get("data-language") == "en":
-                node.set("aria-current", "page")
-            else:
-                node.remove("aria-current")
-        if node.tag == "a" and node.get("href") and not (node.has("data-language") or node.has("data-fixed-language")):
+        if node.tag == "a" and node.get("href"):
             original = node.get("href") or ""
             resolved = resolve_local(original, route)
             if resolved:
@@ -485,7 +480,6 @@ def extract_dictionaries() -> tuple[dict[str, str], dict[str, str]]:
         text=True,
     )
     data = json.loads(result.stdout)
-    data["en"].update(json.loads((ROOT / "assets/gl/en.json").read_text(encoding="utf-8")))
     return data["en"], data["dyn"]
 
 

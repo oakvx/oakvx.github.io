@@ -48,7 +48,12 @@ function openMenu() {
 }
 home.onclick = openMenu;
 document.addEventListener('keydown', event => {
-  if (event.key.toLowerCase() !== 'h' || event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input,select,textarea,[contenteditable]')) return;
+  if (event.key === 'Escape' && !document.querySelector('dialog[open]') && !root.hasAttribute('data-gl-home') && !event.defaultPrevented) {
+    const target = event.target;
+    if (!target.closest?.('input,select,textarea,[contenteditable]')) document.querySelector('.brand').click();
+    return;
+  }
+  if (event.key.toLowerCase() !== 'h' || event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.target.closest?.('input,select,textarea,[contenteditable]')) return;
   event.preventDefault(); if (menu.open) menu.close(); else openMenu();
 });
 for (const [key, title] of [['cv','CV'], ['linkedin','LinkedIn']]) {

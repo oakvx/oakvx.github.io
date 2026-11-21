@@ -55,5 +55,6 @@
   "gl.motionSetting": "Reduce motion",
   "gl.menuHint": "H opens HOME · Esc closes",
   "gl.404back": "Back to GL Menu",
-  "gl.404desc": "The address doesn’t match a tile. Go back to the menu to find a project."
+  "gl.404desc": "The address doesn’t match a tile. Go back to the menu to find a project.",
+  "gl.tileHelp": "Use arrow keys to change project, Enter to open and Tab to reach the preview actions."
 }

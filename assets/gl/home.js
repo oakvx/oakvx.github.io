@@ -6,6 +6,7 @@ const sheet = document.querySelector('[data-sheet]');
 const pad = document.querySelector('.tiles');
 const desktop = matchMedia('(min-width: 1024px)');
 let index = 0;
+let previewAnimation;
 let trigger;
 function select(next, focus = false) {
   const changed = index !== next;
@@ -17,7 +18,10 @@ function select(next, focus = false) {
     previews[i].hidden = i !== next;
   });
   if (focus) tiles[next].focus();
-  if (changed && !still() && desktop.matches) previews[next].animate([{opacity:0,transform:'scale(.985)'},{opacity:1,transform:'none'}],{duration:240,easing:'ease-out'});
+  if (changed) {
+    previewAnimation?.cancel();
+    if (!still() && desktop.matches) previewAnimation = previews[next].animate?.([{opacity:0,transform:'scale(.985)'},{opacity:1,transform:'none'}],{duration:240,easing:'ease-out'});
+  }
   remember('selection', tiles[next].dataset.tile);
 }
 select(Math.max(0, tiles.findIndex(tile => tile.dataset.tile === recall('selection'))));
@@ -39,10 +43,18 @@ sheet.addEventListener('close', () => trigger?.focus());
 desktop.addEventListener('change', () => { if (desktop.matches && sheet.open) sheet.close(); });
 pad.addEventListener('keydown', event => {
   const columns = getComputedStyle(pad).gridTemplateColumns.split(' ').length;
+  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  if (event.key === 'Home' || event.key === 'End') {
+    event.preventDefault(); select(event.key === 'Home' ? 0 : tiles.length - 1, true); return;
+  }
   const delta = {ArrowLeft:-1,ArrowRight:1,ArrowUp:-columns,ArrowDown:columns}[event.key];
   if (!delta) return;
-  event.preventDefault(); select((index+delta+tiles.length)%tiles.length,true);
+  event.preventDefault();
+  const current = tiles.indexOf(document.activeElement);
+  if (current >= 0) select(Math.min(tiles.length - 1, Math.max(0, current + delta)),true);
 });
+
+document.addEventListener('gl-motion', () => previewAnimation?.cancel());
 
 tilt(tiles);
 boot(tiles);

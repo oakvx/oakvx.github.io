@@ -31,3 +31,13 @@ for (const item of plaza.querySelectorAll('details')) {
 }
 
 import './plaza-walk.js';
+
+if (config.plazaDaylight) {
+  function daylight() {
+    const hour = new Date().getHours();
+    plaza.dataset.daylight = hour >= 6 && hour < 9 ? 'dawn' : hour >= 9 && hour < 17 ? 'day' : hour >= 17 && hour < 21 ? 'dusk' : 'night';
+  }
+  daylight();
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) daylight(); });
+  setInterval(() => { if (!document.hidden) daylight(); }, 60_000);
+}

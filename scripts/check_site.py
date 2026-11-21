@@ -86,6 +86,10 @@ def audit_page(relative: str, language: str, route: str, check_seo: bool = False
     original = route if language == "it" else next(k for k, v in ROUTE_TO_EN.items() if v == route)
     if languages != {"it": original, "en": ROUTE_TO_EN[original]}:
         raise AssertionError(f"{relative}: broken static IT/EN switch")
+    dialog_ids = {a.get("id") for a in parser.attrs.get("dialog", [])}
+    landmark_ids = {a.get("id") for a in parser.attrs.get("section", [])}
+    if "home-menu" not in dialog_ids or not {"home-contacts", "home-settings"} <= landmark_ids:
+        raise AssertionError(f"{relative}: HOME dialog lacks contact or settings section")
     html_attrs = parser.attrs.get("html", [{}])[0]
     if html_attrs.get("lang") != language:
         raise AssertionError(f"{relative}: expected <html lang=\"{language}\">")
@@ -156,6 +160,12 @@ def audit_gl_home(relative: str) -> None:
         raise AssertionError(f"{relative}: portfolio project tiles missing")
     if not any(a.get("href") == "#main" for a in parser.attrs.get("a", [])):
         raise AssertionError(f"{relative}: missing skip link")
+    expected_repos = {"oakvx.github.io", "oakvx", "bratAnimator", "autoOfficina", "topGun"}
+    repos = {details.get("data-repo") for details in parser.attrs.get("details", [])}
+    if repos != expected_repos:
+        raise AssertionError(f"{relative}: missing static Piazza repository cards")
+    if not all(f"https://github.com/oakvx/{repo}" in {a.get("href") for a in parser.attrs.get("a", [])} for repo in repos):
+        raise AssertionError(f"{relative}: missing Piazza repository links")
 
 
 def main() -> int:

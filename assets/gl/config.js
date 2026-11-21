@@ -3,6 +3,7 @@ export const config = Object.freeze({
   tilt: true,
   launch: true,
   bratDemo: true,
+  signalCable: true,
   plazaLive: true,
   plazaWalk: true,
   plazaDaylight: true,

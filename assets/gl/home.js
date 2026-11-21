@@ -1,3 +1,4 @@
+import "./cable.js";
 import "./brat-demo.js";
 import { boot, tilt } from './signature.js';
 import { recall, remember, still, sound } from './shell.js';

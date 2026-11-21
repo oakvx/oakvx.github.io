@@ -1,3 +1,4 @@
+import { boot, tilt } from './signature.js';
 import { recall, remember, still, sound } from './shell.js';
 const tiles = [...document.querySelectorAll('[data-tile]')];
 const previews = [...document.querySelectorAll('[data-preview]')];
@@ -42,3 +43,6 @@ pad.addEventListener('keydown', event => {
   if (!delta) return;
   event.preventDefault(); select((index+delta+tiles.length)%tiles.length,true);
 });
+
+tilt(tiles);
+boot(tiles);

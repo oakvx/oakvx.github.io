@@ -1,3 +1,4 @@
+import { connectLaunch } from './launch.js';
 import { config } from './config.js';
 const root = document.documentElement;
 const en = root.lang === 'en';
@@ -67,3 +68,5 @@ export function sound(kind) {
   volume.gain.setValueAtTime(.001,time); volume.gain.exponentialRampToValueAtTime(.035,time+.015); volume.gain.exponentialRampToValueAtTime(.001,time+.11);
   note.connect(volume).connect(context.destination); note.start(time); note.stop(time+.12);
 }
+
+connectLaunch(still);

@@ -56,5 +56,16 @@
   "gl.menuHint": "H opens HOME · Esc closes",
   "gl.404back": "Back to GL Menu",
   "gl.404desc": "The address doesn’t match a tile. Go back to the menu to find a project.",
-  "gl.tileHelp": "Use arrow keys to change project, Enter to open and Tab to reach the preview actions."
+  "gl.tileHelp": "Use arrow keys to change project, Enter to open and Tab to reach the preview actions.",
+  "gl.plazaLabel": "COMMUNITY / 05 REPOSITORIES",
+  "gl.plazaTitle": "The Plaza",
+  "gl.plazaIntro": "Pick a character to explore one of the public repositories behind this portfolio.",
+  "gl.push": "Last push: unavailable offline.",
+  "gl.repo": "Open repository",
+  "gl.repo.portfolio": "Code for GL Menu, case studies and bilingual pages.",
+  "gl.repo.profile": "The GitHub profile repository: a starting point for the other projects.",
+  "gl.repoProfile": "GitHub profile",
+  "gl.repo.brat": "An in-browser editor that turns lyrics into animated videos.",
+  "gl.repo.spinotto": "A sample garage website, not commissioned client work.",
+  "gl.repo.topgun": "Unaffiliated demonstration landing page."
 }

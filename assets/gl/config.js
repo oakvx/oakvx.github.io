@@ -3,6 +3,7 @@ export const config = Object.freeze({
   tilt: true,
   launch: true,
   plazaLive: true,
+  plazaWalk: true,
   cvUrl: null, // TODO: add the approved CV PDF.
   linkedinUrl: null, // TODO: add Gabriele's verified LinkedIn URL.
 });

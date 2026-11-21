@@ -29,3 +29,5 @@ for (const item of plaza.querySelectorAll('details')) {
     item.querySelector('[data-repo-push]').replaceChildren(en ? 'Last push: ' : 'Ultimo push: ', time);
   });
 }
+
+import './plaza-walk.js';

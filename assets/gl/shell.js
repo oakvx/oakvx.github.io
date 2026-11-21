@@ -1,3 +1,4 @@
+import "./secret-help.js";
 import { connectQuality } from "./quality.js";
 import { connectLaunch } from './launch.js';
 import { config } from './config.js';

@@ -8,6 +8,7 @@ export const config = Object.freeze({
   pointerCompanion: true,
   performanceGovernor: true,
   partyMode: true,
+  secretHelp: true,
   plazaLive: true,
   plazaWalk: true,
   plazaDaylight: true,

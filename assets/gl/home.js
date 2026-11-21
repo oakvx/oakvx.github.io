@@ -1,3 +1,4 @@
+import "./party.js";
 import "./cursor.js";
 import "./parallax.js";
 import "./cable.js";

@@ -7,6 +7,7 @@ export const config = Object.freeze({
   parallax: true,
   pointerCompanion: true,
   performanceGovernor: true,
+  partyMode: true,
   plazaLive: true,
   plazaWalk: true,
   plazaDaylight: true,

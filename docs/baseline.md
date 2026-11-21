@@ -34,3 +34,18 @@ La preview HTTPS esposta al browser e `https://oakvx.github.io/` non erano raggi
 | CLS | 0 | 0 | 0 | 0 |
 
 Per la misura pubblicata, eseguire tre audit sullo stesso URL HTTPS della preview con profilo Mobile, throttling simulato e storage pulito; salvare i tre report e calcolare la mediana per metrica. Non usare questi numeri locali come sostituti.
+
+## Fase 4 — candidato finale, prima della sottrazione
+
+Misurato sul codice `9b1ab89`, **in locale** (`http://localhost:8080/`), Chromium 153 / Lighthouse 13.6.0, profilo mobile con throttling simulato e tre navigazioni distinte. Accesso HTTPS alla preview e a GitHub Pages ancora non disponibile dal sandbox (errore TLS). Il browser di misura espone due core: il governor sceglie Ridotta al primo accesso; questo risultato mobile non misura l’effetto della qualità Alta desktop o del party avviato volontariamente.
+
+| Metrica | Run 1 | Run 2 | Run 3 | Mediana |
+|---|---:|---:|---:|---:|
+| Performance | 100 | 100 | 100 | 100 |
+| Accessibilità | 100 | 100 | 100 | 100 |
+| SEO | 100 | 100 | 100 | 100 |
+| LCP | 0,9 s | 1,4 s | 0,9 s | 0,9 s |
+| TBT | 0 ms | 10 ms | 0 ms | 0 ms |
+| CLS | 0 | 0 | 0 | 0 |
+
+Trace desktop non rallentato, senza input e qualità automatica: **0 task ≥50 ms** in tutte e tre le acquisizioni da 3,5 s. Il governor è stato testato separatamente con frame simulati a ~29 fps (Alta → Media → Ridotta e limite conservato al reload). La demo è stata verificata anche fuori viewport e con `visibilitychange` simulato: i pixel restano invariati durante la pausa e tornano ad aggiornarsi alla ripresa. Ripetere le tre misure se il candidato cambia dopo l’approvazione della sottrazione.

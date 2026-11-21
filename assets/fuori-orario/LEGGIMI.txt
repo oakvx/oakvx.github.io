@@ -1,0 +1,24 @@
+Immagini di Fuori orario
+========================
+Copertine e console mostrate nella pagina:
+
+  rayman-legends.jpg      Rayman Legends
+  yokai-watch-2.png       Yo-kai Watch 2: Bony Spirits
+  just-dance-2017.jpg     Just Dance 2017
+  3ds-cutout.png          Tre Nintendo 3DS, con sfondo rimosso
+  wii-u.png               Wii U e GamePad, PNG trasparente
+  wii.png                 Wii, PNG trasparente
+  ps4-cutout.png          PlayStation 4, con sfondo rimosso
+
+Fonti delle copertine
+=====================
+rayman-legends.jpg      https://upload.wikimedia.org/wikipedia/en/f/f6/Rayman_Legends_Box_Art.jpg
+yokai-watch-2.png      https://upload.wikimedia.org/wikipedia/en/c/cb/Yo-kai_Watch_2_Bony_Spirits_artwork.png
+just-dance-2017.jpg    https://www.ibs.it/images/3307215968130_0_0_464_0_75.jpg
+
+Immagini console
+================
+3ds-cutout.png         https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS14OjC2mAheZrZ9Z0G7vH2Ql-gb6cSBWOgpVtnCy8-aA&s=10 (sfondo rimosso)
+wii-u.png              https://upload.wikimedia.org/wikipedia/commons/4/4a/Wii_U_Console_and_Gamepad.png (PNG trasparente originale)
+wii.png                https://upload.wikimedia.org/wikipedia/commons/f/f3/Wii-Console.png (PNG trasparente originale)
+ps4-cutout.png         https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Sony-PlayStation-4-PS4-wDualShock-4.jpg/1280px-Sony-PlayStation-4-PS4-wDualShock-4.jpg (sfondo rimosso)

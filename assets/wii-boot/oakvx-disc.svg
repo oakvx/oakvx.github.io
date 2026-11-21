@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2=".6" y2="1">
+      <stop stop-color="#fafbfc"/><stop offset=".2" stop-color="#d9dee2"/>
+      <stop offset=".4" stop-color="#f9fbfc"/><stop offset=".53" stop-color="#c9d2d8"/>
+      <stop offset=".65" stop-color="#edf1f4"/><stop offset=".85" stop-color="#c9d5dc"/><stop offset="1" stop-color="#f9fbfc"/>
+    </linearGradient>
+    <radialGradient id="light"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".75" stop-color="#fff" stop-opacity="0"/><stop offset=".94" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <mask id="hole"><rect width="360" height="360" fill="white"/><circle cx="180" cy="180" r="20" fill="black"/></mask>
+  </defs>
+  <g mask="url(#hole)">
+    <circle cx="180" cy="180" r="174" fill="url(#metal)" stroke="#b5c0c7" stroke-width="2"/>
+    <circle cx="180" cy="180" r="171" fill="url(#light)" stroke="#fff" stroke-width="2"/>
+    <path d="M16 127A174 174 0 0 1 302 56L210 165Z" fill="#fff" opacity=".24"/>
+    <path d="M21 251A174 174 0 0 0 307 300L200 198Z" fill="#fff" opacity=".28"/>
+    <circle cx="180" cy="180" r="43" fill="#dce3e7" fill-opacity=".5" stroke="#aeb9c0" stroke-width="2"/>
+    <circle cx="180" cy="180" r="32" fill="#edf2f5" stroke="#fff" stroke-width="3"/>
+    <circle cx="180" cy="180" r="23" fill="#b9c9d2"/>
+    <text x="180" y="102" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" letter-spacing="2" fill="#5d7582">OAKVX</text>
+    <text x="180" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" letter-spacing="4" fill="#718895">PORTFOLIO</text>
+    <text x="180" y="300" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#889aa4">Gabriele Lucia</text>
+  </g>
+</svg>

@@ -5,6 +5,7 @@ export const config = Object.freeze({
   bratDemo: true,
   signalCable: true,
   parallax: true,
+  pointerCompanion: true,
   plazaLive: true,
   plazaWalk: true,
   plazaDaylight: true,

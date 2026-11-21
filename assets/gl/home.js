@@ -1,3 +1,4 @@
+import "./cursor.js";
 import "./parallax.js";
 import "./cable.js";
 import "./brat-demo.js";

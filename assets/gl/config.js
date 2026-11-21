@@ -2,6 +2,7 @@ export const config = Object.freeze({
   boot: true,
   tilt: true,
   launch: true,
+  bratDemo: true,
   plazaLive: true,
   plazaWalk: true,
   plazaDaylight: true,

@@ -1,0 +1,31 @@
+import { config } from './config.js';
+import { visibleFrames, whenIdle } from './frames.js';
+const tv = document.querySelector('.tv');
+const art = tv?.querySelector('[data-preview=brat] .preview-art');
+if (config.bratDemo && art) whenIdle(() => {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'brat-demo'; canvas.width = 800; canvas.height = 320;
+  canvas.setAttribute('aria-hidden','true'); canvas.hidden = true;
+  const context = canvas.getContext('2d', {alpha:false});
+  if (!context) return;
+  art.append(canvas);
+  const english = document.documentElement.lang === 'en';
+  const lines = english ? ['gabriele lucia','code and design','lyrics in motion'] : ['gabriele lucia','codice e grafica','testi in movimento'];
+  let clock = 0, paint = 0;
+  visibleFrames(art, (now, delta) => {
+    clock += delta;
+    if (now - paint < 32 && !canvas.hidden) return;
+    paint = now;
+    const phase = (clock % 2200) / 2200;
+    const line = lines[Math.floor(clock / 2200) % lines.length];
+    const ctx = context;
+    ctx.fillStyle = '#b7e82b'; ctx.fillRect(0,0,800,320);
+    ctx.fillStyle = '#233006'; ctx.font = '700 19px system-ui'; ctx.textAlign = 'left';
+    ctx.fillText('●   BRAT ANIMATOR / LIVE DEMO',28,40);
+    ctx.textAlign = 'center'; ctx.font = '700 61px system-ui';
+    ctx.save(); ctx.translate(400,174); const pop = 1-.035*Math.exp(-phase*16); ctx.scale(pop,pop);
+    ctx.fillText(line,0,0,720); ctx.restore();
+    ctx.fillStyle = '#233006'; ctx.fillRect(28,282,744*phase,3);
+    canvas.hidden = false;
+  }, {enabled: () => document.documentElement.dataset.quality !== 'low', pause: () => {canvas.hidden = true;}});
+});

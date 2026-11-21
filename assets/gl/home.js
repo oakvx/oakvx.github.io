@@ -1,3 +1,4 @@
+import "./brat-demo.js";
 import { boot, tilt } from './signature.js';
 import { recall, remember, still, sound } from './shell.js';
 const tiles = [...document.querySelectorAll('[data-tile]')];
@@ -23,6 +24,7 @@ function select(next, focus = false) {
     if (!still() && desktop.matches) previewAnimation = previews[next].animate?.([{opacity:0,transform:'scale(.985)'},{opacity:1,transform:'none'}],{duration:240,easing:'ease-out'});
   }
   remember('selection', tiles[next].dataset.tile);
+  if (changed) document.dispatchEvent(new CustomEvent('gl-select', {detail:tiles[next]}));
 }
 select(Math.max(0, tiles.findIndex(tile => tile.dataset.tile === recall('selection'))));
 document.documentElement.dataset.enhanced = '';

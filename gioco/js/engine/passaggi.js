@@ -28,6 +28,9 @@ export class Passaggi {
     this.vcam.matrixWorldAutoUpdate = false;
     this.frustum = new THREE.Frustum();
     this.pool = [0, 1].map(() => new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType }));
+    // texture vuota: nessuna faccia deve tenere legata la texture in cui si sta disegnando (feedback loop)
+    this.vuota = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
+    this.vuota.needsUpdate = true;
   }
 
   ridimensiona(w, h, scala = this.scala) {
@@ -38,7 +41,7 @@ export class Passaggi {
 
   faccia(m, w, h) {
     const mat = new THREE.ShaderMaterial({
-      uniforms: { tVista: { value: null }, uRes: { value: this.res }, uAttivo: { value: 0 }, uNebbia: { value: new THREE.Color(0x000000) } },
+      uniforms: { tVista: { value: this.vuota }, uRes: { value: this.res }, uAttivo: { value: 0 }, uNebbia: { value: new THREE.Color(0x000000) } },
       vertexShader: vertex,
       fragmentShader: fragment,
     });
@@ -129,6 +132,7 @@ export class Passaggi {
     const candidate = [];
     for (const [P, Q, p] of this.coppie()) {
       P.mat.uniforms.uAttivo.value = 0;
+      P.mat.uniforms.tVista.value = this.vuota;
       P.mat.uniforms.uNebbia.value.copy(nebbia);
       const centro = new THREE.Vector3().setFromMatrixPosition(P.m);
       if (!this.frustum.intersectsSphere(new THREE.Sphere(centro, Math.hypot(p.w, p.h) / 2))) continue;

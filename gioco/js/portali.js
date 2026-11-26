@@ -52,6 +52,8 @@ export class Portali {
     this.scala = 0.5;
     this.res = new THREE.Vector2(1, 1);
     this.reindirizzi = new Map();
+    this.vuota = new THREE.DataTexture(new Uint8Array([200, 210, 220, 255]), 1, 1);
+    this.vuota.needsUpdate = true;
     this.frustum = new THREE.Frustum();
     this.m4 = new THREE.Matrix4();
     const geo = new THREE.PlaneGeometry(W, H);
@@ -182,8 +184,11 @@ export class Portali {
       const piano = new THREE.Plane().setFromNormalAndCoplanarPoint(n, p).applyMatrix4(v.matrixWorldInverse);
       clipObliqua(v.projectionMatrix, piano);
       v.projectionMatrixInverse.copy(v.projectionMatrix).invert();
+      // durante il disegno nella propria texture la finestra non deve tenerla legata (feedback loop)
+      P.mat.uniforms.tVista.value = this.vuota;
       this.renderer.setRenderTarget(P.rt);
       this.renderer.render(this.scene, v);
+      P.mat.uniforms.tVista.value = P.rt.texture;
     }
     for (const P of this.p) P.mat.uniforms.uEco.value = 0;
   }

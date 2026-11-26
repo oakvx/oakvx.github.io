@@ -46,7 +46,11 @@ for (const nome of scelti) {
   const errori = [];
   page.on('pageerror', (e) => errori.push('pageerror: ' + e.message));
   // gli errori di rete del browser ("Failed to load resource") non sono errori del codice
-  page.on('console', (m) => { if (m.type() === 'error' && !m.text().startsWith('Failed to load resource')) errori.push('console.error: ' + m.text()); });
+  page.on('console', (m) => {
+    if (m.type() === 'error' && !m.text().startsWith('Failed to load resource')) errori.push('console.error: ' + m.text());
+    // errori WebGL (es. feedback loop): il browser salta il disegno, quindi sono bug veri
+    if (m.text().includes('GL_INVALID') && !errori.some((e) => e.includes('GL_INVALID'))) errori.push('webgl: ' + m.text());
+  });
   const aiuto = {
     base,
     leggi: () => page.evaluate(() => window.__gioco.leggi()),

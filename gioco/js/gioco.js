@@ -13,7 +13,7 @@ import { creaGiro, creaAiuti } from './logica/giro.js';
 import { creaContapassi } from './logica/passi.js';
 
 const $ = (id) => document.getElementById(id);
-const STANZE = ['ingresso', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const STANZE = ['ingresso', 'percorso', 'oakvx', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
 const ATMOSFERA = { nebbia: 0x3c423f, vicino: 3, lontano: 26, cielo: 0xe4ece6, terra: 0x404642, intensita: 2.3 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
@@ -151,7 +151,8 @@ export async function avvia(ctx) {
     const esito = mod.costruisci(mondo, g);
     if (esito && esito.debug) debugStanze[STANZE[i]] = esito.debug;
   });
-  const meshSolide = mondo.solidi.filter((s) => s.mesh && s.mesh.visible).map((s) => s.mesh);
+  // i vetri sono solidi ma il raggio delle finestre li attraversa
+  const meshSolide = mondo.solidi.filter((s) => s.mesh && s.mesh.visible && !s.mesh.userData.vetro).map((s) => s.mesh);
 
   // ---------------------------------------------------------------- post-processing
   const rt = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: 4 });
@@ -584,7 +585,7 @@ export async function avvia(ctx) {
     window.__gioco = {
       leggi: () => ({
         stato, stanza: stanzaAttuale, gesto, finito, x: giocatore.pos.x, y: giocatore.pos.y, z: giocatore.pos.z, yaw,
-        lampade: g.giro.lampade(), segreti: g.giro.segreti(), cartiglio: cartiglio && cartiglio.chiave,
+        passi, lampade: g.giro.lampade(), segreti: g.giro.segreti(), cartiglio: cartiglio && cartiglio.chiave,
         puntoControllo: ultimoControllo, pc: (() => { const c = controlli.get(ultimoControllo); return c && { x: c.x, y: c.piedi + giocatore.half.y + 0.01, z: c.z }; })(),
         portali: portali.p.map((p) => p.attivo && p.pannello), narratore: narratore.attuale && narratore.attuale.id,
         tenuto: !!tenuto, mirato: mirato && (mirato.chiave || 'cubo'),

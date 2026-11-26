@@ -48,18 +48,56 @@
     "puntoControllo": "Torna al punto di ripresa",
     "esamina": "esamina",
     "azioni": {
-      "bancone": "prendi le finestre"
+      "bancone": "prendi le finestre",
+      "tappa-volta": "leggi la tappa",
+      "tappa-freelance": "leggi la tappa",
+      "tappa-erasmus": "leggi la tappa",
+      "tappa-format": "leggi la tappa",
+      "tappa-unimore": "leggi la tappa"
     },
     "cartigli": {
       "bancone": {
         "titolo": "Le due finestre",
         "testo": "Clic sinistro apre la finestra ciano, clic destro quella magenta, solo sui pannelli a quadretti. Entri da una, esci dall'altra."
+      },
+      "tappa-volta": {
+        "titolo": "IIS A. Volta, Sassuolo",
+        "testo": "2021 – 2026 · Informatica e Telecomunicazioni.\nIl progetto di maturità è Beautify, il gestionale multisalone che trovi più avanti."
+      },
+      "tappa-freelance": {
+        "titolo": "Sviluppatore web freelance",
+        "testo": "2023 – giugno 2026 · Siti e consulenza SEO per attività locali tra Sassuolo e Scandiano."
+      },
+      "tappa-erasmus": {
+        "titolo": "Erasmus+ a Siviglia",
+        "testo": "Maggio – giugno 2025 · Starbotica: supporto IT, Windows, Active Directory, reti locali."
+      },
+      "tappa-format": {
+        "titolo": "Format SRL",
+        "testo": "Agosto – settembre 2026 · Apprendista software e automazione: software industriale, supporto PLC, SQL Server, T-SQL."
+      },
+      "tappa-unimore": {
+        "titolo": "UNIMORE",
+        "testo": "2026 → · Ingegneria Informatica all'Università di Modena e Reggio Emilia."
       }
     },
     "stanze": {
       "ingresso": {
         "cartello": "Ingresso · turno di notte",
         "testi": {}
+      },
+      "percorso": {
+        "cartello": "Percorso",
+        "anni": {
+          "volta": "2021 → 2026",
+          "freelance": "2023 → 2026",
+          "erasmus": "2025",
+          "format": "2026",
+          "unimore": "2026 →"
+        }
+      },
+      "oakvx": {
+        "cartello": "Fuori orario · in arrivo"
       }
     }
   },
@@ -112,18 +150,56 @@
     "puntoControllo": "Back to the checkpoint",
     "esamina": "examine",
     "azioni": {
-      "bancone": "take the windows"
+      "bancone": "take the windows",
+      "tappa-volta": "read the stop",
+      "tappa-freelance": "read the stop",
+      "tappa-erasmus": "read the stop",
+      "tappa-format": "read the stop",
+      "tappa-unimore": "read the stop"
     },
     "cartigli": {
       "bancone": {
         "titolo": "The two windows",
         "testo": "Left click opens the cyan window, right click the magenta one, only on the grid panels. In through one, out of the other."
+      },
+      "tappa-volta": {
+        "titolo": "IIS A. Volta, Sassuolo",
+        "testo": "2021 – 2026 · Computer Science and Telecommunications.\nThe diploma project is Beautify, the multi-salon CRM you will find further on."
+      },
+      "tappa-freelance": {
+        "titolo": "Freelance web developer",
+        "testo": "2023 – June 2026 · Websites and SEO consulting for local businesses around Sassuolo and Scandiano."
+      },
+      "tappa-erasmus": {
+        "titolo": "Erasmus+ in Seville",
+        "testo": "May – June 2025 · Starbotica: IT support, Windows, Active Directory, local networks."
+      },
+      "tappa-format": {
+        "titolo": "Format SRL",
+        "testo": "August – September 2026 · Software & automation apprentice: industrial software, PLC support, SQL Server, T-SQL."
+      },
+      "tappa-unimore": {
+        "titolo": "UNIMORE",
+        "testo": "2026 → · Computer Engineering at the University of Modena and Reggio Emilia."
       }
     },
     "stanze": {
       "ingresso": {
         "cartello": "Entrance · night shift",
         "testi": {}
+      },
+      "percorso": {
+        "cartello": "Journey",
+        "anni": {
+          "volta": "2021 → 2026",
+          "freelance": "2023 → 2026",
+          "erasmus": "2025",
+          "format": "2026",
+          "unimore": "2026 →"
+        }
+      },
+      "oakvx": {
+        "cartello": "After hours · coming soon"
       }
     }
   }

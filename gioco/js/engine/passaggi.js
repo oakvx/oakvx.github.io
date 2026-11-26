@@ -13,6 +13,9 @@ void main(){
   gl_FragColor = vec4(texture2D(tVista, gl_FragCoord.xy / uRes).rgb, 1.0);
 }`;
 
+// matrice di posa di una faccia: centro (x, y, z) e rotazione attorno a y
+export const posa = (x, y, z, ry = 0) => new THREE.Matrix4().makeRotationY(ry).setPosition(x, y, z);
+
 export class Passaggi {
   constructor(renderer, scene) {
     this.renderer = renderer;

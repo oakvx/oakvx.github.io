@@ -1,6 +1,8 @@
 // Resa realistica: tone mapping filmico, ombre (1024 in qualità bassa, 2048 in alta),
 // materiali nuovi, panorama HDR come luce d'ambiente; l'ingresso non esce né nero né bianco.
 import assert from 'node:assert/strict';
+
+export const pesante = true;
 import fs from 'node:fs';
 
 export default async function (page, aiuto) {

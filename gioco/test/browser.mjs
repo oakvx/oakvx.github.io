@@ -67,7 +67,8 @@ for (const nome of scelti) {
   };
   try {
     if (mod.prepara) await mod.prepara(page, aiuto);
-    await page.goto(`${base}/gioco/?avvia=gioco&debug&lang=it${mod.query || ''}`);
+    // gli scenari di gioco girano in modalità leggera; quelli sulla resa grafica esportano `pesante`
+    await page.goto(`${base}/gioco/?avvia=gioco&debug&lang=it${mod.pesante ? '' : '&leggero'}${mod.query || ''}`);
     await page.waitForFunction(() => window.__gioco && window.__gioco.leggi, null, { timeout: 30000 });
     await mod.default(page, aiuto);
     if (errori.length) throw new Error(errori.join('\n'));

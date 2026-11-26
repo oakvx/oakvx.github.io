@@ -33,7 +33,9 @@ export async function avvia(ctx) {
   const canvas = $('scena');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
   // ombre morbide: una sola luce con ombre, quella della stanza in cui si è
-  renderer.shadowMap.enabled = true;
+  // ?leggero (solo per i test senza GPU): niente ombre e mezza risoluzione, la logica non cambia
+  const leggero = new URLSearchParams(location.search).has('leggero');
+  renderer.shadowMap.enabled = !leggero;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(FOG);
@@ -241,7 +243,7 @@ export async function avvia(ctx) {
   const postCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
   function ridimensiona() {
-    const pr = Math.min(devicePixelRatio || 1, 1.5);
+    const pr = leggero ? 0.5 : Math.min(devicePixelRatio || 1, 1.5);
     renderer.setPixelRatio(pr);
     renderer.setSize(innerWidth, innerHeight, false);
     const w = Math.floor(innerWidth * pr);

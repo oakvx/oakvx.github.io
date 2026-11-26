@@ -36,9 +36,9 @@ export default async function (page, aiuto) {
   await G(() => window.__gioco.stanza('piscina').risolvi());
   await cammina(aiuto, -Math.PI / 2, 'middleman');
   await G(() => window.__gioco.stanza('middleman').risolvi());
-  await aiuto.attendi(inStanza, 5000, 'cisterna');
+  await cammina(aiuto, Math.PI, 'cisterna');
   await G(() => window.__gioco.stanza('cisterna').risolvi());
-  await aiuto.attendi(inStanza, 5000, 'galleria');
+  await cammina(aiuto, Math.PI, 'galleria');
   misure.galleria = await fps(page);
   // galleria → scrivania → commit → supermercato
   const ug = await G(() => window.__gioco.stanza('galleria').uscita);

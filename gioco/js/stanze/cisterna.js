@@ -2,6 +2,7 @@
 // gocce dal soffitto. Al centro una scaletta sale verso un foro di luce.
 import * as THREE from 'three';
 import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
 import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
 
@@ -45,8 +46,9 @@ export function costruisci(m, g) {
   m.stanza({
     nome: 'cisterna', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'transito', passi: 'acqua',
     pareti: {
-      w: { pannelli: [{ id: 'cisterna-basso', a: 14, b: 20, y0: 0, y1: 2.6 }] },
       e: { pannelli: [{ id: 'cisterna-alto', a: Z1 - 5, b: Z1 - 1, y0: 3, y1: H }] },
+      w: { pannelli: [{ id: 'cisterna-basso', a: 14, b: 20, y0: 0, y1: 2.6 }], aperture: [apertura(26)] },
+      s: { aperture: [{ ...apertura(333), y0: 3, y1: 5.3 }] },
     },
     materiali: mat,
     acqua: { livello: 0.5, corrente: [0.12, 0.05] },
@@ -102,12 +104,10 @@ export function costruisci(m, g) {
   m.luce(LX, H - 0.6, LZ, 4, 8, 0xd8ece8);
   // pedana alta nell'angolo sud-est: ci si arriva solo con le finestre; da lì si sale alla chiocciola
   m.box(X1 - 6, 0, Z1 - 6, X1, 3, Z1, mat.muro);
-  m.zona('cisterna-su', X1 - 6, 3, Z1 - 6, X1, 6, Z1, { ripeti: true });
-  g.su('cisterna-su', () => {
-    if (g.inViaggio) return;
-    g.inViaggio = true;
-    g.teletrasporta(162.5, 0, 1.5, Math.PI, () => { g.inViaggio = false; });
-  });
+  nicchia(m, [X0, 0, 26, Math.PI / 2]);
+  nicchia(m, [333, 3, Z1, Math.PI]);
+  collega(g, 'cisterna-galleria', [333, 3, Z1, Math.PI], [162.5, 0, 0, 0]);
+  g.arredi.porta(333, 3, Z1 - 0.06, Math.PI, null);
   // il ricordo di questo transito: Format, il software industriale
   const t = tappa(m, g, 'format', X0 + 15, 0, Z1 - 0.06, Math.PI);
   cartelloStanza(m, g, X0 + 4, 3.4, Z0 + 0.06, 0, 2113);
@@ -117,7 +117,8 @@ export function costruisci(m, g) {
     debug: {
       mii: mii.posto,
       tappa: t,
-      risolvi: () => { g.giocatore().pos.set(X1 - 3, 3.9, Z1 - 3); g.giocatore().vel.set(0, 0, 0); },
+      varchi: [{ id: 'cisterna-galleria', da: 'cisterna', a: 'galleria', lato: [333, 3, Z1, Math.PI] }],
+      risolvi: () => { g.giocatore().pos.set(333, 3.9, Z1 - 1.5); g.giocatore().vel.set(0, 0, 0); },
     },
   };
 }

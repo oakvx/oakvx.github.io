@@ -3,6 +3,7 @@
 // scuro, come il sito), Top Gun Fly School (una pista in una teca sola: un file solo) e il
 // sito di Synkris. Nessun enigma: è la stanza dove si respira.
 import * as THREE from 'three';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
 
 const X0 = 150, X1 = 175, Z0 = 0, Z1 = 20, H = 5;
 const CHIARO = { nebbia: 0xb9bdb6, vicino: 6, lontano: 40, cielo: 0xfdfcf6, terra: 0x9a9d96, intensita: 3.2 };
@@ -14,6 +15,7 @@ export function costruisci(m, g) {
   const T = () => g.T().stanze.galleria;
   m.stanza({
     nome: 'galleria', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'design', passi: 'legno',
+    pareti: { n: { aperture: [apertura(162.5)] }, s: { aperture: [apertura(162.5)] } },
     materiali: { pavimento: mat.legnoScuro },
     luci: [[157, 7, 0.6, 1.6], [168, 7, 0.6, 1.6], [157, 14, 0.6, 1.6], [168, 14, 0.6, 1.6]], intensita: 2.6, raggio: 9,
     atmosfera: CHIARO,
@@ -104,12 +106,14 @@ export function costruisci(m, g) {
   m.scene.add(cartello);
 
   g.arredi.cartello(162.5, 3.6, Z0 + 0.03, 0, '09', () => T().cartello);
-  m.zona('uscita-galleria', X0, -1, Z1 - 1, X1, 3, Z1, { ripeti: true });
-  g.su('uscita-galleria', () => g.teletrasporta(206, 0, 1.5, Math.PI));
+  nicchia(m, [162.5, 0, Z0, 0]);
+  nicchia(m, [162.5, 0, Z1, Math.PI]);
+  collega(g, 'galleria-scrivania', [162.5, 0, Z1, Math.PI], [206, 0, 0, 0]);
   g.arredi.porta(162.5, 0, Z1 - 0.06, Math.PI, () => T().uscita);
   g.puntoControllo('galleria', 162.5, 0, 1.5, Math.PI);
   return {
     debug: {
+      varchi: [{ id: 'galleria-scrivania', da: 'galleria', a: 'scrivania', lato: [162.5, 0, Z1, Math.PI] }],
       uscita: [162.5, Z1 - 0.5],
       stato: () => ({ tema, hashSchermo }),
     },

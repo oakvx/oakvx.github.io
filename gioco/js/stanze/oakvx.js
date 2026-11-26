@@ -7,6 +7,7 @@
 import * as THREE from 'three';
 import { canvasTex } from '../engine/materiali.js';
 import { normalizza } from '../logica/stanzaOakvx.js';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
 
 const X0 = 900, X1 = 908, Z0 = 0, Z1 = 12, PARETE = 2.2, COLMO = 4.6, CX = 904;
 
@@ -50,6 +51,7 @@ export function costruisci(m, g) {
   carta.repeat.set(5, 1.2);
   m.stanza({
     nome: 'oakvx', x0: X0, x1: X1, z0: Z0, z1: Z1, h: PARETE, soffitto: false, ala: 'oakvx', passi: 'moquette',
+    pareti: { n: { aperture: [apertura(902.5), apertura(905.5)] }, w: { aperture: [apertura(8.9)] } },
     materiali: { muro, pavimento: new THREE.MeshLambertMaterial({ map: moquette }), battiscopa: legno, cornice: legno },
     luciPunto: false,
     atmosfera: { nebbia: 0x16233b, vicino: 10, lontano: 60, cielo: 0xa6b8de, terra: 0x8a4a1e, intensita: 1.9 },
@@ -222,7 +224,6 @@ export function costruisci(m, g) {
   finestrella.rotation.y = -Math.PI / 2;
   m.scene.add(finestrella);
   m.box(X1 - 0.25, 0.95, 6.45, X1, 1.0, 7.55, new THREE.MeshLambertMaterial({ color: 0xd9b23b }));
-  m.box(X0 + 0.02, 0, 8.3, X0 + 0.08, 2.05, 9.5, new THREE.MeshLambertMaterial({ color: 0x2a3340 }));
   for (let k = 0; k < 5; k++) m.box(X0 + 0.02, k * 0.2, 6.2 + k * 0.28, X0 + 0.5, k * 0.2 + 0.2, 6.5 + k * 0.28, new THREE.MeshLambertMaterial({ color: 0x2a3340 }), { solido: false });
 
   // il Mii, seduto sul letto
@@ -362,11 +363,14 @@ export function costruisci(m, g) {
   });
 
   // la porta con la scaletta porta all'ultima stanza
-  m.zona('verso-contatti', X0, -1, 8.3, X0 + 0.45, 3, 9.5, { ripeti: true });
-  g.su('verso-contatti', () => g.teletrasporta(945, 0, 1.5, Math.PI));
+  for (const x of [902.5, 905.5]) nicchia(m, [x, 0, Z0, 0]);
+  nicchia(m, [X0, 0, 8.9, Math.PI / 2]);
+  collega(g, 'oakvx-contatti', [X0, 0, 8.9, Math.PI / 2], [945, 0, 0, 0]);
+  g.arredi.porta(X0 + 0.06, 0, 8.9, Math.PI / 2, null);
   g.puntoControllo('oakvx', CX, 0, 1.5, Math.PI);
   return {
     debug: {
+      varchi: [{ id: 'oakvx-contatti', da: 'oakvx', a: 'contatti', lato: [X0, 0, 8.9, Math.PI / 2] }],
       porta: [X0, 8.9],
       stato: () => ({
         modo2008: g.modo2008Valore() > 0.99 ? 1 : g.modo2008Valore() < 0.01 ? 0 : g.modo2008Valore(),

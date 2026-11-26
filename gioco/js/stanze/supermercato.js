@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, texTesto, materialeTri } from '../engine/materiali.js';
 import { posa } from '../engine/passaggi.js';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
 import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
 
 const X0 = 450, X1 = 480, Z0 = 0, Z1 = 32, H = 4.5;
@@ -30,7 +31,8 @@ export function costruisci(m, g) {
     nome: 'supermercato', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'transito', passi: 'piastrelle',
     pareti: {
       w: { pannelli: [{ id: 'super-basso', a: 8, b: 12, y0: 0, y1: 2.6 }] },
-      s: { pannelli: [{ id: 'super-alto', a: 451.5, b: 455.5, y0: 2.5, y1: H }] },
+      s: { pannelli: [{ id: 'super-alto', a: 451.5, b: 455.5, y0: 2.5, y1: H }], aperture: [apertura(477.5)] },
+      n: { aperture: [apertura(452)] },
     },
     materiali: mat, luci: tubi, intensita: 2.2, raggio: 8, coloreLuce: 0xf8fff4,
     atmosfera: { nebbia: 0xe6ede7, vicino: 8, lontano: 55, cielo: 0xffffff, terra: 0xd0d8d0, intensita: 3.2 },
@@ -127,9 +129,11 @@ export function costruisci(m, g) {
 
   // l'uscita, in fondo a destra
   const porta = new THREE.MeshLambertMaterial({ color: 0x3f4a46 });
-  m.tondo(X1 - 3.5, 0, Z1 - 0.06, X1 - 1.5, 2.3, Z1, porta, { r: 0.02, solido: false });
-  m.zona('uscita-super', X1 - 3.6, -1, Z1 - 1.0, X1 - 1.4, 3, Z1, { ripeti: true });
-  g.su('uscita-super', () => g.teletrasporta(904, 0, 1.5, Math.PI));
+  void porta;
+  nicchia(m, [452, 0, Z0, 0]);
+  nicchia(m, [477.5, 0, Z1, Math.PI]);
+  collega(g, 'supermercato-oakvx', [477.5, 0, Z1, Math.PI], [902.5, 0, 0, 0]);
+  g.arredi.porta(477.5, 0, Z1 - 0.06, Math.PI, null);
   // il ricordo di questo transito: il lavoro da freelance per le attività locali
   const t = tappa(m, g, 'freelance', X0 + 0.06, 0, 15, Math.PI / 2);
 
@@ -144,7 +148,8 @@ export function costruisci(m, g) {
     debug: {
       mii: mii.posto,
       tappa: t,
-      risolvi: () => { g.giocatore().pos.set(476.6, 0.86, 29.6); g.giocatore().vel.set(0, 0, 0); },
+      varchi: [{ id: 'supermercato-oakvx', da: 'supermercato', a: 'oakvx', lato: [477.5, 0, Z1, Math.PI] }],
+      risolvi: () => { g.giocatore().pos.set(477.5, 0.86, 30); g.giocatore().vel.set(0, 0, 0); },
     },
   };
 }

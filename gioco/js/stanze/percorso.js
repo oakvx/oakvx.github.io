@@ -42,7 +42,7 @@ export function costruisci(m, g) {
   nicchia(m, [0, yS, Z1, Math.PI]);
   // finché la porta non compare, il vano è chiuso da un tappo del colore del muro
   const tappo = m.box(-0.65, yS, Z1, 0.65, yS + 2.3, Z1 + 0.3, mat.intonacoA(yS));
-  g.passaggi.aggiungi({ id: 'porta-segreta', a: posa(0, yS + 1.15, Z1, Math.PI), b: posa(904, 1.15, 0.6, 0), w: 1.3, h: 2.3 });
+  g.passaggi.aggiungi({ id: 'porta-segreta', a: posa(0, yS + 1.15, Z1, Math.PI), b: posa(905.5, 1.15, 0, 0), w: 1.3, h: 2.3 });
   g.passaggi.attiva('porta-segreta', false);
   let vista = false;
   m.ogniFrame(() => {

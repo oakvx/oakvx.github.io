@@ -2,6 +2,7 @@
 // dei commit di oakvx (account oakvx e oakvxish), aggiornato dal vivo. Sotto, i repo toccati di recente.
 import * as THREE from 'three';
 import { cifre } from '../logica/commit.js';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
 
 const X0 = 230, X1 = 250, Z0 = 0, Z1 = 14, H = 5;
 const USCITA = [X1, 0, 7];
@@ -12,14 +13,14 @@ export function costruisci(m, g) {
   const T = () => g.T().stanze.commit;
   m.stanza({
     nome: 'commit', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'commit', passi: 'cemento',
-    pareti: { e: { aperture: [{ a: USCITA[2] - 0.65, b: USCITA[2] + 0.65, y0: 0, y1: 2.3 }] } },
+    pareti: { e: { aperture: [apertura(USCITA[2])] }, n: { aperture: [apertura(240)] } },
     luci: [[240, 5, 0.6, 1.6]], intensita: 1.6, raggio: 12,
     atmosfera: { nebbia: 0x0d1416, vicino: 4, lontano: 30, cielo: 0x9ec9d4, terra: 0x101719, intensita: 1.3 },
   });
-  m.box(X1 + 0.3, 0, USCITA[2] - 0.8, X1 + 0.5, 2.6, USCITA[2] + 0.8, mat.scuro);
+  nicchia(m, [240, 0, Z0, 0]);
+  nicchia(m, [X1, 0, USCITA[2], -Math.PI / 2]);
+  collega(g, 'commit-supermercato', [X1, 0, USCITA[2], -Math.PI / 2], [452, 0, 0, 0]);
   g.arredi.porta(X1 - 0.06, 0, USCITA[2], -Math.PI / 2, () => T().uscita);
-  m.zona('uscita-commit', X1 - 0.3, -1, USCITA[2] - 0.65, X1 + 0.3, 3, USCITA[2] + 0.65, { ripeti: true });
-  g.su('uscita-commit', () => g.teletrasporta(452, 0, 1.5, Math.PI));
 
   // la parete di quadrati
   const quadrati = new THREE.InstancedMesh(new THREE.BoxGeometry(LATO, LATO, 0.05), new THREE.MeshBasicMaterial({ color: 0xffffff }), COLONNE * RIGHE);
@@ -66,5 +67,5 @@ export function costruisci(m, g) {
   g.arredi.cartello(240, 4.2, Z0 + 0.03, 0, '11', () => T().cartello);
   g.puntoControllo('commit', 240, 0, 1.5, Math.PI);
 
-  return { debug: { uscita: [X1 - 0.3, USCITA[2]], xColonna, stato: () => ({ testo, accesi }) } };
+  return { debug: { varchi: [{ id: 'commit-supermercato', da: 'commit', a: 'supermercato', lato: [X1, 0, USCITA[2], -Math.PI / 2] }], uscita: [X1 - 0.3, USCITA[2]], xColonna, stato: () => ({ testo, accesi }) } };
 }

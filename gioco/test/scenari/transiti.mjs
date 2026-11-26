@@ -22,11 +22,11 @@ export default async function (page, aiuto) {
   await G(() => window.__gioco.stanza('piscina').risolvi());
   await cammina(aiuto, -Math.PI / 2, inStanza, 6000, 'middleman');
   await G(() => window.__gioco.stanza('middleman').risolvi());
-  await aiuto.attendi(inStanza, 4000, 'cisterna');
+  await cammina(aiuto, Math.PI, inStanza, 6000, 'cisterna');
 
   // B (Format): dalla pedana alta della cisterna si va direttamente in galleria
   await G(() => window.__gioco.stanza('cisterna').risolvi());
-  await aiuto.attendi(inStanza, 4000, 'galleria');
+  await cammina(aiuto, Math.PI, inStanza, 6000, 'galleria');
 
   // C (freelance): le corsie si ripetono; dal supermercato si arriva alla stanza di oakvx
   await G(() => window.__gioco.vaiA('supermercato'));

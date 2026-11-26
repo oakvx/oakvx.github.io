@@ -691,6 +691,7 @@ export async function avvia(ctx) {
       cubi: () => cubi.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })),
       vaiA: (nome) => { ultimoControllo = nome; riprendi(); },
       stanza: (nome) => debugStanze[nome],
+      varchi: () => Object.values(debugStanze).flatMap((d) => d.varchi || []),
       mira: (x, y, z) => {
         const d = new THREE.Vector3(x, y, z).sub(camera.position);
         yaw = Math.atan2(-d.x, -d.z);

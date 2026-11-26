@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { posa } from '../engine/passaggi.js';
 import { nicchia } from '../engine/varchi.js';
 import { tappa } from '../engine/liminale.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const Z0 = -16, Z1 = -4.3, H = 3, SALTO = 20;
 const TRATTI = 2;
@@ -31,6 +32,12 @@ export function costruisci(m, g) {
     }
   }
   const cartello = g.arredi.cartello(-1.47, 2.6, -5, Math.PI / 2, '01', () => T().cartello);
+  // lampade industriali a parete e quadri elettrici lungo il corridoio
+  const oggetti = creaOggetti(m, g);
+  for (let k = 0; k < TRATTI; k++) {
+    oggetti.metti('industrial_wall_lamp', -1.38, k * SALTO + 2.1, -11, Math.PI / 2, { altezza: 0.35, solido: false });
+    oggetti.metti('utility_box_02', -1.3, k * SALTO, -14, Math.PI / 2, { altezza: 0.9 });
+  }
 
   // le tappe: una porta chiusa con l'anno sopra; esaminarla apre il cartiglio
   for (const [id, z, k] of TAPPE) tappa(m, g, id, 1.48, k * SALTO, z, -Math.PI / 2);
@@ -63,7 +70,7 @@ export function costruisci(m, g) {
   g.puntoControllo('percorso', 0, 0, -5, 0);
   return {
     debug: {
-      stato: () => ({ segreta: vista, cartello: cartello.testo }),
+      stato: () => ({ segreta: vista, cartello: cartello.testo, modelli: oggetti.quanti() }),
       inizio: (k) => [0, (k - 1) * SALTO + 0.87, Z1 - 0.7],
     },
   };

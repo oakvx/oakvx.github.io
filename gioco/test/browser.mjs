@@ -29,7 +29,8 @@ function server() {
 }
 
 const nomi = process.argv.slice(2);
-const tutti = fs.readdirSync(path.join(qui, 'scenari')).filter((f) => f.endsWith('.mjs')).map((f) => f.slice(0, -4)).sort();
+// i file che iniziano con _ sono aiuti condivisi, non scenari
+const tutti = fs.readdirSync(path.join(qui, 'scenari')).filter((f) => f.endsWith('.mjs') && !f.startsWith('_')).map((f) => f.slice(0, -4)).sort();
 const scelti = nomi.length ? nomi : tutti;
 
 const srv = await server();

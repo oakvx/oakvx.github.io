@@ -5,27 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
 <link rel="stylesheet" href="../../assets/ingresso/ingresso.css">
-
-<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#F4F7FA">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<noscript id="oakvx-full-css-fallback"></noscript>
+<link rel="preload" href="../../assets/nero/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/nero/nero.css">
+<script src="../../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="preload" href="../../assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../../assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/polaroid/site.css">
-<link rel="stylesheet" href="../../assets/avatars/avatar.css">
-<link rel="stylesheet" href="../../assets/polaroid/pages.css">
-<link rel="stylesheet" href="../../assets/avatars/pages.css">
-<link rel="stylesheet" href="../../assets/cursor.css">
-<script src="../../assets/polaroid/pages-en.js" defer></script>
-<script src="../../assets/polaroid/site.js" defer blocking="render"></script>
-<link rel="stylesheet" href="../../assets/wiiu/motion.css">
-<link rel="stylesheet" href="../../assets/wiiu/buttons.css">
-<link rel="stylesheet" href="../../assets/wiiu/dialogs.css">
-<link rel="stylesheet" href="../../assets/wiiu/theme.css">
-<script src="../../assets/wiiu/motion.js"></script>
 <title>Brat Animator: lyric video nel browser | Gabriele Lucia</title>
 <meta name="description" content="Brat Animator, editor di Gabriele Lucia per creare lyric video nel browser: testi LRC, timeline, animazioni Canvas ed export MP4/WebM.">
 <meta name="author" content="Gabriele Lucia">
@@ -55,102 +43,195 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/projects/brat-animator/#webpage","url":"https://oakvx.github.io/projects/brat-animator/","name":"Brat Animator: lyric video nel browser | Gabriele Lucia","description":"Brat Animator, editor di Gabriele Lucia per creare lyric video nel browser: testi LRC, timeline, animazioni Canvas ed export MP4/WebM.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/projects/brat-animator/#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/projects/brat-animator/#project"},"about":{"@id":"https://oakvx.github.io/projects/brat-animator/#project"},"breadcrumb":{"@id":"https://oakvx.github.io/projects/brat-animator/#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/projects/brat-animator/#primaryimage","url":"https://oakvx.github.io/assets/social-brat-animator-it.png","contentUrl":"https://oakvx.github.io/assets/social-brat-animator-it.png","width":1200,"height":630,"caption":"Brat Animator — editor di lyric video con testi LRC, timeline, rendering Canvas ed esportazione video.","inLanguage":"it"},{"@type":"CreativeWork","@id":"https://oakvx.github.io/projects/brat-animator/#project","name":"Brat Animator","description":"Brat Animator, editor di Gabriele Lucia per creare lyric video nel browser: testi LRC, timeline, animazioni Canvas ed export MP4/WebM.","creator":{"@id":"https://oakvx.github.io/#person"},"url":"https://oakvx.github.io/bratAnimator/","mainEntityOfPage":{"@id":"https://oakvx.github.io/projects/brat-animator/#webpage"},"hasPart":{"@id":"https://oakvx.github.io/projects/brat-animator/#source"}},{"@type":"SoftwareSourceCode","@id":"https://oakvx.github.io/projects/brat-animator/#source","name":"Brat Animator — codice sorgente","url":"https://github.com/oakvx/bratAnimator","codeRepository":"https://github.com/oakvx/bratAnimator","programmingLanguage":["JavaScript"],"creator":{"@id":"https://oakvx.github.io/#person"},"isPartOf":{"@id":"https://oakvx.github.io/projects/brat-animator/#project"}},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/projects/brat-animator/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Brat Animator","item":"https://oakvx.github.io/projects/brat-animator/"}]}]}</script>
 <script type="application/json" id="seo-translations">{"it":{"title":"Brat Animator: lyric video nel browser | Gabriele Lucia","description":"Brat Animator, editor di Gabriele Lucia per creare lyric video nel browser: testi LRC, timeline, animazioni Canvas ed export MP4/WebM.","canonical":"https://oakvx.github.io/projects/brat-animator/","image":"https://oakvx.github.io/assets/social-brat-animator-it.png","image_alt":"Brat Animator — editor di lyric video con testi LRC, timeline, rendering Canvas ed esportazione video."},"en":{"title":"Brat Animator: browser lyric video editor | Gabriele Lucia","description":"Brat Animator, Gabriele Lucia’s browser-based lyric video editor: LRC lyrics, a timeline, Canvas text animation and MP4/WebM export.","canonical":"https://oakvx.github.io/en/projects/brat-animator/","image":"https://oakvx.github.io/assets/social-brat-animator-en.png","image_alt":"Brat Animator — a lyric video editor with LRC lyrics, a timeline, Canvas rendering and video export."}}</script>
 </head>
-<body data-page="brat-animator">
-<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
-<a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
-
-    <header class="hdr" data-header>
-        <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="wrap hdr__in">
-            <a class="brand" href="../../" data-langlink aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="../../assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
-            <nav class="hdr__nav" aria-label="Navigazione principale" data-i18n-aria="navLabel">
-                <a href="../../#percorso" data-langlink data-i18n="nav.path">Percorso</a>
-                <a href="../../#progetti" data-langlink data-i18n="nav.projects">Progetti</a>
-                <a href="../../#strumenti" data-langlink data-i18n="nav.tools">Strumenti</a>
-                <a href="../../chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a>
-                <a href="../../fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
-            </nav>
-            <div class="hdr__tools">
-                <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
-                <div class="lang" role="group" aria-label="Lingua" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Ferma animazioni</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Attiva audio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/><path class="sound__mute" d="m17 10 4 4m0-4-4 4"/></svg><span class="sr-only" data-sound-label>Attiva audio</span></button>
-                <a class="pill" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="nav.cta">Scrivimi</span></a>
-                <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Apri menu</span></button>
-            </div>
-        </div>
-    </header>
-
-    <div class="menu" id="menu" data-menu hidden>
-        <nav class="menu__nav wrap" aria-label="Menu" data-i18n-aria="menuLabel">
-            <a href="../../#percorso" class="extrude" data-langlink data-i18n="nav.path">Percorso</a>
-            <a href="../../#progetti" class="extrude" data-langlink data-i18n="nav.projects">Progetti</a>
-            <a href="../../#strumenti" class="extrude" data-langlink data-i18n="nav.tools">Strumenti</a>
-            <a href="../../chi-sono/" class="extrude" data-langlink data-i18n="nav.about">Chi sono</a>
-            <a href="../../fuori-orario/" class="extrude" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
-            <a href="#contatti" class="extrude" data-i18n="nav.contact">Contatti</a>
+<body data-pagina="brat">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="../../" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/projects/brat-animator/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/brat-animator/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
-        <div class="menu__foot wrap">
-            <a class="mono" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
-            <a class="mono" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx ↗</a>
-            <p class="mono menu__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="../../" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">chi, cosa, dove</span></a></li>
+                <li><a href="../../#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span><span class="indice__nota t-meta" data-i18n="nav.workNote">quattro casi studio</span></a></li>
+                <li><a href="../../chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">persona, percorso, metodo</span></a></li>
+                <li><a href="../../fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">quando nessuno me lo chiede</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contatti</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">si parte da un’email</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="../../projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="../../projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="../../projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="../../projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="../../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
         </div>
     </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>02.1</b><span data-titolo data-i18n="seg.brat">Brat Animator</span><span class="segnapagina__barra"><i></i></span></p>
 
-    <main id="main">
-<section class="page-hero wrap"><a class="breadcrumb btn btn--ghost btn--back" href="../../#progetti" data-langlink><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 6-6 6 6 6m-6-6h13"/></svg> <span data-i18n="internal.allProjects">Tutti i progetti</span></a><div class="project-wordmark"><span class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><h1 class="display-title extrude">Brat Animator.</h1></div><p class="page-intro" data-i18n="brat-animator.caseSummary">Testi LRC, timeline modificabile e rendering Canvas, riuniti in un editor che esporta il video direttamente dal browser.</p><div class="project-actions"><a class="btn" href="https://oakvx.github.io/bratAnimator/" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3h7v7m0-7-11 11M10 3H3v18h18v-7"/></svg><span data-i18n="brat-animator.caseHeroCTA">Apri l’app</span> </a><a class="btn btn--ghost" href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10m12-10v2c0 4-12 1-12 5"/></svg>GitHub </a></div><dl class="metadata"><div><dt data-i18n="brat-animator.caseRoleLabel">Il mio ruolo</dt><dd data-i18n="brat-animator.caseRoleLabelValue">Sviluppo dell’applicazione</dd></div><div><dt data-i18n="brat-animator.caseStackLabel">Stack</dt><dd data-i18n="brat-animator.caseStackLabelValue">JavaScript / Canvas</dd></div><div><dt data-i18n="brat-animator.caseFocusLabel">Focus</dt><dd data-i18n="brat-animator.caseFocusLabelValue">Timing, motion, export</dd></div><div><dt data-i18n="brat-animator.caseTypeLabel">Progetto</dt><dd data-i18n="brat-animator.caseTypeLabelValue">Tool browser-based · v4.0</dd></div></dl><figure class="project-cover glass-frame"><img src="../../assets/work/brat-editor.webp" srcset="../../assets/work/brat-editor-small.webp 720w, ../../assets/work/brat-editor.webp 1440w" sizes="(max-width:599px) calc(100vw - 54px), (max-width:899px) calc(100vw - 70px), (max-width:1199px) calc(100vw - 94px), 1298px" width="1440" height="1000" alt="Interfaccia di Brat Animator 4.0 con timeline, anteprima video e controlli di stile" data-i18n-alt="brat-animator.coverAlt" decoding="async" fetchpriority="high"><figcaption data-i18n="brat-animator.caseArtNote">Brat Animator 4.0 / schermata reale con testo dimostrativo</figcaption></figure></section><div class="article-layout wrap"><nav class="article-nav" aria-label="In questa pagina" data-i18n-aria="internal.contents"><a href="#overview" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="brat-animator.casePageOverview">Il progetto</span></a><a href="#storytelling" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="brat-animator.casePageStory">Come funziona</span></a><a href="#details" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="brat-animator.casePageBuild">Struttura del codice</span></a><a href="#stack" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="brat-animator.stackNav">Tecnologie</span></a></nav><div class="article-body"><section class="chapter" data-reveal id="overview"><picture class="chapter-avatar" data-avatar data-avatar-pose="idlewainting" data-cycle="idlewainting,laughing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/idlewainting-still.webp"><img src="../../assets/avatars/idlewainting-still.webp" data-avatar-animated="../../assets/avatars/idlewainting.gif" data-avatar-still="../../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="brat-animator.bratStartTitle">Il progetto</h2><p data-i18n="brat-animator.bratStartText">Ho riunito importazione LRC, ricerca LRCLIB, modifica del timing, stile ed esportazione in un editor statico. Testi e media vengono elaborati nel browser.</p></section><section class="chapter" data-reveal id="storytelling"><picture class="chapter-avatar" data-avatar data-avatar-pose="showingoff" data-cycle="showingoff,dancing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/showingoff-still.webp"><img src="../../assets/avatars/showingoff-still.webp" data-avatar-animated="../../assets/avatars/showingoff.webp" data-avatar-still="../../assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="brat-animator.brat-animator-storyHeading">Come funziona</h2><article class="technical-step" id="brat-animator-story-testo"><h3 data-i18n="brat-animator.brat-animator-story-testoTitle">Si parte dal testo</h3><p data-i18n="brat-animator.brat-animator-story-testoText0">L’editor importa testi LRC con timestamp e permette di cercarli su LRCLIB. Le righe e i tempi restano modificabili.</p></article><article class="technical-step" id="brat-animator-story-fotogrammi"><h3 data-i18n="brat-animator.brat-animator-story-fotogrammiTitle">Dal timing ai fotogrammi</h3><p data-i18n="brat-animator.brat-animator-story-fotogrammiText0">La timeline collega parole e caratteri al tempo. Canvas 2D disegna il testo con lo stile e le animazioni scelte nell’editor.</p></article><article class="technical-step" id="brat-animator-story-video"><h3 data-i18n="brat-animator.brat-animator-story-videoTitle">Esportare il video</h3><p data-i18n="brat-animator.brat-animator-story-videoText0">WebCodecs e un muxer MP4 permettono l’export veloce solo video nei browser compatibili. MediaRecorder offre la registrazione in tempo reale e può includere l’audio caricato.</p></article></section><section class="chapter" data-reveal id="details"><picture class="chapter-avatar" data-avatar data-avatar-pose="discofever" data-cycle="discofever,flyspinning" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/discofever-still.webp"><img src="../../assets/avatars/discofever-still.webp" data-avatar-animated="../../assets/avatars/discofever.gif" data-avatar-still="../../assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="brat-animator.bratEngineTitle">Struttura del codice</h2><p data-i18n="brat-animator.bratEngineText">I moduli del repository separano parsing LRC, timing, riconoscimento dei media e verifica delle capacità di esportazione.</p><div class="stack-grid"><article class="stack-item"><h3 data-i18n="brat-animator.bratCoreTitle">Parsing LRC</h3><p data-i18n="brat-animator.bratCoreText">Parsing LRC, timestamp Enhanced LRC, righe modificabili e migrazione del formato progetto.</p><a class="link" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/core.js" target="_blank" rel="noopener noreferrer"><code>core.js</code> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3 data-i18n="brat-animator.bratTimingTitle">Timeline e timing</h3><p data-i18n="brat-animator.bratTimingText">Timeline condivisa per parole e caratteri; segmentazione Unicode e analisi dell’energia audio per guidare le stime.</p><a class="link" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/timing.js" target="_blank" rel="noopener noreferrer"><code>timing.js</code> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3 data-i18n="brat-animator.bratMediaTitle">Riconoscimento media</h3><p data-i18n="brat-animator.bratMediaText">Riconoscimento dei tipi di media e dei riferimenti YouTube utilizzati come anteprima.</p><a class="link" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/media.js" target="_blank" rel="noopener noreferrer"><code>media.js</code> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3 data-i18n="brat-animator.bratExportTitle">Capacità del browser</h3><p data-i18n="brat-animator.bratExportText">Controlli WebCodecs per l’export MP4 veloce. Le capacità disponibili determinano il percorso di esportazione.</p><a class="link" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/export.js" target="_blank" rel="noopener noreferrer"><code>export.js</code> <span aria-hidden="true">↗</span></a></article></div></section><section class="chapter" data-reveal id="system"><picture class="chapter-avatar" data-avatar data-avatar-pose="laughing" data-cycle="laughing,almostfalling" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/laughing-still.webp"><img src="../../assets/avatars/laughing-still.webp" data-avatar-animated="../../assets/avatars/laughing.gif" data-avatar-still="../../assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="brat-animator.bratOutputTitle">Esportazione e salvataggio</h2><p data-i18n="brat-animator.bratOutputText">WebCodecs gestisce l’export veloce solo video; MediaRecorder registra in tempo reale e può includere l’audio. I progetti usano localStorage per lo stato e IndexedDB per i media caricati.</p><p data-i18n="brat-animator.bratFast">Export video-only quando supportato. La disponibilità dipende dalle capacità del browser.</p><p data-i18n="brat-animator.bratRealtime">Registrazione in tempo reale, con audio locale o da URL media diretto compatibile, quando abilitato.</p></section><section class="chapter" data-reveal id="stack"><picture class="chapter-avatar" data-avatar data-avatar-pose="angrystomping" data-cycle="angrystomping,idlewainting" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/angrystomping-still.webp"><img src="../../assets/avatars/angrystomping-still.webp" data-avatar-animated="../../assets/avatars/angrystomping.gif" data-avatar-still="../../assets/avatars/angrystomping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><h2 data-i18n="brat-animator.stackTitle">Tecnologie</h2><div class="stack-grid"><article class="stack-item"><h3>JavaScript</h3><p class="stack-role" data-i18n="brat-animator.stackTool0Role">LOGICA DELL’EDITOR</p><p data-i18n="brat-animator.stackTool0Usage">Coordina parsing LRC, timestamp, timeline e controlli di stile. I moduli separano testo, timing, media ed export.</p><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>Canvas 2D</h3><p class="stack-role" data-i18n="brat-animator.stackTool1Role">DISEGNO DEI FOTOGRAMMI</p><p data-i18n="brat-animator.stackTool1Usage">Trasforma la timeline delle parole in immagini animate, con stile, posizione ed effetti del lyric video.</p><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>WebCodecs + MP4 muxer</h3><p class="stack-role" data-i18n="brat-animator.stackTool2Role">CODIFICA VIDEO</p><p data-i18n="brat-animator.stackTool2Usage">È il percorso di export veloce, solo video. L’app verifica il supporto del browser prima di renderlo disponibile.</p><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>MediaRecorder</h3><p class="stack-role" data-i18n="brat-animator.stackTool3Role">REGISTRAZIONE IN TEMPO REALE</p><p data-i18n="brat-animator.stackTool3Usage">Offre l’export in tempo reale e può includere audio locale o da un URL media diretto compatibile.</p><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article><article class="stack-item"><h3>IndexedDB</h3><p class="stack-role" data-i18n="brat-animator.stackTool4Role">ARCHIVIAZIONE NEL BROWSER</p><p data-i18n="brat-animator.stackTool4Usage">Conserva i blob dei media caricati. Lo stato del progetto viene salvato in localStorage.</p><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank" rel="noopener noreferrer"><span data-i18n="internal.documentation">Documentazione</span> <span aria-hidden="true">↗</span></a></article></div></section></div></div><section class="project-next wrap" data-reveal><div class="project-next-grid"><a href="../synk/" data-langlink><span class="project-next-number">02</span><h2>Synk</h2><p data-i18n="synk.kind">Intent picker e dashboard gestionale</p><span aria-hidden="true">↗</span></a><a href="../beautify/" data-langlink><span class="project-next-number">03</span><h2>Beautify</h2><p data-i18n="beautify.kind">Gestionale multisalone</p><span aria-hidden="true">↗</span></a></div></section>
-<section class="contact wrap" data-reveal id="contatti">
- <h2 class="contact-title extrude" data-extrude><span data-i18n="internal.contactTitle">Scrivimi.</span></h2>
- <p class="contact-intro" data-i18n="internal.contactIntro">Continuiamo via email.</p>
- <a class="contact-email" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com <span aria-hidden="true">↗</span></a>
- <div class="project-actions"><a class="btn" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="internal.emailAction">Scrivimi</span></a><a class="btn btn--ghost" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10m12-10v2c0 4-12 1-12 5"/></svg>GitHub </a></div>
+<main id="main" class="pagina pagina--caso" data-progetto="brat">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label1">Caso 01 / 04</span><span data-i18n="brat.kind">Editor creativo · browser</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split><span>brat</span> <span>animator.</span></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="brat.intro">Testi sincronizzati, timeline modificabile e rendering su Canvas, riuniti in un editor che esporta il video direttamente dal browser. Nato per gioco, arrivato alla versione 5.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="brat.role">Sviluppo dell’applicazione</dd></div>
+            <div><dt>Stack</dt><dd>JavaScript / Canvas</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="brat.focus">Timing, motion, export</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="brat.project">Strumento nel browser · v5</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://oakvx.github.io/bratAnimator/" target="_blank" rel="noopener noreferrer" data-i18n="case.openApp">Apri l’app</a><a href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </div>
 </section>
+
+<figure class="caso-figura rivela-maschera">
+    <img src="../../assets/work/brat-editor.webp" width="1440" height="1000" alt="Interfaccia di Brat Animator 4.0 con timeline, anteprima video e controlli di stile" data-i18n-alt="brat.alt">
+    <figcaption class="t-meta"><span data-i18n="brat.caption">Brat Animator 4.0 — schermata reale con testo dimostrativo</span><span>fig. 01</span></figcaption>
+</figure>
+
+<section class="sezione caso-capo" aria-labelledby="brat-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="brat-concept" data-split data-i18n-html="brat.conceptTitle">Dal testo al video, <em>senza uscire dal browser.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="brat.concept1">Ho riunito importazione dei testi, ricerca su LRCLIB, modifica del timing, stile ed esportazione in un unico editor statico.</p>
+        <p data-i18n="brat.concept2">Testi e media vengono elaborati nel browser: non c’è un backend a cui mandarli.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="brat.problem">Il punto di partenza: animare un testo a tempo di musica, riga per riga, senza un programma di montaggio.</p>
+</section>
+
+<section class="sezione" aria-labelledby="brat-processo">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <h2 id="brat-processo" data-split data-i18n-html="brat.processTitle">Tre passaggi, <em>dal timestamp al fotogramma.</em></h2>
+    </div>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="brat.s1">Si parte dal testo</h3><p data-i18n="brat.s1text">L’editor importa testi LRC con timestamp e permette di cercarli su LRCLIB. Le righe e i tempi restano modificabili.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="brat.s2">Dal timing ai fotogrammi</h3><p data-i18n="brat.s2text">La timeline collega parole e caratteri al tempo. Canvas 2D disegna il testo con lo stile e le animazioni scelte nell’editor.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="brat.s3">Esportare il video</h3><p data-i18n="brat.s3text">WebCodecs e un muxer MP4 permettono l’export veloce solo video nei browser compatibili. MediaRecorder registra in tempo reale e può includere l’audio caricato.</p></li>
+    </ol>
+    <div class="lyric rivela" data-lyric role="img" aria-label="Dimostrazione: tre righe LRC che diventano testo animato, parola per parola" data-i18n-aria="brat.lyricAria">
+        <ol class="lyric__lrc" aria-hidden="true">
+            <li data-t="0" data-parole="gabriele lucia"><span>[00:00.00]</span>gabriele lucia</li>
+            <li data-t="2" data-parole="codice e grafica"><span>[00:02.00]</span>codice e grafica</li>
+            <li data-t="4" data-parole="demo portfolio"><span>[00:04.00]</span>demo portfolio</li>
+        </ol>
+        <div class="lyric__palco" aria-hidden="true"><p class="lyric__riga"></p></div>
+        <div class="lyric__tempo t-meta" aria-hidden="true"><span data-lyric-tempo>00:00.00</span><span class="lyric__traccia"><i></i></span><span>00:06.00</span></div>
+    </div>
+    <p class="t-meta" style="margin-top:1rem" data-i18n="brat.lyricNote">Le stesse tre righe dimostrative della schermata, rianimate qui con CSS e JavaScript.</p>
+</section>
+
+<section class="sezione" aria-labelledby="brat-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <h2 id="brat-architettura" data-split data-i18n-html="brat.archTitle">Quattro moduli, <em>ognuno con un compito.</em></h2>
+        <p class="caso-capo__testo rivela" data-i18n="brat.archText">I moduli del repository separano parsing, timing, riconoscimento dei media e verifica delle capacità di esportazione.</p>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="brat.m1">Parsing LRC</h3><p data-i18n="brat.m1text">Parsing LRC, timestamp Enhanced LRC, righe modificabili e migrazione del formato progetto.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/core.js" target="_blank" rel="noopener noreferrer">core.js</a></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="brat.m2">Timeline e timing</h3><p data-i18n="brat.m2text">Timeline condivisa per parole e caratteri; segmentazione Unicode e analisi dell’energia audio per guidare le stime.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/timing.js" target="_blank" rel="noopener noreferrer">timing.js</a></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="brat.m3">Riconoscimento media</h3><p data-i18n="brat.m3text">Riconoscimento dei tipi di media e dei riferimenti YouTube usati come anteprima.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/media.js" target="_blank" rel="noopener noreferrer">media.js</a></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="brat.m4">Capacità del browser</h3><p data-i18n="brat.m4text">Controlli WebCodecs per l’export MP4 veloce: le capacità disponibili decidono il percorso di esportazione.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/export.js" target="_blank" rel="noopener noreferrer">export.js</a></li>
+    </ul>
+    <div class="tecnologie">
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t1k">Logica dell’editor</p><h3>JavaScript</h3><p data-i18n="brat.t1">Coordina parsing, timestamp, timeline e controlli di stile.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t2k">Disegno dei fotogrammi</p><h3>Canvas 2D</h3><p data-i18n="brat.t2">Trasforma la timeline delle parole in immagini animate, con stile, posizione ed effetti.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t3k">Codifica video</p><h3>WebCodecs</h3><p data-i18n="brat.t3">Il percorso di export veloce, solo video. L’app verifica il supporto del browser prima di renderlo disponibile.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t4k">Tempo reale</p><h3>MediaRecorder</h3><p data-i18n="brat.t4">Export in tempo reale, anche con audio locale o da un URL media diretto compatibile.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t5k">Archiviazione</p><h3>IndexedDB</h3><p data-i18n="brat.t5">Conserva i media caricati; lo stato del progetto resta in localStorage.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+    </div>
+</section>
+
+<section class="sezione risultato" aria-labelledby="brat-risultato">
+    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="brat-risultato" data-split data-i18n-html="brat.result">Un editor completo che vive in <em>una pagina statica.</em></h2>
+    <p class="risultato__note rivela" data-i18n="brat.resultText">Oggi è alla versione 5.0, con editor semplice e avanzato. Legge LRC, TTML, YAML, WebVTT e SRT, ed esporta MP4 e WebM senza server.</p>
+</section>
+
+<a class="prossimo" href="../synk/" data-velo-n="02.2" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Prossimo caso</span><span>02 / 04</span></span>
+    <span class="prossimo__nome" data-velo-nome>Synk</span>
+</a>
+
 </main>
 
-    <footer class="foot">
-        <div class="wrap foot__top">
-            <div class="foot__contact">
-                <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
-                <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
-                <div class="foot__sleeper" aria-hidden="true">
-                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
-                        <source media="(prefers-reduced-motion: reduce)" srcset="../../assets/avatars/sleeping-still.webp">
-                        <img src="../../assets/avatars/sleeping-still.webp" data-avatar-animated="../../assets/avatars/sleeping.gif" data-avatar-still="../../assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
-                    </picture>
-                </div>
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span> — <span data-i18n="foot.label2">fine della pagina</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto, o anche solo per dirmi che il sito ti è piaciuto (o no). Rispondo, giuro.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
             </div>
-            <nav class="foot__nav" aria-label="Collegamenti del piè di pagina" data-i18n-aria="foot.navLabel">
-                <ul>
-                    <li><a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-                    <li><a href="../../chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a></li>
-                    <li><a href="../../fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a></li>
-                    <li><a href="../../assets/CREDITS.html" data-langlink data-i18n="foot.credits">Crediti</a></li>
-                </ul>
-                <ul>
-                    <li><a href="../../#percorso" data-langlink data-i18n="nav.path">Percorso</a></li>
-                    <li><a href="../../#progetti" data-langlink data-i18n="nav.projects">Progetti</a></li>
-                    <li><a href="../../#strumenti" data-langlink data-i18n="nav.tools">Strumenti</a></li>
-                    <li><a href="../../#contatti" data-langlink data-i18n="nav.contact">Contatti</a></li>
-                </ul>
-            </nav>
         </div>
-        <div class="wrap foot__mark" aria-hidden="true" data-mark>
-            <svg class="mark__o" viewBox="-60 -60 120 120"><path data-mark-o d="M0,-50A50,50 0 1,1 0,-50Z" /></svg><span class="mark__rest extrude">akvx</span>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="../../" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="../../#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="../../chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="../../fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+            </ul>
         </div>
-        <div class="wrap foot__bottom">
-            <p>© 2026 Gabriele Lucia</p>
-            <a href="#main"><span data-i18n="foot.top">Torna su</span> <span aria-hidden="true">↑</span></a>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="../../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+            </ul>
         </div>
-    </footer>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="../../assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano: HTML, CSS, JavaScript e WebGL</span></p>
+</footer>
 
-    <p class="toast" role="status" aria-live="polite" data-toast></p>
-<script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
-<script src="../../assets/avatars/avatar.js" defer blocking="render"></script>
-<script src="../../assets/avatars/poses.js" defer blocking="render"></script>
-<script src="../../assets/avatars/companion.js" defer blocking="render"></script>
-<script src="../../assets/wiiu/sound.js" defer></script>
-<script src="../../assets/wiiu/music.js" defer></script>
-<script src="../../assets/wiiu/pointer.js" defer></script>
-<script src="../../assets/wiiu/dialogs.js" defer></script>
 <script src="../../assets/ingresso/ingresso.js" defer></script>
 </body>
 </html>

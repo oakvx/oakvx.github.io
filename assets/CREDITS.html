@@ -5,26 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
 <link rel="stylesheet" href="ingresso/ingresso.css">
-
-<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#F4F7FA">
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<noscript id="oakvx-full-css-fallback"></noscript>
-<link rel="preload" href="../assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/polaroid/site.css">
-<link rel="stylesheet" href="../assets/avatars/avatar.css">
-<link rel="stylesheet" href="../assets/polaroid/pages.css">
-<link rel="stylesheet" href="../assets/avatars/pages.css">
-<link rel="stylesheet" href="../assets/cursor.css">
-<script src="../assets/polaroid/pages-en.js" defer></script>
-<script src="../assets/polaroid/site.js" defer blocking="render"></script>
-<link rel="stylesheet" href="../assets/wiiu/motion.css">
-<link rel="stylesheet" href="../assets/wiiu/buttons.css">
-<link rel="stylesheet" href="../assets/wiiu/dialogs.css">
-<link rel="stylesheet" href="../assets/wiiu/theme.css">
-<script src="../assets/wiiu/motion.js"></script>
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="nero/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="nero/nero.css">
+<script src="nero/nero.js" defer></script>
 <title>Crediti dei materiali | Gabriele Lucia (oakvx)</title>
 <meta name="description" content="Font, icone, fotografie e materiali dei progetti: licenze e provenienza dei contenuti usati nel portfolio di Gabriele Lucia.">
 <meta name="author" content="Gabriele Lucia">
@@ -54,147 +42,169 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/assets/CREDITS.html#webpage","url":"https://oakvx.github.io/assets/CREDITS.html","name":"Crediti dei materiali | Gabriele Lucia (oakvx)","description":"Font, icone, fotografie e materiali dei progetti: licenze e provenienza dei contenuti usati nel portfolio di Gabriele Lucia.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/assets/CREDITS.html#primaryimage"},"breadcrumb":{"@id":"https://oakvx.github.io/assets/CREDITS.html#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/assets/CREDITS.html#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.","inLanguage":"it"},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/assets/CREDITS.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Crediti","item":"https://oakvx.github.io/assets/CREDITS.html"}]}]}</script>
 <script type="application/json" id="seo-translations">{"it":{"title":"Crediti dei materiali | Gabriele Lucia (oakvx)","description":"Font, icone, fotografie e materiali dei progetti: licenze e provenienza dei contenuti usati nel portfolio di Gabriele Lucia.","canonical":"https://oakvx.github.io/assets/CREDITS.html","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"Materials credits | Gabriele Lucia (oakvx)","description":"Fonts, icons, photographs and project materials: licences and sources for content used in Gabriele Lucia’s portfolio.","canonical":"https://oakvx.github.io/en/assets/CREDITS.html","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
 </head>
-<body data-page="credits">
-<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
-<a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
-
-    <header class="hdr" data-header>
-        <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="wrap hdr__in">
-            <a class="brand" href="../" data-langlink aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="../assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / portfolio</span></a>
-            <nav class="hdr__nav" aria-label="Navigazione principale" data-i18n-aria="navLabel">
-                <a href="../#percorso" data-langlink data-i18n="nav.path">Percorso</a>
-                <a href="../#progetti" data-langlink data-i18n="nav.projects">Progetti</a>
-                <a href="../#strumenti" data-langlink data-i18n="nav.tools">Strumenti</a>
-                <a href="../chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a>
-                <a href="../fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
-            </nav>
-            <div class="hdr__tools">
-                <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
-                <div class="lang" role="group" aria-label="Lingua" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Ferma animazioni</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Attiva audio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/><path class="sound__mute" d="m17 10 4 4m0-4-4 4"/></svg><span class="sr-only" data-sound-label>Attiva audio</span></button>
-                <a class="pill" href="mailto:gabrielelucia07@gmail.com" data-langlink><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="nav.cta">Scrivimi</span></a>
-                <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Apri menu</span></button>
-            </div>
-        </div>
-    </header>
-
-    <div class="menu" id="menu" data-menu hidden>
-        <nav class="menu__nav wrap" aria-label="Menu" data-i18n-aria="menuLabel">
-            <a href="../#percorso" class="extrude" data-langlink data-i18n="nav.path">Percorso</a>
-            <a href="../#progetti" class="extrude" data-langlink data-i18n="nav.projects">Progetti</a>
-            <a href="../#strumenti" class="extrude" data-langlink data-i18n="nav.tools">Strumenti</a>
-            <a href="../chi-sono/" class="extrude" data-langlink data-i18n="nav.about">Chi sono</a>
-            <a href="../fuori-orario/" class="extrude" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
-            <a href="../#contatti" class="extrude" data-langlink data-i18n="nav.contact">Contatti</a>
+<body data-pagina="credits">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="../" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/assets/CREDITS.html" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../en/assets/CREDITS.html" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
-        <div class="menu__foot wrap">
-            <a class="mono" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
-            <a class="mono" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx ↗</a>
-            <p class="mono menu__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="../" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">chi, cosa, dove</span></a></li>
+                <li><a href="../#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span><span class="indice__nota t-meta" data-i18n="nav.workNote">quattro casi studio</span></a></li>
+                <li><a href="../chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">persona, percorso, metodo</span></a></li>
+                <li><a href="../fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">quando nessuno me lo chiede</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contatti</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">si parte da un’email</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="../projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="../projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="../projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="../projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
         </div>
     </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>06</b><span data-titolo data-i18n="foot.credits">Crediti dei materiali</span><span class="segnapagina__barra"><i></i></span></p>
 
-    <main id="main">
- <section class="page-hero wrap">
-  <nav class="breadcrumb" aria-label="Percorso di navigazione" data-i18n-aria="internal.breadcrumb"><a href="../" data-langlink>Home</a><span aria-hidden="true">/</span><span data-i18n="home.credits">Crediti</span></nav>
-  <h1 class="display-title extrude" data-i18n="credits.title">Crediti dei materiali</h1>
-  <p class="page-intro" data-i18n="credits.intro">Licenze, provenienza e dettagli sui materiali utilizzati in questo portfolio.</p>
- </section>
- <div class="article-layout wrap">
-  <nav class="article-nav" aria-label="In questa pagina" data-i18n-aria="internal.contents">
-   <a href="#tipografia" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="credits.typography">Tipografia e icone locali</span></a>
-   <a href="#fotografia" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="credits.avatars">Avatar e animazioni</span></a>
-   <a href="#progetti" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="credits.projects">Materiali dei progetti</span></a>
-   <a href="#grafica" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16m-10 0v10"/></svg><span data-i18n="credits.graphics">Grafica del portfolio</span></a>
-  </nav>
-  <div class="article-body">
-   <section class="chapter" data-reveal id="tipografia"><picture class="chapter-avatar" data-avatar data-avatar-pose="idlewainting" data-cycle="idlewainting,laughing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/idlewainting-still.webp"><img src="../assets/avatars/idlewainting-still.webp" data-avatar-animated="../assets/avatars/idlewainting.gif" data-avatar-still="../assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
-    <h2 data-i18n="credits.typography">Tipografia e icone locali</h2>
-    <ul>
-     <li><strong>M PLUS Rounded 1c</strong>, The Rounded M+ Project Authors, SIL Open Font License 1.1. <span data-i18n="credits.nintendoUse">I titoli usano i sottoinsiemi latini locali ai pesi 700 e 900, rinominati Oakvx Rounded; forme e metriche dei glifi sono conservate.</span> <a href="wiiu/Rounded-OFL.txt">Rounded-OFL.txt</a> · <a href="https://github.com/google/fonts/tree/main/ofl/mplusrounded1c" target="_blank" rel="noopener noreferrer">Google Fonts</a>.</li>
-     <li><strong>Nunito Variable</strong>, The Nunito Project Authors, SIL Open Font License 1.1. <code>wiiu/nunito.woff2</code> <span data-i18n="credits.archivoUse">è usato per paragrafi, navigazione, pulsanti e testi di supporto nelle schede social. Il file variabile locale WOFF2 conserva tutti i glifi e l’asse dei pesi 200–900 della distribuzione originale.</span> <span data-i18n="credits.licenseLabel">Licenza:</span> <a href="wiiu/Nunito-OFL.txt">wiiu/Nunito-OFL.txt</a>. <span data-i18n="credits.distributionLabel">Distribuzione originale:</span> <a href="https://github.com/googlefonts/nunito" target="_blank" rel="noopener noreferrer">github.com/googlefonts/nunito</a>.</li>
-     <li><strong>Cascadia Code</strong>, Microsoft, SIL Open Font License 1.1. <code>cascadia-code.woff2</code> <span data-i18n="credits.cascadiaUse">è usato per il terminale e il codice. Il subset conserva caratteri ASCII, accenti italiani e punteggiatura usata, senza modificare forme, metriche o asse variabile. Il nome interno del derivato è</span> <code>Oakvx Portfolio Mono</code>, <span data-i18n="credits.reservedName">nel rispetto del nome riservato dell'originale.</span> <span data-i18n="credits.licenseLabel">Licenza:</span> <a href="CascadiaCode-OFL.txt">CascadiaCode-OFL.txt</a>. <span data-i18n="credits.distributionLabel">Distribuzione originale:</span> <a href="https://github.com/microsoft/cascadia-code" target="_blank" rel="noopener noreferrer">github.com/microsoft/cascadia-code</a>.</li>
-     <li><strong>Devicon</strong>, MIT. <span data-i18n="credits.deviconUse">Le icone delle tecnologie sono servite localmente da</span> <code>icons/</code>. <span data-i18n="credits.sourceLabel">Fonte:</span> <a href="https://github.com/devicons/devicon" target="_blank" rel="noopener noreferrer">github.com/devicons/devicon</a>. <span data-i18n="credits.licenseLabel">Licenza:</span> <a href="icons/LICENSE-devicon.txt">icons/LICENSE-devicon.txt</a>. <span data-i18n="credits.trademarkNotice">I marchi identificano i rispettivi strumenti e appartengono ai loro titolari.</span></li>
-    </ul>
-   </section>
-   <section class="chapter" data-reveal id="fotografia"><picture class="chapter-avatar" data-avatar data-avatar-pose="showingoff" data-cycle="showingoff,dancing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/showingoff-still.webp"><img src="../assets/avatars/showingoff-still.webp" data-avatar-animated="../assets/avatars/showingoff.webp" data-avatar-still="../assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
-    <h2 data-i18n="credits.avatars">Avatar e animazioni</h2>
-    <p data-i18n="credits.avatarSource">Le cinque pose sono state fornite dall’autore per questo portfolio e sostituiscono le fotografie personali. I file sono serviti localmente dalla cartella avatars/.</p>
-    <p><code>standing.gif</code>, <code>sitting.gif</code>, <code>dancing.gif</code>, <code>sleeping.gif</code>: <span data-i18n="credits.avatarFrames">animazioni originali a 512 × 512 px, con trasparenza e fotogrammi conservati.</span></p>
-    <p><code>showingoff.png</code>: <span data-i18n="credits.avatarStill">posa fissa a 512 × 512 px. Il file fornito come showingoff.gif era già un’immagine PNG; è stata corretta soltanto l’estensione.</span></p>
-    <p data-i18n="credits.avatarMotion">Le versioni *-still.webp contengono il primo fotogramma delle rispettive GIF. Sono usate quando le animazioni sono in pausa, la pagina è in background o il sistema richiede movimento ridotto. Le animazioni non richiedono servizi esterni.</p>
-   </section>
-   <section class="chapter" data-reveal id="progetti"><picture class="chapter-avatar" data-avatar data-avatar-pose="discofever" data-cycle="discofever,flyspinning" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/discofever-still.webp"><img src="../assets/avatars/discofever-still.webp" data-avatar-animated="../assets/avatars/discofever.gif" data-avatar-still="../assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
-    <h2 data-i18n="credits.projects">Materiali dei progetti</h2>
-    <ul>
-     <li><strong>Brat Animator:</strong> <span data-i18n="credits.bratCapture">schermata reale 1440 × 1000 px di Brat Animator 4.0, catturata il 18 ottobre 2026 da</span> <a href="https://oakvx.github.io/bratAnimator/" target="_blank" rel="noopener noreferrer">oakvx.github.io/bratAnimator/</a> (<code>work/brat-editor.webp</code>). <span data-i18n="credits.repositoryLabel">Repository:</span> <a href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer">github.com/oakvx/bratAnimator</a>. <span data-i18n="credits.bratDemo">Il testo dimostrativo originale inserito nell’editor è «gabriele lucia», «codice e grafica», «demo portfolio». Nessun brano o contenuto privato è stato caricato. L’interfaccia non è stata ricostruita né ritoccata.</span></li>
-     <li><strong>Synk / Synkris:</strong> <span data-i18n="credits.synkSource">proviene dal materiale fornito dall’autore, archivio</span> <code>synk_site.zip</code><span data-i18n="credits.synkEntry">, voce</span> <code>synk_fixed/og-image.jpg</code> (<code>work/synk-cover.webp</code>). <span data-i18n="credits.synkDetails">L’immagine promozionale originale di 1867 × 949 px è stata ridimensionata proporzionalmente a 1600 × 813 px e codificata in WebP. È materiale promozionale fornito, non una schermata di un gestionale in produzione. Il credito «Synkris / materiale fornito» resta visibile accanto all’immagine.</span></li>
-     <li><strong>Beautify:</strong> <span data-i18n="credits.beautifySource">il logo originale fornito nell’archivio</span> <code>maturita-main.zip</code><span data-i18n="credits.beautifyEntry">, voce</span> <code>maturita-main/assets/logo.svg</code> (<code>beautify-logo.svg</code>). <span data-i18n="credits.beautifyDetails">Non era disponibile una schermata autentica dell’applicazione, quindi è usato il logo. Il file originale non è stato modificato; la presentazione sul fondo scuro può invertirne il colore via CSS.</span></li>
-    </ul>
-    <p><span data-i18n="credits.smallVariantsIntro">Le varianti</span> <code>work/brat-editor-small.webp</code> (720 × 500 px) <span data-i18n="credits.smallVariantsAnd">e</span> <code>work/synk-cover-small.webp</code> (720 × 366 px) <span data-i18n="credits.smallVariantsDetails">sono ridimensionamenti proporzionali delle immagini corrispondenti, senza modifiche al contenuto.</span></p>
-    <p><span data-i18n="credits.materialsOwnership">Questi materiali appartengono a Gabriele Lucia / oakvx o sono stati forniti per il suo portfolio. La loro disponibilità pubblica non concede una licenza generale di riutilizzo. Provenienza, dimensioni e checksum delle immagini sono in</span> <a href="work/sources.json">work/sources.json</a>. <span data-i18n="credits.materialsPrivate">Archivi originali, dati, credenziali e configurazioni delle applicazioni non sono pubblicati.</span></p>
-   </section>
-   <section class="chapter" data-reveal id="grafica"><picture class="chapter-avatar" data-avatar data-avatar-pose="laughing" data-cycle="laughing,almostfalling" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose"><source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/laughing-still.webp"><img src="../assets/avatars/laughing-still.webp" data-avatar-animated="../assets/avatars/laughing.gif" data-avatar-still="../assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
-    <h2 data-i18n="credits.graphics">Grafica del portfolio</h2>
-<p data-i18n="credits.motion">Menu, icone, bolle e transizioni sono realizzati con CSS, SVG e JavaScript originali, ispirati alla leggerezza dei menu delle console. Il puntatore è la risorsa esterna descritta qui sotto.</p>
-<p><strong>Wii U Player 1 cursor — Macrowave.</strong> <span data-i18n="credits.pointer">Puntatore da cursor.cc, con licenza indicata “Creative Commons, no attribution”. Il CUR incorporato nella pagina è conservato senza modifiche; il PNG locale è decodificato in RGBA 32 × 32, con hotspot (7,0). Animazioni e integrazione sono aggiunte del portfolio.</span> <a href="https://www.cursor.cc/?action=icon&amp;file_id=181223" target="_blank" rel="noopener noreferrer">cursor.cc</a> · <a href="wiiu/pointer-NOTICE.txt">pointer-NOTICE.txt</a>.</p>
-<p><strong>AFTER HOURS.</strong> <span data-i18n="credits.afterHours">Interfaccia DOM/Canvas adattata da Homebrew Channel, Team Twiizers / fail0verflow, con licenza GPL-2.0-only; sorgenti leggibili inclusi. Font Droid Sans di Ascender Corporation, Apache-2.0.</span> <a href="after-hours/NOTICE.md">NOTICE</a> · <a href="after-hours/COPYING">GPL-2.0</a> · <a href="after-hours/fonts/LICENSE-APACHE-2.0.txt">Apache-2.0</a>.</p>
-<p data-i18n="credits.audio">Musica e suoni generati dal browser, originali.</p>
-    <p data-i18n="credits.counter">Il contatore dei commit usa una griglia e cifre a pixel originali disegnate nel codice, con una sfumatura ai bordi ispirata alla sezione open source di Supabase. I dati sono i totali pubblici GitHub di oakvx e oakvxish; non sono usati asset grafici del sito di riferimento.</p>
-    <p data-i18n="credits.chameleon">Il percorso usa una scena Canvas originale: una ruota azzurra cambia forma lungo una linea e accompagna le tappe. Geometria e movimento sono calcolati nel codice, senza librerie di animazione. Gli avatar mantengono pose e fotogrammi originali.</p>
-    <p data-i18n="credits.surfaces">Tessere, barre e pulsanti sono disegnati con CSS originale: bordi arrotondati, riflessi chiari, ombre azzurrate e piccoli movimenti a molla. M PLUS Rounded 1c è il font dei titoli scelto dall’autore; i suoni sono generati dal browser.</p>
-    <p data-i18n="credits.identity">Monogramma gl., favicon e schede social PNG sono composizioni originali del portfolio. Le anteprime social usano M PLUS Rounded 1c nei titoli, Nunito nei testi e forme geometriche. Gli avatar sono integrati nelle tessere, nella scrivania, nei contatti e nel piè di pagina. Le foto di console e giochi in Fuori orario sono contenuti editoriali preesistenti.</p>
-   </section>
-  </div>
- </div>
+<main id="main" class="pagina">
+<section class="crediti-apertura" aria-labelledby="crediti-titolo">
+    <p class="t-meta">(06) <span data-i18n="cr.label">Note — crediti dei materiali</span></p>
+    <h1 id="crediti-titolo" data-split data-i18n-html="cr.title">Chi ha fatto <em>cosa.</em></h1>
+    <p class="rivela" data-i18n="cr.intro">Licenze, provenienza e dettagli dei materiali usati in questo sito.</p>
+</section>
+
+<div class="contenitore" style="padding-bottom:clamp(5rem,10vw,9rem)">
+    <section class="voce-crediti" id="tipografia">
+        <h2 data-i18n="cr.typeTitle">Tipografia</h2>
+        <div class="voce-crediti__corpo">
+            <ul>
+                <li data-i18n-html="cr.type1"><strong>Bodoni Moda</strong>, The Bodoni Moda Project Authors, SIL Open Font License 1.1. Titoli e testi di display, file variabili locali (pesi 400–900, dimensione ottica 6–96). Licenza: <a href="nero/fonts/BodoniModa-OFL.txt">BodoniModa-OFL.txt</a>. Origine: <a href="https://github.com/indestructible-type/Bodoni">github.com/indestructible-type/Bodoni</a>.</li>
+                <li data-i18n-html="cr.type2"><strong>Archivo</strong>, The Archivo Project Authors (Omnibus-Type), SIL Open Font License 1.1. Testo corrente; il file variabile conserva gli assi di peso (100–900) e larghezza (62–125), usati per le composizioni compresse ed espanse. Licenza: <a href="nero/fonts/Archivo-OFL.txt">Archivo-OFL.txt</a>.</li>
+                <li data-i18n-html="cr.type3"><strong>Cascadia Code</strong>, Microsoft, SIL Open Font License 1.1. Metadati, didascalie e terminale. Il sottoinsieme locale conserva caratteri ASCII, accenti italiani e punteggiatura, senza modificare forme o metriche; il nome interno del derivato è <em>Oakvx Portfolio Mono</em>. Licenza: <a href="CascadiaCode-OFL.txt">CascadiaCode-OFL.txt</a>.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="voce-crediti" id="fotografia">
+        <h2 data-i18n="cr.avatarTitle">Avatar e sculture di punti</h2>
+        <div class="voce-crediti__corpo">
+            <p data-i18n="cr.avatar1">Il Mii e le sue pose sono disegni dell’autore, forniti per questo portfolio al posto delle fotografie personali, e sono serviti localmente dalla cartella avatars/.</p>
+            <p data-i18n="cr.avatar2">Nella home e in «Chi sono» le pose ferme (*-still.webp, primo fotogramma delle animazioni originali) vengono lette nel browser e ricomposte come nuvole di punti in WebGL: i file non vengono modificati. La scultura organica è generata dal codice, con rumore deterministico.</p>
+        </div>
+    </section>
+
+    <section class="voce-crediti" id="progetti">
+        <h2 data-i18n="cr.projTitle">Materiali dei progetti</h2>
+        <div class="voce-crediti__corpo">
+            <ul>
+                <li data-i18n-html="cr.proj1">Brat Animator: schermata reale 1440 × 1000 px di Brat Animator 4.0, catturata il 18 ottobre 2026 da <a href="https://oakvx.github.io/bratAnimator/">oakvx.github.io/bratAnimator</a> (<code>work/brat-editor.webp</code>). Il testo dimostrativo inserito nell’editor è «gabriele lucia», «codice e grafica», «demo portfolio». L’interfaccia non è stata ricostruita né ritoccata.</li>
+                <li data-i18n-html="cr.proj2">Synk / Synkris: materiale promozionale fornito dall’autore (archivio <code>synk_site.zip</code>, voce <code>synk_fixed/og-image.jpg</code>), ridimensionato da 1867 × 949 a 1600 × 813 px e codificato in WebP (<code>work/synk-cover.webp</code>). Non è una schermata di un gestionale in produzione.</li>
+                <li data-i18n-html="cr.proj3">Beautify: logo originale dall’archivio <code>maturita-main.zip</code> (<code>beautify-logo.svg</code>), non modificato. Non era disponibile una schermata autentica dell’applicazione.</li>
+                <li data-i18n-html="cr.proj4">Spinotto Felice: schermata reale del sito dimostrativo (<code>work/autoofficina-cover.webp</code>).</li>
+            </ul>
+            <p data-i18n-html="cr.proj5">Le varianti <code>*-small.webp</code> sono ridimensionamenti proporzionali, senza modifiche al contenuto. Provenienza, dimensioni e checksum sono in <a href="work/sources.json">work/sources.json</a>. Questi materiali appartengono a Gabriele Lucia / oakvx o sono stati forniti per il suo portfolio: la disponibilità pubblica non concede una licenza generale di riutilizzo.</p>
+        </div>
+    </section>
+
+    <section class="voce-crediti" id="fuori-orario">
+        <h2 data-i18n="cr.foTitle">Immagini di Fuori orario</h2>
+        <div class="voce-crediti__corpo">
+            <p data-i18n="cr.fo1">Copertine e console mostrate nella pagina sono contenuti editoriali preesistenti; i marchi appartengono ai rispettivi titolari.</p>
+            <ul>
+                <li data-i18n-html="cr.fo2">Copertine: Rayman Legends e Yo-kai Watch 2: Bony Spirits da Wikipedia (en), Just Dance 2017 da ibs.it.</li>
+                <li data-i18n-html="cr.fo3">Console: Wii U, Wii e PlayStation 4 da Wikimedia Commons (PNG trasparenti originali o con sfondo rimosso); Nintendo 3DS con sfondo rimosso. Elenco completo delle fonti in <a href="fuori-orario/LEGGIMI.txt">fuori-orario/LEGGIMI.txt</a>.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="voce-crediti" id="grafica">
+        <h2 data-i18n="cr.siteTitle">Il sito</h2>
+        <div class="voce-crediti__corpo">
+            <p data-i18n="cr.site1">Direzione artistica, impaginazione, transizioni, cursore e sculture di punti sono originali: HTML, CSS e JavaScript scritti a mano, con un piccolo motore WebGL senza librerie. Nessuna risorsa grafica di terzi oltre a quelle elencate qui.</p>
+            <p data-i18n="cr.site2">Il contatore dei commit in Fuori orario usa una griglia e cifre a pixel disegnate nel codice; i dati sono i totali pubblici GitHub di oakvx e oakvxish.</p>
+            <p data-i18n-html="cr.site3">Il gioco in 3D, raggiungibile dal menu d’ingresso, usa <a href="https://threejs.org/">three.js</a> (licenza MIT, inclusa nel gioco).</p>
+        </div>
+    </section>
+</div>
 </main>
 
-    <footer class="foot">
-        <div class="wrap foot__top">
-            <div class="foot__contact">
-                <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
-                <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
-                <div class="foot__sleeper" aria-hidden="true">
-                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
-                        <source media="(prefers-reduced-motion: reduce)" srcset="../assets/avatars/sleeping-still.webp">
-                        <img src="../assets/avatars/sleeping-still.webp" data-avatar-animated="../assets/avatars/sleeping.gif" data-avatar-still="../assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
-                    </picture>
-                </div>
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span> — <span data-i18n="foot.label2">fine della pagina</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto, o anche solo per dirmi che il sito ti è piaciuto (o no). Rispondo, giuro.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
             </div>
-            <nav class="foot__nav" aria-label="Collegamenti del piè di pagina" data-i18n-aria="foot.navLabel">
-                <ul>
-                    <li><a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-                    <li><a href="../chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a></li>
-                    <li><a href="../fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a></li>
-                    <li><a href="../assets/CREDITS.html" data-langlink data-i18n="foot.credits">Crediti</a></li>
-                </ul>
-                <ul>
-                    <li><a href="../#percorso" data-langlink data-i18n="nav.path">Percorso</a></li>
-                    <li><a href="../#progetti" data-langlink data-i18n="nav.projects">Progetti</a></li>
-                    <li><a href="../#strumenti" data-langlink data-i18n="nav.tools">Strumenti</a></li>
-                    <li><a href="../#contatti" data-langlink data-i18n="nav.contact">Contatti</a></li>
-                </ul>
-            </nav>
         </div>
-        <div class="wrap foot__mark" aria-hidden="true" data-mark>
-            <svg class="mark__o" viewBox="-60 -60 120 120"><path data-mark-o d="M0,-50A50,50 0 1,1 0,-50Z" /></svg><span class="mark__rest extrude">akvx</span>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="../" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="../#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="../chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="../fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+            </ul>
         </div>
-        <div class="wrap foot__bottom">
-            <p>© 2026 Gabriele Lucia</p>
-            <a href="#main"><span data-i18n="foot.top">Torna su</span> <span aria-hidden="true">↑</span></a>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+            </ul>
         </div>
-    </footer>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="../assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano: HTML, CSS, JavaScript e WebGL</span></p>
+</footer>
 
-    <p class="toast" role="status" aria-live="polite" data-toast></p>
-<script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
-<script src="../assets/avatars/avatar.js" defer blocking="render"></script>
-<script src="../assets/avatars/poses.js" defer blocking="render"></script>
-<script src="../assets/avatars/companion.js" defer blocking="render"></script>
-<script src="../assets/wiiu/sound.js" defer></script>
-<script src="../assets/wiiu/music.js" defer></script>
-<script src="../assets/wiiu/pointer.js" defer></script>
-<script src="../assets/wiiu/dialogs.js" defer></script>
 <script src="ingresso/ingresso.js" defer></script>
 </body>
 </html>

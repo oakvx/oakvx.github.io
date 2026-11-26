@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabriele Lucia, la stanza (beta)</title>
+<meta name="description" content="La prima stanza 3D del portfolio di Gabriele Lucia, junior web developer: uno spazio liminale in beta dove le distanze non sono affidabili.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="gioco.css">
+</head>
+<body>
+<canvas id="scena" aria-hidden="true"></canvas>
+
+<header class="hud-top">
+  <p class="firma"><strong data-t="nome">Gabriele Lucia</strong> <span data-t="ruolo">junior web developer · Sassuolo</span> <span class="beta" data-t="beta">beta</span></p>
+  <nav class="hud-azioni" aria-label="Comandi">
+    <button type="button" id="lingua" class="tasto" aria-label="Switch to English">EN</button>
+    <button type="button" id="audio" class="tasto" aria-pressed="true" data-t="audioOn">Audio: sì</button>
+    <a id="classica" class="tasto tasto-forte" href="../" data-t="classica">Versione classica</a>
+  </nav>
+</header>
+
+<div id="mirino" class="mirino" hidden></div>
+<p id="suggerimento" class="suggerimento" hidden></p>
+
+<section id="ingresso" class="pannello ingresso" aria-labelledby="ingresso-titolo">
+  <h1 id="ingresso-titolo" data-t="introTitolo">Qui le regole non sono garantite.</h1>
+  <p data-t="intro"></p>
+  <p id="avviso" class="avviso" hidden></p>
+  <div class="scelte">
+    <button type="button" id="entra" class="tasto tasto-forte" disabled data-t="caricamento">La stanza si sta accendendo…</button>
+    <a class="tasto" href="../" id="leggere" data-t="leggere">preferisco leggere</a>
+  </div>
+  <p class="comandi" data-t="comandi"></p>
+</section>
+
+<section id="pausa" class="pannello" hidden aria-labelledby="pausa-titolo">
+  <h2 id="pausa-titolo" data-t="pausa">In pausa</h2>
+  <p class="comandi" data-t="comandi"></p>
+  <div class="scelte">
+    <button type="button" id="riprendi" class="tasto tasto-forte" data-t="riprendi">Riprendi</button>
+    <a class="tasto" href="../" data-classica data-t="classica">Versione classica</a>
+  </div>
+</section>
+
+<section id="scheda" class="pannello" hidden role="dialog" aria-modal="true" aria-labelledby="scheda-titolo">
+  <h2 id="scheda-titolo"></h2>
+  <p id="scheda-testo"></p>
+  <div class="scelte">
+    <a id="scheda-link" class="tasto tasto-forte" href="#" data-t="apri">Apri la pagina</a>
+    <button type="button" id="scheda-chiudi" class="tasto" data-t="chiudi">Chiudi</button>
+  </div>
+</section>
+
+<section id="fine" class="pannello" hidden role="dialog" aria-modal="true" aria-labelledby="fine-titolo">
+  <h2 id="fine-titolo" data-t="fineTitolo">Ci sei arrivato.</h2>
+  <p data-t="fine"></p>
+  <div class="scelte">
+    <button type="button" id="ricomincia" class="tasto tasto-forte" data-t="ricomincia">Torna nella stanza</button>
+    <a class="tasto" href="../" data-classica data-t="classica">Versione classica</a>
+  </div>
+</section>
+
+<noscript><p class="pannello">La stanza ha bisogno di JavaScript. <a href="../">Vai alla versione classica</a>.</p></noscript>
+
+<script type="importmap">{ "imports": { "three": "./vendor/three/three.module.js" } }</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+@font-face {
+  font-family: Archivo;
+  src: url('../assets/archivo.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --carta: #eef2f4;
+  --inchiostro: #1d252b;
+  --tenue: #56636c;
+  --accento: #2f6f86;
+  --vetro: rgba(244, 247, 249, 0.86);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--carta);
+  color: var(--inchiostro);
+  font-family: Archivo, system-ui, sans-serif;
+}
+
+#scena {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hud-top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.firma {
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  background: var(--vetro);
+  border: 1px solid rgba(29, 37, 43, 0.12);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.firma strong { font-weight: 750; letter-spacing: -0.01em; }
+.firma span { color: var(--tenue); }
+
+.beta {
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.4rem;
+  border: 1px solid currentColor;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.hud-azioni {
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.tasto {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(29, 37, 43, 0.35);
+  background: var(--vetro);
+  color: var(--inchiostro);
+  font: inherit;
+  font-size: 0.92rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tasto:hover { border-color: var(--inchiostro); }
+.tasto:focus-visible { outline: 3px solid var(--accento); outline-offset: 2px; }
+.tasto[disabled] { opacity: 0.6; cursor: progress; }
+
+.tasto-forte {
+  background: var(--inchiostro);
+  border-color: var(--inchiostro);
+  color: #f5f8fa;
+}
+
+.tasto-forte:hover { background: #000; }
+
+.pannello {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(34rem, calc(100% - 2rem));
+  max-height: calc(100% - 7rem);
+  overflow: auto;
+  padding: 1.8rem 2rem;
+  background: var(--vetro);
+  border: 1px solid rgba(29, 37, 43, 0.18);
+  box-shadow: 0 30px 80px rgba(40, 60, 70, 0.18);
+  backdrop-filter: blur(6px);
+  z-index: 4;
+}
+
+.pannello[hidden] { display: none; }
+
+.pannello h1, .pannello h2 {
+  margin: 0 0 0.8rem;
+  font-weight: 720;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.pannello h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); }
+.pannello h2 { font-size: 1.5rem; }
+.pannello p { line-height: 1.55; }
+
+.scelte {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.comandi {
+  margin: 1.2rem 0 0;
+  color: var(--tenue);
+  font-size: 0.85rem;
+}
+
+.avviso {
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--accento);
+  background: rgba(47, 111, 134, 0.08);
+}
+
+.mirino {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: rgba(29, 37, 43, 0.55);
+  z-index: 2;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.mirino.attivo { transform: scale(2.2); background: var(--accento); }
+
+.suggerimento {
+  position: fixed;
+  left: 50%;
+  top: calc(50% + 1.6rem);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.3rem 0.65rem;
+  background: var(--vetro);
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+@media (max-width: 640px) {
+  .hud-top { flex-direction: column; }
+  .firma span.beta { display: inline-block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mirino { transition: none; }
+}

@@ -1,0 +1,106 @@
+{
+  "it": {
+    "lang": "it",
+    "titolo": "Gabriele Lucia, la stanza (beta)",
+    "nome": "Gabriele Lucia",
+    "ruolo": "junior web developer · Sassuolo",
+    "beta": "beta",
+    "classica": "Versione classica",
+    "classicaUrl": "../",
+    "audioOn": "Audio: sì",
+    "audioOff": "Audio: no",
+    "introTitolo": "Qui le regole non sono garantite.",
+    "intro": "Sono Gabri, faccio siti e interfacce. Questa è la prima stanza del mio portfolio da attraversare: è ancora in beta, ma le distanze già mentono. Se vuoi solo i progetti, c'è la versione classica, e va benissimo così.",
+    "entra": "Entra nella stanza",
+    "leggere": "preferisco leggere",
+    "comandi": "WASD o frecce per muoverti · mouse per guardare · E o clic per interagire · Esc per uscire",
+    "avvisoTouch": "Da telefono o tablet la stanza non è pensata: ti conviene la versione classica. Se vuoi provarci lo stesso, entra comunque.",
+    "avvisoMotion": "Hai chiesto di ridurre il movimento: la stanza si muove parecchio. La versione classica è più tranquilla.",
+    "caricamento": "La stanza si sta accendendo…",
+    "erroreWebgl": "Il tuo browser non riesce ad accendere il 3D. Nessun problema: la versione classica ha tutto.",
+    "pausa": "In pausa",
+    "riprendi": "Riprendi",
+    "chiudi": "Chiudi",
+    "apri": "Apri la pagina",
+    "interagisci": "[E] ",
+    "fineTitolo": "Ci sei arrivato.",
+    "fine": "Il corridoio sembrava lungo tre passi. Dietro questa porta le altre stanze sono ancora in costruzione: torna presto.",
+    "ricomincia": "Torna nella stanza",
+    "oggetti": {
+      "monitor": {
+        "azione": "Guarda il monitor",
+        "titolo": "Brat Animator",
+        "testo": "Il mio editor di lyric video nel browser: testi LRC, timeline, animazioni su Canvas ed esportazione MP4/WebM con WebCodecs.",
+        "url": "../projects/brat-animator/"
+      },
+      "targa": {
+        "azione": "Leggi la targa",
+        "titolo": "Gabriele Lucia",
+        "testo": "19 anni, Sassuolo. Junior web developer e freelance dal 2023: siti, interfacce e SEO per attività locali. Dal 2026 Ingegneria Informatica a UNIMORE.",
+        "url": "../chi-sono/"
+      },
+      "scatola": {
+        "azione": "Guarda la scatola",
+        "titolo": "Ancora sigillata",
+        "testo": "Qui dentro arriverà un pezzo di me. Non ho ancora deciso quale: la stanza è in beta.",
+        "url": ""
+      },
+      "corridoio": {
+        "targhetta": "B-07"
+      }
+    },
+    "schermo": ["testi", "che", "sono", "suoni"]
+  },
+  "en": {
+    "lang": "en",
+    "titolo": "Gabriele Lucia, the room (beta)",
+    "nome": "Gabriele Lucia",
+    "ruolo": "junior web developer · Sassuolo, Italy",
+    "beta": "beta",
+    "classica": "Classic version",
+    "classicaUrl": "../en/",
+    "audioOn": "Sound: on",
+    "audioOff": "Sound: off",
+    "introTitolo": "The rules are not guaranteed in here.",
+    "intro": "I'm Gabri, I build websites and interfaces. This is the first room of my portfolio you can walk through: it's still a beta, but the distances already lie. If you just want the projects, the classic version is right there, and that's completely fine.",
+    "entra": "Enter the room",
+    "leggere": "I'd rather read",
+    "comandi": "WASD or arrows to move · mouse to look · E or click to interact · Esc to leave",
+    "avvisoTouch": "The room isn't made for phones or tablets: the classic version will suit you better. If you want to try anyway, go ahead.",
+    "avvisoMotion": "You asked for reduced motion: the room moves quite a bit. The classic version is calmer.",
+    "caricamento": "The room is switching on…",
+    "erroreWebgl": "Your browser can't start the 3D. No problem: the classic version has everything.",
+    "pausa": "Paused",
+    "riprendi": "Resume",
+    "chiudi": "Close",
+    "apri": "Open the page",
+    "interagisci": "[E] ",
+    "fineTitolo": "You made it.",
+    "fine": "The corridor looked three steps long. The other rooms behind this door are still being built: come back soon.",
+    "ricomincia": "Back to the room",
+    "oggetti": {
+      "monitor": {
+        "azione": "Look at the monitor",
+        "titolo": "Brat Animator",
+        "testo": "My in-browser lyric video editor: LRC lyrics, a timeline, Canvas text animation and MP4/WebM export with WebCodecs.",
+        "url": "../en/projects/brat-animator/"
+      },
+      "targa": {
+        "azione": "Read the plaque",
+        "titolo": "Gabriele Lucia",
+        "testo": "19, from Sassuolo, Italy. Junior web developer and freelancer since 2023: websites, interfaces and SEO for local businesses. Computer Engineering at UNIMORE since 2026.",
+        "url": "../en/chi-sono/"
+      },
+      "scatola": {
+        "azione": "Look at the box",
+        "titolo": "Still sealed",
+        "testo": "A piece of me will go in here. I haven't decided which one yet: the room is a beta.",
+        "url": ""
+      },
+      "corridoio": {
+        "targhetta": "B-07"
+      }
+    },
+    "schermo": ["lyrics", "that", "are", "sounds"]
+  }
+}

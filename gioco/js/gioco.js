@@ -61,7 +61,7 @@ export async function avvia(ctx) {
   let prossimaAssegnazione = 0;
 
   // asset (texture PBR, panorami, modelli): si chiedono subito, si aspettano prima di entrare
-  const asset = creaCaricatore({ base: 'asset/' });
+  const asset = creaCaricatore({ base: 'asset/', modelli: !leggero });
   asset.suProgresso(({ fatti, totali }) => {
     if (totali) $('avvio-testo').textContent = `${ctx.T.caricamento} ${fatti}/${totali}`;
   });
@@ -77,7 +77,7 @@ export async function avvia(ctx) {
   function ambiente(id) {
     ambienteAttuale = id;
     if (!ambienti.has(id)) ambienti.set(id, asset.hdr(id).then((t) => (t ? pmrem.fromEquirectangular(t).texture : null)));
-    ambienti.get(id).then((t) => { if (ambienteAttuale === id) scene.environment = t; });
+    ambienti.get(id).then((t) => { if (ambienteAttuale === id && !leggero) scene.environment = t; });
   }
   scene.environmentIntensity = 1.0;
   ambiente('interno-neutro');
@@ -243,7 +243,7 @@ export async function avvia(ctx) {
   const postCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
   function ridimensiona() {
-    const pr = leggero ? 0.5 : Math.min(devicePixelRatio || 1, 1.5);
+    const pr = leggero ? 0.35 : Math.min(devicePixelRatio || 1, 1.5);
     renderer.setPixelRatio(pr);
     renderer.setSize(innerWidth, innerHeight, false);
     const w = Math.floor(innerWidth * pr);

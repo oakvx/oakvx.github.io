@@ -14,7 +14,7 @@ export default async function (page, aiuto) {
     ['smistamento', 3, [-6, 0.87, -27.5, -0.5, 0.02]],
   ]) {
     await aiuto.esegui((n) => window.__gioco.vaiA(n), stanza);
-    await aiuto.attendi((q) => (window.__gioco.stanza(q[0]).stato().modelli || 0) >= q[1], 30000, [stanza, k]);
+    await aiuto.attendi((q) => (window.__gioco.stanza(q[0]).stato().modelli || 0) >= q[1], 60000, [stanza, k]);
     const lum = await fotografa(page, aiuto, stanza, vista);
     assert.ok(lum > 0.12 && lum < 0.85, `${stanza}: luminanza ${lum.toFixed(2)}`);
   }

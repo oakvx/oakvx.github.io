@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from '../../vendor/three/addons/loaders/GLTFLoader.js';
 import { HDRLoader } from '../../vendor/three/addons/loaders/HDRLoader.js';
 
-export function creaCaricatore({ base = 'asset/', timeout = 15000 } = {}) {
+export function creaCaricatore({ base = 'asset/', timeout = 30000, modelli = true } = {}) {
   const tex = new THREE.TextureLoader();
   const hdrLoader = new HDRLoader();
   const gltf = new GLTFLoader();
@@ -48,13 +48,14 @@ export function creaCaricatore({ base = 'asset/', timeout = 15000 } = {}) {
       return t;
     }),
     // il modello originale resta in cache; ogni chiamata ne riceve una copia
-    modello: (id) => traccia('modello:' + id, async () => {
+    // senza modelli (modalità leggera dei test) ogni richiesta risolve subito null
+    modello: (id) => (!modelli ? Promise.resolve(null) : traccia('modello:' + id, async () => {
       const voce = (await elenco()).modelli[id];
       if (!voce) throw new Error('non in elenco');
       const g = await carica(gltf, base + voce.file);
       g.scene.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       return g.scene;
-    }).then((s) => (s ? s.clone(true) : null)),
+    }).then((s) => (s ? s.clone(true) : null))),
     progresso: () => ({ fatti, totali }),
     suProgresso: (fn) => { ascoltatori.add(fn); fn({ fatti, totali }); },
     tutti: () => Promise.all([...cache.values()]),

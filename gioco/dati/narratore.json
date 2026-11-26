@@ -203,6 +203,14 @@
     "N-301": {
       "it": "Il visitatore trovò una porta che non c'era. Il curatore la segnò sul copione, a matita, per poterla cancellare.",
       "en": "The visitor found a door that wasn't there. The curator marked it in the script, in pencil, so he could erase it."
+    },
+    "N-310": {
+      "it": "I contatti. Il copione finisce davvero qui. Il curatore chiude il quaderno, spegne le luci e, per la prima volta, non legge niente.",
+      "en": "The contacts. The script really ends here. The curator closes the notebook, turns off the lights and, for the first time, reads nothing."
+    },
+    "N-311": {
+      "it": "Fine del turno. Se vi è piaciuto, l'email è sul muro. Se non vi è piaciuto, l'email è comunque sul muro.",
+      "en": "End of shift. If you liked it, the email is on the wall. If you didn't, the email is still on the wall."
     }
   },
   "eventi": {
@@ -428,6 +436,18 @@
     ],
     "segreto:porta-percorso": [
       "N-301"
+    ],
+    "stanza:contatti": [
+      {
+        "id": "N-310",
+        "subito": true
+      }
+    ],
+    "fine": [
+      {
+        "id": "N-311",
+        "subito": true
+      }
     ]
   }
 }

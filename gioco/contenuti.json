@@ -388,10 +388,21 @@
             "oakvx.github.io, bratAnimator, piko, oye, yag. Il numero sulla parete è quello vero, contato in questo momento."
           ]
         }
+      },
+      "contatti": {
+        "cartello": "Contatti",
+        "titolo": "Hai un progetto, un lavoro o un'idea strana?",
+        "aperto": "Aperto a: stage · freelance · progetti interessanti",
+        "dove": "Sassuolo · Ingegneria Informatica @ UNIMORE"
       }
     },
     "stanzaDi": "STANZA {n} DI {tot}",
-    "comandoF": "F: lampada delle prove"
+    "comandoF": "F: lampada delle prove",
+    "fineTitolo": "Fine del turno",
+    "fineTesto": "Giro completato in {tempo}. Segreti trovati: {segreti}. Grazie per la visita: oakvx risponde a tutte le email.",
+    "scrivimi": "Scrivimi",
+    "copiaEmail": "Copia email",
+    "copiata": "Copiata"
   },
   "en": {
     "lang": "en",
@@ -782,9 +793,20 @@
             "oakvx.github.io, bratAnimator, piko, oye, yag. The number on the wall is the real one, counted right now."
           ]
         }
+      },
+      "contatti": {
+        "cartello": "Contacts",
+        "titolo": "Got a project, a job or a weird idea?",
+        "aperto": "Open to: internships · freelance · interesting side projects",
+        "dove": "Sassuolo, Italy · Computer Engineering @ UNIMORE"
       }
     },
     "stanzaDi": "ROOM {n} OF {tot}",
-    "comandoF": "F: evidence lamp"
+    "comandoF": "F: evidence lamp",
+    "fineTitolo": "End of shift",
+    "fineTesto": "Tour completed in {tempo}. Secrets found: {segreti}. Thanks for visiting: oakvx answers every email.",
+    "scrivimi": "Email me",
+    "copiaEmail": "Copy email",
+    "copiata": "Copied"
   }
 }

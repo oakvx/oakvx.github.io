@@ -304,9 +304,13 @@ export function costruisci(m, g) {
     if (suona && t - ultimoAgg > 0.5) { ultimoAgg = t; tv.ridisegna(statoTv()); }
   });
 
+  // la porta con la scaletta porta all'ultima stanza
+  m.zona('verso-contatti', X0, -1, 8.3, X0 + 0.45, 3, 9.5, { ripeti: true });
+  g.su('verso-contatti', () => g.teletrasporta(945, 0, 1.5, Math.PI));
   g.puntoControllo('oakvx', CX, 0, 1.5, Math.PI);
   return {
     debug: {
+      porta: [X0, 8.9],
       stato: () => ({
         modo2008: g.modo2008Valore() > 0.99 ? 1 : g.modo2008Valore() < 0.01 ? 0 : g.modo2008Valore(),
         caricata, mensola: caricata ? dati.mensola.length : 0, lingue: dati.lingue.length, melodia, suona,

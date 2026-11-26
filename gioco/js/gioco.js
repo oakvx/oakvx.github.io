@@ -14,7 +14,7 @@ import { creaContapassi } from './logica/passi.js';
 import { totaleCommit } from './logica/commit.js';
 
 const $ = (id) => document.getElementById(id);
-const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'middleman', 'galleria', 'scrivania', 'commit', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'middleman', 'galleria', 'scrivania', 'commit', 'contatti', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
 const ATMOSFERA = { nebbia: 0x3c423f, vicino: 3, lontano: 26, cielo: 0xe4ece6, terra: 0x404642, intensita: 2.3 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
@@ -99,6 +99,7 @@ export async function avvia(ctx) {
   let fadeCb = null;
   const controlli = new Map();
   let modo2008 = 0;
+  let tempoGiro = 0;
   let commitPromessa = null;
   const aiuti = new Map();
   const g = {
@@ -438,6 +439,34 @@ export async function avvia(ctx) {
     }
   }
 
+  // la schermata finale: tempo, segreti, scrivimi / copia email (torna al sito e rigioca sono nell'HTML)
+  function riempiFinale() {
+    const t = ctx.T;
+    const mm = String(Math.floor(tempoGiro / 60)).padStart(2, '0');
+    const ss = String(Math.floor(tempoGiro % 60)).padStart(2, '0');
+    $('finale-titolo').textContent = t.fineTitolo;
+    const box = $('finale-contenuto');
+    const p = document.createElement('p');
+    p.textContent = t.fineTesto.replace('{tempo}', `${mm}:${ss}`).replace('{segreti}', `${g.giro.segreti().length}/3`);
+    const scelte = document.createElement('div');
+    scelte.className = 'scelte';
+    const mail = document.createElement('a');
+    mail.className = 'tasto tasto-forte';
+    mail.href = 'mailto:gabrielelucia07@gmail.com';
+    mail.textContent = t.scrivimi;
+    const copia = document.createElement('button');
+    copia.type = 'button';
+    copia.id = 'copia-email';
+    copia.className = 'tasto';
+    copia.textContent = t.copiaEmail;
+    copia.addEventListener('click', () => {
+      const fatto = () => { copia.textContent = t.copiata; };
+      if (navigator.clipboard) navigator.clipboard.writeText('gabrielelucia07@gmail.com').then(fatto, () => {});
+    });
+    scelte.append(mail, copia);
+    box.replaceChildren(p, scelte);
+  }
+
   // la schermata finale (riempita dalla stanza dei contatti)
   function fine() {
     if (finito) return;
@@ -445,6 +474,7 @@ export async function avvia(ctx) {
     emetti('fine');
     narratore.poi(() => {
       suoni.finale();
+      riempiFinale();
       stato = 'finale';
       tasti.clear();
       document.exitPointerLock();
@@ -592,6 +622,7 @@ export async function avvia(ctx) {
       aggiornaCubi(dt);
       aggiornaStanza();
       aggiornaAiuti(dt);
+      tempoGiro += dt;
       narratore.aggiorna(dt);
     } else if (stato === 'finale') narratore.aggiorna(dt);
     const moto = Math.hypot(giocatore.vel.x, giocatore.vel.z);

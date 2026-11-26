@@ -1,7 +1,7 @@
 // La cisterna: archi su colonne a perdita d'occhio, acqua scura che scorre lenta,
 // gocce dal soffitto. Al centro una scaletta sale verso un foro di luce.
 import * as THREE from 'three';
-import { cartelloStanza, miiLiminale } from '../engine/liminale.js';
+import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
 import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
 
@@ -106,14 +106,17 @@ export function costruisci(m, g) {
   g.su('cisterna-su', () => {
     if (g.inViaggio) return;
     g.inViaggio = true;
-    g.teletrasporta(400, 12, -2.75, -Math.PI / 2, () => { g.inViaggio = false; });
+    g.teletrasporta(162.5, 0, 1.5, Math.PI, () => { g.inViaggio = false; });
   });
+  // il ricordo di questo transito: Format, il software industriale
+  const t = tappa(m, g, 'format', X0 + 15, 0, Z1 - 0.06, Math.PI);
   cartelloStanza(m, g, X0 + 4, 3.4, Z0 + 0.06, 0, 2113);
   const mii = miiLiminale(m, g, 'cisterna', X0 + 30, 0.5, Z0 + 4, Math.PI, [0, -1]);
   g.puntoControllo('cisterna', 301.5, 0, 18, -Math.PI / 2);
   return {
     debug: {
       mii: mii.posto,
+      tappa: t,
       risolvi: () => { g.giocatore().pos.set(X1 - 3, 3.9, Z1 - 3); g.giocatore().vel.set(0, 0, 0); },
     },
   };

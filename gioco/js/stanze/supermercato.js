@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, texTesto, materialeTri } from '../engine/materiali.js';
 import { posa } from '../engine/passaggi.js';
-import { cartelloStanza, miiLiminale } from '../engine/liminale.js';
+import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
 
 const X0 = 450, X1 = 480, Z0 = 0, Z1 = 32, H = 4.5;
 
@@ -129,7 +129,9 @@ export function costruisci(m, g) {
   const porta = new THREE.MeshLambertMaterial({ color: 0x3f4a46 });
   m.tondo(X1 - 3.5, 0, Z1 - 0.06, X1 - 1.5, 2.3, Z1, porta, { r: 0.02, solido: false });
   m.zona('uscita-super', X1 - 3.6, -1, Z1 - 1.0, X1 - 1.4, 3, Z1, { ripeti: true });
-  g.su('uscita-super', () => g.teletrasporta(521.5, 0, 1.5, Math.PI));
+  g.su('uscita-super', () => g.teletrasporta(904, 0, 1.5, Math.PI));
+  // il ricordo di questo transito: il lavoro da freelance per le attività locali
+  const t = tappa(m, g, 'freelance', X0 + 0.06, 0, 15, Math.PI / 2);
 
   // le corsie si ripetono: chi arriva in fondo si ritrova all'inizio (il pannello alto, oltre, resta visibile)
   g.passaggi.aggiungi({ id: 'super-anello', a: posa(463.45, 1.2, 27, Math.PI), b: posa(463.45, 1.2, 3.5, 0), w: 26.9, h: 2.4, doppio: false });
@@ -141,6 +143,7 @@ export function costruisci(m, g) {
   return {
     debug: {
       mii: mii.posto,
+      tappa: t,
       risolvi: () => { g.giocatore().pos.set(476.6, 0.86, 29.6); g.giocatore().vel.set(0, 0, 0); },
     },
   };

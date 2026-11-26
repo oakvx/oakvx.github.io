@@ -11,7 +11,7 @@ export default async function (page, aiuto) {
   const G = (fn, a) => aiuto.esegui(fn, a);
   await G(() => window.__gioco.gioca());
   // dal fondo del percorso
-  await G(() => window.__gioco.vai(0, 60.87, -12));
+  await G(() => window.__gioco.vai(0, 20.87, -12));
   await cammina(aiuto, 0, () => window.__gioco.leggi().stanza === 'smistamento');
 
   // uscita chiusa
@@ -38,5 +38,5 @@ export default async function (page, aiuto) {
   assert.equal((await aiuto.leggi()).lampade, 5);
   await G((p) => window.__gioco.vai(p[0], 0.87, p[2] + 2), u);
   await aiuto.aspetta(1200);
-  await cammina(aiuto, 0, () => ['passaggio', 'atrio'].includes(window.__gioco.leggi().stanza));
+  await cammina(aiuto, 0, () => window.__gioco.leggi().stanza === 'piscina');
 }

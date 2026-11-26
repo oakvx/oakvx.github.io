@@ -8,5 +8,5 @@ export async function prepara(page) {
 export default async function (page, aiuto) {
   await aiuto.esegui(() => { window.__gioco.gioca(); window.__gioco.vaiA('commit'); });
   await aiuto.attendi(() => window.__gioco.stanza('commit').stato().testo === '2.512', 5000);
-  assert.equal(await aiuto.esegui(() => window.__gioco.stanza('atrio').cartello()), 'STANZA 1.847 DI 2.512');
+  assert.equal(await aiuto.esegui(() => window.__gioco.stanza('piscina').cartello()), 'STANZA 1.848 DI 2.512');
 }

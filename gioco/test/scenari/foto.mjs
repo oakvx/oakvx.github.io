@@ -11,7 +11,7 @@ export default async function (page, aiuto) {
   for (const k of ['cemento', 'intonaco', 'metallo', 'piastrelle', 'moquette', 'legnoScuro', 'neonSodio']) assert.ok(chiavi.includes(k), 'manca ' + k);
   fs.mkdirSync(out, { recursive: true });
   await aiuto.esegui(() => window.__gioco.gioca());
-  for (const [stanza, x, y, z, yaw] of [['ingresso', 0, 0.87, 2.6, 0], ['atrio', 0, 0.87, 12, Math.PI]]) {
+  for (const [stanza, x, y, z, yaw] of [['ingresso', 0, 0.87, 2.6, 0], ['piscina', 42, 0.87, 19.2, -Math.PI / 2]]) {
     await aiuto.esegui((p) => { window.__gioco.vai(p[0], p[1], p[2]); window.__gioco.guarda(p[3], -0.05); }, [x, y, z, yaw]);
     await aiuto.aspetta(1500);
     const png = await page.screenshot({ path: path.join(out, stanza + '.png') });

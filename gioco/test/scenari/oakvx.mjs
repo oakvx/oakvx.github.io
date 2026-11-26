@@ -23,11 +23,11 @@ export default async function (page, aiuto) {
   await aiuto.attendi(() => window.__gioco.stanza('oakvx').stato().modo2008 === 0, 3000);
   assert.equal(await page.locator('#data2008').isVisible(), false);
 
-  // porta segreta: dal terzo tratto del percorso, guardando indietro, si entra qui; e si torna
-  await G(() => { const p = window.__gioco.stanza('percorso').inizio(3); window.__gioco.vai(p[0], p[1], -12); window.__gioco.guarda(Math.PI); });
+  // porta segreta: dal secondo tratto del percorso, guardando indietro, si entra qui; e si torna
+  await G(() => { const p = window.__gioco.stanza('percorso').inizio(2); window.__gioco.vai(p[0], p[1], -12); window.__gioco.guarda(Math.PI); });
   await aiuto.attendi(() => window.__gioco.stanza('percorso').stato().segreta === true, 2000);
   await cammina(aiuto, Math.PI, inStanza, 'oakvx');
   assert.ok((await aiuto.leggi()).segreti.includes('porta-percorso'));
   await aiuto.aspetta(300);
-  await cammina(aiuto, 0, inStanza, 'percorso-3');
+  await cammina(aiuto, 0, inStanza, 'percorso-2');
 }

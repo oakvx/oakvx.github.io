@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
-import { cartelloStanza } from '../engine/liminale.js';
+import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
 
 const X0 = 40.3, X1 = 70, Z0 = 17, Z1 = 21, H = 3.2;
 
@@ -118,7 +118,10 @@ export function costruisci(m, g) {
   m.zona('porta-rossa', X1 - 1.0, -1, 18.1, X1, 3, 19.9, { ripeti: true });
   g.su('porta-rossa', () => g.teletrasporta(110, 0, 1.5, Math.PI, () => g.suoni.tonfo()));
 
-  cartelloStanza(m, g, X0 + 1.5, 2.6, Z1 - 0.06, Math.PI, 1848);
+  const cartello = cartelloStanza(m, g, X0 + 1.5, 2.6, Z1 - 0.06, Math.PI, 1848);
+  // il ricordo di questo transito: l'Erasmus a Siviglia, oltre la corrente
+  const t = tappa(m, g, 'erasmus', 67.2, 0, Z0 + 0.06, 0);
+  const mii = miiLiminale(m, g, 'piscina', 69, 0, 19.6, -Math.PI / 2, [0, 1]);
   g.puntoControllo('piscina', X0 + 0.9, 0, 19.2, -Math.PI / 2);
-  return { debug: { risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
+  return { debug: { tappa: t, mii: mii.posto, cartello: () => cartello.testo, risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
 }

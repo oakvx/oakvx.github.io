@@ -44,3 +44,14 @@ export function miiLiminale(m, g, id, x, y, z, ry, verso = [1, 0]) {
   });
   return { id, posto: [x, y, z] };
 }
+
+// una tappa del percorso: porta chiusa con l'anno sopra; esaminarla (E) apre il cartiglio
+export function tappa(m, g, id, x, y0, z, ry) {
+  g.arredi.porta(x, y0, z, ry, () => g.T().stanze.percorso.anni[id]);
+  const fx = Math.sin(ry), fz = Math.cos(ry);
+  const mx = Math.abs(fz) * 0.65 + Math.abs(fx) * 0.07, mz = Math.abs(fx) * 0.65 + Math.abs(fz) * 0.07;
+  const cx = x - fx * 0.05, cz = z - fz * 0.05;
+  const anta = m.box(cx - mx, y0, cz - mz, cx + mx, y0 + 2.3, cz + mz, m.mat.legnoScuro);
+  g.interattivo(anta.mesh, 'tappa-' + id);
+  return id;
+}

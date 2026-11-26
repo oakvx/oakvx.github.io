@@ -38,13 +38,14 @@ export function costruisci(m, g) {
   }
 
   // arrivo dal percorso (a senso unico), sulla parete sud
-  g.passaggi.aggiungi({ id: 'percorso-3', a: posa(0, 61.3, -15.7, 0), b: posa(0, 1.3, Z1 - 0.3, Math.PI), w: 3, h: 2.6, doppio: false });
+  g.passaggi.aggiungi({ id: 'percorso-fine', a: posa(0, 21.3, -15.7, 0), b: posa(0, 1.3, Z1 - 0.3, Math.PI), w: 3, h: 2.6, doppio: false });
   g.arredi.porta(0, 0, Z1 - 0.06, Math.PI, null, { w: 3, h: 2.6 });
 
   // uscita: chiusa da una saracinesca finché le lampade non sono cinque
   nicchia(m, USCITA, 2, 2.6);
   const saracinesca = m.box(USCITA[0] - 1, 0, Z0 - 0.3, USCITA[0] + 1, 2.6, Z0 - 0.05, mat.metallo);
-  collega(g, 'uscita-smistamento', USCITA, [0, 0, 7.85, 0], { w: 2, h: 2.6 });
+  // verso il corridoio allagato (primo transito), dalla sua apertura ovest
+  collega(g, 'uscita-smistamento', USCITA, [40.3, 0, 19.2, Math.PI / 2], { w: 2.4, h: 2.8 });
   g.passaggi.attiva('uscita-smistamento', false);
   g.arredi.porta(USCITA[0], 0, Z0 + 0.06, 0, null, { w: 2, h: 2.6 });
 

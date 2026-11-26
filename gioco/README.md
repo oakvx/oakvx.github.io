@@ -11,20 +11,20 @@ Progetto e piano: `docs/superpowers/specs/2026-11-26-gioco-v3-design.md`, `docs/
 | Stanza | File | Cosa si gioca |
 | --- | --- | --- |
 | Ingresso | `stanze/ingresso.js` | si prendono le due finestre al bancone; la prima prova passa oltre un vetro |
-| Percorso | `stanze/percorso.js` | quattro tratti impilati e cuciti da passaggi: 12 m di ingombro, quasi 50 da camminare; le tappe del percorso |
+| Percorso | `stanze/percorso.js` | due tratti impilati e cuciti da un passaggio: 12 m di ingombro, il doppio da camminare; la prima e l'ultima tappa |
 | Smistamento (Backend & App Logic) | `stanze/smistamento.js` | cinque porte con hash di commit, cinque lampade; l'uscita si apre a lampade accese |
 | YAG | `stanze/yag.js` | cubo-chiave, varco di autenticazione con limiti operativi, piedistalli che scelgono il backend |
 | Piko | `stanze/piko.js` | un agente-fantasma propone un piano: approva o rifiuta; uno finisce nel pozzo |
 | Brat Animator | `stanze/brat.js` | desktop gigante, parole del testo come ponte a tempo di musica, leva-timeline |
 | synk | `stanze/synk.js` | pavimento-calendario: tre prenotazioni senza sovrapposizioni, saga di compensazione |
 | Beautify | `stanze/beautify.js` | tre saloni separati dietro le vetrine; l'appuntamento va nel salone libero |
-| Transito A | `stanze/atrio.js`, `stanze/piscina.js` | l'acqua trascina all'indietro: si passa con le finestre |
+| Transito A · Erasmus a Siviglia | `stanze/piscina.js` | l'acqua trascina all'indietro: si passa con le finestre; in fondo la tappa 2025 |
 | middleManPS4 | `stanze/middleman.js` | al buio; la lampada delle prove (F) rivela etichette e pannelli |
-| Transito B | `stanze/cisterna.js`, `stanze/spirale.js` | niente scaletta: alla pedana alta si arriva con le finestre |
+| Transito B · Format | `stanze/cisterna.js` | niente scaletta: alla pedana alta si arriva con le finestre; la tappa 2026 |
 | Galleria (Design & Web) | `stanze/galleria.js` | quattro vetrine; lo schermo del portfolio ti inquadra dall'alto; leva del tema |
 | Scrivania (Cosa so fare) | `stanze/scrivania.js` | terminale `portfolio.sh` in cui si scrive davvero; `apri` apre la porta |
 | Commit | `stanze/commit.js` | parete di quadrati che compone il numero dei commit, dal vivo |
-| Transito C | `stanze/supermercato.js`, `stanze/nave.js`, `stanze/ballatoio.js` | corsie che si ripetono: si esce con una finestra sul pannello alto |
+| Transito C · freelance | `stanze/supermercato.js` | corsie che si ripetono: si esce con una finestra sul pannello alto; la tappa 2023 → 2026 |
 | Stanza di oakvx (Fuori orario) | `stanze/oakvx.js` | la mansarda sotto la pioggia, in "modalità 2008"; la TV suona i suoi brani |
 | Contatti | `stanze/contatti.js` | l'ultima stanza; la schermata finale con tempo e segreti |
 
@@ -48,7 +48,7 @@ due finestre, F per la lampada delle prove (in middleManPS4), Esc per la pausa. 
 | `js/engine/proiezione.js` | matematica condivisa di finestre e passaggi |
 | `js/engine/liminale.js` | cartello "stanza N di 2.500" e Mii che gira l'angolo |
 | `js/engine/mondo.js`, `materiali.js`, `arredi.js`, `fisica.js`, `acqua.js` | stanze, tavolozza low poly, arredi (anche il Mii), fisica, acqua |
-| `js/audio.js`, `js/musica.js` | effetti (passi per materiale, urti, leve, porte) e musica liminale generativa che si distorce ai cambi di stanza |
+| `js/audio.js`, `suoni/`, `js/musica.js` | effetti da campioni CC0 di Kenney (passi per materiale, urti, leve, porte; ripiego generato se un file manca) e musica liminale generativa che si distorce ai cambi di stanza |
 | `js/narratore.js`, `dati/narratore.json` | il curatore: righe con ID e mappa `eventi` (evento → righe) |
 | `js/logica/*.js` | logica pura, testata con `node --test`: giro e aiuti, passi, armonia, YAG, Piko, Brat, calendario, saloni, prove, terminale, commit, stanza di oakvx |
 | `contenuti.json` | testi IT/EN di interfaccia e stanze (`stanze.<nome>`), cartigli, azioni |

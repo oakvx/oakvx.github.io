@@ -8,8 +8,8 @@ export async function prepara(page) {
 export default async function (page, aiuto) {
   await aiuto.esegui(() => { window.__gioco.avviaAudio(); window.__gioco.gioca(); });
   const t1 = await aiuto.esegui(() => window.__gioco.tempoMusica());
-  await aiuto.esegui(() => window.__gioco.vai(0, 0.87, 12));
-  await aiuto.attendi(() => window.__gioco.leggi().stanza === 'atrio');
+  await aiuto.esegui(() => window.__gioco.vai(42, 0.87, 19.2));
+  await aiuto.attendi(() => window.__gioco.leggi().stanza === 'piscina');
   await aiuto.aspetta(400);
   const t2 = await aiuto.esegui(() => window.__gioco.tempoMusica());
   assert.ok(t2 > t1 + 0.3, `${t1} → ${t2}`);

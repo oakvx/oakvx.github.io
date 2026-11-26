@@ -11,7 +11,10 @@ import { reduceMotion } from './menu.js';
 
 const $ = (id) => document.getElementById(id);
 const FINALI = ['dipendente', 'magazzino', 'fuori', 'corridoio', 'attesa'];
-const STANZE = ['sala', 'bivio', 'laboratorio', 'archivio', 'magazzino', 'fuorimappa', 'corridoio'];
+const STANZE = ['sala', 'bivio', 'laboratorio', 'archivio', 'magazzino', 'fuorimappa', 'corridoio',
+  'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const ATMOSFERA = { nebbia: 0xe9eef1, vicino: 1.5, lontano: 22, cielo: 0xf6f9fb, terra: 0xc4cdd1, intensita: 2.9 };
+const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
 const VEL = 3.2;
 const SALTO = 4.6;
@@ -36,7 +39,16 @@ export async function avvia(ctx) {
   const imp = leggiImpostazioni();
   const camera = new THREE.PerspectiveCamera(imp.fov, innerWidth / innerHeight, 0.02, 80);
   camera.rotation.order = 'YXZ';
-  scene.add(new THREE.HemisphereLight(0xf6f9fb, 0xc4cdd1, 2.9));
+  const emi = new THREE.HemisphereLight(0xf6f9fb, 0xc4cdd1, 2.9);
+  scene.add(emi);
+  // gruppo fisso di luci puntiformi, assegnate alle definizioni più vicine
+  const gruppoLuci = Array.from({ length: N_LUCI }, () => {
+    const l = new THREE.PointLight(0xffffff, 0, 1, 2);
+    scene.add(l);
+    return l;
+  });
+  let assegnate = [];
+  let prossimaAssegnazione = 0;
 
   const mat = creaMateriali(renderer);
   const mondo = new Mondo(scene, mat);
@@ -57,6 +69,8 @@ export async function avvia(ctx) {
 
   // ---------------------------------------------------------------- giocatore e corpi
   const giocatore = new Corpo(SPAWN, new THREE.Vector3(0.28, 0.85, 0.28), { tipo: 'giocatore' });
+  giocatore.passo = 0.36;
+  let inAcqua = false;
   const cubi = [];
   let yaw = 0;
   let pitch = 0;
@@ -87,6 +101,15 @@ export async function avvia(ctx) {
     yaw: () => yaw,
     narratore: () => narratore,
     finale: (id) => finale(id),
+    suoni,
+    teletrasporta: (x, piedi, z, nuovoYaw = null, prima = null) => g.velo(() => {
+      if (prima) prima();
+      giocatore.pos.set(x, piedi + giocatore.half.y + 0.01, z);
+      giocatore.vel.set(0, 0, 0);
+      giocatore.zPrima = [null, null];
+      if (nuovoYaw !== null) yaw = nuovoYaw;
+      if (tenuto) { tenuto.tenuto = false; tenuto = null; }
+    }),
     velo: (fn) => {
       $('velo').classList.add('on');
       fadeCb = fn;
@@ -372,11 +395,19 @@ export async function avvia(ctx) {
     const r = (tasti.has('KeyD') || tasti.has('ArrowRight') ? 1 : 0) - (tasti.has('KeyA') || tasti.has('ArrowLeft') ? 1 : 0);
     let vx = 0;
     let vz = 0;
+    const stQui = mondo.stanzaDi(giocatore.pos);
+    const acqua = stQui && stQui.acqua;
+    const piedi = giocatore.pos.y - giocatore.half.y;
+    const bagnato = !!acqua && piedi < stQui.y0 + acqua.livello;
+    if (bagnato && !inAcqua && giocatore.vel.y < -1) suoni.tonfo();
+    inAcqua = bagnato;
+    const vel = VEL * (bagnato ? 0.7 : 1);
     if (f || r) {
       const len = Math.hypot(f, r);
-      vx = ((-Math.sin(yaw) * f + Math.cos(yaw) * r) / len) * VEL;
-      vz = ((-Math.cos(yaw) * f - Math.sin(yaw) * r) / len) * VEL;
+      vx = ((-Math.sin(yaw) * f + Math.cos(yaw) * r) / len) * vel;
+      vz = ((-Math.cos(yaw) * f - Math.sin(yaw) * r) / len) * vel;
     }
+    if (bagnato && acqua.corrente) { vx += acqua.corrente[0]; vz += acqua.corrente[1]; }
     const acc = giocatore.aTerra ? 14 : 2.5;
     const k = 1 - Math.exp(-acc * dt);
     giocatore.vel.x += (vx - giocatore.vel.x) * k;
@@ -386,6 +417,8 @@ export async function avvia(ctx) {
     const varchi = portali.varchi(giocatore);
     const prima = giocatore.pos.clone();
     muovi(giocatore, giocatore.vel.clone().multiplyScalar(dt), mondo, cubi, varchi);
+    const input = { avanti: tasti.has('KeyW') || tasti.has('ArrowUp') };
+    for (const v of mondo.vincoli) v(giocatore, dt, input);
     const t = portali.attraversa(giocatore);
     if (t) {
       yaw += t.dyaw;
@@ -418,9 +451,45 @@ export async function avvia(ctx) {
     const nome = s ? s.nome : null;
     if (nome && nome !== stanzaAttuale) {
       stanzaAttuale = nome;
+      if (s.atmosfera !== 'eredita') atmo = { ...ATMOSFERA, ...(s.atmosfera || {}) };
+      if (s.suono !== 'eredita') suoni.ambiente(s.suono || {});
       emetti('stanza:' + nome);
     }
     mondo.controllaZone(giocatore.pos, (z) => emetti(z));
+  }
+
+  // atmosfera: nebbia, sfondo e luce ambiente sfumano verso quelli della stanza
+  let atmo = { ...ATMOSFERA };
+  const cNebbia = new THREE.Color(), cCielo = new THREE.Color(), cTerra = new THREE.Color();
+  function aggiornaAtmosfera(dt) {
+    const k = 1 - Math.exp(-2.2 * dt);
+    scene.fog.color.lerp(cNebbia.set(atmo.nebbia), k);
+    scene.background.copy(scene.fog.color);
+    scene.fog.near += (atmo.vicino - scene.fog.near) * k;
+    scene.fog.far += (atmo.lontano - scene.fog.far) * k;
+    emi.color.lerp(cCielo.set(atmo.cielo), k);
+    emi.groundColor.lerp(cTerra.set(atmo.terra), k);
+    emi.intensity += (atmo.intensita - emi.intensity) * k;
+  }
+
+  function aggiornaLuci(t) {
+    if (t > prossimaAssegnazione) {
+      prossimaAssegnazione = t + 0.3;
+      const p = camera.position;
+      assegnate = mondo.luci
+        .map((l) => [l, l.position.distanceToSquared(p) - l.distance * l.distance * 0.5])
+        .sort((a, b) => a[1] - b[1])
+        .slice(0, N_LUCI)
+        .map((x) => x[0]);
+    }
+    gruppoLuci.forEach((pl, i) => {
+      const d = assegnate[i];
+      if (!d) { pl.intensity = 0; return; }
+      pl.position.copy(d.position);
+      pl.intensity = d.intensity;
+      pl.distance = d.distance;
+      pl.color.copy(d.color);
+    });
   }
 
   const soglie = [15, 30, 45, 60];
@@ -450,8 +519,13 @@ export async function avvia(ctx) {
     const moto = Math.hypot(giocatore.vel.x, giocatore.vel.z);
     const bob = imp.calmo || !giocatore.aTerra ? 0 : Math.sin(passi * 6.2) * 0.022 * Math.min(1, moto / VEL);
     camera.position.set(giocatore.pos.x, giocatore.pos.y + 0.75 + bob, giocatore.pos.z);
-    camera.rotation.set(pitch, yaw, 0);
+    const stCam = mondo.stanzaDi(giocatore.pos);
+    const rollio = stCam && stCam.ondeggia && !imp.calmo ? Math.sin(t * 0.55) * 0.012 + Math.sin(t * 0.21) * 0.006 : 0;
+    camera.rotation.set(pitch + rollio * 0.3, yaw, rollio);
     camera.updateMatrixWorld();
+    aggiornaAtmosfera(dt);
+    aggiornaLuci(t);
+    suoni.aggiorna(dt);
     for (const fn of mondo.aggiornamenti) fn(dt, t);
     if (stato === 'gioco') aggiornaMira();
     portali.aggiorna(t);

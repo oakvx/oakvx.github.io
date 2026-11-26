@@ -7,9 +7,11 @@ export function costruisci(m, g) {
   const mat = m.mat;
   m.stanza({
     nome: 'sala', x0: -4, x1: 4, z0: -4, z1: 4, h: 3.2,
-    pareti: { n: { aperture: [{ a: -1, b: 1, y0: 0, y1: 2.6 }] } },
+    pareti: { n: { aperture: [{ a: -1, b: 1, y0: 0, y1: 2.6 }] }, s: { aperture: [{ a: -1, b: 1, y0: 0, y1: 2.6 }] } },
     luci: [[0, -1.6], [0, 1.6]], intensita: 3.2, raggio: 7,
   });
+  // verso la nuova ala ("Altrove")
+  m.stanza({ nome: 'passaggio', x0: -1, x1: 1, z0: 4.3, z1: 7.7, h: 2.6, pareti: { n: false, s: false }, luci: [[0, 6, 0.4, 0.9]], luciPunto: false, atmosfera: 'eredita', suono: 'eredita' });
   m.stanza({
     nome: 'corridoio1', x0: -1, x1: 1, z0: -9.7, z1: -4.3, h: 2.6,
     pareti: { n: false, s: false }, luci: [[0, -7, 0.5, 1.1]], luciPunto: false,
@@ -131,9 +133,10 @@ export function costruisci(m, g) {
   A.griglia(-3.98, 2.75, 2.2, Math.PI / 2);
   A.griglia(3.98, 2.75, 2.2, -Math.PI / 2);
   // una panca lungo la parete di fondo, per l'attesa
-  m.tondo(-1.6, 0.4, 3.45, 1.6, 0.47, 3.85, mat.legno, { r: 0.03 });
-  for (const x of [-1.4, 1.4]) m.tondo(x - 0.04, 0, 3.5, x + 0.04, 0.4, 3.8, mat.scuro, { r: 0.02, solido: false });
-  m.ombra(0, 0, 3.65, 3.6, 0.9);
+  m.tondo(-3.7, 0.4, 3.45, -1.5, 0.47, 3.85, mat.legno, { r: 0.03 });
+  for (const x of [-3.5, -1.7]) m.tondo(x - 0.04, 0, 3.5, x + 0.04, 0.4, 3.8, mat.scuro, { r: 0.02, solido: false });
+  m.ombra(-2.6, 0, 3.65, 2.8, 0.9);
+  A.cartello(0, 2.93, 3.97, Math.PI, '06', () => g.T().sale.altrove);
 
   // conteggio dei ritorni dal bivio
   let daBivio = false;

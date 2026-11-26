@@ -41,8 +41,7 @@ export function costruisci(m, g) {
   etichetta.ridisegna();
   g.suLingua(() => etichetta.ridisegna());
   const speciale = g.cubo(12.6, 0.3, -35.2, { speciale: true, mappa: etichetta });
-  const alone = new THREE.PointLight(0xffe7a8, 2.5, 3.5, 2);
-  m.scene.add(alone);
+  const alone = m.luce(0, 0, 0, 2.5, 3.5, 0xffe7a8);
   m.ogniFrame((dt, t) => {
     alone.position.copy(speciale.pos);
     alone.intensity = 2 + Math.sin(t * 2.4) * 0.8;

@@ -15,6 +15,7 @@ export class Corpo {
     this.tipo = tipo;
     this.tenuto = false;
     this.zPrima = [null, null]; // lato rispetto alle due finestre al frame precedente
+    this.passo = 0;              // altezza dei gradini che sale da solo (giocatore)
   }
 }
 
@@ -28,7 +29,16 @@ const tmpMin = new THREE.Vector3();
 const tmpMax = new THREE.Vector3();
 
 // muove un corpo di delta, asse per asse, contro i solidi e gli altri corpi
+function libero(corpo, mondo, varchi) {
+  for (const s of mondo.solidi) {
+    if (!s.attivo || (s.pannello && varchi.has(s.pannello))) continue;
+    if (sovrapposti(corpo.pos, corpo.half, s.min, s.max)) return false;
+  }
+  return true;
+}
+
 export function muovi(corpo, delta, mondo, altri, varchi) {
+  const eraATerra = corpo.aTerra;
   corpo.aTerra = false;
   for (const asse of ['y', 'x', 'z']) {
     const d = delta[asse];
@@ -38,6 +48,13 @@ export function muovi(corpo, delta, mondo, altri, varchi) {
       if (!s.attivo) continue;
       if (s.pannello && varchi.has(s.pannello)) continue;
       if (!sovrapposti(corpo.pos, corpo.half, s.min, s.max)) continue;
+      // gradino basso: il giocatore ci sale sopra invece di fermarsi
+      const salita = s.max.y - (corpo.pos.y - corpo.half.y);
+      if (asse !== 'y' && corpo.passo && eraATerra && salita > 0 && salita <= corpo.passo) {
+        corpo.pos.y += salita + EPS;
+        if (libero(corpo, mondo, varchi)) { corpo.aTerra = true; continue; }
+        corpo.pos.y -= salita + EPS;
+      }
       risolvi(corpo, asse, d, s.min, s.max);
     }
     for (const o of altri) {

@@ -26,6 +26,20 @@ Il piano proponeva TypeScript, Vite e Rapier. Restiamo su JavaScript a moduli ES
 
 Le stanze emettono eventi (`stanza:*`, `porta:*`, `gesto`, `portale:*`, `indietro`, `fermo:*`…) e solo il narratore decide cosa dire.
 
+## La nuova ala: "Altrove" (porta 06 della sala d'attesa)
+
+Un giro ad anello di spazi liminali, ognuno con atmosfera (nebbia, luce, colore) e suono propri, che sfumano passando da una stanza all'altra:
+
+1. **Atrio** (`atrio.js`): centro commerciale al buio, due scale mobili funzionanti, balconata a vetri; a est un corridoio verdastro con l'insegna d'uscita.
+2. **Corridoio allagato** (`piscina.js`): piastrelle a nuvole, quadri, luci lilla; l'acqua scorre verso la porta rossa e trascina.
+3. **Cisterna** (`cisterna.js`): archi su colonne, acqua scura che scorre lenta, gocce; la scaletta porta in cima alla chiocciola.
+4. **Scala a chiocciola** (`spirale.js`): mosaico, gradini a elica, pozzo centrale (chi cade torna nella cisterna); in fondo una porta.
+5. **Supermercato** (`supermercato.js`): neon, scaffali, banchi frigo, cartelli delle corsie.
+6. **Nave** (`nave.js`): legno, moquette, ottone; il pavimento ondeggia e il legno scricchiola; la scala sale al ballatoio.
+7. **Ballatoio** (`ballatoio.js`): trentesimo piano sotto la pioggia, città nella nebbia; l'ultima porta riporta alla sala.
+
+Il motore aggiunge: un gruppo fisso di 10 luci assegnate per vicinanza (prestazioni costanti con tante stanze), atmosfera e livelli sonori per stanza (`atmosfera`, `suono`), rampe e nastri (`mondo.rampa`), scalette (`mondo.scaletta`), vincoli personalizzati (`mondo.vincoli`), gradini bassi saliti in automatico, acqua animata che scorre (`engine/acqua.js`) con rallentamento e corrente per chi ci cammina dentro.
+
 ## Finali
 
 | Come | Finale | Rivela |

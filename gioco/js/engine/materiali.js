@@ -38,13 +38,14 @@ function rumore(ctx, w, h, quanti, alpha) {
 }
 
 function triplanare(mat, scala, chiave) {
+  const sv = typeof scala === 'number' ? new THREE.Vector2(scala, scala) : scala;
   mat.onBeforeCompile = (sh) => {
-    sh.uniforms.uScala = { value: scala };
+    sh.uniforms.uScala = { value: sv };
     sh.vertexShader = sh.vertexShader
       .replace('#include <common>', '#include <common>\nvarying vec3 vWP;\nvarying vec3 vWN;')
       .replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvWP = (modelMatrix * vec4(transformed, 1.0)).xyz;\nvWN = normalize(mat3(modelMatrix) * objectNormal);');
     sh.fragmentShader = sh.fragmentShader
-      .replace('#include <common>', '#include <common>\nvarying vec3 vWP;\nvarying vec3 vWN;\nuniform float uScala;')
+      .replace('#include <common>', '#include <common>\nvarying vec3 vWP;\nvarying vec3 vWN;\nuniform vec2 uScala;')
       .replace('#include <map_fragment>', [
         'vec3 an = abs(vWN);',
         'vec2 tuv = an.y > max(an.x, an.z) ? vWP.xz : (an.x > an.z ? vWP.zy : vWP.xy);',
@@ -107,6 +108,7 @@ export function creaMateriali(renderer) {
   const tri = (tex, scala, chiave) => triplanare(new THREE.MeshLambertMaterial({ map: tex }), scala, chiave);
 
   return {
+    tex: { pavimento, muro, soffitto },
     pavimento: tri(pavimento, 1, 'pav'),
     muro: tri(muro, 0.5, 'muro'),
     soffitto: tri(soffitto, 1, 'soff'),
@@ -123,4 +125,9 @@ export function creaMateriali(renderer) {
     neon: new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false }),
     neonTremolante: new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false }),
   };
+}
+
+// materiale con mappatura in coordinate mondo: sx, sy = ripetizioni per metro
+export function materialeTri(tex, sx, sy, chiave, opzioni = {}) {
+  return triplanare(new THREE.MeshLambertMaterial({ map: tex, ...opzioni }), new THREE.Vector2(sx, sy), chiave);
 }

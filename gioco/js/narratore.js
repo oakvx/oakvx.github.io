@@ -156,6 +156,15 @@ export class Narratore {
       case 'finale:magazzino': this.di('N-072', { subito: true }); break;
       case 'finale:corridoio': this.di('N-090', { subito: true }); break;
       case 'finale:attesa': this.di('N-084', { subito: true }); break;
+      case 'stanza:atrio': this.di('N-110', { subito: true }); break;
+      case 'stanza:piscina': this.di('N-111', { subito: true }); break;
+      case 'stanza:cisterna': this.di('N-112', { subito: true }); break;
+      case 'stanza:spirale': this.di('N-113', { subito: true }); break;
+      case 'caduta': this.di('N-114', { subito: true }); break;
+      case 'stanza:supermercato': this.di('N-115', { subito: true }); break;
+      case 'stanza:nave': this.di('N-116', { subito: true }); break;
+      case 'stanza:ballatoio': this.di('N-117', { subito: true }); break;
+      case 'ritorno': this.di('N-118', { subito: true }); break;
       default: break;
     }
   }

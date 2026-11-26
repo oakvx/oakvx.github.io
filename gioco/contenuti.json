@@ -164,7 +164,11 @@
       "attesa": "Attesa",
       "laboratorio": "Laboratorio",
       "magazzino": "Magazzino",
-      "archivio": "Archivio"
+      "archivio": "Archivio",
+      "altrove": "Altrove",
+      "atrio": "Atrio",
+      "uscita": "Uscita",
+      "gastronomia": "GASTRONOMIA"
     },
     "didascalie": {
       "monitor": [
@@ -349,7 +353,11 @@
       "attesa": "Waiting room",
       "laboratorio": "Lab",
       "magazzino": "Storeroom",
-      "archivio": "Archive"
+      "archivio": "Archive",
+      "altrove": "Elsewhere",
+      "atrio": "Atrium",
+      "uscita": "Exit",
+      "gastronomia": "DELI"
     },
     "didascalie": {
       "monitor": [

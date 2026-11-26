@@ -4,6 +4,10 @@ export class Suoni {
     this.ctx = ctx;
     this.ac = null;
     this.out = null;
+    this.livelli = { ronzio: 1, acqua: 0, pioggia: 0, gocce: 0, legno: 0 };
+    this.obiettivo = { ...this.livelli };
+    this.prossimaGoccia = 0;
+    this.prossimoLegno = 0;
     ctx.suAudio((on) => this.volume(on));
   }
 
@@ -19,7 +23,9 @@ export class Suoni {
     const lp = ac.createBiquadFilter();
     lp.type = 'lowpass';
     lp.frequency.value = 420;
-    lp.connect(this.out);
+    this.gRonzio = ac.createGain();
+    this.gRonzio.connect(this.out);
+    lp.connect(this.gRonzio);
     for (const [f, tipo, g] of [[50, 'sine', 0.03], [100, 'sawtooth', 0.005], [100.4, 'sawtooth', 0.005], [150, 'triangle', 0.003]]) {
       const o = ac.createOscillator();
       o.type = tipo;
@@ -46,6 +52,70 @@ export class Suoni {
       lfo.start();
     }
   }
+
+  // rumore in loop filtrato, con un gain controllabile
+  loop(tipo, freq, q, lfoFreq = 0, lfoProf = 0) {
+    const ac = this.ac;
+    const n = ac.sampleRate * 3;
+    const buf = ac.createBuffer(2, n, ac.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = buf.getChannelData(c);
+      let b = 0;
+      for (let i = 0; i < n; i++) { b = 0.97 * b + 0.03 * (Math.random() * 2 - 1); d[i] = tipo === 'marrone' ? b * 6 : Math.random() * 2 - 1; }
+    }
+    const src = ac.createBufferSource();
+    src.buffer = buf;
+    src.loop = true;
+    const f = ac.createBiquadFilter();
+    f.type = tipo === 'acuto' ? 'highpass' : 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q;
+    const g = ac.createGain();
+    g.gain.value = 0;
+    src.connect(f).connect(g).connect(this.out);
+    if (lfoFreq) {
+      const lfo = ac.createOscillator();
+      lfo.frequency.value = lfoFreq;
+      const lg = ac.createGain();
+      lg.gain.value = lfoProf;
+      lfo.connect(lg).connect(f.frequency);
+      lfo.start();
+    }
+    src.start();
+    return g;
+  }
+
+  // livelli d'ambiente della stanza corrente: { ronzio, acqua, pioggia, gocce, legno }
+  ambiente(liv) { this.obiettivo = { ronzio: 1, acqua: 0, pioggia: 0, gocce: 0, legno: 0, ...liv }; }
+
+  aggiorna(dt) {
+    if (!this.ac) return;
+    if (!this.gAcqua) {
+      this.gAcqua = this.loop('marrone', 700, 0.7, 0.35, 260);
+      this.gAcqua2 = this.loop('bianco', 2200, 1.4, 0.8, 600);
+      this.gPioggia = this.loop('acuto', 1500, 0.5);
+    }
+    const k = 1 - Math.exp(-1.5 * dt);
+    for (const c of Object.keys(this.livelli)) this.livelli[c] += (this.obiettivo[c] - this.livelli[c]) * k;
+    const L = this.livelli;
+    const t = this.ac.currentTime;
+    this.gRonzio.gain.setTargetAtTime(L.ronzio, t, 0.1);
+    this.gAcqua.gain.setTargetAtTime(L.acqua * 0.5, t, 0.1);
+    this.gAcqua2.gain.setTargetAtTime(L.acqua * 0.06, t, 0.1);
+    this.gPioggia.gain.setTargetAtTime(L.pioggia * 0.12, t, 0.1);
+    if (L.gocce > 0.05 && t > this.prossimaGoccia) {
+      this.prossimaGoccia = t + 0.4 + Math.random() * 2.2;
+      const f = 900 + Math.random() * 900;
+      this.nota(f, 0, 0.12, 'sine', 0.05 * L.gocce);
+      this.nota(f * 1.5, 0.02, 0.08, 'sine', 0.02 * L.gocce);
+    }
+    if (L.legno > 0.05 && t > this.prossimoLegno) {
+      this.prossimoLegno = t + 3 + Math.random() * 6;
+      this.rumore(0.6, 180 + Math.random() * 120, 4, 0.5 * L.legno);
+    }
+  }
+
+  tonfo() { this.rumore(0.5, 500, 0.8, 0.5); this.rumore(0.9, 1600, 0.6, 0.25); }
 
   volume(on) {
     if (this.out) this.out.gain.setTargetAtTime(on ? 1 : 0, this.ac.currentTime, 0.1);

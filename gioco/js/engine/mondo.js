@@ -43,6 +43,8 @@ export class Mondo {
     this.interattivi = [];
     this.stanze = [];
     this.aggiornamenti = [];
+    this.luci = [];       // definizioni: il gioco le assegna a un gruppo fisso di PointLight
+    this.vincoli = [];    // rampe, scale, scalette: funzioni (corpo, dt, input)
   }
 
   // blocco solido (o solo visivo) da min a max
@@ -103,11 +105,46 @@ export class Mondo {
     return n;
   }
 
-  luce(x, y, z, intensita = 3, distanza = 8) {
-    const l = new THREE.PointLight(0xf2f7ff, intensita, distanza, 2);
-    l.position.set(x, y, z);
-    this.scene.add(l);
+  luce(x, y, z, intensita = 3, distanza = 8, colore = 0xf2f7ff) {
+    const l = { position: new THREE.Vector3(x, y, z), intensity: intensita, distance: distanza, color: new THREE.Color(colore) };
+    this.luci.push(l);
     return l;
+  }
+
+  // rampa (scale, scale mobili): pavimento inclinato lungo un asse, con nastro opzionale
+  rampa({ x0, x1, z0, z1, asse = 'z', da, a, nastro = 0 }) {
+    this.vincoli.push((c, dt) => {
+      const p = c.pos;
+      if (p.x < x0 || p.x > x1 || p.z < z0 || p.z > z1) return;
+      const t = asse === 'z' ? (p.z - z0) / (z1 - z0) : (p.x - x0) / (x1 - x0);
+      const h = da + (a - da) * t;
+      const piedi = p.y - c.half.y;
+      if (piedi > h + 0.45 || piedi < h - 0.7 || c.vel.y > 1) return;
+      p.y = h + c.half.y + 0.001;
+      c.vel.y = 0;
+      c.aTerra = true;
+      if (nastro) { if (asse === 'z') p.z += nastro * dt; else p.x += nastro * dt; }
+    });
+  }
+
+  // scaletta: tenendo avanti si sale fino a cima
+  scaletta({ x0, x1, z0, z1, y0, cima, suCima }) {
+    this.vincoli.push((c, dt, input) => {
+      const p = c.pos;
+      if (p.x < x0 || p.x > x1 || p.z < z0 || p.z > z1) return;
+      const piedi = p.y - c.half.y;
+      if (piedi < y0 - 0.2 || piedi > cima + 0.5) return;
+      if (input.avanti) {
+        // agganciati ai pioli: niente spostamenti laterali mentre si sale
+        c.pos.x = Math.min(x1 - 0.1, Math.max(x0 + 0.1, c.pos.x));
+        c.pos.z = Math.min(z1 - 0.1, Math.max(z0 + 0.1, c.pos.z));
+        c.vel.x = c.vel.z = 0;
+        c.vel.y = 2.2;
+        c.aTerra = false;
+      }
+      else if (piedi > y0 + 0.05) { c.vel.y = Math.max(c.vel.y, -1); }
+      if (piedi >= cima && suCima) suCima();
+    });
   }
 
   // zona che emette un evento quando il giocatore entra
@@ -145,7 +182,7 @@ export class Mondo {
     const { x0, x1, z0, z1, y0 = 0, h } = def;
     const s = { gravita: 1, ...def, y0 };
     this.stanze.push(s);
-    const m = this.mat;
+    const m = (this.ms = { ...this.mat, ...(def.materiali || {}) });
     const pareti = def.pareti || {};
     const ex = (k) => (pareti[k] === false ? 0 : T);
     const bx0 = x0 - ex('w'), bx1 = x1 + ex('e'), bz0 = z0 - ex('n'), bz1 = z1 + ex('s');
@@ -164,8 +201,8 @@ export class Mondo {
     }
     if (def.luci) {
       for (const [lx, lz, w = 0.6, d = 1.2] of def.luci) {
-        this.neon(lx, y0 + h, lz, w, d);
-        if (def.luciPunto !== false) this.luce(lx, y0 + h - 0.3, lz, def.intensita ?? 3, def.raggio ?? 7);
+        this.neon(lx, y0 + h, lz, w, d, def.matNeon || this.mat.neon);
+        if (def.luciPunto !== false) this.luce(lx, y0 + h - 0.3, lz, def.intensita ?? 3, def.raggio ?? 7, def.coloreLuce ?? 0xf2f7ff);
       }
     }
     return s;
@@ -203,7 +240,7 @@ export class Mondo {
         const vc = (V[j] + V[j + 1]) / 2;
         if (aperture.some((o) => dentro(o, uc, vc))) continue;
         const pan = pannelli.find((o) => dentro(o, uc, vc));
-        const mat = pan ? (pan.proibito ? this.mat.proibito : this.mat.pannello) : this.mat.muro;
+        const mat = pan ? (pan.proibito ? this.ms.proibito : this.ms.pannello) : this.ms.muro;
         const ya = y0 + V[j];
         const yb = y0 + V[j + 1];
         if (lato.asse === 'x') this.box(U[i], ya, lato.piano[0], U[i + 1], yb, lato.piano[1], mat, { pannello: pan ? pan.id : null });
@@ -215,7 +252,7 @@ export class Mondo {
 
   // battiscopa e cornici delle porte (solo visivi)
   dettagli(lato, y0, h, aperture, pannelli) {
-    const mat = this.mat;
+    const mat = this.ms;
     const n = lato.normale;
     const fuori = n.x + n.z > 0 ? 1 : -1;               // verso l'interno della stanza
     const faccia = fuori > 0 ? lato.piano[1] : lato.piano[0];

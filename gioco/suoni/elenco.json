@@ -1,0 +1,105 @@
+{
+ "passo-cemento": [
+  "passo-cemento-1.ogg",
+  "passo-cemento-2.ogg",
+  "passo-cemento-3.ogg",
+  "passo-cemento-4.ogg",
+  "passo-cemento-5.ogg"
+ ],
+ "passo-legno": [
+  "passo-legno-1.ogg",
+  "passo-legno-2.ogg",
+  "passo-legno-3.ogg",
+  "passo-legno-4.ogg",
+  "passo-legno-5.ogg"
+ ],
+ "passo-moquette": [
+  "passo-moquette-1.ogg",
+  "passo-moquette-2.ogg",
+  "passo-moquette-3.ogg",
+  "passo-moquette-4.ogg",
+  "passo-moquette-5.ogg"
+ ],
+ "passo-piastrelle": [
+  "passo-piastrelle-1.ogg",
+  "passo-piastrelle-2.ogg",
+  "passo-piastrelle-3.ogg",
+  "passo-piastrelle-4.ogg",
+  "passo-piastrelle-5.ogg"
+ ],
+ "passo-metallo": [
+  "passo-metallo-1.ogg",
+  "passo-metallo-2.ogg",
+  "passo-metallo-3.ogg"
+ ],
+ "urto-leggero": [
+  "urto-leggero-1.ogg",
+  "urto-leggero-2.ogg",
+  "urto-leggero-3.ogg"
+ ],
+ "urto-pesante": [
+  "urto-pesante-1.ogg",
+  "urto-pesante-2.ogg",
+  "urto-pesante-3.ogg"
+ ],
+ "tonfo": [
+  "tonfo-1.ogg",
+  "tonfo-2.ogg",
+  "tonfo-3.ogg"
+ ],
+ "leva": [
+  "leva-1.ogg",
+  "leva-2.ogg"
+ ],
+ "porta-apre": [
+  "porta-apre-1.ogg",
+  "porta-apre-2.ogg"
+ ],
+ "porta-chiude": [
+  "porta-chiude-1.ogg",
+  "porta-chiude-2.ogg"
+ ],
+ "saracinesca": [
+  "saracinesca-1.ogg"
+ ],
+ "lampada": [
+  "lampada-1.ogg"
+ ],
+ "notifica": [
+  "notifica-1.ogg",
+  "notifica-2.ogg"
+ ],
+ "errore": [
+  "errore-1.ogg",
+  "errore-2.ogg"
+ ],
+ "finestra": [
+  "finestra-1.ogg",
+  "finestra-2.ogg"
+ ],
+ "passaggio": [
+  "passaggio-1.ogg"
+ ],
+ "presa": [
+  "presa-1.ogg",
+  "presa-2.ogg"
+ ],
+ "tasto": [
+  "tasto-1.ogg",
+  "tasto-2.ogg",
+  "tasto-3.ogg"
+ ],
+ "fruscio": [
+  "fruscio-1.ogg",
+  "fruscio-2.ogg",
+  "fruscio-3.ogg"
+ ],
+ "scricchiolio": [
+  "scricchiolio-1.ogg",
+  "scricchiolio-2.ogg",
+  "scricchiolio-3.ogg"
+ ],
+ "finale": [
+  "finale-1.ogg"
+ ]
+}

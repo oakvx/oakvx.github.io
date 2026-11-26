@@ -77,7 +77,7 @@ export function costruisci(m, g) {
         return;
       }
       if (e.code === 'Backspace') { riga = riga.slice(0, -1); return; }
-      if (e.key && e.key.length === 1 && riga.length < 48) { riga += e.key; g.suoni.nota?.(1200, 0, 0.02, 'square', 0.01); }
+      if (e.key && e.key.length === 1 && riga.length < 48) { riga += e.key; g.suoni.tasto(); }
     });
   });
   let passo = -1;

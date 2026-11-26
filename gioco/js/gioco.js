@@ -674,6 +674,7 @@ export async function avvia(ctx) {
       tempoMusica: () => suoni.musica.tempo(),
       avanzaAiuti: (sec) => aggiornaAiuti(sec),
       avviaAudio: () => suoni.avvia(),
+      suoni: () => ({ caricati: suoni.caricati, prova: (n) => suoni.campione(n, { gain: 0 }) }),
       livelloAudio: () => {
         if (!suoni.ac) return 0;
         if (!suoni.analizzatore) { suoni.analizzatore = suoni.ac.createAnalyser(); suoni.musica.master.connect(suoni.analizzatore); }

@@ -169,7 +169,7 @@ export function creaMateriali(renderer, asset = null) {
   const m = {
     tex: { pavimento: grezza('#8d8e89', 2200), muro: grezza('#cfcfcf', 900), soffitto: grezza('#a7a79f', 400) },
     intonacoA,
-    cemento: pbrMondo(asset, 'cemento', { scala: 0.35, tinta: 0xa9aaa6 }),
+    cemento: pbrMondo(asset, 'cemento', { scala: 0.35, tinta: 0xd2d6da }),
     intonaco: intonacoA(0),
     metallo: pbrMondo(asset, 'metallo', { scala: 0.6 }),
     lamiera: pbrMondo(asset, 'lamiera', { scala: 0.4 }),

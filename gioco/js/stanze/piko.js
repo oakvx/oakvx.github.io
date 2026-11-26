@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import { stanzaProgetto } from '../engine/varchi.js';
 import { creaPianificatore } from '../logica/piko.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = -100, X1 = -80, Z0 = -60, Z1 = -40, H = 4;
 const POZZO = { x0: -96, x1: -84, z0: -52, z1: -48 };
@@ -101,6 +102,10 @@ export function costruisci(m, g) {
   g.arredi.didascalia(-95, 1.5, Z0 + 0.02, 0, () => T().testi.limiti, { w: 1.3, h: 0.75 });
   g.arredi.cartello(-90, 3.4, Z1 - 0.03, Math.PI, '04', () => T().cartello);
 
+  // oggetti scansionati
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('modern_arm_chair_01', -83, 0, -45, -2.2, { altezza: 0.85 });
+  oggetti.metti('potted_plant_01', -99, 0, -41.2, 0, { altezza: 1.2 });
   const aiuti = g.aiuti('piko');
   let cammino = null; // { punti, k, t, esito }
   let ultimo = null;
@@ -180,7 +185,7 @@ export function costruisci(m, g) {
     debug: {
       pozzo: [-90, -50],
       risolvi: () => { fatto = true; aiuti.risolto(); g.lampada('piko'); },
-      stato: () => ({ piano: pianificatore.attuale(), ultimo, fatto, soluzione, cammino: cammino && { k: cammino.k, z: fantasma.position.z, y: fantasma.position.y } }),
+      stato: () => ({ modelli: oggetti.quanti(), piano: pianificatore.attuale(), ultimo, fatto, soluzione, cammino: cammino && { k: cammino.k, z: fantasma.position.z, y: fantasma.position.y } }),
     },
   };
 }

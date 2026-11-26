@@ -2,7 +2,7 @@
  "texture": {
   "cemento": {
    "fonte": "Poly Haven",
-   "idFonte": "concrete_floor",
+   "idFonte": "brushed_concrete",
    "licenza": "CC0",
    "file": {
     "diff": "texture/cemento/diff.jpg",
@@ -114,7 +114,7 @@
  "hdr": {
   "interno-neutro": {
    "fonte": "Poly Haven",
-   "idFonte": "abandoned_tiled_room",
+   "idFonte": "hospital_room_2",
    "licenza": "CC0",
    "file": "hdr/interno-neutro.hdr"
   },

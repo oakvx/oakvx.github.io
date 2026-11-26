@@ -13,7 +13,7 @@ const TMP = path.join(ASSET, '.tmp');
 
 // id interno → id Poly Haven
 const TEXTURE = {
-  cemento: 'concrete_floor',
+  cemento: 'brushed_concrete',
   intonaco: 'painted_plaster_wall',
   piastrelle: 'floor_tiles_06',
   'piastrelle-piscina': 'blue_floor_tiles_01',
@@ -25,7 +25,7 @@ const TEXTURE = {
   mattoni: 'brick_wall_001',
   tufo: 'rustic_stone_wall',
 };
-const HDR = { 'interno-neutro': 'abandoned_tiled_room', 'interno-caldo': 'artist_workshop', notte: 'moonless_golf' };
+const HDR = { 'interno-neutro': 'hospital_room_2', 'interno-caldo': 'artist_workshop', notte: 'moonless_golf' };
 const MODELLI = [
   'metal_office_desk', 'power_box_01', 'industrial_wall_lamp', 'utility_box_01', 'utility_box_02',
   'metal_toolbox', 'drawer_cabinet', 'modern_arm_chair_01', 'bar_chair_round_01', 'potted_plant_01', 'potted_plant_02', 'potted_plant_04',

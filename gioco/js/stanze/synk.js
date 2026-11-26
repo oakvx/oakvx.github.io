@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { canvasTex } from '../engine/materiali.js';
 import { stanzaProgetto } from '../engine/varchi.js';
 import { creaCalendario } from '../logica/calendario.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = -140, X1 = -115, Z0 = -60, Z1 = -40, H = 4.5;
 const GX0 = -135, ORA = 1.6, INIZIO = 9, FINE = 18;
@@ -95,6 +96,10 @@ export function costruisci(m, g) {
   g.arredi.didascalia(X1 - 0.03, 1.6, -45, -Math.PI / 2, () => T().testi.tecnica, { w: 1.7, h: 1.05 });
   g.arredi.cartello(-127.5, 3.4, Z1 - 0.03, Math.PI, '06', () => T().cartello);
 
+  // oggetti scansionati
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('potted_plant_02', -139.2, 0, -41, 0, { altezza: 1.1 });
+  oggetti.metti('side_table_01', -116, 0, -41.2, 0, { altezza: 0.55 });
   const aiuti = g.aiuti('synk');
   const esiti = {};
   let tempo = 0, sincronizza = -1, fatto = false, soluzione = false;
@@ -163,7 +168,7 @@ export function costruisci(m, g) {
         c.corpo.vel.set(0, 0, 0);
       },
       risolvi: () => { fatto = true; aiuti.risolto(); g.lampada('synk'); },
-      stato: () => ({ esiti: { ...esiti }, prenotati: Object.keys(cubi).filter((id) => cubi[id].da !== null), inRientro: Object.keys(cubi).filter((id) => cubi[id].rifiuto), fatto, soluzione }),
+      stato: () => ({ modelli: oggetti.quanti(), esiti: { ...esiti }, prenotati: Object.keys(cubi).filter((id) => cubi[id].da !== null), inRientro: Object.keys(cubi).filter((id) => cubi[id].rifiuto), fatto, soluzione }),
     },
   };
 }

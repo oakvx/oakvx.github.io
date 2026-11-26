@@ -57,7 +57,8 @@
       "piko-approva": "approva il piano",
       "piko-rifiuta": "rifiuta il piano",
       "brat-pausa": "ferma o riparti il tempo",
-      "brat-indietro": "riavvolgi di un secondo"
+      "brat-indietro": "riavvolgi di un secondo",
+      "galleria-tema": "cambia tema"
     },
     "cartigli": {
       "bancone": {
@@ -248,6 +249,33 @@
             "Strumenti in Python (solo libreria standard) e payload in C attorno a tre domande: come si carica un payload, cosa c'è dentro i binari, cosa passa sulla rete. Diagnostica in sola lettura e analisi offline; nessun aggiramento di PSN, nessuna falsificazione del firmware. Premi F: qui conta solo ciò che si prova."
           ]
         }
+      },
+      "galleria": {
+        "cartello": "Design & Web",
+        "uscita": "→ strumenti",
+        "presto": "in arrivo · scenari illustrati",
+        "testi": {
+          "portfolio": [
+            "Portfolio",
+            "HTML · CSS · JavaScript",
+            "Sito statico senza build: pagine EN generate, controlli automatici su link, SEO, accessibilità e sitemap. Lo schermo qui sopra ti inquadra: sei dentro il portfolio."
+          ],
+          "spinotto": [
+            "Spinotto Felice",
+            "demo di un sito per una piccola attività",
+            "Responsive, tema chiaro e scuro (prova la leva), FAQ, preferenze salvate. L'attività è inventata; contenuti e immagini sono di Alberto Pecchini."
+          ],
+          "topgun": [
+            "Top Gun Fly School",
+            "landing page non ufficiale",
+            "Una pagina sola, in un file solo. Non per prenotazioni né per informazioni di volo."
+          ],
+          "synkris": [
+            "Sito di Synkris",
+            "sito del progetto",
+            "Sito statico con scenari illustrativi. L'applicazione vera è synk, nello smistamento; il sito non prende prenotazioni."
+          ]
+        }
       }
     },
     "stanzaDi": "STANZA {n} DI {tot}",
@@ -311,7 +339,8 @@
       "piko-approva": "approve the plan",
       "piko-rifiuta": "reject the plan",
       "brat-pausa": "pause or resume time",
-      "brat-indietro": "rewind one second"
+      "brat-indietro": "rewind one second",
+      "galleria-tema": "switch theme"
     },
     "cartigli": {
       "bancone": {
@@ -500,6 +529,33 @@
             "middleManPS4",
             "research · WIP · v0.17",
             "Python tooling (standard library only) and C payloads around three questions: how a payload gets loaded, what is inside the binaries, what is visible on the wire. Read-only diagnostics and offline analysis; no PSN bypass, no firmware spoofing. Press F: here only what you can prove counts."
+          ]
+        }
+      },
+      "galleria": {
+        "cartello": "Design & Web",
+        "uscita": "→ toolbox",
+        "presto": "coming soon · illustrated scenarios",
+        "testi": {
+          "portfolio": [
+            "Portfolio",
+            "HTML · CSS · JavaScript",
+            "Static site with no build step: generated EN pages, automated checks for links, SEO, accessibility and sitemap. The screen above is filming you: you are inside the portfolio."
+          ],
+          "spinotto": [
+            "Spinotto Felice",
+            "a small-business website demo",
+            "Responsive, light and dark themes (try the lever), FAQ, saved preferences. The business is invented; content and images are by Alberto Pecchini."
+          ],
+          "topgun": [
+            "Top Gun Fly School",
+            "unofficial landing page",
+            "One page, in one file. Not for bookings or flight information."
+          ],
+          "synkris": [
+            "Synkris site",
+            "project website",
+            "Static site with illustrative scenarios. The real application is synk, back in the hub; the site takes no bookings."
           ]
         }
       }

@@ -167,6 +167,14 @@
     "N-262": {
       "it": "Ho acceso io la lampada e ho provato i due pannelli giusti. Evidenza fornita. Non ditelo al revisore.",
       "en": "I turned on the lamp and proved the two right panels myself. Evidence provided. Don't tell the reviewer."
+    },
+    "N-270": {
+      "it": "Design e web. Quattro vetrine e nessun enigma: il copione dice «pausa». Lo schermo a sinistra, per qualche motivo, ci sta riprendendo.",
+      "en": "Design and web. Four showcases and no puzzle: the script says \"break\". The screen on the left, for some reason, is filming us."
+    },
+    "N-271": {
+      "it": "Il visitatore cambiò il tema della stanza. Il curatore, che aveva appena abituato gli occhi, non commentò.",
+      "en": "The visitor switched the room's theme. The curator, whose eyes had just adjusted, made no comment."
     }
   },
   "eventi": {
@@ -350,6 +358,15 @@
     ],
     "aiuto:soluzione:middleman": [
       "N-262"
+    ],
+    "stanza:galleria": [
+      {
+        "id": "N-270",
+        "subito": true
+      }
+    ],
+    "oggetto:galleria-tema": [
+      "N-271"
     ]
   }
 }

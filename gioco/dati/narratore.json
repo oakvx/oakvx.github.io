@@ -99,6 +99,22 @@
     "N-214": {
       "it": "Pulsante premuto, e da nessuno di noi. Un'altra lampada accesa.",
       "en": "Button pressed, and by none of us. Another lamp is on."
+    },
+    "N-220": {
+      "it": "Brat Animator. Il primo progetto di oakvx. Le parole arrivano a tempo, e a quanto pare ci si cammina sopra.",
+      "en": "Brat Animator. oakvx's first project. The words arrive on time and, apparently, you can walk on them."
+    },
+    "N-221": {
+      "it": "Indizio: il ponte regge solo quando il testo è intero. La leva blu ferma il tempo. Non chiedetemi come.",
+      "en": "Hint: the bridge only holds when the whole line is there. The blue lever stops time. Don't ask me how."
+    },
+    "N-222": {
+      "it": "E dall'altra parte, la cornice in alto. Una finestra in basso, una lassù. Il copione lo dice in grassetto.",
+      "en": "And on the other side, the ledge up there. One window down here, one up there. The script says it in bold."
+    },
+    "N-223": {
+      "it": "Il visitatore arrivò in cima al desktop. Un'altra lampada. Il curatore canticchiò il ritornello.",
+      "en": "The visitor reached the top of the desktop. Another lamp. The curator hummed the chorus."
     }
   },
   "eventi": {
@@ -205,6 +221,24 @@
     "lampada:piko": [
       {
         "id": "N-214",
+        "subito": true
+      }
+    ],
+    "stanza:brat": [
+      {
+        "id": "N-220",
+        "subito": true
+      }
+    ],
+    "aiuto:indizio:brat": [
+      "N-221"
+    ],
+    "aiuto:soluzione:brat": [
+      "N-222"
+    ],
+    "lampada:brat": [
+      {
+        "id": "N-223",
         "subito": true
       }
     ]

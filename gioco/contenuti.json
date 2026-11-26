@@ -55,7 +55,9 @@
       "tappa-format": "leggi la tappa",
       "tappa-unimore": "leggi la tappa",
       "piko-approva": "approva il piano",
-      "piko-rifiuta": "rifiuta il piano"
+      "piko-rifiuta": "rifiuta il piano",
+      "brat-pausa": "ferma o riparti il tempo",
+      "brat-indietro": "riavvolgi di un secondo"
     },
     "cartigli": {
       "bancone": {
@@ -170,6 +172,23 @@
             "Permessi per sessione e per app, una macchina a stati in SQLite, un registratore Teach con consenso, Skills importabili. Anteprima alpha: non per compiti sensibili, distruttivi o finanziari."
           ]
         }
+      },
+      "brat": {
+        "cartello": "Brat Animator",
+        "pausa": "⏯ PAUSA",
+        "indietro": "⏪ INDIETRO",
+        "testi": {
+          "brat": [
+            "Brat Animator",
+            "il primo progetto di oakvx",
+            "Uno studio di lyric video tutto nel browser, con un desktop in stile Windows 7 fatto con 7.css. Le parole compaiono a tempo, come qui."
+          ],
+          "tecnica": [
+            "Com'è fatto",
+            "JavaScript · 7.css · Canvas 2D · WebCodecs · IndexedDB · PWA",
+            "Un compositore Canvas 2D guidato dai timestamp tiene allineate anteprima ed esportazione; dove c'è, WebCodecs esporta in MP4. I progetti stanno in IndexedDB e in archivi .brat.zip portatili, e funziona anche offline. Ultima aggiunta: le sillabe temporizzate di una parola spezzata mostrano il trattino finché la parola non è completa."
+          ]
+        }
       }
     }
   },
@@ -229,7 +248,9 @@
       "tappa-format": "read the stop",
       "tappa-unimore": "read the stop",
       "piko-approva": "approve the plan",
-      "piko-rifiuta": "reject the plan"
+      "piko-rifiuta": "reject the plan",
+      "brat-pausa": "pause or resume time",
+      "brat-indietro": "rewind one second"
     },
     "cartigli": {
       "bancone": {
@@ -342,6 +363,23 @@
             "How it is made",
             "Python · FastAPI · SQLite · Ollama · React/Tauri",
             "Per-session and per-app permissions, an SQLite session state machine, a consent-based Teach recorder, importable Skills. Alpha preview: not for sensitive, destructive or financial tasks."
+          ]
+        }
+      },
+      "brat": {
+        "cartello": "Brat Animator",
+        "pausa": "⏯ PAUSE",
+        "indietro": "⏪ BACK",
+        "testi": {
+          "brat": [
+            "Brat Animator",
+            "oakvx's first project",
+            "A lyric-video studio that runs entirely in the browser, with a Windows 7-style desktop made with 7.css. Words appear on time, like here."
+          ],
+          "tecnica": [
+            "How it is made",
+            "JavaScript · 7.css · Canvas 2D · WebCodecs · IndexedDB · PWA",
+            "A timestamp-driven Canvas 2D compositor keeps preview and export aligned; WebCodecs exports MP4 where supported. Projects live in IndexedDB and portable .brat.zip archives, and it works offline too. Latest: timed syllables of a split word show a hyphen until the word completes."
           ]
         }
       }

@@ -79,6 +79,26 @@
     "N-204": {
       "it": "Backend uno. Bello, ma senza uscita. Come certe riunioni.",
       "en": "Backend one. Nice, but no exit. Like certain meetings."
+    },
+    "N-210": {
+      "it": "Piko. Un agente che prima di fare qualcosa ti chiede il permesso. Io lo trovo commovente. Il monitor dice cosa vuole fare.",
+      "en": "Piko. An agent that asks permission before doing anything. I find it moving. The monitor says what it wants to do."
+    },
+    "N-211": {
+      "it": "Il visitatore approvò il piano. Il piano, con grande fiducia, finì nel pozzo.",
+      "en": "The visitor approved the plan. The plan, very confidently, went into the pit."
+    },
+    "N-212": {
+      "it": "Indizio: leggere il piano prima di approvarlo. È letteralmente il punto di tutto il progetto.",
+      "en": "Hint: read the plan before approving it. That is literally the point of the whole project."
+    },
+    "N-213": {
+      "it": "Ho messo il piano giusto sullo schermo. Ora basta approvarlo. Lo dico con amore.",
+      "en": "I've put the right plan on the screen. Now you just approve it. I say this with love."
+    },
+    "N-214": {
+      "it": "Pulsante premuto, e da nessuno di noi. Un'altra lampada accesa.",
+      "en": "Button pressed, and by none of us. Another lamp is on."
     }
   },
   "eventi": {
@@ -163,6 +183,30 @@
     ],
     "stanza:yag-backend1": [
       "N-204"
+    ],
+    "stanza:piko": [
+      {
+        "id": "N-210",
+        "subito": true
+      }
+    ],
+    "piko:pozzo": [
+      {
+        "id": "N-211",
+        "subito": true
+      }
+    ],
+    "aiuto:indizio:piko": [
+      "N-212"
+    ],
+    "aiuto:soluzione:piko": [
+      "N-213"
+    ],
+    "lampada:piko": [
+      {
+        "id": "N-214",
+        "subito": true
+      }
     ]
   }
 }

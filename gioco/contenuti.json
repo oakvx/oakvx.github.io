@@ -53,7 +53,9 @@
       "tappa-freelance": "leggi la tappa",
       "tappa-erasmus": "leggi la tappa",
       "tappa-format": "leggi la tappa",
-      "tappa-unimore": "leggi la tappa"
+      "tappa-unimore": "leggi la tappa",
+      "piko-approva": "approva il piano",
+      "piko-rifiuta": "rifiuta il piano"
     },
     "cartigli": {
       "bancone": {
@@ -137,6 +139,37 @@
             "La richiesta è arrivata al backend giusto. Torna indietro: la lampada di YAG nello smistamento è accesa."
           ]
         }
+      },
+      "piko": {
+        "cartello": "Piko",
+        "approva": "APPROVA",
+        "rifiuta": "RIFIUTA",
+        "piano": "Piano {n}",
+        "attesa": "In attesa della tua approvazione.",
+        "piani": [
+          [
+            "Vai dritto verso il pulsante.",
+            "Attraversa il pavimento al centro.",
+            "Premi il pulsante."
+          ],
+          [
+            "Gira a sinistra lungo il muro.",
+            "Supera il pozzo dal camminamento.",
+            "Premi il pulsante in fondo."
+          ]
+        ],
+        "testi": {
+          "piko": [
+            "Piko",
+            "alpha preview · Windows x64",
+            "Un agente locale per Windows: guarda l'app che hai davanti, scrive un piano con un modello Ollama locale, aspetta che tu lo legga e solo dopo clicca e scrive. Niente cloud, niente flusso dello schermo in background, nessuna azione senza approvazione."
+          ],
+          "limiti": [
+            "Com'è fatto",
+            "Python · FastAPI · SQLite · Ollama · React/Tauri",
+            "Permessi per sessione e per app, una macchina a stati in SQLite, un registratore Teach con consenso, Skills importabili. Anteprima alpha: non per compiti sensibili, distruttivi o finanziari."
+          ]
+        }
       }
     }
   },
@@ -194,7 +227,9 @@
       "tappa-freelance": "read the stop",
       "tappa-erasmus": "read the stop",
       "tappa-format": "read the stop",
-      "tappa-unimore": "read the stop"
+      "tappa-unimore": "read the stop",
+      "piko-approva": "approve the plan",
+      "piko-rifiuta": "reject the plan"
     },
     "cartigli": {
       "bancone": {
@@ -276,6 +311,37 @@
             "Backend 2",
             "200 OK",
             "The request reached the right backend. Head back: YAG's lamp in the hub is on."
+          ]
+        }
+      },
+      "piko": {
+        "cartello": "Piko",
+        "approva": "APPROVE",
+        "rifiuta": "REJECT",
+        "piano": "Plan {n}",
+        "attesa": "Waiting for your approval.",
+        "piani": [
+          [
+            "Go straight to the button.",
+            "Cross the floor in the middle.",
+            "Press the button."
+          ],
+          [
+            "Turn left along the wall.",
+            "Pass the pit on the walkway.",
+            "Press the button at the end."
+          ]
+        ],
+        "testi": {
+          "piko": [
+            "Piko",
+            "alpha preview · Windows x64",
+            "A local Windows agent: it looks at the app in front of it, writes a plan with a local Ollama model, waits for you to read it, and only then clicks and types. No cloud, no background screen stream, no action without your approval."
+          ],
+          "limiti": [
+            "How it is made",
+            "Python · FastAPI · SQLite · Ollama · React/Tauri",
+            "Per-session and per-app permissions, an SQLite session state machine, a consent-based Teach recorder, importable Skills. Alpha preview: not for sensitive, destructive or financial tasks."
           ]
         }
       }

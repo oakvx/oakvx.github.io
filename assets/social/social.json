@@ -1,0 +1,49 @@
+{
+ "aggiornato": "2026-11-26T22:36:45.799Z",
+ "account": {
+  "instagram:oakvx": {
+   "piattaforma": "instagram",
+   "handle": "oakvx",
+   "storia": [],
+   "errore": "instagram: conteggi non trovati"
+  },
+  "tiktok:oakvx.sh": {
+   "piattaforma": "tiktok",
+   "handle": "oakvx.sh",
+   "storia": [
+    [
+     "2026-11-26T22:36:45.799Z",
+     17210
+    ]
+   ],
+   "nome": "γκαμπρή! 🎏",
+   "follower": 17210,
+   "seguiti": 204,
+   "miPiace": 3538370,
+   "video": 27,
+   "privato": false,
+   "avatar": "assets/social/avatar-oakvx-sh.jpg",
+   "aggiornato": "2026-11-26T22:36:45.799Z",
+   "errore": null
+  },
+  "tiktok:uvst.oakvx": {
+   "piattaforma": "tiktok",
+   "handle": "uvst.oakvx",
+   "storia": [
+    [
+     "2026-11-26T22:36:45.799Z",
+     117
+    ]
+   ],
+   "nome": "γκαμπρή 🦅‼️",
+   "follower": 117,
+   "seguiti": 42,
+   "miPiace": 37253,
+   "video": 14,
+   "privato": false,
+   "avatar": "assets/social/avatar-uvst-oakvx.jpg",
+   "aggiornato": "2026-11-26T22:36:45.799Z",
+   "errore": null
+  }
+ }
+}

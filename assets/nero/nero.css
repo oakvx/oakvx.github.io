@@ -837,6 +837,119 @@ html.velo-entra::after {
 }
 .archivio__piede { margin-top: 2rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
+
+/* Commit di questo sito */
+.cantiere__corpo {
+    display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gola); row-gap: 2rem;
+    align-items: end;
+}
+.cantiere__numero {
+    grid-column: 1 / span 5;
+    display: flex; align-items: baseline; gap: 1rem;
+    font: 400 clamp(5rem, 15vw, 15rem)/.8 var(--serif);
+    letter-spacing: -.035em;
+    font-variant-numeric: lining-nums;
+}
+.cantiere__numero [data-commit-totale] { color: var(--bianco); }
+.cantiere__dati { grid-column: 7 / span 6; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem var(--gola); }
+.cantiere__dati dt { color: var(--bianco-40); margin-bottom: .25rem; }
+.cantiere__dati dd { color: var(--bianco); text-transform: none; letter-spacing: .02em; overflow-wrap: anywhere; }
+.cantiere__grafico {
+    grid-column: 1 / -1;
+    display: flex; align-items: flex-end; gap: 2px;
+    height: clamp(9rem, 18vw, 15rem);
+    padding-top: 1rem;
+    border-bottom: 1px solid var(--linea-forte);
+}
+.cantiere__barra {
+    flex: 1 1 0; min-width: 1px;
+    height: calc(var(--h) * 100%);
+    background: var(--bianco);
+    transform-origin: bottom;
+    transition: transform 1.2s var(--entra), background .3s;
+    transition-delay: calc(var(--i) * 6ms);
+}
+.cantiere__barra:hover { background: var(--cremisi); }
+.cantiere__barra.vuota { height: 3px; background: var(--grafite); }
+.js .cantiere__grafico .cantiere__barra { transform: scaleY(0); }
+.js .cantiere.visto-grafico .cantiere__barra, .calm .cantiere__barra { transform: none; }
+.cantiere__asse { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -1.2rem; }
+.cantiere__stato { grid-column: 1 / -1; margin-top: -1rem; }
+@media (max-width: 900px) {
+    .cantiere__numero, .cantiere__dati { grid-column: 1 / -1; }
+    .cantiere__grafico { gap: 1px; }
+}
+
+/* Profili social */
+.social__griglia { display: grid; gap: var(--gola); }
+.profilo {
+    display: grid; grid-template-columns: 5.5rem 1fr;
+    border: 1px solid var(--linea-forte);
+    background: var(--superficie);
+    min-height: 24rem;
+}
+.profilo__rotaia {
+    display: grid; align-content: start; justify-items: center; gap: 1.4rem;
+    padding: 1.3rem .6rem; border-right: 1px solid var(--linea);
+}
+.profilo__piattaforma { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--bianco); }
+.profilo__piattaforma::after { content: ""; display: inline-block; width: .45rem; height: .45rem; border-radius: 50%; background: var(--cremisi); margin-top: .7rem; }
+.profilo__account { display: grid; gap: .7rem; }
+.profilo__scelta { position: relative; border-radius: 50%; padding: 3px; border: 1px solid transparent; transition: border-color .3s; }
+.profilo__scelta[aria-pressed="true"] { border-color: var(--cremisi); }
+.profilo__avatar {
+    display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 50%;
+    background: var(--grafite) center / cover no-repeat;
+    font: italic 400 1.3rem/1 var(--serif); color: var(--bianco-60);
+    filter: grayscale(1); transition: filter .4s;
+}
+.profilo__scelta[aria-pressed="true"] .profilo__avatar, .profilo__scelta:hover .profilo__avatar { filter: none; }
+.profilo__corpo {
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1fr auto; align-content: start; column-gap: 2rem;
+    padding: 1.4rem 1.6rem 1.2rem;
+}
+.profilo__corpo > * { position: relative; z-index: 1; grid-column: 1; }
+.profilo__storia { position: absolute !important; left: 0; right: 0; bottom: 3.2rem; width: 100%; height: 45%; z-index: 0 !important; }
+.profilo__storia path { fill: none; stroke: var(--cremisi); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: .7; }
+.profilo__handle { font: 400 1.5rem/1.1 var(--serif); display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+.profilo__numero {
+    margin-top: clamp(2rem, 6vw, 5rem);
+    font: 400 clamp(4.4rem, 11vw, 10rem)/.8 var(--serif);
+    letter-spacing: -.035em; font-variant-numeric: lining-nums tabular-nums;
+}
+.profilo__etichetta { margin-top: .7rem; color: var(--bianco); }
+.profilo__dati { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; margin-top: .5rem; }
+.profilo__dati b { font-weight: 400; color: var(--bianco); }
+.profilo__apri {
+    justify-self: start; margin-top: 1.6rem;
+    padding: .8rem 1.1rem; border: 1px solid var(--linea-forte); color: var(--bianco);
+    transition: background .4s, color .4s, border-color .4s;
+}
+.profilo__apri:hover { background: var(--bianco); color: var(--nero); border-color: var(--bianco); }
+.profilo__scelte {
+    grid-column: 2 !important; grid-row: 1 / span 6;
+    display: flex; gap: .8rem; overflow-x: auto; scroll-snap-type: x mandatory;
+    max-width: min(26rem, 40vw); padding-bottom: .4rem;
+}
+.profilo__scelta-contenuto { flex: none; width: 11rem; scroll-snap-align: start; display: grid; gap: .5rem; }
+.profilo__scelta-contenuto img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border: 1px solid var(--linea-forte); filter: grayscale(.6); transition: filter .5s; }
+.profilo__scelta-contenuto:hover img { filter: none; }
+.profilo__piede {
+    grid-column: 1 / -1 !important; align-self: end;
+    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2rem; padding-top: .9rem; border-top: 1px solid var(--linea);
+}
+.profilo__piede [data-campo-profilo="stato"]::before { content: ""; display: inline-block; width: .4rem; height: .4rem; border-radius: 50%; background: var(--cremisi); margin-right: .5rem; vertical-align: .1em; }
+@media (max-width: 720px) {
+    .profilo { grid-template-columns: 1fr; }
+    .profilo__rotaia { grid-template-columns: auto 1fr; justify-items: start; align-items: center; border-right: 0; border-bottom: 1px solid var(--linea); padding: .9rem 1.2rem; }
+    .profilo__piattaforma { writing-mode: horizontal-tb; transform: none; }
+    .profilo__account { grid-auto-flow: column; justify-self: end; }
+    .profilo__corpo { grid-template-columns: 1fr; }
+    .profilo__scelte { grid-column: 1 !important; grid-row: auto; max-width: none; margin-top: 1.6rem; }
+}
+
 /* ==========================================================================
    CHI SONO
    ========================================================================== */

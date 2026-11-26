@@ -1,0 +1,40 @@
+name: Social
+
+# Conteggi pubblici di Instagram e TikTok, controllati ogni ora.
+# Il commit parte solo quando un numero (o un avatar) cambia.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/social.mjs
+      - .github/workflows/social.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Leggi i profili
+        run: node scripts/social.mjs
+      - name: Salva se qualcosa è cambiato
+        run: |
+          if [ -n "$(git status --porcelain -- assets/social)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/social
+            git commit -m "Update public social counts"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

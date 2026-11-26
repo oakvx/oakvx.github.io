@@ -195,6 +195,14 @@
     "N-290": {
       "it": "Il muro dei commit. Ogni quadrato acceso è... no, non ogni quadrato è un commit. Il numero sì. È tutto vero, me l'ha detto il muro.",
       "en": "The commit wall. Every lit square is... no, not every square is a commit. The number is. It's all real, the wall told me."
+    },
+    "N-300": {
+      "it": "Questa... non è una sala. È una camera. Piove. Credo che il copione finisca qui, e che oakvx sia seduto sul letto. Io non dico niente.",
+      "en": "This... is not a gallery. It's a bedroom. It's raining. I think the script ends here, and that oakvx is sitting on the bed. I'm not saying anything."
+    },
+    "N-301": {
+      "it": "Il visitatore trovò una porta che non c'era. Il curatore la segnò sul copione, a matita, per poterla cancellare.",
+      "en": "The visitor found a door that wasn't there. The curator marked it in the script, in pencil, so he could erase it."
     }
   },
   "eventi": {
@@ -411,6 +419,15 @@
         "id": "N-290",
         "subito": true
       }
+    ],
+    "stanza:oakvx": [
+      {
+        "id": "N-300",
+        "subito": true
+      }
+    ],
+    "segreto:porta-percorso": [
+      "N-301"
     ]
   }
 }

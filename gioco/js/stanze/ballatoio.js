@@ -129,7 +129,7 @@ export function costruisci(m, g) {
   m.tondo(X0 + 0.7, Y0, Z0, X0 + 1.9, Y0 + 2.2, Z0 + 0.06, new THREE.MeshLambertMaterial({ color: 0xeef2f4 }), { r: 0.02, solido: false });
   m.luce(X0 + 1.3, Y0 + 2.4, Z0 + 0.8, 1.4, 4, 0xf2f7ff);
   m.zona('casa', X0, Y0 - 1, Z0, X1, Y0 + 3, Z0 + 1.0, { ripeti: true });
-  g.su('casa', () => g.teletrasporta(664, 0, 1.5, Math.PI));
+  g.su('casa', () => g.teletrasporta(904, 0, 1.5, Math.PI));
   cartelloStanza(m, g, X0 + 0.04, Y0 + 2.4, -10, Math.PI / 2, 2499);
   g.puntoControllo('ballatoio', 601.3, Y0, 9, 0);
   return { debug: { risolvi: () => { g.giocatore().pos.set(601.3, Y0 + 0.86, Z0 + 2); g.giocatore().vel.set(0, 0, 0); } } };

@@ -59,7 +59,9 @@
       "brat-pausa": "ferma o riparti il tempo",
       "brat-indietro": "riavvolgi di un secondo",
       "galleria-tema": "cambia tema",
-      "terminale": "siediti al terminale"
+      "terminale": "siediti al terminale",
+      "jukebox": "accendi la TV",
+      "jukebox-avanti": "brano successivo"
     },
     "cartigli": {
       "bancone": {
@@ -103,7 +105,17 @@
         }
       },
       "oakvx": {
-        "cartello": "Fuori orario · in arrivo"
+        "cartello": "Fuori orario",
+        "tvSpenta": "TV · canale oakvx",
+        "tvAiuto": "E: play / pausa · VCR: avanti",
+        "carillon": "carillon della mansarda",
+        "testi": {
+          "stanza": [
+            "Fuori orario",
+            "la camera di oakvx",
+            "Quello che resta acceso quando si spegne il lavoro: musica, console, lingue, cose. La TV sulla libreria suona; il resto è da guardare."
+          ]
+        }
       },
       "smistamento": {
         "cartello": "Backend & App Logic"
@@ -441,7 +453,9 @@
       "brat-pausa": "pause or resume time",
       "brat-indietro": "rewind one second",
       "galleria-tema": "switch theme",
-      "terminale": "sit at the terminal"
+      "terminale": "sit at the terminal",
+      "jukebox": "switch the TV",
+      "jukebox-avanti": "next track"
     },
     "cartigli": {
       "bancone": {
@@ -485,7 +499,17 @@
         }
       },
       "oakvx": {
-        "cartello": "After hours · coming soon"
+        "cartello": "After hours",
+        "tvSpenta": "TV · channel oakvx",
+        "tvAiuto": "E: play / pause · VCR: next",
+        "carillon": "attic music box",
+        "testi": {
+          "stanza": [
+            "After hours",
+            "oakvx's room",
+            "What stays on when work switches off: music, consoles, languages, stuff. The TV on the bookshelf plays; the rest is to look at."
+          ]
+        }
       },
       "smistamento": {
         "cartello": "Backend & App Logic"

@@ -321,3 +321,12 @@ html, body {
 .cartiglio h2 { margin: 0 0 0.5rem; font-size: 1.35rem; letter-spacing: -0.02em; }
 .cartiglio p { margin: 0; line-height: 1.5; white-space: pre-line; }
 .cartiglio .cartiglio-chiudi { margin-top: 0.8rem; color: var(--tenue); font-size: 0.85rem; }
+
+/* ------------------------------------------------------------ la data delle fotocamere del 2008 */
+.data2008 {
+  position: fixed; right: 2.2rem; bottom: 1.6rem; z-index: 2; margin: 0;
+  color: #f4d03a; font: 700 clamp(1.4rem, 3vw, 2.2rem)/1 "Courier New", monospace; letter-spacing: 0.06em;
+  text-shadow: 0 0 6px rgba(255, 170, 0, 0.55), 1px 1px 0 #7a5400;
+  pointer-events: none;
+}
+.data2008[hidden] { display: none; }

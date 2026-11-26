@@ -98,6 +98,7 @@ export async function avvia(ctx) {
 
   let fadeCb = null;
   const controlli = new Map();
+  let modo2008 = 0;
   let commitPromessa = null;
   const aiuti = new Map();
   const g = {
@@ -112,6 +113,9 @@ export async function avvia(ctx) {
     // modalità testo (terminale): i tasti vanno a suTasto invece di muovere il giocatore
     modoTesto: (attivo, suTasto) => { modoTesto = attivo ? suTasto : null; tasti.clear(); },
     atmosfera: (a) => { atmo = { ...ATMOSFERA, ...a }; },
+    // modalità 2008 (stanza di oakvx): filtro da fotocamera digitale e data gialla
+    modo2008: (on) => { modo2008 = on ? 1 : 0; $('data2008').hidden = !on; },
+    modo2008Valore: () => post.uniforms.uModo2008.value,
     giocatore: () => giocatore,
     tenuto: () => tenuto,
     yaw: () => yaw,
@@ -167,17 +171,29 @@ export async function avvia(ctx) {
   // ---------------------------------------------------------------- post-processing
   const rt = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: 4 });
   const post = new THREE.ShaderMaterial({
-    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 } },
+    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 }, uModo2008: { value: 0 } },
     vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
     fragmentShader: `
-      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo;
+      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo; uniform float uModo2008;
       varying vec2 vUv;
       float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
       void main(){
         vec2 c = vUv - 0.5; float r2 = dot(c, c);
         vec2 off = c * 0.004 * (1.0 + r2 * 4.0) * (1.0 - uCalmo);
         vec3 col = vec3(texture2D(tDiffuse, vUv + off).r, texture2D(tDiffuse, vUv).g, texture2D(tDiffuse, vUv - off).b);
+        // modalità 2008: blocchi JPEG leggeri (sul colore lineare, prima della gamma)
+        if (uModo2008 > 0.0) {
+          vec2 blocco = (floor(vUv * uRes / 8.0) + 0.5) * 8.0 / uRes;
+          col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.22 * uModo2008);
+        }
         col = pow(max(col, 0.0), vec3(1.0 / 2.2));
+        if (uModo2008 > 0.0) {
+          float m8 = uModo2008;
+          col *= mix(1.0, 1.32 - r2 * 2.4, m8);                                   // flash frontale
+          col = mix(col, vec3(dot(col, vec3(0.299, 0.587, 0.114))), 0.32 * m8);   // colori slavati
+          col *= mix(vec3(1.0), vec3(1.07, 1.0, 0.88), m8);                       // sensore caldo
+          col += (hash(vUv * uRes * 0.5 + floor(uTime * 12.0)) - 0.5) * 0.05 * m8;
+        }
         col *= vec3(1.0, 0.99, 0.96);
         col *= mix(0.7, 1.0, smoothstep(0.62, 0.08, r2));
         col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.05, 0.02, uCalmo);
@@ -592,6 +608,8 @@ export async function avvia(ctx) {
     if (stato === 'gioco') aggiornaMira();
     portali.aggiorna(t);
     post.uniforms.uTime.value = imp.calmo ? 0 : t;
+    const m8 = post.uniforms.uModo2008;
+    m8.value = modo2008 > m8.value ? Math.min(1, m8.value + dt / 0.6) : Math.max(0, m8.value - dt / 0.6);
     passaggi.render(camera);
     const accese = passaggi.spegni();
     portali.render(camera);

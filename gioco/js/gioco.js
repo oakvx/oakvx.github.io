@@ -552,6 +552,8 @@ export async function avvia(ctx) {
       interagisci: () => interagisci(),
       evento: (n) => emetti(n),
       salta: () => { narratore.coda = []; narratore.attuale = null; narratore.pausa = 0; narratore.mostra(); },
+      // i test non possono ottenere il pointer lock: entrano in gioco direttamente
+      gioca: () => { stato = 'gioco'; mostra(null); },
     };
   }
 

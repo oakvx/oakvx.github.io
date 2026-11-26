@@ -14,8 +14,8 @@
     "sceltaSito": "Sito",
     "sceltaSitoNota": "progetti, percorso, contatti",
     "sceltaGioco": "Gioco",
-    "sceltaGiocoNota": "3D, da computer, circa 10 minuti",
-    "comandi": "WASD per muoverti · Spazio per saltare · mouse per guardare · E per prendere e interagire · clic sinistro e destro per le finestre (quando le avrai) · Esc per la pausa",
+    "sceltaGiocoNota": "3D, da computer, circa 15 minuti",
+    "comandi": "WASD per muoverti · Spazio per saltare · mouse per guardare · E per prendere e interagire · clic sinistro e destro per le due finestre · F per la lampada (dove serve) · Esc per la pausa",
     "avvisoTouch": "Il gioco è pensato per computer con tastiera e mouse. Da qui ti conviene il sito.",
     "avvisoMotion": "Hai chiesto di ridurre il movimento: nel gioco ho già spento oscillazioni e distorsioni, ma resta un'esperienza in movimento.",
     "caricamento": "Il curatore sta cercando le chiavi…",
@@ -24,7 +24,6 @@
     "pausa": "In pausa",
     "riprendi": "Riprendi",
     "chiudi": "Chiudi",
-    "apri": "Apri la pagina",
     "ricomincia": "Ricomincia",
     "impostazioni": "Impostazioni",
     "fov": "Campo visivo",
@@ -37,156 +36,373 @@
     "qualita": "Qualità delle finestre",
     "bassa": "Bassa",
     "alta": "Alta",
-    "finaleDi": "Finale {i} di 5",
-    "finaliVisti": "Finali visti: {n} di 5",
     "interagisci": "[E] ",
     "prendi": "Prendi",
     "lascia": "[E] lascia · clic per lanciare",
-    "oggetti": {
-      "monitor": {
-        "azione": "Guarda il monitor",
-        "titolo": "Brat Animator",
-        "testo": "Il mio editor di lyric video nel browser: testi LRC, timeline, animazioni su Canvas ed esportazione MP4/WebM con WebCodecs.",
-        "url": "../projects/brat-animator/"
-      },
-      "targa": {
-        "azione": "Leggi la targa",
-        "titolo": "Gabriele Lucia",
-        "testo": "19 anni, Sassuolo. Junior web developer e freelance dal 2023: siti, interfacce e SEO per attività locali. Dal 2026 Ingegneria Informatica a UNIMORE.",
-        "url": "../chi-sono/"
-      },
-      "scatola": {
-        "azione": "Guarda la scatola"
-      },
-      "scrivania": {
-        "azione": "Avvicinati alla scrivania"
-      }
-    },
-    "archivio": [
-      [
-        "2021–2026",
-        "IIS Volta, Sassuolo",
-        "Diploma in Informatica e Telecomunicazioni"
-      ],
-      [
-        "2025",
-        "Erasmus+, Siviglia",
-        "Starbotica: supporto IT e attività educative"
-      ],
-      [
-        "2026",
-        "Stage, Format SRL",
-        "Software e automazione industriale: PLC e SQL Server"
-      ],
-      [
-        "2026–",
-        "UNIMORE",
-        "Ingegneria Informatica, part-time"
-      ]
-    ],
-    "targhe": {
-      "sala": "STANZA 01 · ATTESA",
-      "corridoio": "B-07",
-      "scatolaTitolo": "pezzo di Gabri",
-      "scatolaNota": "in arrivo",
-      "speciale": "NON TOCCARE"
-    },
-    "fuori": [
-      "stanza_03.js",
-      "// TODO: copione capitolo 2",
-      "narratore.state = 'panico'",
-      "synk/webhook.js",
-      "regex: /^(\\d{1,2})[:.](\\d{2})$/",
-      "porta_destra.unused",
-      "luce_neon_007"
-    ],
-    "finali": {
-      "dipendente": {
-        "titolo": "Il dipendente modello",
-        "testo": "Hai seguito il copione fino all'archivio. Ecco il percorso di Gabri e i contatti.",
-        "link": [
-          [
-            "Percorso completo",
-            "../chi-sono/"
-          ],
-          [
-            "Contatti",
-            "../#contatti"
-          ]
-        ]
-      },
-      "magazzino": {
-        "titolo": "Il magazzino",
-        "testo": "Hai disobbedito e hai trovato il progetto nascosto: Brat Animator, editor di lyric video nel browser.",
-        "link": [
-          [
-            "Brat Animator",
-            "../projects/brat-animator/"
-          ],
-          [
-            "Codice su GitHub",
-            "https://github.com/oakvx/bratAnimator"
-          ]
-        ]
-      },
-      "fuori": {
-        "titolo": "Fuori mappa",
-        "testo": "Hai usato una finestra dove non dovevi e sei finito dietro le quinte, dove Gabri smonta le cose per capirle. Lì c'è Synk: messaggi WhatsApp, calendario e prenotazioni.",
-        "link": [
-          [
-            "Synk",
-            "../projects/synk/"
-          ]
-        ]
-      },
-      "corridoio": {
-        "titolo": "Il corridoio infinito",
-        "testo": "Hai fatto marcia indietro troppe volte e la stanza è cambiata alle tue spalle. In fondo al corridoio c'era Beautify, il gestionale multisalone del diploma.",
-        "link": [
-          [
-            "Beautify",
-            "../projects/beautify/"
-          ]
-        ]
-      },
-      "attesa": {
-        "titolo": "L'attesa",
-        "testo": "Non ti sei mosso e il curatore ha finito le parole. Restava la musica: Gabri ha una stanza apposta per quella.",
-        "link": [
-          [
-            "Fuori orario",
-            "../fuori-orario/"
-          ]
-        ]
-      }
-    },
     "sale": {
-      "attesa": "Attesa",
-      "laboratorio": "Laboratorio",
-      "magazzino": "Magazzino",
-      "archivio": "Archivio",
-      "altrove": "Altrove",
       "atrio": "Atrio",
       "uscita": "Uscita",
       "gastronomia": "GASTRONOMIA"
     },
-    "didascalie": {
-      "monitor": [
-        "Brat Animator",
-        "Editor di lyric video · Canvas, WebCodecs",
-        "Testi LRC su una timeline, animati ed esportati in MP4 o WebM, tutto nel browser."
-      ],
-      "scatola": [
-        "Pezzo di Gabri",
-        "Opera in arrivo · sigillata",
-        "Il contenuto non è ancora stato scelto. Si prega di non aprire."
-      ],
-      "gesto": [
-        "Il gesto",
-        "Clic sinistro · clic destro",
-        "Due finestre collegate, solo sui pannelli a quadretti. Quello che entra da una esce dall’altra."
-      ]
-    }
+    "chiudiCartiglio": "E per chiudere",
+    "puntoControllo": "Torna al punto di ripresa",
+    "esamina": "esamina",
+    "azioni": {
+      "bancone": "prendi le finestre",
+      "tappa-volta": "leggi la tappa",
+      "tappa-freelance": "leggi la tappa",
+      "tappa-erasmus": "leggi la tappa",
+      "tappa-format": "leggi la tappa",
+      "tappa-unimore": "leggi la tappa",
+      "piko-approva": "approva il piano",
+      "piko-rifiuta": "rifiuta il piano",
+      "brat-pausa": "ferma o riparti il tempo",
+      "brat-indietro": "riavvolgi di un secondo",
+      "galleria-tema": "cambia tema",
+      "terminale": "siediti al terminale",
+      "jukebox": "accendi la TV",
+      "jukebox-avanti": "brano successivo"
+    },
+    "cartigli": {
+      "bancone": {
+        "titolo": "Le due finestre",
+        "testo": "Clic sinistro apre la finestra ciano, clic destro quella magenta, solo sui pannelli a quadretti. Entri da una, esci dall'altra."
+      },
+      "tappa-volta": {
+        "titolo": "IIS A. Volta, Sassuolo",
+        "testo": "2021 – 2026 · Informatica e Telecomunicazioni.\nIl progetto di maturità è Beautify, il gestionale multisalone che trovi più avanti."
+      },
+      "tappa-freelance": {
+        "titolo": "Sviluppatore web freelance",
+        "testo": "2023 – giugno 2026 · Siti e consulenza SEO per attività locali tra Sassuolo e Scandiano."
+      },
+      "tappa-erasmus": {
+        "titolo": "Erasmus+ a Siviglia",
+        "testo": "Maggio – giugno 2025 · Starbotica: supporto IT, Windows, Active Directory, reti locali."
+      },
+      "tappa-format": {
+        "titolo": "Format SRL",
+        "testo": "Agosto – settembre 2026 · Apprendista software e automazione: software industriale, supporto PLC, SQL Server, T-SQL."
+      },
+      "tappa-unimore": {
+        "titolo": "UNIMORE",
+        "testo": "2026 → · Ingegneria Informatica all'Università di Modena e Reggio Emilia."
+      }
+    },
+    "stanze": {
+      "ingresso": {
+        "cartello": "Ingresso · turno di notte",
+        "testi": {}
+      },
+      "percorso": {
+        "cartello": "Percorso",
+        "anni": {
+          "volta": "2021 → 2026",
+          "freelance": "2023 → 2026",
+          "erasmus": "2025",
+          "format": "2026",
+          "unimore": "2026 →"
+        }
+      },
+      "oakvx": {
+        "cartello": "Fuori orario",
+        "tvSpenta": "TV · canale oakvx",
+        "tvAiuto": "E: play / pausa · VCR: avanti",
+        "carillon": "carillon della mansarda",
+        "testi": {
+          "stanza": [
+            "Fuori orario",
+            "la camera di oakvx",
+            "Quello che resta acceso quando si spegne il lavoro: musica, console, lingue, cose. La TV sulla libreria suona; il resto è da guardare."
+          ]
+        }
+      },
+      "smistamento": {
+        "cartello": "Backend & App Logic"
+      },
+      "yag": {
+        "cartello": "YAG · Yet Another Gateway",
+        "varco": "AUTH",
+        "uscita": "BACKEND",
+        "modelli": {
+          "a": "modello A",
+          "b": "modello B"
+        },
+        "testi": {
+          "yag": [
+            "YAG · Yet Another Gateway",
+            "sperimentale · v0.1.0-rc.2",
+            "Un gateway AI scritto in C17: accesso autenticato a più backend di inferenza, adattatori di protocollo compatibili OpenAI e Anthropic, instradamento per modello e limiti operativi. Console di controllo in React/TypeScript e client desktop opzionale."
+          ],
+          "avviso": [
+            "Attenzione",
+            "YAG è sperimentale",
+            "Compatibilità con i modelli reali e sicurezza in produzione sono ancora da qualificare: non esporlo a reti non fidate."
+          ],
+          "chiave": [
+            "Chiave client LAN",
+            "prendila (E)",
+            "Senza chiave il varco di autenticazione non ti fa passare."
+          ],
+          "flusso": [
+            "Backend 1",
+            "flusso di una richiesta",
+            "Chiave client LAN → Autenticazione → Adattatore di protocollo (OpenAI / Anthropic) → Instradamento per modello + limiti operativi → Backend 1 oppure Backend 2. Qui non c'è l'uscita: il modello giusto è l'altro."
+          ],
+          "risposta": [
+            "Backend 2",
+            "200 OK",
+            "La richiesta è arrivata al backend giusto. Torna indietro: la lampada di YAG nello smistamento è accesa."
+          ]
+        }
+      },
+      "piko": {
+        "cartello": "Piko",
+        "approva": "APPROVA",
+        "rifiuta": "RIFIUTA",
+        "piano": "Piano {n}",
+        "attesa": "In attesa della tua approvazione.",
+        "piani": [
+          [
+            "Vai dritto verso il pulsante.",
+            "Attraversa il pavimento al centro.",
+            "Premi il pulsante."
+          ],
+          [
+            "Gira a sinistra lungo il muro.",
+            "Supera il pozzo dal camminamento.",
+            "Premi il pulsante in fondo."
+          ]
+        ],
+        "testi": {
+          "piko": [
+            "Piko",
+            "alpha preview · Windows x64",
+            "Un agente locale per Windows: guarda l'app che hai davanti, scrive un piano con un modello Ollama locale, aspetta che tu lo legga e solo dopo clicca e scrive. Niente cloud, niente flusso dello schermo in background, nessuna azione senza approvazione."
+          ],
+          "limiti": [
+            "Com'è fatto",
+            "Python · FastAPI · SQLite · Ollama · React/Tauri",
+            "Permessi per sessione e per app, una macchina a stati in SQLite, un registratore Teach con consenso, Skills importabili. Anteprima alpha: non per compiti sensibili, distruttivi o finanziari."
+          ]
+        }
+      },
+      "brat": {
+        "cartello": "Brat Animator",
+        "pausa": "⏯ PAUSA",
+        "indietro": "⏪ INDIETRO",
+        "testi": {
+          "brat": [
+            "Brat Animator",
+            "il primo progetto di oakvx",
+            "Uno studio di lyric video tutto nel browser, con un desktop in stile Windows 7 fatto con 7.css. Le parole compaiono a tempo, come qui."
+          ],
+          "tecnica": [
+            "Com'è fatto",
+            "JavaScript · 7.css · Canvas 2D · WebCodecs · IndexedDB · PWA",
+            "Un compositore Canvas 2D guidato dai timestamp tiene allineate anteprima ed esportazione; dove c'è, WebCodecs esporta in MP4. I progetti stanno in IndexedDB e in archivi .brat.zip portatili, e funziona anche offline. Ultima aggiunta: le sillabe temporizzate di una parola spezzata mostrano il trattino finché la parola non è completa."
+          ]
+        }
+      },
+      "synk": {
+        "cartello": "synk",
+        "occupato": "occupato",
+        "calendario": "Google Calendar · oggi",
+        "vuoto": "In attesa di sincronizzazione…",
+        "saga": "saga di compensazione",
+        "soluzione": "Colore 11–13 · Taglio e piega dopo le 14",
+        "richieste": {
+          "taglio": "Taglio",
+          "colore": "Colore",
+          "piega": "Piega"
+        },
+        "testi": {
+          "synk": [
+            "synk",
+            "release candidate 1.2.0-rc.6",
+            "Prenotazioni on-premise per saloni, con messaggi WhatsApp e Google Calendar. Le richieste arrivano come messaggi; il calendario non accetta due appuntamenti sovrapposti. È in collaudo: non per dati di clienti reali."
+          ],
+          "tecnica": [
+            "Com'è fatto",
+            "Node.js · PHP · PostgreSQL 16 · Docker",
+            "Un vincolo di esclusione GiST rende impossibile la doppia prenotazione; le scritture verso Google Calendar passano da una outbox transazionale con lease e fencing token, e una saga di compensazione rimette le cose a posto quando qualcosa fallisce. Ollama locale opzionale."
+          ]
+        }
+      },
+      "beautify": {
+        "cartello": "Beautify",
+        "salone": "Salone",
+        "tabellone": "Disponibilità · martedì 15:00",
+        "occupato": "occupato",
+        "libero": "libero",
+        "testi": {
+          "beautify": [
+            "Beautify",
+            "progetto di maturità · PHP · MySQL",
+            "Un gestionale per più saloni: clienti, ruoli del personale, appuntamenti, magazzino e statistiche. I dati di ogni salone restano separati, ma il controllo della disponibilità è condiviso."
+          ]
+        }
+      },
+      "middleman": {
+        "cartello": "middleManPS4 · Reverse Engineering",
+        "etichette": {
+          "elf": "ELF · validazione",
+          "orbis": "Orbis · binari",
+          "psf": "PSF · metadati",
+          "nid": "NID · simboli",
+          "ghidra": "export per Ghidra",
+          "rete": "DNS · TCP · TLS passivi",
+          "console": "PS4 12.52 · GoldHEN",
+          "lettura": "solo lettura"
+        },
+        "testi": {
+          "mm": [
+            "middleManPS4",
+            "ricerca · WIP · v0.17",
+            "Strumenti in Python (solo libreria standard) e payload in C attorno a tre domande: come si carica un payload, cosa c'è dentro i binari, cosa passa sulla rete. Diagnostica in sola lettura e analisi offline; nessun aggiramento di PSN, nessuna falsificazione del firmware. Premi F: qui conta solo ciò che si prova."
+          ]
+        }
+      },
+      "galleria": {
+        "cartello": "Design & Web",
+        "uscita": "→ strumenti",
+        "presto": "in arrivo · scenari illustrati",
+        "testi": {
+          "portfolio": [
+            "Portfolio",
+            "HTML · CSS · JavaScript",
+            "Sito statico senza build: pagine EN generate, controlli automatici su link, SEO, accessibilità e sitemap. Lo schermo qui sopra ti inquadra: sei dentro il portfolio."
+          ],
+          "spinotto": [
+            "Spinotto Felice",
+            "demo di un sito per una piccola attività",
+            "Responsive, tema chiaro e scuro (prova la leva), FAQ, preferenze salvate. L'attività è inventata; contenuti e immagini sono di Alberto Pecchini."
+          ],
+          "topgun": [
+            "Top Gun Fly School",
+            "landing page non ufficiale",
+            "Una pagina sola, in un file solo. Non per prenotazioni né per informazioni di volo."
+          ],
+          "synkris": [
+            "Sito di Synkris",
+            "sito del progetto",
+            "Sito statico con scenari illustrativi. L'applicazione vera è synk, nello smistamento; il sito non prende prenotazioni."
+          ]
+        }
+      },
+      "scrivania": {
+        "cartello": "Cosa so fare",
+        "porta": "→ commit",
+        "benvenuto": [
+          "portfolio.sh · turno di notte",
+          "scrivi help e premi Invio"
+        ],
+        "strumenti": [
+          [
+            "Web",
+            "HTML, CSS, JavaScript, React, TypeScript, Canvas 2D, WebCodecs"
+          ],
+          [
+            "Backend & AI",
+            "Node.js, PHP, C17, Python, FastAPI, Docker, Ollama"
+          ],
+          [
+            "Dati",
+            "PostgreSQL, MySQL, SQL Server (T-SQL), SQLite"
+          ],
+          [
+            "Reverse eng.",
+            "Python, payload C, ELF/Orbis, Ghidra"
+          ],
+          [
+            "Sistemi",
+            "Windows, UI Automation, Active Directory, PLC"
+          ]
+        ],
+        "principi": [
+          "local-first quando ha senso",
+          "stati espliciti invece di successi presunti",
+          "prove invece di supposizioni",
+          "movimento accessibile"
+        ],
+        "percorso": [
+          "2026 →      Ingegneria Informatica, UNIMORE",
+          "ago–set 2026  Format SRL: software industriale, PLC, SQL Server",
+          "2023–2026    freelance web e SEO, Sassuolo e Scandiano",
+          "mag–giu 2025  Erasmus+ a Siviglia, Starbotica",
+          "2021–2026    IIS A. Volta: Beautify è il progetto di maturità"
+        ],
+        "contatti": [
+          "email: gabrielelucia07@gmail.com",
+          "aperto a: stage · freelance · progetti interessanti",
+          "la porta dei contatti è in fondo al giro"
+        ],
+        "chi": [
+          "oakvx (Gabriele Lucia), Sassuolo",
+          "studente di Ingegneria Informatica, sviluppatore e grafico",
+          "lavoro su entrambi i lati di un sistema: l'interfaccia e la logica che deve reggere"
+        ],
+        "log": [
+          "oakvx.github.io · aggiornato 2026-11-26",
+          "bratAnimator · aggiornato 2026-11-26",
+          "piko · aggiornato 2026-11-26",
+          "oye · aggiornato 2026-11-25",
+          "yag · aggiornato 2026-11-24"
+        ],
+        "aree": {
+          "web": [
+            "Web",
+            "interfacce",
+            "HTML, CSS, JavaScript, React, TypeScript, 7.css, Canvas 2D, WebCodecs, MediaRecorder, IndexedDB, service worker, accessibilità, SEO."
+          ],
+          "backend": [
+            "Backend & infrastruttura AI",
+            "servizi",
+            "Node.js, Express, PHP, C17, CMake, libcurl, Docker Compose, Python, FastAPI, SQLite, Ollama, Git, GitHub Actions, API compatibili OpenAI."
+          ],
+          "dati": [
+            "Dati",
+            "database",
+            "PostgreSQL (vincoli, outbox e code, SKIP LOCKED), MySQL, SQL Server (T-SQL), SQLite."
+          ],
+          "reverse": [
+            "Reverse engineering",
+            "analisi",
+            "Python, payload in C, ELF/Orbis/PSF/NID, Ghidra, metadati DNS/TLS/TCP passivi."
+          ],
+          "sistemi": [
+            "Sistemi",
+            "IT",
+            "Windows, Windows UI Automation, NSIS, Active Directory, supporto IT, software industriale, basi di PLC."
+          ]
+        }
+      },
+      "commit": {
+        "cartello": "Attività GitHub",
+        "uscita": "→ notte",
+        "sotto": "commit pubblici · oakvx + oakvxish · dal vivo",
+        "testi": {
+          "recenti": [
+            "Toccati di recente",
+            "aggiornato da GitHub Actions",
+            "oakvx.github.io, bratAnimator, piko, oye, yag. Il numero sulla parete è quello vero, contato in questo momento."
+          ]
+        }
+      },
+      "contatti": {
+        "cartello": "Contatti",
+        "titolo": "Hai un progetto, un lavoro o un'idea strana?",
+        "aperto": "Aperto a: stage · freelance · progetti interessanti",
+        "dove": "Sassuolo · Ingegneria Informatica @ UNIMORE"
+      }
+    },
+    "stanzaDi": "STANZA {n} DI {tot}",
+    "comandoF": "F: lampada delle prove",
+    "fineTitolo": "Fine del turno",
+    "fineTesto": "Giro completato in {tempo}. Segreti trovati: {segreti}. Grazie per la visita: oakvx risponde a tutte le email.",
+    "scrivimi": "Scrivimi",
+    "copiaEmail": "Copia email",
+    "copiata": "Copiata"
   },
   "en": {
     "lang": "en",
@@ -203,8 +419,8 @@
     "sceltaSito": "Site",
     "sceltaSitoNota": "projects, path, contacts",
     "sceltaGioco": "Game",
-    "sceltaGiocoNota": "3D, desktop, about 10 minutes",
-    "comandi": "WASD to move · Space to jump · mouse to look · E to pick up and interact · left and right click for the windows (once you have them) · Esc to pause",
+    "sceltaGiocoNota": "3D, desktop, about 15 minutes",
+    "comandi": "WASD to move · Space to jump · mouse to look · E to pick up and interact · left and right click for the two windows · F for the lamp (where needed) · Esc to pause",
     "avvisoTouch": "The game is made for a computer with keyboard and mouse. From here, the site will suit you better.",
     "avvisoMotion": "You asked for reduced motion: I've already turned off sway and distortion in the game, but it's still an experience in motion.",
     "caricamento": "The curator is looking for the keys…",
@@ -213,7 +429,6 @@
     "pausa": "Paused",
     "riprendi": "Resume",
     "chiudi": "Close",
-    "apri": "Open the page",
     "ricomincia": "Start over",
     "impostazioni": "Settings",
     "fov": "Field of view",
@@ -226,155 +441,372 @@
     "qualita": "Window quality",
     "bassa": "Low",
     "alta": "High",
-    "finaleDi": "Ending {i} of 5",
-    "finaliVisti": "Endings seen: {n} of 5",
     "interagisci": "[E] ",
     "prendi": "Pick up",
     "lascia": "[E] drop · click to throw",
-    "oggetti": {
-      "monitor": {
-        "azione": "Look at the monitor",
-        "titolo": "Brat Animator",
-        "testo": "My in-browser lyric video editor: LRC lyrics, a timeline, Canvas text animation and MP4/WebM export with WebCodecs.",
-        "url": "../en/projects/brat-animator/"
-      },
-      "targa": {
-        "azione": "Read the plaque",
-        "titolo": "Gabriele Lucia",
-        "testo": "19, from Sassuolo, Italy. Junior web developer and freelancer since 2023: websites, interfaces and SEO for local businesses. Computer Engineering at UNIMORE since 2026.",
-        "url": "../en/chi-sono/"
-      },
-      "scatola": {
-        "azione": "Look at the box"
-      },
-      "scrivania": {
-        "azione": "Walk up to the desk"
-      }
-    },
-    "archivio": [
-      [
-        "2021–2026",
-        "IIS Volta, Sassuolo",
-        "Diploma in Computer Science and Telecommunications"
-      ],
-      [
-        "2025",
-        "Erasmus+, Seville",
-        "Starbotica: IT support and educational activities"
-      ],
-      [
-        "2026",
-        "Internship, Format SRL",
-        "Industrial software and automation: PLC and SQL Server"
-      ],
-      [
-        "2026–",
-        "UNIMORE",
-        "Computer Engineering, part-time"
-      ]
-    ],
-    "targhe": {
-      "sala": "ROOM 01 · WAITING",
-      "corridoio": "B-07",
-      "scatolaTitolo": "a piece of Gabri",
-      "scatolaNota": "coming soon",
-      "speciale": "DO NOT TOUCH"
-    },
-    "fuori": [
-      "room_03.js",
-      "// TODO: script chapter 2",
-      "narrator.state = 'panic'",
-      "synk/webhook.js",
-      "regex: /^(\\d{1,2})[:.](\\d{2})$/",
-      "right_door.unused",
-      "neon_light_007"
-    ],
-    "finali": {
-      "dipendente": {
-        "titolo": "The model employee",
-        "testo": "You followed the script all the way to the archive. Here's Gabri's path and how to get in touch.",
-        "link": [
-          [
-            "Full path",
-            "../en/chi-sono/"
-          ],
-          [
-            "Contacts",
-            "../en/#contatti"
-          ]
-        ]
-      },
-      "magazzino": {
-        "titolo": "The storeroom",
-        "testo": "You disobeyed and found the hidden project: Brat Animator, an in-browser lyric video editor.",
-        "link": [
-          [
-            "Brat Animator",
-            "../en/projects/brat-animator/"
-          ],
-          [
-            "Code on GitHub",
-            "https://github.com/oakvx/bratAnimator"
-          ]
-        ]
-      },
-      "fuori": {
-        "titolo": "Off the map",
-        "testo": "You used a window where you shouldn't have and ended up backstage, where Gabri takes things apart to understand them. Synk lives there: WhatsApp messages, calendar and bookings.",
-        "link": [
-          [
-            "Synk",
-            "../en/projects/synk/"
-          ]
-        ]
-      },
-      "corridoio": {
-        "titolo": "The endless corridor",
-        "testo": "You went back too many times and the room changed behind you. At the end of the corridor was Beautify, the multi-salon management system from the diploma.",
-        "link": [
-          [
-            "Beautify",
-            "../en/projects/beautify/"
-          ]
-        ]
-      },
-      "attesa": {
-        "titolo": "The wait",
-        "testo": "You stood still and the curator ran out of words. The music remained: Gabri keeps a room just for that.",
-        "link": [
-          [
-            "After Hours",
-            "../en/fuori-orario/"
-          ]
-        ]
-      }
-    },
     "sale": {
-      "attesa": "Waiting room",
-      "laboratorio": "Lab",
-      "magazzino": "Storeroom",
-      "archivio": "Archive",
-      "altrove": "Elsewhere",
       "atrio": "Atrium",
       "uscita": "Exit",
       "gastronomia": "DELI"
     },
-    "didascalie": {
-      "monitor": [
-        "Brat Animator",
-        "Lyric video editor · Canvas, WebCodecs",
-        "LRC lyrics on a timeline, animated and exported to MP4 or WebM, all in the browser."
-      ],
-      "scatola": [
-        "A piece of Gabri",
-        "Work in progress · sealed",
-        "The contents have not been chosen yet. Please do not open."
-      ],
-      "gesto": [
-        "The gesture",
-        "Left click · right click",
-        "Two linked windows, only on the gridded panels. Whatever goes in one comes out of the other."
-      ]
-    }
+    "chiudiCartiglio": "E to close",
+    "puntoControllo": "Back to the checkpoint",
+    "esamina": "examine",
+    "azioni": {
+      "bancone": "take the windows",
+      "tappa-volta": "read the stop",
+      "tappa-freelance": "read the stop",
+      "tappa-erasmus": "read the stop",
+      "tappa-format": "read the stop",
+      "tappa-unimore": "read the stop",
+      "piko-approva": "approve the plan",
+      "piko-rifiuta": "reject the plan",
+      "brat-pausa": "pause or resume time",
+      "brat-indietro": "rewind one second",
+      "galleria-tema": "switch theme",
+      "terminale": "sit at the terminal",
+      "jukebox": "switch the TV",
+      "jukebox-avanti": "next track"
+    },
+    "cartigli": {
+      "bancone": {
+        "titolo": "The two windows",
+        "testo": "Left click opens the cyan window, right click the magenta one, only on the grid panels. In through one, out of the other."
+      },
+      "tappa-volta": {
+        "titolo": "IIS A. Volta, Sassuolo",
+        "testo": "2021 – 2026 · Computer Science and Telecommunications.\nThe diploma project is Beautify, the multi-salon CRM you will find further on."
+      },
+      "tappa-freelance": {
+        "titolo": "Freelance web developer",
+        "testo": "2023 – June 2026 · Websites and SEO consulting for local businesses around Sassuolo and Scandiano."
+      },
+      "tappa-erasmus": {
+        "titolo": "Erasmus+ in Seville",
+        "testo": "May – June 2025 · Starbotica: IT support, Windows, Active Directory, local networks."
+      },
+      "tappa-format": {
+        "titolo": "Format SRL",
+        "testo": "August – September 2026 · Software & automation apprentice: industrial software, PLC support, SQL Server, T-SQL."
+      },
+      "tappa-unimore": {
+        "titolo": "UNIMORE",
+        "testo": "2026 → · Computer Engineering at the University of Modena and Reggio Emilia."
+      }
+    },
+    "stanze": {
+      "ingresso": {
+        "cartello": "Entrance · night shift",
+        "testi": {}
+      },
+      "percorso": {
+        "cartello": "Journey",
+        "anni": {
+          "volta": "2021 → 2026",
+          "freelance": "2023 → 2026",
+          "erasmus": "2025",
+          "format": "2026",
+          "unimore": "2026 →"
+        }
+      },
+      "oakvx": {
+        "cartello": "After hours",
+        "tvSpenta": "TV · channel oakvx",
+        "tvAiuto": "E: play / pause · VCR: next",
+        "carillon": "attic music box",
+        "testi": {
+          "stanza": [
+            "After hours",
+            "oakvx's room",
+            "What stays on when work switches off: music, consoles, languages, stuff. The TV on the bookshelf plays; the rest is to look at."
+          ]
+        }
+      },
+      "smistamento": {
+        "cartello": "Backend & App Logic"
+      },
+      "yag": {
+        "cartello": "YAG · Yet Another Gateway",
+        "varco": "AUTH",
+        "uscita": "BACKEND",
+        "modelli": {
+          "a": "model A",
+          "b": "model B"
+        },
+        "testi": {
+          "yag": [
+            "YAG · Yet Another Gateway",
+            "experimental · v0.1.0-rc.2",
+            "An AI gateway written in C17: authenticated access to multiple inference backends, OpenAI-compatible and Anthropic-compatible protocol adapters, per-model routing and operational limits. React/TypeScript control console and an optional desktop client."
+          ],
+          "avviso": [
+            "Warning",
+            "YAG is experimental",
+            "Real-model compatibility and production security are still under qualification: don't expose it to untrusted networks."
+          ],
+          "chiave": [
+            "LAN client key",
+            "take it (E)",
+            "Without a key the authentication gate won't let you through."
+          ],
+          "flusso": [
+            "Backend 1",
+            "request flow",
+            "LAN client key → Auth → Protocol adapter (OpenAI / Anthropic) → Per-model routing + operational limits → Backend 1 or Backend 2. There's no way out here: the right model is the other one."
+          ],
+          "risposta": [
+            "Backend 2",
+            "200 OK",
+            "The request reached the right backend. Head back: YAG's lamp in the hub is on."
+          ]
+        }
+      },
+      "piko": {
+        "cartello": "Piko",
+        "approva": "APPROVE",
+        "rifiuta": "REJECT",
+        "piano": "Plan {n}",
+        "attesa": "Waiting for your approval.",
+        "piani": [
+          [
+            "Go straight to the button.",
+            "Cross the floor in the middle.",
+            "Press the button."
+          ],
+          [
+            "Turn left along the wall.",
+            "Pass the pit on the walkway.",
+            "Press the button at the end."
+          ]
+        ],
+        "testi": {
+          "piko": [
+            "Piko",
+            "alpha preview · Windows x64",
+            "A local Windows agent: it looks at the app in front of it, writes a plan with a local Ollama model, waits for you to read it, and only then clicks and types. No cloud, no background screen stream, no action without your approval."
+          ],
+          "limiti": [
+            "How it is made",
+            "Python · FastAPI · SQLite · Ollama · React/Tauri",
+            "Per-session and per-app permissions, an SQLite session state machine, a consent-based Teach recorder, importable Skills. Alpha preview: not for sensitive, destructive or financial tasks."
+          ]
+        }
+      },
+      "brat": {
+        "cartello": "Brat Animator",
+        "pausa": "⏯ PAUSE",
+        "indietro": "⏪ BACK",
+        "testi": {
+          "brat": [
+            "Brat Animator",
+            "oakvx's first project",
+            "A lyric-video studio that runs entirely in the browser, with a Windows 7-style desktop made with 7.css. Words appear on time, like here."
+          ],
+          "tecnica": [
+            "How it is made",
+            "JavaScript · 7.css · Canvas 2D · WebCodecs · IndexedDB · PWA",
+            "A timestamp-driven Canvas 2D compositor keeps preview and export aligned; WebCodecs exports MP4 where supported. Projects live in IndexedDB and portable .brat.zip archives, and it works offline too. Latest: timed syllables of a split word show a hyphen until the word completes."
+          ]
+        }
+      },
+      "synk": {
+        "cartello": "synk",
+        "occupato": "booked",
+        "calendario": "Google Calendar · today",
+        "vuoto": "Waiting to sync…",
+        "saga": "compensation saga",
+        "soluzione": "Colour 11–13 · Cut and blow-dry after 14",
+        "richieste": {
+          "taglio": "Cut",
+          "colore": "Colour",
+          "piega": "Blow-dry"
+        },
+        "testi": {
+          "synk": [
+            "synk",
+            "release candidate 1.2.0-rc.6",
+            "On-premise salon booking with WhatsApp messages and Google Calendar. Requests arrive as messages; the calendar won't accept two overlapping appointments. It's in testing: not for real customer data."
+          ],
+          "tecnica": [
+            "How it is made",
+            "Node.js · PHP · PostgreSQL 16 · Docker",
+            "A GiST exclusion constraint makes double booking impossible; writes to Google Calendar go through a transactional outbox with leases and fencing tokens, and a compensation saga puts things back when something fails. Optional local Ollama."
+          ]
+        }
+      },
+      "beautify": {
+        "cartello": "Beautify",
+        "salone": "Salon",
+        "tabellone": "Availability · Tuesday 15:00",
+        "occupato": "booked",
+        "libero": "free",
+        "testi": {
+          "beautify": [
+            "Beautify",
+            "diploma project · PHP · MySQL",
+            "A CRM for several salons: clients, staff roles, appointments, stock and analytics. Each salon's data stays separate, while availability checks are shared."
+          ]
+        }
+      },
+      "middleman": {
+        "cartello": "middleManPS4 · Reverse Engineering",
+        "etichette": {
+          "elf": "ELF · validation",
+          "orbis": "Orbis · binaries",
+          "psf": "PSF · metadata",
+          "nid": "NID · symbols",
+          "ghidra": "Ghidra export",
+          "rete": "passive DNS · TCP · TLS",
+          "console": "PS4 12.52 · GoldHEN",
+          "lettura": "read-only"
+        },
+        "testi": {
+          "mm": [
+            "middleManPS4",
+            "research · WIP · v0.17",
+            "Python tooling (standard library only) and C payloads around three questions: how a payload gets loaded, what is inside the binaries, what is visible on the wire. Read-only diagnostics and offline analysis; no PSN bypass, no firmware spoofing. Press F: here only what you can prove counts."
+          ]
+        }
+      },
+      "galleria": {
+        "cartello": "Design & Web",
+        "uscita": "→ toolbox",
+        "presto": "coming soon · illustrated scenarios",
+        "testi": {
+          "portfolio": [
+            "Portfolio",
+            "HTML · CSS · JavaScript",
+            "Static site with no build step: generated EN pages, automated checks for links, SEO, accessibility and sitemap. The screen above is filming you: you are inside the portfolio."
+          ],
+          "spinotto": [
+            "Spinotto Felice",
+            "a small-business website demo",
+            "Responsive, light and dark themes (try the lever), FAQ, saved preferences. The business is invented; content and images are by Alberto Pecchini."
+          ],
+          "topgun": [
+            "Top Gun Fly School",
+            "unofficial landing page",
+            "One page, in one file. Not for bookings or flight information."
+          ],
+          "synkris": [
+            "Synkris site",
+            "project website",
+            "Static site with illustrative scenarios. The real application is synk, back in the hub; the site takes no bookings."
+          ]
+        }
+      },
+      "scrivania": {
+        "cartello": "Toolbox",
+        "porta": "→ commits",
+        "benvenuto": [
+          "portfolio.sh · night shift",
+          "type help and press Enter"
+        ],
+        "strumenti": [
+          [
+            "Web",
+            "HTML, CSS, JavaScript, React, TypeScript, Canvas 2D, WebCodecs"
+          ],
+          [
+            "Backend & AI",
+            "Node.js, PHP, C17, Python, FastAPI, Docker, Ollama"
+          ],
+          [
+            "Data",
+            "PostgreSQL, MySQL, SQL Server (T-SQL), SQLite"
+          ],
+          [
+            "Reverse eng.",
+            "Python, C payloads, ELF/Orbis, Ghidra"
+          ],
+          [
+            "Systems",
+            "Windows, UI Automation, Active Directory, PLC"
+          ]
+        ],
+        "principi": [
+          "local-first when it fits",
+          "explicit states over assumed success",
+          "evidence over assumptions",
+          "accessible motion"
+        ],
+        "percorso": [
+          "2026 →      Computer Engineering, UNIMORE",
+          "Aug–Sep 2026  Format SRL: industrial software, PLC, SQL Server",
+          "2023–2026    freelance web & SEO, Sassuolo and Scandiano",
+          "May–Jun 2025  Erasmus+ in Seville, Starbotica",
+          "2021–2026    IIS A. Volta: Beautify was the diploma project"
+        ],
+        "contatti": [
+          "email: gabrielelucia07@gmail.com",
+          "open to: internships · freelance · interesting side projects",
+          "the contacts door is at the end of the tour"
+        ],
+        "chi": [
+          "oakvx (Gabriele Lucia), Sassuolo, Italy",
+          "computer engineering student, developer and graphic designer",
+          "I work on both sides of a system: the interface and the logic that has to hold up"
+        ],
+        "log": [
+          "oakvx.github.io · updated 2026-11-26",
+          "bratAnimator · updated 2026-11-26",
+          "piko · updated 2026-11-26",
+          "oye · updated 2026-11-25",
+          "yag · updated 2026-11-24"
+        ],
+        "aree": {
+          "web": [
+            "Web",
+            "interfaces",
+            "HTML, CSS, JavaScript, React, TypeScript, 7.css, Canvas 2D, WebCodecs, MediaRecorder, IndexedDB, service workers, accessibility, SEO."
+          ],
+          "backend": [
+            "Backend & AI infrastructure",
+            "services",
+            "Node.js, Express, PHP, C17, CMake, libcurl, Docker Compose, Python, FastAPI, SQLite, Ollama, Git, GitHub Actions, OpenAI-compatible APIs."
+          ],
+          "dati": [
+            "Data",
+            "databases",
+            "PostgreSQL (constraints, outbox/queue patterns, SKIP LOCKED), MySQL, SQL Server (T-SQL), SQLite."
+          ],
+          "reverse": [
+            "Reverse engineering",
+            "analysis",
+            "Python, C payloads, ELF/Orbis/PSF/NID, Ghidra, passive DNS/TLS/TCP metadata."
+          ],
+          "sistemi": [
+            "Systems",
+            "IT",
+            "Windows, Windows UI Automation, NSIS, Active Directory, IT support, industrial software, PLC basics."
+          ]
+        }
+      },
+      "commit": {
+        "cartello": "GitHub activity",
+        "uscita": "→ night",
+        "sotto": "public commits · oakvx + oakvxish · live",
+        "testi": {
+          "recenti": [
+            "Recently pushed",
+            "auto-updated by GitHub Actions",
+            "oakvx.github.io, bratAnimator, piko, oye, yag. The number on the wall is the real one, counted right now."
+          ]
+        }
+      },
+      "contatti": {
+        "cartello": "Contacts",
+        "titolo": "Got a project, a job or a weird idea?",
+        "aperto": "Open to: internships · freelance · interesting side projects",
+        "dove": "Sassuolo, Italy · Computer Engineering @ UNIMORE"
+      }
+    },
+    "stanzaDi": "ROOM {n} OF {tot}",
+    "comandoF": "F: evidence lamp",
+    "fineTitolo": "End of shift",
+    "fineTesto": "Tour completed in {tempo}. Secrets found: {segreti}. Thanks for visiting: oakvx answers every email.",
+    "scrivimi": "Email me",
+    "copiaEmail": "Copy email",
+    "copiata": "Copied"
   }
 }

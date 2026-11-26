@@ -219,7 +219,6 @@ html, body {
 .impostazioni select { padding: 0.35rem 0.6rem; border: 1px solid rgba(29, 37, 43, 0.2); border-radius: var(--r-s); background: #fff; }
 .impostazioni output { font-variant-numeric: tabular-nums; color: var(--tenue); }
 
-.finale-numero { margin: 0 0 0.3rem; color: var(--accento); font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; }
 
 .mirino {
   position: fixed; left: 50%; top: 50%;
@@ -309,3 +308,25 @@ html, body {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
   .pagine i { animation-duration: 1.6s !important; }
 }
+
+/* ------------------------------------------------------------ cartiglio: si legge senza uscire dal gioco */
+.cartiglio {
+  position: fixed; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%);
+  width: min(34rem, calc(100vw - 2rem)); padding: 1.3rem 1.5rem 1rem;
+  border: 1px solid rgba(29, 37, 43, 0.18); border-radius: var(--r-m);
+  background: var(--vetro); box-shadow: var(--ombra); color: var(--inchiostro);
+  pointer-events: none;
+}
+.cartiglio[hidden] { display: none; }
+.cartiglio h2 { margin: 0 0 0.5rem; font-size: 1.35rem; letter-spacing: -0.02em; }
+.cartiglio p { margin: 0; line-height: 1.5; white-space: pre-line; }
+.cartiglio .cartiglio-chiudi { margin-top: 0.8rem; color: var(--tenue); font-size: 0.85rem; }
+
+/* ------------------------------------------------------------ la data delle fotocamere del 2008 */
+.data2008 {
+  position: fixed; right: 2.2rem; bottom: 1.6rem; z-index: 2; margin: 0;
+  color: #f4d03a; font: 700 clamp(1.4rem, 3vw, 2.2rem)/1 "Courier New", monospace; letter-spacing: 0.06em;
+  text-shadow: 0 0 6px rgba(255, 170, 0, 0.55), 1px 1px 0 #7a5400;
+  pointer-events: none;
+}
+.data2008[hidden] { display: none; }

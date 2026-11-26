@@ -24,7 +24,7 @@ export function costruisci(m, g) {
 
   // la stanza esiste solo come zona (atmosfera, suono, nome): le pareti sono curve
   m.stanze.push({
-    nome: 'spirale', x0: CX - R, x1: CX + R, z0: CZ - R, z1: CZ + R, y0: -6, h: 20, gravita: 1,
+    nome: 'spirale', x0: CX - R, x1: CX + R, z0: CZ - R, z1: CZ + R, y0: -6, h: 20, gravita: 1, ala: 'transito',
     atmosfera: { nebbia: 0x14201e, vicino: 1.5, lontano: 20, cielo: 0x9cc2bb, terra: 0x0a1211, intensita: 1.0 },
     suono: { ronzio: 0.15, gocce: 0.4 },
   });
@@ -114,7 +114,9 @@ export function costruisci(m, g) {
     // la porta in fondo porta al supermercato
     if (piedi < 0.6 && r > R - 0.9 && Math.abs(Math.atan2(dz, -dx)) < 0.3 && !g.inViaggio) {
       g.inViaggio = true;
-      g.teletrasporta(452, 0, 1.5, Math.PI, () => { g.inViaggio = false; });
+      g.teletrasporta(162.5, 0, 1.5, Math.PI, () => { g.inViaggio = false; });
     }
   });
+  // per i test: quasi in fondo, davanti alla porta
+  return { debug: { risolvi: () => { g.giocatore().pos.set(CX - R + 1.2, 0.86, CZ); g.giocatore().vel.set(0, 0, 0); } } };
 }

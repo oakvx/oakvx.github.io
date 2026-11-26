@@ -1,32 +1,30 @@
 // Il gioco: caricato solo dopo la scelta "Gioco" nel menu.
 import * as THREE from 'three';
-import { creaMateriali, texTesto } from './engine/materiali.js';
+import { creaMateriali, texTesto, canvasTex } from './engine/materiali.js';
 import { Mondo, geoTonda } from './engine/mondo.js';
 import { creaArredi } from './engine/arredi.js';
 import { Corpo, muovi, passoCorpo, G } from './engine/fisica.js';
 import { Portali } from './portali.js';
+import { Passaggi } from './engine/passaggi.js';
 import { Narratore } from './narratore.js';
 import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
+import { creaGiro, creaAiuti } from './logica/giro.js';
+import { creaContapassi } from './logica/passi.js';
+import { totaleCommit } from './logica/commit.js';
 
 const $ = (id) => document.getElementById(id);
-const FINALI = ['dipendente', 'magazzino', 'fuori', 'corridoio', 'attesa'];
-const STANZE = ['sala', 'bivio', 'laboratorio', 'archivio', 'magazzino', 'fuorimappa', 'corridoio',
-  'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
-const ATMOSFERA = { nebbia: 0xe9eef1, vicino: 1.5, lontano: 22, cielo: 0xf6f9fb, terra: 0xc4cdd1, intensita: 2.9 };
+const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'middleman', 'galleria', 'scrivania', 'commit', 'contatti', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const ATMOSFERA = { nebbia: 0x3c423f, vicino: 3, lontano: 26, cielo: 0xe4ece6, terra: 0x404642, intensita: 2.3 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
 const VEL = 3.2;
 const SALTO = 4.6;
-const FOG = 0xe9eef1;
+const FOG = 0x3c423f;
 
 function leggiImpostazioni() {
   const base = { fov: 74, sens: 1, sott: 'medi', qual: '0.5', calmo: reduceMotion };
   try { return { ...base, ...JSON.parse(localStorage.getItem('gioco-imp') || '{}') }; } catch { return base; }
-}
-
-function finaliVisti() {
-  try { return new Set(JSON.parse(localStorage.getItem('gioco-finali') || '[]').filter((f) => FINALI.includes(f))); } catch { return new Set(); }
 }
 
 export async function avvia(ctx) {
@@ -35,11 +33,11 @@ export async function avvia(ctx) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(FOG);
-  scene.fog = new THREE.Fog(FOG, 1.5, 22);
+  scene.fog = new THREE.Fog(FOG, ATMOSFERA.vicino, ATMOSFERA.lontano);
   const imp = leggiImpostazioni();
   const camera = new THREE.PerspectiveCamera(imp.fov, innerWidth / innerHeight, 0.02, 80);
   camera.rotation.order = 'YXZ';
-  const emi = new THREE.HemisphereLight(0xf6f9fb, 0xc4cdd1, 2.9);
+  const emi = new THREE.HemisphereLight(ATMOSFERA.cielo, ATMOSFERA.terra, ATMOSFERA.intensita);
   scene.add(emi);
   // gruppo fisso di luci puntiformi, assegnate alle definizioni più vicine
   const gruppoLuci = Array.from({ length: N_LUCI }, () => {
@@ -53,6 +51,7 @@ export async function avvia(ctx) {
   const mat = creaMateriali(renderer);
   const mondo = new Mondo(scene, mat);
   const portali = new Portali(renderer, scene, mondo);
+  const passaggi = new Passaggi(renderer, scene);
   const suoni = new Suoni(ctx);
   const datiNarr = await (await fetch('dati/narratore.json')).json();
   const narratore = new Narratore(datiNarr, ctx, suoni);
@@ -74,12 +73,20 @@ export async function avvia(ctx) {
   const cubi = [];
   let yaw = 0;
   let pitch = 0;
-  const geoCubo = geoTonda(0.44, 0.44, 0.44, 0.045);
-  const matCubo = new THREE.MeshLambertMaterial({ color: 0xe6ecef });
+  // cubi a spigoli vivi, con un hash di commit stampato sui lati
+  const geoCubo = new THREE.BoxGeometry(0.44, 0.44, 0.44);
+  const matCubo = () => {
+    const hash = Array.from({ length: 7 }, () => '0123456789abcdef'[Math.floor(Math.random() * 16)]).join('');
+    return new THREE.MeshLambertMaterial({ map: canvasTex(128, 128, (c, w, h) => {
+      c.fillStyle = '#9a9c95'; c.fillRect(0, 0, w, h);
+      c.fillStyle = '#6d706a'; c.fillRect(0, 0, w, 6); c.fillRect(0, h - 6, w, 6); c.fillRect(0, 0, 6, h); c.fillRect(w - 6, 0, 6, h);
+      c.fillStyle = '#23292a'; c.font = '700 22px monospace'; c.textAlign = 'center'; c.fillText(hash, w / 2, h / 2 + 8);
+    }) });
+  };
   const interattivi = [];
 
-  function cubo(x, y, z, { speciale = false, mappa = null } = {}) {
-    const mesh = new THREE.Mesh(geoCubo, mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo);
+  function cubo(x, y, z, { speciale = false, mappa = null, materiale = null } = {}) {
+    const mesh = new THREE.Mesh(geoCubo, materiale || (mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo()));
     mesh.position.set(x, y, z);
     scene.add(mesh);
     const c = new Corpo(mesh.position, new THREE.Vector3(0.22, 0.22, 0.22), { mesh });
@@ -90,18 +97,51 @@ export async function avvia(ctx) {
   }
 
   let fadeCb = null;
+  const controlli = new Map();
+  let modo2008 = 0;
+  let tempoGiro = 0;
+  let commitPromessa = null;
+  const aiuti = new Map();
   const g = {
-    mondo, scene, portali, emetti, su, cubo, debug: ctx.debug,
+    mondo, scene, portali, passaggi, emetti, su, cubo, debug: ctx.debug,
     T: () => ctx.T,
     lingua: () => ctx.lingua,
     suLingua: (fn) => ctx.suLingua(fn),
     texTesto,
     interattivo: (mesh, chiave) => { mesh.userData.chiave = chiave; interattivi.push(mesh); },
+    camera,
+    renderer,
+    // modalità testo (terminale): i tasti vanno a suTasto invece di muovere il giocatore
+    modoTesto: (attivo, suTasto) => { modoTesto = attivo ? suTasto : null; tasti.clear(); },
+    atmosfera: (a) => { atmo = { ...ATMOSFERA, ...a }; },
+    // modalità 2008 (stanza di oakvx): filtro da fotocamera digitale e data gialla
+    modo2008: (on) => { modo2008 = on ? 1 : 0; $('data2008').hidden = !on; },
+    modo2008Valore: () => post.uniforms.uModo2008.value,
     giocatore: () => giocatore,
+    tenuto: () => tenuto,
     yaw: () => yaw,
     narratore: () => narratore,
-    finale: (id) => finale(id),
     suoni,
+    musica: suoni.musica,
+    // contatore pubblico dei commit: una richiesta sola, condivisa da muro e cartelli
+    commit: () => (commitPromessa ||= totaleCommit({ fetch: (u, o) => fetch(u, o), storage: localStorage })),
+    giro: creaGiro(),
+    // punto di ripresa di una stanza: chi cade o si incastra torna qui
+    puntoControllo: (stanza, x, piedi, z, yawP = 0) => { controlli.set(stanza, { x, piedi, z, yaw: yawP }); },
+    cartiglio: (chiave) => apriCartiglio(chiave),
+    lampada: (id) => {
+      if (!g.giro.completa(id)) return false;
+      suoni.lampada?.();
+      emetti('lampada:' + id);
+      return true;
+    },
+    aiuti: (stanza) => {
+      const a = creaAiuti();
+      aiuti.set(stanza, a);
+      return a;
+    },
+    segreto: (id) => { if (g.giro.segreto(id)) emetti('segreto:' + id); },
+    fine: () => fine(),
     teletrasporta: (x, piedi, z, nuovoYaw = null, prima = null) => g.velo(() => {
       if (prima) prima();
       giocatore.pos.set(x, piedi + giocatore.half.y + 0.01, z);
@@ -121,30 +161,44 @@ export async function avvia(ctx) {
 
   // le stanze sono moduli separati, scaricati qui
   const moduli = await Promise.all(STANZE.map((n) => import(`./stanze/${n}.js`)));
-  moduli.forEach((mod) => mod.costruisci(mondo, g));
-  const meshSolide = mondo.solidi.filter((s) => s.mesh && s.mesh.visible).map((s) => s.mesh);
+  const debugStanze = {};
+  moduli.forEach((mod, i) => {
+    const esito = mod.costruisci(mondo, g);
+    if (esito && esito.debug) debugStanze[STANZE[i]] = esito.debug;
+  });
+  // i vetri sono solidi ma il raggio delle finestre li attraversa
+  const meshSolide = mondo.solidi.filter((s) => s.mesh && s.mesh.visible && !s.mesh.userData.vetro).map((s) => s.mesh);
 
   // ---------------------------------------------------------------- post-processing
   const rt = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: 4 });
   const post = new THREE.ShaderMaterial({
-    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 } },
+    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 }, uModo2008: { value: 0 } },
     vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
     fragmentShader: `
-      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo;
+      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo; uniform float uModo2008;
       varying vec2 vUv;
       float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
       void main(){
         vec2 c = vUv - 0.5; float r2 = dot(c, c);
         vec2 off = c * 0.004 * (1.0 + r2 * 4.0) * (1.0 - uCalmo);
         vec3 col = vec3(texture2D(tDiffuse, vUv + off).r, texture2D(tDiffuse, vUv).g, texture2D(tDiffuse, vUv - off).b);
-        vec2 px = 3.0 / uRes;
-        vec3 blur = (texture2D(tDiffuse, vUv + vec2(px.x, 0.0)).rgb + texture2D(tDiffuse, vUv - vec2(px.x, 0.0)).rgb
-                   + texture2D(tDiffuse, vUv + vec2(0.0, px.y)).rgb + texture2D(tDiffuse, vUv - vec2(0.0, px.y)).rgb) * 0.25;
-        col = mix(col, max(col, blur), 0.45);
+        // modalità 2008: blocchi JPEG leggeri (sul colore lineare, prima della gamma)
+        if (uModo2008 > 0.0) {
+          vec2 blocco = (floor(vUv * uRes / 8.0) + 0.5) * 8.0 / uRes;
+          col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.22 * uModo2008);
+        }
         col = pow(max(col, 0.0), vec3(1.0 / 2.2));
-        col *= vec3(0.975, 1.0, 1.025);
-        col *= mix(0.76, 1.0, smoothstep(0.62, 0.08, r2));
-        col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.04, 0.015, uCalmo);
+        if (uModo2008 > 0.0) {
+          float m8 = uModo2008;
+          col *= mix(1.0, 1.32 - r2 * 2.4, m8);                                   // flash frontale
+          col = mix(col, vec3(dot(col, vec3(0.299, 0.587, 0.114))), 0.32 * m8);   // colori slavati
+          col *= mix(vec3(1.0), vec3(1.07, 1.0, 0.88), m8);                       // sensore caldo
+          col += (hash(vUv * uRes * 0.5 + floor(uTime * 12.0)) - 0.5) * 0.05 * m8;
+        }
+        col *= vec3(1.0, 0.99, 0.96);
+        col *= mix(0.7, 1.0, smoothstep(0.62, 0.08, r2));
+        col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.05, 0.02, uCalmo);
+        col = floor(col * 48.0 + 0.5) / 48.0;
         gl_FragColor = vec4(col, 1.0);
       }`,
     depthTest: false,
@@ -163,6 +217,7 @@ export async function avvia(ctx) {
     rt.setSize(w, h);
     post.uniforms.uRes.value.set(w, h);
     portali.impostaScala(Number(imp.qual), w, h);
+    passaggi.ridimensiona(w, h, Number(imp.qual));
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
   }
@@ -174,8 +229,10 @@ export async function avvia(ctx) {
     camera.fov = imp.fov;
     camera.updateProjectionMatrix();
     post.uniforms.uCalmo.value = imp.calmo ? 1 : 0;
+    suoni.musica.calmo(imp.calmo);
     $('sottotitoli').className = 'sottotitoli ' + imp.sott + ($('sottotitoli').classList.contains('panico') ? ' panico' : '');
     portali.impostaScala(Number(imp.qual), rt.width, rt.height);
+    passaggi.ridimensiona(rt.width, rt.height, Number(imp.qual));
     $('imp-fov').value = imp.fov;
     $('imp-fov-v').textContent = imp.fov + '°';
     $('imp-sens').value = imp.sens;
@@ -193,27 +250,54 @@ export async function avvia(ctx) {
   applicaImpostazioni();
 
   // ---------------------------------------------------------------- stato di gioco
-  let stato = 'avvio';            // avvio | gioco | pausa | scheda | finale
+  let stato = 'avvio';            // avvio | gioco | pausa | finale
   let gesto = false;
   let tenuto = null;
   let finito = false;
   let fermo = 0;
   let passi = 0;
+  const contapassi = creaContapassi(0.55);
   let stanzaAttuale = null;
+  let ultimoControllo = 'ingresso';
   let mirato = null;
+  let cartiglio = null;           // { chiave, pos } mentre è aperto
+  let modoTesto = null;           // funzione che riceve i tasti mentre si scrive
   const tasti = new Set();
-  const visti = finaliVisti();
 
   function mostra(id) {
-    for (const p of ['avvio', 'pausa', 'scheda', 'finale']) $(p).hidden = p !== id;
+    for (const p of ['avvio', 'pausa', 'finale']) $(p).hidden = p !== id;
     const inGioco = id === null;
     $('mirino').hidden = !inGioco;
     $('finestre').hidden = !inGioco || !gesto;
     if (!inGioco) $('suggerimento').hidden = true;
-    $('sottotitoli').style.visibility = id === 'pausa' || id === 'scheda' ? 'hidden' : '';
+    $('sottotitoli').style.visibility = id === 'pausa' ? 'hidden' : '';
+    if (!inGioco) chiudiCartiglio();
   }
 
-  function testoFinali() { return ctx.T.finaliVisti.replace('{n}', visti.size); }
+  function apriCartiglio(chiave) {
+    const c = ctx.T.cartigli && ctx.T.cartigli[chiave];
+    if (!c) return;
+    cartiglio = { chiave, pos: giocatore.pos.clone() };
+    $('cartiglio-titolo').textContent = c.titolo;
+    $('cartiglio-testo').textContent = c.testo;
+    $('cartiglio').hidden = false;
+  }
+  function chiudiCartiglio() {
+    cartiglio = null;
+    $('cartiglio').hidden = true;
+  }
+  ctx.suLingua(() => { if (cartiglio) apriCartiglio(cartiglio.chiave); });
+
+  function riprendi() {
+    const c = controlli.get(ultimoControllo) || controlli.get('ingresso');
+    if (!c) return;
+    giocatore.pos.set(c.x, c.piedi + giocatore.half.y + 0.01, c.z);
+    giocatore.vel.set(0, 0, 0);
+    giocatore.zPrima = [null, null];
+    yaw = c.yaw;
+    pitch = 0;
+    if (tenuto) { tenuto.tenuto = false; tenuto = null; }
+  }
 
   function blocca() {
     suoni.avvia();
@@ -226,9 +310,10 @@ export async function avvia(ctx) {
       stato = 'gioco';
       mostra(null);
     } else if (stato === 'gioco') {
+      // Esc nel browser libera sempre il puntatore: chiude anche il terminale
+      if (modoTesto) modoTesto({ code: 'Escape', key: 'Escape', preventDefault() {} });
       stato = 'pausa';
       tasti.clear();
-      $('pausa-finali').textContent = testoFinali();
       mostra('pausa');
       $('riprendi').focus();
     }
@@ -242,7 +327,7 @@ export async function avvia(ctx) {
   };
   $('avvio-entra').addEventListener('click', blocca);
   $('riprendi').addEventListener('click', blocca);
-  $('scheda-chiudi').addEventListener('click', blocca);
+  $('punto-controllo').addEventListener('click', () => { g.velo(riprendi); blocca(); });
   $('ricomincia').addEventListener('click', ricomincia);
   $('ricomincia-pausa').addEventListener('click', ricomincia);
   canvas.addEventListener('click', () => { if (stato === 'pausa' || stato === 'avvio') blocca(); });
@@ -264,18 +349,24 @@ export async function avvia(ctx) {
   });
 
   document.addEventListener('keydown', (e) => {
+    if (stato === 'gioco' && modoTesto) {
+      e.preventDefault();
+      modoTesto(e);
+      return;
+    }
     if (stato === 'gioco') {
       fermo = 0;
       if (e.code === 'KeyE' && !e.repeat) interagisci();
+      if (e.code === 'KeyF' && !e.repeat) {
+        const st = mondo.stanzaDi(giocatore.pos);
+        if (st && st.prove) emetti('lampada-prove');
+      }
       if (e.code === 'Space' && giocatore.aTerra) {
         const st = mondo.stanzaDi(giocatore.pos);
         giocatore.vel.y = SALTO * Math.sqrt(st ? st.gravita : 1);
       }
       tasti.add(e.code);
       if (e.code.startsWith('Arrow') || e.code === 'Space') e.preventDefault();
-    } else if (e.code === 'Escape' && stato === 'scheda') {
-      stato = 'pausa';
-      mostra('pausa');
     }
   });
   document.addEventListener('keyup', (e) => tasti.delete(e.code));
@@ -301,6 +392,7 @@ export async function avvia(ctx) {
 
   function interagisci() {
     if (tenuto) { tenuto.tenuto = false; tenuto = null; return; }
+    if (cartiglio) { chiudiCartiglio(); return; }
     if (!mirato) return;
     if (mirato.corpo) {
       tenuto = mirato.corpo;
@@ -311,17 +403,7 @@ export async function avvia(ctx) {
     }
     const k = mirato.chiave;
     emetti('oggetto:' + k);
-    const o = ctx.T.oggetti[k];
-    if (o && o.testo) {
-      $('scheda-titolo').textContent = o.titolo;
-      $('scheda-testo').textContent = o.testo;
-      $('scheda-link').href = o.url;
-      stato = 'scheda';
-      tasti.clear();
-      document.exitPointerLock();
-      mostra('scheda');
-      $('scheda-link').focus();
-    }
+    if (ctx.T.cartigli && ctx.T.cartigli[k]) apriCartiglio(k);
   }
 
   function lancia() {
@@ -344,7 +426,7 @@ export async function avvia(ctx) {
     $('mirino').classList.toggle('attivo', !!mirato);
     if (tenuto) { sugg.textContent = ctx.T.lascia; sugg.hidden = false; }
     else if (mirato) {
-      sugg.textContent = ctx.T.interagisci + (mirato.corpo ? ctx.T.prendi : ctx.T.oggetti[mirato.chiave].azione);
+      sugg.textContent = ctx.T.interagisci + (mirato.corpo ? ctx.T.prendi : (ctx.T.azioni && ctx.T.azioni[mirato.chiave]) || ctx.T.esamina);
       sugg.hidden = false;
     } else sugg.hidden = true;
   }
@@ -355,32 +437,44 @@ export async function avvia(ctx) {
       gesto = true;
       $('finestre').hidden = stato !== 'gioco';
     }
-    if (nome === 'speciale') finale('magazzino');
-    if (nome === 'scrivania') finale('dipendente');
-    if (nome === 'fuori') narratore.poi(() => finale('fuori'));
   }
 
-  function finale(id) {
+  // la schermata finale: tempo, segreti, scrivimi / copia email (torna al sito e rigioca sono nell'HTML)
+  function riempiFinale() {
+    const t = ctx.T;
+    const mm = String(Math.floor(tempoGiro / 60)).padStart(2, '0');
+    const ss = String(Math.floor(tempoGiro % 60)).padStart(2, '0');
+    $('finale-titolo').textContent = t.fineTitolo;
+    const box = $('finale-contenuto');
+    const p = document.createElement('p');
+    p.textContent = t.fineTesto.replace('{tempo}', `${mm}:${ss}`).replace('{segreti}', `${g.giro.segreti().length}/3`);
+    const scelte = document.createElement('div');
+    scelte.className = 'scelte';
+    const mail = document.createElement('a');
+    mail.className = 'tasto tasto-forte';
+    mail.href = 'mailto:gabrielelucia07@gmail.com';
+    mail.textContent = t.scrivimi;
+    const copia = document.createElement('button');
+    copia.type = 'button';
+    copia.id = 'copia-email';
+    copia.className = 'tasto';
+    copia.textContent = t.copiaEmail;
+    copia.addEventListener('click', () => {
+      const fatto = () => { copia.textContent = t.copiata; };
+      if (navigator.clipboard) navigator.clipboard.writeText('gabrielelucia07@gmail.com').then(fatto, () => {});
+    });
+    scelte.append(mail, copia);
+    box.replaceChildren(p, scelte);
+  }
+
+  // la schermata finale (riempita dalla stanza dei contatti)
+  function fine() {
     if (finito) return;
     finito = true;
-    if (id !== 'fuori') narratore.evento('finale:' + id);
+    emetti('fine');
     narratore.poi(() => {
-      visti.add(id);
-      localStorage.setItem('gioco-finali', JSON.stringify([...visti]));
       suoni.finale();
-      const f = ctx.T.finali[id];
-      $('finale-numero').textContent = ctx.T.finaleDi.replace('{i}', FINALI.indexOf(id) + 1);
-      $('finale-titolo').textContent = f.titolo;
-      $('finale-testo').textContent = f.testo;
-      const box = $('finale-link');
-      box.replaceChildren(...f.link.map(([testo, url]) => {
-        const a = document.createElement('a');
-        a.className = 'tasto';
-        a.href = url;
-        a.textContent = testo;
-        return a;
-      }));
-      $('finale-visti').textContent = testoFinali();
+      riempiFinale();
       stato = 'finale';
       tasti.clear();
       document.exitPointerLock();
@@ -424,9 +518,18 @@ export async function avvia(ctx) {
       yaw += t.dyaw;
       suoni.passaggio();
       emetti('portale:attraversato', t);
-    } else passi += Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
-    // caduta nel vuoto: si torna all'inizio della stanza corrente
-    if (giocatore.pos.y < -20) { giocatore.pos.copy(SPAWN); giocatore.vel.set(0, 0, 0); }
+    } else {
+      const tp = passaggi.attraversa(giocatore);
+      if (tp) { yaw += tp.dyaw; emetti('passaggio:' + tp.id, tp); }
+      else {
+        const d = Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
+        passi += d;
+        if (giocatore.aTerra && contapassi.avanza(d)) suoni.passo(bagnato ? 'acqua' : (stQui && stQui.passi) || 'cemento');
+      }
+    }
+    // caduta nel vuoto: si torna al punto di ripresa dell'ultima stanza che ne ha uno
+    const ultima = controlli.get(ultimoControllo);
+    if (giocatore.pos.y < (ultima ? ultima.piedi : 0) - 20) g.velo(riprendi);
   }
 
   function aggiornaCubi(dt) {
@@ -440,8 +543,9 @@ export async function avvia(ctx) {
         if (c.vel.length() > 14) c.vel.setLength(14);
       }
       const varchi = portali.varchi(c);
-      passoCorpo(c, dt, mondo, cubi, varchi);
-      if (portali.attraversa(c) && c.tenuto) { c.tenuto = false; tenuto = null; }
+      const urto = passoCorpo(c, dt, mondo, cubi, varchi);
+      if (urto > 2 && !c.tenuto) suoni.urto(Math.min(1, urto / 8));
+      if ((portali.attraversa(c) || passaggi.attraversa(c)) && c.tenuto) { c.tenuto = false; tenuto = null; }
       if (c.pos.y < -20) { c.pos.y = 3; c.vel.set(0, 0, 0); }
     }
   }
@@ -453,6 +557,12 @@ export async function avvia(ctx) {
       stanzaAttuale = nome;
       if (s.atmosfera !== 'eredita') atmo = { ...ATMOSFERA, ...(s.atmosfera || {}) };
       if (s.suono !== 'eredita') suoni.ambiente(s.suono || {});
+      if (s.atmosfera !== 'eredita') {
+        suoni.musica.ala(s.ala);
+        suoni.musica.letto(s.letto);
+        suoni.musica.transizione();
+      }
+      if (controlli.has(nome)) ultimoControllo = nome;
       emetti('stanza:' + nome);
     }
     mondo.controllaZone(giocatore.pos, (z) => emetti(z));
@@ -492,15 +602,13 @@ export async function avvia(ctx) {
     });
   }
 
-  const soglie = [15, 30, 45, 60];
-  const dette = new Set();
-  function aggiornaAttesa(dt) {
-    if (finito || narratore.occupato()) return;
-    fermo += dt;
-    for (const s of soglie) {
-      if (fermo >= s && !dette.has(s)) { dette.add(s); emetti('fermo:' + s); }
+  function aggiornaAiuti(dt) {
+    for (const [nome, a] of aiuti) {
+      const qui = !!stanzaAttuale && (stanzaAttuale === nome || stanzaAttuale.startsWith(nome + '-'));
+      const esito = a.aggiorna(dt, qui);
+      if (esito) emetti(`aiuto:${esito}:${nome}`);
     }
-    if (fermo >= 75) finale('attesa');
+    if (cartiglio && cartiglio.pos.distanceTo(giocatore.pos) > 3) chiudiCartiglio();
   }
 
   // ---------------------------------------------------------------- ciclo
@@ -513,7 +621,8 @@ export async function avvia(ctx) {
       aggiornaGiocatore(dt);
       aggiornaCubi(dt);
       aggiornaStanza();
-      aggiornaAttesa(dt);
+      aggiornaAiuti(dt);
+      tempoGiro += dt;
       narratore.aggiorna(dt);
     } else if (stato === 'finale') narratore.aggiorna(dt);
     const moto = Math.hypot(giocatore.vel.x, giocatore.vel.z);
@@ -530,7 +639,12 @@ export async function avvia(ctx) {
     if (stato === 'gioco') aggiornaMira();
     portali.aggiorna(t);
     post.uniforms.uTime.value = imp.calmo ? 0 : t;
+    const m8 = post.uniforms.uModo2008;
+    m8.value = modo2008 > m8.value ? Math.min(1, m8.value + dt / 0.6) : Math.max(0, m8.value - dt / 0.6);
+    passaggi.render(camera);
+    const accese = passaggi.spegni();
     portali.render(camera);
+    passaggi.riaccendi(accese);
     renderer.setRenderTarget(rt);
     renderer.render(scene, camera);
     renderer.setRenderTarget(null);
@@ -542,8 +656,10 @@ export async function avvia(ctx) {
     window.__gioco = {
       leggi: () => ({
         stato, stanza: stanzaAttuale, gesto, finito, x: giocatore.pos.x, y: giocatore.pos.y, z: giocatore.pos.z, yaw,
+        passi, lampade: g.giro.lampade(), segreti: g.giro.segreti(), cartiglio: cartiglio && cartiglio.chiave,
+        puntoControllo: ultimoControllo, pc: (() => { const c = controlli.get(ultimoControllo); return c && { x: c.x, y: c.piedi + giocatore.half.y + 0.01, z: c.z }; })(),
         portali: portali.p.map((p) => p.attivo && p.pannello), narratore: narratore.attuale && narratore.attuale.id,
-        stNarr: { ...narratore.stato }, tenuto: !!tenuto, mirato: mirato && (mirato.chiave || 'cubo'), visti: [...visti],
+        tenuto: !!tenuto, mirato: mirato && (mirato.chiave || 'cubo'),
       }),
       vai: (x, y, z) => { giocatore.pos.set(x, y, z); giocatore.vel.set(0, 0, 0); giocatore.zPrima = [null, null]; },
       guarda: (y, p = 0) => { yaw = y; pitch = p; },
@@ -552,12 +668,39 @@ export async function avvia(ctx) {
       interagisci: () => interagisci(),
       evento: (n) => emetti(n),
       salta: () => { narratore.coda = []; narratore.attuale = null; narratore.pausa = 0; narratore.mostra(); },
+      // i test non possono ottenere il pointer lock: entrano in gioco direttamente
+      gioca: () => { stato = 'gioco'; mostra(null); },
+      materiali: () => Object.keys(mat),
+      tempoMusica: () => suoni.musica.tempo(),
+      avanzaAiuti: (sec) => aggiornaAiuti(sec),
+      avviaAudio: () => suoni.avvia(),
+      livelloAudio: () => {
+        if (!suoni.ac) return 0;
+        if (!suoni.analizzatore) { suoni.analizzatore = suoni.ac.createAnalyser(); suoni.musica.master.connect(suoni.analizzatore); }
+        const d = new Float32Array(suoni.analizzatore.fftSize);
+        suoni.analizzatore.getFloatTimeDomainData(d);
+        return Math.sqrt(d.reduce((a, x) => a + x * x, 0) / d.length);
+      },
+      aggiungiPassaggio: (id, a, b) => {
+        const m4 = ([x, y, z, ry]) => new THREE.Matrix4().makeRotationY(ry).setPosition(x, y, z);
+        passaggi.aggiungi({ id, a: m4(a), b: m4(b) });
+      },
+      rimuoviPassaggio: (id) => passaggi.rimuovi(id),
+      cubo: (x, y, z, vx = 0, vy = 0, vz = 0) => { const c = cubo(x, y, z); c.vel.set(vx, vy, vz); return cubi.length - 1; },
+      cubi: () => cubi.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })),
+      vaiA: (nome) => { ultimoControllo = nome; riprendi(); },
+      stanza: (nome) => debugStanze[nome],
+      mira: (x, y, z) => {
+        const d = new THREE.Vector3(x, y, z).sub(camera.position);
+        yaw = Math.atan2(-d.x, -d.z);
+        pitch = Math.atan2(d.y, Math.hypot(d.x, d.z));
+      },
     };
   }
 
   // ---------------------------------------------------------------- partenza
-  giocatore.pos.copy(SPAWN);
-  emetti('inizio', { visti: visti.size });
+  riprendi();
+  emetti('inizio');
   renderer.setAnimationLoop(ciclo);
   $('avvio-testo').removeAttribute('data-t');
   $('avvio-testo').textContent = ctx.T.comandi;

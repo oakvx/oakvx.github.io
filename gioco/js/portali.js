@@ -3,11 +3,11 @@
 // limitata a un livello (dentro una finestra, l'altra appare come rumore a pixel).
 // Un pannello può "mentire": la sua finestra porta a una posizione diversa (eff).
 import * as THREE from 'three';
+import { matriceAttraverso, clipObliqua } from './engine/proiezione.js';
 
 export const W = 1.1;
 export const H = 2.0;
 
-const R_PI = new THREE.Matrix4().makeRotationY(Math.PI);
 const AVANTI = new THREE.Vector3(0, 0, 1);
 
 const vertex = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
@@ -89,7 +89,7 @@ export class Portali {
   piazza(i, hit) {
     const id = hit.object.userData.pannello;
     const pan = this.mondo.pannelli.get(id);
-    if (!pan || !hit.face) return 'no';
+    if (!pan || !hit.face || pan.bloccato) return 'no';
     if (hit.face.normal.dot(pan.normale) < 0.9) return 'no';
     if (pan.b - pan.a < W || pan.y1 - pan.y0 < H) return 'no';
     let u = pan.asse === 'x' ? hit.point.x : hit.point.z;
@@ -143,7 +143,7 @@ export class Portali {
       corpo.zPrima[P.i] = l.z;
       if (zp !== null && zp > 0 && l.z <= 0 && Math.abs(l.x) < W / 2 && Math.abs(l.y) < H / 2 + 0.3) {
         const Q = this.p[1 - P.i];
-        const M = this.m4.copy(Q.eff).multiply(R_PI).multiply(P.inv);
+        const M = this.m4.copy(matriceAttraverso(P.fis, Q.eff));
         corpo.pos.applyMatrix4(M);
         corpo.vel.applyMatrix3(new THREE.Matrix3().setFromMatrix4(M));
         corpo.zPrima[0] = corpo.zPrima[1] = null;
@@ -171,7 +171,7 @@ export class Portali {
       // la finestra va guardata dal davanti
       const lc = camera.position.clone().applyMatrix4(P.inv);
       if (lc.z < -0.05) continue;
-      const M = new THREE.Matrix4().copy(Q.eff).multiply(R_PI).multiply(P.inv);
+      const M = matriceAttraverso(P.fis, Q.eff);
       const v = this.vcam;
       v.matrixWorld.multiplyMatrices(M, camera.matrixWorld);
       v.matrixWorldInverse.copy(v.matrixWorld).invert();
@@ -180,19 +180,7 @@ export class Portali {
       const n = AVANTI.clone().transformDirection(Q.eff);
       const p = new THREE.Vector3().setFromMatrixPosition(Q.eff).addScaledVector(n, -0.02);
       const piano = new THREE.Plane().setFromNormalAndCoplanarPoint(n, p).applyMatrix4(v.matrixWorldInverse);
-      const c = new THREE.Vector4(piano.normal.x, piano.normal.y, piano.normal.z, piano.constant);
-      const e = v.projectionMatrix.elements;
-      const q = new THREE.Vector4(
-        (Math.sign(c.x) + e[8]) / e[0],
-        (Math.sign(c.y) + e[9]) / e[5],
-        -1,
-        (1 + e[10]) / e[14],
-      );
-      c.multiplyScalar(2 / c.dot(q));
-      e[2] = c.x;
-      e[6] = c.y;
-      e[10] = c.z + 1;
-      e[14] = c.w;
+      clipObliqua(v.projectionMatrix, piano);
       v.projectionMatrixInverse.copy(v.projectionMatrix).invert();
       this.renderer.setRenderTarget(P.rt);
       this.renderer.render(this.scene, v);

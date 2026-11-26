@@ -1,0 +1,22 @@
+{
+  "brani": [],
+  "poster": [],
+  "mensola": [
+    { "forma": "console-portatile", "etichetta": { "it": "3DS modificato", "en": "Modded 3DS" } },
+    { "forma": "console-portatile", "etichetta": { "it": "3DS modificato", "en": "Modded 3DS" } },
+    { "forma": "console-portatile", "etichetta": { "it": "3DS modificato", "en": "Modded 3DS" } },
+    { "forma": "console-casa", "etichetta": "Wii U" },
+    { "forma": "console-casa", "etichetta": "Wii" },
+    { "forma": "console-casa", "etichetta": "PlayStation 4" }
+  ],
+  "note": [
+    { "it": "Benvenuto in camera mia. Questa nota è un segnaposto: cambiala in dati/stanza-oakvx.json.", "en": "Welcome to my room. This note is a placeholder: change it in dati/stanza-oakvx.json." }
+  ],
+  "lingue": [
+    { "lingua": "Italiano", "livello": { "it": "madrelingua", "en": "native" } },
+    { "lingua": "English", "livello": "C1" },
+    { "lingua": "Español", "livello": "B1" },
+    { "lingua": "Ελληνικά", "livello": "B1" },
+    { "lingua": "中文", "livello": "A2" }
+  ]
+}

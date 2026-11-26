@@ -1,6 +1,7 @@
 // La cisterna: archi su colonne a perdita d'occhio, acqua scura che scorre lenta,
 // gocce dal soffitto. Al centro una scaletta sale verso un foro di luce.
 import * as THREE from 'three';
+import { cartelloStanza, miiLiminale } from '../engine/liminale.js';
 import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
 
@@ -42,7 +43,11 @@ export function costruisci(m, g) {
     cornice: new THREE.MeshLambertMaterial({ color: 0x55636a }),
   };
   m.stanza({
-    nome: 'cisterna', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H,
+    nome: 'cisterna', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'transito', passi: 'acqua',
+    pareti: {
+      w: { pannelli: [{ id: 'cisterna-basso', a: 14, b: 20, y0: 0, y1: 2.6 }] },
+      e: { pannelli: [{ id: 'cisterna-alto', a: Z1 - 5, b: Z1 - 1, y0: 3, y1: H }] },
+    },
     materiali: mat,
     acqua: { livello: 0.5, corrente: [0.12, 0.05] },
     atmosfera: { nebbia: 0x0b1215, vicino: 2, lontano: 28, cielo: 0x6a8894, terra: 0x0a0e10, intensita: 0.95 },
@@ -95,24 +100,21 @@ export function costruisci(m, g) {
   anello.position.set(LX, H - 0.012, LZ);
   m.scene.add(anello);
   m.luce(LX, H - 0.6, LZ, 4, 8, 0xd8ece8);
-  const ferro = new THREE.MeshLambertMaterial({ color: 0x8a7f6d, emissive: 0x15120d });
-  for (const dx of [-0.24, 0.24]) {
-    const montante = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, H, 8), ferro);
-    montante.position.set(LX + dx, H / 2, LZ);
-    m.scene.add(montante);
-  }
-  for (let y = 0.3; y < H; y += 0.3) {
-    const piolo = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.48, 8), ferro);
-    piolo.rotation.z = Math.PI / 2;
-    piolo.position.set(LX, y, LZ);
-    m.scene.add(piolo);
-  }
-  m.scaletta({
-    x0: LX - 0.45, x1: LX + 0.45, z0: LZ - 0.45, z1: LZ + 0.45, y0: 0, cima: H - 1.85,
-    suCima: () => {
-      if (g.inViaggio) return;
-      g.inViaggio = true;
-      g.teletrasporta(400, 12, -2.75, -Math.PI / 2, () => { g.inViaggio = false; });
-    },
+  // pedana alta nell'angolo sud-est: ci si arriva solo con le finestre; da lì si sale alla chiocciola
+  m.box(X1 - 6, 0, Z1 - 6, X1, 3, Z1, mat.muro);
+  m.zona('cisterna-su', X1 - 6, 3, Z1 - 6, X1, 6, Z1, { ripeti: true });
+  g.su('cisterna-su', () => {
+    if (g.inViaggio) return;
+    g.inViaggio = true;
+    g.teletrasporta(400, 12, -2.75, -Math.PI / 2, () => { g.inViaggio = false; });
   });
+  cartelloStanza(m, g, X0 + 4, 3.4, Z0 + 0.06, 0, 2113);
+  const mii = miiLiminale(m, g, 'cisterna', X0 + 30, 0.5, Z0 + 4, Math.PI, [0, -1]);
+  g.puntoControllo('cisterna', 301.5, 0, 18, -Math.PI / 2);
+  return {
+    debug: {
+      mii: mii.posto,
+      risolvi: () => { g.giocatore().pos.set(X1 - 3, 3.9, Z1 - 3); g.giocatore().vel.set(0, 0, 0); },
+    },
+  };
 }

@@ -1,4 +1,6 @@
 // Suoni generati con Web Audio: nessun file, nessuna libreria.
+import { Musica } from './musica.js';
+
 export class Suoni {
   constructor(ctx) {
     this.ctx = ctx;
@@ -8,6 +10,7 @@ export class Suoni {
     this.obiettivo = { ...this.livelli };
     this.prossimaGoccia = 0;
     this.prossimoLegno = 0;
+    this.musica = new Musica();
     ctx.suAudio((on) => this.volume(on));
   }
 
@@ -35,22 +38,9 @@ export class Suoni {
       o.connect(gg).connect(lp);
       o.start();
     }
-    // pad lontano e sognante
-    const pad = ac.createGain();
-    pad.gain.value = 0.011;
-    pad.connect(this.out);
-    for (const f of [220, 277.18, 329.63, 415.3]) {
-      const o = ac.createOscillator();
-      o.frequency.value = f;
-      const lfo = ac.createOscillator();
-      lfo.frequency.value = 0.04 + Math.random() * 0.05;
-      const lg = ac.createGain();
-      lg.gain.value = 2;
-      lfo.connect(lg).connect(o.detune);
-      o.connect(pad);
-      o.start();
-      lfo.start();
-    }
+    // musica liminale (sostituisce il vecchio pad)
+    this.musica.collega(ac, this.out);
+    this.musica.avvia();
   }
 
   // rumore in loop filtrato, con un gain controllabile
@@ -165,6 +155,38 @@ export class Suoni {
     const base = i === 0 ? [523.25, 659.25, 783.99] : [783.99, 659.25, 523.25];
     base.forEach((f, k) => this.nota(f, k * 0.045, 0.09, 'square', 0.035));
   }
+
+  // passi: un timbro per materiale, con un po' di variazione per non suonare meccanici
+  passo(materiale = 'cemento') {
+    if (!this.ac) return;
+    const v = () => 0.94 + Math.random() * 0.12;
+    switch (materiale) {
+      case 'metallo': this.rumore(0.12, 2400 * v(), 6, 0.13); this.nota(310 * v(), 0, 0.07, 'triangle', 0.025); break;
+      case 'piastrelle': this.rumore(0.07, 1800 * v(), 2, 0.15); this.nota(120 * v(), 0, 0.05, 'sine', 0.04); break;
+      case 'moquette': this.rumore(0.1, 420 * v(), 0.8, 0.07); break;
+      case 'acqua': this.rumore(0.26, 1100 * v(), 0.5, 0.2); this.rumore(0.12, 2600 * v(), 1.5, 0.06); break;
+      case 'legno': this.rumore(0.12, 300 * v(), 3, 0.2); this.nota(140 * v(), 0, 0.08, 'sine', 0.05); break;
+      default: this.rumore(0.09, 900 * v(), 1.2, 0.16); this.nota(80 * v(), 0, 0.07, 'sine', 0.05);
+    }
+  }
+
+  // urto di un cubo: più forte, più grave e più lungo
+  urto(forza) {
+    const k = Math.max(0, Math.min(1, forza));
+    this.rumore(0.18 + k * 0.2, 320 + Math.random() * 80, 1.4, 0.45 * k);
+    this.nota(70 + Math.random() * 20, 0, 0.12 + k * 0.1, 'sine', 0.08 * k);
+  }
+
+  leva() { this.rumore(0.05, 3000, 4, 0.2); this.nota(180, 0.06, 0.05, 'square', 0.04); this.rumore(0.08, 700, 2, 0.25); }
+
+  porta(apre = true) {
+    this.rumore(1.1, apre ? 130 : 110, 0.8, 0.35);
+    this.nota(55, 0, 1.1, 'sawtooth', 0.02);
+    if (this.ac) setTimeout(() => this.rumore(0.2, 260, 1.5, 0.4), 1050);
+  }
+
+  lampada() { this.nota(880, 0, 0.5, 'sine', 0.05); this.nota(1318.5, 0.12, 0.7, 'sine', 0.04); this.rumore(0.05, 5000, 3, 0.08); }
+  notifica() { this.nota(659.25, 0, 0.12, 'triangle', 0.05); this.nota(987.77, 0.1, 0.18, 'triangle', 0.05); }
 
   errore() { this.nota(140, 0, 0.18, 'square', 0.04); this.nota(110, 0.09, 0.2, 'square', 0.04); }
   passaggio() { this.rumore(0.35, 900, 0.6, 0.25); }

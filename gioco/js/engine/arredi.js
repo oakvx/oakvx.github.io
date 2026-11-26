@@ -102,7 +102,8 @@ export function creaArredi(m, g) {
       ctx.fillText(numero, 34, 86);
       ctx.fillStyle = '#a9b7bf';
       ctx.font = '500 34px Archivo, sans-serif';
-      ctx.fillText(nome(), 150, 80);
+      tex.testo = nome();
+      ctx.fillText(tex.testo, 150, 80);
     });
     tex.ridisegna();
     g.suLingua(() => tex.ridisegna());
@@ -114,6 +115,87 @@ export function creaArredi(m, g) {
     gruppo.position.set(x, y, z);
     gruppo.rotation.y = ry;
     m.scene.add(gruppo);
+    return tex;
+  }
+
+  // telaio di porta in metallo scuro con un'etichetta (hash di commit) sopra; solo visivo
+  function porta(x, y0, z, ry, etichetta, { w = 1.3, h = 2.3 } = {}) {
+    const gr = new THREE.Group();
+    const t = 0.12;
+    for (const [px, py, sx, sy] of [[-w / 2 - t / 2, h / 2, t, h], [w / 2 + t / 2, h / 2, t, h], [0, h + t / 2, w + 2 * t, t]]) {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, 0.16), mat.cornice);
+      b.position.set(px, py, 0);
+      gr.add(b);
+    }
+    if (etichetta) {
+      const tex = texTesto(256, 64, (ctx, cw, ch) => {
+        ctx.fillStyle = '#1b2122'; ctx.fillRect(0, 0, cw, ch);
+        ctx.fillStyle = '#e8eee9'; ctx.font = '700 34px monospace'; ctx.textAlign = 'center';
+        ctx.fillText(typeof etichetta === 'function' ? etichetta() : etichetta, cw / 2, 44);
+      });
+      tex.ridisegna();
+      if (typeof etichetta === 'function') g.suLingua(() => tex.ridisegna());
+      const tg = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.2), new THREE.MeshBasicMaterial({ map: tex }));
+      tg.position.set(0, h + 0.3, 0.09);
+      gr.add(tg);
+    }
+    gr.position.set(x, y0, z);
+    gr.rotation.y = ry;
+    m.scene.add(gr);
+    return gr;
+  }
+
+  // il Mii di oakvx in low poly: capelli castani, maglione viola, jeans. pose: 'in piedi' | 'seduto' | 'gira'
+  function mii(x, y, z, ry, posa = 'in piedi') {
+    const pelle = new THREE.MeshLambertMaterial({ color: 0xf1c7a0 });
+    const capelli = new THREE.MeshLambertMaterial({ color: 0x5a3a22 });
+    const maglione = new THREE.MeshLambertMaterial({ color: 0x7a4bb8 });
+    const jeans = new THREE.MeshLambertMaterial({ color: 0x3a5487 });
+    const bianco = new THREE.MeshLambertMaterial({ color: 0xf2f2f2 });
+    const nero = new THREE.MeshLambertMaterial({ color: 0x1a1a1a });
+    const gr = new THREE.Group();
+    const pezzo = (mt, sx, sy, sz, px, py, pz, padre = gr) => {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, sz), mt);
+      b.position.set(px, py, pz);
+      padre.add(b);
+      return b;
+    };
+    const seduto = posa === 'seduto';
+    const busto = seduto ? 0.42 : 0.72;
+    pezzo(maglione, 0.36, 0.42, 0.22, 0, busto + 0.21, 0);
+    pezzo(pelle, 0.34, 0.36, 0.32, 0, busto + 0.62, 0);
+    pezzo(capelli, 0.38, 0.14, 0.36, 0, busto + 0.83, -0.01);
+    pezzo(capelli, 0.38, 0.26, 0.08, 0, busto + 0.68, -0.17);
+    pezzo(capelli, 0.06, 0.2, 0.3, -0.19, busto + 0.7, -0.02);
+    pezzo(capelli, 0.06, 0.2, 0.3, 0.19, busto + 0.7, -0.02);
+    pezzo(capelli, 0.3, 0.08, 0.06, 0.03, busto + 0.76, 0.16);
+    for (const ex of [-0.08, 0.08]) pezzo(nero, 0.04, 0.06, 0.02, ex, busto + 0.64, 0.165);
+    pezzo(nero, 0.1, 0.06, 0.02, 0, busto + 0.47, 0.165);
+    const braccio = (lato) => {
+      const b = pezzo(maglione, 0.1, 0.38, 0.12, lato * 0.24, busto + 0.2, 0);
+      pezzo(pelle, 0.09, 0.08, 0.1, 0, -0.22, 0, b);
+      return b;
+    };
+    const bs = braccio(-1);
+    const bd = braccio(1);
+    if (posa === 'gira') { bd.rotation.z = 2.4; bd.position.y += 0.18; gr.rotation.y = ry + 0.5; }
+    if (seduto) {
+      for (const lx of [-0.09, 0.09]) {
+        pezzo(jeans, 0.14, 0.14, 0.4, lx, 0.36, 0.17);
+        pezzo(jeans, 0.14, 0.34, 0.14, lx, 0.17, 0.36);
+        pezzo(bianco, 0.15, 0.07, 0.2, lx, 0.03, 0.4);
+      }
+    } else {
+      for (const lx of [-0.09, 0.09]) {
+        pezzo(jeans, 0.14, 0.64, 0.16, lx, 0.39, 0);
+        pezzo(bianco, 0.15, 0.08, 0.22, lx, 0.04, 0.03);
+      }
+    }
+    bs.rotation.z = seduto ? 0 : 0.08;
+    gr.position.set(x, y, z);
+    if (posa !== 'gira') gr.rotation.y = ry;
+    m.scene.add(gr);
+    return gr;
   }
 
   // griglia di aerazione
@@ -141,5 +223,5 @@ export function creaArredi(m, g) {
     m.scene.add(gr);
   }
 
-  return { didascalia, recinto, cartello, griglia };
+  return { didascalia, recinto, cartello, griglia, porta, mii };
 }

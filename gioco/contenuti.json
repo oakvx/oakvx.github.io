@@ -364,6 +364,18 @@
             "Windows, Windows UI Automation, NSIS, Active Directory, supporto IT, software industriale, basi di PLC."
           ]
         }
+      },
+      "commit": {
+        "cartello": "Attività GitHub",
+        "uscita": "→ notte",
+        "sotto": "commit pubblici · oakvx + oakvxish · dal vivo",
+        "testi": {
+          "recenti": [
+            "Toccati di recente",
+            "aggiornato da GitHub Actions",
+            "oakvx.github.io, bratAnimator, piko, oye, yag. Il numero sulla parete è quello vero, contato in questo momento."
+          ]
+        }
       }
     },
     "stanzaDi": "STANZA {n} DI {tot}",
@@ -732,6 +744,18 @@
             "Systems",
             "IT",
             "Windows, Windows UI Automation, NSIS, Active Directory, IT support, industrial software, PLC basics."
+          ]
+        }
+      },
+      "commit": {
+        "cartello": "GitHub activity",
+        "uscita": "→ night",
+        "sotto": "public commits · oakvx + oakvxish · live",
+        "testi": {
+          "recenti": [
+            "Recently pushed",
+            "auto-updated by GitHub Actions",
+            "oakvx.github.io, bratAnimator, piko, oye, yag. The number on the wall is the real one, counted right now."
           ]
         }
       }

@@ -11,6 +11,7 @@ import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
 import { creaGiro, creaAiuti } from './logica/giro.js';
 import { creaContapassi } from './logica/passi.js';
+import { totaleCommit } from './logica/commit.js';
 
 const $ = (id) => document.getElementById(id);
 const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'middleman', 'galleria', 'scrivania', 'commit', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
@@ -97,6 +98,7 @@ export async function avvia(ctx) {
 
   let fadeCb = null;
   const controlli = new Map();
+  let commitPromessa = null;
   const aiuti = new Map();
   const g = {
     mondo, scene, portali, passaggi, emetti, su, cubo, debug: ctx.debug,
@@ -116,6 +118,8 @@ export async function avvia(ctx) {
     narratore: () => narratore,
     suoni,
     musica: suoni.musica,
+    // contatore pubblico dei commit: una richiesta sola, condivisa da muro e cartelli
+    commit: () => (commitPromessa ||= totaleCommit({ fetch: (u, o) => fetch(u, o), storage: localStorage })),
     giro: creaGiro(),
     // punto di ripresa di una stanza: chi cade o si incastra torna qui
     puntoControllo: (stanza, x, piedi, z, yawP = 0) => { controlli.set(stanza, { x, piedi, z, yaw: yawP }); },

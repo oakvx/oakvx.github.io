@@ -191,6 +191,10 @@
     "N-283": {
       "it": "Il visitatore chiese un panino al computer. Il computer, sorprendentemente, accettò.",
       "en": "The visitor asked the computer for a sandwich. The computer, surprisingly, agreed."
+    },
+    "N-290": {
+      "it": "Il muro dei commit. Ogni quadrato acceso è... no, non ogni quadrato è un commit. Il numero sì. È tutto vero, me l'ha detto il muro.",
+      "en": "The commit wall. Every lit square is... no, not every square is a commit. The number is. It's all real, the wall told me."
     }
   },
   "eventi": {
@@ -399,6 +403,12 @@
     "segreto:comando": [
       {
         "id": "N-283",
+        "subito": true
+      }
+    ],
+    "stanza:commit": [
+      {
+        "id": "N-290",
         "subito": true
       }
     ]

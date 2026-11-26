@@ -1,9 +1,10 @@
 // Spazi liminali: il cartello "stanza N di 2.500" (col contatore vero dei commit, quando c'è)
 // e il Mii di oakvx che gira l'angolo quando ti avvicini.
 import * as THREE from 'three';
+import { formatta } from '../logica/commit.js';
 
 export function cartelloStanza(m, g, x, y, z, ry, n) {
-  const fmt = (v) => v.toLocaleString(g.lingua() === 'en' ? 'en-GB' : 'it-IT');
+  const fmt = (v) => (g.lingua() === 'en' ? formatta(v).replace(/\./g, ',') : formatta(v));
   let totale = '2.500';
   const tex = g.texTesto(512, 128, (ctx, w, h) => {
     ctx.fillStyle = '#1c1f1d'; ctx.fillRect(0, 0, w, h);

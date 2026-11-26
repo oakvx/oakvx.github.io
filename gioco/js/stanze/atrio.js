@@ -161,8 +161,8 @@ export function costruisci(m, g) {
   }
   insegna(39.9, 2.55, 19.2, -Math.PI / 2);
 
-  cartelloStanza(m, g, 0, 3, 8.32, 0, 1847);
+  const cartello = cartelloStanza(m, g, 0, 3, 8.32, 0, 1847);
   const mii = miiLiminale(m, g, 'atrio', 9, 4, 30, -Math.PI / 2, [1, 0]);
   g.puntoControllo('atrio', 0, 0, 9.5, Math.PI);
-  return { debug: { mii: mii.posto } };
+  return { debug: { mii: mii.posto, cartello: () => cartello.testo } };
 }

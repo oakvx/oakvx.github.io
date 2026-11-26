@@ -40,10 +40,13 @@ let falliti = 0;
 for (const nome of scelti) {
   const mod = await import(pathToFileURL(path.join(qui, 'scenari', nome + '.mjs')).href);
   const context = await browser.newContext({ viewport: { width: 960, height: 600 } });
+  // GitHub non si chiama mai davvero: risposta fissa (gli scenari possono sovrascriverla)
+  await context.route('https://api.github.com/**', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{"total_count":1250}' }));
   const page = await context.newPage();
   const errori = [];
   page.on('pageerror', (e) => errori.push('pageerror: ' + e.message));
-  page.on('console', (m) => { if (m.type() === 'error') errori.push('console.error: ' + m.text()); });
+  // gli errori di rete del browser ("Failed to load resource") non sono errori del codice
+  page.on('console', (m) => { if (m.type() === 'error' && !m.text().startsWith('Failed to load resource')) errori.push('console.error: ' + m.text()); });
   const aiuto = {
     base,
     leggi: () => page.evaluate(() => window.__gioco.leggi()),

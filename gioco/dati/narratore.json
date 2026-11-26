@@ -59,6 +59,26 @@
     "N-117": {
       "it": "Fuori pioveva. Il visitatore era molto in alto, e la città non finiva. Il curatore, per una volta, rimase zitto ad ascoltare.",
       "en": "It was raining outside. The visitor was very high up, and the city didn't end. For once, the curator kept quiet and listened."
+    },
+    "N-200": {
+      "it": "YAG. Il copione dice che il visitatore, qui, è una richiesta. Una richiesta senza chiave non passa. Nemmeno io, a dire il vero.",
+      "en": "YAG. The script says that here the visitor is a request. A request without a key doesn't get through. Neither do I, to be honest."
+    },
+    "N-201": {
+      "it": "Indizio, pagina tre: la chiave sta sul tavolino vicino all'ingresso. Il modello giusto non è quello che sembra più vicino.",
+      "en": "Hint, page three: the key is on the little table by the entrance. The right model is not the one that looks closest."
+    },
+    "N-202": {
+      "it": "Ho evidenziato il piedistallo B. Non ditelo a nessuno.",
+      "en": "I've highlighted pedestal B. Don't tell anyone."
+    },
+    "N-203": {
+      "it": "Duecento, OK. Una lampada si è accesa da qualche parte. Il curatore applaudì da solo.",
+      "en": "Two hundred, OK. A lamp lit up somewhere. The curator applauded alone."
+    },
+    "N-204": {
+      "it": "Backend uno. Bello, ma senza uscita. Come certe riunioni.",
+      "en": "Backend one. Nice, but no exit. Like certain meetings."
     }
   },
   "eventi": {
@@ -122,6 +142,27 @@
         "id": "N-117",
         "subito": true
       }
+    ],
+    "stanza:yag": [
+      {
+        "id": "N-200",
+        "subito": true
+      }
+    ],
+    "aiuto:indizio:yag": [
+      "N-201"
+    ],
+    "aiuto:soluzione:yag": [
+      "N-202"
+    ],
+    "lampada:yag": [
+      {
+        "id": "N-203",
+        "subito": true
+      }
+    ],
+    "stanza:yag-backend1": [
+      "N-204"
     ]
   }
 }

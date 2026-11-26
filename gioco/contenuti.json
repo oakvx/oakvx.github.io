@@ -101,6 +101,42 @@
       },
       "smistamento": {
         "cartello": "Backend & App Logic"
+      },
+      "yag": {
+        "cartello": "YAG · Yet Another Gateway",
+        "varco": "AUTH",
+        "uscita": "BACKEND",
+        "modelli": {
+          "a": "modello A",
+          "b": "modello B"
+        },
+        "testi": {
+          "yag": [
+            "YAG · Yet Another Gateway",
+            "sperimentale · v0.1.0-rc.2",
+            "Un gateway AI scritto in C17: accesso autenticato a più backend di inferenza, adattatori di protocollo compatibili OpenAI e Anthropic, instradamento per modello e limiti operativi. Console di controllo in React/TypeScript e client desktop opzionale."
+          ],
+          "avviso": [
+            "Attenzione",
+            "YAG è sperimentale",
+            "Compatibilità con i modelli reali e sicurezza in produzione sono ancora da qualificare: non esporlo a reti non fidate."
+          ],
+          "chiave": [
+            "Chiave client LAN",
+            "prendila (E)",
+            "Senza chiave il varco di autenticazione non ti fa passare."
+          ],
+          "flusso": [
+            "Backend 1",
+            "flusso di una richiesta",
+            "Chiave client LAN → Autenticazione → Adattatore di protocollo (OpenAI / Anthropic) → Instradamento per modello + limiti operativi → Backend 1 oppure Backend 2. Qui non c'è l'uscita: il modello giusto è l'altro."
+          ],
+          "risposta": [
+            "Backend 2",
+            "200 OK",
+            "La richiesta è arrivata al backend giusto. Torna indietro: la lampada di YAG nello smistamento è accesa."
+          ]
+        }
       }
     }
   },
@@ -206,6 +242,42 @@
       },
       "smistamento": {
         "cartello": "Backend & App Logic"
+      },
+      "yag": {
+        "cartello": "YAG · Yet Another Gateway",
+        "varco": "AUTH",
+        "uscita": "BACKEND",
+        "modelli": {
+          "a": "model A",
+          "b": "model B"
+        },
+        "testi": {
+          "yag": [
+            "YAG · Yet Another Gateway",
+            "experimental · v0.1.0-rc.2",
+            "An AI gateway written in C17: authenticated access to multiple inference backends, OpenAI-compatible and Anthropic-compatible protocol adapters, per-model routing and operational limits. React/TypeScript control console and an optional desktop client."
+          ],
+          "avviso": [
+            "Warning",
+            "YAG is experimental",
+            "Real-model compatibility and production security are still under qualification: don't expose it to untrusted networks."
+          ],
+          "chiave": [
+            "LAN client key",
+            "take it (E)",
+            "Without a key the authentication gate won't let you through."
+          ],
+          "flusso": [
+            "Backend 1",
+            "request flow",
+            "LAN client key → Auth → Protocol adapter (OpenAI / Anthropic) → Per-model routing + operational limits → Backend 1 or Backend 2. There's no way out here: the right model is the other one."
+          ],
+          "risposta": [
+            "Backend 2",
+            "200 OK",
+            "The request reached the right backend. Head back: YAG's lamp in the hub is on."
+          ]
+        }
       }
     }
   }

@@ -106,6 +106,7 @@ export async function avvia(ctx) {
     texTesto,
     interattivo: (mesh, chiave) => { mesh.userData.chiave = chiave; interattivi.push(mesh); },
     giocatore: () => giocatore,
+    tenuto: () => tenuto,
     yaw: () => yaw,
     narratore: () => narratore,
     suoni,
@@ -601,6 +602,7 @@ export async function avvia(ctx) {
       gioca: () => { stato = 'gioco'; mostra(null); },
       materiali: () => Object.keys(mat),
       tempoMusica: () => suoni.musica.tempo(),
+      avanzaAiuti: (sec) => aggiornaAiuti(sec),
       avviaAudio: () => suoni.avvia(),
       livelloAudio: () => {
         if (!suoni.ac) return 0;

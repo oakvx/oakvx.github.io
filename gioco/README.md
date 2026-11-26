@@ -1,65 +1,75 @@
-# Il gioco (v2, beta): il curatore e le finestre
+# Il gioco (v3): "Turno di notte"
 
-Servito in `/gioco/`. Apre un menu con due scelte: **Sito** (la versione classica, invariata) e **Gioco**. Il motore 3D si scarica solo dopo aver scelto "Gioco". Testi IT/EN con `?lang=it|en`. La versione classica non viene toccata e non passa da `scripts/build_static.py`.
+Servito in `/gioco/`. Ci si arriva dal menu d'ingresso del sito ("Gioco") o da `/gioco/` (menu Sito/Gioco).
+Il curatore fa il turno di notte nell'edificio di oakvx: un impianto in cemento low poly che "è" il suo
+profilo GitHub. Il giro dura 10–15 minuti e passa da tutte le stanze: chi gioca una volta vede tutti i progetti.
 
-## Scelte tecniche
+Progetto e piano: `docs/superpowers/specs/2026-11-26-gioco-v3-design.md`, `docs/superpowers/plans/2026-11-26-gioco-v3.md`.
 
-Il piano proponeva TypeScript, Vite e Rapier. Restiamo su JavaScript a moduli ES senza bundler, con Three.js r187 in `vendor/three/` (licenza MIT, con l'addon `RoundedBoxGeometry`) e fisica a scatole scritta a mano, perché:
+## Il giro
 
-- il sito è già pubblicato su GitHub Pages senza build e la CI controlla i `.js` con `node --check`;
-- le finestre devono aprire varchi nei muri e teletrasportare corpi: con una fisica propria la regola è una riga, con Rapier servirebbero filtri di collisione per ogni passaggio.
+| Stanza | File | Cosa si gioca |
+| --- | --- | --- |
+| Ingresso | `stanze/ingresso.js` | si prendono le due finestre al bancone; la prima prova passa oltre un vetro |
+| Percorso | `stanze/percorso.js` | quattro tratti impilati e cuciti da passaggi: 12 m di ingombro, quasi 50 da camminare; le tappe del percorso |
+| Smistamento (Backend & App Logic) | `stanze/smistamento.js` | cinque porte con hash di commit, cinque lampade; l'uscita si apre a lampade accese |
+| YAG | `stanze/yag.js` | cubo-chiave, varco di autenticazione con limiti operativi, piedistalli che scelgono il backend |
+| Piko | `stanze/piko.js` | un agente-fantasma propone un piano: approva o rifiuta; uno finisce nel pozzo |
+| Brat Animator | `stanze/brat.js` | desktop gigante, parole del testo come ponte a tempo di musica, leva-timeline |
+| synk | `stanze/synk.js` | pavimento-calendario: tre prenotazioni senza sovrapposizioni, saga di compensazione |
+| Beautify | `stanze/beautify.js` | tre saloni separati dietro le vetrine; l'appuntamento va nel salone libero |
+| Transito A | `stanze/atrio.js`, `stanze/piscina.js` | l'acqua trascina all'indietro: si passa con le finestre |
+| middleManPS4 | `stanze/middleman.js` | al buio; la lampada delle prove (F) rivela etichette e pannelli |
+| Transito B | `stanze/cisterna.js`, `stanze/spirale.js` | niente scaletta: alla pedana alta si arriva con le finestre |
+| Galleria (Design & Web) | `stanze/galleria.js` | quattro vetrine; lo schermo del portfolio ti inquadra dall'alto; leva del tema |
+| Scrivania (Cosa so fare) | `stanze/scrivania.js` | terminale `portfolio.sh` in cui si scrive davvero; `apri` apre la porta |
+| Commit | `stanze/commit.js` | parete di quadrati che compone il numero dei commit, dal vivo |
+| Transito C | `stanze/supermercato.js`, `stanze/nave.js`, `stanze/ballatoio.js` | corsie che si ripetono: si esce con una finestra sul pannello alto |
+| Stanza di oakvx (Fuori orario) | `stanze/oakvx.js` | la mansarda sotto la pioggia, in "modalità 2008"; la TV suona i suoi brani |
+| Contatti | `stanze/contatti.js` | l'ultima stanza; la schermata finale con tempo e segreti |
+
+Segreti (3): la porta del percorso che compare guardando indietro, i tre Mii negli spazi liminali, un comando nascosto nel terminale.
+Se resti fermo su un enigma, a 45 s il curatore dà un indizio e a 90 s la soluzione compare nella stanza.
+
+## Comandi
+
+WASD o frecce, Spazio per saltare, mouse per guardare, E per prendere e interagire, clic sinistro/destro per le
+due finestre, F per la lampada delle prove (in middleManPS4), Esc per la pausa. Nella pausa: "Torna al punto di ripresa".
 
 ## Struttura
 
 | File | Ruolo |
 | --- | --- |
-| `index.html`, `gioco.css` | menu, HUD, sottotitoli, pausa con impostazioni, schede, finali |
-| `contenuti.json` | testi di interfaccia, oggetti, archivio, finali (IT/EN) |
-| `dati/narratore.json` | battute del curatore con ID (`N-001`…); `voce` elenca gli ID che hanno un audio in `voce/<lingua>/<ID>.mp3` |
-| `js/menu.js` | lingua, audio, scelta Sito/Gioco, import differito del gioco |
-| `js/gioco.js` | renderer, post-processing, giocatore, cubi, interazioni, finali, salvataggio locale |
-| `js/engine/` | `materiali.js` (texture procedurali, mappatura in coordinate mondo), `mondo.js` (stanze, pareti con aperture e pannelli, battiscopa, cornici, plafoniere, blocchi arrotondati, ombre di contatto, zone), `arredi.js` (didascalie, recinti con cordone, cartelli di sala, griglie), `fisica.js` (AABB, gravità per stanza) |
-| `js/portali.js` | finestre a pixel: camera virtuale, piano di taglio obliquo, ricorsione limitata, teletrasporto con velocità e orientamento, reindirizzamenti |
-| `js/narratore.js` | coda delle battute, sottotitoli, copione sfogliato nel panico, logica degli eventi |
-| `js/audio.js` | ronzio, pad, fruscio, suoni delle finestre (Web Audio) |
-| `js/stanze/` | un modulo per stanza: `sala`, `bivio`, `laboratorio`, `archivio`, `magazzino`, `fuorimappa`, `corridoio` |
+| `js/menu.js` | menu Sito/Gioco, lingua, audio, import differito del gioco |
+| `js/gioco.js` | renderer, post-processing (anche la "modalità 2008"), giocatore, cubi, eventi, punti di ripresa, cartigli, finale |
+| `js/portali.js` | le due finestre del giocatore |
+| `js/engine/passaggi.js` | passaggi fissi non euclidei (`posa(x, y, z, ry)` per le matrici) |
+| `js/engine/varchi.js` | porte tra stanze lontane, coordinate delle porte dei progetti, guscio delle stanze-progetto |
+| `js/engine/proiezione.js` | matematica condivisa di finestre e passaggi |
+| `js/engine/liminale.js` | cartello "stanza N di 2.500" e Mii che gira l'angolo |
+| `js/engine/mondo.js`, `materiali.js`, `arredi.js`, `fisica.js`, `acqua.js` | stanze, tavolozza low poly, arredi (anche il Mii), fisica, acqua |
+| `js/audio.js`, `js/musica.js` | effetti (passi per materiale, urti, leve, porte) e musica liminale generativa che si distorce ai cambi di stanza |
+| `js/narratore.js`, `dati/narratore.json` | il curatore: righe con ID e mappa `eventi` (evento → righe) |
+| `js/logica/*.js` | logica pura, testata con `node --test`: giro e aiuti, passi, armonia, YAG, Piko, Brat, calendario, saloni, prove, terminale, commit, stanza di oakvx |
+| `contenuti.json` | testi IT/EN di interfaccia e stanze (`stanze.<nome>`), cartigli, azioni |
 
-Le stanze emettono eventi (`stanza:*`, `porta:*`, `gesto`, `portale:*`, `indietro`, `fermo:*`…) e solo il narratore decide cosa dire.
+Contratto di una stanza: `export function costruisci(m, g)` che può restituire `{ debug: { … } }`. In `g` ci sono, tra l'altro,
+`puntoControllo`, `cartiglio`, `lampada`, `aiuti`, `segreto`, `fine`, `passaggi`, `musica`, `commit`, `modoTesto`, `modo2008`, `atmosfera`.
 
-## La nuova ala: "Altrove" (porta 06 della sala d'attesa)
+## La stanza di oakvx
 
-Un giro ad anello di spazi liminali, ognuno con atmosfera (nebbia, luce, colore) e suono propri, che sfumano passando da una stanza all'altra:
+Si riempie da `dati/stanza-oakvx.json` e dai file in `oakvx/` (musica, poster): istruzioni in `oakvx/LEGGIMI.md`.
 
-1. **Atrio** (`atrio.js`): centro commerciale al buio, due scale mobili funzionanti, balconata a vetri; a est un corridoio verdastro con l'insegna d'uscita.
-2. **Corridoio allagato** (`piscina.js`): piastrelle a nuvole, quadri, luci lilla; l'acqua scorre verso la porta rossa e trascina.
-3. **Cisterna** (`cisterna.js`): archi su colonne, acqua scura che scorre lenta, gocce; la scaletta porta in cima alla chiocciola.
-4. **Scala a chiocciola** (`spirale.js`): mosaico, gradini a elica, pozzo centrale (chi cade torna nella cisterna); in fondo una porta.
-5. **Supermercato** (`supermercato.js`): neon, scaffali, banchi frigo, cartelli delle corsie.
-6. **Nave** (`nave.js`): legno, moquette, ottone; il pavimento ondeggia e il legno scricchiola; la scala sale al ballatoio.
-7. **Ballatoio** (`ballatoio.js`): trentesimo piano sotto la pioggia, città nella nebbia; l'ultima porta riporta alla sala.
-
-Il motore aggiunge: un gruppo fisso di 10 luci assegnate per vicinanza (prestazioni costanti con tante stanze), atmosfera e livelli sonori per stanza (`atmosfera`, `suono`), rampe e nastri (`mondo.rampa`), scalette (`mondo.scaletta`), vincoli personalizzati (`mondo.vincoli`), gradini bassi saliti in automatico, acqua animata che scorre (`engine/acqua.js`) con rallentamento e corrente per chi ci cammina dentro.
-
-## Finali
-
-| Come | Finale | Rivela |
-| --- | --- | --- |
-| Arrivare all'archivio oltre la balconata (servono le finestre) | Il dipendente modello | percorso e contatti |
-| Prendere la scatola che brilla nel magazzino (porta destra, gravità bassa) | Il magazzino | Brat Animator |
-| Aprire una finestra sul pannello dietro la colonna | Fuori mappa | Synk e reverse engineering |
-| Tornare dal bivio alla sala tre volte | Il corridoio infinito | Beautify |
-| Restare fermi a lungo | L'attesa | musica e Fuori orario |
-
-I finali visti restano in `localStorage` (`gioco-finali`) e il curatore se ne accorge alla partita dopo.
-
-## Comandi
-
-WASD o frecce, Spazio per saltare, mouse per guardare, E per prendere e interagire, clic sinistro/destro per le due finestre (dopo la pedana del laboratorio), Esc per la pausa (campo visivo, sensibilità, sottotitoli, qualità delle finestre, riduzione delle oscillazioni).
-
-## Prova locale
+## Test
 
 ```bash
-python3 -m http.server 8000   # poi apri http://localhost:8000/gioco/
+node --test 'gioco/test/unit/*.test.mjs'     # logica pura (gira anche nella CI del sito)
+node gioco/test/browser.mjs                  # tutti gli scenari nel browser (Playwright preinstallato)
+node gioco/test/browser.mjs yag brat         # solo alcuni
+GIOCO_FPS=50 node gioco/test/browser.mjs giro-completo   # anche la soglia di FPS (su una macchina con GPU)
 ```
 
-`?debug` espone `window.__gioco` (`leggi`, `vai`, `guarda`, `spara`, `tasto`, `interagisci`, `evento`, `salta`) e `window.__corridoio` per i test automatici. `?avvia=gioco` salta il menu.
+`?debug` espone `window.__gioco` (`leggi`, `vai`, `vaiA`, `guarda`, `mira`, `spara`, `tasto`, `interagisci`, `evento`,
+`gioca`, `stanza(nome)`, `avanzaAiuti`, `salta`, …). `?avvia=gioco` salta il menu. Le foto dei test finiscono in `gioco/test/out/` (ignorata da git).
+
+Three.js r187 è in `vendor/three/` (licenza MIT). Nessun bundler: moduli ES, controllati in CI con `node --check`.

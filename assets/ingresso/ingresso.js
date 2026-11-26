@@ -15,7 +15,7 @@
             titolo: 'Ciao, sono oakvx.',
             intro: 'Faccio siti e interfacce, e penso che un\'interfaccia debba raccontare chi la possiede. Qui puoi scegliere: il sito, veloce e chiaro, con progetti, percorso e contatti. Oppure il gioco, dove c\'è un curatore al primo giorno di lavoro e nessuna regola è garantita.',
             sito: 'Sito', sitoNota: 'progetti, percorso, contatti',
-            gioco: 'Gioco', giocoNota: '3D, da computer, circa 10 minuti',
+            gioco: 'Gioco', giocoNota: '3D, da computer, circa 15 minuti',
             touch: 'Il gioco è pensato per computer con tastiera e mouse: da qui ti conviene il sito.'
         },
         en: {
@@ -24,7 +24,7 @@
             titolo: 'Hi, I\'m oakvx.',
             intro: 'I build websites and interfaces, and I think an interface should tell you who owns it. You can choose: the site, fast and clear, with projects, path and contacts. Or the game, with a curator on their first day at work and no rule guaranteed.',
             sito: 'Site', sitoNota: 'projects, path, contacts',
-            gioco: 'Game', giocoNota: '3D, desktop, about 10 minutes',
+            gioco: 'Game', giocoNota: '3D, desktop, about 15 minutes',
             touch: 'The game is made for a computer with keyboard and mouse: from here, the site will suit you better.'
         }
     }[lang];

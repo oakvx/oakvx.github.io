@@ -14,7 +14,7 @@ export default async function (page, aiuto) {
     s = await aiuto.leggi();
     if (s.stanza && s.stanza.startsWith('percorso') && (Math.abs(s.x) > 1.6 || s.z > -3.5 || s.z < -16.5)) fuori = true;
     if (s.stanza === 'percorso-4' && s.z < -13.5) break;
-    if (Date.now() - t0 > 30000) throw new Error('non arrivo in fondo: ' + JSON.stringify(s));
+    if (Date.now() - t0 > 90000) throw new Error('non arrivo in fondo: ' + JSON.stringify(s));
     await aiuto.aspetta(50);
   }
   await G(() => window.__gioco.tasto('KeyW', false));

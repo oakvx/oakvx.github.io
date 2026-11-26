@@ -42,7 +42,7 @@ export function costruisci(m, g) {
     cornice: new THREE.MeshLambertMaterial({ color: 0x5a3520 }),
   };
   m.stanza({
-    nome: 'nave', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, soffitto: false, ondeggia: true,
+    nome: 'nave', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, soffitto: false, ondeggia: true, ala: 'transito', passi: 'legno',
     materiali: mat,
     atmosfera: { nebbia: 0x2a1b12, vicino: 3, lontano: 22, cielo: 0xffd9a8, terra: 0x3a2214, intensita: 1.5 },
     suono: { ronzio: 0.1, legno: 1 },
@@ -108,4 +108,6 @@ export function costruisci(m, g) {
   }
   m.zona('ponte', 528.5, H - 0.6, 10.3, 531.5, H + 3, 12.5, { ripeti: true });
   g.su('ponte', () => g.teletrasporta(601.3, 30, 9, 0));
+  g.puntoControllo('nave', 521.5, 0, 1.5, Math.PI);
+  return { debug: { risolvi: () => { g.giocatore().pos.set(530, H + 0.9, 11.4); g.giocatore().vel.set(0, 0, 0); } } };
 }

@@ -229,7 +229,8 @@
           ]
         }
       }
-    }
+    },
+    "stanzaDi": "STANZA {n} DI {tot}"
   },
   "en": {
     "lang": "en",
@@ -461,6 +462,7 @@
           ]
         }
       }
-    }
+    },
+    "stanzaDi": "ROOM {n} OF {tot}"
   }
 }

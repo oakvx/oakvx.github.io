@@ -2,6 +2,7 @@
 // Porte tutte uguali, tubi, lampade a muro. Oltre il parapetto la città nella nebbia,
 // piani identici sopra e sotto. L'ultima porta riporta alla sala d'attesa.
 import * as THREE from 'three';
+import { cartelloStanza } from '../engine/liminale.js';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, texTesto, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
@@ -35,7 +36,7 @@ export function costruisci(m, g) {
     cornice: new THREE.MeshLambertMaterial({ color: 0x3e474c }),
   };
   m.stanza({
-    nome: 'ballatoio', x0: X0, x1: X1, z0: Z0, z1: Z1, y0: Y0, h: H,
+    nome: 'ballatoio', x0: X0, x1: X1, z0: Z0, z1: Z1, y0: Y0, h: H, ala: 'transito', passi: 'metallo',
     pareti: { e: false }, materiali: mat,
     atmosfera: { nebbia: 0x56626e, vicino: 4, lontano: 80, cielo: 0xa4b2c0, terra: 0x2b3239, intensita: 1.4 },
     suono: { ronzio: 0, pioggia: 1 },
@@ -124,10 +125,12 @@ export function costruisci(m, g) {
   m.scene.add(pioggia);
   m.ogniFrame((dt, t) => { pioggia.material.uniforms.uTempo.value = t; });
 
-  // in fondo: la porta che riporta alla sala d'attesa
+  // in fondo: la porta della stanza di oakvx
   m.tondo(X0 + 0.7, Y0, Z0, X0 + 1.9, Y0 + 2.2, Z0 + 0.06, new THREE.MeshLambertMaterial({ color: 0xeef2f4 }), { r: 0.02, solido: false });
   m.luce(X0 + 1.3, Y0 + 2.4, Z0 + 0.8, 1.4, 4, 0xf2f7ff);
   m.zona('casa', X0, Y0 - 1, Z0, X1, Y0 + 3, Z0 + 1.0, { ripeti: true });
-  g.su('casa', () => g.teletrasporta(0, 0, 6.6, 0, () => g.emetti('ritorno')));
-  void THREE;
+  g.su('casa', () => g.teletrasporta(664, 0, 1.5, Math.PI));
+  cartelloStanza(m, g, X0 + 0.04, Y0 + 2.4, -10, Math.PI / 2, 2499);
+  g.puntoControllo('ballatoio', 601.3, Y0, 9, 0);
+  return { debug: { risolvi: () => { g.giocatore().pos.set(601.3, Y0 + 0.86, Z0 + 2); g.giocatore().vel.set(0, 0, 0); } } };
 }

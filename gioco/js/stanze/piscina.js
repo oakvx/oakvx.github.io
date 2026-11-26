@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
+import { cartelloStanza } from '../engine/liminale.js';
 
 const X0 = 40.3, X1 = 70, Z0 = 17, Z1 = 21, H = 3.2;
 
@@ -44,9 +45,13 @@ export function costruisci(m, g) {
   };
   m.stanza({
     nome: 'piscina', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H,
-    pareti: { w: { aperture: [{ a: 18, b: 20.4, y0: 0, y1: 2.8 }] } },
-    materiali: mat, luciPunto: false,
-    acqua: { livello: 0.35, corrente: [0.45, 0] },
+    pareti: {
+      w: { aperture: [{ a: 18, b: 20.4, y0: 0, y1: 2.8 }] },
+      n: { pannelli: [{ id: 'piscina-inizio', a: 41.2, b: 44.6, y0: 0, y1: 2.6 }] },
+      s: { pannelli: [{ id: 'piscina-fine', a: 64, b: 67.6, y0: 0, y1: 2.6 }] },
+    },
+    materiali: mat, luciPunto: false, ala: 'transito', passi: 'acqua',
+    acqua: { livello: 0.35, corrente: [0, 0] },
     atmosfera: { nebbia: 0xcdc1d8, vicino: 6, lontano: 46, cielo: 0xf3ecff, terra: 0x7fb0bb, intensita: 2.3 },
     suono: { ronzio: 0.3, acqua: 1 },
   });
@@ -54,7 +59,7 @@ export function costruisci(m, g) {
   m.tondo(X0, 0, 18, X0 + 0.3, 0.3, 20.4, mat.muro, { r: 0.04 });
 
   // parete nord dipinta a nuvole (fascia bassa)
-  m.box(X0 + 0.3, 0, Z0, X1, 2.1, Z0 + 0.02, materialeTri(nuvole, 0.25, 0.5, 'pis-nuv'), { solido: false });
+  m.box(45, 0, Z0, X1, 2.1, Z0 + 0.02, materialeTri(nuvole, 0.25, 0.5, 'pis-nuv'), { solido: false });
 
   // corrimano su entrambe le pareti
   const metallo = new THREE.MeshLambertMaterial({ color: 0xa8a9ad, emissive: 0x151515 });
@@ -72,7 +77,7 @@ export function costruisci(m, g) {
 
   // quadri sulla parete sud: astratti, colori pastello
   const palette = [['#e9b7c9', '#7db5c9', '#f4e3b1'], ['#b9c8f0', '#f0c1a3', '#7fa58f'], ['#f2d0e2', '#9c8bd6', '#d8eef0']];
-  for (let i = 0, x = X0 + 3; x < X1 - 2; i++, x += 4) {
+  for (let i = 0, x = X0 + 3; x < 63; i++, x += 4) {
     const [a, b, c] = palette[i % 3];
     const t = canvasTex(128, 160, (ctx, w, h) => {
       ctx.fillStyle = a; ctx.fillRect(0, 0, w, h);
@@ -99,13 +104,21 @@ export function costruisci(m, g) {
     m.luce(x, H - 0.6, 19, 2.2, 7, 0xe6d2ff);
   }
 
-  // l'acqua che scorre verso est
-  creaAcqua(m, X0 + 0.3, Z0, X1, Z1, 0.35, { flusso: [0.45, 0.02], colore: 0x3d97a6, riflesso: 0xf3eaff, opacita: 0.5 });
+  // l'acqua scorre all'indietro, verso l'ingresso: nel tratto centrale trascina più forte di quanto si cammini
+  creaAcqua(m, X0 + 0.3, Z0, X1, Z1, 0.35, { flusso: [-1.1, 0.02], colore: 0x3d97a6, riflesso: 0xf3eaff, opacita: 0.5 });
+  m.vincoli.push((c, dt) => {
+    const p = c.pos;
+    if (p.x > 45 && p.x < 63 && p.z > Z0 && p.z < Z1 && p.y - c.half.y < 0.35 && p.y < 3) p.x -= 3.2 * dt;
+  });
 
   // la porta rossa in fondo
   const rosso = new THREE.MeshBasicMaterial({ color: 0xff2a3a, fog: false });
   m.tondo(X1 - 0.06, 0, 18.1, X1, 2.5, 19.9, rosso, { r: 0.02, solido: false });
   m.luce(X1 - 0.8, 1.4, 19, 3, 7, 0xff3344);
   m.zona('porta-rossa', X1 - 1.0, -1, 18.1, X1, 3, 19.9, { ripeti: true });
-  g.su('porta-rossa', () => g.teletrasporta(301.5, 0, 18, -Math.PI / 2, () => g.suoni.tonfo()));
+  g.su('porta-rossa', () => g.teletrasporta(110, 0, 1.5, Math.PI, () => g.suoni.tonfo()));
+
+  cartelloStanza(m, g, X0 + 1.5, 2.6, Z1 - 0.06, Math.PI, 1848);
+  g.puntoControllo('piscina', X0 + 0.9, 0, 19.2, -Math.PI / 2);
+  return { debug: { risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
 }

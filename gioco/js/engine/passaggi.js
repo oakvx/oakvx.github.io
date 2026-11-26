@@ -100,7 +100,8 @@ export class Passaggi {
       l.copy(corpo.pos).applyMatrix4(P.inv);
       const zp = corpo.zPass.get(P);
       corpo.zPass.set(P, l.z);
-      if (zp !== undefined && zp > 0 && l.z <= 0 && Math.abs(l.x) < p.w / 2 && Math.abs(l.y) < p.h / 2 + 0.3) {
+      // zp - l.z < 1: un salto di colpo (finestra, teletrasporto) non è un attraversamento
+      if (zp !== undefined && zp > 0 && l.z <= 0 && zp - l.z < 1 && Math.abs(l.x) < p.w / 2 && Math.abs(l.y) < p.h / 2 + 0.3) {
         const M = matriceAttraverso(P.m, Q.m);
         corpo.pos.applyMatrix4(M);
         corpo.vel.applyMatrix3(new THREE.Matrix3().setFromMatrix4(M));

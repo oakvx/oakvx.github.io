@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, texTesto, materialeTri } from '../engine/materiali.js';
+import { cartelloStanza, miiLiminale } from '../engine/liminale.js';
 
 export function costruisci(m, g) {
   const tex = m.mat.tex;
@@ -21,7 +22,7 @@ export function costruisci(m, g) {
   const fascia = new THREE.MeshLambertMaterial({ color: 0x3c3e40 });
 
   m.stanza({
-    nome: 'atrio', x0: -12, x1: 12, z0: 8, z1: 32, h: 8,
+    nome: 'atrio', x0: -12, x1: 12, z0: 8, z1: 32, h: 8, ala: 'transito', passi: 'piastrelle',
     pareti: {
       n: { aperture: [{ a: -1, b: 1, y0: 0, y1: 2.6 }] },
       e: { aperture: [{ a: 18, b: 20.4, y0: 0, y1: 2.8 }] },
@@ -149,7 +150,7 @@ export function costruisci(m, g) {
   const luciC = [];
   for (let x = 15; x < 40; x += 4) luciC.push([x, 19.2, 0.25, 1.4]);
   m.stanza({
-    nome: 'uscita', x0: 12.3, x1: 40, z0: 18, z1: 20.4, h: 2.8, pareti: { w: false, e: false },
+    nome: 'uscita', x0: 12.3, x1: 40, z0: 18, z1: 20.4, h: 2.8, pareti: { w: false, e: false }, ala: 'transito', passi: 'piastrelle',
     materiali: matCorr, matNeon: verde, luci: luciC, intensita: 1.1, raggio: 5, coloreLuce: 0xcff0c8,
     atmosfera: { nebbia: 0x151b15, vicino: 2, lontano: 30, cielo: 0x84a083, terra: 0x182018, intensita: 0.9 },
     suono: { ronzio: 0.9 },
@@ -159,4 +160,9 @@ export function costruisci(m, g) {
     m.tondo(x - 0.5, 0, Math.min(lato, lato + (lato > 19 ? -0.05 : 0.05)), x + 0.5, 2.1, Math.max(lato, lato + (lato > 19 ? -0.05 : 0.05)), scuro, { r: 0.015, solido: false });
   }
   insegna(39.9, 2.55, 19.2, -Math.PI / 2);
+
+  cartelloStanza(m, g, 0, 3, 8.32, 0, 1847);
+  const mii = miiLiminale(m, g, 'atrio', 9, 4, 30, -Math.PI / 2, [1, 0]);
+  g.puntoControllo('atrio', 0, 0, 9.5, Math.PI);
+  return { debug: { mii: mii.posto } };
 }

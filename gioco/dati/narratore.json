@@ -35,8 +35,8 @@
       "en": "The corridor was flooded. The curator decided to call it \"an installation\". The water flowed towards the red door, and the visitor followed it."
     },
     "N-112": {
-      "it": "Sotto il museo c'è una cisterna. Lo sanno tutti tranne me.",
-      "en": "There's a cistern under the museum. Everyone knows except me.",
+      "it": "Sotto l'edificio c'è una cisterna. Lo sanno tutti tranne me. E la scaletta non c'è più.",
+      "en": "There's a cistern under the building. Everyone knows except me. And the ladder is gone.",
       "panico": true
     },
     "N-113": {
@@ -151,6 +151,10 @@
     "N-243": {
       "it": "Appuntamento spostato, agende in ordine. Quinta lampada, o quella che è. Ho perso il conto.",
       "en": "Appointment moved, schedules in order. Fifth lamp, or whichever. I've lost count."
+    },
+    "N-250": {
+      "it": "Il visitatore notò il Mii di oakvx girare l'angolo. Tre volte. Il curatore fece finta di niente, per professionalità.",
+      "en": "The visitor saw oakvx's Mii turn the corner. Three times. The curator pretended not to notice, out of professionalism."
     }
   },
   "eventi": {
@@ -314,6 +318,12 @@
     "lampada:beautify": [
       {
         "id": "N-243",
+        "subito": true
+      }
+    ],
+    "segreto:mii": [
+      {
+        "id": "N-250",
         "subito": true
       }
     ]

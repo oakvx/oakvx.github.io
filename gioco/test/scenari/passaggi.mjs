@@ -14,6 +14,13 @@ export default async function (page, aiuto) {
   assert.ok(Math.abs(s.x) < 1, 'x ' + s.x);
   assert.equal(s.stanza, 'atrio');
 
+  // un salto di colpo da un lato all'altro (finestra, teletrasporto) non conta come attraversamento
+  await G(() => { window.__gioco.vaiA('ingresso'); window.__gioco.aggiungiPassaggio('prova', [0, 1.2, 0, 0], [0, 1.2, 20, 0]); });
+  await aiuto.aspetta(200);
+  await G(() => window.__gioco.vai(0, 0.87, -1.2));
+  await aiuto.aspetta(300);
+  assert.equal((await aiuto.leggi()).stanza, 'ingresso');
+
   // un cubo lanciato attraverso il varco
   await G(() => window.__gioco.vaiA('ingresso'));
   const i = await G(() => window.__gioco.cubo(0.6, 0.6, 1.5, 0, 0, -5));

@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import { illuminato } from '../logica/prove.js';
 import { apertura, nicchia, collega } from '../engine/varchi.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 100, X1 = 120, Z0 = 0, Z1 = 20, H = 4.5;
 const NICCHIA = { x0: 117, x1: X1, z0: 13, z1: Z1, y: 2 };
@@ -114,6 +115,10 @@ export function costruisci(m, g) {
   });
   g.su('stanza:cisterna', () => aiuti.risolto());
 
+  // un faro da cantiere spento e un quadro di rete: si vedono solo con la lampada
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('portable_searchlight', 104, 0, 2.6, 0.6, { altezza: 1.2 });
+  oggetti.metti('utility_box_02', 100.4, 0, 12.5, Math.PI / 2, { altezza: 1.0 });
   g.puntoControllo('middleman', 110, 0, 1.5, Math.PI);
   return {
     debug: {
@@ -121,7 +126,7 @@ export function costruisci(m, g) {
       uscita: [118.5, 16],
       varchi: [{ id: 'middleman-cisterna', da: 'middleman', a: 'cisterna', lato: USCITA }],
       risolvi: () => { g.giocatore().pos.set(USCITA[0], NICCHIA.y + 0.9, Z1 - 1.5); g.giocatore().vel.set(0, 0, 0); },
-      stato: () => ({ lampada: accesa, provati: [...provati], soluzione }),
+      stato: () => ({ modelli: oggetti.quanti(), lampada: accesa, provati: [...provati], soluzione }),
     },
   };
 }

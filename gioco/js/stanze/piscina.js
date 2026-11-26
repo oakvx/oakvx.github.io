@@ -7,6 +7,7 @@ import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
 import { apertura, nicchia, collega } from '../engine/varchi.js';
 import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 40.3, X1 = 70, Z0 = 17, Z1 = 21, H = 3.2;
 
@@ -123,9 +124,12 @@ export function costruisci(m, g) {
   m.luce(X1 - 0.8, 1.4, 19, 3, 7, 0xff3344);
 
   const cartello = cartelloStanza(m, g, X0 + 1.5, 2.6, Z1 - 0.06, Math.PI, 1848);
+  // vasi di terracotta nell'acqua, come in un cortile di Siviglia allagato
+  const oggetti = creaOggetti(m, g);
+  for (const [x, z] of [[46, 17.45], [56, 20.55], [62, 17.45]]) oggetti.metti('planter_pot_clay', x, 0, z, x, { altezza: 0.7 });
   // il ricordo di questo transito: l'Erasmus a Siviglia, oltre la corrente
   const t = tappa(m, g, 'erasmus', 67.2, 0, Z0 + 0.06, 0);
   const mii = miiLiminale(m, g, 'piscina', 69, 0, 19.6, -Math.PI / 2, [0, 1]);
   g.puntoControllo('piscina', X0 + 0.9, 0, 19.2, -Math.PI / 2);
-  return { debug: { varchi: [{ id: 'piscina-middleman', da: 'piscina', a: 'middleman', lato: [X1, 0, 19, -Math.PI / 2] }], tappa: t, mii: mii.posto, cartello: () => cartello.testo, risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
+  return { debug: { stato: () => ({ modelli: oggetti.quanti() }), varchi: [{ id: 'piscina-middleman', da: 'piscina', a: 'middleman', lato: [X1, 0, 19, -Math.PI / 2] }], tappa: t, mii: mii.posto, cartello: () => cartello.testo, risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
 }

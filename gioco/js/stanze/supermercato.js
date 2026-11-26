@@ -2,10 +2,11 @@
 // senza nome, banchi frigo, cartelli delle corsie appesi. Il ronzio è più forte.
 import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
-import { canvasTex, texTesto, materialeTri } from '../engine/materiali.js';
+import { canvasTex, texTesto, materialeTri, pbrMondo } from '../engine/materiali.js';
 import { posa } from '../engine/passaggi.js';
 import { apertura, nicchia, collega } from '../engine/varchi.js';
 import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 450, X1 = 480, Z0 = 0, Z1 = 32, H = 4.5;
 
@@ -19,11 +20,13 @@ export function costruisci(m, g) {
     ctx.fillStyle = '#c3c9c5';
     for (let i = 0; i < n; i++) { ctx.fillRect(i * p, 0, 2, h); ctx.fillRect(0, i * p, w, 2); }
   });
+  // pavimento in piastrelle vere, pareti e soffitto in intonaco chiaro (resa realistica)
+  void pavimento;
   const mat = {
-    pavimento: materialeTri(pavimento, 0.42, 0.42, 'sup-pav'),
-    muro: materialeTri(m.mat.tex.muro, 0.5, 0.5, 'sup-muro', { color: 0xf3f6f1 }),
-    soffitto: materialeTri(m.mat.tex.soffitto, 1, 1, 'sup-soff', { color: 0xf4f6f2 }),
-    battiscopa: new THREE.MeshLambertMaterial({ color: 0x9aa59c }),
+    pavimento: m.mat.piastrelle,
+    muro: pbrMondo(g.asset, 'intonaco', { scala: 0.5, tinta: 0xeef0ea }),
+    soffitto: pbrMondo(g.asset, 'intonaco', { scala: 0.6, tinta: 0xe8ebe6, rimbalzo: 0.18 }),
+    battiscopa: new THREE.MeshStandardMaterial({ color: 0x9aa59c, roughness: 0.6 }),
   };
   const tubi = [];
   for (let x = X0 + 2.5; x < X1; x += 5) for (let z = Z0 + 4; z < Z1 - 2; z += 6) tubi.push([x, z, 0.16, 4.8]);
@@ -35,7 +38,7 @@ export function costruisci(m, g) {
       n: { aperture: [apertura(452)] },
     },
     materiali: mat, luci: tubi, intensita: 2.2, raggio: 8, coloreLuce: 0xf8fff4,
-    atmosfera: { nebbia: 0xe6ede7, vicino: 8, lontano: 55, cielo: 0xffffff, terra: 0xd0d8d0, intensita: 3.2 },
+    atmosfera: { nebbia: 0xc9d1cb, vicino: 8, lontano: 55, cielo: 0xffffff, terra: 0xb8c0b8, intensita: 2.0 },
     suono: { ronzio: 1.8 },
   });
 
@@ -143,9 +146,13 @@ export function costruisci(m, g) {
   m.box(452, 0, Z1 - 2.1, 455, 2.0, Z1 - 1.6, matProdotti);
   cartelloStanza(m, g, 451.5, 3.1, 1.2, Math.PI / 2, 2371);
   const mii = miiLiminale(m, g, 'supermercato', 467.5, 0, 22, Math.PI, [1, 0]);
+  // scatoloni da scaricare, di quelli che nessuno scarica mai
+  const oggetti = creaOggetti(m, g);
+  for (const [x, z, h, ry] of [[456.3, 2.4, 0.5, 0.2], [456.4, 2.5, 0.5, -0.4], [472.5, 2.6, 0.45, 1.1]]) oggetti.metti('cardboard_box_01', x, 0, z, ry, { altezza: h });
   g.puntoControllo('supermercato', 452, 0, 1.5, Math.PI);
   return {
     debug: {
+      stato: () => ({ modelli: oggetti.quanti() }),
       mii: mii.posto,
       tappa: t,
       varchi: [{ id: 'supermercato-oakvx', da: 'supermercato', a: 'oakvx', lato: [477.5, 0, Z1, Math.PI] }],

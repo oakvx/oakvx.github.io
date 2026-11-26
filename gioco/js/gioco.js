@@ -107,6 +107,8 @@ export async function avvia(ctx) {
     interattivo: (mesh, chiave) => { mesh.userData.chiave = chiave; interattivi.push(mesh); },
     camera,
     renderer,
+    // modalità testo (terminale): i tasti vanno a suTasto invece di muovere il giocatore
+    modoTesto: (attivo, suTasto) => { modoTesto = attivo ? suTasto : null; tasti.clear(); },
     atmosfera: (a) => { atmo = { ...ATMOSFERA, ...a }; },
     giocatore: () => giocatore,
     tenuto: () => tenuto,
@@ -238,6 +240,7 @@ export async function avvia(ctx) {
   let ultimoControllo = 'ingresso';
   let mirato = null;
   let cartiglio = null;           // { chiave, pos } mentre è aperto
+  let modoTesto = null;           // funzione che riceve i tasti mentre si scrive
   const tasti = new Set();
 
   function mostra(id) {
@@ -286,6 +289,8 @@ export async function avvia(ctx) {
       stato = 'gioco';
       mostra(null);
     } else if (stato === 'gioco') {
+      // Esc nel browser libera sempre il puntatore: chiude anche il terminale
+      if (modoTesto) modoTesto({ code: 'Escape', key: 'Escape', preventDefault() {} });
       stato = 'pausa';
       tasti.clear();
       mostra('pausa');
@@ -323,6 +328,11 @@ export async function avvia(ctx) {
   });
 
   document.addEventListener('keydown', (e) => {
+    if (stato === 'gioco' && modoTesto) {
+      e.preventDefault();
+      modoTesto(e);
+      return;
+    }
     if (stato === 'gioco') {
       fermo = 0;
       if (e.code === 'KeyE' && !e.repeat) interagisci();

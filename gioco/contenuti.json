@@ -58,7 +58,8 @@
       "piko-rifiuta": "rifiuta il piano",
       "brat-pausa": "ferma o riparti il tempo",
       "brat-indietro": "riavvolgi di un secondo",
-      "galleria-tema": "cambia tema"
+      "galleria-tema": "cambia tema",
+      "terminale": "siediti al terminale"
     },
     "cartigli": {
       "bancone": {
@@ -276,6 +277,93 @@
             "Sito statico con scenari illustrativi. L'applicazione vera è synk, nello smistamento; il sito non prende prenotazioni."
           ]
         }
+      },
+      "scrivania": {
+        "cartello": "Cosa so fare",
+        "porta": "→ commit",
+        "benvenuto": [
+          "portfolio.sh · turno di notte",
+          "scrivi help e premi Invio"
+        ],
+        "strumenti": [
+          [
+            "Web",
+            "HTML, CSS, JavaScript, React, TypeScript, Canvas 2D, WebCodecs"
+          ],
+          [
+            "Backend & AI",
+            "Node.js, PHP, C17, Python, FastAPI, Docker, Ollama"
+          ],
+          [
+            "Dati",
+            "PostgreSQL, MySQL, SQL Server (T-SQL), SQLite"
+          ],
+          [
+            "Reverse eng.",
+            "Python, payload C, ELF/Orbis, Ghidra"
+          ],
+          [
+            "Sistemi",
+            "Windows, UI Automation, Active Directory, PLC"
+          ]
+        ],
+        "principi": [
+          "local-first quando ha senso",
+          "stati espliciti invece di successi presunti",
+          "prove invece di supposizioni",
+          "movimento accessibile"
+        ],
+        "percorso": [
+          "2026 →      Ingegneria Informatica, UNIMORE",
+          "ago–set 2026  Format SRL: software industriale, PLC, SQL Server",
+          "2023–2026    freelance web e SEO, Sassuolo e Scandiano",
+          "mag–giu 2025  Erasmus+ a Siviglia, Starbotica",
+          "2021–2026    IIS A. Volta: Beautify è il progetto di maturità"
+        ],
+        "contatti": [
+          "email: gabrielelucia07@gmail.com",
+          "aperto a: stage · freelance · progetti interessanti",
+          "la porta dei contatti è in fondo al giro"
+        ],
+        "chi": [
+          "oakvx (Gabriele Lucia), Sassuolo",
+          "studente di Ingegneria Informatica, sviluppatore e grafico",
+          "lavoro su entrambi i lati di un sistema: l'interfaccia e la logica che deve reggere"
+        ],
+        "log": [
+          "oakvx.github.io · aggiornato 2026-11-26",
+          "bratAnimator · aggiornato 2026-11-26",
+          "piko · aggiornato 2026-11-26",
+          "oye · aggiornato 2026-11-25",
+          "yag · aggiornato 2026-11-24"
+        ],
+        "aree": {
+          "web": [
+            "Web",
+            "interfacce",
+            "HTML, CSS, JavaScript, React, TypeScript, 7.css, Canvas 2D, WebCodecs, MediaRecorder, IndexedDB, service worker, accessibilità, SEO."
+          ],
+          "backend": [
+            "Backend & infrastruttura AI",
+            "servizi",
+            "Node.js, Express, PHP, C17, CMake, libcurl, Docker Compose, Python, FastAPI, SQLite, Ollama, Git, GitHub Actions, API compatibili OpenAI."
+          ],
+          "dati": [
+            "Dati",
+            "database",
+            "PostgreSQL (vincoli, outbox e code, SKIP LOCKED), MySQL, SQL Server (T-SQL), SQLite."
+          ],
+          "reverse": [
+            "Reverse engineering",
+            "analisi",
+            "Python, payload in C, ELF/Orbis/PSF/NID, Ghidra, metadati DNS/TLS/TCP passivi."
+          ],
+          "sistemi": [
+            "Sistemi",
+            "IT",
+            "Windows, Windows UI Automation, NSIS, Active Directory, supporto IT, software industriale, basi di PLC."
+          ]
+        }
       }
     },
     "stanzaDi": "STANZA {n} DI {tot}",
@@ -340,7 +428,8 @@
       "piko-rifiuta": "reject the plan",
       "brat-pausa": "pause or resume time",
       "brat-indietro": "rewind one second",
-      "galleria-tema": "switch theme"
+      "galleria-tema": "switch theme",
+      "terminale": "sit at the terminal"
     },
     "cartigli": {
       "bancone": {
@@ -556,6 +645,93 @@
             "Synkris site",
             "project website",
             "Static site with illustrative scenarios. The real application is synk, back in the hub; the site takes no bookings."
+          ]
+        }
+      },
+      "scrivania": {
+        "cartello": "Toolbox",
+        "porta": "→ commits",
+        "benvenuto": [
+          "portfolio.sh · night shift",
+          "type help and press Enter"
+        ],
+        "strumenti": [
+          [
+            "Web",
+            "HTML, CSS, JavaScript, React, TypeScript, Canvas 2D, WebCodecs"
+          ],
+          [
+            "Backend & AI",
+            "Node.js, PHP, C17, Python, FastAPI, Docker, Ollama"
+          ],
+          [
+            "Data",
+            "PostgreSQL, MySQL, SQL Server (T-SQL), SQLite"
+          ],
+          [
+            "Reverse eng.",
+            "Python, C payloads, ELF/Orbis, Ghidra"
+          ],
+          [
+            "Systems",
+            "Windows, UI Automation, Active Directory, PLC"
+          ]
+        ],
+        "principi": [
+          "local-first when it fits",
+          "explicit states over assumed success",
+          "evidence over assumptions",
+          "accessible motion"
+        ],
+        "percorso": [
+          "2026 →      Computer Engineering, UNIMORE",
+          "Aug–Sep 2026  Format SRL: industrial software, PLC, SQL Server",
+          "2023–2026    freelance web & SEO, Sassuolo and Scandiano",
+          "May–Jun 2025  Erasmus+ in Seville, Starbotica",
+          "2021–2026    IIS A. Volta: Beautify was the diploma project"
+        ],
+        "contatti": [
+          "email: gabrielelucia07@gmail.com",
+          "open to: internships · freelance · interesting side projects",
+          "the contacts door is at the end of the tour"
+        ],
+        "chi": [
+          "oakvx (Gabriele Lucia), Sassuolo, Italy",
+          "computer engineering student, developer and graphic designer",
+          "I work on both sides of a system: the interface and the logic that has to hold up"
+        ],
+        "log": [
+          "oakvx.github.io · updated 2026-11-26",
+          "bratAnimator · updated 2026-11-26",
+          "piko · updated 2026-11-26",
+          "oye · updated 2026-11-25",
+          "yag · updated 2026-11-24"
+        ],
+        "aree": {
+          "web": [
+            "Web",
+            "interfaces",
+            "HTML, CSS, JavaScript, React, TypeScript, 7.css, Canvas 2D, WebCodecs, MediaRecorder, IndexedDB, service workers, accessibility, SEO."
+          ],
+          "backend": [
+            "Backend & AI infrastructure",
+            "services",
+            "Node.js, Express, PHP, C17, CMake, libcurl, Docker Compose, Python, FastAPI, SQLite, Ollama, Git, GitHub Actions, OpenAI-compatible APIs."
+          ],
+          "dati": [
+            "Data",
+            "databases",
+            "PostgreSQL (constraints, outbox/queue patterns, SKIP LOCKED), MySQL, SQL Server (T-SQL), SQLite."
+          ],
+          "reverse": [
+            "Reverse engineering",
+            "analysis",
+            "Python, C payloads, ELF/Orbis/PSF/NID, Ghidra, passive DNS/TLS/TCP metadata."
+          ],
+          "sistemi": [
+            "Systems",
+            "IT",
+            "Windows, Windows UI Automation, NSIS, Active Directory, IT support, industrial software, PLC basics."
           ]
         }
       }

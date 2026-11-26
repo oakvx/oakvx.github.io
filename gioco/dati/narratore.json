@@ -175,6 +175,22 @@
     "N-271": {
       "it": "Il visitatore cambiò il tema della stanza. Il curatore, che aveva appena abituato gli occhi, non commentò.",
       "en": "The visitor switched the room's theme. The curator, whose eyes had just adjusted, made no comment."
+    },
+    "N-280": {
+      "it": "L'ufficio. Qui oakvx tiene gli attrezzi. C'è un terminale acceso: il copione dice che si scrive help. Io non ho mai scritto niente in vita mia.",
+      "en": "The office. This is where oakvx keeps the tools. There's a terminal on: the script says you type help. I have never typed anything in my life."
+    },
+    "N-281": {
+      "it": "Indizio: la porta non ha maniglia. Ha un comando.",
+      "en": "Hint: the door has no handle. It has a command."
+    },
+    "N-282": {
+      "it": "Ho lasciato un post-it sul monitor. È il trucco più vecchio del mondo.",
+      "en": "I've left a sticky note on the monitor. Oldest trick in the world."
+    },
+    "N-283": {
+      "it": "Il visitatore chiese un panino al computer. Il computer, sorprendentemente, accettò.",
+      "en": "The visitor asked the computer for a sandwich. The computer, surprisingly, agreed."
     }
   },
   "eventi": {
@@ -367,6 +383,24 @@
     ],
     "oggetto:galleria-tema": [
       "N-271"
+    ],
+    "stanza:scrivania": [
+      {
+        "id": "N-280",
+        "subito": true
+      }
+    ],
+    "aiuto:indizio:scrivania": [
+      "N-281"
+    ],
+    "aiuto:soluzione:scrivania": [
+      "N-282"
+    ],
+    "segreto:comando": [
+      {
+        "id": "N-283",
+        "subito": true
+      }
     ]
   }
 }

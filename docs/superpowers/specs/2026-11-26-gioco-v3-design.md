@@ -114,6 +114,15 @@ Segreto: dal PERCORSO una porta che compare solo guardando indietro porta subito
 
 Low poly a facce piatte, texture procedurali su canvas (come oggi), originali: cemento con macchie, intonaco in due colori (zoccolo scuro, parte alta chiara), metallo verniciato e graffiato, piastrelle consumate, moquette, legno scuro. Luce: neon freddi negli impianti, sodio caldo nei transiti, lampada calda nella stanza di oakvx. Post-processing: si toglie la sfocatura "sognante", si aggiunge leggera quantizzazione del colore e grana. Oggetti fisici con spigoli vivi. I cubi hanno un hash stampato sul lato.
 
+## Stanza di oakvx: com'è fatta
+
+Riferimenti dati da oakvx il 2026-11-26 (due foto, non incluse nel repo):
+
+1. **La stanza**: mansarda di notte con il **tetto di vetro a falde** e travi di legno scuro, **pioggia** che scorre sui vetri e cielo blu temporalesco, **due faretti** caldi appesi alle travi. In fondo un **letto basso con coperta verde** e cuscini chiari, incassato in una **libreria piena** (libri, scatole, una **TV a tubo catodico** su uno scaffale). Pareti blu polvere con piccoli motivi chiari sparsi; **moquette a onde arancio e ocra** con piccole stelle; **termosifone** in ghisa bianco, **boccione dell'acqua**, **finestrella ad arco** con davanzale giallo; a destra una **porta scura con scaletta a gradini** incassata nel muro.
+2. **L'atmosfera**: foto di una fotocamera digitale del **2008** in un soggiorno qualunque (flash frontale, colori slavati, rumore JPEG, **data gialla in basso a destra**). Entrando nella stanza il post-processing passa in "modalità 2008": flash (centro più chiaro, angoli scuri), saturazione bassa, leggera blocchettatura, grana e la data `GG/MM/2008` in giallo nell'angolo (giorno e mese di oggi). Con "calmo" niente blocchettatura animata.
+
+Nella stanza: il **jukebox è la TV a tubo catodico** (mostra titolo del brano e una barra), i **poster** sono le cornici sulla parete blu, la **mensola** è la libreria, le **note** sono biglietti sul letto, il **Mii** è seduto sul letto. Suono: pioggia sul vetro (sempre), ronzio della TV.
+
 ## Stanza di oakvx: come si riempie
 
 - `gioco/dati/stanza-oakvx.json` con: `brani` (titolo, file in `gioco/oakvx/musica/`, nota), `poster` (immagine in `gioco/oakvx/poster/`, didascalia IT/EN), `mensola` (oggetti tra un elenco di forme low poly già pronte: console, cassetta, libro, pianta, tazza, cuffie, con etichetta), `note` (biglietti con testo IT/EN), `lingue`.

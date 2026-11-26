@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<script data-wii-boot-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-wii-launched')==='1'}catch{}const p=new URLSearchParams(location.search),debug=['menu','preview'].includes(p.get('wii')),skip=p.has('nowii')||p.has('skipwii'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit/i.test(navigator.userAgent);if(!skip&&(!seen||debug)&&(!bot||debug)){window.__oakvxBootWaiting=true;r.classList.add('wii-boot-pending');window.__wiiBootTimer=setTimeout(()=>{window.__oakvxBootExpired=true;window.__oakvxBootWaiting=false;r.classList.remove('wii-boot-pending','wii-boot-active','wii-boot-background-paused','home-loading');dispatchEvent(new CustomEvent('wii-boot:ready',{detail:{reason:'fallback'}}))},4000)}})();</script>
-<link rel="stylesheet" href="wii-boot/wii-boot.css">
-<script src="wii-boot/wii-content.js" defer></script>
-<script src="wii-boot/wii-audio.js" defer></script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<link rel="stylesheet" href="ingresso/ingresso.css">
 
 <script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
 <meta name="color-scheme" content="light">
@@ -141,7 +139,6 @@
     <h2 data-i18n="credits.graphics">Grafica del portfolio</h2>
 <p data-i18n="credits.motion">Menu, icone, bolle e transizioni sono realizzati con CSS, SVG e JavaScript originali, ispirati alla leggerezza dei menu delle console. Il puntatore è la risorsa esterna descritta qui sotto.</p>
 <p><strong>Wii U Player 1 cursor — Macrowave.</strong> <span data-i18n="credits.pointer">Puntatore da cursor.cc, con licenza indicata “Creative Commons, no attribution”. Il CUR incorporato nella pagina è conservato senza modifiche; il PNG locale è decodificato in RGBA 32 × 32, con hotspot (7,0). Animazioni e integrazione sono aggiunte del portfolio.</span> <a href="https://www.cursor.cc/?action=icon&amp;file_id=181223" target="_blank" rel="noopener noreferrer">cursor.cc</a> · <a href="wiiu/pointer-NOTICE.txt">pointer-NOTICE.txt</a>.</p>
-<p><strong>Avvio OAKVX / Wii.</strong> <span data-i18n="credits.wiiBoot">Ricostruzione del menu PAL 4.3E con grafica, font e campioni Nintendo/Fontworks originali, derivati locali e banner OAKVX personalizzato. Provenienza, hash e limiti di fedeltà nel credito dedicato.</span> <a href="wii-boot/NOTICE.md">NOTICE</a>.</p>
 <p><strong>AFTER HOURS.</strong> <span data-i18n="credits.afterHours">Interfaccia DOM/Canvas adattata da Homebrew Channel, Team Twiizers / fail0verflow, con licenza GPL-2.0-only; sorgenti leggibili inclusi. Font Droid Sans di Ascender Corporation, Apache-2.0.</span> <a href="after-hours/NOTICE.md">NOTICE</a> · <a href="after-hours/COPYING">GPL-2.0</a> · <a href="after-hours/fonts/LICENSE-APACHE-2.0.txt">Apache-2.0</a>.</p>
 <p data-i18n="credits.audio">Musica e suoni generati dal browser, originali.</p>
     <p data-i18n="credits.counter">Il contatore dei commit usa una griglia e cifre a pixel originali disegnate nel codice, con una sfumatura ai bordi ispirata alla sezione open source di Supabase. I dati sono i totali pubblici GitHub di oakvx e oakvxish; non sono usati asset grafici del sito di riferimento.</p>
@@ -198,6 +195,6 @@
 <script src="../assets/wiiu/music.js" defer></script>
 <script src="../assets/wiiu/pointer.js" defer></script>
 <script src="../assets/wiiu/dialogs.js" defer></script>
-<script src="wii-boot/wii-boot.js" defer></script>
+<script src="ingresso/ingresso.js" defer></script>
 </body>
 </html>

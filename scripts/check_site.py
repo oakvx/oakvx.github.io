@@ -137,45 +137,28 @@ def audit_page(relative: str, language: str, route: str, check_seo: bool = False
     return checked, images
 
 
-def audit_wii_home(relative: str) -> None:
-    parser = AuditParser()
-    parser.feed((ROOT / relative).read_text(encoding="utf-8"))
-    active = [attrs for attrs in parser.attrs.get("a", []) if attrs.get("data-channel")]
-    empty = [attrs for attrs in parser.attrs.get("span", []) if "home-channel-empty" in (attrs.get("class") or "").split()]
-    pages = [attrs for attrs in parser.attrs.get("div", []) if "data-home-channel-page" in attrs]
-    arrows = [attrs for attrs in parser.attrs.get("button", []) if "data-home-wii-page-prev" in attrs or "data-home-wii-page-next" in attrs]
-    if len(active) != 6 or len(empty) != 42 or len(active) + len(empty) != 48 or len(pages) != 4 or len(arrows) != 2:
-        raise AssertionError(f"{relative}: Wii home must have four 4×3 pages, with six live portfolio channels")
-    css = (ROOT / "assets/wiiu/home.css").read_text(encoding="utf-8")
-    if "aspect-ratio: 16 / 9" not in css or "grid-template-columns: repeat(4,minmax(0,1fr))" not in css or "width: 400%" not in css:
-        raise AssertionError("homepage Wii menu must preserve its 16:9, four-column, four-page layout")
-    if "font-family: Wii,Arial,sans-serif" not in css:
-        raise AssertionError("homepage titles should use the preserved Wii menu font")
-    resources = (
-        "assets/wii-boot/original/native/ui/menu-chrome.webp",
-        "assets/wii-boot/original/native/ui/focus-chrome.webp",
-        "assets/wii-boot/original/native/ui/empty-chrome.webp",
-        "assets/wii-boot/original/native/ui/button-ring.png",
-        "assets/wii-boot/original/native/ui/wii-button.png",
-        "assets/wii-boot/original/native/ui/sd.png",
-        "assets/wii-boot/original/native/ui/mail-button-base.png",
-        "assets/wii-boot/original/native/ui/mail-symbol.png",
-        "assets/wii-boot/original/ui/bg-pattern.png",
-        "assets/wii-boot/original/ui/arrow-left.png",
-        "assets/wii-boot/original/ui/arrow-right.png",
-        "assets/wii-boot/original/native/clock/0.png",
-        "assets/wii-boot/original/native/clock/colon.png",
-        "assets/wii-boot/original/fonts/menu.woff2",
-    )
-    missing = [asset for asset in resources if not (ROOT / asset).is_file()]
-    if missing:
-        raise AssertionError(f"homepage Wii menu is missing native UI assets: {', '.join(missing)}")
+ENTRY_PAGES = (
+    "index.html", "404.html", "chi-sono/index.html", "assets/CREDITS.html",
+    "fuori-orario/index.html", "fuori-orario/classic/index.html",
+    "projects/autoofficina/index.html", "projects/beautify/index.html",
+    "projects/brat-animator/index.html", "projects/synk/index.html",
+)
+
+
+def audit_entry_menu(relative: str) -> None:
+    text = (ROOT / relative).read_text(encoding="utf-8")
+    if "wii-boot" in text:
+        raise AssertionError(f"{relative}: the Wii boot was removed, drop its references")
+    for needle in ("data-ingresso-bootstrap", "ingresso/ingresso.css", "ingresso/ingresso.js"):
+        if needle not in text:
+            raise AssertionError(f"{relative}: entry menu is missing {needle!r}")
 
 
 def main() -> int:
     failures = []
-    for relative in ("index.html", "en/index.html"):
-        audit_wii_home(relative)
+    for relative in ENTRY_PAGES:
+        audit_entry_menu(relative)
+        audit_entry_menu(f"en/{relative}")
     js_files = sorted([*ROOT.rglob("*.js"), *ROOT.rglob("*.cjs")])
     js_files = [path for path in js_files if ".git" not in path.parts]
     for path in js_files:

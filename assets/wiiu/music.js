@@ -139,7 +139,7 @@
         };
     }
     sound.subscribe(state=>{
-        if(state.active && state.scene !== 'wii') {if(!player) {try{player=createPlayer(state.context);}catch{player=null;}}}
+        if(state.active) {if(!player) {try{player=createPlayer(state.context);}catch{player=null;}}}
         else if(player) {player.stop(state.leaving);player=null;}
     });
     function duck() {

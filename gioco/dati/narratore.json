@@ -1,0 +1,212 @@
+{
+  "nome": {
+    "it": "Il Curatore",
+    "en": "The Curator"
+  },
+  "voce": [],
+  "righe": {
+    "N-001": {
+      "it": "Benvenuti. Questo è Gabri. Cioè, questa è la stanza di Gabri. Gabri costruisce cose che funzionano, di solito al secondo tentativo.",
+      "en": "Welcome. This is Gabri. I mean, this is Gabri's room. Gabri builds things that work, usually on the second try."
+    },
+    "N-002": {
+      "it": "Io sono il curatore. Oggi è il mio primo giorno, ma ho il copione, quindi andrà tutto benissimo.",
+      "en": "I am the curator. It's my first day, but I have the script, so everything will go perfectly."
+    },
+    "N-003": {
+      "it": "Il visitatore si guardò intorno, notò la scatola sigillata e decise, saggiamente, di proseguire verso il corridoio.",
+      "en": "The visitor looked around, noticed the sealed box and wisely decided to head down the corridor."
+    },
+    "N-010": {
+      "it": "La scatola è sigillata. C'è scritto «pezzo di Gabri». Nel copione dice che dentro c'è... no, non c'è scritto. Andiamo avanti.",
+      "en": "The box is sealed. It says \"a piece of Gabri\". The script says that inside there's... no, it doesn't say. Moving on."
+    },
+    "N-011": {
+      "it": "Il visitatore insisteva con la scatola. La scatola, con dignità, restava chiusa.",
+      "en": "The visitor kept poking the box. The box, with dignity, stayed shut."
+    },
+    "N-012": {
+      "it": "Quello è Brat Animator: Gabri l'ha fatto per animare i testi delle canzoni. Il copione dice di essere colpiti. Siate colpiti.",
+      "en": "That's Brat Animator: Gabri made it to animate song lyrics. The script says to be impressed. Be impressed."
+    },
+    "N-013": {
+      "it": "Gabriele Lucia, diciannove anni, Sassuolo. Il curatore lo lesse ad alta voce, con l'orgoglio di chi l'ha imparato a memoria stamattina.",
+      "en": "Gabriele Lucia, nineteen, from Sassuolo. The curator read it aloud with the pride of someone who memorised it this morning."
+    },
+    "N-020": {
+      "it": "Il visitatore, persona ragionevole, prese la porta a sinistra.",
+      "en": "The visitor, a reasonable person, took the door on the left."
+    },
+    "N-021": {
+      "it": "Esatto. Proprio così. Il copione e il visitatore, finalmente d'accordo.",
+      "en": "Exactly. Just like that. The script and the visitor, finally in agreement."
+    },
+    "N-022": {
+      "it": "Quella era la destra. Va bene. Faremo finta che fosse previsto.",
+      "en": "That was the right. Fine. We'll pretend it was planned.",
+      "panico": true
+    },
+    "N-023": {
+      "it": "Un attimo... pagina quattro... no, cinque... Il magazzino. Qui c'è il magazzino. Nessuno doveva vedere il magazzino.",
+      "en": "One moment... page four... no, five... The storeroom. This is the storeroom. Nobody was supposed to see the storeroom.",
+      "panico": true
+    },
+    "N-030": {
+      "it": "Il visitatore tornò indietro. Forse aveva dimenticato qualcosa. Forse la scatola. Non aprirà la scatola.",
+      "en": "The visitor went back. Maybe they forgot something. Maybe the box. They will not open the box."
+    },
+    "N-031": {
+      "it": "Di nuovo indietro? Il copione non prevede marce indietro. Ho controllato. Due volte.",
+      "en": "Back again? The script has no reverse gear. I checked. Twice.",
+      "panico": true
+    },
+    "N-032": {
+      "it": "Ho perso il segno. Il corridoio... il corridoio non dovrebbe essere così lungo. Chi ha spostato il corridoio?",
+      "en": "I've lost my place. The corridor... the corridor shouldn't be this long. Who moved the corridor?",
+      "panico": true
+    },
+    "N-040": {
+      "it": "Il laboratorio. Qui Gabri prova le idee prima che diventino progetti. Vicino all'ingresso c'è una pedana: il visitatore ci salì sopra, come da copione.",
+      "en": "The lab. This is where Gabri tries out ideas before they become projects. By the entrance there's a pad: the visitor stepped on it, as scripted."
+    },
+    "N-041": {
+      "it": "Al visitatore fu concesso il gesto: clic sinistro per una finestra, clic destro per l'altra. Funzionano solo sui pannelli a quadretti. È nel regolamento, l'ho letto.",
+      "en": "The visitor was granted the gesture: left click for one window, right click for the other. They only work on the gridded panels. It's in the rulebook, I read it."
+    },
+    "N-042": {
+      "it": "Una finestra. Bellissima. Ora l'altra, sul pannello in alto, sopra la balconata. Quello giusto.",
+      "en": "A window. Beautiful. Now the other one, on the high panel above the balcony. The right one."
+    },
+    "N-043": {
+      "it": "C'è anche un pannello sulla parete di destra, dietro la colonna. Quello no. Non c'è nel copione. Non so nemmeno perché sia lì.",
+      "en": "There's also a panel on the right wall, behind the column. Not that one. It's not in the script. I don't even know why it's there."
+    },
+    "N-044": {
+      "it": "Il visitatore attraversò la finestra e arrivò sulla balconata. Il curatore si rilassò per la prima volta in tutta la giornata.",
+      "en": "The visitor went through the window and reached the balcony. The curator relaxed for the first time all day."
+    },
+    "N-045": {
+      "it": "Il visitatore lanciò un cubo. Il copione non dice niente sui cubi. Il curatore decise che i cubi erano «interattività».",
+      "en": "The visitor threw a cube. The script says nothing about cubes. The curator decided cubes were \"interactivity\"."
+    },
+    "N-046": {
+      "it": "No, no, no. Quel pannello no. Toglila. Pagina sette... dove c'è scritto cosa fare se...",
+      "en": "No, no, no. Not that panel. Take it off. Page seven... where does it say what to do if...",
+      "panico": true
+    },
+    "N-050": {
+      "it": "Dove siamo? Questo non è un posto. Qui ci sono i file. Si vede tutto. Non guardate i file.",
+      "en": "Where are we? This isn't a place. These are the files. You can see everything. Don't look at the files.",
+      "panico": true
+    },
+    "N-051": {
+      "it": "...Va bene, guardateli. Gabri ha costruito Synk smontando come funzionano i messaggi. A Gabri piace aprire le cose per capire come sono fatte. Me compreso, temo.",
+      "en": "...Fine, look at them. Gabri built Synk by taking apart how messages work. Gabri likes opening things up to see how they're made. Me included, I fear."
+    },
+    "N-060": {
+      "it": "L'archivio. Il percorso di Gabri, in ordine, come piace al copione: Volta, Siviglia, Format, UNIMORE.",
+      "en": "The archive. Gabri's path, in order, just how the script likes it: Volta, Seville, Format, UNIMORE."
+    },
+    "N-061": {
+      "it": "Il visitatore aveva obbedito a tutto. Proprio a tutto. Il curatore, per qualche motivo, iniziò a preoccuparsi.",
+      "en": "The visitor had obeyed everything. Absolutely everything. The curator, for some reason, began to worry."
+    },
+    "N-062": {
+      "it": "In fondo c'è la scrivania. Il visitatore si avvicinò, perché era l'ultima riga del copione.",
+      "en": "At the end there's the desk. The visitor walked up to it, because it was the last line of the script."
+    },
+    "N-070": {
+      "it": "Qui la gravità non è ancora stata sistemata. È nella lista delle cose da fare. Pagina... non trovo la pagina.",
+      "en": "Gravity hasn't been fixed in here yet. It's on the to-do list. Page... I can't find the page.",
+      "panico": true
+    },
+    "N-071": {
+      "it": "C'è una scatola che brilla. Non prendete la scatola che brilla.",
+      "en": "There's a glowing box. Do not pick up the glowing box."
+    },
+    "N-072": {
+      "it": "L'ha presa. Va bene. Quella è Brat Animator, il progetto a cui Gabri tiene di più. Era nascosta qui perché... non lo so, io non ero ancora stato assunto.",
+      "en": "They took it. Fine. That's Brat Animator, the project Gabri cares about most. It was hidden here because... I don't know, I hadn't been hired yet.",
+      "panico": true
+    },
+    "N-080": {
+      "it": "Il visitatore restava fermo. Forse pensava. Forse leggeva. Il curatore rispettò il silenzio.",
+      "en": "The visitor stood still. Maybe thinking. Maybe reading. The curator respected the silence."
+    },
+    "N-081": {
+      "it": "Ancora fermo. Il curatore ne approfittò per ripassare il copione. Pagina uno: «Benvenuti». Bello. L'avevo già detto.",
+      "en": "Still standing. The curator took the chance to review the script. Page one: \"Welcome\". Nice. I already said that."
+    },
+    "N-082": {
+      "it": "Va bene, parlerò da solo. Lo sapete che Gabri ascolta i Cocteau Twins? Canzoni in cui le parole diventano suoni. Un po' come me adesso.",
+      "en": "Fine, I'll talk to myself. Did you know Gabri listens to Cocteau Twins? Songs where the words turn into sounds. A bit like me right now."
+    },
+    "N-083": {
+      "it": "...",
+      "en": "..."
+    },
+    "N-084": {
+      "it": "Il visitatore aveva scelto di aspettare. E aspettando, sentì la musica. Gabri le tiene una stanza apposta: si chiama Fuori orario.",
+      "en": "The visitor had chosen to wait. And while waiting, they heard the music. Gabri keeps a room just for it: it's called After Hours."
+    },
+    "N-090": {
+      "it": "Il visitatore raggiunse la porta. Dietro c'era Beautify, il gestionale per saloni che Gabri ha portato al diploma. Cinquanta passi, come cinque anni di scuola: tanti, ma finiscono.",
+      "en": "The visitor reached the door. Behind it was Beautify, the salon management system Gabri brought to the diploma exam. Fifty steps, like five years of school: many, but they end."
+    },
+    "N-095": {
+      "it": "Il visitatore arrivò alla fine senza disobbedire una volta. Dipendente modello. Il curatore lo propose per una promozione. Ecco percorso e contatti di Gabri: almeno Gabri sa improvvisare.",
+      "en": "The visitor reached the end without disobeying once. Model employee. The curator nominated them for a promotion. Here are Gabri's path and contacts: Gabri, at least, knows how to improvise."
+    },
+    "N-096": {
+      "it": "Il visitatore arrivò alla scrivania. Non proprio seguendo il copione, ma ci arrivò. Quasi un dipendente modello. Ecco percorso e contatti di Gabri.",
+      "en": "The visitor reached the desk. Not exactly by the script, but they got there. Almost a model employee. Here are Gabri's path and contacts."
+    },
+    "N-100": {
+      "it": "Oh. Di nuovo voi. Il copione dice che è la prima visita, ma io mi ricordo {n} finali su 5. Facciamo finta di niente.",
+      "en": "Oh. You again. The script says it's your first visit, but I remember {n} endings out of 5. Let's pretend nothing happened."
+    },
+    "N-101": {
+      "it": "Avete visto tutti i finali. Il curatore non ha più copione. Da qui in poi si improvvisa insieme.",
+      "en": "You've seen every ending. The curator has no script left. From here on, we improvise together."
+    },
+    "N-110": {
+      "it": "Un momento. Questa ala non c'è nel copione. C'è una scala mobile. Nessuno mi ha detto che avevamo una scala mobile.",
+      "en": "One moment. This wing isn't in the script. There's an escalator. Nobody told me we had an escalator.",
+      "panico": true
+    },
+    "N-111": {
+      "it": "Il corridoio era allagato. Il curatore decise di chiamarlo «installazione». L'acqua scorreva verso la porta rossa, e il visitatore la seguì.",
+      "en": "The corridor was flooded. The curator decided to call it \"an installation\". The water flowed towards the red door, and the visitor followed it."
+    },
+    "N-112": {
+      "it": "Sotto il museo c'è una cisterna. Lo sanno tutti tranne me.",
+      "en": "There's a cistern under the museum. Everyone knows except me.",
+      "panico": true
+    },
+    "N-113": {
+      "it": "Il visitatore salì una scala e si ritrovò in cima a un'altra. Il curatore smise di prendere appunti.",
+      "en": "The visitor climbed a ladder and found themselves at the top of a staircase. The curator stopped taking notes."
+    },
+    "N-114": {
+      "it": "Il visitatore guardò giù. Poi ci finì dentro.",
+      "en": "The visitor looked down. Then fell right in.",
+      "panico": true
+    },
+    "N-115": {
+      "it": "Un supermercato. Aperto, illuminato, vuoto. Il curatore controllò se c'era qualcosa da comprare. Non c'era niente da comprare.",
+      "en": "A supermarket. Open, lit, empty. The curator checked if there was anything to buy. There was nothing to buy."
+    },
+    "N-116": {
+      "it": "Il pavimento si muoveva appena. Il curatore sperò fosse una sua impressione.",
+      "en": "The floor was moving, just slightly. The curator hoped it was only a feeling."
+    },
+    "N-117": {
+      "it": "Fuori pioveva. Il visitatore era molto in alto, e la città non finiva. Il curatore, per una volta, rimase zitto ad ascoltare.",
+      "en": "It was raining outside. The visitor was very high up, and the city didn't end. For once, the curator kept quiet and listened."
+    },
+    "N-118": {
+      "it": "E il visitatore tornò in sala d'attesa. Il giro lungo. Il curatore annotò: «da aggiungere al copione».",
+      "en": "And the visitor was back in the waiting room. The long way round. The curator wrote down: \"add to the script\"."
+    }
+  }
+}

@@ -308,13 +308,9 @@ AH.App = (() => {
     clockTimer=setInterval(()=>{if(!document.hidden)updateClock();},30000);
     addEventListener('pagehide',()=>{clearInterval(clockTimer);cancelAnimationFrame(frame);hidePointer();});
     addEventListener('pageshow',e=>{if(e.persisted){clockTimer=setInterval(()=>{if(!document.hidden)updateClock();},30000);syncMotion();}});
-    if(window.__oakvxBootWaiting){
+    if(root.classList.contains('ingresso-attivo')){
       dom.ui.inert=true;syncMotion();
-      const resume=()=>{
-        removeEventListener('wii-boot:prepare',resume);removeEventListener('wii-boot:ready',resume);
-        s.intro=false;s.channelState='HOMEBREW_INTERFACE';dom.ui.inert=false;renderBrowser();syncMotion();
-      };
-      addEventListener('wii-boot:prepare',resume,{once:true});addEventListener('wii-boot:ready',resume,{once:true});
+      addEventListener('ingresso:chiuso',()=>{dom.ui.inert=false;playIntro();},{once:true});
     }else playIntro();
   }
   return {init,state:s,_skip(){AH.ChannelBoot.skip();}};

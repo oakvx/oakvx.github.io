@@ -99,8 +99,6 @@
     addEventListener('keydown', hide, { capture: true });
     addEventListener('pageswap', hide);
     addEventListener('pageshow', enable);
-    addEventListener('wii-boot:prepare', () => { raise = true; schedule(); });
-    addEventListener('wii-boot:ready', () => { raise = true; schedule(); });
     document.addEventListener('visibilitychange', () => { if (document.hidden) hide(); });
     addEventListener('scroll', schedule, { passive: true, capture: true });
     const promote = event => {

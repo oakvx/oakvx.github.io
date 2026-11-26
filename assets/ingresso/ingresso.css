@@ -1,0 +1,112 @@
+/* Menu d'ingresso: compare una volta per sessione e fa scegliere tra il sito e il gioco. */
+@font-face {
+    font-family: "Ingresso Nunito";
+    src: url('../wiiu/nunito.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+}
+
+/* Finché il menu è attivo la pagina sotto resta nascosta, così non lampeggia. */
+html.ingresso-attivo body { visibility: hidden; }
+html.ingresso-attivo body .ingresso { visibility: visible; }
+
+.ingresso {
+    --carta: #eef2f4;
+    --inchiostro: #1d252b;
+    --tenue: #56636c;
+    --accento: #2f6f86;
+    --ciano: #39c6d9;
+    --magenta: #d95bb3;
+    --molla: cubic-bezier(.2,.8,.2,1);
+    --ombra: 0 1px 2px rgba(30,45,52,.06), 0 10px 30px rgba(30,45,52,.1);
+    position: fixed; inset: 0; z-index: 2147483000;
+    width: 100%; height: 100%; max-width: none; max-height: none;
+    margin: 0; padding: 0; border: 0; overflow: auto;
+    background:
+        radial-gradient(circle at 18% 12%, #ffffffd9, transparent 42%),
+        radial-gradient(circle at 88% 92%, #d8e7ee, transparent 45%),
+        var(--carta);
+    color: var(--inchiostro);
+    font: 400 16px/1.5 "Ingresso Nunito", Nunito, "Segoe UI", system-ui, sans-serif;
+    cursor: auto;
+}
+.ingresso::backdrop { background: var(--carta, #eef2f4); }
+.ingresso.esce { animation: ingresso-esce .45s ease both; }
+
+.ingresso__firma {
+    position: absolute; top: 1.25rem; left: 1.5rem; right: 1.5rem;
+    display: flex; align-items: baseline; gap: .6rem; margin: 0;
+    font-size: .95rem; color: var(--tenue);
+}
+.ingresso__firma strong { color: var(--inchiostro); font-weight: 800; letter-spacing: -.01em; }
+
+.ingresso__corpo {
+    min-height: 100%; max-width: 62rem; margin: 0 auto;
+    padding: 6rem 1.5rem 3rem; box-sizing: border-box;
+    display: flex; flex-direction: column; justify-content: center;
+}
+.ingresso__corpo > * { animation: ingresso-sale .7s var(--molla) both; }
+.ingresso__corpo > :nth-child(2) { animation-delay: .08s; }
+.ingresso__corpo > :nth-child(3) { animation-delay: .16s; }
+.ingresso__corpo > :nth-child(4) { animation-delay: .24s; }
+
+.ingresso h1 {
+    margin: 0 0 1rem; color: var(--inchiostro);
+    font: 800 clamp(2.6rem,8vw,5.4rem)/.95 "Ingresso Nunito", Nunito, system-ui, sans-serif;
+    letter-spacing: -.04em;
+}
+.ingresso__intro { max-width: 38rem; margin: 0; font-size: 1.15rem; line-height: 1.55; color: #33404a; }
+
+.ingresso__scelte {
+    display: grid; grid-template-columns: repeat(auto-fit,minmax(15rem,1fr));
+    gap: 1rem; margin: 2rem 0 1rem;
+}
+.ingresso__scelta {
+    position: relative; display: flex; flex-direction: column; gap: .35rem;
+    min-height: 9rem; padding: 1.4rem 1.5rem; box-sizing: border-box;
+    border: 1px solid rgba(29,37,43,.14); border-radius: 24px;
+    background: #f8fafb; color: var(--inchiostro); box-shadow: var(--ombra);
+    font: inherit; text-align: left; text-decoration: none; cursor: pointer; overflow: hidden;
+    transition: transform .35s var(--molla), border-color .25s ease, box-shadow .35s var(--molla);
+}
+.ingresso__scelta:hover { transform: translateY(-4px); border-color: rgba(29,37,43,.4); box-shadow: 0 2px 4px rgba(30,45,52,.06), 0 24px 50px rgba(30,45,52,.16); }
+.ingresso__scelta:active { transform: scale(.985); }
+.ingresso__scelta:focus-visible { outline: 3px solid var(--accento); outline-offset: 3px; }
+.ingresso__nome { margin-top: auto; font-size: 2.2rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.ingresso__nota { color: var(--tenue); }
+
+.ingresso__scelta--gioco { background: var(--inchiostro); border-color: var(--inchiostro); color: #f2f6f8; }
+.ingresso__scelta--gioco .ingresso__nota { color: #a9b7bf; }
+.ingresso__scelta--gioco::before,
+.ingresso__scelta--gioco::after {
+    content: ''; position: absolute; top: 1.2rem; right: 1.4rem; width: 46px; height: 46px; opacity: .85;
+    background: conic-gradient(from 90deg at 50% 50%, transparent 0 25%, currentColor 0 50%, transparent 0 75%, currentColor 0) 0 0 / 12px 12px;
+    transition: transform .5s var(--molla);
+}
+.ingresso__scelta--gioco::before { color: var(--ciano); clip-path: polygon(0 0,100% 0,100% 30%,70% 30%,70% 100%,0 100%); }
+.ingresso__scelta--gioco::after { color: var(--magenta); top: 2.6rem; right: 3.6rem; clip-path: polygon(30% 0,100% 0,100% 100%,0 100%,0 70%,30% 70%); }
+.ingresso__scelta--gioco:hover::before { transform: translate(4px,-4px); }
+.ingresso__scelta--gioco:hover::after { transform: translate(-4px,4px); }
+
+.ingresso__avviso { max-width: 38rem; margin: 0; font-size: .95rem; color: var(--tenue); }
+.ingresso__avviso[hidden] { display: none; }
+
+@keyframes ingresso-sale { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes ingresso-esce { to { opacity: 0; transform: scale(.97); filter: blur(4px); } }
+
+@media (max-width: 540px) {
+    .ingresso__corpo { padding-top: 4.5rem; }
+    .ingresso__scelta { min-height: 7.5rem; }
+    .ingresso__nome { font-size: 1.9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ingresso__corpo > *, .ingresso.esce { animation: none; }
+    .ingresso__scelta, .ingresso__scelta::before, .ingresso__scelta::after { transition: none; }
+    .ingresso__scelta:hover { transform: none; }
+}
+:root:is(.paused,.calm) .ingresso__corpo > *,
+:root:is(.paused,.calm) .ingresso.esce { animation: none; }
+
+@media print { .ingresso { display: none; } html.ingresso-attivo body { visibility: visible; } }

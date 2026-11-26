@@ -11,7 +11,7 @@
     const voices = new Set();
     const subscribers = new Set();
     try { preference = localStorage.getItem('wiiu-sound'); enabled = preference === 'on'; } catch {}
-    const stopped = () => document.hidden || root.classList.contains('paused') || (scene !== 'wii' && (reduced.matches || root.classList.contains('calm')));
+    const stopped = () => document.hidden || root.classList.contains('paused') || reduced.matches || root.classList.contains('calm');
     const allowed = () => !!Audio && enabled && gesture && !stopped() && !leaving;
     const state = () => Object.freeze({ context, enabled, active: allowed() && context?.state === 'running', leaving, scene, available: !!Audio });
     function publish() {
@@ -22,7 +22,6 @@
     }
     Object.defineProperty(window, 'wiiuSound', { value: Object.freeze({
         getState: state,
-        setScene(value) { scene = value === 'wii' ? 'wii' : 'portfolio'; sync(); publish(); },
         setEnabled(value, event) {
             if (event?.isTrusted) gesture = true;
             enabled = !!value; preference = enabled ? 'on' : 'off';

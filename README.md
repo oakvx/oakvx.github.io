@@ -15,6 +15,7 @@ Sito portfolio statico di Gabriele Lucia, pubblicato su GitHub Pages: <https://o
 
 - [Stack](#stack)
 - [Struttura del repository](#struttura-del-repository)
+- [Menu d'ingresso](#menu-dingresso)
 - [Sistema di pagine](#sistema-di-pagine)
 - [Internazionalizzazione](#internazionalizzazione)
 - [Avatar e movimento ridotto](#avatar-e-movimento-ridotto)
@@ -50,6 +51,7 @@ assets/
                            companion.js
   cursor.css               puntatore solo CSS
   github-stats.js          contatore di commit pubblici
+  ingresso/                menu d'ingresso Sito/Gioco
   CREDITS.html             provenienza dei materiali
 scripts/
   build_static.py          genera en/ e sitemap.xml
@@ -57,6 +59,14 @@ scripts/
   extract-translations.cjs utility Node per le traduzioni
 .github/workflows/site-check.yml
 ```
+
+## Menu d'ingresso
+
+Alla prima pagina aperta in una sessione compare un menu a tutto schermo ("Ciao, sono oakvx.") con due scelte: **Sito** chiude il menu e lascia la pagina richiesta, **Gioco** apre `/gioco/`. Vive in `assets/ingresso/` (`ingresso.css`, `ingresso.js`), con un piccolo bootstrap in `<head>` in tutte le pagine pubbliche.
+
+- Una volta per sessione (`sessionStorage`, chiave `oakvx-ingresso`); mai ai crawler; senza JavaScript la pagina si vede subito.
+- Se lo script non parte entro 4 s la pagina viene sbloccata comunque.
+- Esc equivale a "Sito". Per provarlo: `?ingresso=1`; per saltarlo: `?ingresso=0`.
 
 ## Sistema di pagine
 

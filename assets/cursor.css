@@ -3,7 +3,7 @@
     /* PNG fallback and CUR share the same verified hotspot. */
     @media (any-hover: hover) and (any-pointer: fine) {
         html:not([data-pointer-mode="native"]),html:not([data-pointer-mode="native"]) body { cursor: url('wiiu/pointer.png') 7 0,auto!important; }
-        html:not([data-pointer-mode="native"]) :is(a[href],button,[role="button"],summary,[data-cycle],#wii-boot) { cursor: url('wiiu/pointer.png') 7 0,pointer!important; }
+        html:not([data-pointer-mode="native"]) :is(a[href],button,[role="button"],summary,[data-cycle]) { cursor: url('wiiu/pointer.png') 7 0,pointer!important; }
         html.wiiu-pointer-ready.wiiu-pointer-visible,
         html.wiiu-pointer-ready.wiiu-pointer-visible body,
         html.wiiu-pointer-ready.wiiu-pointer-visible body * { cursor: none!important; }

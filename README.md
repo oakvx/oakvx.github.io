@@ -101,6 +101,12 @@ Tutte le pagine (home, chi-sono, casi studio, fuori-orario, 404, crediti) usano 
 - Chiamate **non autenticate**, quindi soggette ai limiti di frequenza della Search API. Per questo il totale è messo in cache in `localStorage` (chiave `oakvx-public-commit-total-v1`, TTL 1 ora) e, in caso di errore, il nuovo tentativo avviene dopo 5 minuti.
 - Ridisegna la matrice al cambio di `lang` e annuncia lo stato tramite regione per screen reader.
 
+## Commit del sito e profili social
+
+- **Commit del sito** (home, sezione "Questo sito"): totale, giorni di lavoro e istogramma per giorno dei commit di questo repository. `nero.js` li legge dall'API pubblica di GitHub (`/repos/oakvx/oakvx.github.io/commits`, cache di un'ora in `localStorage`, chiave `oakvx-commit-sito-v1`); senza rete restano i valori scritti nella pagina alla pubblicazione.
+- **Profili social** (Fuori orario): Instagram @oakvx, TikTok @oakvx.sh e @uvst.oakvx. La GitHub Action [`social.yml`](.github/workflows/social.yml) esegue ogni ora `scripts/social.mjs`, che legge solo i conteggi pubblici e l'avatar e aggiorna `assets/social/social.json`; il commit parte solo quando un valore cambia, e se una piattaforma non risponde resta l'ultimo valore valido.
+- Le storie e i video da mostrare nelle card si scelgono a mano in `assets/social/scelte.json`: per ogni account un elenco di `{ "tipo", "titolo", "immagine", "link" }`, con le immagini in `assets/social/scelte/`.
+
 ## Sviluppo locale
 
 Nessun pacchetto da installare:

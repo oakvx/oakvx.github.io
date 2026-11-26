@@ -34,7 +34,22 @@
             slotNone: 'Nessun orario libero',
             slotPick: (h, d) => `Prenotato alle ${h}, per ${d} minuti. (Simulazione: nulla viene salvato.)`,
             lightOn: 'Spegni la luce',
-            lightOff: 'Accendi la luce'
+            lightOff: 'Accendi la luce',
+            locale: 'it-IT',
+            commitDay: (n, d) => `${n} commit · ${d}`,
+            commitChart: (n, g) => `${n} commit in ${g} giorni di lavoro`,
+            commitLive: 'aggiornato da GitHub',
+            commitOffline: 'GitHub non risponde: dati dell’ultima pubblicazione',
+            following: 'seguiti',
+            posts: 'post',
+            likes: 'mi piace',
+            videos: 'video',
+            private: 'profilo privato',
+            waiting: 'in attesa del primo controllo',
+            changed: t => `ultimo cambiamento ${t}`,
+            ago: (n, u) => `${n} ${u} fa`,
+            units: { m: ['minuto', 'minuti'], h: ['ora', 'ore'], d: ['giorno', 'giorni'] },
+            now: 'adesso'
         },
         en: {
             pause: 'Pause animations',
@@ -56,7 +71,22 @@
             slotNone: 'No free slots',
             slotPick: (h, d) => `Booked at ${h}, for ${d} minutes. (Simulation: nothing is saved.)`,
             lightOn: 'Turn the light off',
-            lightOff: 'Turn the light on'
+            lightOff: 'Turn the light on',
+            locale: 'en-GB',
+            commitDay: (n, d) => `${n} commit${n === 1 ? '' : 's'} · ${d}`,
+            commitChart: (n, g) => `${n} commits over ${g} working days`,
+            commitLive: 'updated from GitHub',
+            commitOffline: 'GitHub is not answering: data from the last publish',
+            following: 'following',
+            posts: 'posts',
+            likes: 'likes',
+            videos: 'videos',
+            private: 'private profile',
+            waiting: 'waiting for the first check',
+            changed: t => `last change ${t}`,
+            ago: (n, u) => `${n} ${u} ago`,
+            units: { m: ['minute', 'minutes'], h: ['hour', 'hours'], d: ['day', 'days'] },
+            now: 'just now'
         }
     };
     const t = key => DYN[lang][key];
@@ -761,6 +791,194 @@
         set(calm());
     }
 
+
+    /* ----------------------------------------------------------------------
+       Commit di questo sito: totale e istogramma per giorno, in diretta da GitHub
+       (API pubblica, risultato in cache per un'ora). Senza rete restano i dati
+       incisi nella pagina al momento della pubblicazione.
+       ---------------------------------------------------------------------- */
+    const dataBreve = d => new Date(d + 'T12:00:00').toLocaleDateString(t('locale'), { day: 'numeric', month: 'short', year: 'numeric' });
+
+    function initCommitSito() {
+        const box = $('[data-commit-sito]');
+        if (!box) return;
+        const grafico = $('[data-commit-grafico]', box);
+        const stato = $('[data-commit-stato]', box);
+        const CACHE = 'oakvx-commit-sito-v1';
+        let statici = null;
+        try { statici = JSON.parse($('#commit-sito-dati')?.textContent || 'null'); } catch {}
+
+        const disegna = (dati, live) => {
+            const giorni = dati.giorni || {};
+            const date = Object.keys(giorni).sort();
+            if (!date.length) return;
+            const primo = new Date(date[0] + 'T12:00:00');
+            const oggi = new Date(); oggi.setHours(12, 0, 0, 0);
+            const max = Math.max(...Object.values(giorni));
+            const frag = document.createDocumentFragment();
+            let n = 0;
+            for (const d = new Date(primo); d <= oggi; d.setDate(d.getDate() + 1)) {
+                const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                const c = giorni[k] || 0;
+                const bar = document.createElement('span');
+                bar.className = 'cantiere__barra' + (c ? '' : ' vuota');
+                bar.style.setProperty('--h', c ? Math.max(.04, c / max).toFixed(3) : 0);
+                bar.style.setProperty('--i', n++);
+                if (c) bar.title = t('commitDay')(c, dataBreve(k));
+                frag.append(bar);
+            }
+            grafico.replaceChildren(frag);
+            const record = Object.entries(giorni).sort((a, b) => b[1] - a[1])[0];
+            const set = (sel, v) => { const el = $(sel, box); if (el) el.textContent = v; };
+            set('[data-commit-totale]', dati.totale.toLocaleString(t('locale')));
+            set('[data-commit-primo]', dataBreve(date[0]));
+            set('[data-commit-da]', dataBreve(date[0]));
+            set('[data-commit-giorni]', String(date.length));
+            set('[data-commit-record]', `${record[1]} · ${dataBreve(record[0])}`);
+            if (dati.ultimo) set('[data-commit-ultimo]', dati.ultimo);
+            grafico.setAttribute('aria-label', t('commitChart')(dati.totale, date.length));
+            if (stato) stato.textContent = live === true ? t('commitLive') : live === false ? t('commitOffline') : '';
+        };
+
+        const leggi = async () => {
+            const giorni = {};
+            let totale = 0, ultimo = '';
+            for (let page = 1; page <= 10; page++) {
+                const res = await fetch(`https://api.github.com/repos/oakvx/oakvx.github.io/commits?per_page=100&page=${page}`, { headers: { Accept: 'application/vnd.github+json' } });
+                if (!res.ok) throw new Error('GitHub ' + res.status);
+                const lista = await res.json();
+                if (page === 1 && lista[0]) ultimo = lista[0].commit.message.split('\n')[0];
+                for (const c of lista) {
+                    const quando = new Date(c.commit.author?.date || c.commit.committer?.date);
+                    const k = `${quando.getFullYear()}-${String(quando.getMonth() + 1).padStart(2, '0')}-${String(quando.getDate()).padStart(2, '0')}`;
+                    giorni[k] = (giorni[k] || 0) + 1;
+                }
+                totale += lista.length;
+                if (lista.length < 100) break;
+            }
+            return { totale, giorni, ultimo };
+        };
+
+        if (statici) disegna(statici);
+        if ('IntersectionObserver' in window) {
+            const vis = new IntersectionObserver(([e]) => { if (e.isIntersecting) { box.classList.add('visto-grafico'); vis.disconnect(); } }, { threshold: .2 });
+            vis.observe(grafico);
+        } else box.classList.add('visto-grafico');
+        let cache = null;
+        try { cache = JSON.parse(localStorage.getItem(CACHE) || 'null'); } catch {}
+        if (cache && Date.now() - cache.quando < 3600e3) { disegna(cache.dati, true); return; }
+        const parti = () => leggi()
+            .then(dati => {
+                disegna(dati, true);
+                try { localStorage.setItem(CACHE, JSON.stringify({ quando: Date.now(), dati })); } catch {}
+            })
+            .catch(() => { if (cache) disegna(cache.dati, false); else if (stato) stato.textContent = t('commitOffline'); });
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); parti(); } }, { rootMargin: '600px' });
+            io.observe(box);
+        } else parti();
+    }
+
+    /* ----------------------------------------------------------------------
+       Profili social: conteggi da assets/social/social.json (scritto ogni ora
+       dalla GitHub Action) e contenuti scelti in assets/social/scelte.json.
+       ---------------------------------------------------------------------- */
+    function fa(iso) {
+        const min = Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000));
+        if (min < 1) return t('now');
+        const [n, u] = min < 60 ? [min, 'm'] : min < 2880 ? [Math.round(min / 60), 'h'] : [Math.round(min / 1440), 'd'];
+        return t('ago')(n, t('units')[u][n === 1 ? 0 : 1]);
+    }
+
+    function contaFino(el, valore) {
+        const fmt = v => Math.round(v).toLocaleString(t('locale'));
+        if (calm() || !('IntersectionObserver' in window)) { el.textContent = fmt(valore); return; }
+        const io = new IntersectionObserver(([e]) => {
+            if (!e.isIntersecting) return;
+            io.disconnect();
+            const start = performance.now();
+            const step = now => {
+                const p = Math.min(1, (now - start) / 1400);
+                el.textContent = fmt(valore * (1 - Math.pow(1 - p, 4)));
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        });
+        io.observe(el);
+    }
+
+    async function initSocial() {
+        const box = $('[data-social]');
+        if (!box) return;
+        const base = new URL('assets/social/', new URL($('script[src*="nero/nero.js"]').src, location.href).href.replace(/assets\/nero\/nero\.js.*$/, ''));
+        let dati = {}, scelte = {};
+        try { dati = (await (await fetch(new URL('social.json', base), { cache: 'no-cache' })).json()).account || {}; } catch {}
+        try { scelte = await (await fetch(new URL('scelte.json', base), { cache: 'no-cache' })).json(); } catch {}
+        const asset = p => new URL(p.replace(/^assets\/social\//, ''), base).href;
+
+        $$('.profilo', box).forEach(card => {
+            const campo = k => $(`[data-campo-profilo="${k}"]`, card);
+            const mostra = chiave => {
+                const [piattaforma, handle] = chiave.split(':');
+                const a = dati[chiave] || {};
+                card.dataset.account = chiave;
+                $$('[data-scegli]', card).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.scegli === chiave)));
+                campo('nome').textContent = a.nome || handle;
+                campo('handle').textContent = '@' + handle;
+                campo('link').href = piattaforma === 'instagram' ? `https://www.instagram.com/${handle}/` : `https://www.tiktok.com/@${handle}`;
+                if (a.follower != null) contaFino(campo('follower'), a.follower); else campo('follower').textContent = '—';
+                const pezzi = piattaforma === 'instagram'
+                    ? [[a.seguiti, t('following')], [a.post, t('posts')]]
+                    : [[a.seguiti, t('following')], [a.miPiace, t('likes')], [a.video, t('videos')]];
+                campo('dati').replaceChildren(...pezzi.filter(([v]) => v != null).map(([v, l]) => {
+                    const s = document.createElement('span');
+                    const b = document.createElement('b');
+                    b.textContent = v.toLocaleString(t('locale'));
+                    s.append(b, ' ' + l);
+                    return s;
+                }));
+                if (a.privato) { const s = document.createElement('span'); s.textContent = t('private'); campo('dati').append(s); }
+                campo('stato').textContent = a.aggiornato ? t('changed')(fa(a.aggiornato)) : t('waiting');
+                // andamento dei follower
+                const storia = (a.storia || []).map(([q, v]) => [new Date(q).getTime(), v]);
+                const path = $('.profilo__storia path', card);
+                if (storia.length > 1) {
+                    const t0 = storia[0][0], t1 = Math.max(Date.now(), storia.at(-1)[0]);
+                    const vs = storia.map(p => p[1]), lo = Math.min(...vs), hi = Math.max(...vs);
+                    const x = q => ((q - t0) / (t1 - t0 || 1)) * 100;
+                    const y = v => 38 - ((v - lo) / (hi - lo || 1)) * 30;
+                    let d = `M0 ${y(storia[0][1]).toFixed(2)}`;
+                    storia.forEach(([q, v], i) => { if (i) d += ` H${x(q).toFixed(2)} V${y(v).toFixed(2)}`; });
+                    d += ` H100`;
+                    path.setAttribute('d', d);
+                } else path.setAttribute('d', '');
+                // contenuti scelti
+                const lista = scelte[chiave] || [];
+                const sc = campo('scelte');
+                sc.hidden = !lista.length;
+                sc.replaceChildren(...lista.map(it => {
+                    const el = document.createElement(it.link ? 'a' : 'figure');
+                    el.className = 'profilo__scelta-contenuto';
+                    if (it.link) { el.href = it.link; el.target = '_blank'; el.rel = 'noopener noreferrer'; }
+                    const img = new Image();
+                    img.src = asset(it.immagine); img.alt = it.titolo || ''; img.loading = 'lazy';
+                    const cap = document.createElement('span');
+                    cap.className = 't-meta';
+                    cap.textContent = [it.tipo, it.titolo].filter(Boolean).join(' · ');
+                    el.append(img, cap);
+                    return el;
+                }));
+            };
+            $$('[data-scegli]', card).forEach(b => {
+                const a = dati[b.dataset.scegli];
+                const av = $('.profilo__avatar', b);
+                if (a?.avatar) { av.textContent = ''; av.style.backgroundImage = `url("${asset(a.avatar)}")`; }
+                b.addEventListener('click', () => mostra(b.dataset.scegli));
+            });
+            mostra(card.dataset.account);
+        });
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -781,6 +999,8 @@
         initFlusso();
         initOrari();
         initLuce();
+        initCommitSito();
+        initSocial();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

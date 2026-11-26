@@ -6,6 +6,7 @@ import { creaArredi } from './engine/arredi.js';
 import { Corpo, muovi, passoCorpo, G } from './engine/fisica.js';
 import { Portali } from './portali.js';
 import { Passaggi } from './engine/passaggi.js';
+import { creaCaricatore } from './engine/asset.js';
 import { Narratore } from './narratore.js';
 import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
@@ -48,6 +49,15 @@ export async function avvia(ctx) {
   let assegnate = [];
   let prossimaAssegnazione = 0;
 
+  // asset (texture PBR, panorami, modelli): si chiedono subito, si aspettano prima di entrare
+  const asset = creaCaricatore({ base: 'asset/' });
+  asset.suProgresso(({ fatti, totali }) => {
+    if (totali) $('avvio-testo').textContent = `${ctx.T.caricamento} ${fatti}/${totali}`;
+  });
+  const precarica = asset.elenco().then((e) => Promise.all([
+    ...Object.keys(e.texture).map((id) => asset.texture(id)),
+    ...Object.keys(e.hdr).map((id) => asset.hdr(id)),
+  ]));
   const mat = creaMateriali(renderer);
   const mondo = new Mondo(scene, mat);
   const portali = new Portali(renderer, scene, mondo);
@@ -103,7 +113,7 @@ export async function avvia(ctx) {
   let commitPromessa = null;
   const aiuti = new Map();
   const g = {
-    mondo, scene, portali, passaggi, emetti, su, cubo, debug: ctx.debug,
+    mondo, scene, portali, passaggi, emetti, asset, su, cubo, debug: ctx.debug,
     T: () => ctx.T,
     lingua: () => ctx.lingua,
     suLingua: (fn) => ctx.suLingua(fn),
@@ -671,6 +681,7 @@ export async function avvia(ctx) {
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
       materiali: () => Object.keys(mat),
+      asset: () => asset.progresso(),
       tempoMusica: () => suoni.musica.tempo(),
       avanzaAiuti: (sec) => aggiornaAiuti(sec),
       avviaAudio: () => suoni.avvia(),
@@ -705,6 +716,8 @@ export async function avvia(ctx) {
   emetti('inizio');
   renderer.setAnimationLoop(ciclo);
   $('avvio-testo').removeAttribute('data-t');
+  await precarica;
+  await asset.tutti();
   $('avvio-testo').textContent = ctx.T.comandi;
   $('caricatore').hidden = true;
   $('avvio-entra').hidden = false;

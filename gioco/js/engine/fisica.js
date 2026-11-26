@@ -75,7 +75,7 @@ function risolvi(corpo, asse, d, mn, mx) {
   else corpo.vel[asse] *= corpo.tipo === 'cubo' ? -0.25 : 0;
 }
 
-// passo di simulazione per i corpi liberi (cubi)
+// passo di simulazione per i corpi liberi (cubi); restituisce la velocità d'urto
 export function passoCorpo(corpo, dt, mondo, altri, varchi) {
   if (!corpo.tenuto) {
     const st = mondo.stanzaDi(corpo.pos);
@@ -87,7 +87,10 @@ export function passoCorpo(corpo, dt, mondo, altri, varchi) {
       corpo.vel.z *= attrito;
     }
   }
+  const prima = corpo.vel.clone();
   const delta = corpo.vel.clone().multiplyScalar(dt);
   muovi(corpo, delta, mondo, altri, varchi);
   if (corpo.mesh) corpo.mesh.position.copy(corpo.pos);
+  // velocità persa nell'urto (m/s): serve per il suono
+  return corpo.tenuto ? 0 : prima.sub(corpo.vel).length();
 }

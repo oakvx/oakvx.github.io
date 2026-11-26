@@ -10,6 +10,7 @@ import { Narratore } from './narratore.js';
 import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
 import { creaGiro, creaAiuti } from './logica/giro.js';
+import { creaContapassi } from './logica/passi.js';
 
 const $ = (id) => document.getElementById(id);
 const STANZE = ['ingresso', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
@@ -225,6 +226,7 @@ export async function avvia(ctx) {
   let finito = false;
   let fermo = 0;
   let passi = 0;
+  const contapassi = creaContapassi(0.55);
   let stanzaAttuale = null;
   let ultimoControllo = 'ingresso';
   let mirato = null;
@@ -448,7 +450,11 @@ export async function avvia(ctx) {
     } else {
       const tp = passaggi.attraversa(giocatore);
       if (tp) { yaw += tp.dyaw; emetti('passaggio:' + tp.id, tp); }
-      else passi += Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
+      else {
+        const d = Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
+        passi += d;
+        if (giocatore.aTerra && contapassi.avanza(d)) suoni.passo(bagnato ? 'acqua' : (stQui && stQui.passi) || 'cemento');
+      }
     }
     // caduta nel vuoto: si torna al punto di ripresa dell'ultima stanza che ne ha uno
     const ultima = controlli.get(ultimoControllo);
@@ -466,7 +472,8 @@ export async function avvia(ctx) {
         if (c.vel.length() > 14) c.vel.setLength(14);
       }
       const varchi = portali.varchi(c);
-      passoCorpo(c, dt, mondo, cubi, varchi);
+      const urto = passoCorpo(c, dt, mondo, cubi, varchi);
+      if (urto > 2 && !c.tenuto) suoni.urto(Math.min(1, urto / 8));
       if ((portali.attraversa(c) || passaggi.attraversa(c)) && c.tenuto) { c.tenuto = false; tenuto = null; }
       if (c.pos.y < -20) { c.pos.y = 3; c.vel.set(0, 0, 0); }
     }

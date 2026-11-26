@@ -32,6 +32,9 @@ export async function avvia(ctx) {
   // ---------------------------------------------------------------- renderer e scena
   const canvas = $('scena');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+  // ombre morbide: una sola luce con ombre, quella della stanza in cui si è
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(FOG);
   scene.fog = new THREE.Fog(FOG, ATMOSFERA.vicino, ATMOSFERA.lontano);
@@ -39,6 +42,12 @@ export async function avvia(ctx) {
   const camera = new THREE.PerspectiveCamera(imp.fov, innerWidth / innerHeight, 0.02, 80);
   camera.rotation.order = 'YXZ';
   const emi = new THREE.HemisphereLight(ATMOSFERA.cielo, ATMOSFERA.terra, ATMOSFERA.intensita);
+  const luceOmbre = new THREE.SpotLight(0xfff1dc, 0, 22, 1.0, 0.6, 1.4);
+  luceOmbre.castShadow = true;
+  luceOmbre.shadow.mapSize.set(1024, 1024);
+  luceOmbre.shadow.bias = -0.0004;
+  luceOmbre.shadow.normalBias = 0.03;
+  scene.add(luceOmbre, luceOmbre.target);
   scene.add(emi);
   // gruppo fisso di luci puntiformi, assegnate alle definizioni più vicine
   const gruppoLuci = Array.from({ length: N_LUCI }, () => {
@@ -58,7 +67,18 @@ export async function avvia(ctx) {
     ...Object.keys(e.texture).map((id) => asset.texture(id)),
     ...Object.keys(e.hdr).map((id) => asset.hdr(id)),
   ]));
-  const mat = creaMateriali(renderer);
+  const mat = creaMateriali(renderer, asset);
+  // panorami HDR → luce d'ambiente e riflessi (uno per area)
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const ambienti = new Map();
+  let ambienteAttuale = null;
+  function ambiente(id) {
+    ambienteAttuale = id;
+    if (!ambienti.has(id)) ambienti.set(id, asset.hdr(id).then((t) => (t ? pmrem.fromEquirectangular(t).texture : null)));
+    ambienti.get(id).then((t) => { if (ambienteAttuale === id) scene.environment = t; });
+  }
+  scene.environmentIntensity = 1.0;
+  ambiente('interno-neutro');
   const mondo = new Mondo(scene, mat);
   const portali = new Portali(renderer, scene, mondo);
   const passaggi = new Passaggi(renderer, scene);
@@ -182,10 +202,10 @@ export async function avvia(ctx) {
   // ---------------------------------------------------------------- post-processing
   const rt = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: 4 });
   const post = new THREE.ShaderMaterial({
-    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 }, uModo2008: { value: 0 } },
+    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 }, uModo2008: { value: 0 }, uEsposizione: { value: 1.15 } },
     vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
     fragmentShader: `
-      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo; uniform float uModo2008;
+      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo; uniform float uModo2008; uniform float uEsposizione;
       varying vec2 vUv;
       float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
       void main(){
@@ -197,7 +217,10 @@ export async function avvia(ctx) {
           vec2 blocco = (floor(vUv * uRes / 8.0) + 0.5) * 8.0 / uRes;
           col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.1 * uModo2008);
         }
-        col = pow(max(col, 0.0), vec3(1.0 / 2.2));
+        // tone mapping filmico (ACES, approssimazione di Narkowicz) e codifica sRGB
+        col *= uEsposizione;
+        col = clamp((col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14), 0.0, 1.0);
+        col = mix(col * 12.92, 1.055 * pow(col, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, col));
         if (uModo2008 > 0.0) {
           float m8 = uModo2008;
           col *= mix(1.0, 1.16 - r2 * 1.5, m8);                                   // flash frontale
@@ -208,7 +231,6 @@ export async function avvia(ctx) {
         col *= vec3(1.0, 0.99, 0.96);
         col *= mix(0.7, 1.0, smoothstep(0.62, 0.08, r2));
         col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.05, 0.02, uCalmo);
-        col = floor(col * 48.0 + 0.5) / 48.0;
         gl_FragColor = vec4(col, 1.0);
       }`,
     depthTest: false,
@@ -235,6 +257,20 @@ export async function avvia(ctx) {
   ridimensiona();
 
   // ---------------------------------------------------------------- impostazioni
+  // qualità bassa: mappa d'ombra 1024 e niente ombre dai piccoli oggetti; alta: 2048 e tutto
+  function impostaOmbre(alta) {
+    const lato = alta ? 2048 : 1024;
+    if (luceOmbre.shadow.mapSize.x !== lato) {
+      luceOmbre.shadow.mapSize.set(lato, lato);
+      if (luceOmbre.shadow.map) { luceOmbre.shadow.map.dispose(); luceOmbre.shadow.map = null; }
+    }
+    for (const sld of mondo.solidi) {
+      if (!sld.mesh) continue;
+      const d = sld.max.clone().sub(sld.min);
+      sld.mesh.castShadow = alta || Math.max(d.x, d.y, d.z) >= 1;
+    }
+  }
+
   function applicaImpostazioni() {
     camera.fov = imp.fov;
     camera.updateProjectionMatrix();
@@ -243,6 +279,7 @@ export async function avvia(ctx) {
     $('sottotitoli').className = 'sottotitoli ' + imp.sott + ($('sottotitoli').classList.contains('panico') ? ' panico' : '');
     portali.impostaScala(Number(imp.qual), rt.width, rt.height);
     passaggi.ridimensiona(rt.width, rt.height, Number(imp.qual));
+    impostaOmbre(Number(imp.qual) >= 1);
     $('imp-fov').value = imp.fov;
     $('imp-fov-v').textContent = imp.fov + '°';
     $('imp-sens').value = imp.sens;
@@ -573,6 +610,15 @@ export async function avvia(ctx) {
         suoni.musica.transizione();
       }
       if (controlli.has(nome)) ultimoControllo = nome;
+      if (s.atmosfera !== 'eredita') {
+        ambiente(s.hdr || 'interno-neutro');
+        const o = s.ombra || { pos: [(s.x0 + s.x1) / 2, s.y0 + s.h - 0.15, (s.z0 + s.z1) / 2], bersaglio: [(s.x0 + s.x1) / 2, s.y0, (s.z0 + s.z1) / 2] };
+        luceOmbre.position.set(...o.pos);
+        luceOmbre.target.position.set(...o.bersaglio);
+        luceOmbre.intensity = o.intensita ?? 14;
+        luceOmbre.distance = Math.max(12, s.h * 3 + Math.hypot(s.x1 - s.x0, s.z1 - s.z0));
+        luceOmbre.angle = o.angolo ?? Math.min(1.25, Math.atan2(Math.hypot(s.x1 - s.x0, s.z1 - s.z0) / 2, s.h) + 0.15);
+      }
       emetti('stanza:' + nome);
     }
     mondo.controllaZone(giocatore.pos, (z) => emetti(z));
@@ -589,7 +635,7 @@ export async function avvia(ctx) {
     scene.fog.far += (atmo.lontano - scene.fog.far) * k;
     emi.color.lerp(cCielo.set(atmo.cielo), k);
     emi.groundColor.lerp(cTerra.set(atmo.terra), k);
-    emi.intensity += (atmo.intensita - emi.intensity) * k;
+    emi.intensity += (atmo.intensita * 0.55 - emi.intensity) * k;   // il resto lo fa il panorama HDR
   }
 
   function aggiornaLuci(t) {
@@ -681,6 +727,7 @@ export async function avvia(ctx) {
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
       materiali: () => Object.keys(mat),
+      resa: () => ({ toneMapping: 'ACESFilmic', ombre: renderer.shadowMap.enabled, mappaOmbra: luceOmbre.shadow.mapSize.x, ambiente: ambienteAttuale }),
       asset: () => asset.progresso(),
       tempoMusica: () => suoni.musica.tempo(),
       avanzaAiuti: (sec) => aggiornaAiuti(sec),

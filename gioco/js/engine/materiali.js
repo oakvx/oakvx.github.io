@@ -68,113 +68,74 @@ function macchie(ctx, w, h, quante, colore, alpha) {
   }
 }
 
-// intonaco a due colori: zoccolo scuro fino a 1,1 m dal pavimento, parte alta chiara
-function intonacoBicolore(tex, y0) {
-  const mat = new THREE.MeshLambertMaterial({ map: tex });
+// texture di attesa: bianco, normale piatta, ARM (occlusione 1, rugosità 0.8, metallo 0)
+const pixel = (r, g, b) => { const t = new THREE.DataTexture(new Uint8Array([r, g, b, 255]), 1, 1); t.needsUpdate = true; return t; };
+const BIANCO = pixel(255, 255, 255);
+const PIATTA = pixel(128, 128, 255);
+const ARM0 = pixel(255, 204, 0);
+
+/*
+ * Materiale PBR con mappatura in coordinate mondo: colore, normali e ARM (occlusione, rugosità,
+ * metallo) proiettati sull'asse dominante della superficie, densità `scala` ripetizioni al metro.
+ * Le normali usano una base tangente per asse. `zoccolo` (opzionale) tinge di scuro la fascia bassa
+ * della parete fino a `zoccolo.h` metri sopra `zoccolo.base`. Finché le texture non arrivano il
+ * materiale usa solo la tinta; poi si aggiorna da solo (nessuna ricompilazione).
+ */
+export function pbrMondo(asset, id, { scala = 0.5, tinta = 0xffffff, rugosita = 1, metallo = 1, normale = 1, zoccolo = null, rimbalzo = 0 } = {}) {
+  // rimbalzo: luce riflessa simulata (soffitti e superfici che guardano in basso)
+  const mat = new THREE.MeshStandardMaterial({ color: tinta, roughness: rugosita, metalness: metallo, emissive: new THREE.Color(tinta).multiplyScalar(rimbalzo) });
+  const u = {
+    tColore: { value: BIANCO }, tNormali: { value: PIATTA }, tArm: { value: ARM0 },
+    uScala: { value: scala }, uNormale: { value: normale },
+    uZBase: { value: zoccolo ? zoccolo.base : -1e6 }, uZAlto: { value: zoccolo ? zoccolo.h : 0 },
+    uZTinta: { value: new THREE.Color(zoccolo ? zoccolo.tinta : 0xffffff) },
+  };
+  if (asset && id) asset.texture(id).then((t) => { if (!t) return; u.tColore.value = t.map; u.tNormali.value = t.normalMap; u.tArm.value = t.aoMap; });
   mat.onBeforeCompile = (sh) => {
-    sh.uniforms.uScala = { value: new THREE.Vector2(0.5, 0.5) };
-    sh.uniforms.uBase = { value: y0 };
+    Object.assign(sh.uniforms, u);
     sh.vertexShader = sh.vertexShader
       .replace('#include <common>', '#include <common>\nvarying vec3 vWP;\nvarying vec3 vWN;')
       .replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvWP = (modelMatrix * vec4(transformed, 1.0)).xyz;\nvWN = normalize(mat3(modelMatrix) * objectNormal);');
     sh.fragmentShader = sh.fragmentShader
-      .replace('#include <common>', '#include <common>\nvarying vec3 vWP;\nvarying vec3 vWN;\nuniform vec2 uScala;\nuniform float uBase;')
-      .replace('#include <map_fragment>', [
-        'vec3 an = abs(vWN);',
-        'vec2 tuv = an.y > max(an.x, an.z) ? vWP.xz : (an.x > an.z ? vWP.zy : vWP.xy);',
-        'vec3 tx = texture2D(map, tuv * uScala).rgb;',
-        'float h = vWP.y - uBase;',
-        'vec3 alto = vec3(0.78, 0.77, 0.69);',
-        'vec3 basso = vec3(0.25, 0.36, 0.34);',
-        'vec3 tinta = h < 1.08 ? basso : (h < 1.14 ? vec3(0.16, 0.2, 0.19) : alto);',
-        'diffuseColor.rgb *= tinta * tx * 1.25;',
-      ].join('\n'));
+      .replace('#include <common>', `#include <common>
+varying vec3 vWP; varying vec3 vWN;
+uniform sampler2D tColore; uniform sampler2D tNormali; uniform sampler2D tArm;
+uniform float uScala; uniform float uNormale; uniform float uZBase; uniform float uZAlto; uniform vec3 uZTinta;
+vec2 tuvM; vec3 tanM; vec3 bitM; vec3 armM;`)
+      .replace('#include <map_fragment>', `
+vec3 an = abs(vWN);
+if (an.y > max(an.x, an.z)) { tuvM = vWP.xz; tanM = vec3(1.0, 0.0, 0.0); bitM = vec3(0.0, 0.0, sign(vWN.y)); }
+else if (an.x > an.z) { tuvM = vec2(vWP.z * sign(vWN.x), vWP.y); tanM = vec3(0.0, 0.0, sign(vWN.x)); bitM = vec3(0.0, 1.0, 0.0); }
+else { tuvM = vec2(-vWP.x * sign(vWN.z), vWP.y); tanM = vec3(-sign(vWN.z), 0.0, 0.0); bitM = vec3(0.0, 1.0, 0.0); }
+tuvM *= uScala;
+diffuseColor.rgb *= texture2D(tColore, tuvM).rgb;
+if (vWP.y - uZBase < uZAlto) diffuseColor.rgb *= uZTinta;
+armM = texture2D(tArm, tuvM).rgb;`)
+      .replace('#include <roughnessmap_fragment>', 'float roughnessFactor = roughness * armM.g;')
+      .replace('#include <metalnessmap_fragment>', 'float metalnessFactor = metalness * armM.b;')
+      .replace('#include <normal_fragment_maps>', `
+vec3 nt = texture2D(tNormali, tuvM).xyz * 2.0 - 1.0;
+nt.xy *= uNormale;
+vec3 nw = normalize(tanM * nt.x + bitM * nt.y + normalize(vWN) * nt.z);
+normal = normalize((viewMatrix * vec4(nw, 0.0)).xyz);`)
+      .replace('#include <aomap_fragment>', `
+float ambientOcclusion = armM.r;
+reflectedLight.indirectDiffuse *= ambientOcclusion;
+#if defined( USE_CLEARCOAT )
+  clearcoatSpecularIndirect *= ambientOcclusion;
+#endif
+reflectedLight.indirectSpecular *= ambientOcclusion;`);
   };
-  mat.customProgramCacheKey = () => 'intonaco-' + y0;
+  mat.customProgramCacheKey = () => 'pbr-mondo';
   return mat;
 }
 
-export function creaMateriali(renderer) {
+const std = (color, roughness = 0.7, metalness = 0, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness, metalness, ...extra });
+
+export function creaMateriali(renderer, asset = null) {
   aniso = renderer.capabilities.getMaxAnisotropy();
 
-  const cemento = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#8d8e89';
-    ctx.fillRect(0, 0, w, h);
-    macchie(ctx, w, h, 14, '60,62,58', 0.18);
-    macchie(ctx, w, h, 10, '170,170,162', 0.12);
-    rumore(ctx, w, h, 2200, 0.16);
-    ctx.fillStyle = 'rgba(40,42,40,0.55)';
-    ctx.fillRect(0, 0, w, 2);
-    ctx.fillRect(0, 0, 2, h);
-  });
-
-  const intonaco = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#cfcfcf';
-    ctx.fillRect(0, 0, w, h);
-    macchie(ctx, w, h, 8, '120,120,110', 0.12);
-    rumore(ctx, w, h, 900, 0.08);
-  });
-
-  const soffitto = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#a7a79f';
-    ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = 'rgba(70,70,64,0.35)';
-    for (let i = 0; i < 380; i++) ctx.fillRect(Math.random() * w, Math.random() * h, 2, 2);
-    ctx.fillStyle = '#6f6f68';
-    ctx.fillRect(0, 0, w, 4);
-    ctx.fillRect(0, 0, 4, h);
-    ctx.fillRect(w / 2, 0, 3, h);
-    ctx.fillRect(0, h / 2, w, 3);
-  });
-
-  const metallo = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#5d6a70';
-    ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = 'rgba(200,205,205,0.18)';
-    for (let i = 0; i < 70; i++) {
-      const x = Math.random() * w, y = Math.random() * h;
-      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.random() * 30 - 15, y + Math.random() * 6 - 3); ctx.stroke();
-    }
-    macchie(ctx, w, h, 6, '120,80,50', 0.18);
-    rumore(ctx, w, h, 600, 0.08);
-  });
-
-  const piastrelle = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#b9b29d';
-    ctx.fillRect(0, 0, w, h);
-    for (let x = 0; x < 4; x++) for (let y = 0; y < 4; y++) {
-      const v = Math.random() * 18 - 9;
-      ctx.fillStyle = `rgb(${185 + v},${178 + v},${157 + v})`;
-      ctx.fillRect(x * 64 + 2, y * 64 + 2, 60, 60);
-    }
-    macchie(ctx, w, h, 8, '90,84,66', 0.16);
-    rumore(ctx, w, h, 700, 0.1);
-  });
-
-  const moquette = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#7a4a32';
-    ctx.fillRect(0, 0, w, h);
-    for (let i = 0; i < 9000; i++) {
-      const v = Math.random() * 40;
-      ctx.fillStyle = `rgba(${120 + v},${70 + v / 2},${40},0.35)`;
-      ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
-    }
-  });
-
-  const legnoScuro = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#4a3324';
-    ctx.fillRect(0, 0, w, h);
-    for (let y = 0; y < h; y += 32) {
-      ctx.fillStyle = `rgba(30,18,10,0.6)`;
-      ctx.fillRect(0, y, w, 2);
-      for (let i = 0; i < 40; i++) {
-        ctx.fillStyle = `rgba(${90 + Math.random() * 30},${60 + Math.random() * 20},40,0.25)`;
-        ctx.fillRect(Math.random() * w, y + 3 + Math.random() * 27, 20 + Math.random() * 60, 1);
-      }
-    }
-  });
-
-  // pannello su cui si aprono le finestre: griglia chiara, angoli ciano e magenta
+  // pannello su cui si aprono le finestre: griglia chiara, angoli ciano e magenta (resta grafico)
   const pannelloTex = (a, b) => canvasTex(256, 256, (ctx, w, h) => {
     ctx.fillStyle = '#d9dcd6';
     ctx.fillRect(0, 0, w, h);
@@ -190,39 +151,51 @@ export function creaMateriali(renderer) {
       ctx.fillRect(x, y, 4, 16);
     }
   });
+  const pannello = (a, b, chiave) => {
+    const m = triplanare(new THREE.MeshStandardMaterial({ map: pannelloTex(a, b), roughness: 0.55, metalness: 0 }), 1, chiave);
+    return m;
+  };
+  // tessuti grezzi per i materiali di stanza fatti a mano (materialeTri)
+  const grezza = (base, quanti) => canvasTex(256, 256, (ctx, w, h) => { ctx.fillStyle = base; ctx.fillRect(0, 0, w, h); rumore(ctx, w, h, quanti, 0.1); });
 
-  const tri = (tex, scala, chiave) => triplanare(new THREE.MeshLambertMaterial({ map: tex }), scala, chiave);
   const cacheIntonaco = new Map();
   const intonacoA = (y0 = 0) => {
-    if (!cacheIntonaco.has(y0)) cacheIntonaco.set(y0, intonacoBicolore(intonaco, y0));
+    if (!cacheIntonaco.has(y0)) {
+      cacheIntonaco.set(y0, pbrMondo(asset, 'intonaco', { scala: 0.5, tinta: 0xe6e2d6, zoccolo: { base: y0, h: 1.1, tinta: 0x5c7f7a } }));
+    }
     return cacheIntonaco.get(y0);
   };
 
   const m = {
-    tex: { pavimento: cemento, muro: intonaco, soffitto, cemento, metallo, piastrelle, moquette, legnoScuro },
+    tex: { pavimento: grezza('#8d8e89', 2200), muro: grezza('#cfcfcf', 900), soffitto: grezza('#a7a79f', 400) },
     intonacoA,
-    cemento: tri(cemento, 0.5, 'cem'),
+    cemento: pbrMondo(asset, 'cemento', { scala: 0.35 }),
     intonaco: intonacoA(0),
-    metallo: tri(metallo, 0.6, 'met'),
-    piastrelle: tri(piastrelle, 1, 'pia'),
-    moquette: tri(moquette, 1, 'moq'),
-    legnoScuro: tri(legnoScuro, 0.7, 'leg'),
+    metallo: pbrMondo(asset, 'metallo', { scala: 0.6 }),
+    lamiera: pbrMondo(asset, 'lamiera', { scala: 0.4 }),
+    piastrelle: pbrMondo(asset, 'piastrelle', { scala: 0.5 }),
+    piastrellePiscina: pbrMondo(asset, 'piastrelle-piscina', { scala: 0.6 }),
+    moquette: pbrMondo(asset, 'moquette', { scala: 0.5 }),
+    legnoScuro: pbrMondo(asset, 'legno-scuro', { scala: 0.4 }),
+    parquet: pbrMondo(asset, 'parquet', { scala: 0.4 }),
+    mattoni: pbrMondo(asset, 'mattoni', { scala: 0.35 }),
+    tufo: pbrMondo(asset, 'tufo', { scala: 0.3 }),
     neonSodio: new THREE.MeshBasicMaterial({ color: 0xffc27a, fog: false }),
-    soffitto: tri(soffitto, 0.5, 'soff'),
-    pannello: tri(pannelloTex('#39c6d9', '#d95bb3'), 1, 'pan'),
-    proibito: tri(pannelloTex('#7a5a6a', '#7a5a6a'), 1, 'pro'),
-    grigio: new THREE.MeshLambertMaterial({ color: 0x7c7f7a }),
-    chiaro: new THREE.MeshLambertMaterial({ color: 0xb9b8ae }),
-    scuro: new THREE.MeshLambertMaterial({ color: 0x24292a }),
-    cornice: new THREE.MeshLambertMaterial({ color: 0x3e4644 }),
-    battiscopa: new THREE.MeshLambertMaterial({ color: 0x1f2625 }),
-    legno: new THREE.MeshLambertMaterial({ color: 0x6b4a33 }),
-    ottone: new THREE.MeshLambertMaterial({ color: 0xa88a4e, emissive: 0x1d160a }),
-    cordone: new THREE.MeshLambertMaterial({ color: 0x8a2f2a }),
+    soffitto: pbrMondo(asset, 'intonaco', { scala: 0.6, tinta: 0xe2e0d6, rimbalzo: 0.22 }),
+    pannello: pannello('#39c6d9', '#d95bb3', 'pan'),
+    proibito: pannello('#7a5a6a', '#7a5a6a', 'pro'),
+    grigio: std(0x7c7f7a, 0.8),
+    chiaro: std(0xc9c8be, 0.75),
+    scuro: std(0x24292a, 0.6, 0.2),
+    cornice: std(0x3e4644, 0.45, 0.6),
+    battiscopa: std(0x1f2625, 0.5, 0.1),
+    legno: std(0x6b4a33, 0.65),
+    ottone: std(0xb08d4e, 0.3, 1),
+    cordone: std(0x8a2f2a, 0.9),
     neon: new THREE.MeshBasicMaterial({ color: 0xeef6f2, fog: false }),
     neonTremolante: new THREE.MeshBasicMaterial({ color: 0xeef6f2, fog: false }),
   };
-  // nomi storici, usati dai transiti di v2: puntano alla nuova tavolozza
+  // nomi storici, usati dalle stanze: puntano alla nuova tavolozza
   m.pavimento = m.cemento;
   m.muro = m.intonaco;
   return m;
@@ -230,5 +203,5 @@ export function creaMateriali(renderer) {
 
 // materiale con mappatura in coordinate mondo: sx, sy = ripetizioni per metro
 export function materialeTri(tex, sx, sy, chiave, opzioni = {}) {
-  return triplanare(new THREE.MeshLambertMaterial({ map: tex, ...opzioni }), new THREE.Vector2(sx, sy), chiave);
+  return triplanare(new THREE.MeshStandardMaterial({ map: tex, roughness: 0.8, metalness: 0, ...opzioni }), new THREE.Vector2(sx, sy), chiave);
 }

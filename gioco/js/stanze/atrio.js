@@ -28,7 +28,7 @@ export function costruisci(m, g) {
     },
     materiali: mat, matNeon: caldo,
     luci: [[-3, 13, 1.2, 1.2], [6, 18, 1.2, 1.2]], intensita: 2.2, raggio: 10, coloreLuce: 0xffe9c2,
-    atmosfera: { nebbia: 0x15160f, vicino: 4, lontano: 40, cielo: 0x86845f, terra: 0x1a1a13, intensita: 0.75 },
+    atmosfera: { nebbia: 0x24251c, vicino: 5, lontano: 42, cielo: 0xb8b48a, terra: 0x2a2a20, intensita: 1.5 },
     suono: { ronzio: 0.45 },
   });
 

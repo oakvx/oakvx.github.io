@@ -1,6 +1,6 @@
 // Il gioco: caricato solo dopo la scelta "Gioco" nel menu.
 import * as THREE from 'three';
-import { creaMateriali, texTesto } from './engine/materiali.js';
+import { creaMateriali, texTesto, canvasTex } from './engine/materiali.js';
 import { Mondo, geoTonda } from './engine/mondo.js';
 import { creaArredi } from './engine/arredi.js';
 import { Corpo, muovi, passoCorpo, G } from './engine/fisica.js';
@@ -12,12 +12,12 @@ import { creaGiro, creaAiuti } from './logica/giro.js';
 
 const $ = (id) => document.getElementById(id);
 const STANZE = ['ingresso', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
-const ATMOSFERA = { nebbia: 0xe9eef1, vicino: 1.5, lontano: 22, cielo: 0xf6f9fb, terra: 0xc4cdd1, intensita: 2.9 };
+const ATMOSFERA = { nebbia: 0x3c423f, vicino: 3, lontano: 26, cielo: 0xe4ece6, terra: 0x404642, intensita: 2.3 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
 const VEL = 3.2;
 const SALTO = 4.6;
-const FOG = 0xe9eef1;
+const FOG = 0x3c423f;
 
 function leggiImpostazioni() {
   const base = { fov: 74, sens: 1, sott: 'medi', qual: '0.5', calmo: reduceMotion };
@@ -30,11 +30,11 @@ export async function avvia(ctx) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(FOG);
-  scene.fog = new THREE.Fog(FOG, 1.5, 22);
+  scene.fog = new THREE.Fog(FOG, ATMOSFERA.vicino, ATMOSFERA.lontano);
   const imp = leggiImpostazioni();
   const camera = new THREE.PerspectiveCamera(imp.fov, innerWidth / innerHeight, 0.02, 80);
   camera.rotation.order = 'YXZ';
-  const emi = new THREE.HemisphereLight(0xf6f9fb, 0xc4cdd1, 2.9);
+  const emi = new THREE.HemisphereLight(ATMOSFERA.cielo, ATMOSFERA.terra, ATMOSFERA.intensita);
   scene.add(emi);
   // gruppo fisso di luci puntiformi, assegnate alle definizioni più vicine
   const gruppoLuci = Array.from({ length: N_LUCI }, () => {
@@ -69,12 +69,20 @@ export async function avvia(ctx) {
   const cubi = [];
   let yaw = 0;
   let pitch = 0;
-  const geoCubo = geoTonda(0.44, 0.44, 0.44, 0.045);
-  const matCubo = new THREE.MeshLambertMaterial({ color: 0xe6ecef });
+  // cubi a spigoli vivi, con un hash di commit stampato sui lati
+  const geoCubo = new THREE.BoxGeometry(0.44, 0.44, 0.44);
+  const matCubo = () => {
+    const hash = Array.from({ length: 7 }, () => '0123456789abcdef'[Math.floor(Math.random() * 16)]).join('');
+    return new THREE.MeshLambertMaterial({ map: canvasTex(128, 128, (c, w, h) => {
+      c.fillStyle = '#9a9c95'; c.fillRect(0, 0, w, h);
+      c.fillStyle = '#6d706a'; c.fillRect(0, 0, w, 6); c.fillRect(0, h - 6, w, 6); c.fillRect(0, 0, 6, h); c.fillRect(w - 6, 0, 6, h);
+      c.fillStyle = '#23292a'; c.font = '700 22px monospace'; c.textAlign = 'center'; c.fillText(hash, w / 2, h / 2 + 8);
+    }) });
+  };
   const interattivi = [];
 
   function cubo(x, y, z, { speciale = false, mappa = null } = {}) {
-    const mesh = new THREE.Mesh(geoCubo, mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo);
+    const mesh = new THREE.Mesh(geoCubo, mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo());
     mesh.position.set(x, y, z);
     scene.add(mesh);
     const c = new Corpo(mesh.position, new THREE.Vector3(0.22, 0.22, 0.22), { mesh });
@@ -154,14 +162,11 @@ export async function avvia(ctx) {
         vec2 c = vUv - 0.5; float r2 = dot(c, c);
         vec2 off = c * 0.004 * (1.0 + r2 * 4.0) * (1.0 - uCalmo);
         vec3 col = vec3(texture2D(tDiffuse, vUv + off).r, texture2D(tDiffuse, vUv).g, texture2D(tDiffuse, vUv - off).b);
-        vec2 px = 3.0 / uRes;
-        vec3 blur = (texture2D(tDiffuse, vUv + vec2(px.x, 0.0)).rgb + texture2D(tDiffuse, vUv - vec2(px.x, 0.0)).rgb
-                   + texture2D(tDiffuse, vUv + vec2(0.0, px.y)).rgb + texture2D(tDiffuse, vUv - vec2(0.0, px.y)).rgb) * 0.25;
-        col = mix(col, max(col, blur), 0.45);
         col = pow(max(col, 0.0), vec3(1.0 / 2.2));
-        col *= vec3(0.975, 1.0, 1.025);
-        col *= mix(0.76, 1.0, smoothstep(0.62, 0.08, r2));
-        col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.04, 0.015, uCalmo);
+        col *= vec3(1.0, 0.99, 0.96);
+        col *= mix(0.7, 1.0, smoothstep(0.62, 0.08, r2));
+        col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.05, 0.02, uCalmo);
+        col = floor(col * 48.0 + 0.5) / 48.0;
         gl_FragColor = vec4(col, 1.0);
       }`,
     depthTest: false,
@@ -568,6 +573,7 @@ export async function avvia(ctx) {
       salta: () => { narratore.coda = []; narratore.attuale = null; narratore.pausa = 0; narratore.mostra(); },
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
+      materiali: () => Object.keys(mat),
       vaiA: (nome) => { ultimoControllo = nome; riprendi(); },
       stanza: (nome) => debugStanze[nome],
       mira: (x, y, z) => {

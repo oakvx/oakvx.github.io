@@ -183,6 +183,8 @@ export class Mondo {
     const s = { gravita: 1, ...def, y0 };
     this.stanze.push(s);
     const m = (this.ms = { ...this.mat, ...(def.materiali || {}) });
+    // l'intonaco a due colori misura lo zoccolo dal pavimento della stanza
+    if (m.muro === this.mat.muro && this.mat.intonacoA) m.muro = this.mat.intonacoA(y0);
     const pareti = def.pareti || {};
     const ex = (k) => (pareti[k] === false ? 0 : T);
     const bx0 = x0 - ex('w'), bx1 = x1 + ex('e'), bz0 = z0 - ex('n'), bz1 = z1 + ex('s');

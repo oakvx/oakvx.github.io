@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gabriele Lucia, la stanza (beta)</title>
-<meta name="description" content="La prima stanza 3D del portfolio di Gabriele Lucia, junior web developer: uno spazio liminale in beta dove le distanze non sono affidabili.">
+<title>Gabriele Lucia: sito o gioco</title>
+<meta name="description" content="Gabriele Lucia, junior web developer a Sassuolo: scegli il sito con progetti, percorso e contatti, oppure il gioco 3D con un curatore al primo giorno di lavoro.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="gioco.css">
 </head>
-<body>
+<body class="in-menu">
 <canvas id="scena" aria-hidden="true"></canvas>
 
 <header class="hud-top">
@@ -18,30 +18,58 @@
   <nav class="hud-azioni" aria-label="Comandi">
     <button type="button" id="lingua" class="tasto" aria-label="Switch to English">EN</button>
     <button type="button" id="audio" class="tasto" aria-pressed="true" data-t="audioOn">Audio: sì</button>
-    <a id="classica" class="tasto tasto-forte" href="../" data-t="classica">Versione classica</a>
+    <a id="classica" class="tasto tasto-forte" href="../" data-t="classica">Torna al sito</a>
   </nav>
 </header>
 
+<main id="menu" class="menu">
+  <h1 data-t="menuTitolo">Ciao, sono Gabri.</h1>
+  <p class="menu-intro" data-t="menuIntro"></p>
+  <div class="menu-scelte">
+    <a class="scelta" id="scelta-sito" href="../" data-classica>
+      <span class="scelta-nome" data-t="sceltaSito">Sito</span>
+      <span class="scelta-nota" data-t="sceltaSitoNota">progetti, percorso, contatti</span>
+    </a>
+    <button type="button" class="scelta scelta-gioco" id="scelta-gioco">
+      <span class="scelta-nome" data-t="sceltaGioco">Gioco</span>
+      <span class="scelta-nota" data-t="sceltaGiocoNota">3D, da computer</span>
+    </button>
+  </div>
+  <p id="avviso" class="avviso" hidden></p>
+  <p class="comandi" data-t="comandi"></p>
+</main>
+
 <div id="mirino" class="mirino" hidden></div>
 <p id="suggerimento" class="suggerimento" hidden></p>
+<div id="sottotitoli" class="sottotitoli medi" aria-live="polite" hidden>
+  <p><span id="sott-nome" class="sott-nome"></span><span id="sott-pagine" class="pagine" hidden aria-hidden="true"><i></i><i></i><i></i></span></p>
+  <p id="sott-testo" class="sott-testo"></p>
+</div>
+<div id="finestre" class="finestre" hidden aria-hidden="true"><i class="a"></i><i class="b"></i></div>
 
-<section id="ingresso" class="pannello ingresso" aria-labelledby="ingresso-titolo">
-  <h1 id="ingresso-titolo" data-t="introTitolo">Qui le regole non sono garantite.</h1>
-  <p data-t="intro"></p>
-  <p id="avviso" class="avviso" hidden></p>
-  <div class="scelte">
-    <button type="button" id="entra" class="tasto tasto-forte" disabled data-t="caricamento">La stanza si sta accendendo…</button>
-    <a class="tasto" href="../" id="leggere" data-t="leggere">preferisco leggere</a>
-  </div>
-  <p class="comandi" data-t="comandi"></p>
+<section id="avvio" class="pannello" hidden aria-live="polite">
+  <p id="avvio-testo" data-t="caricamento">Il curatore sta cercando le chiavi…</p>
+  <button type="button" id="avvio-entra" class="tasto tasto-forte" hidden data-t="clicPerIniziare">Clic per entrare</button>
 </section>
 
 <section id="pausa" class="pannello" hidden aria-labelledby="pausa-titolo">
   <h2 id="pausa-titolo" data-t="pausa">In pausa</h2>
   <p class="comandi" data-t="comandi"></p>
+  <fieldset class="impostazioni">
+    <legend data-t="impostazioni">Impostazioni</legend>
+    <label><span data-t="fov">Campo visivo</span> <input type="range" id="imp-fov" min="60" max="100" step="1"> <output id="imp-fov-v"></output></label>
+    <label><span data-t="sensibilita">Sensibilità</span> <input type="range" id="imp-sens" min="0.4" max="2" step="0.1"> <output id="imp-sens-v"></output></label>
+    <label><span data-t="sottotitoli">Sottotitoli</span>
+      <select id="imp-sott"><option value="piccoli" data-t="piccoli">Piccoli</option><option value="medi" data-t="medi">Medi</option><option value="grandi" data-t="grandi">Grandi</option></select></label>
+    <label><span data-t="qualita">Qualità delle finestre</span>
+      <select id="imp-qual"><option value="0.5" data-t="bassa">Bassa</option><option value="1" data-t="alta">Alta</option></select></label>
+    <label class="spunta"><input type="checkbox" id="imp-calmo"> <span data-t="calmo">Riduci oscillazioni e distorsioni</span></label>
+  </fieldset>
+  <p id="pausa-finali" class="comandi"></p>
   <div class="scelte">
     <button type="button" id="riprendi" class="tasto tasto-forte" data-t="riprendi">Riprendi</button>
-    <a class="tasto" href="../" data-classica data-t="classica">Versione classica</a>
+    <button type="button" id="ricomincia-pausa" class="tasto" data-t="ricomincia">Ricomincia</button>
+    <a class="tasto" href="../" data-classica data-t="classica">Torna al sito</a>
   </div>
 </section>
 
@@ -54,18 +82,22 @@
   </div>
 </section>
 
-<section id="fine" class="pannello" hidden role="dialog" aria-modal="true" aria-labelledby="fine-titolo">
-  <h2 id="fine-titolo" data-t="fineTitolo">Ci sei arrivato.</h2>
-  <p data-t="fine"></p>
+<section id="finale" class="pannello finale" hidden role="dialog" aria-modal="true" aria-labelledby="finale-titolo">
+  <p id="finale-numero" class="finale-numero"></p>
+  <h2 id="finale-titolo"></h2>
+  <p id="finale-testo"></p>
+  <div id="finale-link" class="scelte"></div>
+  <p id="finale-visti" class="comandi"></p>
   <div class="scelte">
-    <button type="button" id="ricomincia" class="tasto tasto-forte" data-t="ricomincia">Torna nella stanza</button>
-    <a class="tasto" href="../" data-classica data-t="classica">Versione classica</a>
+    <button type="button" id="ricomincia" class="tasto tasto-forte" data-t="ricomincia">Ricomincia</button>
+    <a class="tasto" href="../" data-classica data-t="classica">Torna al sito</a>
   </div>
 </section>
 
-<noscript><p class="pannello">La stanza ha bisogno di JavaScript. <a href="../">Vai alla versione classica</a>.</p></noscript>
+<div id="velo" class="velo" aria-hidden="true"></div>
+<noscript><p class="pannello">Il gioco ha bisogno di JavaScript. <a href="../">Vai al sito</a>.</p></noscript>
 
 <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.js" } }</script>
-<script type="module" src="js/main.js"></script>
+<script type="module" src="js/menu.js"></script>
 </body>
 </html>

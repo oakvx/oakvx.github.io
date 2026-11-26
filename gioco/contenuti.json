@@ -98,6 +98,9 @@
       },
       "oakvx": {
         "cartello": "Fuori orario · in arrivo"
+      },
+      "smistamento": {
+        "cartello": "Backend & App Logic"
       }
     }
   },
@@ -200,6 +203,9 @@
       },
       "oakvx": {
         "cartello": "After hours · coming soon"
+      },
+      "smistamento": {
+        "cartello": "Backend & App Logic"
       }
     }
   }

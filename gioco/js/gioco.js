@@ -13,7 +13,7 @@ import { creaGiro, creaAiuti } from './logica/giro.js';
 import { creaContapassi } from './logica/passi.js';
 
 const $ = (id) => document.getElementById(id);
-const STANZE = ['ingresso', 'percorso', 'oakvx', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
 const ATMOSFERA = { nebbia: 0x3c423f, vicino: 3, lontano: 26, cielo: 0xe4ece6, terra: 0x404642, intensita: 2.3 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);

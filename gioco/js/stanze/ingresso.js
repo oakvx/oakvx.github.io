@@ -14,8 +14,6 @@ export function costruisci(m, g) {
     },
     luci: [[0, -1.6], [0, 1.6]], intensita: 3.2, raggio: 7,
   });
-  // corridoio verso l'atrio: ci arriva l'uscita dello smistamento
-  m.stanza({ nome: 'passaggio', x0: -1, x1: 1, z0: 4.3, z1: 7.7, h: 2.6, pareti: { n: {}, s: false }, luci: [[0, 6, 0.4, 0.9]], luciPunto: false, atmosfera: 'eredita', suono: 'eredita' });
 
   // vetro sull'uscita nord: solido, ma le finestre ci sparano attraverso
   const vetro = m.box(-1, 0, -4.22, 1, 2.6, -4.12, new THREE.MeshLambertMaterial({ color: 0xa9c4c8, transparent: true, opacity: 0.18, depthWrite: false }));

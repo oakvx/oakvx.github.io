@@ -109,6 +109,7 @@ export async function avvia(ctx) {
     yaw: () => yaw,
     narratore: () => narratore,
     suoni,
+    musica: suoni.musica,
     giro: creaGiro(),
     // punto di ripresa di una stanza: chi cade o si incastra torna qui
     puntoControllo: (stanza, x, piedi, z, yawP = 0) => { controlli.set(stanza, { x, piedi, z, yaw: yawP }); },
@@ -200,6 +201,7 @@ export async function avvia(ctx) {
     camera.fov = imp.fov;
     camera.updateProjectionMatrix();
     post.uniforms.uCalmo.value = imp.calmo ? 1 : 0;
+    suoni.musica.calmo(imp.calmo);
     $('sottotitoli').className = 'sottotitoli ' + imp.sott + ($('sottotitoli').classList.contains('panico') ? ' panico' : '');
     portali.impostaScala(Number(imp.qual), rt.width, rt.height);
     passaggi.ridimensiona(rt.width, rt.height, Number(imp.qual));
@@ -486,6 +488,11 @@ export async function avvia(ctx) {
       stanzaAttuale = nome;
       if (s.atmosfera !== 'eredita') atmo = { ...ATMOSFERA, ...(s.atmosfera || {}) };
       if (s.suono !== 'eredita') suoni.ambiente(s.suono || {});
+      if (s.atmosfera !== 'eredita') {
+        suoni.musica.ala(s.ala);
+        suoni.musica.letto(s.letto);
+        suoni.musica.transizione();
+      }
       if (controlli.has(nome)) ultimoControllo = nome;
       emetti('stanza:' + nome);
     }
@@ -592,6 +599,15 @@ export async function avvia(ctx) {
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
       materiali: () => Object.keys(mat),
+      tempoMusica: () => suoni.musica.tempo(),
+      avviaAudio: () => suoni.avvia(),
+      livelloAudio: () => {
+        if (!suoni.ac) return 0;
+        if (!suoni.analizzatore) { suoni.analizzatore = suoni.ac.createAnalyser(); suoni.musica.master.connect(suoni.analizzatore); }
+        const d = new Float32Array(suoni.analizzatore.fftSize);
+        suoni.analizzatore.getFloatTimeDomainData(d);
+        return Math.sqrt(d.reduce((a, x) => a + x * x, 0) / d.length);
+      },
       aggiungiPassaggio: (id, a, b) => {
         const m4 = ([x, y, z, ry]) => new THREE.Matrix4().makeRotationY(ry).setPosition(x, y, z);
         passaggi.aggiungi({ id, a: m4(a), b: m4(b) });

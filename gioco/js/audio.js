@@ -1,4 +1,6 @@
 // Suoni generati con Web Audio: nessun file, nessuna libreria.
+import { Musica } from './musica.js';
+
 export class Suoni {
   constructor(ctx) {
     this.ctx = ctx;
@@ -8,6 +10,7 @@ export class Suoni {
     this.obiettivo = { ...this.livelli };
     this.prossimaGoccia = 0;
     this.prossimoLegno = 0;
+    this.musica = new Musica();
     ctx.suAudio((on) => this.volume(on));
   }
 
@@ -35,22 +38,9 @@ export class Suoni {
       o.connect(gg).connect(lp);
       o.start();
     }
-    // pad lontano e sognante
-    const pad = ac.createGain();
-    pad.gain.value = 0.011;
-    pad.connect(this.out);
-    for (const f of [220, 277.18, 329.63, 415.3]) {
-      const o = ac.createOscillator();
-      o.frequency.value = f;
-      const lfo = ac.createOscillator();
-      lfo.frequency.value = 0.04 + Math.random() * 0.05;
-      const lg = ac.createGain();
-      lg.gain.value = 2;
-      lfo.connect(lg).connect(o.detune);
-      o.connect(pad);
-      o.start();
-      lfo.start();
-    }
+    // musica liminale (sostituisce il vecchio pad)
+    this.musica.collega(ac, this.out);
+    this.musica.avvia();
   }
 
   // rumore in loop filtrato, con un gain controllabile

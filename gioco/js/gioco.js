@@ -5,6 +5,7 @@ import { Mondo, geoTonda } from './engine/mondo.js';
 import { creaArredi } from './engine/arredi.js';
 import { Corpo, muovi, passoCorpo, G } from './engine/fisica.js';
 import { Portali } from './portali.js';
+import { Passaggi } from './engine/passaggi.js';
 import { Narratore } from './narratore.js';
 import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
@@ -48,6 +49,7 @@ export async function avvia(ctx) {
   const mat = creaMateriali(renderer);
   const mondo = new Mondo(scene, mat);
   const portali = new Portali(renderer, scene, mondo);
+  const passaggi = new Passaggi(renderer, scene);
   const suoni = new Suoni(ctx);
   const datiNarr = await (await fetch('dati/narratore.json')).json();
   const narratore = new Narratore(datiNarr, ctx, suoni);
@@ -96,7 +98,7 @@ export async function avvia(ctx) {
   const controlli = new Map();
   const aiuti = new Map();
   const g = {
-    mondo, scene, portali, emetti, su, cubo, debug: ctx.debug,
+    mondo, scene, portali, passaggi, emetti, su, cubo, debug: ctx.debug,
     T: () => ctx.T,
     lingua: () => ctx.lingua,
     suLingua: (fn) => ctx.suLingua(fn),
@@ -185,6 +187,7 @@ export async function avvia(ctx) {
     rt.setSize(w, h);
     post.uniforms.uRes.value.set(w, h);
     portali.impostaScala(Number(imp.qual), w, h);
+    passaggi.ridimensiona(w, h, Number(imp.qual));
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
   }
@@ -198,6 +201,7 @@ export async function avvia(ctx) {
     post.uniforms.uCalmo.value = imp.calmo ? 1 : 0;
     $('sottotitoli').className = 'sottotitoli ' + imp.sott + ($('sottotitoli').classList.contains('panico') ? ' panico' : '');
     portali.impostaScala(Number(imp.qual), rt.width, rt.height);
+    passaggi.ridimensiona(rt.width, rt.height, Number(imp.qual));
     $('imp-fov').value = imp.fov;
     $('imp-fov-v').textContent = imp.fov + '°';
     $('imp-sens').value = imp.sens;
@@ -441,7 +445,11 @@ export async function avvia(ctx) {
       yaw += t.dyaw;
       suoni.passaggio();
       emetti('portale:attraversato', t);
-    } else passi += Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
+    } else {
+      const tp = passaggi.attraversa(giocatore);
+      if (tp) { yaw += tp.dyaw; emetti('passaggio:' + tp.id, tp); }
+      else passi += Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
+    }
     // caduta nel vuoto: si torna al punto di ripresa dell'ultima stanza che ne ha uno
     const ultima = controlli.get(ultimoControllo);
     if (giocatore.pos.y < (ultima ? ultima.piedi : 0) - 20) g.velo(riprendi);
@@ -459,7 +467,7 @@ export async function avvia(ctx) {
       }
       const varchi = portali.varchi(c);
       passoCorpo(c, dt, mondo, cubi, varchi);
-      if (portali.attraversa(c) && c.tenuto) { c.tenuto = false; tenuto = null; }
+      if ((portali.attraversa(c) || passaggi.attraversa(c)) && c.tenuto) { c.tenuto = false; tenuto = null; }
       if (c.pos.y < -20) { c.pos.y = 3; c.vel.set(0, 0, 0); }
     }
   }
@@ -547,7 +555,10 @@ export async function avvia(ctx) {
     if (stato === 'gioco') aggiornaMira();
     portali.aggiorna(t);
     post.uniforms.uTime.value = imp.calmo ? 0 : t;
+    passaggi.render(camera);
+    const accese = passaggi.spegni();
     portali.render(camera);
+    passaggi.riaccendi(accese);
     renderer.setRenderTarget(rt);
     renderer.render(scene, camera);
     renderer.setRenderTarget(null);
@@ -574,6 +585,13 @@ export async function avvia(ctx) {
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
       materiali: () => Object.keys(mat),
+      aggiungiPassaggio: (id, a, b) => {
+        const m4 = ([x, y, z, ry]) => new THREE.Matrix4().makeRotationY(ry).setPosition(x, y, z);
+        passaggi.aggiungi({ id, a: m4(a), b: m4(b) });
+      },
+      rimuoviPassaggio: (id) => passaggi.rimuovi(id),
+      cubo: (x, y, z, vx = 0, vy = 0, vz = 0) => { const c = cubo(x, y, z); c.vel.set(vx, vy, vz); return cubi.length - 1; },
+      cubi: () => cubi.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })),
       vaiA: (nome) => { ultimoControllo = nome; riprendi(); },
       stanza: (nome) => debugStanze[nome],
       mira: (x, y, z) => {

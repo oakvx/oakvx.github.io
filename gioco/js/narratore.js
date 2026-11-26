@@ -60,6 +60,9 @@ export class Narratore {
     this.attuale = r;
     this.tempo = this.durata(r);
     this.mostra();
+    this.box.classList.remove('nuova');
+    void this.box.offsetWidth;
+    this.box.classList.add('nuova');
     if (this.dati.righe[r.id]?.panico) this.suoni?.fruscio();
     if (this.voce) { this.voce.pause(); this.voce = null; }
     if (this.dati.voce?.includes(r.id) && this.ctx.audio) {

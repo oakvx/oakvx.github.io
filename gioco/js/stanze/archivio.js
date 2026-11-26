@@ -50,7 +50,11 @@ export function costruisci(m, g) {
   g.suLingua(ridisegna);
 
   // scrivania
-  m.box(-5, y0, -43.4, -2.5, y0 + 0.78, -42.5, m.mat.grigio);
+  m.tondo(-5, y0 + 0.72, -43.4, -2.5, y0 + 0.78, -42.5, m.mat.legno, { r: 0.02 });
+  for (const [x, z] of [[-4.9, -43.3], [-2.6, -43.3], [-4.9, -42.6], [-2.6, -42.6]]) m.tondo(x - 0.03, y0, z - 0.03, x + 0.03, y0 + 0.72, z + 0.03, m.mat.scuro, { r: 0.015, solido: false });
+  m.box(-5, y0, -43.4, -2.5, y0 + 0.72, -42.5, m.mat.chiaro).mesh.visible = false;
+  m.ombra(-3.75, y0, -42.95, 3.2, 1.4);
+  g.arredi.cartello(-2.5, y0 + 2.62, -36.33, Math.PI, '05', () => g.T().sale.archivio);
   const lampada = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.3), m.mat.neon);
   lampada.position.set(-3.75, y0 + 0.8, -42.95);
   m.scene.add(lampada);

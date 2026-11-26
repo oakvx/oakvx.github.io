@@ -13,13 +13,16 @@ export function costruisci(m, g) {
   // scaffali: tre file
   for (const z of [-26.5, -30, -33.5]) {
     const x0 = 6, x1 = 13;
-    for (const x of [x0, (x0 + x1) / 2, x1 - 0.1]) m.box(x, 0, z - 0.5, x + 0.1, 3, z + 0.5, mat.cornice);
-    for (const y of [0.9, 1.9, 2.9]) m.box(x0, y, z - 0.5, x1, y + 0.06, z + 0.5, mat.grigio);
+    for (const x of [x0, (x0 + x1) / 2, x1 - 0.1]) m.tondo(x, 0, z - 0.5, x + 0.1, 3, z + 0.5, mat.cornice, { r: 0.02 });
+    for (const y of [0.9, 1.9, 2.9]) m.tondo(x0, y, z - 0.5, x1, y + 0.06, z + 0.5, mat.grigio, { r: 0.02 });
+    m.ombra((x0 + x1) / 2, 0, z, x1 - x0 + 0.8, 1.6);
     for (let k = 0; k < 5; k++) {
       const piano = [0.96, 1.96][k % 2];
       g.cubo(x0 + 0.55 + k * 1.25, piano + 0.24, z + (Math.random() - 0.5) * 0.3);
     }
   }
+  g.arredi.cartello(2.5, 2.7, -22.03, Math.PI, '04', () => g.T().sale.magazzino);
+  for (const z of [-25, -33]) g.arredi.griglia(0.52, 4, z, Math.PI / 2, 0.8, 0.4);
   // scatole sparse a terra
   for (let k = 0; k < 6; k++) g.cubo(2 + Math.random() * 3, 0.3 + k * 0.5, -25 - Math.random() * 9);
 

@@ -1,7 +1,8 @@
 // Il gioco: caricato solo dopo la scelta "Gioco" nel menu.
 import * as THREE from 'three';
 import { creaMateriali, texTesto } from './engine/materiali.js';
-import { Mondo } from './engine/mondo.js';
+import { Mondo, geoTonda } from './engine/mondo.js';
+import { creaArredi } from './engine/arredi.js';
 import { Corpo, muovi, passoCorpo, G } from './engine/fisica.js';
 import { Portali } from './portali.js';
 import { Narratore } from './narratore.js';
@@ -59,14 +60,12 @@ export async function avvia(ctx) {
   const cubi = [];
   let yaw = 0;
   let pitch = 0;
-  const geoCubo = new THREE.BoxGeometry(0.44, 0.44, 0.44);
-  const bordoCubo = new THREE.EdgesGeometry(geoCubo);
-  const matBordo = new THREE.LineBasicMaterial({ color: 0x8b9ba3 });
+  const geoCubo = geoTonda(0.44, 0.44, 0.44, 0.045);
+  const matCubo = new THREE.MeshLambertMaterial({ color: 0xe6ecef });
   const interattivi = [];
 
   function cubo(x, y, z, { speciale = false, mappa = null } = {}) {
-    const mesh = new THREE.Mesh(geoCubo, mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : mat.chiaro);
-    mesh.add(new THREE.LineSegments(bordoCubo, matBordo));
+    const mesh = new THREE.Mesh(geoCubo, mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo);
     mesh.position.set(x, y, z);
     scene.add(mesh);
     const c = new Corpo(mesh.position, new THREE.Vector3(0.22, 0.22, 0.22), { mesh });
@@ -94,6 +93,8 @@ export async function avvia(ctx) {
       setTimeout(() => { if (fadeCb) { fadeCb(); fadeCb = null; } $('velo').classList.remove('on'); }, 300);
     },
   };
+
+  g.arredi = creaArredi(mondo, g);
 
   // le stanze sono moduli separati, scaricati qui
   const moduli = await Promise.all(STANZE.map((n) => import(`./stanze/${n}.js`)));
@@ -186,6 +187,7 @@ export async function avvia(ctx) {
     $('mirino').hidden = !inGioco;
     $('finestre').hidden = !inGioco || !gesto;
     if (!inGioco) $('suggerimento').hidden = true;
+    $('sottotitoli').style.visibility = id === 'pausa' || id === 'scheda' ? 'hidden' : '';
   }
 
   function testoFinali() { return ctx.T.finaliVisti.replace('{n}', visti.size); }
@@ -485,6 +487,7 @@ export async function avvia(ctx) {
   renderer.setAnimationLoop(ciclo);
   $('avvio-testo').removeAttribute('data-t');
   $('avvio-testo').textContent = ctx.T.comandi;
+  $('caricatore').hidden = true;
   $('avvio-entra').hidden = false;
   $('avvio-entra').focus();
 }

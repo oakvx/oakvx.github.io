@@ -4,7 +4,7 @@ Servito in `/gioco/`. Apre un menu con due scelte: **Sito** (la versione classic
 
 ## Scelte tecniche
 
-Il piano proponeva TypeScript, Vite e Rapier. Restiamo su JavaScript a moduli ES senza bundler, con Three.js r187 in `vendor/three/` (licenza MIT) e fisica a scatole scritta a mano, perché:
+Il piano proponeva TypeScript, Vite e Rapier. Restiamo su JavaScript a moduli ES senza bundler, con Three.js r187 in `vendor/three/` (licenza MIT, con l'addon `RoundedBoxGeometry`) e fisica a scatole scritta a mano, perché:
 
 - il sito è già pubblicato su GitHub Pages senza build e la CI controlla i `.js` con `node --check`;
 - le finestre devono aprire varchi nei muri e teletrasportare corpi: con una fisica propria la regola è una riga, con Rapier servirebbero filtri di collisione per ogni passaggio.
@@ -18,7 +18,7 @@ Il piano proponeva TypeScript, Vite e Rapier. Restiamo su JavaScript a moduli ES
 | `dati/narratore.json` | battute del curatore con ID (`N-001`…); `voce` elenca gli ID che hanno un audio in `voce/<lingua>/<ID>.mp3` |
 | `js/menu.js` | lingua, audio, scelta Sito/Gioco, import differito del gioco |
 | `js/gioco.js` | renderer, post-processing, giocatore, cubi, interazioni, finali, salvataggio locale |
-| `js/engine/` | `materiali.js` (texture procedurali, mappatura in coordinate mondo), `mondo.js` (stanze, pareti con aperture e pannelli, zone), `fisica.js` (AABB, gravità per stanza) |
+| `js/engine/` | `materiali.js` (texture procedurali, mappatura in coordinate mondo), `mondo.js` (stanze, pareti con aperture e pannelli, battiscopa, cornici, plafoniere, blocchi arrotondati, ombre di contatto, zone), `arredi.js` (didascalie, recinti con cordone, cartelli di sala, griglie), `fisica.js` (AABB, gravità per stanza) |
 | `js/portali.js` | finestre a pixel: camera virtuale, piano di taglio obliquo, ricorsione limitata, teletrasporto con velocità e orientamento, reindirizzamenti |
 | `js/narratore.js` | coda delle battute, sottotitoli, copione sfogliato nel panico, logica degli eventi |
 | `js/audio.js` | ronzio, pad, fruscio, suoni delle finestre (Web Audio) |

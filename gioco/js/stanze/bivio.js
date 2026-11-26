@@ -13,14 +13,15 @@ export function costruisci(m, g) {
   m.stanza({ nome: 'corridoioS', x0: -3.5, x1: -1.5, z0: -21.7, z1: -18.3, h: 2.4, pareti: { n: false, s: false }, luci: [[-2.5, -20, 0.5, 1]], luciPunto: false });
   m.stanza({ nome: 'corridoioD', x0: 1.5, x1: 3.5, z0: -21.7, z1: -18.3, h: 2.4, pareti: { n: false, s: false }, luci: [[2.5, -20, 0.5, 1]], luciPunto: false });
 
-  // cornici scure intorno alle due porte, identiche: nessun indizio
-  for (const cx of [-2.5, 2.5]) {
-    m.box(cx - 1.08, 0, -18.02, cx - 1.0, 2.48, -17.96, m.mat.cornice, { solido: false });
-    m.box(cx + 1.0, 0, -18.02, cx + 1.08, 2.48, -17.96, m.mat.cornice, { solido: false });
-    m.box(cx - 1.08, 2.4, -18.02, cx + 1.08, 2.48, -17.96, m.mat.cornice, { solido: false });
-  }
-  // una panca, per chi vuole aspettare
-  m.box(-1.2, 0, -11.2, 1.2, 0.45, -10.75, m.mat.grigio);
+  // allestimento: due cartelli con soli numeri (nessun indizio), panca, griglie
+  const A = g.arredi;
+  A.cartello(-2.5, 2.78, -17.96, 0, '03', () => '');
+  A.cartello(2.5, 2.78, -17.96, 0, '04', () => '');
+  m.tondo(-1.2, 0.4, -11.25, 1.2, 0.47, -10.8, m.mat.legno, { r: 0.03 });
+  for (const x of [-1.0, 1.0]) m.tondo(x - 0.04, 0, -11.2, x + 0.04, 0.4, -10.85, m.mat.scuro, { r: 0.02, solido: false });
+  m.ombra(0, 0, -11.02, 2.8, 0.9);
+  A.griglia(-4.98, 2.7, -14, Math.PI / 2);
+  A.griglia(4.98, 2.7, -14, -Math.PI / 2);
 
   m.zona('porta:sinistra', -3.5, -1, -21.7, -1.5, 3, -18.6);
   m.zona('porta:destra', 1.5, -1, -21.7, 3.5, 3, -18.6);

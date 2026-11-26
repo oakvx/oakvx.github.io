@@ -3,6 +3,7 @@
 // Lì la porta in fondo arretra dell'88% di ogni metro: ne servono una cinquantina.
 // Luci e piastrelle si ripetono ogni 4 m, quindi gli spostamenti non si vedono.
 import * as THREE from 'three';
+import { geoTonda } from '../engine/mondo.js';
 
 const DX = 100;          // la copia sta 100 m a est (multiplo del periodo delle texture)
 const Z0 = -4.3;         // imbocco del corridoio
@@ -19,7 +20,7 @@ export function costruisci(m, g) {
   const porta = new THREE.Group();
   const muro = new THREE.Mesh(new THREE.BoxGeometry(2, 2.6, 0.2), mat.muro);
   muro.position.y = 1.3;
-  const anta = new THREE.Mesh(new THREE.BoxGeometry(0.92, 2.1, 0.06), new THREE.MeshLambertMaterial({ color: 0xc9d3d8 }));
+  const anta = new THREE.Mesh(geoTonda(0.92, 2.1, 0.06, 0.02), new THREE.MeshLambertMaterial({ color: 0xc9d3d8 }));
   anta.position.set(0, 1.05, 0.13);
   const maniglia = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.03, 0.05), mat.scuro);
   maniglia.position.set(0.32, 1.02, 0.18);

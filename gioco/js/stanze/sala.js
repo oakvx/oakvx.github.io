@@ -1,6 +1,7 @@
 // Sala d'attesa (stanza 01) e primo corridoio. Regola: chi torna qui dal bivio
 // viene contato, e alla terza volta il corridoio cambia (vedi corridoio.js).
 import * as THREE from 'three';
+import { geoTonda } from '../engine/mondo.js';
 
 export function costruisci(m, g) {
   const mat = m.mat;
@@ -17,9 +18,9 @@ export function costruisci(m, g) {
   // monitor su piedistallo: Brat Animator
   const gruppo = new THREE.Group();
   gruppo.position.set(-2.5, 0, -1.4);
-  const ped = new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.0, 0.6), mat.grigio);
+  const ped = new THREE.Mesh(geoTonda(0.6, 1.0, 0.6, 0.04), mat.grigio);
   ped.position.y = 0.5;
-  const corpo = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.5, 0.42), mat.scuro);
+  const corpo = new THREE.Mesh(geoTonda(0.72, 0.5, 0.42, 0.05), mat.scuro);
   corpo.position.y = 1.27;
   const texSchermo = g.texTesto(512, 320, (ctx, w, h, t, parole) => {
     const ciclo = 5.2;
@@ -107,7 +108,7 @@ export function costruisci(m, g) {
   });
   const lato = new THREE.MeshLambertMaterial({ map: texScatola });
   const sopra = new THREE.MeshLambertMaterial({ color: 0xf1f3f4 });
-  const scatola = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.55, 0.55), [lato, lato, sopra, sopra, lato, lato]);
+  const scatola = new THREE.Mesh(geoTonda(0.55, 0.55, 0.55, 0.03), [lato, lato, sopra, sopra, lato, lato]);
   scatola.position.set(2.5, 0.275, 2.3);
   scatola.rotation.y = -0.5;
   m.scene.add(scatola);
@@ -117,6 +118,22 @@ export function costruisci(m, g) {
   g.suLingua(() => { texTarga.ridisegna(); texScatola.ridisegna(); });
   texTarga.ridisegna();
   texScatola.ridisegna();
+
+  // allestimento: ombre, recinto, didascalie, cartello, griglie
+  const A = g.arredi;
+  m.ombra(-2.5, 0, -1.4, 1.2, 1.2);
+  m.ombra(2.5, 0, 2.3, 1.1, 1.1);
+  A.recinto(1.85, 1.65, 3.15, 2.95);
+  A.didascalia(-3.97, 1.45, -0.35, Math.PI / 2, () => g.T().didascalie.monitor, { w: 0.5, h: 0.32 });
+  A.didascalia(1.45, 0, 2.3, -Math.PI / 2, () => g.T().didascalie.scatola, { su: 'leggio', w: 0.42, h: 0.27 });
+  m.box(1.33, 0, 2.18, 1.57, 1.1, 2.42, mat.chiaro).mesh.visible = false;
+  A.cartello(0, 2.93, -3.97, 0, '01', () => g.T().sale.attesa);
+  A.griglia(-3.98, 2.75, 2.2, Math.PI / 2);
+  A.griglia(3.98, 2.75, 2.2, -Math.PI / 2);
+  // una panca lungo la parete di fondo, per l'attesa
+  m.tondo(-1.6, 0.4, 3.45, 1.6, 0.47, 3.85, mat.legno, { r: 0.03 });
+  for (const x of [-1.4, 1.4]) m.tondo(x - 0.04, 0, 3.5, x + 0.04, 0.4, 3.8, mat.scuro, { r: 0.02, solido: false });
+  m.ombra(0, 0, 3.65, 3.6, 0.9);
 
   // conteggio dei ritorni dal bivio
   let daBivio = false;

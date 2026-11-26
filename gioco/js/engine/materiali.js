@@ -116,6 +116,10 @@ export function creaMateriali(renderer) {
     chiaro: new THREE.MeshLambertMaterial({ color: 0xeef2f4 }),
     scuro: new THREE.MeshLambertMaterial({ color: 0x2a3237 }),
     cornice: new THREE.MeshLambertMaterial({ color: 0xbfcad0 }),
+    battiscopa: new THREE.MeshLambertMaterial({ color: 0xcfd8dd }),
+    legno: new THREE.MeshLambertMaterial({ color: 0xd9d2c5 }),
+    ottone: new THREE.MeshLambertMaterial({ color: 0xb59a5e, emissive: 0x1d160a }),
+    cordone: new THREE.MeshLambertMaterial({ color: 0x5f8796 }),
     neon: new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false }),
     neonTremolante: new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false }),
   };

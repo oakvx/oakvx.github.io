@@ -89,8 +89,15 @@ let caricando = false;
 async function avviaGioco() {
   if (caricando) return;
   caricando = true;
+  const menu = $('menu');
+  if (!reduceMotion && !menu.hidden) {
+    menu.classList.add('esce');
+    await new Promise((r) => setTimeout(r, 420));
+  }
+  menu.classList.remove('esce');
   document.body.classList.remove('in-menu');
-  $('menu').hidden = true;
+  menu.hidden = true;
+  $('caricatore').hidden = false;
   $('avvio').hidden = false;
   try {
     const modulo = await import('./gioco.js');

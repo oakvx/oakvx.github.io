@@ -13,15 +13,25 @@ export function costruisci(m, g) {
       w: { pannelli: [{ id: 'basso', a: -30.5, b: -24.5, y0: 0, y1: 3.2 }] },
       e: { pannelli: [{ id: 'proibito', a: -31.9, b: -29.9, y0: 0, y1: 2.6, proibito: true }] },
     },
-    luci: [[-7, -25, 0.8, 1.6], [-7, -29.5, 0.8, 1.6], [-7, -34, 0.8, 1.6]], intensita: 6, raggio: 10,
+    luci: [[-7, -25, 0.8, 1.6], [-7, -29.5, 0.8, 1.6], [-7, -34, 0.8, 1.6]], intensita: 4, raggio: 10,
   });
 
   // balconata rialzata sul lato nord
   m.box(-14, 0, -36, -0.5, 3.5, -32.5, mat.pavimento);
-  // ringhiera bassa (solo visiva sopra il bordo)
-  m.box(-14, 3.5, -32.56, -0.5, 3.6, -32.5, mat.cornice, { solido: false });
+  // bordo e parapetto della balconata
+  m.tondo(-14, 3.42, -32.6, -0.5, 3.56, -32.44, mat.cornice, { r: 0.03, solido: false });
+  m.tondo(-14, 4.42, -32.6, -0.5, 4.5, -32.5, mat.cornice, { r: 0.035, solido: false });
+  for (let x = -13.5; x < -0.6; x += 1.5) m.tondo(x - 0.03, 3.5, -32.58, x + 0.03, 4.45, -32.52, mat.cornice, { r: 0.02, solido: false });
+  m.box(-14, 3.5, -32.6, -0.5, 4.6, -32.45, mat.chiaro).mesh.visible = false;
   // colonna che nasconde il pannello proibito
-  m.box(-2.6, 0, -31.6, -1.6, 7, -30.6, mat.muro);
+  m.tondo(-2.6, 0, -31.6, -1.6, 7, -30.6, mat.muro, { r: 0.08 });
+  m.ombra(-2.1, 0, -31.1, 1.6, 1.6);
+  // allestimento
+  const A = g.arredi;
+  A.cartello(-2.5, 2.7, -22.03, Math.PI, '03', () => g.T().sale.laboratorio);
+  A.didascalia(-1.15, 0, -23.4, -0.5, () => g.T().didascalie.gesto, { su: 'leggio', w: 0.44, h: 0.28 });
+  m.box(-1.27, 0, -23.52, -1.03, 1.1, -23.28, mat.chiaro).mesh.visible = false;
+  for (const z of [-26, -30]) A.griglia(-0.52, 5.6, z, -Math.PI / 2, 0.9, 0.4);
 
   // pedana del gesto
   const pedana = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.6, 0.06, 24), mat.cornice);

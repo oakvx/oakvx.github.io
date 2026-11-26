@@ -214,6 +214,20 @@
             "Un vincolo di esclusione GiST rende impossibile la doppia prenotazione; le scritture verso Google Calendar passano da una outbox transazionale con lease e fencing token, e una saga di compensazione rimette le cose a posto quando qualcosa fallisce. Ollama locale opzionale."
           ]
         }
+      },
+      "beautify": {
+        "cartello": "Beautify",
+        "salone": "Salone",
+        "tabellone": "Disponibilità · martedì 15:00",
+        "occupato": "occupato",
+        "libero": "libero",
+        "testi": {
+          "beautify": [
+            "Beautify",
+            "progetto di maturità · PHP · MySQL",
+            "Un gestionale per più saloni: clienti, ruoli del personale, appuntamenti, magazzino e statistiche. I dati di ogni salone restano separati, ma il controllo della disponibilità è condiviso."
+          ]
+        }
       }
     }
   },
@@ -430,6 +444,20 @@
             "How it is made",
             "Node.js · PHP · PostgreSQL 16 · Docker",
             "A GiST exclusion constraint makes double booking impossible; writes to Google Calendar go through a transactional outbox with leases and fencing tokens, and a compensation saga puts things back when something fails. Optional local Ollama."
+          ]
+        }
+      },
+      "beautify": {
+        "cartello": "Beautify",
+        "salone": "Salon",
+        "tabellone": "Availability · Tuesday 15:00",
+        "occupato": "booked",
+        "libero": "free",
+        "testi": {
+          "beautify": [
+            "Beautify",
+            "diploma project · PHP · MySQL",
+            "A CRM for several salons: clients, staff roles, appointments, stock and analytics. Each salon's data stays separate, while availability checks are shared."
           ]
         }
       }

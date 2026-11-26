@@ -135,6 +135,22 @@
     "N-234": {
       "it": "Sincronizzato. Nessuna doppia prenotazione, nessun cliente arrabbiato. Lampada.",
       "en": "Synced. No double bookings, no angry customers. Lamp."
+    },
+    "N-240": {
+      "it": "Beautify, il progetto di maturità di oakvx. Tre saloni, tre agende, nessuno che sbircia nei dati degli altri. L'appuntamento delle tre è nel salone sbagliato.",
+      "en": "Beautify, oakvx's diploma project. Three salons, three schedules, nobody peeking at the others' data. The three o'clock appointment is in the wrong salon."
+    },
+    "N-241": {
+      "it": "Indizio: dalla reception le vetrine si attraversano con lo sguardo. E con le finestre.",
+      "en": "Hint: from reception you can see through the shop windows. And open windows through them."
+    },
+    "N-242": {
+      "it": "Il tabellone dice salone C. Il cubo va sulla poltrona di C. Ho finito i modi gentili di dirlo.",
+      "en": "The board says salon C. The cube goes on C's chair. I've run out of polite ways to say it."
+    },
+    "N-243": {
+      "it": "Appuntamento spostato, agende in ordine. Quinta lampada, o quella che è. Ho perso il conto.",
+      "en": "Appointment moved, schedules in order. Fifth lamp, or whichever. I've lost count."
     }
   },
   "eventi": {
@@ -280,6 +296,24 @@
     "lampada:synk": [
       {
         "id": "N-234",
+        "subito": true
+      }
+    ],
+    "stanza:beautify": [
+      {
+        "id": "N-240",
+        "subito": true
+      }
+    ],
+    "aiuto:indizio:beautify": [
+      "N-241"
+    ],
+    "aiuto:soluzione:beautify": [
+      "N-242"
+    ],
+    "lampada:beautify": [
+      {
+        "id": "N-243",
         "subito": true
       }
     ]

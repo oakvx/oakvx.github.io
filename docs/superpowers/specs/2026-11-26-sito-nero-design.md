@@ -20,7 +20,7 @@ Niente gradienti decorativi, niente glassmorphism: superfici opache, una grana f
 
 ## Tipografia
 
-- **Bodoni Moda** (serif ad alto contrasto, dimensione ottica 96): titoli oversize, corsivo per l'accento.
+- **Fraunces** (serif editoriale ad alto contrasto, dimensione ottica 144, morbidezza 50): titoli oversize, corsivo per l'accento. Scelto al posto di Fraunces per un tono curato ma meno da boutique di lusso.
 - **Archivo** variabile: testo corrente; l'asse di larghezza (62–125) diventa materiale grafico
   (titolo compresso di Brat Animator, espanso di Spinotto Felice, strumenti che si allargano al passaggio).
 - **Cascadia Code**: metadati, numerazioni editoriali, didascalie, terminale.
@@ -30,7 +30,7 @@ Gerarchie asimmetriche su griglia a 12 colonne: etichetta mono nelle prime 3 col
 ## Navigazione
 
 - Testata minima: marchio, ora di Sassuolo, IT/EN, "Indice". Si ritira scorrendo verso il basso.
-- Indice a tutto schermo con voci numerate 01–05 in Bodoni, casi studio e "Altrove" (gioco, GitHub, email),
+- Indice a tutto schermo con voci numerate 01–05 in Fraunces, casi studio e "Altrove" (gioco, GitHub, email),
   comando "Ferma animazioni". Focus intrappolato, Esc per chiudere.
 - Segnapagina in basso a sinistra: numero, titolo, avanzamento in cremisi.
 - Colophon uguale ovunque: "Scrivimi." oversize, email, copia, indice, firma `oakvx` in contorno.

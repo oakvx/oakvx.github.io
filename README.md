@@ -30,7 +30,7 @@ Sito portfolio statico di Gabriele Lucia, pubblicato su GitHub Pages: <https://o
 | --- | --- |
 | Markup, stile, script | HTML5, CSS3, JavaScript ES (vanilla), WebGL 1 senza librerie |
 | Hosting | GitHub Pages (`.nojekyll`, nessuna build Jekyll) |
-| Font | Bodoni Moda (display), Archivo variabile con asse di larghezza (testo), Cascadia Code (metadati), self-hosted in `.woff2` con licenze OFL |
+| Font | Fraunces (display), Archivo variabile con asse di larghezza (testo), Cascadia Code (metadati), self-hosted in `.woff2` con licenze OFL |
 | Strumenti | Python 3 (generazione e controlli, solo libreria standard), Node.js 22 in CI |
 | Accessibilità | `prefers-reduced-motion`, comando "Ferma animazioni", focus visibile, menu con focus intrappolato, ripieghi senza WebGL |
 | SEO | Metadati Person, anteprime social per pagina e lingua, `sitemap.xml`, `robots.txt` |
@@ -124,4 +124,4 @@ La CI ([`site-check.yml`](.github/workflows/site-check.yml), su push, pull reque
 
 ## Crediti
 
-Provenienza e descrizione dei materiali: [`assets/CREDITS.html`](assets/CREDITS.html). Font con licenza OFL (`assets/nero/fonts/BodoniModa-OFL.txt`, `assets/nero/fonts/Archivo-OFL.txt`, `assets/CascadiaCode-OFL.txt`). Grafiche, avatar e sculture di punti sono opera dell'autore.
+Provenienza e descrizione dei materiali: [`assets/CREDITS.html`](assets/CREDITS.html). Font con licenza OFL (`assets/nero/fonts/Fraunces-OFL.txt`, `assets/nero/fonts/Archivo-OFL.txt`, `assets/CascadiaCode-OFL.txt`). Grafiche, avatar e sculture di punti sono opera dell'autore.

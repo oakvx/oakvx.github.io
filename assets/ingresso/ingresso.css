@@ -1,14 +1,14 @@
 /* Menu d'ingresso: compare una volta per sessione e fa scegliere tra il sito e il gioco.
-   Stesso linguaggio del sito "Nero": nero opaco, Bodoni Moda, un solo accento cremisi. */
+   Stesso linguaggio del sito "Nero": nero opaco, Fraunces, un solo accento cremisi. */
 @font-face {
     font-family: "Ingresso Serif";
-    src: url('../nero/fonts/bodoni-moda.woff2') format('woff2');
-    font-weight: 400 900; font-style: normal; font-display: swap;
+    src: url('../nero/fonts/fraunces.woff2') format('woff2');
+    font-weight: 100 900; font-style: normal; font-display: swap;
 }
 @font-face {
     font-family: "Ingresso Serif";
-    src: url('../nero/fonts/bodoni-moda-italic.woff2') format('woff2');
-    font-weight: 400 900; font-style: italic; font-display: swap;
+    src: url('../nero/fonts/fraunces-italic.woff2') format('woff2');
+    font-weight: 100 900; font-style: italic; font-display: swap;
 }
 @font-face {
     font-family: "Ingresso Sans";
@@ -27,6 +27,7 @@ html.ingresso-attivo body { visibility: hidden; }
 html.ingresso-attivo body .ingresso { visibility: visible; }
 
 .ingresso {
+    font-variation-settings: "SOFT" 50;
     --nero: #050505;
     --bianco: #E8E6E1;
     --tenue: rgb(232 230 225 / .55);
@@ -52,7 +53,7 @@ html.ingresso-attivo body .ingresso { visibility: visible; }
     color: var(--tenue);
 }
 .ingresso__firma strong {
-    color: var(--bianco); font: italic 500 1.5rem/1 "Ingresso Serif", Didot, serif; letter-spacing: -.02em; text-transform: none;
+    color: var(--bianco); font: italic 500 1.5rem/1 "Ingresso Serif", Georgia, serif; letter-spacing: -.02em; text-transform: none;
 }
 
 .ingresso__corpo {
@@ -70,9 +71,9 @@ html.ingresso-attivo body .ingresso { visibility: visible; }
 .ingresso h1 {
     grid-column: 1 / -1;
     margin: 0 0 2rem;
-    font: 400 clamp(3.4rem, 11vw, 12rem)/.86 "Ingresso Serif", Didot, serif;
-    font-variation-settings: "opsz" 96;
-    letter-spacing: -.055em;
+    font: 400 clamp(3.4rem, 11vw, 12rem)/.86 "Ingresso Serif", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    letter-spacing: -.035em;
     color: var(--bianco);
 }
 .ingresso h1 em { font-style: italic; color: var(--cremisi); }
@@ -107,8 +108,8 @@ html.ingresso-attivo body .ingresso { visibility: visible; }
 .ingresso__scelta:hover, .ingresso__scelta:focus-visible { color: var(--nero); }
 .ingresso__scelta:focus-visible { outline: 1px solid var(--cremisi); outline-offset: -1px; }
 .ingresso__nome {
-    font: 400 clamp(2.6rem, 6vw, 6rem)/1 "Ingresso Serif", Didot, serif;
-    letter-spacing: -.045em;
+    font: 400 clamp(2.6rem, 6vw, 6rem)/1 "Ingresso Serif", Georgia, serif;
+    letter-spacing: -.028em;
     transition: transform .7s var(--entra);
 }
 .ingresso__scelta:hover .ingresso__nome, .ingresso__scelta:focus-visible .ingresso__nome { font-style: italic; transform: translateX(.15em); }

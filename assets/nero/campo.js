@@ -2,7 +2,7 @@
    Campo — sculture di punti in WebGL, senza librerie.
    Ogni [data-campo] elenca le sue forme in data-forme, separate da "|":
      scultura          superficie organica deformata, con anello e pulviscolo
-     testo:404         testo campionato da Bodoni Moda corsivo
+     testo:404         testo campionato da Fraunces corsivo
      immagine:/x.webp  silhouette di un'immagine con trasparenza (rilievo dalla luminanza)
    Tenere premuto (mouse, touch, Invio o Spazio sul pulsante [data-tieni])
    fa esplodere i punti e li ricompone nella forma successiva; un tocco breve
@@ -119,11 +119,11 @@
         g.fillStyle = '#fff';
         g.textAlign = 'center'; g.textBaseline = 'middle';
         let size = 380;
-        g.font = `italic 700 ${size}px "Nero Serif", "Bodoni 72", Didot, serif`;
+        g.font = `italic 700 ${size}px "Nero Serif", Georgia, serif`;
         const m = g.measureText(str).width;
-        if (m > w * .8) { size *= (w * .8) / m; g.font = `italic 700 ${size}px "Nero Serif", "Bodoni 72", Didot, serif`; }
+        if (m > w * .8) { size *= (w * .8) / m; g.font = `italic 700 ${size}px "Nero Serif", Georgia, serif`; }
         g.fillText(str, w / 2, h / 2 + size * .04);
-        // ispessisce i filetti del Bodoni, altrimenti restano quasi senza punti
+        // ispessisce i filetti del serif, altrimenti restano quasi senza punti
         g.lineWidth = size * .028; g.strokeStyle = '#fff'; g.lineJoin = 'round';
         g.strokeText(str, w / 2, h / 2 + size * .04);
         const data = g.getImageData(0, 0, w, h).data;

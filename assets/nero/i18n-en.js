@@ -417,7 +417,7 @@ window.OAKVX_EN = {
     'cr.title': 'Who made <em>what.</em>',
     'cr.intro': 'Licences, origin and details of the materials used on this site.',
     'cr.typeTitle': 'Typography',
-    'cr.type1': '<strong>Bodoni Moda</strong>, The Bodoni Moda Project Authors, SIL Open Font License 1.1. Headings and display text, local variable files (weights 400–900, optical size 6–96). Licence: <a href="nero/fonts/BodoniModa-OFL.txt">BodoniModa-OFL.txt</a>. Source: <a href="https://github.com/indestructible-type/Bodoni">github.com/indestructible-type/Bodoni</a>.',
+    'cr.type1': '<strong>Fraunces</strong>, The Fraunces Project Authors (Undercase Type), SIL Open Font License 1.1. Headings and display text; the local variable files keep the weight (100–900), optical size (9–144), softness and “wonk” axes. Licence: <a href="nero/fonts/Fraunces-OFL.txt">Fraunces-OFL.txt</a>. Source: <a href="https://github.com/undercasetype/Fraunces">github.com/undercasetype/Fraunces</a>.',
     'cr.type2': '<strong>Archivo</strong>, The Archivo Project Authors (Omnibus-Type), SIL Open Font License 1.1. Body text; the variable file keeps the weight (100–900) and width (62–125) axes, used for the condensed and expanded compositions. Licence: <a href="nero/fonts/Archivo-OFL.txt">Archivo-OFL.txt</a>.',
     'cr.type3': '<strong>Cascadia Code</strong>, Microsoft, SIL Open Font License 1.1. Metadata, captions and terminal. The local subset keeps ASCII, Italian accents and punctuation, without changing shapes or metrics; the derivative’s internal name is <em>Oakvx Portfolio Mono</em>. Licence: <a href="CascadiaCode-OFL.txt">CascadiaCode-OFL.txt</a>.',
     'cr.avatarTitle': 'Avatar and point sculptures',

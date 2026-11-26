@@ -38,13 +38,14 @@ export function collega(g, id, a, b, { w = W, h = H, doppio = true } = {}) {
 }
 
 // guscio di una stanza-progetto: porta d'ingresso nella parete sud (z1), verso lo smistamento
-export function stanzaProgetto(m, g, { id, x0, x1, z0, z1, h = 4, ...resto }) {
+export function stanzaProgetto(m, g, { id, x0, x1, z0, z1, h = 4, pareti = {}, ...resto }) {
   const [px] = PORTE[id].stanza;
+  const sud = pareti.s || {};
   const s = m.stanza({
     nome: id, x0, x1, z0, z1, h, ala: 'backend',
-    pareti: { s: { aperture: [apertura(px)] }, ...(resto.pareti || {}) },
-    luci: resto.luci || [[(x0 + x1) / 2, (z0 + z1) / 2, 0.8, 1.6]], intensita: resto.intensita ?? 3, raggio: resto.raggio ?? 12,
+    luci: [[(x0 + x1) / 2, (z0 + z1) / 2, 0.8, 1.6]], intensita: 3, raggio: 12,
     ...resto,
+    pareti: { ...pareti, s: { ...sud, aperture: [...(sud.aperture || []), apertura(px)] } },
   });
   nicchia(m, PORTE[id].stanza);
   g.arredi.porta(px, 0, z1 - 0.06, Math.PI, null);

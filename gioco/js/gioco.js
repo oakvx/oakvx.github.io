@@ -185,13 +185,13 @@ export async function avvia(ctx) {
         // modalità 2008: blocchi JPEG leggeri (sul colore lineare, prima della gamma)
         if (uModo2008 > 0.0) {
           vec2 blocco = (floor(vUv * uRes / 8.0) + 0.5) * 8.0 / uRes;
-          col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.22 * uModo2008);
+          col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.1 * uModo2008);
         }
         col = pow(max(col, 0.0), vec3(1.0 / 2.2));
         if (uModo2008 > 0.0) {
           float m8 = uModo2008;
-          col *= mix(1.0, 1.32 - r2 * 2.4, m8);                                   // flash frontale
-          col = mix(col, vec3(dot(col, vec3(0.299, 0.587, 0.114))), 0.32 * m8);   // colori slavati
+          col *= mix(1.0, 1.16 - r2 * 1.5, m8);                                   // flash frontale
+          col = mix(col, vec3(dot(col, vec3(0.299, 0.587, 0.114))), 0.16 * m8);   // colori un po' slavati
           col *= mix(vec3(1.0), vec3(1.07, 1.0, 0.88), m8);                       // sensore caldo
           col += (hash(vUv * uRes * 0.5 + floor(uTime * 12.0)) - 0.5) * 0.05 * m8;
         }

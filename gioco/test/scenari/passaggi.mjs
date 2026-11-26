@@ -5,17 +5,17 @@ import assert from 'node:assert/strict';
 export default async function (page, aiuto) {
   const G = (fn, arg) => aiuto.esegui(fn, arg);
   await G(() => { window.__gioco.gioca(); window.__gioco.vaiA('ingresso'); });
-  // A nell'ingresso, rivolto a sud; B nell'atrio, 20 m più in là
-  await G(() => window.__gioco.aggiungiPassaggio('prova', [0, 1.2, 0, 0], [0, 1.2, 20, 0]));
+  // A nell'ingresso, rivolto a sud; B nello smistamento, 34 m più in là
+  await G(() => window.__gioco.aggiungiPassaggio('prova', [0, 1.2, 0, 0], [0, 1.2, -34, 0]));
   await G(() => { window.__gioco.vai(0, 0.87, 1.2); window.__gioco.guarda(0); window.__gioco.tasto('KeyW', true); });
-  await aiuto.attendi(() => window.__gioco.leggi().z > 15, 4000);
+  await aiuto.attendi(() => window.__gioco.leggi().z < -25, 4000);
   await G(() => window.__gioco.tasto('KeyW', false));
   const s = await aiuto.leggi();
   assert.ok(Math.abs(s.x) < 1, 'x ' + s.x);
-  assert.equal(s.stanza, 'atrio');
+  assert.equal(s.stanza, 'smistamento');
 
   // un salto di colpo da un lato all'altro (finestra, teletrasporto) non conta come attraversamento
-  await G(() => { window.__gioco.vaiA('ingresso'); window.__gioco.aggiungiPassaggio('prova', [0, 1.2, 0, 0], [0, 1.2, 20, 0]); });
+  await G(() => { window.__gioco.vaiA('ingresso'); window.__gioco.aggiungiPassaggio('prova', [0, 1.2, 0, 0], [0, 1.2, -34, 0]); });
   await aiuto.aspetta(200);
   await G(() => window.__gioco.vai(0, 0.87, -1.2));
   await aiuto.aspetta(300);
@@ -24,7 +24,7 @@ export default async function (page, aiuto) {
   // un cubo lanciato attraverso il varco
   await G(() => window.__gioco.vaiA('ingresso'));
   const i = await G(() => window.__gioco.cubo(0.6, 0.6, 1.5, 0, 0, -5));
-  await aiuto.attendi((k) => window.__gioco.cubi()[k].z > 15, 4000, i);
+  await aiuto.attendi((k) => window.__gioco.cubi()[k].z < -25, 4000, i);
 
   // finestre del giocatore: una a ovest, una a est; camminando verso ovest si esce a est
   await G(() => window.__gioco.rimuoviPassaggio('prova'));

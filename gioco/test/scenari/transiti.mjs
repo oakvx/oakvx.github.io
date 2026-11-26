@@ -22,9 +22,8 @@ export default async function (page, aiuto) {
   await G(() => window.__gioco.stanza('piscina').risolvi());
   await cammina(aiuto, -Math.PI / 2, inStanza, 6000, 'middleman');
   // dalla stanza (segnaposto) di middleman alla cisterna
-  const u = await G(() => window.__gioco.stanza('middleman').uscita);
-  await G((p) => window.__gioco.vai(p[0], 0.87, p[1] - 1.5), u);
-  await cammina(aiuto, Math.PI, inStanza, 6000, 'cisterna');
+  await G(() => window.__gioco.stanza('middleman').risolvi());
+  await aiuto.attendi(inStanza, 4000, 'cisterna');
 
   // B: dalla pedana alta della cisterna alla chiocciola, e in fondo alla galleria
   await G(() => window.__gioco.stanza('cisterna').risolvi());

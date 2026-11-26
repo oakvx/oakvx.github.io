@@ -155,6 +155,18 @@
     "N-250": {
       "it": "Il visitatore notò il Mii di oakvx girare l'angolo. Tre volte. Il curatore fece finta di niente, per professionalità.",
       "en": "The visitor saw oakvx's Mii turn the corner. Three times. The curator pretended not to notice, out of professionalism."
+    },
+    "N-260": {
+      "it": "Reverse engineering. Qui è buio per principio: si vede solo quello che si può dimostrare. Il tasto F accende la lampada delle prove. Io lo so perché c'è scritto.",
+      "en": "Reverse engineering. It's dark here on principle: you only see what you can prove. The F key turns on the evidence lamp. I know because it says so."
+    },
+    "N-261": {
+      "it": "Indizio: i pannelli accettano le finestre solo dopo che li hai illuminati. Uno in basso a sinistra, uno in alto a destra, sopra la nicchia.",
+      "en": "Hint: the panels only accept windows after you've lit them. One low on the left, one high on the right, above the alcove."
+    },
+    "N-262": {
+      "it": "Ho acceso io la lampada e ho provato i due pannelli giusti. Evidenza fornita. Non ditelo al revisore.",
+      "en": "I turned on the lamp and proved the two right panels myself. Evidence provided. Don't tell the reviewer."
     }
   },
   "eventi": {
@@ -326,6 +338,18 @@
         "id": "N-250",
         "subito": true
       }
+    ],
+    "stanza:middleman": [
+      {
+        "id": "N-260",
+        "subito": true
+      }
+    ],
+    "aiuto:indizio:middleman": [
+      "N-261"
+    ],
+    "aiuto:soluzione:middleman": [
+      "N-262"
     ]
   }
 }

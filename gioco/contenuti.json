@@ -228,9 +228,30 @@
             "Un gestionale per più saloni: clienti, ruoli del personale, appuntamenti, magazzino e statistiche. I dati di ogni salone restano separati, ma il controllo della disponibilità è condiviso."
           ]
         }
+      },
+      "middleman": {
+        "cartello": "middleManPS4 · Reverse Engineering",
+        "etichette": {
+          "elf": "ELF · validazione",
+          "orbis": "Orbis · binari",
+          "psf": "PSF · metadati",
+          "nid": "NID · simboli",
+          "ghidra": "export per Ghidra",
+          "rete": "DNS · TCP · TLS passivi",
+          "console": "PS4 12.52 · GoldHEN",
+          "lettura": "solo lettura"
+        },
+        "testi": {
+          "mm": [
+            "middleManPS4",
+            "ricerca · WIP · v0.17",
+            "Strumenti in Python (solo libreria standard) e payload in C attorno a tre domande: come si carica un payload, cosa c'è dentro i binari, cosa passa sulla rete. Diagnostica in sola lettura e analisi offline; nessun aggiramento di PSN, nessuna falsificazione del firmware. Premi F: qui conta solo ciò che si prova."
+          ]
+        }
       }
     },
-    "stanzaDi": "STANZA {n} DI {tot}"
+    "stanzaDi": "STANZA {n} DI {tot}",
+    "comandoF": "F: lampada delle prove"
   },
   "en": {
     "lang": "en",
@@ -461,8 +482,29 @@
             "A CRM for several salons: clients, staff roles, appointments, stock and analytics. Each salon's data stays separate, while availability checks are shared."
           ]
         }
+      },
+      "middleman": {
+        "cartello": "middleManPS4 · Reverse Engineering",
+        "etichette": {
+          "elf": "ELF · validation",
+          "orbis": "Orbis · binaries",
+          "psf": "PSF · metadata",
+          "nid": "NID · symbols",
+          "ghidra": "Ghidra export",
+          "rete": "passive DNS · TCP · TLS",
+          "console": "PS4 12.52 · GoldHEN",
+          "lettura": "read-only"
+        },
+        "testi": {
+          "mm": [
+            "middleManPS4",
+            "research · WIP · v0.17",
+            "Python tooling (standard library only) and C payloads around three questions: how a payload gets loaded, what is inside the binaries, what is visible on the wire. Read-only diagnostics and offline analysis; no PSN bypass, no firmware spoofing. Press F: here only what you can prove counts."
+          ]
+        }
       }
     },
-    "stanzaDi": "ROOM {n} OF {tot}"
+    "stanzaDi": "ROOM {n} OF {tot}",
+    "comandoF": "F: evidence lamp"
   }
 }

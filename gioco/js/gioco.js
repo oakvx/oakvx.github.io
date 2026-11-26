@@ -105,6 +105,9 @@ export async function avvia(ctx) {
     suLingua: (fn) => ctx.suLingua(fn),
     texTesto,
     interattivo: (mesh, chiave) => { mesh.userData.chiave = chiave; interattivi.push(mesh); },
+    camera,
+    renderer,
+    atmosfera: (a) => { atmo = { ...ATMOSFERA, ...a }; },
     giocatore: () => giocatore,
     tenuto: () => tenuto,
     yaw: () => yaw,
@@ -323,6 +326,10 @@ export async function avvia(ctx) {
     if (stato === 'gioco') {
       fermo = 0;
       if (e.code === 'KeyE' && !e.repeat) interagisci();
+      if (e.code === 'KeyF' && !e.repeat) {
+        const st = mondo.stanzaDi(giocatore.pos);
+        if (st && st.prove) emetti('lampada-prove');
+      }
       if (e.code === 'Space' && giocatore.aTerra) {
         const st = mondo.stanzaDi(giocatore.pos);
         giocatore.vel.y = SALTO * Math.sqrt(st ? st.gravita : 1);

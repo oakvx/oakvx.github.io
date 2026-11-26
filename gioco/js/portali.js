@@ -89,7 +89,7 @@ export class Portali {
   piazza(i, hit) {
     const id = hit.object.userData.pannello;
     const pan = this.mondo.pannelli.get(id);
-    if (!pan || !hit.face) return 'no';
+    if (!pan || !hit.face || pan.bloccato) return 'no';
     if (hit.face.normal.dot(pan.normale) < 0.9) return 'no';
     if (pan.b - pan.a < W || pan.y1 - pan.y0 < H) return 'no';
     let u = pan.asse === 'x' ? hit.point.x : hit.point.z;

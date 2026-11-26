@@ -1,61 +1,20 @@
 <!doctype html>
-<html lang="it" data-home data-lang-en-url="/en/">
-
+<html lang="it" data-lang-en-url="/en/">
 <head>
 <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
-<link rel="stylesheet" href="assets/ingresso/ingresso.css">
-
-    <script>
-        (() => {
-            const root = document.documentElement;
-            root.classList.add('js');
-            let lang, paused = false, firstHome = false;
-            try {
-                lang = root.dataset.staticLang || new URL(location.href).searchParams.get('lang') || localStorage.getItem('lang');
-                paused = localStorage.getItem('motion') === 'paused';
-            } catch {}
-            try {
-                firstHome = sessionStorage.getItem('wiiu-home-seen') !== '1';
-                sessionStorage.setItem('wiiu-home-seen', '1');
-                sessionStorage.setItem('gl-loader', '1');
-            } catch { firstHome = false; }
-            lang = lang === 'it' || lang === 'en' ? lang : navigator.language.toLowerCase().startsWith('en') ? 'en' : 'it';
-            root.dataset.lang = lang;
-            root.dataset.homeFirst = String(firstHome);
-            root.dataset.homeBoot = String(performance.now());
-            if (lang === 'en') root.classList.add('i18n-pending');
-            const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (paused || reduce) root.classList.add('calm');
-            if (paused) root.classList.add('paused');
-            if (!paused && !reduce && firstHome) root.classList.add('home-loading');
-        })();
-    </script>
-    <meta name="color-scheme" content="light">
-    <meta name="theme-color" content="#F4F7FA">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="preload" href="assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="assets/polaroid/site.css">
-    <link rel="stylesheet" href="assets/avatars/avatar.css">
-    <link rel="stylesheet" href="assets/polaroid/hero.css">
-    <script src="assets/polaroid/site.js?v=20261107-static-en" defer blocking="render"></script>
-    <script src="assets/avatars/avatar.js" defer blocking="render"></script>
-    <script src="assets/avatars/poses.js" defer blocking="render"></script>
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="assets/avatars/pages.css">
-<link rel="stylesheet" href="assets/cursor.css">
-<link rel="stylesheet" href="assets/wiiu/motion.css">
-<link rel="stylesheet" href="assets/wiiu/buttons.css">
-<link rel="stylesheet" href="assets/wiiu/dialogs.css">
-<link rel="stylesheet" href="assets/wiiu/plaza.css?v=20261104-recent">
-<link rel="stylesheet" href="assets/wiiu/home.css?v=20261107-wii-menu-mii-font">
-<link rel="stylesheet" href="assets/wiiu/desktop.css">
-<link rel="stylesheet" href="assets/wiiu/theme.css">
-<link rel="stylesheet" href="assets/polaroid/featured.css">
-<script src="assets/wiiu/home.js?v=20261107-wii-menu-4pages" defer blocking="render"></script>
-<script src="assets/wiiu/motion.js"></script>
+<link rel="stylesheet" href="./assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="./assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="./assets/nero/nero.css">
+<script src="./assets/nero/nero.js" defer></script>
+<script src="./assets/nero/campo.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Gabriele Lucia (oakvx) | Developer e Graphic Designer</title>
 <meta name="description" content="Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social e interfacce. Studio Ingegneria Informatica a UNIMORE.">
 <meta name="author" content="Gabriele Lucia">
@@ -85,639 +44,257 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/#webpage","url":"https://oakvx.github.io/","name":"Gabriele Lucia (oakvx) | Developer e Graphic Designer","description":"Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social e interfacce. Studio Ingegneria Informatica a UNIMORE.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/#person"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/#primaryimage","url":"https://oakvx.github.io/assets/social-home-it.png","contentUrl":"https://oakvx.github.io/assets/social-home-it.png","width":1200,"height":630,"caption":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce.","inLanguage":"it"}]}</script>
 <script type="application/json" id="seo-translations">{"it":{"title":"Gabriele Lucia (oakvx) | Developer e Graphic Designer","description":"Gabriele Lucia, developer e graphic designer a Sassuolo. Applicazioni web, grafica per social e interfacce. Studio Ingegneria Informatica a UNIMORE.","canonical":"https://oakvx.github.io/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx — portfolio di sviluppo web, grafica per social e interfacce."},"en":{"title":"Gabriele Lucia (oakvx) | Developer & Graphic Designer","description":"Gabriele Lucia, developer and graphic designer in Sassuolo, Italy. Web applications, social graphics and interfaces. Computer Engineering student at UNIMORE.","canonical":"https://oakvx.github.io/en/","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx — portfolio of web development, social graphics and interface design."}}</script>
 </head>
-
-<body>
-<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
-    <a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
-
-    <!-- Puntini originali, solo al primo accesso della sessione -->
-    <div class="loader" data-home-loader aria-hidden="true"><div class="loader__dots"><i style="--dot:0"></i><i style="--dot:1"></i><i style="--dot:2"></i><i style="--dot:3"></i><i style="--dot:4"></i><i style="--dot:5"></i><i style="--dot:6"></i><i style="--dot:7"></i></div><span class="loader__label" data-i18n="loader.label">Apro il portfolio</span></div>
-
-    <header class="hdr" data-header>
-        <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="wrap hdr__in">
-            <a class="brand" href="./" data-langlink aria-label="gl. Gabriele Lucia / oakvx, pagina iniziale" data-i18n-aria="brandLabel"><span class="brand__avatar" aria-hidden="true"><img src="assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
-            <nav class="hdr__nav" aria-label="Navigazione principale" data-i18n-aria="navLabel">
-                <a href="#percorso" data-i18n="nav.path">Percorso</a>
-                <a href="#progetti" data-i18n="nav.projects">Progetti</a>
-                <a href="#strumenti" data-i18n="nav.tools">Strumenti</a>
-                <a href="chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a>
-                <a href="fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
-            </nav>
-            <div class="hdr__tools">
-                <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
-                <div class="lang" role="group" aria-label="Lingua" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Ferma animazioni</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Attiva audio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/><path class="sound__mute" d="m17 10 4 4m0-4-4 4"/></svg><span class="sr-only" data-sound-label>Attiva audio</span></button>
-                <a class="pill" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span data-i18n="nav.cta">Scrivimi</span></a>
-                <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Apri menu</span></button>
-            </div>
-        </div>
-    </header>
-
-    <div class="menu" id="menu" data-menu hidden>
-        <nav class="menu__nav wrap" aria-label="Menu" data-i18n-aria="menuLabel">
-            <a href="#percorso" class="extrude" data-i18n="nav.path">Percorso</a>
-            <a href="#progetti" class="extrude" data-i18n="nav.projects">Progetti</a>
-            <a href="#strumenti" class="extrude" data-i18n="nav.tools">Strumenti</a>
-            <a href="chi-sono/" class="extrude" data-langlink data-i18n="nav.about">Chi sono</a>
-            <a href="fuori-orario/" class="extrude" data-langlink data-i18n="nav.afterHours">Fuori orario</a>
-            <a href="#contatti" class="extrude" data-i18n="nav.contact">Contatti</a>
+<body data-pagina="index">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="./" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="./en/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
-        <div class="menu__foot wrap">
-            <a class="mono" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
-            <a class="mono" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx ↗</a>
-            <p class="mono menu__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="./" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">chi, cosa, dove</span></a></li>
+                <li><a href="./#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span><span class="indice__nota t-meta" data-i18n="nav.workNote">quattro casi studio</span></a></li>
+                <li><a href="./chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">persona, percorso, metodo</span></a></li>
+                <li><a href="./fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">quando nessuno me lo chiede</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contatti</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">si parte da un’email</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="./projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="./projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="./projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="./projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="./gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
         </div>
     </div>
-
-    <main id="main">
-        <!-- 1 · Menu a canali: gli stessi contenuti e collegamenti, in due pagine -->
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="wrap hero__meta">
-                <p class="hello"><span data-i18n="hero.hello">Ciao, sono</span></p>
-                <p class="mono hero__place" data-i18n="hero.place">Sassuolo, Italia</p>
-            </div>
-            <div class="wrap hero__grid">
-                <div class="hero__name" data-hero-name>
-                    <h1 class="name extrude" id="hero-title"><span>Gabriele</span> <span>Lucia</span></h1>
-                </div>
-                <div class="hero__copy">
-                    <p class="hero__role" data-i18n-html="hero.role">Sviluppo web. <em>Grafica e interfacce.</em></p>
-                    <p class="hero__desc" data-i18n="hero.desc">Creo applicazioni web, grafiche e interfacce. Studio Ingegneria Informatica a UNIMORE, con base a Sassuolo.</p>
-                    <div class="actions">
-                        <a class="btn" href="#progetti"><span data-i18n="hero.explore">Vedi i progetti</span><svg class="btn__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
-                    </div>
-                </div>
-                <figure class="hero__shot" data-hero-shot>
-                                    <picture class="avatar hero__portrait" data-avatar data-avatar-pose="standing">
-                                        <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/standing-still.webp">
-                                        <img src="assets/avatars/standing-still.webp" data-avatar-animated="assets/avatars/standing.gif" data-avatar-still="assets/avatars/standing-still.webp" width="512" height="512" alt="Il Mii di Gabriele Lucia" data-i18n-alt="hero.photoAlt" fetchpriority="high" decoding="async">
-                                    </picture>
-                </figure>
 </div>
-        </section>
+<p class="segnapagina t-meta" aria-hidden="true"><b>01</b><span data-titolo data-i18n="nav.home">Ingresso</span><span class="segnapagina__barra"><i></i></span></p>
 
-        <!-- 2 · Codice + grafica + dati -->
-        <section class="stretch" aria-label="Codice più grafica più dati uguale Gabriele" data-i18n-aria="stretch.label">
-            <p class="stretch__row" data-stretch aria-hidden="true"><span data-i18n="stretch.code">Codice</span><span class="op op--b">+</span><span data-i18n="stretch.design">Grafica</span><span class="op op--y">+</span><span data-i18n="stretch.data">Dati</span><span class="op op--r">=</span><span>Gabriele</span></p>
-        </section>
+<main id="main" class="pagina pagina--home">
 
-        <!-- 3 · Chi sono -->
-        <section class="about paper" id="chi" aria-labelledby="about-title">
-            <div class="wrap about__grid">
-                <p class="label" data-reveal data-i18n="about.label">Chi sono</p>
-                <h2 class="h2 about__title" id="about-title" data-reveal data-i18n-html="about.title">Mi sono avvicinato alla programmazione <em>per curiosità.</em></h2>
-                <figure class="about__shot" data-reveal data-cycle="sitting,laughing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose">
-                    <span class="tape" aria-hidden="true"></span>
-                    <div class="print" style="--tilt:-4deg">
-                        <div class="print__in">
-                            <div class="print__photo print__photo--avatar">
-                                <picture class="avatar" data-avatar data-avatar-pose="sitting">
-                                    <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/sitting-still.webp">
-                                    <img src="assets/avatars/sitting-still.webp" data-avatar-animated="assets/avatars/sitting.gif" data-avatar-still="assets/avatars/sitting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="Avatar animato di Gabriele Lucia, seduto" data-i18n-alt="about.photoAlt">
-                                </picture>
-                            </div>
-                            <p class="print__cap"><span class="caption-text" data-i18n="about.caption">io, seduto</span></p>
-                        </div>
-                    </div>
-                </figure>
-                <div class="about__copy" data-reveal>
-                    <p data-i18n="about.p1">Volevo capire come funzionavano i software e provare a creare qualcosa di mio.</p>
-                    <p data-i18n="about.p2">Con il tempo mi sono interessato sempre di più alla risoluzione dei problemi: capire cosa non funziona, trovare una soluzione e vedere il risultato nel programma che sto costruendo.</p>
-                    <p class="about__punch" data-i18n-html="about.punch">Codice e grafica <b aria-hidden="true">→</b> <em>due lati dello stesso lavoro.</em></p>
-                </div>
-                <dl class="facts" data-reveal>
-                    <div><dt data-i18n="about.f1">Base</dt><dd data-i18n="about.f1v">Sassuolo, Italia</dd></div>
-                    <div><dt data-i18n="about.f2">Formazione</dt><dd data-i18n="about.f2v">Diploma in Informatica e Telecomunicazioni</dd></div>
-                    <div><dt data-i18n="about.f3">Università</dt><dd data-i18n="about.f3v">Ingegneria Informatica · UNIMORE</dd></div>
-                </dl>
-                <a class="link about__link" href="chi-sono/" data-langlink data-reveal><span data-i18n="about.story">La mia storia</span> <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-
-        <!-- 4 · Percorso: il quadrato rotola sulla strada e tappa dopo tappa diventa una ruota -->
-        <section class="journey" id="percorso" aria-labelledby="journey-title" data-journey>
-            <div class="journey__track">
-                <div class="journey__stage">
-                    <div class="wrap journey__head">
-                        <div>
-                            <p class="label" data-i18n="journey.label">Il mio percorso</p>
-                            <h2 class="h2" id="journey-title" data-i18n-html="journey.title">Ogni tappa <em>smussa uno spigolo.</em></h2>
-                        </div>
-                        <div class="journey__aside">
-                            <p data-i18n="journey.intro">Dalla scuola all’università: siti per attività locali, un Erasmus a Siviglia, l’automazione industriale.</p>
-                            <p class="ab mono" aria-hidden="true"><span>2021</span><b>→</b><span data-i18n="journey.now">oggi</span></p>
-                        </div>
-                    </div>
-                    
-                    <ol class="wrap journey__stops">
-                        <li class="stop" data-stop>
-                            <a href="chi-sono/#inizio" data-langlink>
-                                <picture class="avatar stop__avatar" data-avatar data-avatar-pose="idlewainting" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/idlewainting-still.webp"><img src="assets/avatars/idlewainting-still.webp" data-avatar-animated="assets/avatars/idlewainting.gif" data-avatar-still="assets/avatars/idlewainting-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><span class="stop__top"><span class="stop__n mono">01</span><span class="stop__date mono">2021 — 2026</span></span>
-                                <h3>IIS A. Volta</h3>
-                                <p data-i18n="journey.s1">Informatica e Telecomunicazioni · Sassuolo</p>
-                                <span class="stop__go" aria-hidden="true">↗</span>
-                            </a>
-                        </li>
-                        <li class="stop" data-stop>
-                            <a href="chi-sono/#siti-web" data-langlink>
-                                <picture class="avatar stop__avatar" data-avatar data-avatar-pose="showingoff" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/showingoff-still.webp"><img src="assets/avatars/showingoff-still.webp" data-avatar-animated="assets/avatars/showingoff.webp" data-avatar-still="assets/avatars/showingoff-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><span class="stop__top"><span class="stop__n mono">02</span><span class="stop__date mono">2023 — 2026</span></span>
-                                <h3 data-i18n="journey.s2t">Sviluppo web freelance</h3>
-                                <p data-i18n="journey.s2">Siti web, interfacce e SEO per attività locali</p>
-                                <span class="stop__go" aria-hidden="true">↗</span>
-                            </a>
-                        </li>
-                        <li class="stop" data-stop>
-                            <a href="chi-sono/#siviglia" data-langlink>
-                                <picture class="avatar stop__avatar" data-avatar data-avatar-pose="drunkwandering" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/drunkwandering-still.webp"><img src="assets/avatars/drunkwandering-still.webp" data-avatar-animated="assets/avatars/drunkwandering.webp" data-avatar-still="assets/avatars/drunkwandering-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><span class="stop__top"><span class="stop__n mono">03</span><span class="stop__date mono" data-i18n="journey.s3d">mag — giu 2025</span></span>
-                                <h3 data-i18n="journey.s3t">Erasmus+ a Siviglia</h3>
-                                <p data-i18n="journey.s3">Starbotica · Supporto IT e attività didattiche</p>
-                                <span class="stop__go" aria-hidden="true">↗</span>
-                            </a>
-                        </li>
-                        <li class="stop" data-stop>
-                            <a href="chi-sono/#automazione" data-langlink>
-                                <picture class="avatar stop__avatar" data-avatar data-avatar-pose="angrystomping" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/angrystomping-still.webp"><img src="assets/avatars/angrystomping-still.webp" data-avatar-animated="assets/avatars/angrystomping.gif" data-avatar-still="assets/avatars/angrystomping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><span class="stop__top"><span class="stop__n mono">04</span><span class="stop__date mono" data-i18n="journey.s4d">ago — set 2026</span></span>
-                                <h3>Format SRL</h3>
-                                <p data-i18n="journey.s4">Software e automazione · PLC / SQL Server</p>
-                                <span class="stop__go" aria-hidden="true">↗</span>
-                            </a>
-                        </li>
-                        <li class="stop" data-stop>
-                            <a href="chi-sono/#oggi" data-langlink>
-                                <picture class="avatar stop__avatar" data-avatar data-avatar-pose="laughing" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/laughing-still.webp"><img src="assets/avatars/laughing-still.webp" data-avatar-animated="assets/avatars/laughing.gif" data-avatar-still="assets/avatars/laughing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture><span class="stop__top"><span class="stop__n mono">05</span><span class="stop__date mono">2026</span></span>
-                                <h3>UNIMORE</h3>
-                                <p data-i18n="journey.s5">Ingegneria Informatica</p>
-                                <span class="stop__go" aria-hidden="true">↗</span>
-                            </a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-        <!-- Progetti scelti: una selezione stabile, non dipendente dall'ultimo push. -->
-        <section class="featured wrap" id="progetti" aria-labelledby="featured-title">
-            <div class="featured__head">
-                <p class="label" data-reveal data-i18n="featured.eyebrow">Progetti selezionati</p>
-                <h2 class="h2" id="featured-title" data-reveal data-i18n-html="featured.title">Dal problema <em>al progetto.</em></h2>
-                <p class="featured__intro" data-reveal data-i18n="featured.intro">Tre lavori che mostrano come progetto e sviluppo si incontrano: un editor creativo, un gestionale e un flusso conversazionale.</p>
-            </div>
-            <div class="featured__grid">
-                <article class="featured-card featured-card--brat" data-reveal>
-                    <a class="featured-card__media" href="projects/brat-animator/" data-langlink aria-label="Apri il caso studio Brat Animator" data-i18n-aria="featured.openBrat">
-                        <img src="assets/work/brat-editor-small.webp" srcset="assets/work/brat-editor-small.webp 720w, assets/work/brat-editor.webp 1440w" sizes="(max-width: 760px) calc(100vw - 48px), (max-width: 1100px) 42vw, 520px" width="1440" height="1000" loading="lazy" decoding="async" alt="Interfaccia di Brat Animator con timeline e anteprima video" data-i18n-alt="featured.brat.alt">
-                        <span class="featured-card__index" aria-hidden="true">01 / 03</span>
-                    </a>
-                    <div class="featured-card__body">
-                        <p class="featured-card__kind mono" data-i18n="featured.brat.kind">Editor creativo · browser</p>
-                        <h3><a href="projects/brat-animator/" data-langlink>Brat Animator</a></h3>
-                        <p class="featured-card__description" data-i18n="featured.brat.description">Un editor per trasformare testi sincronizzati in lyric video, con timeline e rendering direttamente nel browser.</p>
-                        <p class="featured-card__role" data-i18n="featured.brat.role">Sviluppo dell’applicazione · Canvas · export video</p>
-                        <ul class="featured-card__tags" aria-label="Tecnologie" data-i18n-aria="featured.technologies">
-                            <li>JavaScript</li><li>Canvas</li><li>WebCodecs</li>
-                        </ul>
-                        <div class="featured-card__actions">
-                            <a class="link" href="projects/brat-animator/" data-langlink aria-label="Leggi il caso studio di Brat Animator" data-i18n-aria="featured.caseStudyBrat"><span data-i18n="featured.caseStudy">Caso studio</span> <span aria-hidden="true">↗</span></a>
-                            <a class="link" href="https://oakvx.github.io/bratAnimator/" target="_blank" rel="noopener noreferrer"><span data-i18n="featured.openApp">Apri l’app</span> <span aria-hidden="true">↗</span></a>
-                        </div>
-                    </div>
-                </article>
-                <article class="featured-card featured-card--synk" data-reveal>
-                    <a class="featured-card__media featured-card__media--contain" href="projects/synk/" data-langlink aria-label="Apri il caso studio Synk" data-i18n-aria="featured.openSynk">
-                        <img src="assets/work/synk-cover-small.webp" srcset="assets/work/synk-cover-small.webp 720w, assets/work/synk-cover.webp 1600w" sizes="(max-width: 760px) calc(100vw - 48px), (max-width: 1100px) 42vw, 520px" width="1600" height="813" loading="lazy" decoding="async" alt="Materiale promozionale fornito per il progetto Synk" data-i18n-alt="featured.synk.alt">
-                        <span class="featured-card__index" aria-hidden="true">02 / 03</span>
-                    </a>
-                    <div class="featured-card__body">
-                        <p class="featured-card__kind mono" data-i18n="featured.synk.kind">Automazione conversazionale</p>
-                        <h3><a href="projects/synk/" data-langlink>Synk</a></h3>
-                        <p class="featured-card__description" data-i18n="featured.synk.description">Un flusso WhatsApp che interpreta le richieste e collega prenotazioni, Google Calendar e dashboard gestionale.</p>
-                        <p class="featured-card__role" data-i18n="featured.synk.role">Intent picker · backend · dashboard · fine-tuning</p>
-                        <ul class="featured-card__tags" aria-label="Tecnologie" data-i18n-aria="featured.technologies">
-                            <li>Node.js</li><li>PostgreSQL</li><li>llama.cpp</li>
-                        </ul>
-                        <div class="featured-card__actions">
-                            <a class="link" href="projects/synk/" data-langlink aria-label="Leggi il caso studio di Synk" data-i18n-aria="featured.caseStudySynk"><span data-i18n="featured.caseStudy">Caso studio</span> <span aria-hidden="true">↗</span></a>
-                        </div>
-                    </div>
-                </article>
-                <article class="featured-card featured-card--beautify" data-reveal>
-                    <a class="featured-card__media featured-card__media--logo" href="projects/beautify/" data-langlink aria-label="Apri il caso studio Beautify" data-i18n-aria="featured.openBeautify">
-                        <img src="assets/beautify-logo.svg" width="512" height="256" loading="lazy" decoding="async" alt="Logo del progetto Beautify" data-i18n-alt="featured.beautify.alt">
-                        <span class="featured-card__index" aria-hidden="true">03 / 03</span>
-                    </a>
-                    <div class="featured-card__body">
-                        <p class="featured-card__kind mono" data-i18n="featured.beautify.kind">Gestionale multisalone · progetto di diploma</p>
-                        <h3><a href="projects/beautify/" data-langlink>Beautify</a></h3>
-                        <p class="featured-card__description" data-i18n="featured.beautify.description">Un CRM per più saloni: clienti, servizi, disponibilità e appuntamenti condividono lo stesso contesto.</p>
-                        <p class="featured-card__role" data-i18n="featured.beautify.role">Backend PHP · database MySQL · disponibilità</p>
-                        <ul class="featured-card__tags" aria-label="Tecnologie" data-i18n-aria="featured.technologies">
-                            <li>PHP</li><li>MySQL</li><li>CRUD</li>
-                        </ul>
-                        <div class="featured-card__actions">
-                            <a class="link" href="projects/beautify/" data-langlink aria-label="Leggi il caso studio di Beautify" data-i18n-aria="featured.caseStudyBeautify"><span data-i18n="featured.caseStudy">Caso studio</span> <span aria-hidden="true">↗</span></a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <a class="featured__all link" href="#attivita-github" data-i18n="featured.github">Vedi le attività recenti su GitHub <span aria-hidden="true">↓</span></a>
-        </section>
-
-        <!-- Repository recenti: contenuto live GitHub e piazza interattiva. -->
-        <section class="plaza" id="attivita-github" aria-labelledby="activity-title" data-work data-plaza>
-            <div class="wrap plaza__head">
-                <h2 class="h2" id="activity-title" data-i18n-html="work.title">Attività recente su <em>GitHub.</em></h2>
-                <p class="plaza__intro"><span data-i18n="work.intro">Repository pubblici aggiornati di recente, ordinati per ultimo push. I progetti selezionati sono sopra.</span> <a class="mono plaza__count" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-plaza-count>5</span> repo · github.com/oakvx ↗</a></p>
-                <p class="plaza__hint mono" aria-hidden="true" data-i18n="work.hint">Passa su un’icona · clicca un Mii per farlo parlare</p>
-            </div>
-
-            <div class="plaza__stage" data-plaza-stage>
-                <picture class="avatar work__avatar plaza__me" data-avatar data-avatar-pose="standing" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/standing-still.webp"><img src="assets/avatars/standing-still.webp" data-avatar-animated="assets/avatars/standing.gif" data-avatar-still="assets/avatars/standing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt=""></picture>
-
-                <ol class="plaza__list" data-work-list>
-                    <li class="repo" data-proj data-repo="oakvx.github.io" data-stars="2" data-size="17150" data-pushed="2026-11-04T01:53:01Z" data-lang="HTML" style="--lang:#e34c26">
-                        <figure class="repo__icon" data-print-work>
-                            <a class="repo__glass" href="https://github.com/oakvx/oakvx.github.io" target="_blank" rel="noopener noreferrer" aria-describedby="repo-3-kind">
-                                <img class="repo__thumb" src="assets/work/repo-portfolio-256.webp" srcset="assets/work/repo-portfolio-256.webp 256w, assets/work/repo-portfolio-512.webp 512w" sizes="200px" width="256" height="256" loading="lazy" decoding="async" alt="oakvx.github.io">
-                            </a>
-                        </figure>
-                        <div class="repo__card">
-                            <p class="repo__name" data-i18n="work.r3n">Questo portfolio</p>
-                            <div class="repo__more"><div>
-                                <p class="repo__kind" id="repo-3-kind" data-i18n="work.r3k">Sito personale · oakvx.github.io</p>
-                                <p class="repo__text" data-i18n="work.r3">Il sito che stai guardando: tema da console, transizioni tra le pagine e nessuna libreria esterna.</p>
-                                <p class="repo__meta mono"><span class="repo__lang">HTML · CSS · JS</span><span data-repo-stars>★ 2</span><a href="https://github.com/oakvx/oakvx.github.io" target="_blank" rel="noopener noreferrer">oakvx/oakvx.github.io ↗</a><time class="repo__updated" datetime="2026-11-04T01:53:01Z">Ultimo push: 4 nov 2026</time></p>
-                            </div></div>
-                        </div>
-                        <ul class="repo__posts" hidden>
-                            <li data-i18n="work.r3a">Sei proprio qui, in questa piazza!</li>
-                            <li data-i18n="work.r3b">Niente librerie: solo HTML, CSS e JS</li>
-                            <li data-i18n="work.r3c">Ogni Mii è disegnato dal codice</li>
-                        </ul>
-                    </li>
-                    <li class="repo" data-proj data-repo="oakvx" data-stars="0" data-size="2764" data-pushed="2026-11-02T22:15:32Z" data-lang="Markdown" style="--lang:#083fa1">
-                        <figure class="repo__icon" data-print-work>
-                            <a class="repo__glass" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer" aria-describedby="repo-5-kind">
-                                <img class="repo__thumb" src="assets/work/repo-profile-256.webp" srcset="assets/work/repo-profile-256.webp 256w, assets/work/repo-profile-512.webp 512w" sizes="200px" width="256" height="256" loading="lazy" decoding="async" alt="oakvx">
-                            </a>
-                        </figure>
-                        <div class="repo__card">
-                            <p class="repo__name" data-i18n="work.r5n">Profilo GitHub</p>
-                            <div class="repo__more"><div>
-                                <p class="repo__kind" id="repo-5-kind" data-i18n="work.r5k">README del profilo · oakvx</p>
-                                <p class="repo__text" data-i18n="work.r5">La pagina del mio profilo, ispirata alla home di una console dei primi anni 2010. Solo Markdown e immagini disegnate da zero.</p>
-                                <p class="repo__meta mono"><span class="repo__lang">Markdown</span><span data-repo-stars>★ 0</span><a href="https://github.com/oakvx/oakvx" target="_blank" rel="noopener noreferrer">oakvx/oakvx ↗</a><time class="repo__updated" datetime="2026-11-02T22:15:32Z">Ultimo push: 2 nov 2026</time></p>
-                            </div></div>
-                        </div>
-                        <ul class="repo__posts" hidden>
-                            <li data-i18n="work.r5a">Benvenuto nel mio profilo!</li>
-                            <li data-i18n="work.r5b">Solo Markdown: niente CSS né JS</li>
-                        </ul>
-                    </li>
-                    <li class="repo" data-proj data-project="brat-animator" data-repo="bratAnimator" data-stars="4" data-size="1224" data-pushed="2026-11-01T21:53:05Z" data-lang="JavaScript" style="--lang:#f1e05a">
-                        <figure class="repo__icon" data-print-work>
-                            <a class="repo__glass" href="projects/brat-animator/" data-langlink aria-describedby="repo-1-kind">
-                                <img class="repo__thumb" src="assets/work/brat-editor-small.webp" width="720" height="500" loading="lazy" decoding="async" alt="Brat Animator" style="object-position:0 0">
-                            </a>
-                        </figure>
-                        <div class="repo__card">
-                            <p class="repo__name">Brat Animator</p>
-                            <div class="repo__more"><div>
-                                <p class="repo__kind" id="repo-1-kind" data-i18n="work.r1k">Editor di lyric video</p>
-                                <p class="repo__text" data-i18n="work.r1">Anima testi sincronizzati (LRC, TTML, SRT…) in stile brat ed esporta il video direttamente dal browser, senza backend.</p>
-                                <p class="repo__meta mono"><span class="repo__lang">JavaScript</span><span data-repo-stars>★ 4</span><a href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer">oakvx/bratAnimator ↗</a><time class="repo__updated" datetime="2026-11-01T21:53:05Z">Ultimo push: 1 nov 2026</time></p>
-                            </div></div>
-                        </div>
-                        <ul class="repo__posts" hidden>
-                            <li data-i18n="work.r1a">Versione 5.0: editor semplice e avanzato!</li>
-                            <li data-i18n="work.r1b">Ora legge anche TTML, YAML e WebVTT</li>
-                            <li data-i18n="work.r1c">Esporto MP4 e WebM senza server</li>
-                        </ul>
-                    </li>
-                    <li class="repo" data-proj data-project="autoofficina" data-repo="autoOfficina" data-stars="0" data-size="1365" data-pushed="2026-10-20T09:56:37Z" data-lang="CSS" style="--lang:#663399">
-                        <figure class="repo__icon" data-print-work>
-                            <a class="repo__glass" href="projects/autoofficina/" data-langlink aria-describedby="repo-2-kind">
-                                <img class="repo__thumb" src="assets/work/autoofficina-cover-small.webp" width="720" height="500" loading="lazy" decoding="async" alt="Spinotto Felice" style="object-position:30% 0">
-                            </a>
-                        </figure>
-                        <div class="repo__card">
-                            <p class="repo__name">Spinotto Felice</p>
-                            <div class="repo__more"><div>
-                                <p class="repo__kind" id="repo-2-kind" data-i18n="work.r2k">Sito vetrina · demo</p>
-                                <p class="repo__text" data-i18n="work.r2">Un modello di sito vetrina compilato per un’attività inventata: accessori per auto elettriche, in tema chiaro e scuro.</p>
-                                <p class="repo__meta mono"><span class="repo__lang">CSS · HTML</span><span data-repo-stars>★ 0</span><a href="https://github.com/oakvx/autoOfficina" target="_blank" rel="noopener noreferrer">oakvx/autoOfficina ↗</a><time class="repo__updated" datetime="2026-10-20T09:56:37Z">Ultimo push: 20 ott 2026</time></p>
-                            </div></div>
-                        </div>
-                        <ul class="repo__posts" hidden>
-                            <li data-i18n="work.r2a">Tema chiaro e tema scuro!</li>
-                            <li data-i18n="work.r2b">Spinotto Felice non esiste davvero</li>
-                            <li data-i18n="work.r2c">Un modello che si riusa per ogni attività</li>
-                        </ul>
-                    </li>
-                    <li class="repo" data-proj data-repo="topGun" data-stars="0" data-size="103" data-pushed="2026-10-19T23:33:35Z" data-lang="HTML" style="--lang:#e34c26">
-                        <figure class="repo__icon" data-print-work>
-                            <a class="repo__glass" href="https://oakvx.github.io/topGun/" target="_blank" rel="noopener noreferrer" aria-describedby="repo-4-kind">
-                                <img class="repo__thumb" src="assets/work/repo-topgun-256.webp" srcset="assets/work/repo-topgun-256.webp 256w, assets/work/repo-topgun-512.webp 512w" sizes="200px" width="256" height="256" loading="lazy" decoding="async" alt="Top Gun Fly School">
-                            </a>
-                        </figure>
-                        <div class="repo__card">
-                            <p class="repo__name">Top Gun Fly School</p>
-                            <div class="repo__more"><div>
-                                <p class="repo__kind" id="repo-4-kind" data-i18n="work.r4k">Landing page · sito non ufficiale</p>
-                                <p class="repo__text" data-i18n="work.r4">Una pagina per una scuola di volo ultraleggero di Reggio Emilia, scritta in un unico file HTML. Progetto dimostrativo.</p>
-                                <p class="repo__meta mono"><span class="repo__lang">HTML</span><span data-repo-stars>★ 0</span><a href="https://github.com/oakvx/topGun" target="_blank" rel="noopener noreferrer">oakvx/topGun ↗</a><time class="repo__updated" datetime="2026-10-19T23:33:35Z">Ultimo push: 20 ott 2026</time></p>
-                            </div></div>
-                        </div>
-                        <ul class="repo__posts" hidden>
-                            <li data-i18n="work.r4a">Si vola sopra Reggio Emilia!</li>
-                            <li data-i18n="work.r4b">Tutto in un solo file HTML</li>
-                            <li data-i18n="work.r4c">Sito non ufficiale, solo una demo</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- 6 · Strumenti: la scrivania di un vecchio computer, con le finestre da spostare -->
-        <section class="desk" id="strumenti" aria-labelledby="desk-title">
-            <div class="wrap desk__head">
-                <div>
-                    <p class="label" data-reveal data-i18n="desk.label">Strumenti del mestiere</p>
-                    <h2 class="h2" id="desk-title" data-reveal data-i18n-html="desk.title">Cosa so <em>fare.</em></h2>
-                </div>
-                <p class="desk__intro" data-reveal data-i18n="desk.intro">Una piccola scrivania: competenze, domande frequenti e un terminale che risponde davvero.</p>
-            </div>
-            <div class="wrap">
-                <div class="crt">
-                    <div class="screen" data-desk>
-                        <div class="screen__bar" aria-hidden="true">
-                            <span class="mini-bands"></span>
-                            <b>oakvx</b>
-                            <span data-i18n="desk.m1">File</span><span data-i18n="desk.m2">Modifica</span><span data-i18n="desk.m3">Vista</span>
-                            <span class="screen__date" data-desk-date>dom 19 ott</span>
-                            <span class="screen__time" data-desk-time>--:--</span>
-                        </div>
-                        <div class="wall" aria-hidden="true">
-                            <div class="wall__sun"></div>
-                            <p class="wall__text"><span data-i18n="desk.wall1">Codice e grafica,</span><br><b data-i18n="desk.wall2">tutto a fuoco.</b></p>
-                        </div>
-
-                        <p class="screen__hint" aria-hidden="true" data-i18n="desk.hint">trascina le finestre dalla barra del titolo</p>
-                        <ul class="dicons" aria-label="Icone della scrivania" data-i18n-aria="desk.icons">
-                            <li><button type="button" class="dicon" data-open="skills" aria-controls="win-skills"><span class="ficon ficon--html" aria-hidden="true">&lt;/&gt;</span><span data-i18n="desk.f.skills">competenze.html</span></button></li>
-                            <li><button type="button" class="dicon" data-open="term" aria-controls="win-term"><span class="ficon ficon--sh" aria-hidden="true">$_</span><span>portfolio.sh</span></button></li>
-                            <li><button type="button" class="dicon" data-open="faq" aria-controls="win-faq"><span class="ficon ficon--md" aria-hidden="true">MD</span><span>FAQ.md</span></button></li>
-                            <li><button type="button" class="dicon" data-open="photo" aria-controls="win-photo"><span class="ficon ficon--img" aria-hidden="true"><picture class="avatar avatar--icon"><img src="assets/avatars/showingoff.png" width="512" height="512" alt="" loading="lazy"></picture></span><span>gabriele.gif</span></button></li>
-                            <li><button type="button" class="dicon" data-open="tools" aria-controls="win-tools"><span class="ficon ficon--dir" aria-hidden="true"></span><span data-i18n="desk.f.tools">strumenti</span></button></li>
-                        </ul>
-
-                        <div class="desk__workspace" data-desk-workspace>
-                        <!-- competenze.html -->
-                        <section class="win win--skills" id="win-skills" data-win="skills" aria-labelledby="win-skills-t" tabindex="-1">
-                            <header class="win__bar" data-drag>
-                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi competenze.html" data-i18n-aria="desk.close.skills"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button><i></i><i></i></span>
-                                <h3 class="win__name" id="win-skills-t" data-i18n="desk.f.skills">competenze.html</h3>
-                            </header>
-                            <div class="win__body">
-                                <p class="win__kicker mono" data-i18n="desk.kicker">Tre aree di lavoro</p>
-                                <div class="cards">
-                                    <article class="card" style="--c:var(--accent)">
-                                        <div class="card__in">
-                                            <div class="card__face card__front">
-                                                <p class="card__n mono">01</p>
-                                                <h4 data-i18n="skills.1t">Sviluppo web</h4>
-                                                <p class="card__text" data-i18n="skills.1">Siti e applicazioni web: interfacce, pubblicazione e indicizzazione sui motori di ricerca.</p>
-                                                <ul class="card__list">
-                                                    <li>HTML · CSS · JavaScript</li>
-                                                    <li data-i18n="skills.1b">SEO e pubblicazione</li>
-                                                    <li data-i18n="skills.1c">Pagine social aziendali</li>
-                                                </ul>
-                                                <p class="card__practice"><span class="mono" data-i18n="skills.practice">in pratica</span><span data-i18n="skills.1p">Siti per officine, centri estetici e utensilerie, dal 2023 al 2026</span></p>
-                                                <a class="barcode" href="mailto:gabrielelucia07@gmail.com?subject=Sviluppo%20web"><span class="barcode__bars" aria-hidden="true"></span><span data-i18n="skills.cta">Parliamone</span></a>
-                                            </div>
-                                            <div class="card__face card__back" aria-hidden="true">
-                                                <p class="mono">GL-600 · 01</p>
-                                                <p class="card__code extrude">WEB</p>
-                                                <p class="mono card__note" data-i18n-html="skills.back">sviluppo: 10 minuti<br>non agitare</p>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="card__flip" data-flip aria-pressed="false" aria-label="Gira la scheda" data-i18n-aria="skills.flip"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8a8 8 0 1 1-1 7m1-7V3m0 5h5"/></svg></button>
-                                    </article>
-                                    <article class="card" style="--c:var(--accent)">
-                                        <div class="card__in">
-                                            <div class="card__face card__front">
-                                                <p class="card__n mono">02</p>
-                                                <h4 data-i18n="skills.2t">Backend e dati</h4>
-                                                <p class="card__text" data-i18n="skills.2">Logica lato server e database relazionali, dai CRUD all’automazione.</p>
-                                                <ul class="card__list">
-                                                    <li>Node.js · PHP</li>
-                                                    <li>PostgreSQL · MySQL</li>
-                                                    <li data-i18n="skills.2c">T-SQL su SQL Server</li>
-                                                </ul>
-                                                <p class="card__practice"><span class="mono" data-i18n="skills.practice">in pratica</span><span>Synk, Beautify, Format SRL</span></p>
-                                                <a class="barcode" href="mailto:gabrielelucia07@gmail.com?subject=Backend%20e%20dati"><span class="barcode__bars" aria-hidden="true"></span><span data-i18n="skills.cta">Parliamone</span></a>
-                                            </div>
-                                            <div class="card__face card__back" aria-hidden="true">
-                                                <p class="mono">GL-600 · 02</p>
-                                                <p class="card__code extrude">DAT</p>
-                                                <p class="mono card__note" data-i18n-html="skills.back">sviluppo: 10 minuti<br>non agitare</p>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="card__flip" data-flip aria-pressed="false" aria-label="Gira la scheda" data-i18n-aria="skills.flip"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8a8 8 0 1 1-1 7m1-7V3m0 5h5"/></svg></button>
-                                    </article>
-                                    <article class="card" style="--c:var(--accent)">
-                                        <div class="card__in">
-                                            <div class="card__face card__front">
-                                                <p class="card__n mono">03</p>
-                                                <h4 data-i18n="skills.3t">Grafica e interfacce</h4>
-                                                <p class="card__text" data-i18n="skills.3">La parte visiva del lavoro, che affianco allo sviluppo software.</p>
-                                                <ul class="card__list">
-                                                    <li data-i18n="skills.3a">Contenuti per i social</li>
-                                                    <li data-i18n="skills.3b">Progettazione di interfacce</li>
-                                                    <li data-i18n="skills.3c">Testi animati su Canvas</li>
-                                                </ul>
-                                                <p class="card__practice"><span class="mono" data-i18n="skills.practice">in pratica</span><span data-i18n="skills.3p">Brat Animator, pagine social</span></p>
-                                                <a class="barcode" href="mailto:gabrielelucia07@gmail.com?subject=Grafica%20e%20interfacce"><span class="barcode__bars" aria-hidden="true"></span><span data-i18n="skills.cta">Parliamone</span></a>
-                                            </div>
-                                            <div class="card__face card__back" aria-hidden="true">
-                                                <p class="mono">GL-600 · 03</p>
-                                                <p class="card__code extrude">GFX</p>
-                                                <p class="mono card__note" data-i18n-html="skills.back">sviluppo: 10 minuti<br>non agitare</p>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="card__flip" data-flip aria-pressed="false" aria-label="Gira la scheda" data-i18n-aria="skills.flip"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8a8 8 0 1 1-1 7m1-7V3m0 5h5"/></svg></button>
-                                    </article>
-                                </div>
-                                <p class="win__foot" data-i18n="skills.langs">Lingue: italiano (madrelingua) · inglese C1 · spagnolo B1 · greco B1 · cinese A2</p>
-                            </div>
-                        </section>
-
-                        <!-- portfolio.sh -->
-                        <section class="win win--term" id="win-term" data-win="term" aria-labelledby="win-term-t" tabindex="-1">
-                            <header class="win__bar" data-drag>
-                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi portfolio.sh" data-i18n-aria="desk.close.term"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button><i></i><i></i></span>
-                                <h3 class="win__name" id="win-term-t">portfolio.sh</h3>
-                            </header>
-                            <div class="term" data-term>
-                                <div class="term__out" tabindex="0" role="log" aria-live="polite" aria-label="Risposte del terminale" data-i18n-aria="term.log" data-term-out>
-                                    <p class="term__muted">// oakvx / portfolio</p>
-                                    <p class="term__prompt"><b>oakvx@portfolio</b>:~ $ whoami</p>
-                                    <p>Gabriele Lucia</p>
-                                    <p data-i18n="term.identity">Junior developer &amp; graphic designer.
-Sassuolo, Italia.
-Ingegneria Informatica @ UNIMORE.</p>
-                                    <p class="term__muted" data-i18n="term.start">Digita help per iniziare.</p>
-                                </div>
-                                <form class="term__form" data-term-form>
-                                    <label for="term-input"><span aria-hidden="true">$</span><span class="sr-only" data-i18n="term.input">Comando del terminale</span></label>
-                                    <input id="term-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="120">
-                                    <button type="submit" aria-label="Esegui comando" data-i18n-aria="term.run"><span class="btn__key" aria-hidden="true">↵</span></button>
-                                </form>
-                                <div class="term__chips" role="group" aria-label="Comandi rapidi" data-i18n-aria="term.commands">
-                                    <button type="button" data-cmd="help">help</button><button type="button" data-cmd="whoami">whoami</button><button type="button" data-cmd="ls">ls</button><button type="button" data-cmd="skills">skills</button><button type="button" data-cmd="email">email</button>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- FAQ.md -->
-                        <section class="win win--faq" id="win-faq" data-win="faq" aria-labelledby="win-faq-t" tabindex="-1">
-                            <header class="win__bar" data-drag>
-                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi FAQ.md" data-i18n-aria="desk.close.faq"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button><i></i><i></i></span>
-                                <h3 class="win__name" id="win-faq-t">FAQ.md</h3>
-                            </header>
-                            <div class="win__body faq" data-i18n-html="faq">
-                                <h4># Dove ti trovo?</h4>
-                                <p>A Sassuolo, in provincia di Modena.</p>
-                                <hr>
-                                <h4># Cosa studi?</h4>
-                                <p>Ingegneria Informatica all’Università di Modena e Reggio Emilia (UNIMORE).</p>
-                                <hr>
-                                <h4># Che lingue parli?</h4>
-                                <p>Italiano (madrelingua), inglese C1, spagnolo B1, greco B1, cinese A2.</p>
-                                <hr>
-                                <h4># Hai lavorato all’estero?</h4>
-                                <p>Sì: a maggio e giugno 2025, con l’Erasmus+, alla Starbotica di Siviglia. Supporto IT e attività didattiche, in inglese e spagnolo.</p>
-                                <hr>
-                                <h4># Con cosa lavori?</h4>
-                                <p>HTML, CSS, JavaScript, Node.js, PHP, PostgreSQL, MySQL, T-SQL e Git.</p>
-                                <hr>
-                                <h4># E fuori dal lavoro?</h4>
-                                <p>Mi piace esplorare nuove tecnologie, sperimentare con progetti personali e imparare lingue straniere.</p>
-                                <hr>
-                                <h4># Come ti contatto?</h4>
-                                <p>Scrivimi a <a href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>.</p>
-                            </div>
-                        </section>
-
-                        <!-- gabriele.gif -->
-                        <section class="win win--photo" id="win-photo" data-win="photo" aria-labelledby="win-photo-t" tabindex="-1">
-                            <header class="win__bar" data-drag>
-                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi gabriele.gif" data-i18n-aria="desk.close.photo"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button><i></i><i></i></span>
-                                <h3 class="win__name" id="win-photo-t">gabriele.gif</h3>
-                            </header>
-                            <div class="win__body viewer viewer--avatar" data-cycle="discofever,flyspinning,dancing" aria-label="Cambia posa dell’avatar" data-i18n-aria="avatar.changePose">
-                                <picture class="avatar" data-avatar data-avatar-pose="discofever"><source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/discofever-still.webp"><img src="assets/avatars/discofever-still.webp" data-avatar-animated="assets/avatars/discofever.gif" data-avatar-still="assets/avatars/discofever-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="Avatar animato di Gabriele Lucia: clicca per cambiare posa"></picture>
-                                <p class="viewer__meta mono">512 × 512 · clicca per cambiare</p>
-                            </div>
-                        </section>
-
-                        <!-- strumenti/ -->
-                        <section class="win win--tools" id="win-tools" data-win="tools" aria-labelledby="win-tools-t" tabindex="-1">
-                            <header class="win__bar" data-drag>
-                                <span class="win__dots"><button type="button" class="win__close" data-close aria-label="Chiudi strumenti" data-i18n-aria="desk.close.tools"><svg class="btn__icon " viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button><i></i><i></i></span>
-                                <h3 class="win__name" id="win-tools-t"><span data-i18n="desk.f.tools">strumenti</span>/</h3>
-                            </header>
-                            <div class="win__body">
-                                <ul class="tools">
-                                    <li><img src="assets/icons/html5.svg" width="36" height="36" loading="lazy" alt="">HTML</li>
-                                    <li><img src="assets/icons/css3.svg" width="36" height="36" loading="lazy" alt="">CSS</li>
-                                    <li><img src="assets/icons/javascript.svg" width="36" height="36" loading="lazy" alt="">JavaScript</li>
-                                    <li><img src="assets/icons/nodejs.svg" width="36" height="36" loading="lazy" alt="">Node.js</li>
-                                    <li><img src="assets/icons/php.svg" width="36" height="36" loading="lazy" alt="">PHP</li>
-                                    <li><img src="assets/icons/postgresql.svg" width="36" height="36" loading="lazy" alt="">PostgreSQL</li>
-                                    <li><img src="assets/icons/mysql.svg" width="36" height="36" loading="lazy" alt="">MySQL</li>
-                                    <li><img src="assets/icons/git.svg" width="36" height="36" loading="lazy" alt="">Git</li>
-                                </ul>
-                                <p class="win__status mono" data-i18n="desk.items">8 elementi</p>
-                            </div>
-                        </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7 · Contatti: lo stesso quadrato, che a destra diventa un obiettivo -->
-        <section class="cta paper" id="contatti" aria-labelledby="cta-title">
-            <div class="wrap cta__head">
-                <p class="label" data-reveal data-i18n="cta.label">Contatti</p>
-                <h2 class="h2" id="cta-title" data-reveal data-i18n-html="cta.title">Hai un progetto da <em>mettere a fuoco?</em></h2>
-                <p class="cta__intro" data-reveal data-i18n="cta.intro">Scrivimi due righe e continuiamo via email.</p>
-                <div class="cta__avatar" aria-hidden="true">
-                    <picture class="avatar" data-avatar data-avatar-pose="dancing">
-                        <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/dancing-still.webp">
-                        <img src="assets/avatars/dancing-still.webp" data-avatar-animated="assets/avatars/dancing.gif" data-avatar-still="assets/avatars/dancing-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
-                    </picture>
-                </div>
-            </div>
-            <div class="wrap contact-channel-slot"><a class="contact-channel" href="mailto:gabrielelucia07@gmail.com" data-contact-channel><svg viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="contact-channel__letter" x="24" y="18" width="52" height="44" rx="5" fill="#fff"/><path d="M34 29h32m-32 8h24"/><rect x="8" y="27" width="84" height="47" rx="8" fill="#e1f5fc"/><path d="m12 69 28-26m48 26L60 43"/><path class="contact-channel__flap" d="m10 29 40 29 40-29Z" fill="#e1f5fc"/></svg><div><h3 data-i18n="cta.channelTitle">Scrivimi.</h3><p data-i18n="cta.channelDescription">Si parte da un’email.</p></div><span class="contact-channel__arrow" aria-hidden="true">↗</span></a></div>
-            <div class="wrap cta__alt" data-reveal>
-                <a class="cta__mail" href="mailto:gabrielelucia07@gmail.com">[ gabrielelucia07@gmail.com ]</a>
-                <button class="link" type="button" data-copy-email data-i18n="cta.copy">Copia l’email</button>
-                <a class="link" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span aria-hidden="true">↗</span></a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="foot">
-        <div class="wrap foot__top">
-            <div class="foot__contact">
-                <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
-                <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
-                <div class="foot__sleeper" aria-hidden="true">
-                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
-                        <source media="(prefers-reduced-motion: reduce)" srcset="assets/avatars/sleeping-still.webp">
-                        <img src="assets/avatars/sleeping-still.webp" data-avatar-animated="assets/avatars/sleeping.gif" data-avatar-still="assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
-                    </picture>
-                </div>
-            </div>
-            <nav class="foot__nav" aria-label="Collegamenti del piè di pagina" data-i18n-aria="foot.navLabel">
-                <ul>
-                    <li><a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-                    <li><a href="chi-sono/" data-langlink data-i18n="nav.about">Chi sono</a></li>
-                    <li><a href="fuori-orario/" data-langlink data-i18n="nav.afterHours">Fuori orario</a></li>
-                    <li><a href="assets/CREDITS.html" data-langlink data-i18n="foot.credits">Crediti</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#percorso" data-i18n="nav.path">Percorso</a></li>
-                    <li><a href="#progetti" data-i18n="nav.projects">Progetti</a></li>
-                    <li><a href="#strumenti" data-i18n="nav.tools">Strumenti</a></li>
-                    <li><a href="#contatti" data-i18n="nav.contact">Contatti</a></li>
-                </ul>
-            </nav>
+<section class="apertura" aria-labelledby="apertura-titolo">
+    <div class="apertura__campo campo" id="campo-apertura" data-campo data-forme="scultura|immagine:/assets/avatars/showingoff-still.webp" data-nomi="scultura|il Mii di oakvx" data-nomi-en="sculpture|oakvx’s Mii" data-punti="26000" data-spostamento="0.26,0.1" data-scala="0.6" data-area=".apertura" data-luce="0.5">
+        <canvas></canvas>
+        <div class="campo__ripiego" aria-hidden="true"></div>
+    </div>
+    <p class="apertura__meta t-meta">
+        <span data-i18n="home.metaA">Portfolio — 2026</span>
+        <span data-i18n="home.metaB">Sviluppo web · Backend · Grafica</span>
+        <span>44.53° N — 10.78° E</span>
+    </p>
+    <h1 class="apertura__titolo" id="apertura-titolo"><span class="sr-only" data-i18n="home.h1Sr">Gabriele Lucia, in arte oakvx: sviluppatore e designer.</span><span data-lettere aria-hidden="true">oakvx</span></h1>
+    <div class="apertura__piede">
+        <p class="apertura__intro" data-i18n-html="home.intro"><span class="corsivo">Ciao, sono oakvx.</span> All’anagrafe Gabriele Lucia. Faccio siti, applicazioni web e grafica, e studio Ingegneria Informatica a UNIMORE. Sto a Sassuolo.</p>
+        <ul class="apertura__ruoli t-meta">
+            <li data-i18n="home.role1">Sviluppo web</li>
+            <li data-i18n="home.role2">Backend e dati</li>
+            <li data-i18n="home.role3">Grafica e interfacce</li>
+        </ul>
+        <div class="apertura__azione">
+            <button class="tieni t-meta" type="button" data-tieni="campo-apertura" aria-describedby="stato-apertura">
+                <span class="tieni__anello" aria-hidden="true"><svg viewBox="0 0 36 36"><circle class="fondo" cx="18" cy="18" r="15.9" pathLength="100"/><circle class="carica" cx="18" cy="18" r="15.9" pathLength="100"/></svg></span>
+                <span class="tieni__testo"><span data-i18n="home.hold">Tieni premuto</span><small><span data-i18n="home.holdNote">ricompone la scultura</span> · <span id="stato-apertura" data-campo-stato="campo-apertura" aria-live="polite">01 / 02</span></small></span>
+            </button>
         </div>
-        <div class="wrap foot__mark" aria-hidden="true" data-mark>
-            <svg class="mark__o" viewBox="-60 -60 120 120"><path data-mark-o d="M0,-50A50,50 0 1,1 0,50A50,50 0 1,1 0,-50Z" /></svg><span class="mark__rest extrude">akvx</span>
-        </div>
-        <div class="wrap foot__bottom">
-            <p>© 2026 Gabriele Lucia</p>
-            <a href="#main"><span data-i18n="foot.top">Torna su</span> <span aria-hidden="true">↑</span></a>
-        </div>
-    </footer>
+    </div>
+</section>
 
-    <p class="toast" role="status" aria-live="polite" data-toast></p>
+<section class="manifesto contenitore" aria-label="Metodo" data-i18n-aria="home.manifestoAria">
+    <p class="t-meta">(01) <span data-i18n="home.manifestoLabel">Metodo</span></p>
+    <p class="manifesto__testo" data-scorri-parole data-i18n-html="home.manifesto">Mi sono avvicinato alla programmazione per curiosità. Oggi la parte che preferisco è sempre la stessa: capire <em>cosa non funziona</em>, trovare una soluzione e vederla prendere forma. Codice e grafica, per me, sono <span class="cremisi">due lati dello stesso lavoro.</span></p>
+    <p class="manifesto__firma t-meta"><span data-i18n="home.manifestoSign">— oakvx, Sassuolo</span><a class="filo" href="chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="home.manifestoLink">La storia completa</span> <span class="freccia" aria-hidden="true"></span></a></p>
+</section>
 
-    <svg width="0" height="0" class="defs" aria-hidden="true" focusable="false">
-        <path id="orbit-path" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0" />
-    </svg>
-<script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
-<script src="assets/avatars/companion.js" defer blocking="render"></script>
-<script src="assets/wiiu/sound.js" defer></script>
-<script src="assets/wiiu/music.js" defer></script>
-<script src="assets/wiiu/pointer.js" defer></script>
-<script src="assets/wiiu/dialogs.js" defer></script>
-<script src="assets/wiiu/plaza.js?v=20261107-lazy-api" defer></script>
-<script src="assets/ingresso/ingresso.js" defer></script>
+<section class="sezione lavori" id="lavori" aria-labelledby="lavori-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(02) <span data-i18n="home.workLabel">Lavori</span></p>
+        <h2 class="sezione-titolo" id="lavori-titolo" data-split data-i18n-html="home.workTitle">Cose che ho fatto, <em>e che rifarei.</em></h2>
+        <p class="sezione-nota rivela" data-i18n="home.workNote">Quattro progetti, quattro problemi diversi: un editor creativo, un flusso conversazionale, un gestionale per più saloni e un sito vetrina.</p>
+    </header>
+    <ol class="lavori__elenco" data-anteprime>
+        <li class="lavoro">
+            <a class="lavoro__link" href="projects/brat-animator/" data-cursore="Apri" data-velo-n="02.1">
+                <span class="lavoro__n t-meta">01</span>
+                <span class="lavoro__nome" data-velo-nome>Brat Animator</span>
+                <span class="lavoro__tipo t-meta" data-i18n="home.w1type">Editor creativo · browser</span>
+                <span class="lavoro__desc" data-i18n="home.w1desc">Un editor che trasforma testi sincronizzati in lyric video, con timeline e rendering direttamente nel browser.</span>
+                <img class="lavoro__img" src="assets/work/brat-editor-small.webp" width="720" height="500" alt="" loading="lazy" decoding="async">
+            </a>
+        </li>
+        <li class="lavoro">
+            <a class="lavoro__link" href="projects/synk/" data-cursore="Apri" data-velo-n="02.2">
+                <span class="lavoro__n t-meta">02</span>
+                <span class="lavoro__nome" data-velo-nome>Synk</span>
+                <span class="lavoro__tipo t-meta" data-i18n="home.w2type">Automazione conversazionale</span>
+                <span class="lavoro__desc" data-i18n="home.w2desc">Un assistente su WhatsApp che capisce cosa serve e collega prenotazioni, Google Calendar e dashboard gestionale.</span>
+                <img class="lavoro__img" src="assets/work/synk-cover-small.webp" width="720" height="366" alt="" loading="lazy" decoding="async">
+            </a>
+        </li>
+        <li class="lavoro">
+            <a class="lavoro__link" href="projects/beautify/" data-cursore="Apri" data-velo-n="02.3">
+                <span class="lavoro__n t-meta">03</span>
+                <span class="lavoro__nome" data-velo-nome>Beautify</span>
+                <span class="lavoro__tipo t-meta" data-i18n="home.w3type">Gestionale · progetto di diploma</span>
+                <span class="lavoro__desc" data-i18n="home.w3desc">Un CRM per più saloni: clienti, servizi, disponibilità e appuntamenti nello stesso contesto. Database e backend sono miei.</span>
+                <img class="lavoro__img contiene" src="assets/beautify-logo.svg" width="400" height="400" alt="" loading="lazy" decoding="async">
+            </a>
+        </li>
+        <li class="lavoro">
+            <a class="lavoro__link" href="projects/autoofficina/" data-cursore="Apri" data-velo-n="02.4">
+                <span class="lavoro__n t-meta">04</span>
+                <span class="lavoro__nome" data-velo-nome>Spinotto Felice</span>
+                <span class="lavoro__tipo t-meta" data-i18n="home.w4type">Sito vetrina · demo</span>
+                <span class="lavoro__desc" data-i18n="home.w4desc">Un sito vetrina per un’attività che non esiste. Il negozio è finto, il sito no.</span>
+                <img class="lavoro__img" src="assets/work/autoofficina-cover-small.webp" width="720" height="500" alt="" loading="lazy" decoding="async">
+            </a>
+        </li>
+    </ol>
+</section>
+
+<section class="sezione tappe" id="percorso" aria-labelledby="tappe-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(03) <span data-i18n="home.pathLabel">Percorso</span></p>
+        <h2 class="sezione-titolo" id="tappe-titolo" data-split data-i18n-html="home.pathTitle">Ogni tappa smussa <em>uno spigolo.</em></h2>
+        <p class="sezione-nota rivela" data-i18n="home.pathNote">Dalla scuola all’università: siti per attività locali, un Erasmus a Siviglia, l’automazione industriale.</p>
+    </header>
+    <ol class="tappe__elenco">
+        <li class="tappa"><a href="chi-sono/#inizio" data-velo-n="03"><span class="tappa__n t-meta">01</span><span class="tappa__anno">2021 — 2026</span><span class="tappa__nome" data-velo-nome>IIS A. Volta</span><span class="tappa__nota t-meta" data-i18n="home.p1">Informatica e Telecomunicazioni · Sassuolo</span></a></li>
+        <li class="tappa"><a href="chi-sono/#siti-web" data-velo-n="03"><span class="tappa__n t-meta">02</span><span class="tappa__anno">2023 — 2026</span><span class="tappa__nome" data-velo-nome data-i18n="home.p2name">Sviluppo web freelance</span><span class="tappa__nota t-meta" data-i18n="home.p2">Siti, interfacce e SEO per attività locali</span></a></li>
+        <li class="tappa"><a href="chi-sono/#siviglia" data-velo-n="03"><span class="tappa__n t-meta">03</span><span class="tappa__anno" data-i18n="home.p3date">mag — giu 2025</span><span class="tappa__nome" data-velo-nome data-i18n="home.p3name">Erasmus+ a Siviglia</span><span class="tappa__nota t-meta" data-i18n="home.p3">Starbotica · supporto IT e attività didattiche</span></a></li>
+        <li class="tappa"><a href="chi-sono/#automazione" data-velo-n="03"><span class="tappa__n t-meta">04</span><span class="tappa__anno" data-i18n="home.p4date">ago — set 2026</span><span class="tappa__nome" data-velo-nome>Format SRL</span><span class="tappa__nota t-meta" data-i18n="home.p4">Software e automazione · PLC / SQL Server</span></a></li>
+        <li class="tappa"><a href="chi-sono/#oggi" data-velo-n="03"><span class="tappa__n t-meta">05</span><span class="tappa__anno" data-i18n="home.p5date">2026 — oggi</span><span class="tappa__nome" data-velo-nome>UNIMORE</span><span class="tappa__nota t-meta" data-i18n="home.p5">Ingegneria Informatica</span></a></li>
+    </ol>
+</section>
+
+<section class="sezione mestiere" id="strumenti" aria-labelledby="mestiere-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(04) <span data-i18n="home.skillsLabel">Mestiere</span></p>
+        <h2 class="sezione-titolo" id="mestiere-titolo" data-split data-i18n-html="home.skillsTitle">Tre aree di lavoro, <em>un solo modo di farlo.</em></h2>
+    </header>
+    <div class="mestiere__aree">
+        <article class="area rivela">
+            <p class="area__n" aria-hidden="true">i.</p>
+            <h3 data-i18n="home.a1">Sviluppo web</h3>
+            <p data-i18n="home.a1text">Siti e applicazioni web: interfacce, pubblicazione e indicizzazione sui motori di ricerca.</p>
+            <ul><li>HTML · CSS · JavaScript</li><li data-i18n="home.a1b">SEO e pubblicazione</li><li data-i18n="home.a1c">Pagine social aziendali</li></ul>
+            <p class="area__pratica t-meta" data-i18n="home.a1p">In pratica: siti per officine, centri estetici e utensilerie, dal 2023 al 2026.</p>
+        </article>
+        <article class="area rivela">
+            <p class="area__n" aria-hidden="true">ii.</p>
+            <h3 data-i18n="home.a2">Backend e dati</h3>
+            <p data-i18n="home.a2text">Logica lato server e database relazionali, dai CRUD all’automazione.</p>
+            <ul><li>Node.js · PHP</li><li>PostgreSQL · MySQL</li><li data-i18n="home.a2c">T-SQL su SQL Server</li></ul>
+            <p class="area__pratica t-meta" data-i18n="home.a2p">In pratica: Synk, Beautify, Format SRL.</p>
+        </article>
+        <article class="area rivela">
+            <p class="area__n" aria-hidden="true">iii.</p>
+            <h3 data-i18n="home.a3">Grafica e interfacce</h3>
+            <p data-i18n="home.a3text">La parte visiva del lavoro, che affianco allo sviluppo software.</p>
+            <ul><li data-i18n="home.a3a">Contenuti per i social</li><li data-i18n="home.a3b">Progettazione di interfacce</li><li data-i18n="home.a3c">Testi animati su Canvas</li></ul>
+            <p class="area__pratica t-meta" data-i18n="home.a3p">In pratica: Brat Animator, pagine social.</p>
+        </article>
+    </div>
+    <div class="strumenti">
+        <p class="t-meta" data-i18n="home.tools">Strumenti</p>
+        <ul class="strumenti__elenco">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Node.js</li><li>PHP</li><li>PostgreSQL</li><li>MySQL</li><li>T-SQL</li><li>Git</li>
+        </ul>
+    </div>
+</section>
+
+<section class="sezione archivio" id="attivita-github" aria-labelledby="archivio-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(05) <span data-i18n="home.archiveLabel">Archivio aperto</span></p>
+        <h2 class="sezione-titolo" id="archivio-titolo" data-split data-i18n-html="home.archiveTitle">Il codice, <em>alla luce del sole.</em></h2>
+        <p class="sezione-nota rivela" data-i18n="home.archiveNote">Repository pubblici aggiornati di recente, ordinati per ultimo push.</p>
+    </header>
+    <ul class="archivio__elenco">
+        <li class="repo"><a href="https://github.com/oakvx/oakvx.github.io" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>oakvx.github.io</span><span class="repo__desc" data-i18n="home.r1">Questo sito: nessun framework, nessuna dipendenza di runtime. Sculture WebGL e transizioni scritte a mano.</span><span class="repo__dati t-meta" data-i18n="home.r1d">HTML · CSS · JS — ★ 2 — 4 nov 2026</span></a></li>
+        <li class="repo"><a href="https://github.com/oakvx/oakvx" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>oakvx</span><span class="repo__desc" data-i18n="home.r2">Il README del mio profilo GitHub. Solo Markdown e immagini disegnate da zero.</span><span class="repo__dati t-meta" data-i18n="home.r2d">Markdown — ★ 0 — 2 nov 2026</span></a></li>
+        <li class="repo"><a href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>bratAnimator</span><span class="repo__desc" data-i18n="home.r3">Anima testi sincronizzati (LRC, TTML, SRT…) ed esporta il video dal browser, senza backend. Versione 5.0.</span><span class="repo__dati t-meta" data-i18n="home.r3d">JavaScript — ★ 4 — 1 nov 2026</span></a></li>
+        <li class="repo"><a href="https://github.com/oakvx/autoOfficina" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>autoOfficina</span><span class="repo__desc" data-i18n="home.r4">Il modello di sito vetrina dietro Spinotto Felice, in tema chiaro e scuro.</span><span class="repo__dati t-meta" data-i18n="home.r4d">CSS · HTML — ★ 0 — 20 ott 2026</span></a></li>
+        <li class="repo"><a href="https://github.com/oakvx/topGun" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>topGun</span><span class="repo__desc" data-i18n="home.r5">Landing page dimostrativa, non ufficiale, per una scuola di volo ultraleggero di Reggio Emilia. Un unico file HTML.</span><span class="repo__dati t-meta" data-i18n="home.r5d">HTML — ★ 0 — 20 ott 2026</span></a></li>
+    </ul>
+    <p class="archivio__piede t-meta"><a class="filo" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer" data-i18n="home.archiveAll">Tutti i repository su github.com/oakvx</a><span><span data-i18n="home.archiveGame">Preferisci esplorare? C’è anche</span> <a class="filo" href="gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></span></p>
+</section>
+
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span> — <span data-i18n="foot.label2">fine della pagina</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto, o anche solo per dirmi che il sito ti è piaciuto (o no). Rispondo, giuro.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="./" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="./#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="./chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="./fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="./gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="./assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano: HTML, CSS, JavaScript e WebGL</span></p>
+</footer>
+
+<script src="./assets/ingresso/ingresso.js" defer></script>
 </body>
-
 </html>

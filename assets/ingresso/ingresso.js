@@ -53,8 +53,10 @@
     firma.append(el('strong', '', 'oakvx'), el('span', '', T.firma));
 
     const corpo = el('div', 'ingresso__corpo');
-    const titolo = el('h1', '', T.titolo);
+    const titolo = el('h1');
     titolo.id = 'ingresso-titolo';
+    const [prima, dopo] = T.titolo.split('oakvx');
+    titolo.append(prima, el('em', '', 'oakvx'), dopo || '');
     const intro = el('p', 'ingresso__intro', T.intro);
     intro.id = 'ingresso-intro';
 
@@ -93,7 +95,7 @@
         if (calmo()) { fine(); return; }
         sblocca();
         dialog.classList.add('esce');
-        setTimeout(fine, 420);
+        setTimeout(fine, 700);
     }
 
     sito.addEventListener('click', entraNelSito);

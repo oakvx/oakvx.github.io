@@ -49,14 +49,13 @@ function objectLiteral(source, marker, filename) {
   throw new Error(`${filename}: unterminated object for ${marker}`);
 }
 
-const sitePath = path.join(root, 'assets/polaroid/site.js');
-const site = fs.readFileSync(sitePath, 'utf8');
-const en = objectLiteral(site, 'const EN =', sitePath);
-const dyn = objectLiteral(site, 'const DYN =', sitePath);
+// Testi dinamici (DYN) dal comportamento condiviso, dizionario delle pagine da i18n-en.js.
+const corePath = path.join(root, 'assets/nero/nero.js');
+const dyn = objectLiteral(fs.readFileSync(corePath, 'utf8'), 'const DYN =', corePath);
 
-const pagesPath = path.join(root, 'assets/polaroid/pages-en.js');
-const pagesContext = { window: {} };
-vm.runInNewContext(fs.readFileSync(pagesPath, 'utf8'), pagesContext, { filename: pagesPath });
-Object.assign(en, pagesContext.window.OAKVX_EN || {});
+const dictPath = path.join(root, 'assets/nero/i18n-en.js');
+const dictContext = { window: {} };
+vm.runInNewContext(fs.readFileSync(dictPath, 'utf8'), dictContext, { filename: dictPath });
+const en = Object.assign({}, dictContext.window.OAKVX_EN || {});
 
 process.stdout.write(JSON.stringify({ en, dyn: dyn.en || {} }));

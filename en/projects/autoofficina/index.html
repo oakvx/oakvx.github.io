@@ -5,27 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
 <link rel="stylesheet" href="/assets/ingresso/ingresso.css">
-
-<script>(()=>{const root=document.documentElement;root.classList.add('js');let lang,paused=false;try{lang=root.dataset.staticLang||new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}if(!['it','en'].includes(lang))lang=(navigator.language||'').toLowerCase().startsWith('en')?'en':'it';root.dataset.lang=lang;if(lang==='en')root.classList.add('i18n-pending');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(paused||reduce)root.classList.add('calm');if(paused)root.classList.add('paused')})();</script>
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#F4F7FA">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<noscript id="oakvx-full-css-fallback"></noscript>
+<link rel="preload" href="/assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/nero/nero.css">
+<script src="/assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="preload" href="/assets/wiiu/nunito.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/wiiu/rounded-900-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/polaroid/site.css">
-<link rel="stylesheet" href="/assets/avatars/avatar.css">
-<link rel="stylesheet" href="/assets/polaroid/pages.css">
-<link rel="stylesheet" href="/assets/avatars/pages.css">
-<link rel="stylesheet" href="/assets/cursor.css">
-<script src="/assets/polaroid/pages-en.js" defer></script>
-<script src="/assets/polaroid/site.js" defer blocking="render"></script>
-<link rel="stylesheet" href="/assets/wiiu/motion.css">
-<link rel="stylesheet" href="/assets/wiiu/buttons.css">
-<link rel="stylesheet" href="/assets/wiiu/dialogs.css">
-<link rel="stylesheet" href="/assets/wiiu/theme.css">
-<script src="/assets/wiiu/motion.js"></script>
 <title>Spinotto Felice: automotive business website | Gabriele Lucia</title>
 <meta name="description" content="Original structure and styling of an automotive website by Gabriele Lucia, in HTML, CSS and JavaScript. Explore the public Spinotto Felice demo.">
 <meta name="author" content="Gabriele Lucia">
@@ -55,102 +43,169 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/en/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx"],"jobTitle":"Developer e graphic designer"},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/en/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/en/projects/autoofficina#webpage","url":"https://oakvx.github.io/en/projects/autoofficina/","name":"Spinotto Felice: automotive business website | Gabriele Lucia","description":"Original structure and styling of an automotive website by Gabriele Lucia, in HTML, CSS and JavaScript. Explore the public Spinotto Felice demo.","inLanguage":"en","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/en/projects/autoofficina#primaryimage"},"mainEntity":{"@id":"https://oakvx.github.io/en/projects/autoofficina#project"},"about":{"@id":"https://oakvx.github.io/en/projects/autoofficina#project"},"breadcrumb":{"@id":"https://oakvx.github.io/en/projects/autoofficina#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/en/projects/autoofficina#primaryimage","url":"https://oakvx.github.io/assets/social-autoofficina-en.png","contentUrl":"https://oakvx.github.io/assets/social-autoofficina-en.png","width":1200,"height":630,"caption":"Spinotto Felice — an automotive business website in HTML, CSS and JavaScript.","inLanguage":"en"},{"@type":"CreativeWork","@id":"https://oakvx.github.io/en/projects/autoofficina#project","name":"Spinotto Felice","description":"Struttura e stile originali di un sito automotive di Gabriele Lucia, in HTML, CSS e JavaScript. Scopri la demo pubblica Spinotto Felice.","creator":{"@id":"https://oakvx.github.io/#person"},"url":"https://oakvx.github.io/autoOfficina/","mainEntityOfPage":{"@id":"https://oakvx.github.io/en/projects/autoofficina#webpage"}},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/en/projects/autoofficina#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/en/"},{"@type":"ListItem","position":2,"name":"Spinotto Felice","item":"https://oakvx.github.io/en/projects/autoofficina/"}]}]}</script>
 <script type="application/json" id="seo-translations">{"it":{"title":"Spinotto Felice: sito vetrina automotive | Gabriele Lucia","description":"Struttura e stile originali di un sito automotive di Gabriele Lucia, in HTML, CSS e JavaScript. Scopri la demo pubblica Spinotto Felice.","canonical":"https://oakvx.github.io/projects/autoofficina/","image":"https://oakvx.github.io/assets/social-autoofficina-it.png","image_alt":"Spinotto Felice — sito vetrina automotive in HTML, CSS e JavaScript."},"en":{"title":"Spinotto Felice: automotive business website | Gabriele Lucia","description":"Original structure and styling of an automotive website by Gabriele Lucia, in HTML, CSS and JavaScript. Explore the public Spinotto Felice demo.","canonical":"https://oakvx.github.io/en/projects/autoofficina/","image":"https://oakvx.github.io/assets/social-autoofficina-en.png","image_alt":"Spinotto Felice — an automotive business website in HTML, CSS and JavaScript."}}</script>
 </head>
-<body data-page="autoofficina">
-<div class="ambient-bubbles" aria-hidden="true"><i style="--bubble:0"></i><i style="--bubble:1"></i><i style="--bubble:2"></i><i style="--bubble:3"></i><i style="--bubble:4"></i><i style="--bubble:5"></i></div>
-<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
-
-    <header class="hdr" data-header>
-        <div class="hdr__stripes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="wrap hdr__in">
-            <a class="brand" href="/en/" data-langlink aria-label="gl. Gabriele Lucia / oakvx, home" data-i18n-aria="brandLabel" data-en-href="/en/" data-it-href="/"><span class="brand__avatar" aria-hidden="true"><img src="/assets/avatars/showingoff-still.webp" width="38" height="38" alt=""></span><span class="brand__mark">gl.</span><span class="mini-bands" aria-hidden="true"></span><span class="brand__caption">Gabriele Lucia / oakvx</span></a>
-            <nav class="hdr__nav" aria-label="Main navigation" data-i18n-aria="navLabel">
-                <a href="/en/#percorso" data-langlink data-i18n="nav.path" data-en-href="/en/#percorso" data-it-href="/#percorso">Journey</a>
-                <a href="/en/#progetti" data-langlink data-i18n="nav.projects" data-en-href="/en/#progetti" data-it-href="/#progetti">Projects</a>
-                <a href="/en/#strumenti" data-langlink data-i18n="nav.tools" data-en-href="/en/#strumenti" data-it-href="/#strumenti">Toolkit</a>
-                <a href="/en/chi-sono/" data-langlink data-i18n="nav.about" data-en-href="/en/chi-sono/" data-it-href="/chi-sono/">About me</a>
-                <a href="/en/fuori-orario/" data-langlink data-i18n="nav.afterHours" data-en-href="/en/fuori-orario/" data-it-href="/fuori-orario/">After hours</a>
-            </nav>
-            <div class="hdr__tools">
-                <p class="hdr__clock mono" aria-hidden="true"><span class="pulse"></span><span data-clock-short>--:--</span></p>
-                <div class="lang" role="group" aria-label="Language" data-i18n-aria="langLabel"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-                <button class="motion" type="button" data-motion aria-pressed="false"><span class="motion__icon" aria-hidden="true"></span><span class="sr-only" data-motion-label>Pause animations</span></button><button class="sound" type="button" data-sound aria-pressed="false" aria-label="Enable sound"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"></path><path class="sound__wave" d="M17 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"></path><path class="sound__mute" d="m17 10 4 4m0-4-4 4"></path></svg><span class="sr-only" data-sound-label aria-label="Enable sound">Enable sound</span></button>
-                <a class="pill" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"></path></svg><span data-i18n="nav.cta">Email me</span></a>
-                <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="menu"><span class="burger__lines" aria-hidden="true"><i></i><i></i></span><span class="sr-only" data-burger-label>Open menu</span></button>
-            </div>
-        </div>
-    </header>
-
-    <div class="menu" id="menu" data-menu hidden>
-        <nav class="menu__nav wrap" aria-label="Menu" data-i18n-aria="menuLabel">
-            <a href="/en/#percorso" class="extrude" data-langlink data-i18n="nav.path" data-en-href="/en/#percorso" data-it-href="/#percorso">Journey</a>
-            <a href="/en/#progetti" class="extrude" data-langlink data-i18n="nav.projects" data-en-href="/en/#progetti" data-it-href="/#progetti">Projects</a>
-            <a href="/en/#strumenti" class="extrude" data-langlink data-i18n="nav.tools" data-en-href="/en/#strumenti" data-it-href="/#strumenti">Toolkit</a>
-            <a href="/en/chi-sono/" class="extrude" data-langlink data-i18n="nav.about" data-en-href="/en/chi-sono/" data-it-href="/chi-sono/">About me</a>
-            <a href="/en/fuori-orario/" class="extrude" data-langlink data-i18n="nav.afterHours" data-en-href="/en/fuori-orario/" data-it-href="/fuori-orario/">After hours</a>
-            <a href="#contatti" class="extrude" data-i18n="nav.contact">Contact</a>
+<body data-pagina="autoofficina">
+<a class="salta" href="#main" data-i18n="ui.skip">Skip to content</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="/en/" aria-label="oakvx, back to the entrance" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — development and design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/projects/autoofficina/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/projects/autoofficina/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
-        <div class="menu__foot wrap">
-            <a class="mono" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com</a>
-            <a class="mono" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx ↗</a>
-            <p class="mono menu__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Index</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Site index" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pages" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="/en/" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Entrance</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">who, what, where</span></a></li>
+                <li><a href="/en/#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Work</span><span class="indice__nota t-meta" data-i18n="nav.workNote">four case studies</span></a></li>
+                <li><a href="/en/chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">About</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">person, path, method</span></a></li>
+                <li><a href="/en/fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">After hours</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">when nobody asks me to</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contact</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">it starts with an email</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Case studies</p>
+                <ul>
+                    <li><a class="filo" href="/en/projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="/en/projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="/en/projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="/en/projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Elsewhere</p>
+                <ul>
+                    <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause animations</span></button>
         </div>
     </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>02.4</b><span data-titolo data-i18n="seg.spinotto">Spinotto Felice</span><span class="segnapagina__barra"><i></i></span></p>
 
-    <main id="main">
-<section class="page-hero wrap"><a class="breadcrumb btn btn--ghost btn--back" href="/en/#progetti"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 6-6 6 6 6m-6-6h13"></path></svg><span data-i18n="internal.allProjects">All projects</span></a><div class="project-wordmark"><h1 class="display-title">Spinotto Felice.</h1></div><p class="page-intro" data-i18n="autoofficina.lead">An automotive business website in HTML, CSS and JavaScript. I created the original structure and styling; the public version is the Spinotto Felice electric car accessories demo.</p><div class="project-actions"><a class="btn" href="https://oakvx.github.io/autoOfficina/" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3h7v7m0-7-11 11M10 3H3v18h18v-7"></path></svg><span data-i18n="autoofficina.visit">Visit the website</span></a><a class="btn btn--ghost" href="https://github.com/oakvx/autoOfficina" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"></circle><circle cx="18" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><path d="M6 7v10m12-10v2c0 4-12 1-12 5"></path></svg>GitHub </a></div><dl class="metadata"><div><dt data-i18n="autoofficina.3">Role</dt><dd data-i18n="autoofficina.3value">Original structure and styling</dd></div><div><dt data-i18n="autoofficina.5">Stack</dt><dd data-i18n="autoofficina.5value">HTML / CSS / JavaScript</dd></div><div><dt data-i18n="autoofficina.7">Type</dt><dd data-i18n="autoofficina.7value">Business website</dd></div><div><dt data-i18n="autoofficina.9">Version</dt><dd data-i18n="autoofficina.9value">Public demo</dd></div></dl><figure class="project-cover glass-frame"><img src="/assets/work/autoofficina-cover.webp" srcset="/assets/work/autoofficina-cover-small.webp 720w, /assets/work/autoofficina-cover.webp 1440w" sizes="(max-width:899px) calc(100vw - 70px), 1298px" width="1440" height="1000" alt="Spinotto Felice: homepage of the demo website" data-i18n-alt="autoofficina.coverAlt" decoding="async" fetchpriority="high"><figcaption data-i18n="autoofficina.caption">Spinotto Felice / actual screenshot of the demo website</figcaption></figure></section><div class="article-layout wrap"><nav class="article-nav" aria-label="On this page" data-i18n-aria="internal.contents"><a href="#overview" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="autoofficina.navProject">The project</span></a><a href="#interfaccia" class="btn btn--ghost btn--nav"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 10h16m-10 0v10"></path></svg><span data-i18n="autoofficina.navInterface">Interface</span></a></nav><div class="article-body"><section class="chapter" data-reveal id="overview"><h2 data-i18n="autoofficina.title">From an automotive website to a demo</h2><p data-i18n="autoofficina.overview">The project brings together services, approach, demonstration reviews, frequently asked questions and contact details on a single page with section navigation.</p><p data-i18n="autoofficina.credits">I created the original structure and styling. Alberto Pecchini handled demo cleanup, the light theme, fictional content and images. Spinotto Felice is a fictional business, with no real purchases or bookings.</p></section><section class="chapter" data-reveal id="interfaccia"><h2 data-i18n="autoofficina.interfaceTitle">Navigation and interactions</h2><p data-i18n="autoofficina.interface">The layout adapts to desktop and mobile. JavaScript handles the menu, FAQ accordion, entry animations and light/dark switching, with the preference saved in the browser.</p></section></div></div>
-<section class="contact wrap" data-reveal id="contatti">
- <h2 class="contact-title"><span data-i18n="internal.contactTitle">Email me.</span></h2>
- <p class="contact-intro" data-i18n="internal.contactIntro">Let’s continue by email.</p>
- <a class="contact-email" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07@gmail.com <span aria-hidden="true">↗</span></a>
- <div class="project-actions"><a class="btn" href="mailto:gabrielelucia07@gmail.com"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3zM3 6l9 7 9-7"></path></svg><span data-i18n="internal.emailAction">Email me</span></a><a class="btn btn--ghost" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer"><svg class="btn__icon " viewbox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2"></circle><circle cx="18" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><path d="M6 7v10m12-10v2c0 4-12 1-12 5"></path></svg>GitHub </a></div>
+<main id="main" class="pagina pagina--caso" data-progetto="spinotto">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label4">Case 04 / 04</span><span data-i18n="spinotto.kind">Showcase website · public demo</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split data-i18n-html="spinotto.title">Spinotto <em>Felice.</em></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="spinotto.intro">An automotive showcase website in HTML, CSS and JavaScript. The original structure and style are mine; the public version is a demo dedicated to electric car accessories. The shop is fake, the site isn’t.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.roleShort">Role</dt><dd data-i18n="spinotto.role">Original structure and style</dd></div>
+            <div><dt>Stack</dt><dd>HTML / CSS / JavaScript</dd></div>
+            <div><dt data-i18n="spinotto.typeK">Type</dt><dd data-i18n="spinotto.type">Showcase website</dd></div>
+            <div><dt data-i18n="spinotto.versionK">Version</dt><dd data-i18n="spinotto.version">Public demo</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://oakvx.github.io/autoOfficina/" target="_blank" rel="noopener noreferrer" data-i18n="spinotto.visit">Visit the site</a><a href="https://github.com/oakvx/autoOfficina" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </div>
 </section>
+
+<figure class="rivela-maschera">
+    <div class="luce" data-luce data-cursore="Luce">
+        <img src="/assets/work/autoofficina-cover.webp" width="1440" height="1000" alt="Spinotto Felice: homepage of the demo website" data-i18n-alt="spinotto.alt">
+    </div>
+    <figcaption class="luce__barra t-meta">
+        <span data-i18n="spinotto.caption">Spinotto Felice — real screenshot of the demo website</span>
+        <button class="luce__interruttore t-meta" type="button" data-interruttore aria-pressed="false"><i aria-hidden="true"></i><span data-interruttore-testo data-i18n="spinotto.light">Turn the light on</span></button>
+    </figcaption>
+</figure>
+
+<section class="sezione caso-capo" aria-labelledby="spinotto-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="spinotto-concept" data-split data-i18n-html="spinotto.conceptTitle">From automotive website <em>to demo.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="spinotto.concept1">The project brings together services, approach, demo reviews, frequently asked questions and contacts in a single page with section navigation.</p>
+        <p data-i18n="spinotto.concept2">I created the original structure and style. Alberto Pecchini took care of cleaning up the demo, the light theme, the fictional content and the images.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="spinotto.problem">The starting point: a showcase website template that can be reused for any business. Spinotto Felice is made up: no purchases, no real bookings.</p>
+</section>
+
+<section class="sezione" aria-labelledby="spinotto-processo">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Process</span></p>
+        <h2 id="spinotto-processo" data-split data-i18n-html="spinotto.processTitle">Navigation <em>and interactions.</em></h2>
+    </div>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="spinotto.s1">By sections</h3><p data-i18n="spinotto.s1text">Services, approach, reviews, FAQ and contacts on a single page, reachable from the menu.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="spinotto.s2">Desktop and mobile</h3><p data-i18n="spinotto.s2text">The layout adapts to every screen. JavaScript handles the menu, the accordion FAQ and the entrance animations.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="spinotto.s3">Light and dark</h3><p data-i18n="spinotto.s3text">The switch between light and dark themes remembers the preference in the browser. The switch above is a small tribute to it.</p></li>
+    </ol>
+</section>
+
+<section class="sezione risultato" aria-labelledby="spinotto-risultato">
+    <p class="t-meta">(03) <span data-i18n="case.result">Result</span></p>
+    <h2 class="risultato__frase" id="spinotto-risultato" data-split data-i18n-html="spinotto.result">A template <em>that can be reused</em> for any business.</h2>
+    <p class="risultato__note rivela" data-i18n="spinotto.resultText">The demo is public and the code is on GitHub: two themes, menu, FAQ and entrance animations, on desktop and mobile.</p>
+</section>
+
+<a class="prossimo" href="/en/projects/brat-animator/" data-velo-n="02.1" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.back">Back to the start</span><span>01 / 04</span></span>
+    <span class="prossimo__nome" data-velo-nome>Brat Animator</span>
+</a>
+
 </main>
 
-    <footer class="foot">
-        <div class="wrap foot__top">
-            <div class="foot__contact">
-                <a class="foot__mail" href="mailto:gabrielelucia07@gmail.com">gabrielelucia07<wbr>@gmail.com</a>
-                <p class="mono foot__clock"><span class="pulse" aria-hidden="true"></span><span data-clock>Sassuolo</span></p>
-                <div class="foot__sleeper" aria-hidden="true">
-                    <picture class="avatar avatar--sleep" data-avatar data-avatar-pose="sleeping">
-                        <source media="(prefers-reduced-motion: reduce)" srcset="/assets/avatars/sleeping-still.webp">
-                        <img src="/assets/avatars/sleeping-still.webp" data-avatar-animated="/assets/avatars/sleeping.gif" data-avatar-still="/assets/avatars/sleeping-still.webp" width="512" height="512" loading="lazy" decoding="async" alt="">
-                    </picture>
-                </div>
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contact</span> — <span data-i18n="foot.label2">end of the page</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Write to <em>me.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">For a job, a project, or just to tell me you liked the site (or didn’t). I reply, I promise.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copy the address</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
             </div>
-            <nav class="foot__nav" aria-label="Footer links" data-i18n-aria="foot.navLabel">
-                <ul>
-                    <li><a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-                    <li><a href="/en/chi-sono/" data-langlink data-i18n="nav.about" data-en-href="/en/chi-sono/" data-it-href="/chi-sono/">About me</a></li>
-                    <li><a href="/en/fuori-orario/" data-langlink data-i18n="nav.afterHours" data-en-href="/en/fuori-orario/" data-it-href="/fuori-orario/">After hours</a></li>
-                    <li><a href="/en/assets/CREDITS.html" data-langlink data-i18n="foot.credits" data-en-href="/en/assets/CREDITS.html" data-it-href="/assets/CREDITS.html">Credits</a></li>
-                </ul>
-                <ul>
-                    <li><a href="/en/#percorso" data-langlink data-i18n="nav.path" data-en-href="/en/#percorso" data-it-href="/#percorso">Journey</a></li>
-                    <li><a href="/en/#progetti" data-langlink data-i18n="nav.projects" data-en-href="/en/#progetti" data-it-href="/#progetti">Projects</a></li>
-                    <li><a href="/en/#strumenti" data-langlink data-i18n="nav.tools" data-en-href="/en/#strumenti" data-it-href="/#strumenti">Toolkit</a></li>
-                    <li><a href="/en/#contatti" data-langlink data-i18n="nav.contact" data-en-href="/en/#contatti" data-it-href="/#contatti">Contact</a></li>
-                </ul>
-            </nav>
         </div>
-        <div class="wrap foot__mark" aria-hidden="true" data-mark>
-            <svg class="mark__o" viewbox="-60 -60 120 120"><path data-mark-o d="M0,-50A50,50 0 1,1 0,-50Z"></path></svg><span class="mark__rest extrude">akvx</span>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Index</h3>
+            <ul>
+                <li><a class="filo" href="/en/" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Entrance</span></a></li>
+                <li><a class="filo" href="/en/#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Work</span></a></li>
+                <li><a class="filo" href="/en/chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">About</span></a></li>
+                <li><a class="filo" href="/en/fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">After hours</span></a></li>
+            </ul>
         </div>
-        <div class="wrap foot__bottom">
-            <p>© 2026 Gabriele Lucia</p>
-            <a href="#main"><span data-i18n="foot.top">Back to top</span> <span aria-hidden="true">↑</span></a>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Elsewhere</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game</span></a></li>
+            </ul>
         </div>
-    </footer>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Where</h3>
+            <p data-i18n="foot.whereText">Sassuolo, province of Modena, Italy.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Notes</h3>
+            <ul>
+                <li><a class="filo" href="/en/assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Material credits</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause animations</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Back to top</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Written by hand: HTML, CSS, JavaScript and WebGL</span></p>
+</footer>
 
-    <p class="toast" role="status" aria-live="polite" data-toast></p>
-<script>/* aperto con un doppio clic (file://): i link alle cartelle vanno al loro index.html */if(location.protocol==='file:')addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target==='_blank'||e.ctrlKey||e.metaKey||e.shiftKey)return;const u=new URL(a.href);if(u.protocol!=='file:'||!u.pathname.endsWith('/'))return;e.preventDefault();e.stopImmediatePropagation();u.pathname+='index.html';location.href=u.href},true);</script>
-<script src="/assets/avatars/avatar.js" defer blocking="render"></script>
-<script src="/assets/avatars/poses.js" defer blocking="render"></script>
-<script src="/assets/avatars/companion.js" defer blocking="render"></script>
-<script src="/assets/wiiu/sound.js" defer></script>
-<script src="/assets/wiiu/music.js" defer></script>
-<script src="/assets/wiiu/pointer.js" defer></script>
-<script src="/assets/wiiu/dialogs.js" defer></script>
 <script src="/assets/ingresso/ingresso.js" defer></script>
 </body>
 </html>

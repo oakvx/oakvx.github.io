@@ -24,7 +24,6 @@
     "pausa": "In pausa",
     "riprendi": "Riprendi",
     "chiudi": "Chiudi",
-    "apri": "Apri la pagina",
     "ricomincia": "Ricomincia",
     "impostazioni": "Impostazioni",
     "fov": "Campo visivo",
@@ -37,155 +36,31 @@
     "qualita": "Qualità delle finestre",
     "bassa": "Bassa",
     "alta": "Alta",
-    "finaleDi": "Finale {i} di 5",
-    "finaliVisti": "Finali visti: {n} di 5",
     "interagisci": "[E] ",
     "prendi": "Prendi",
     "lascia": "[E] lascia · clic per lanciare",
-    "oggetti": {
-      "monitor": {
-        "azione": "Guarda il monitor",
-        "titolo": "Brat Animator",
-        "testo": "Il mio editor di lyric video nel browser: testi LRC, timeline, animazioni su Canvas ed esportazione MP4/WebM con WebCodecs.",
-        "url": "../projects/brat-animator/"
-      },
-      "targa": {
-        "azione": "Leggi la targa",
-        "titolo": "Gabriele Lucia",
-        "testo": "19 anni, Sassuolo. Junior web developer e freelance dal 2023: siti, interfacce e SEO per attività locali. Dal 2026 Ingegneria Informatica a UNIMORE.",
-        "url": "../chi-sono/"
-      },
-      "scatola": {
-        "azione": "Guarda la scatola"
-      },
-      "scrivania": {
-        "azione": "Avvicinati alla scrivania"
-      }
-    },
-    "archivio": [
-      [
-        "2021–2026",
-        "IIS Volta, Sassuolo",
-        "Diploma in Informatica e Telecomunicazioni"
-      ],
-      [
-        "2025",
-        "Erasmus+, Siviglia",
-        "Starbotica: supporto IT e attività educative"
-      ],
-      [
-        "2026",
-        "Stage, Format SRL",
-        "Software e automazione industriale: PLC e SQL Server"
-      ],
-      [
-        "2026–",
-        "UNIMORE",
-        "Ingegneria Informatica, part-time"
-      ]
-    ],
-    "targhe": {
-      "sala": "STANZA 01 · ATTESA",
-      "corridoio": "B-07",
-      "scatolaTitolo": "pezzo di Gabri",
-      "scatolaNota": "in arrivo",
-      "speciale": "NON TOCCARE"
-    },
-    "fuori": [
-      "stanza_03.js",
-      "// TODO: copione capitolo 2",
-      "narratore.state = 'panico'",
-      "synk/webhook.js",
-      "regex: /^(\\d{1,2})[:.](\\d{2})$/",
-      "porta_destra.unused",
-      "luce_neon_007"
-    ],
-    "finali": {
-      "dipendente": {
-        "titolo": "Il dipendente modello",
-        "testo": "Hai seguito il copione fino all'archivio. Ecco il percorso di Gabri e i contatti.",
-        "link": [
-          [
-            "Percorso completo",
-            "../chi-sono/"
-          ],
-          [
-            "Contatti",
-            "../#contatti"
-          ]
-        ]
-      },
-      "magazzino": {
-        "titolo": "Il magazzino",
-        "testo": "Hai disobbedito e hai trovato il progetto nascosto: Brat Animator, editor di lyric video nel browser.",
-        "link": [
-          [
-            "Brat Animator",
-            "../projects/brat-animator/"
-          ],
-          [
-            "Codice su GitHub",
-            "https://github.com/oakvx/bratAnimator"
-          ]
-        ]
-      },
-      "fuori": {
-        "titolo": "Fuori mappa",
-        "testo": "Hai usato una finestra dove non dovevi e sei finito dietro le quinte, dove Gabri smonta le cose per capirle. Lì c'è Synk: messaggi WhatsApp, calendario e prenotazioni.",
-        "link": [
-          [
-            "Synk",
-            "../projects/synk/"
-          ]
-        ]
-      },
-      "corridoio": {
-        "titolo": "Il corridoio infinito",
-        "testo": "Hai fatto marcia indietro troppe volte e la stanza è cambiata alle tue spalle. In fondo al corridoio c'era Beautify, il gestionale multisalone del diploma.",
-        "link": [
-          [
-            "Beautify",
-            "../projects/beautify/"
-          ]
-        ]
-      },
-      "attesa": {
-        "titolo": "L'attesa",
-        "testo": "Non ti sei mosso e il curatore ha finito le parole. Restava la musica: Gabri ha una stanza apposta per quella.",
-        "link": [
-          [
-            "Fuori orario",
-            "../fuori-orario/"
-          ]
-        ]
-      }
-    },
     "sale": {
-      "attesa": "Attesa",
-      "laboratorio": "Laboratorio",
-      "magazzino": "Magazzino",
-      "archivio": "Archivio",
-      "altrove": "Altrove",
       "atrio": "Atrio",
       "uscita": "Uscita",
       "gastronomia": "GASTRONOMIA"
     },
-    "didascalie": {
-      "monitor": [
-        "Brat Animator",
-        "Editor di lyric video · Canvas, WebCodecs",
-        "Testi LRC su una timeline, animati ed esportati in MP4 o WebM, tutto nel browser."
-      ],
-      "scatola": [
-        "Pezzo di Gabri",
-        "Opera in arrivo · sigillata",
-        "Il contenuto non è ancora stato scelto. Si prega di non aprire."
-      ],
-      "gesto": [
-        "Il gesto",
-        "Clic sinistro · clic destro",
-        "Due finestre collegate, solo sui pannelli a quadretti. Quello che entra da una esce dall’altra."
-      ]
+    "chiudiCartiglio": "E per chiudere",
+    "puntoControllo": "Torna al punto di ripresa",
+    "esamina": "esamina",
+    "azioni": {
+      "bancone": "prendi le finestre"
+    },
+    "cartigli": {
+      "bancone": {
+        "titolo": "Le due finestre",
+        "testo": "Clic sinistro apre la finestra ciano, clic destro quella magenta, solo sui pannelli a quadretti. Entri da una, esci dall'altra."
+      }
+    },
+    "stanze": {
+      "ingresso": {
+        "cartello": "Ingresso · turno di notte",
+        "testi": {}
+      }
     }
   },
   "en": {
@@ -213,7 +88,6 @@
     "pausa": "Paused",
     "riprendi": "Resume",
     "chiudi": "Close",
-    "apri": "Open the page",
     "ricomincia": "Start over",
     "impostazioni": "Settings",
     "fov": "Field of view",
@@ -226,155 +100,31 @@
     "qualita": "Window quality",
     "bassa": "Low",
     "alta": "High",
-    "finaleDi": "Ending {i} of 5",
-    "finaliVisti": "Endings seen: {n} of 5",
     "interagisci": "[E] ",
     "prendi": "Pick up",
     "lascia": "[E] drop · click to throw",
-    "oggetti": {
-      "monitor": {
-        "azione": "Look at the monitor",
-        "titolo": "Brat Animator",
-        "testo": "My in-browser lyric video editor: LRC lyrics, a timeline, Canvas text animation and MP4/WebM export with WebCodecs.",
-        "url": "../en/projects/brat-animator/"
-      },
-      "targa": {
-        "azione": "Read the plaque",
-        "titolo": "Gabriele Lucia",
-        "testo": "19, from Sassuolo, Italy. Junior web developer and freelancer since 2023: websites, interfaces and SEO for local businesses. Computer Engineering at UNIMORE since 2026.",
-        "url": "../en/chi-sono/"
-      },
-      "scatola": {
-        "azione": "Look at the box"
-      },
-      "scrivania": {
-        "azione": "Walk up to the desk"
-      }
-    },
-    "archivio": [
-      [
-        "2021–2026",
-        "IIS Volta, Sassuolo",
-        "Diploma in Computer Science and Telecommunications"
-      ],
-      [
-        "2025",
-        "Erasmus+, Seville",
-        "Starbotica: IT support and educational activities"
-      ],
-      [
-        "2026",
-        "Internship, Format SRL",
-        "Industrial software and automation: PLC and SQL Server"
-      ],
-      [
-        "2026–",
-        "UNIMORE",
-        "Computer Engineering, part-time"
-      ]
-    ],
-    "targhe": {
-      "sala": "ROOM 01 · WAITING",
-      "corridoio": "B-07",
-      "scatolaTitolo": "a piece of Gabri",
-      "scatolaNota": "coming soon",
-      "speciale": "DO NOT TOUCH"
-    },
-    "fuori": [
-      "room_03.js",
-      "// TODO: script chapter 2",
-      "narrator.state = 'panic'",
-      "synk/webhook.js",
-      "regex: /^(\\d{1,2})[:.](\\d{2})$/",
-      "right_door.unused",
-      "neon_light_007"
-    ],
-    "finali": {
-      "dipendente": {
-        "titolo": "The model employee",
-        "testo": "You followed the script all the way to the archive. Here's Gabri's path and how to get in touch.",
-        "link": [
-          [
-            "Full path",
-            "../en/chi-sono/"
-          ],
-          [
-            "Contacts",
-            "../en/#contatti"
-          ]
-        ]
-      },
-      "magazzino": {
-        "titolo": "The storeroom",
-        "testo": "You disobeyed and found the hidden project: Brat Animator, an in-browser lyric video editor.",
-        "link": [
-          [
-            "Brat Animator",
-            "../en/projects/brat-animator/"
-          ],
-          [
-            "Code on GitHub",
-            "https://github.com/oakvx/bratAnimator"
-          ]
-        ]
-      },
-      "fuori": {
-        "titolo": "Off the map",
-        "testo": "You used a window where you shouldn't have and ended up backstage, where Gabri takes things apart to understand them. Synk lives there: WhatsApp messages, calendar and bookings.",
-        "link": [
-          [
-            "Synk",
-            "../en/projects/synk/"
-          ]
-        ]
-      },
-      "corridoio": {
-        "titolo": "The endless corridor",
-        "testo": "You went back too many times and the room changed behind you. At the end of the corridor was Beautify, the multi-salon management system from the diploma.",
-        "link": [
-          [
-            "Beautify",
-            "../en/projects/beautify/"
-          ]
-        ]
-      },
-      "attesa": {
-        "titolo": "The wait",
-        "testo": "You stood still and the curator ran out of words. The music remained: Gabri keeps a room just for that.",
-        "link": [
-          [
-            "After Hours",
-            "../en/fuori-orario/"
-          ]
-        ]
-      }
-    },
     "sale": {
-      "attesa": "Waiting room",
-      "laboratorio": "Lab",
-      "magazzino": "Storeroom",
-      "archivio": "Archive",
-      "altrove": "Elsewhere",
       "atrio": "Atrium",
       "uscita": "Exit",
       "gastronomia": "DELI"
     },
-    "didascalie": {
-      "monitor": [
-        "Brat Animator",
-        "Lyric video editor · Canvas, WebCodecs",
-        "LRC lyrics on a timeline, animated and exported to MP4 or WebM, all in the browser."
-      ],
-      "scatola": [
-        "A piece of Gabri",
-        "Work in progress · sealed",
-        "The contents have not been chosen yet. Please do not open."
-      ],
-      "gesto": [
-        "The gesture",
-        "Left click · right click",
-        "Two linked windows, only on the gridded panels. Whatever goes in one comes out of the other."
-      ]
+    "chiudiCartiglio": "E to close",
+    "puntoControllo": "Back to the checkpoint",
+    "esamina": "examine",
+    "azioni": {
+      "bancone": "take the windows"
+    },
+    "cartigli": {
+      "bancone": {
+        "titolo": "The two windows",
+        "testo": "Left click opens the cyan window, right click the magenta one, only on the grid panels. In through one, out of the other."
+      }
+    },
+    "stanze": {
+      "ingresso": {
+        "cartello": "Entrance · night shift",
+        "testi": {}
+      }
     }
   }
 }

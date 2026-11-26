@@ -66,29 +66,23 @@
       <select id="imp-qual"><option value="0.5" data-t="bassa">Bassa</option><option value="1" data-t="alta">Alta</option></select></label>
     <label class="spunta"><input type="checkbox" id="imp-calmo"> <span data-t="calmo">Riduci oscillazioni e distorsioni</span></label>
   </fieldset>
-  <p id="pausa-finali" class="comandi"></p>
   <div class="scelte">
     <button type="button" id="riprendi" class="tasto tasto-forte" data-t="riprendi">Riprendi</button>
+    <button type="button" id="punto-controllo" class="tasto" data-t="puntoControllo">Torna al punto di ripresa</button>
     <button type="button" id="ricomincia-pausa" class="tasto" data-t="ricomincia">Ricomincia</button>
     <a class="tasto" href="../" data-classica data-t="classica">Torna al sito</a>
   </div>
 </section>
 
-<section id="scheda" class="pannello" hidden role="dialog" aria-modal="true" aria-labelledby="scheda-titolo">
-  <h2 id="scheda-titolo"></h2>
-  <p id="scheda-testo"></p>
-  <div class="scelte">
-    <a id="scheda-link" class="tasto tasto-forte" href="#" data-t="apri">Apri la pagina</a>
-    <button type="button" id="scheda-chiudi" class="tasto" data-t="chiudi">Chiudi</button>
-  </div>
-</section>
+<aside id="cartiglio" class="cartiglio" hidden aria-live="polite">
+  <h2 id="cartiglio-titolo"></h2>
+  <p id="cartiglio-testo"></p>
+  <p class="cartiglio-chiudi" data-t="chiudiCartiglio">E per chiudere</p>
+</aside>
 
 <section id="finale" class="pannello finale" hidden role="dialog" aria-modal="true" aria-labelledby="finale-titolo">
-  <p id="finale-numero" class="finale-numero"></p>
   <h2 id="finale-titolo"></h2>
-  <p id="finale-testo"></p>
-  <div id="finale-link" class="scelte"></div>
-  <p id="finale-visti" class="comandi"></p>
+  <div id="finale-contenuto"></div>
   <div class="scelte">
     <button type="button" id="ricomincia" class="tasto tasto-forte" data-t="ricomincia">Ricomincia</button>
     <a class="tasto" href="../" data-classica data-t="classica">Torna al sito</a>

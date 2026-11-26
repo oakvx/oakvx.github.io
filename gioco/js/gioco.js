@@ -8,11 +8,10 @@ import { Portali } from './portali.js';
 import { Narratore } from './narratore.js';
 import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
+import { creaGiro, creaAiuti } from './logica/giro.js';
 
 const $ = (id) => document.getElementById(id);
-const FINALI = ['dipendente', 'magazzino', 'fuori', 'corridoio', 'attesa'];
-const STANZE = ['sala', 'bivio', 'laboratorio', 'archivio', 'magazzino', 'fuorimappa', 'corridoio',
-  'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const STANZE = ['ingresso', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
 const ATMOSFERA = { nebbia: 0xe9eef1, vicino: 1.5, lontano: 22, cielo: 0xf6f9fb, terra: 0xc4cdd1, intensita: 2.9 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
@@ -23,10 +22,6 @@ const FOG = 0xe9eef1;
 function leggiImpostazioni() {
   const base = { fov: 74, sens: 1, sott: 'medi', qual: '0.5', calmo: reduceMotion };
   try { return { ...base, ...JSON.parse(localStorage.getItem('gioco-imp') || '{}') }; } catch { return base; }
-}
-
-function finaliVisti() {
-  try { return new Set(JSON.parse(localStorage.getItem('gioco-finali') || '[]').filter((f) => FINALI.includes(f))); } catch { return new Set(); }
 }
 
 export async function avvia(ctx) {
@@ -90,6 +85,8 @@ export async function avvia(ctx) {
   }
 
   let fadeCb = null;
+  const controlli = new Map();
+  const aiuti = new Map();
   const g = {
     mondo, scene, portali, emetti, su, cubo, debug: ctx.debug,
     T: () => ctx.T,
@@ -100,8 +97,24 @@ export async function avvia(ctx) {
     giocatore: () => giocatore,
     yaw: () => yaw,
     narratore: () => narratore,
-    finale: (id) => finale(id),
     suoni,
+    giro: creaGiro(),
+    // punto di ripresa di una stanza: chi cade o si incastra torna qui
+    puntoControllo: (stanza, x, piedi, z, yawP = 0) => { controlli.set(stanza, { x, piedi, z, yaw: yawP }); },
+    cartiglio: (chiave) => apriCartiglio(chiave),
+    lampada: (id) => {
+      if (!g.giro.completa(id)) return false;
+      suoni.lampada?.();
+      emetti('lampada:' + id);
+      return true;
+    },
+    aiuti: (stanza) => {
+      const a = creaAiuti();
+      aiuti.set(stanza, a);
+      return a;
+    },
+    segreto: (id) => { if (g.giro.segreto(id)) emetti('segreto:' + id); },
+    fine: () => fine(),
     teletrasporta: (x, piedi, z, nuovoYaw = null, prima = null) => g.velo(() => {
       if (prima) prima();
       giocatore.pos.set(x, piedi + giocatore.half.y + 0.01, z);
@@ -121,7 +134,11 @@ export async function avvia(ctx) {
 
   // le stanze sono moduli separati, scaricati qui
   const moduli = await Promise.all(STANZE.map((n) => import(`./stanze/${n}.js`)));
-  moduli.forEach((mod) => mod.costruisci(mondo, g));
+  const debugStanze = {};
+  moduli.forEach((mod, i) => {
+    const esito = mod.costruisci(mondo, g);
+    if (esito && esito.debug) debugStanze[STANZE[i]] = esito.debug;
+  });
   const meshSolide = mondo.solidi.filter((s) => s.mesh && s.mesh.visible).map((s) => s.mesh);
 
   // ---------------------------------------------------------------- post-processing
@@ -193,27 +210,52 @@ export async function avvia(ctx) {
   applicaImpostazioni();
 
   // ---------------------------------------------------------------- stato di gioco
-  let stato = 'avvio';            // avvio | gioco | pausa | scheda | finale
+  let stato = 'avvio';            // avvio | gioco | pausa | finale
   let gesto = false;
   let tenuto = null;
   let finito = false;
   let fermo = 0;
   let passi = 0;
   let stanzaAttuale = null;
+  let ultimoControllo = 'ingresso';
   let mirato = null;
+  let cartiglio = null;           // { chiave, pos } mentre è aperto
   const tasti = new Set();
-  const visti = finaliVisti();
 
   function mostra(id) {
-    for (const p of ['avvio', 'pausa', 'scheda', 'finale']) $(p).hidden = p !== id;
+    for (const p of ['avvio', 'pausa', 'finale']) $(p).hidden = p !== id;
     const inGioco = id === null;
     $('mirino').hidden = !inGioco;
     $('finestre').hidden = !inGioco || !gesto;
     if (!inGioco) $('suggerimento').hidden = true;
-    $('sottotitoli').style.visibility = id === 'pausa' || id === 'scheda' ? 'hidden' : '';
+    $('sottotitoli').style.visibility = id === 'pausa' ? 'hidden' : '';
+    if (!inGioco) chiudiCartiglio();
   }
 
-  function testoFinali() { return ctx.T.finaliVisti.replace('{n}', visti.size); }
+  function apriCartiglio(chiave) {
+    const c = ctx.T.cartigli && ctx.T.cartigli[chiave];
+    if (!c) return;
+    cartiglio = { chiave, pos: giocatore.pos.clone() };
+    $('cartiglio-titolo').textContent = c.titolo;
+    $('cartiglio-testo').textContent = c.testo;
+    $('cartiglio').hidden = false;
+  }
+  function chiudiCartiglio() {
+    cartiglio = null;
+    $('cartiglio').hidden = true;
+  }
+  ctx.suLingua(() => { if (cartiglio) apriCartiglio(cartiglio.chiave); });
+
+  function riprendi() {
+    const c = controlli.get(ultimoControllo) || controlli.get('ingresso');
+    if (!c) return;
+    giocatore.pos.set(c.x, c.piedi + giocatore.half.y + 0.01, c.z);
+    giocatore.vel.set(0, 0, 0);
+    giocatore.zPrima = [null, null];
+    yaw = c.yaw;
+    pitch = 0;
+    if (tenuto) { tenuto.tenuto = false; tenuto = null; }
+  }
 
   function blocca() {
     suoni.avvia();
@@ -228,7 +270,6 @@ export async function avvia(ctx) {
     } else if (stato === 'gioco') {
       stato = 'pausa';
       tasti.clear();
-      $('pausa-finali').textContent = testoFinali();
       mostra('pausa');
       $('riprendi').focus();
     }
@@ -242,7 +283,7 @@ export async function avvia(ctx) {
   };
   $('avvio-entra').addEventListener('click', blocca);
   $('riprendi').addEventListener('click', blocca);
-  $('scheda-chiudi').addEventListener('click', blocca);
+  $('punto-controllo').addEventListener('click', () => { g.velo(riprendi); blocca(); });
   $('ricomincia').addEventListener('click', ricomincia);
   $('ricomincia-pausa').addEventListener('click', ricomincia);
   canvas.addEventListener('click', () => { if (stato === 'pausa' || stato === 'avvio') blocca(); });
@@ -273,9 +314,6 @@ export async function avvia(ctx) {
       }
       tasti.add(e.code);
       if (e.code.startsWith('Arrow') || e.code === 'Space') e.preventDefault();
-    } else if (e.code === 'Escape' && stato === 'scheda') {
-      stato = 'pausa';
-      mostra('pausa');
     }
   });
   document.addEventListener('keyup', (e) => tasti.delete(e.code));
@@ -301,6 +339,7 @@ export async function avvia(ctx) {
 
   function interagisci() {
     if (tenuto) { tenuto.tenuto = false; tenuto = null; return; }
+    if (cartiglio) { chiudiCartiglio(); return; }
     if (!mirato) return;
     if (mirato.corpo) {
       tenuto = mirato.corpo;
@@ -311,17 +350,7 @@ export async function avvia(ctx) {
     }
     const k = mirato.chiave;
     emetti('oggetto:' + k);
-    const o = ctx.T.oggetti[k];
-    if (o && o.testo) {
-      $('scheda-titolo').textContent = o.titolo;
-      $('scheda-testo').textContent = o.testo;
-      $('scheda-link').href = o.url;
-      stato = 'scheda';
-      tasti.clear();
-      document.exitPointerLock();
-      mostra('scheda');
-      $('scheda-link').focus();
-    }
+    if (ctx.T.cartigli && ctx.T.cartigli[k]) apriCartiglio(k);
   }
 
   function lancia() {
@@ -344,7 +373,7 @@ export async function avvia(ctx) {
     $('mirino').classList.toggle('attivo', !!mirato);
     if (tenuto) { sugg.textContent = ctx.T.lascia; sugg.hidden = false; }
     else if (mirato) {
-      sugg.textContent = ctx.T.interagisci + (mirato.corpo ? ctx.T.prendi : ctx.T.oggetti[mirato.chiave].azione);
+      sugg.textContent = ctx.T.interagisci + (mirato.corpo ? ctx.T.prendi : (ctx.T.azioni && ctx.T.azioni[mirato.chiave]) || ctx.T.esamina);
       sugg.hidden = false;
     } else sugg.hidden = true;
   }
@@ -355,32 +384,15 @@ export async function avvia(ctx) {
       gesto = true;
       $('finestre').hidden = stato !== 'gioco';
     }
-    if (nome === 'speciale') finale('magazzino');
-    if (nome === 'scrivania') finale('dipendente');
-    if (nome === 'fuori') narratore.poi(() => finale('fuori'));
   }
 
-  function finale(id) {
+  // la schermata finale (riempita dalla stanza dei contatti)
+  function fine() {
     if (finito) return;
     finito = true;
-    if (id !== 'fuori') narratore.evento('finale:' + id);
+    emetti('fine');
     narratore.poi(() => {
-      visti.add(id);
-      localStorage.setItem('gioco-finali', JSON.stringify([...visti]));
       suoni.finale();
-      const f = ctx.T.finali[id];
-      $('finale-numero').textContent = ctx.T.finaleDi.replace('{i}', FINALI.indexOf(id) + 1);
-      $('finale-titolo').textContent = f.titolo;
-      $('finale-testo').textContent = f.testo;
-      const box = $('finale-link');
-      box.replaceChildren(...f.link.map(([testo, url]) => {
-        const a = document.createElement('a');
-        a.className = 'tasto';
-        a.href = url;
-        a.textContent = testo;
-        return a;
-      }));
-      $('finale-visti').textContent = testoFinali();
       stato = 'finale';
       tasti.clear();
       document.exitPointerLock();
@@ -425,8 +437,9 @@ export async function avvia(ctx) {
       suoni.passaggio();
       emetti('portale:attraversato', t);
     } else passi += Math.hypot(giocatore.pos.x - prima.x, giocatore.pos.z - prima.z);
-    // caduta nel vuoto: si torna all'inizio della stanza corrente
-    if (giocatore.pos.y < -20) { giocatore.pos.copy(SPAWN); giocatore.vel.set(0, 0, 0); }
+    // caduta nel vuoto: si torna al punto di ripresa dell'ultima stanza che ne ha uno
+    const ultima = controlli.get(ultimoControllo);
+    if (giocatore.pos.y < (ultima ? ultima.piedi : 0) - 20) g.velo(riprendi);
   }
 
   function aggiornaCubi(dt) {
@@ -453,6 +466,7 @@ export async function avvia(ctx) {
       stanzaAttuale = nome;
       if (s.atmosfera !== 'eredita') atmo = { ...ATMOSFERA, ...(s.atmosfera || {}) };
       if (s.suono !== 'eredita') suoni.ambiente(s.suono || {});
+      if (controlli.has(nome)) ultimoControllo = nome;
       emetti('stanza:' + nome);
     }
     mondo.controllaZone(giocatore.pos, (z) => emetti(z));
@@ -492,15 +506,13 @@ export async function avvia(ctx) {
     });
   }
 
-  const soglie = [15, 30, 45, 60];
-  const dette = new Set();
-  function aggiornaAttesa(dt) {
-    if (finito || narratore.occupato()) return;
-    fermo += dt;
-    for (const s of soglie) {
-      if (fermo >= s && !dette.has(s)) { dette.add(s); emetti('fermo:' + s); }
+  function aggiornaAiuti(dt) {
+    for (const [nome, a] of aiuti) {
+      const qui = !!stanzaAttuale && (stanzaAttuale === nome || stanzaAttuale.startsWith(nome + '-'));
+      const esito = a.aggiorna(dt, qui);
+      if (esito) emetti(`aiuto:${esito}:${nome}`);
     }
-    if (fermo >= 75) finale('attesa');
+    if (cartiglio && cartiglio.pos.distanceTo(giocatore.pos) > 3) chiudiCartiglio();
   }
 
   // ---------------------------------------------------------------- ciclo
@@ -513,7 +525,7 @@ export async function avvia(ctx) {
       aggiornaGiocatore(dt);
       aggiornaCubi(dt);
       aggiornaStanza();
-      aggiornaAttesa(dt);
+      aggiornaAiuti(dt);
       narratore.aggiorna(dt);
     } else if (stato === 'finale') narratore.aggiorna(dt);
     const moto = Math.hypot(giocatore.vel.x, giocatore.vel.z);
@@ -542,8 +554,10 @@ export async function avvia(ctx) {
     window.__gioco = {
       leggi: () => ({
         stato, stanza: stanzaAttuale, gesto, finito, x: giocatore.pos.x, y: giocatore.pos.y, z: giocatore.pos.z, yaw,
+        lampade: g.giro.lampade(), segreti: g.giro.segreti(), cartiglio: cartiglio && cartiglio.chiave,
+        puntoControllo: ultimoControllo, pc: (() => { const c = controlli.get(ultimoControllo); return c && { x: c.x, y: c.piedi + giocatore.half.y + 0.01, z: c.z }; })(),
         portali: portali.p.map((p) => p.attivo && p.pannello), narratore: narratore.attuale && narratore.attuale.id,
-        stNarr: { ...narratore.stato }, tenuto: !!tenuto, mirato: mirato && (mirato.chiave || 'cubo'), visti: [...visti],
+        tenuto: !!tenuto, mirato: mirato && (mirato.chiave || 'cubo'),
       }),
       vai: (x, y, z) => { giocatore.pos.set(x, y, z); giocatore.vel.set(0, 0, 0); giocatore.zPrima = [null, null]; },
       guarda: (y, p = 0) => { yaw = y; pitch = p; },
@@ -554,12 +568,19 @@ export async function avvia(ctx) {
       salta: () => { narratore.coda = []; narratore.attuale = null; narratore.pausa = 0; narratore.mostra(); },
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
+      vaiA: (nome) => { ultimoControllo = nome; riprendi(); },
+      stanza: (nome) => debugStanze[nome],
+      mira: (x, y, z) => {
+        const d = new THREE.Vector3(x, y, z).sub(camera.position);
+        yaw = Math.atan2(-d.x, -d.z);
+        pitch = Math.atan2(d.y, Math.hypot(d.x, d.z));
+      },
     };
   }
 
   // ---------------------------------------------------------------- partenza
-  giocatore.pos.copy(SPAWN);
-  emetti('inizio', { visti: visti.size });
+  riprendi();
+  emetti('inizio');
   renderer.setAnimationLoop(ciclo);
   $('avvio-testo').removeAttribute('data-t');
   $('avvio-testo').textContent = ctx.T.comandi;

@@ -115,6 +115,26 @@
     "N-223": {
       "it": "Il visitatore arrivò in cima al desktop. Un'altra lampada. Il curatore canticchiò il ritornello.",
       "en": "The visitor reached the top of the desktop. Another lamp. The curator hummed the chorus."
+    },
+    "N-230": {
+      "it": "synk. Un salone, una giornata, tre messaggi su WhatsApp. Il calendario, ci tengo a dirlo, non sopporta le sovrapposizioni. Come me.",
+      "en": "synk. One salon, one day, three WhatsApp messages. The calendar, I must say, can't stand overlaps. Like me."
+    },
+    "N-231": {
+      "it": "Respinto. Il database ha detto no, e la saga di compensazione ha rimesso tutto com'era. Un'eleganza che io non ho.",
+      "en": "Rejected. The database said no, and the compensation saga put everything back. An elegance I do not have."
+    },
+    "N-232": {
+      "it": "Indizio: il colore dura due ore. Ci sono solo due buchi abbastanza grandi.",
+      "en": "Hint: colour takes two hours. Only two gaps are big enough."
+    },
+    "N-233": {
+      "it": "Ho scritto la soluzione sul calendario. Il cliente non lo saprà mai.",
+      "en": "I've written the solution on the calendar. The customer will never know."
+    },
+    "N-234": {
+      "it": "Sincronizzato. Nessuna doppia prenotazione, nessun cliente arrabbiato. Lampada.",
+      "en": "Synced. No double bookings, no angry customers. Lamp."
     }
   },
   "eventi": {
@@ -239,6 +259,27 @@
     "lampada:brat": [
       {
         "id": "N-223",
+        "subito": true
+      }
+    ],
+    "stanza:synk": [
+      {
+        "id": "N-230",
+        "subito": true
+      }
+    ],
+    "synk:conflitto": [
+      "N-231"
+    ],
+    "aiuto:indizio:synk": [
+      "N-232"
+    ],
+    "aiuto:soluzione:synk": [
+      "N-233"
+    ],
+    "lampada:synk": [
+      {
+        "id": "N-234",
         "subito": true
       }
     ]

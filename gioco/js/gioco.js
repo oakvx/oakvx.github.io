@@ -84,8 +84,8 @@ export async function avvia(ctx) {
   };
   const interattivi = [];
 
-  function cubo(x, y, z, { speciale = false, mappa = null } = {}) {
-    const mesh = new THREE.Mesh(geoCubo, mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo());
+  function cubo(x, y, z, { speciale = false, mappa = null, materiale = null } = {}) {
+    const mesh = new THREE.Mesh(geoCubo, materiale || (mappa ? new THREE.MeshLambertMaterial({ map: mappa, emissive: 0x6b5520, emissiveIntensity: 0.6 }) : matCubo()));
     mesh.position.set(x, y, z);
     scene.add(mesh);
     const c = new Corpo(mesh.position, new THREE.Vector3(0.22, 0.22, 0.22), { mesh });

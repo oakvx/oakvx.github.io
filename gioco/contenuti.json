@@ -189,6 +189,31 @@
             "Un compositore Canvas 2D guidato dai timestamp tiene allineate anteprima ed esportazione; dove c'è, WebCodecs esporta in MP4. I progetti stanno in IndexedDB e in archivi .brat.zip portatili, e funziona anche offline. Ultima aggiunta: le sillabe temporizzate di una parola spezzata mostrano il trattino finché la parola non è completa."
           ]
         }
+      },
+      "synk": {
+        "cartello": "synk",
+        "occupato": "occupato",
+        "calendario": "Google Calendar · oggi",
+        "vuoto": "In attesa di sincronizzazione…",
+        "saga": "saga di compensazione",
+        "soluzione": "Colore 11–13 · Taglio e piega dopo le 14",
+        "richieste": {
+          "taglio": "Taglio",
+          "colore": "Colore",
+          "piega": "Piega"
+        },
+        "testi": {
+          "synk": [
+            "synk",
+            "release candidate 1.2.0-rc.6",
+            "Prenotazioni on-premise per saloni, con messaggi WhatsApp e Google Calendar. Le richieste arrivano come messaggi; il calendario non accetta due appuntamenti sovrapposti. È in collaudo: non per dati di clienti reali."
+          ],
+          "tecnica": [
+            "Com'è fatto",
+            "Node.js · PHP · PostgreSQL 16 · Docker",
+            "Un vincolo di esclusione GiST rende impossibile la doppia prenotazione; le scritture verso Google Calendar passano da una outbox transazionale con lease e fencing token, e una saga di compensazione rimette le cose a posto quando qualcosa fallisce. Ollama locale opzionale."
+          ]
+        }
       }
     }
   },
@@ -380,6 +405,31 @@
             "How it is made",
             "JavaScript · 7.css · Canvas 2D · WebCodecs · IndexedDB · PWA",
             "A timestamp-driven Canvas 2D compositor keeps preview and export aligned; WebCodecs exports MP4 where supported. Projects live in IndexedDB and portable .brat.zip archives, and it works offline too. Latest: timed syllables of a split word show a hyphen until the word completes."
+          ]
+        }
+      },
+      "synk": {
+        "cartello": "synk",
+        "occupato": "booked",
+        "calendario": "Google Calendar · today",
+        "vuoto": "Waiting to sync…",
+        "saga": "compensation saga",
+        "soluzione": "Colour 11–13 · Cut and blow-dry after 14",
+        "richieste": {
+          "taglio": "Cut",
+          "colore": "Colour",
+          "piega": "Blow-dry"
+        },
+        "testi": {
+          "synk": [
+            "synk",
+            "release candidate 1.2.0-rc.6",
+            "On-premise salon booking with WhatsApp messages and Google Calendar. Requests arrive as messages; the calendar won't accept two overlapping appointments. It's in testing: not for real customer data."
+          ],
+          "tecnica": [
+            "How it is made",
+            "Node.js · PHP · PostgreSQL 16 · Docker",
+            "A GiST exclusion constraint makes double booking impossible; writes to Google Calendar go through a transactional outbox with leases and fencing tokens, and a compensation saga puts things back when something fails. Optional local Ollama."
           ]
         }
       }

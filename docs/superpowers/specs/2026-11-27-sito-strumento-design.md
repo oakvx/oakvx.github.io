@@ -1,5 +1,7 @@
 # Sito "Strumento": banco di lavoro, tono cinico, transizione a proiettile
 
+> Stato: implementato il 2026-11-27 secondo `docs/superpowers/plans/2026-11-27-sito-strumento.md`. Differenze rispetto a questo documento: scritta del fascio e titolo della home in minuscolo («oakvx.»); la pistola è un unico GLB quantizzato da 1,1 MB.
+
 Seconda iterazione del sito "Nero". Il gioco in `/gioco/` non si tocca.
 
 ## Perché

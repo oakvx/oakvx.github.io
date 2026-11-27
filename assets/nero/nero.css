@@ -1645,7 +1645,7 @@ html.sparo-arrivo::after {
    Tacche: quattro angoli segnati a 1px al posto dei riquadri pieni.
    I componenti si aggiungono all'elenco; il loro bordo pieno sparisce.
    -------------------------------------------------------------------------- */
-.term, .lyric, .flusso {
+.term, .lyric, .flusso, .orari {
     --tacca: 12px;
     --tacca-colore: rgb(232 230 225 / .5);
     border-color: transparent;

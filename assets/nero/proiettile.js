@@ -46,4 +46,34 @@
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
     OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, USCITA_MS, ARRIVO_MS });
+
+    /* ---------------------------------------------------------------- DOM */
+    let livello = null;
+
+    function creaLivello() {
+        if (livello) return livello;
+        livello = document.createElement('div');
+        livello.className = 'sparo';
+        livello.setAttribute('aria-hidden', 'true');
+        const scritta = Array.from({ length: 14 }, () => 'oakvx.').join(' ');
+        livello.innerHTML =
+            '<span class="sparo__fascio"><span class="sparo__scritta">' + scritta + '</span></span>' +
+            '<span class="sparo__lampo"></span>' +
+            '<span class="sparo__proiettile"></span>';
+        document.body.append(livello);
+        return livello;
+    }
+
+    /** Disegna lo stato f = fase(ms) a partire dalla volata {x, y} in pixel. */
+    function disegna(f, volata) {
+        const el = creaLivello();
+        el.style.setProperty('--x0', volata.x + 'px');
+        el.style.setProperty('--y', volata.y + 'px');
+        el.style.setProperty('--s', (f.sparo > 0 && f.sparo < 1 ? Math.sin(f.sparo * Math.PI) : 0).toFixed(3));
+        el.style.setProperty('--p', f.proiettile.toFixed(4));
+        el.style.setProperty('--f', f.fascio.toFixed(4));
+        el.style.setProperty('--c', f.copertura.toFixed(4));
+    }
+
+    Object.assign(OAKVX.proiettile, { creaLivello, disegna });
 })();

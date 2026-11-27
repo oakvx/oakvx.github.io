@@ -135,4 +135,5 @@ Il gioco 3D esistente (`/gioco/`) e il terminale di Chi sono si collegano dal Ma
 ## Decisioni di oakvx
 
 - Mazzo da 40: **carte siciliane**.
-- Carioca: la versione con **coppia, tris, poker, tric trac, bomba e chiusura**. Non ho trovato fonti pubblicate su questa variante: le regole (carte distribuite, cosa sono tric trac e bomba, come si chiude, punteggi) le scrive oakvx prima che la carioca entri nel piano.
+- Scopa e briscola si giocano con le **carte siciliane**.
+- Carioca: è **un gioco a parte** (non una variante della scala 40 né della scopa), con **coppia, tris, poker, tric trac, bomba e chiusura**. Mazzo e regole li indica oakvx. Non ho trovato fonti pubblicate su questa variante: le regole (carte distribuite, cosa sono tric trac e bomba, come si chiude, punteggi) le scrive oakvx prima che la carioca entri nel piano.

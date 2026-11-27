@@ -56,6 +56,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="./magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="./en/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -150,14 +151,14 @@
 </div>
 
 <section class="manifesto contenitore" aria-label="Metodo" data-i18n-aria="home.manifestoAria">
-    <p class="t-meta">(01) <span data-i18n="home.manifestoLabel">Metodo</span></p>
+    <p class="t-meta">(i) <span data-i18n="home.manifestoLabel">Metodo</span></p>
     <p class="manifesto__testo" data-scorri-parole data-i18n-html="home.manifesto">Ho iniziato per curiosità e sono rimasto per i problemi. Mi piace capire <em>cosa non funziona</em>, sistemarlo e far finta che fosse facile. Codice e grafica, per me, sono <span class="cremisi">lo stesso lavoro visto da due lati.</span></p>
     <p class="manifesto__firma t-meta"><span data-i18n="home.manifestoSign">— oakvx, Sassuolo</span><a class="filo" href="metodo/" data-velo-n="05"><span data-velo-nome data-i18n="home.methodLink">Come lavoro</span> <span class="freccia" aria-hidden="true"></span></a><a class="filo" href="chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="home.manifestoLink">La versione lunga</span> <span class="freccia" aria-hidden="true"></span></a></p>
 </section>
 
 <section class="sezione lavori" id="lavori" aria-labelledby="lavori-titolo">
     <header class="sezione-testa">
-        <p class="t-meta">(02) <span data-i18n="home.workLabel">Lavori</span></p>
+        <p class="t-meta">(ii) <span data-i18n="home.workLabel">Lavori</span></p>
         <h2 class="sezione-titolo" id="lavori-titolo" data-split data-i18n-html="home.workTitle">Quattro progetti. <em>Ne avrei altri, ma questi reggono.</em></h2>
         <p class="sezione-nota rivela" data-i18n="home.workNote">Un editor creativo, un assistente su WhatsApp, un gestionale e un sito vetrina. Problemi diversi, stessa testardaggine.</p>
     </header>
@@ -204,7 +205,7 @@
 
 <section class="sezione tappe" id="percorso" aria-labelledby="tappe-titolo">
     <header class="sezione-testa">
-        <p class="t-meta">(03) <span data-i18n="home.pathLabel">Percorso</span></p>
+        <p class="t-meta">(iii) <span data-i18n="home.pathLabel">Percorso</span></p>
         <h2 class="sezione-titolo" id="tappe-titolo" data-split data-i18n-html="home.pathTitle">Ogni tappa smussa uno spigolo. <em>Qualcuno è rimasto.</em></h2>
         <p class="sezione-nota rivela" data-i18n="home.pathNote">Scuola, clienti veri, un Erasmus a Siviglia, macchine industriali. Adesso l’università.</p>
     </header>
@@ -219,7 +220,7 @@
 
 <section class="sezione mestiere" id="strumenti" aria-labelledby="mestiere-titolo">
     <header class="sezione-testa">
-        <p class="t-meta">(04) <span data-i18n="home.skillsLabel">Mestiere</span></p>
+        <p class="t-meta">(iv) <span data-i18n="home.skillsLabel">Mestiere</span></p>
         <h2 class="sezione-titolo" id="mestiere-titolo" data-split data-i18n-html="home.skillsTitle">Tre cose che so fare. <em>Le altre le imparo quando servono.</em></h2>
     </header>
     <div class="mestiere__aree">
@@ -255,7 +256,7 @@
 
 <section class="sezione archivio" id="attivita-github" aria-labelledby="archivio-titolo">
     <header class="sezione-testa">
-        <p class="t-meta">(05) <span data-i18n="home.archiveLabel">Archivio aperto</span></p>
+        <p class="t-meta">(v) <span data-i18n="home.archiveLabel">Archivio aperto</span></p>
         <h2 class="sezione-titolo" id="archivio-titolo" data-split data-i18n-html="home.archiveTitle">Il codice è pubblico. <em>Giudicate pure.</em></h2>
         <p class="sezione-nota rivela" data-i18n="home.archiveNote">Quattro repository fuori dai casi studio: un agente locale, un gateway AI, un po’ di reverse engineering e un Hackintosh.</p>
     </header>
@@ -270,23 +271,23 @@
 
 <section class="sezione cantiere" id="commit-sito" aria-labelledby="cantiere-titolo" data-commit-sito>
     <header class="sezione-testa">
-        <p class="t-meta">(06) <span data-i18n="home.siteLabel">Questo sito</span></p>
+        <p class="t-meta">(vi) <span data-i18n="home.siteLabel">Questo sito</span></p>
         <h2 class="sezione-titolo" id="cantiere-titolo" data-split data-i18n-html="home.siteTitle">Rifatto, limato, <em>committato.</em> Più volte.</h2>
         <p class="sezione-nota rivela" data-i18n="home.siteNote">Ogni commit di questo repository, giorno per giorno, in diretta da GitHub. Sì, alcuni giorni ho esagerato.</p>
     </header>
     <div class="cantiere__corpo">
-        <p class="cantiere__numero"><span data-commit-totale>214</span> <span class="t-meta" data-i18n="home.siteUnit">commit</span></p>
+        <p class="cantiere__numero"><span data-commit-totale>226</span> <span class="t-meta" data-i18n="home.siteUnit">commit</span></p>
         <dl class="cantiere__dati t-meta">
             <div><dt data-i18n="home.siteFirst">Primo commit</dt><dd data-commit-primo>4 nov 2026</dd></div>
             <div><dt data-i18n="home.siteDays">Giorni di lavoro</dt><dd data-commit-giorni>7</dd></div>
-            <div><dt data-i18n="home.siteBest">Giorno record</dt><dd data-commit-record>127 · 27 nov 2026</dd></div>
-            <div><dt data-i18n="home.siteLast">Ultimo</dt><dd><a class="filo" href="https://github.com/oakvx/oakvx.github.io/commits" target="_blank" rel="noopener noreferrer" data-commit-ultimo>Stili: contatti leggibili su desktop, niente colophon doppio, titoli dei servizi con un minimo</a></dd></div>
+            <div><dt data-i18n="home.siteBest">Giorno record</dt><dd data-commit-record>139 · 27 nov 2026</dd></div>
+            <div><dt data-i18n="home.siteLast">Ultimo</dt><dd><a class="filo" href="https://github.com/oakvx/oakvx.github.io/commits" target="_blank" rel="noopener noreferrer" data-commit-ultimo>Generatore: pagina Magazzino, più file extra per pagina</a></dd></div>
         </dl>
         <div class="cantiere__grafico" data-commit-grafico role="img" aria-label="Commit per giorno" data-i18n-aria="home.siteChartAria"></div>
         <p class="cantiere__asse t-meta" aria-hidden="true"><span data-commit-da>4 nov 2026</span><span data-i18n="home.siteToday">oggi</span></p>
         <p class="cantiere__stato t-meta" data-commit-stato aria-live="polite"></p>
     </div>
-    <script type="application/json" id="commit-sito-dati">{"totale": 214, "giorni": {"2026-11-04": 1, "2026-11-07": 6, "2026-11-09": 1, "2026-11-19": 2, "2026-11-21": 20, "2026-11-26": 57, "2026-11-27": 127}, "ultimo": "Stili: contatti leggibili su desktop, niente colophon doppio, titoli dei servizi con un minimo"}</script>
+    <script type="application/json" id="commit-sito-dati">{"totale": 226, "giorni": {"2026-11-04": 1, "2026-11-07": 6, "2026-11-09": 1, "2026-11-19": 2, "2026-11-21": 20, "2026-11-26": 57, "2026-11-27": 139}, "ultimo": "Generatore: pagina Magazzino, più file extra per pagina"}</script>
 </section>
 
 </main>

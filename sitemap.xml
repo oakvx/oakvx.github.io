@@ -170,4 +170,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/contatti/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/contatti/"/>
   </url>
+  <url><loc>https://oakvx.github.io/magazzino/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/magazzino/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/"/>
+  </url>
 </urlset>

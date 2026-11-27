@@ -1778,3 +1778,21 @@ html.sparo-arrivo::after {
 .oggetto__luce { border-bottom: 0; }
 .oggetto figcaption { padding-top: .6rem; border-top: 1px solid var(--linea-forte); }
 .gioco__copertina { padding: 10px; background-color: transparent; }
+
+/* 404: il "404" di punti dentro un cerchio di misura (centro di data-spostamento 0.36, 0.3) */
+.vuoto::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    left: 68%; top: 35%; width: min(62vh, 44vw); aspect-ratio: 1; translate: -50% -50%;
+    border: 1px solid rgb(232 230 225 / .12); border-radius: 50%;
+    background:
+        linear-gradient(rgb(200 16 53 / .7), rgb(200 16 53 / .7)) 50% 50% / 1px 30% no-repeat,
+        linear-gradient(rgb(200 16 53 / .7), rgb(200 16 53 / .7)) 50% 50% / 30% 1px no-repeat;
+}
+@media (max-aspect-ratio: 23/20) { .vuoto::before { left: 50%; top: 40%; width: 70vw; } }
+
+/* Crediti: ogni voce parte da una croce sul filo */
+.voce-crediti { position: relative; }
+.voce-crediti::before {
+    content: ""; position: absolute; left: -7px; top: -7px; width: 15px; height: 15px;
+    background: linear-gradient(var(--bianco-60), var(--bianco-60)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--bianco-60), var(--bianco-60)) 0 50% / 100% 1px no-repeat;
+}

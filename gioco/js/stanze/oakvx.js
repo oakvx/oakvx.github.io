@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import { canvasTex } from '../engine/materiali.js';
 import { normalizza } from '../logica/stanzaOakvx.js';
 import { apertura, nicchia, collega } from '../engine/varchi.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 900, X1 = 908, Z0 = 0, Z1 = 12, PARETE = 2.2, COLMO = 4.6, CX = 904;
 
@@ -50,7 +51,7 @@ export function costruisci(m, g) {
   const muro = new THREE.MeshLambertMaterial({ map: carta });
   carta.repeat.set(5, 1.2);
   m.stanza({
-    nome: 'oakvx', x0: X0, x1: X1, z0: Z0, z1: Z1, h: PARETE, soffitto: false, ala: 'oakvx', passi: 'moquette',
+    nome: 'oakvx', x0: X0, x1: X1, z0: Z0, z1: Z1, h: PARETE, soffitto: false, ala: 'oakvx', passi: 'moquette', hdr: 'notte',
     pareti: { n: { aperture: [apertura(902.5), apertura(905.5)] }, w: { aperture: [apertura(8.9)] } },
     materiali: { muro, pavimento: new THREE.MeshLambertMaterial({ map: moquette }), battiscopa: legno, cornice: legno },
     luciPunto: false,
@@ -226,6 +227,17 @@ export function costruisci(m, g) {
   m.box(X1 - 0.25, 0.95, 6.45, X1, 1.0, 7.55, new THREE.MeshLambertMaterial({ color: 0xd9b23b }));
   for (let k = 0; k < 5; k++) m.box(X0 + 0.02, k * 0.2, 6.2 + k * 0.28, X0 + 0.5, k * 0.2 + 0.2, 6.5 + k * 0.28, new THREE.MeshLambertMaterial({ color: 0x2a3340 }), { solido: false });
 
+  // oggetti scansionati: credenza sotto la falda con enciclopedie e walkman, stereo per terra,
+  // una piantina sul davanzale della finestrella
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('vintage_cabinet_01', X1 - 0.17, 0, 9.4, -Math.PI / 2, { altezza: 1.0 }).then((o) => {
+    if (!o) return;
+    oggetti.metti('book_encyclopedia_set_01', X1 - 0.17, 1.0, 9.15, -Math.PI / 2, { solido: false });
+    oggetti.metti('portable_cassette_player', X1 - 0.2, 1.0, 9.7, -Math.PI / 2 - 0.4, { solido: false });
+  });
+  oggetti.metti('boombox', CX + 1.9, 0, Z1 - 1.25, Math.PI + 0.2);
+  oggetti.metti('potted_plant_04', X1 - 0.13, 1.0, 7.3, 0.8, { solido: false });
+
   // il Mii, seduto sul letto
   g.arredi.mii(CX - 0.6, 0.42, Z1 - 1.6, Math.PI, 'seduto');
   g.arredi.cartello(CX, 2.0, Z0 + 0.03, 0, '12', () => T().cartello);
@@ -373,6 +385,7 @@ export function costruisci(m, g) {
       varchi: [{ id: 'oakvx-contatti', da: 'oakvx', a: 'contatti', lato: [X0, 0, 8.9, Math.PI / 2] }],
       porta: [X0, 8.9],
       stato: () => ({
+        modelli: oggetti.quanti(),
         modo2008: g.modo2008Valore() > 0.99 ? 1 : g.modo2008Valore() < 0.01 ? 0 : g.modo2008Valore(),
         caricata, mensola: caricata ? dati.mensola.length : 0, lingue: dati.lingue.length, melodia, suona,
       }),

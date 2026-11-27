@@ -88,3 +88,10 @@
 .regole h2 { font: 400 clamp(1.8rem, calc(var(--u) * 3.4), 3rem)/1 var(--serif); }
 .regole ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .6rem; color: var(--bianco-80); }
 @media (max-width: 760px) { .regole { grid-template-columns: 1fr; } .tavolo { padding: .9rem; min-height: 26rem; } }
+
+/* scala 40: tante carte in mano, più piccole e sovrapposte sul telefono */
+[data-gioco="scala-40"] { --carta: clamp(3.6rem, 9vw, 6.2rem); }
+@media (max-width: 760px) {
+    [data-gioco="scala-40"] .tavolo__mano { gap: 0; padding-left: 1.4rem; }
+    [data-gioco="scala-40"] .tavolo__carta--mano { margin-left: -1.4rem; }
+}

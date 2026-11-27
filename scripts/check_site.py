@@ -148,6 +148,7 @@ ENTRY_PAGES = (
     "magazzino/index.html", "magazzino/blackjack/index.html",
     "magazzino/briscola/index.html",
     "magazzino/scopa/index.html",
+    "magazzino/scala-40/index.html",
 )
 
 

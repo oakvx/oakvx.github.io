@@ -519,6 +519,7 @@ window.OAKVX_EN = {
     'gm.blackjack': "Blackjack",
     'gm.briscola': "Briscola",
     'gm.scopa': "Scopa",
+    'gm.scala40': "Scala 40",
     'mg.label': "Warehouse · open all night",
     'mg.chips': "Chips",
     'mg.title': "The Warehouse. <em>Stuff to play, not to look at.</em>",
@@ -564,6 +565,13 @@ window.OAKVX_EN = {
     'sp.r2': "If there’s a card of the same value on the table, you must take that one. If more takes are possible, tap the table cards and then yours.",
     'sp.r3': "Clearing the table is a scopa, one point. Not on the very last play, and the cards left go to whoever took last.",
     'sp.r4': "At the end of each hand: a point each for cards (more than 20), coins (more than 5), the settebello and the primiera. First to 11.",
+
+    's4.title': "Scala 40. <em>Open with forty, close with style.</em>",
+    's4.r1': "Two French decks with four jokers, thirteen cards each. Every turn you draw a card and discard one.",
+    's4.r2': "Melds: three or four of a kind (same value, different suits) and runs of one suit, at least three cards. The ace goes before the 2 or after the king, never across.",
+    's4.r3': "You open by laying down at least 40 points: ace 11, picture cards 10, the rest their value. One joker at most per meld.",
+    's4.r4': "You can take the discard only if you have opened or if it lets you open right away. Once open you can add cards to the groups on the table.",
+    's4.r5': "You close by discarding your last card. The others take penalties for what they hold (joker 25): whoever reaches 101 is out.",
 
     /* chi sono */
     'about.label': 'About',

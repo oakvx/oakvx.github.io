@@ -1,0 +1,62 @@
+<main id="main" class="pagina pagina--sicurezza">
+
+<section class="chi-apertura" aria-labelledby="sicurezza-titolo">
+    <p class="t-meta"><span>(07) <span data-i18n="nav.security">Sicurezza</span></span><span data-i18n="sc.labelB">Cosa faccio davvero, cosa non prometto</span></p>
+    <h1 class="chi-apertura__titolo" id="sicurezza-titolo" data-split data-i18n-html="sc.title">La sicurezza non è un bollino. <em>È un elenco di scelte.</em></h1>
+    <p class="chi-apertura__coda rivela" style="--ritardo:.5s" data-i18n="sc.coda">Ecco le mie, progetto per progetto. E, più sotto, quello che non prometto.</p>
+</section>
+
+<section class="sezione" aria-labelledby="sito-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(i) <span data-i18n="sc.siteLabel">Questo sito</span></p>
+        <h2 class="sezione-titolo" id="sito-titolo" data-split data-i18n-html="sc.siteTitle">Comincio <em>dal mio.</em></h2>
+    </header>
+    <div class="aperte">
+        <article class="aperta rivela"><p class="t-meta">01</p><h3 data-i18n="sc.s1">Nessuno ti segue</h3><p data-i18n="sc.s1text">Niente analitiche, niente cookie di tracciamento, niente pubblicità. I font sono serviti da qui, non da altri.</p></article>
+        <article class="aperta rivela"><p class="t-meta">02</p><h3 data-i18n="sc.s2">Una sola chiamata fuori</h3><p data-i18n="sc.s2text">L’unica richiesta esterna va all’API pubblica di GitHub, per i contatori dei commit. Niente chiavi, niente dati personali.</p></article>
+        <article class="aperta rivela"><p class="t-meta">03</p><h3 data-i18n="sc.s3">Poco nel tuo browser</h3><p data-i18n="sc.s3text">Solo la lingua, se hai fermato le animazioni e una copia in cache dei contatori. Niente che ti identifichi.</p></article>
+        <article class="aperta rivela"><p class="t-meta">04</p><h3 data-i18n="sc.s4">Ogni versione resta</h3><p data-i18n="sc.s4text">Il codice è pubblico su GitHub e ogni modifica è un commit: si può controllare e tornare indietro.</p></article>
+    </div>
+</section>
+
+<section class="sezione" aria-label="Progetti">
+    <article class="capitolo">
+        <p class="capitolo__num" aria-hidden="true">I</p>
+        <div class="capitolo__testa"><p class="t-meta">piko</p><h3 data-i18n="sc.p1">Niente senza permesso</h3></div>
+        <div class="capitolo__corpo rivela"><p data-i18n="sc.p1text">Azioni solo nelle app autorizzate per la sessione, dopo un piano approvato. Finestre di password e credenziali rifiutate. Un’API raggiungibile solo dallo stesso computer, dietro un token.</p></div>
+    </article>
+    <article class="capitolo">
+        <p class="capitolo__num" aria-hidden="true">II</p>
+        <div class="capitolo__testa"><p class="t-meta">yag</p><h3 data-i18n="sc.p2">I segreti restano sull’host</h3></div>
+        <div class="capitolo__corpo rivela"><p data-i18n="sc.p2text">Il browser vede la chiave del gateway, mai quelle dei server. Chiavi client revocabili e con permessi, limiti di dimensione e connessioni imposti, richieste malformate rifiutate.</p></div>
+    </article>
+    <article class="capitolo">
+        <p class="capitolo__num" aria-hidden="true">III</p>
+        <div class="capitolo__testa"><p class="t-meta">synk</p><h3 data-i18n="sc.p3">Dati al salone, backup cifrati</h3></div>
+        <div class="capitolo__corpo rivela"><p data-i18n="sc.p3text">PostgreSQL su un PC locale, porte solo su 127.0.0.1, sessioni protette da CSRF in dashboard, backup cifrati, richieste privacy registrate senza contenuto delle chat.</p></div>
+    </article>
+    <article class="capitolo">
+        <p class="capitolo__num" aria-hidden="true">IV</p>
+        <div class="capitolo__testa"><p class="t-meta">middleManPS4</p><h3 data-i18n="sc.p4">Metadati, nient’altro</h3></div>
+        <div class="capitolo__corpo rivela"><p data-i18n="sc.p4text">Gli strumenti di rete registrano solo metadati DNS, TCP e TLS: niente decifratura, niente cattura di credenziali. I file esistenti non vengono mai sovrascritti.</p></div>
+    </article>
+</section>
+
+<section class="sezione" aria-labelledby="non-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(ii) <span data-i18n="sc.notLabel">Cosa non prometto</span></p>
+        <h2 class="sezione-titolo" id="non-titolo" data-split data-i18n-html="sc.notTitle">Preferisco <em>dirlo prima.</em></h2>
+    </header>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="sc.n1t">Niente è sicuro al 100%</h3><p data-i18n="sc.n1">Chi lo promette sta vendendo qualcosa. Io riduco i rischi e scrivo quelli che restano.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="sc.n2t">Sperimentale vuol dire sperimentale</h3><p data-i18n="sc.n2">yag non ha TLS nativo e non va messo su una rete non fidata; synk è una release candidate da non usare ancora con dati veri. I loro README lo dicono subito.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="sc.n3t">Un backup solo non è un backup</h3><p data-i18n="sc.n3">Le copie devono stare in più di un posto, e qualcuno deve provare a ripristinarle.</p></li>
+    </ul>
+</section>
+
+<a class="prossimo" href="../metodo/" data-velo-n="05" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="sc.next">Le regole dietro</span><span>05</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.method">Metodo</span>
+</a>
+
+</main>

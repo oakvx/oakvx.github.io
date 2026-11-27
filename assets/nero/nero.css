@@ -413,28 +413,42 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     transform-origin: 0 0;
     transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--sx, 0), var(--sy, 0));
     will-change: transform;
-    /* bordi cremisi sottili: scalano insieme al fascio */
-    background: linear-gradient(rgb(200 16 53 / calc(.9 * (1 - var(--c)))), transparent 6%, transparent 94%, rgb(200 16 53 / calc(.9 * (1 - var(--c))))),
-        color-mix(in srgb, #050505 calc(var(--c) * 100%), #E8E6E1);
+    background: color-mix(in srgb, #050505 calc(var(--c) * 100%), rgb(240 236 228));
+    opacity: calc(.9 + var(--c) * .1);
 }
 .sparo__scritta {
     position: absolute; left: var(--x0); top: var(--y);
-    padding-left: 2vw;
-    font: 700 10vh / 1 var(--sans);
-    font-stretch: 62%; letter-spacing: -.01em;
+    padding-left: 1.4vw;
+    font: 600 3.2vh / 1 var(--sans);
+    font-stretch: 70%; letter-spacing: .04em;
     white-space: nowrap;
-    color: #050505;
+    color: rgb(5 5 5 / .78);
     transform-origin: left center;
     transform: translateY(-50%) scale(max(.04, var(--f)));
-    opacity: var(--testo, 0);
+    opacity: max(0, var(--testo, 0));
     will-change: transform, opacity;
 }
 .sparo__lampo {
     position: absolute; left: var(--x0); top: var(--y);
-    width: 34vh; height: 34vh; translate: -50% -50%;
-    background: radial-gradient(closest-side, #fff, rgb(255 236 210 / .8) 30%, rgb(200 16 53 / .35) 60%, transparent);
-    opacity: var(--s); scale: calc(.4 + var(--s) * .8);
+    width: 9vh; height: 4.5vh; translate: -18% -50%;
+    background:
+        radial-gradient(ellipse 50% 22% at 30% 50%, #fff, rgb(255 222 170 / .9) 40%, transparent 72%),
+        radial-gradient(ellipse 12% 42% at 22% 50%, rgb(255 236 200 / .8), transparent 70%),
+        radial-gradient(closest-side, rgb(255 190 120 / .25), transparent);
+    opacity: var(--s); scale: calc(.6 + var(--s) * .5) calc(.7 + var(--s) * .4);
+    mix-blend-mode: screen;
 }
+.sparo__fumo {
+    position: absolute; left: var(--x0); top: var(--y);
+    width: 7vh; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(200 196 190 / .22), transparent);
+    translate: calc(-30% + var(--fumo) * var(--dx, 2vh)) calc(-50% - var(--fumo) * var(--dy, 7vh));
+    scale: calc(.4 + var(--fumo) * var(--k, 1.6));
+    opacity: calc(min(1, var(--fumo) * 12) * (1 - var(--fumo)) * .9);
+    filter: blur(4px);
+}
+.sparo__fumo:nth-of-type(2) { --dx: -1vh; --dy: 10vh; --k: 2.2; width: 5vh; }
+.sparo__fumo:nth-of-type(3) { --dx: 4vh; --dy: 5vh; --k: 1.2; width: 4vh; }
 .sparo__proiettile {
     position: absolute; left: 0; top: var(--y);
     width: 2.6rem; height: 6px;
@@ -445,12 +459,12 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     opacity: min(1, calc(var(--p) * 40));
     will-change: transform;
 }
-.sparo.arrivo .sparo__scritta { left: 50%; top: 50%; padding-left: 0; font-size: 13vh; color: #E8E6E1; transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
+.sparo.arrivo .sparo__scritta { left: 50%; top: 50%; padding-left: 0; font-size: 4.5vh; color: rgb(232 230 225 / .7); transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
 html.sparo-arrivo::after {
     content: ""; position: fixed; inset: 0; z-index: 2500; background: var(--nero);
     animation: velo-sicurezza .01s 1.6s forwards;
 }
-@media (max-width: 600px) { .sparo__scritta { font-size: 6vh; } .sparo.arrivo .sparo__scritta { font-size: 8vh; } }
+@media (max-width: 600px) { .sparo__scritta { font-size: 2.4vh; } .sparo.arrivo .sparo__scritta { font-size: 4vh; } }
 
 /* --------------------------------------------------------------------------
    Cursore

@@ -17,6 +17,9 @@
     // avanzamento 0..1 di un intervallo [da, a]
     const tratto = (ms, da, a) => Math.min(1, Math.max(0, (ms - da) / (a - da)));
 
+    // ease in-out cubica
+    const cubica = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
     /** Il clic su questo link deve far partire lo sparo? */
     function vaFatta(evento, link, pagina, calmo) {
         if (calmo || evento.defaultPrevented) return false;
@@ -41,7 +44,11 @@
         return {
             pistola: Math.min(tratto(ms, 0, 180), 1 - tratto(ms, 600, USCITA_MS)),
             sparo: tratto(ms, 150, 260),
-            proiettile: tratto(ms, 180, 480),
+            // il lampo: acceso di colpo a 150 ms, spento in una manciata di fotogrammi
+            lampo: ms < 150 || ms > 260 ? 0 : Math.exp(-(ms - 150) / 47),
+            // il proiettile è quasi istantaneo: la scia lo insegue
+            proiettile: cubica(tratto(ms, 170, 450)),
+            fumo: tratto(ms, 170, USCITA_MS),
             fascio: tratto(ms, 180, 520),
             copertura: tratto(ms, 480, USCITA_MS)
         };
@@ -57,7 +64,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, arrivoValido, USCITA_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, cubica, arrivoValido, USCITA_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;
@@ -72,6 +79,7 @@
             '<span class="sparo__fascio"></span>' +
             '<span class="sparo__scritta">' + scritta + '</span>' +
             '<span class="sparo__lampo"></span>' +
+            '<span class="sparo__fumo"></span><span class="sparo__fumo"></span><span class="sparo__fumo"></span>' +
             '<span class="sparo__proiettile"></span>';
         document.body.append(livello);
         return livello;
@@ -95,15 +103,17 @@
         const x0 = volata.x, y = volata.y;
         const sinistra = x0 * (1 - f.copertura);
         const larghezza = (W - x0 + W * .08) * f.proiettile + x0 * f.copertura;
-        const altezza = 2 + f.fascio * H * .15 + f.copertura * H * 2.1;
-        rettangolo(el, sinistra, y - altezza / 2, larghezza, altezza, f.copertura * f.copertura);
+        // scia sottile; quando copre diventa un'ombra scura che si allarga, non una banda bianca
+        const altezza = 1.5 + f.fascio * H * .045 + f.copertura * f.copertura * H * 2.1;
+        rettangolo(el, sinistra, y - altezza / 2, larghezza, altezza, Math.min(1, f.copertura * 2.2));
         el.style.setProperty('--x0', x0 + 'px');
         el.style.setProperty('--y', y + 'px');
-        el.style.setProperty('--s', (f.sparo > 0 && f.sparo < 1 ? Math.sin(f.sparo * Math.PI) : 0).toFixed(3));
+        el.style.setProperty('--s', (f.lampo || 0).toFixed(3));
+        el.style.setProperty('--fumo', (f.fumo || 0).toFixed(4));
         el.style.setProperty('--p', f.proiettile.toFixed(4));
         el.style.setProperty('--f', f.fascio.toFixed(4));
         el.style.setProperty('--d', Math.max(f.pistola, f.copertura).toFixed(4));
-        el.style.setProperty('--testo', (f.fascio * (1 - f.copertura * 1.4)).toFixed(4));
+        el.style.setProperty('--testo', (f.fascio * (1 - f.copertura * 3)).toFixed(4));
     }
 
     Object.assign(OAKVX.proiettile, { creaLivello, disegna });

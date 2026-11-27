@@ -58,3 +58,26 @@ test('arrivoValido: solo un segnale scritto da meno di 3 secondi', () => {
     assert.equal(p.arrivoValido(null, adesso), false);
     assert.equal(p.arrivoValido(String(adesso + 10_000), adesso), false); // orologio indietro
 });
+
+test('fase: il proiettile si vede uscire dalla canna, il fumo dura fino alla fine', () => {
+    assert.equal(p.fase(170).proiettile, 0);
+    assert.ok(p.fase(220).proiettile > 0 && p.fase(220).proiettile < .3);
+    assert.equal(p.fase(450).proiettile, 1);
+    assert.equal(p.fase(170).fumo, 0);
+    assert.ok(p.fase(500).fumo > 0 && p.fase(500).fumo < 1);
+    assert.equal(p.fase(p.USCITA_MS).fumo, 1);
+});
+test('fase: il lampo è un picco che si spegne in fretta', () => {
+    assert.equal(p.fase(140).lampo, 0);
+    assert.ok(p.fase(160).lampo > .8);
+    assert.ok(p.fase(230).lampo < .2);
+    assert.equal(p.fase(300).lampo, 0);
+});
+
+test('cubica: parte lenta, finisce lenta, simmetrica', () => {
+    assert.equal(p.cubica(0), 0);
+    assert.equal(p.cubica(1), 1);
+    assert.equal(p.cubica(.5), .5);
+    assert.ok(p.cubica(.1) < .01);
+    assert.ok(Math.abs(p.cubica(.2) + p.cubica(.8) - 1) < 1e-9);
+});

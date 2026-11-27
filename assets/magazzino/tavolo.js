@@ -47,6 +47,9 @@
         });
 
         function mostra(v) {
+            // ricorda dov'era il fuoco: dopo la ricostruzione torna lì
+            const prima = doc.activeElement, eraQui = prima && radice.querySelectorAll('button').includes ? radice.querySelectorAll('button').includes(prima) : Array.prototype.indexOf.call(radice.querySelectorAll('button'), prima) >= 0;
+            const fuocoCarta = eraQui && prima.dataset ? prima.dataset.carta : null, fuocoAzione = eraQui && !fuocoCarta ? prima.textContent : null;
             const tipo = v.dorso || 'siciliane';
             avversari.replaceChildren(...(v.avversari || []).map(a => {
                 const r = el('div', 'tavolo__avversario');
@@ -94,6 +97,14 @@
                 b.addEventListener('click', () => { if (a.attiva && onAzione) onAzione(a.nome); });
                 return b;
             }));
+
+            if (fuocoCarta || fuocoAzione) rimettiFuoco(fuocoCarta, fuocoAzione);
+        }
+
+        function rimettiFuoco(fuocoCarta, fuocoAzione) {
+            const b = Array.prototype.slice.call(radice.querySelectorAll('button')).filter(x => x.getAttribute('disabled') === null);
+            const qui = b.find(x => fuocoCarta && x.dataset && x.dataset.carta === fuocoCarta) || b.find(x => fuocoAzione && !x.dataset.carta && x.textContent === fuocoAzione) || b[0];
+            if (qui) qui.focus();
         }
 
         function annuncia(testo) { annuncio.textContent = testo; }

@@ -57,3 +57,15 @@ test('una carta coperta sul tavolo mostra il dorso e non il suo nome', () => {
     assert.equal(posti[1].getAttribute('aria-label'), 'Carta coperta');
     assert.ok(posti[1].children[0].innerHTML.includes('Dorso'));
 });
+
+test('dopo una mossa il fuoco torna sulla stessa carta o sulla prima della mano', () => {
+    const radice = doc.createElement('div');
+    const t = T.monta(radice, {});
+    const v = { mano: [carta('denari', 1), carta('spade', 2)], avversari: [], tavolo: [], azioni: [], messaggio: '' };
+    t.mostra(v);
+    radice.querySelector('.tavolo__mano').querySelectorAll('button')[1].focus();
+    t.mostra(v);
+    const ora = radice.querySelector('.tavolo__mano').querySelectorAll('button');
+    assert.ok(ora.includes(doc.activeElement), 'il fuoco è su un bottone che non esiste più');
+    assert.equal(doc.activeElement.dataset.carta, 'spade-2');
+});

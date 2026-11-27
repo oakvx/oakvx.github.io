@@ -163,6 +163,7 @@
         if (s.fase !== 'gioco' || s.turno !== 1) return;
         clearTimeout(attesa);
         attesa = setTimeout(() => {
+            if (s.fase !== 'gioco' || s.turno !== 1) return;
             const m = mossaComputer(s, livello), c = s.mani[1][m.indice];
             s = gioca(s, m.indice, m.presa);
             const u = s.ultimaMossa;
@@ -187,6 +188,7 @@
         disegna();
     }
     function onAzione(nome) {
+        clearTimeout(attesa);
         if (nome === 'nuova') s = nuova(Date.now() >>> 0);
         if (nome === 'prossima') s = nuova(Date.now() >>> 0, s.punteggi, 1 - s.chiInizia);
         if (nome === 'livello') livello = livello === 'difficile' ? 'normale' : 'difficile';

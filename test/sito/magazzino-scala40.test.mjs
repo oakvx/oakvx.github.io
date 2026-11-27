@@ -73,3 +73,23 @@ test('una partita fra computer arriva in fondo senza perdere carte', () => {
     }
     assert.ok(s.fase === 'chiusa' || s.fase === 'finita', `fase ${s.fase} dopo ${giri} giri`);
 });
+
+test('nessuna smazzata fra computer si blocca, su molti semi', () => {
+    for (let seme = 1; seme <= 200; seme++) {
+        let s = S.nuova(seme, 2), giri = 0;
+        while (s.fase !== 'chiusa' && s.fase !== 'finita' && giri++ < 3000) {
+            const prima = JSON.stringify(s);
+            for (const m of S.mossaComputer(s)) {
+                if (m.tipo === 'pesca') s = S.pesca(s, m.da);
+                if (m.tipo === 'cala') s = S.cala(s, m.gruppi);
+                if (m.tipo === 'attacca') s = S.attacca(s, m.carta, m.gruppo);
+                if (m.tipo === 'scarta') s = S.scarta(s, m.indice);
+            }
+            assert.notEqual(JSON.stringify(s), prima, `seme ${seme} bloccato`);
+        }
+    }
+});
+test('aperto, lo scarto si prende solo se si può usare in questo turno', () => {
+    const s = { mazzo: [k('fiori', 2)], scarti: [k('quadri', 3)], mani: [[k('quadri', 4), k('quadri', 5)], [k('cuori', 9)]], aperto: [true, true], tavolo: [], turno: 0, fase: 'pesca', presoDaScarto: null, punteggi: [0, 0], eliminati: [false, false], chiInizia: 0 };
+    assert.equal(S.pesca(s, 'scarto'), s);
+});

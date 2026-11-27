@@ -151,14 +151,14 @@
         const banco_ = s ? s.banco.map((c, i) => (coperta && i === 1 ? { coperta: true, id: 'coperta' } : c)) : [];
         const azioni = inGioco
             ? ['carta', 'stai', 'raddoppia', 'dividi'].map(n => ({ nome: n, etichetta: T[n], attiva: possibili(s).includes(n) && (n === 'carta' || n === 'stai' || dep.saldo() >= s.mani[s.attiva].puntata) }))
-            : dep.saldo() === 0 ? [{ nome: 'ricarica', etichetta: T.ricarica, attiva: true }]
+            : dep.saldo() < PUNTATE[0] ? [{ nome: 'ricarica', etichetta: T.ricarica, attiva: true }]
             : PUNTATE.map(n => ({ nome: `punta-${n}`, etichetta: T.punta(n), attiva: dep.saldo() >= n }));
         const mani = s ? s.mani : [];
         const attiva = s ? mani[s.attiva] : null;
         let messaggio = T.scegli;
         if (inGioco) messaggio = T.tocca(punteggio(attiva.carte).totale) + (mani.length > 1 ? ' · ' + mani.map((m, i) => T.mano(i + 1, punteggio(m.carte).totale)).join(' · ') : '');
         else if (finale) messaggio = finale;
-        else if (dep.saldo() === 0) messaggio = T.zero;
+        else if (dep.saldo() < PUNTATE[0]) messaggio = T.zero;
         tavolo.mostra({
             dorso: 'francesi',
             avversari: [{ nome: T.banco + (s && !inGioco && s.banco.length ? ` · ${punteggio(s.banco).totale}` : ''), carte: 0 }],

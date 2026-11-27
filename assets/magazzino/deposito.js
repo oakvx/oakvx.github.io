@@ -6,10 +6,14 @@
     const SALDO_INIZIALE = 1000;
     const CHIAVE_GETTONI = 'oakvx-gettoni-v1';
     const chiavePartita = gioco => `oakvx-partita-${gioco}-v1`;
+    const PUNTATA_MINIMA = 10;
+    // una memoria sola per tutti i depositi della pagina: se localStorage è bloccato vedono lo stesso saldo
+    const condivise = new WeakMap(), senzaStorage = new Map();
 
     function crea(storage) {
         if (storage === undefined) { try { storage = window.localStorage; } catch { storage = null; } }
-        const memoria = new Map();
+        let memoria = senzaStorage;
+        if (storage && typeof storage === 'object') { memoria = condivise.get(storage) || new Map(); condivise.set(storage, memoria); }
         const leggi = k => {
             try { const v = storage?.getItem(k); if (v != null) return v; } catch {}
             return memoria.has(k) ? memoria.get(k) : null;
@@ -32,7 +36,7 @@
                 return true;
             },
             paga(n) { if (valida(n)) imposta(saldo() + n); },
-            ricarica() { if (saldo() === 0) imposta(SALDO_INIZIALE); },
+            ricarica() { if (saldo() < PUNTATA_MINIMA) imposta(SALDO_INIZIALE); },
             salva(gioco, stato) { scrivi(chiavePartita(gioco), JSON.stringify(stato)); },
             riprendi(gioco) {
                 const v = leggi(chiavePartita(gioco));
@@ -44,7 +48,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.deposito = { crea, SALDO_INIZIALE };
+    OAKVX.deposito = { crea, SALDO_INIZIALE, PUNTATA_MINIMA };
 
     // nelle pagine: mostra il saldo dove c'è [data-gettoni] e lo tiene aggiornato
     const doc = window.document;

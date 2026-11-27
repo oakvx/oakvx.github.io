@@ -55,3 +55,16 @@ test('con localStorage bloccato funziona tutto in memoria', () => {
     d.salva('scopa', { a: 1 });
     assert.equal(d.riprendi('scopa').a, 1);
 });
+
+test('sotto la puntata minima si può ricaricare', () => {
+    const d = D.crea(memoria());
+    d.scommetti(995);
+    assert.equal(d.saldo(), 5);
+    d.ricarica();
+    assert.equal(d.saldo(), 1000);
+});
+test('con localStorage bloccato due depositi vedono lo stesso saldo', () => {
+    const bloccato = { ...rotto };   // uno tutto suo: la memoria è condivisa per oggetto
+    const a = D.crea(bloccato); a.scommetti(250);
+    assert.equal(D.crea(bloccato).saldo(), 750);
+});

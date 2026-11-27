@@ -106,10 +106,13 @@
         if (s.fase !== 'gioco' || s.turno !== 1) return;
         clearTimeout(attesa);
         attesa = setTimeout(() => {
+            if (s.fase !== 'gioco' || s.turno !== 1) return;
             const i = mossaComputer(s, livello), c = s.mani[1][i], prima = s.ultimaPresa;
             s = gioca(s, i);
-            tavolo.annuncia(T.gioca(D.nome(c, lingua)));
+            nota = T.gioca(D.nome(c, lingua));
+            const giocata = nota;
             dopoPresa(prima);
+            if (nota !== giocata) { nota = giocata + ' ' + nota; tavolo.annuncia(nota); } else tavolo.annuncia(nota);
             salva(); disegna(); turnoComputer();
         }, calmo() ? 150 : 900);
     }
@@ -121,6 +124,7 @@
         salva(); disegna(); turnoComputer();
     }
     function onAzione(nome) {
+        clearTimeout(attesa);
         if (nome === 'nuova') { s = nuova(Date.now() >>> 0); nota = ''; }
         if (nome === 'livello') livello = livello === 'difficile' ? 'normale' : 'difficile';
         salva(); disegna(); turnoComputer();
@@ -132,7 +136,7 @@
         tavolo.mostra({
             dorso: 'siciliane',
             avversari: [{ nome: `${T.pc} · ${b}`, carte: s.mani[1].length }],
-            tavolo: [...(s.mazzo.length ? [s.briscola] : []), ...s.tavolo.map(t => t.carta)],
+            tavolo: [...(s.mazzo.length ? [s.briscola] : []), ...(s.tavolo.length ? s.tavolo.map(t => t.carta) : s.ultimaPresa ? [s.ultimaPresa.carte] : [])],
             mazzo: s.mazzo.length ? T.briscola(D.nome(s.briscola, lingua)) + s.mazzo.length : null,
             mano: s.mani[0],
             manoAttiva: !fine && s.turno === 0,

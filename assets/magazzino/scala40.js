@@ -114,6 +114,13 @@
                  fase: 'pesca', presoDaScarto: null, punteggi: punteggi ? punteggi.slice() : Array(giocatori).fill(0), eliminati: elim, rimescoli: 0, ultima: null };
     }
 
+    /** Chi è aperto prende lo scarto solo se riesce a usarlo subito: attaccarlo, o calarlo tenendo una carta per chiudere. */
+    function usabile(s, chi, cima) {
+        const mano = s.mani[chi];
+        if (mano.length >= 1 && s.tavolo.some(g => combinazione([...g.carte, cima]))) return true;
+        return migliori([...mano, cima], cima.id).punti > 0;
+    }
+
     function pesca(stato, da) {
         if (stato.fase !== 'pesca') return stato;
         const chi = stato.turno;
@@ -123,7 +130,7 @@
             if (!stato.aperto[chi]) {
                 const m = migliori([...stato.mani[chi], cima], cima.id);
                 if (m.punti < 40) return stato;
-            }
+            } else if (!usabile(stato, chi, cima)) return stato;
             const s = copia(stato);
             s.mani[chi].push(s.scarti.pop()); ordina(s.mani[chi]);
             s.presoDaScarto = cima.id; s.fase = 'gioca'; s.ultima = { chi, tipo: 'pesca', da };
@@ -201,7 +208,7 @@
             let da = 'mazzo';
             if (cima && !eJolly(cima)) {
                 if (!s.aperto[chi]) { if (migliori([...mano, cima], cima.id).punti >= 40) da = 'scarto'; }
-                else if (s.tavolo.some(g => combinazione([...g.carte, cima])) || candidati([...mano, cima]).some(g => g.some(c => c.id === cima.id))) da = 'scarto';
+                else if (usabile(s, chi, cima)) da = 'scarto';
             }
             return [{ tipo: 'pesca', da }];
         }
@@ -217,7 +224,10 @@
             let trovato = true;
             while (trovato && t.mani[chi].length > 1) {
                 trovato = false;
-                for (const c of t.mani[chi]) {
+                const ordine = [...t.mani[chi]].sort((a, b) => (b.id === t.presoDaScarto) - (a.id === t.presoDaScarto));
+                for (const c of ordine) {
+                    const resta = t.mani[chi].filter(x => x.id !== c.id);
+                    if (t.presoDaScarto && resta.length === 1 && resta[0].id === t.presoDaScarto) continue;
                     const g = t.tavolo.findIndex(x => combinazione([...x.carte, c]));
                     if (g >= 0) { mosse.push({ tipo: 'attacca', carta: c.id, gruppo: g }); t = attacca(t, c.id, g); trovato = true; break; }
                 }
@@ -270,11 +280,17 @@
         if ((s.fase !== 'pesca' && s.fase !== 'gioca') || s.turno === 0) return;
         clearTimeout(attesa);
         attesa = setTimeout(() => {
+            if ((s.fase !== 'pesca' && s.fase !== 'gioca') || s.turno === 0) return;
+            const primaDi = s;
             for (const m of mossaComputer(s)) {
                 if (m.tipo === 'pesca') s = pesca(s, m.da);
                 if (m.tipo === 'cala') s = cala(s, m.gruppi);
                 if (m.tipo === 'attacca') s = attacca(s, m.carta, m.gruppo);
                 if (m.tipo === 'scarta') s = scarta(s, m.indice);
+            }
+            if (s.fase === 'gioca' && s.turno === primaDi.turno && s.mani[s.turno].length === primaDi.mani[primaDi.turno].length + 1) {
+                // rete di sicurezza: se il computer non riesce a chiudere il turno, scarta la prima carta che può
+                for (let i = 0; i < s.mani[s.turno].length && s.fase === 'gioca' && s.turno === primaDi.turno; i++) s = scarta(s, i);
             }
             if (s.ultima && s.ultima.tipo === 'scarta') tavolo.annuncia(`${T.pc(s.ultima.chi)}: ${D.nome(s.ultima.carta, lingua)}`);
             salva(); disegna(); turniComputer();
@@ -296,6 +312,7 @@
         salva(); disegna();
     }
     function onAzione(nome) {
+        clearTimeout(attesa);
         if (nome === 'mazzo' || nome === 'scarto') { const t = pesca(s, nome); nota = t === s ? T.no : ''; s = t; }
         if (nome === 'gruppo' && scelte.length >= 3) { pronti.push(scelte); scelte = []; }
         if (nome === 'annulla') { pronti = []; }

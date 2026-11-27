@@ -828,7 +828,6 @@ html.sparo-arrivo::after {
 .lavoro__desc { grid-column: 10 / span 3; color: var(--bianco-60); font-size: .95rem; line-height: 1.5; transition: color .4s; }
 .lavoro__link:hover .lavoro__desc { color: var(--bianco); }
 .lavoro__img { display: none; }
-.lavori__elenco.ha-anteprima .lavoro__link:not(:hover) .lavoro__nome { color: var(--bianco-40); }
 @media (max-width: 900px) {
     .lavoro__n { grid-column: 1 / span 2; }
     .lavoro__tipo { grid-column: 3 / -1; text-align: right; }
@@ -836,28 +835,6 @@ html.sparo-arrivo::after {
     .lavoro__desc { grid-column: 1 / -1; grid-row: 3; }
     .lavoro__img { display: block; grid-column: 1 / -1; grid-row: 4; margin-top: 1.4rem; aspect-ratio: 16 / 10; object-fit: cover; width: 100%; background: var(--superficie); filter: grayscale(.4); }
     .lavoro__img.contiene { object-fit: contain; padding: 18% 30%; filter: invert(1) grayscale(1); background: #f0eee9; }
-}
-
-.anteprima {
-    position: fixed; left: 0; top: 0; z-index: 700;
-    width: clamp(16rem, calc(var(--u) * 26), 19.76rem); aspect-ratio: 4 / 3;
-    pointer-events: none;
-    overflow: hidden;
-    clip-path: inset(50% 50% 50% 50%);
-    transition: clip-path .7s var(--entra);
-    background: var(--superficie);
-}
-.anteprima.visibile { clip-path: inset(0 0 0 0); }
-.anteprima img {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-    opacity: 0; transform: scale(1.15);
-    transition: opacity .5s, transform 1.2s var(--entra);
-}
-.anteprima img.contiene { object-fit: contain; padding: 22%; background: #f0eee9; }
-.anteprima img.attiva { opacity: 1; transform: scale(1); }
-.anteprima__etichetta {
-    position: absolute; left: .7rem; bottom: .6rem; z-index: 2;
-    color: var(--bianco); mix-blend-mode: difference;
 }
 
 /* Tappe del percorso */
@@ -1761,5 +1738,4 @@ html.sparo-arrivo::after {
     .lavoro__link:hover .lavoro__img, .lavoro__link:focus-visible .lavoro__img { filter: none; }
     .lavoro__link:hover .lavoro__img.contiene { filter: none; }
     .lavoro__desc { order: 5; }
-    .lavori__elenco.ha-anteprima .lavoro__link:not(:hover) .lavoro__nome { color: inherit; }
 }

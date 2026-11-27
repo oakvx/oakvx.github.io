@@ -412,61 +412,6 @@
     }
 
     /* ----------------------------------------------------------------------
-       Indice dei lavori: anteprima che segue il cursore, inclinata dalla velocità.
-       ---------------------------------------------------------------------- */
-    function initAnteprime() {
-        const list = $('[data-anteprime]');
-        if (!list || !finePointer.matches || !matchMedia('(min-width: 901px)').matches) return;
-        const box = document.createElement('div');
-        box.className = 'anteprima';
-        box.setAttribute('aria-hidden', 'true');
-        const tag = document.createElement('span');
-        tag.className = 'anteprima__etichetta t-meta';
-        box.append(tag);
-        const items = $$('.lavoro', list);
-        const imgs = items.map(item => {
-            const src = $('.lavoro__img', item);
-            const img = new Image();
-            img.src = src?.currentSrc || src?.src || '';
-            img.alt = '';
-            if (src?.classList.contains('contiene')) img.className = 'contiene';
-            box.append(img);
-            return img;
-        });
-        document.body.append(box);
-        let x = 0, y = 0, bx = 0, by = 0, vx = 0, raf = 0, active = false;
-        const loop = () => {
-            const k = calm() ? 1 : .14;
-            const nx = bx + (x - bx) * k, ny = by + (y - by) * k;
-            vx = nx - bx; bx = nx; by = ny;
-            const skew = Math.max(-12, Math.min(12, vx * .6));
-            box.style.transform = `translate(${bx + 28}px, ${by - box.offsetHeight / 2}px) rotate(${skew * .25}deg) skewX(${-skew}deg)`;
-            raf = active || Math.abs(vx) > .05 ? requestAnimationFrame(loop) : 0;
-        };
-        list.addEventListener('pointermove', e => {
-            x = e.clientX; y = e.clientY;
-            if (!raf) raf = requestAnimationFrame(loop);
-        });
-        items.forEach((item, i) => {
-            const link = $('.lavoro__link', item);
-            const show = () => {
-                active = true;
-                imgs.forEach((im, j) => im.classList.toggle('attiva', i === j));
-                tag.textContent = $('.lavoro__n', item)?.textContent + ' — ' + ($('.lavoro__tipo', item)?.textContent || '');
-                box.classList.add('visibile');
-                list.classList.add('ha-anteprima');
-                if (!raf) raf = requestAnimationFrame(loop);
-            };
-            link.addEventListener('pointerenter', e => { if (!bx) { bx = x = e.clientX; by = y = e.clientY; } show(); });
-        });
-        list.addEventListener('pointerleave', () => {
-            active = false;
-            box.classList.remove('visibile');
-            list.classList.remove('ha-anteprima');
-        });
-    }
-
-    /* ----------------------------------------------------------------------
        Copia dell'indirizzo email
        ---------------------------------------------------------------------- */
     let avvisoTimer;
@@ -1073,7 +1018,6 @@
         initApertura();
         initRivela();
         initParoleScorrevoli();
-        initAnteprime();
         initCopia();
         initDecifra();
         initParallasse();

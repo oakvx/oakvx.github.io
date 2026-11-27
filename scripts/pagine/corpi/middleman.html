@@ -1,0 +1,53 @@
+<main id="main" class="pagina pagina--caso" data-progetto="middleman">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="mm.label">Caso 07 / 07</span><span data-i18n="mm.kind">Ricerca · reverse engineering</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>middleMan<em>PS4</em></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="mm.intro">Un laboratorio che consegna etichette, non promesse. Payload in C, analisi offline di ELF in Python e strumenti di rete che registrano metadati e si rifiutano di registrare altro.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="mm.role">Ricerca, strumenti, documentazione</dd></div>
+            <div><dt>Stack</dt><dd data-i18n="mm.stack">C · Python (solo libreria standard)</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="mm.focus">Prove, onestà delle affermazioni</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="mm.status">Ricerca · in corso · v0.17</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://github.com/oakvx/middleManPS4" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <div class="caso-repo rivela" data-repo="oakvx/middleManPS4" hidden><p class="t-meta"><span data-i18n="case.languages">Linguaggi, da GitHub</span><span data-repo-info></span></p><span class="caso-repo__barra" data-repo-barra aria-hidden="true"></span><p class="caso-repo__lingue t-meta" data-repo-lingue></p></div>
+    </div>
+</section>
+
+<section class="sezione caso-capo" aria-labelledby="mm-concept">
+    <p class="t-meta">(01) <span data-i18n="mm.qLabel">La domanda</span></p>
+    <h2 id="mm-concept" data-split data-i18n-html="mm.qTitle">Dove viene controllata la versione? <em>Risposta: non si sa.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="mm.q1">La ricerca parte da una domanda: la PlayStation Network controlla la versione di sistema sulla console, sul server o in entrambi, e quel controllo è raggiungibile dalla rete?</p>
+        <p data-i18n="mm.q2">Tre condizioni dovrebbero essere vere prima che il resto sia più di un’ipotesi. Nessuna è dimostrata. Il repository raccoglie prove su quei tre punti; non prova ad aggirarli.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="mm.scope">Perimetro: una console e una rete tue. Non è uno sblocco della PSN: niente falsificazione del firmware, niente aggiramento dell’autenticazione, niente intercettazione TLS, niente cattura di credenziali.</p>
+</section>
+
+<section class="sezione" aria-labelledby="mm-regole">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="mm.rulesLabel">Regole di casa</span></p>
+        <h2 id="mm-regole" data-split data-i18n-html="mm.rulesTitle">I vincoli <em>sono il metodo.</em></h2>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="mm.r1t">Sola lettura</h3><p data-i18n="mm.r1">Sulla console lettura del firmware e osservatore leggono soltanto: niente modifica, aggancia o inietta nei processi di sistema.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="mm.r2t">Solo metadati</h3><p data-i18n="mm.r2">Gli strumenti di rete registrano metadati DNS, TCP e TLS. Niente decifratura, niente impersonificazione.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="mm.r3t">Affermazioni etichettate</h3><p data-i18n="mm.r3">Ogni funzione è etichettata come provata, non provata o non implementata. Trovare una stringa non dimostra che quel codice venga eseguito.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="mm.r4t">Una configurazione</h3><p data-i18n="mm.r4">I risultati valgono per una console e un firmware soltanto. È l’unità di misura onesta.</p></li>
+    </ul>
+</section>
+
+<section class="sezione risultato" aria-labelledby="mm-risultato">
+    <p class="t-meta">(03) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="mm-risultato" data-split data-i18n-html="mm.result">Si chiamava fwSpoofer. <em>Poi l’ho rinominato.</em></h2>
+    <p class="risultato__note rivela" data-i18n="mm.resultText">Il nuovo nome è la politica di onestà: lì dentro niente falsifica niente. Zero dipendenze, un banco di ricerca offline e una CI che fa girare i test a ogni push.</p>
+</section>
+
+<a class="prossimo" href="../../lavori/" data-velo-n="02" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="lv.allBack">Torna a tutti i lavori</span><span>02</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.archive">Tutti i lavori</span>
+</a>
+
+</main>

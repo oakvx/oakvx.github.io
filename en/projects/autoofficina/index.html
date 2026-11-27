@@ -53,7 +53,7 @@
         <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — development and design</span>
     </a>
     <div class="testata__azioni">
-        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
         <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/autoofficina/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/projects/autoofficina/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -68,7 +68,11 @@
                 <li><a href="/en/#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Work</span></a></li>
                 <li><a href="/en/chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">About</span></a></li>
                 <li><a href="/en/fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">After hours</span></a></li>
-                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contact</span></a></li>
+                <li><a href="/en/metodo/" data-velo-n="05"><span class="indice__n t-meta">05</span><span class="indice__nome" data-velo-nome data-i18n="nav.method">Method</span></a></li>
+                <li><a href="/en/servizi/" data-velo-n="06"><span class="indice__n t-meta">06</span><span class="indice__nome" data-velo-nome data-i18n="nav.services">Services</span></a></li>
+                <li><a href="/en/sicurezza/" data-velo-n="07"><span class="indice__n t-meta">07</span><span class="indice__nome" data-velo-nome data-i18n="nav.security">Security</span></a></li>
+                <li><a href="/en/stile/" data-velo-n="08"><span class="indice__n t-meta">08</span><span class="indice__nome" data-velo-nome data-i18n="nav.style">Style</span></a></li>
+                <li><a href="/en/contatti/" data-velo-n="09"><span class="indice__n t-meta">09</span><span class="indice__nome" data-velo-nome data-i18n="nav.contact">Contact</span></a></li>
             </ol>
         </nav>
         <div class="indice__lato">
@@ -79,6 +83,10 @@
                     <li><a class="filo" href="/en/projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
                     <li><a class="filo" href="/en/projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
                     <li><a class="filo" href="/en/projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                    <li><a class="filo" href="/en/projects/piko/" data-velo-n="02.5"><span data-velo-nome>piko</span></a></li>
+                    <li><a class="filo" href="/en/projects/yag/" data-velo-n="02.6"><span data-velo-nome>yag</span></a></li>
+                    <li><a class="filo" href="/en/projects/middleman/" data-velo-n="02.7"><span data-velo-nome>middleManPS4</span></a></li>
+                    <li><a class="filo" href="/en/lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">All work</span></a></li>
                 </ul>
             </div>
             <div>
@@ -98,7 +106,7 @@
 <main id="main" class="pagina pagina--caso" data-progetto="spinotto">
 
 <section class="caso-apertura" aria-labelledby="caso-titolo">
-    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label4">Case 04 / 04</span><span data-i18n="spinotto.kind">Showcase website · public demo</span><span>2026</span></p>
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label4">Case 04 / 07</span><span data-i18n="spinotto.kind">Showcase website · public demo</span><span>2026</span></p>
     <h1 class="caso-apertura__titolo" id="caso-titolo" data-split data-i18n-html="spinotto.title">Spinotto <em>Felice.</em></h1>
     <div class="caso-apertura__piede">
         <p class="caso-apertura__intro rivela" data-i18n="spinotto.intro">An automotive showcase site in HTML, CSS and JavaScript. Structure and style are mine; the public version sells electric car accessories to customers who don't exist. The shop is fake, the site isn't.</p>
@@ -109,6 +117,7 @@
             <div><dt data-i18n="spinotto.versionK">Version</dt><dd data-i18n="spinotto.version">Public demo</dd></div>
         </dl>
         <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://oakvx.github.io/autoOfficina/" target="_blank" rel="noopener noreferrer" data-i18n="spinotto.visit">Visit the site</a><a href="https://github.com/oakvx/autoOfficina" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <div class="caso-repo rivela" data-repo="oakvx/autoOfficina" hidden><p class="t-meta"><span data-i18n="case.languages">Languages, from GitHub</span><span data-repo-info></span></p><span class="caso-repo__barra" data-repo-barra aria-hidden="true"></span><p class="caso-repo__lingue t-meta" data-repo-lingue></p></div>
     </div>
 </section>
 
@@ -150,9 +159,9 @@
     <p class="risultato__note rivela" data-i18n="spinotto.resultText">The demo is public and the code is on GitHub: two themes, menu, FAQ and entrance animations, on desktop and mobile.</p>
 </section>
 
-<a class="prossimo" href="/en/projects/brat-animator/" data-velo-n="02.1" data-cursore="Avanti">
-    <span class="t-meta"><span data-i18n="case.back">Back to the start</span><span>01 / 04</span></span>
-    <span class="prossimo__nome" data-velo-nome>Brat Animator</span>
+<a class="prossimo" href="/en/projects/piko/" data-velo-n="02.5" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Next case</span><span>05 / 07</span></span>
+    <span class="prossimo__nome" data-velo-nome>piko</span>
 </a>
 
 </main>
@@ -180,6 +189,12 @@
                 <li><a class="filo" href="/en/#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Work</span></a></li>
                 <li><a class="filo" href="/en/chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">About</span></a></li>
                 <li><a class="filo" href="/en/fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">After hours</span></a></li>
+                <li><a class="filo" href="/en/metodo/" data-velo-n="05"><span data-velo-nome data-i18n="nav.method">Method</span></a></li>
+                <li><a class="filo" href="/en/lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">All work</span></a></li>
+                <li><a class="filo" href="/en/servizi/" data-velo-n="06"><span data-velo-nome data-i18n="nav.services">Services</span></a></li>
+                <li><a class="filo" href="/en/sicurezza/" data-velo-n="07"><span data-velo-nome data-i18n="nav.security">Security</span></a></li>
+                <li><a class="filo" href="/en/stile/" data-velo-n="08"><span data-velo-nome data-i18n="nav.style">Style</span></a></li>
+                <li><a class="filo" href="/en/contatti/" data-velo-n="09"><span data-velo-nome data-i18n="nav.contact">Contact</span></a></li>
             </ul>
         </div>
         <div>

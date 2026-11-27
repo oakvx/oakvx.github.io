@@ -32,6 +32,15 @@ PAGE_FILES = [
     "fuori-orario/index.html",
     "fuori-orario/classic/index.html",
     "404.html",
+    "metodo/index.html",
+    "lavori/index.html",
+    "projects/piko/index.html",
+    "projects/yag/index.html",
+    "projects/middleman/index.html",
+    "servizi/index.html",
+    "sicurezza/index.html",
+    "stile/index.html",
+    "contatti/index.html",
 ]
 SITEMAP_FILES = [
     "index.html",
@@ -42,6 +51,15 @@ SITEMAP_FILES = [
     "projects/brat-animator/index.html",
     "assets/CREDITS.html",
     "fuori-orario/index.html",
+    "metodo/index.html",
+    "lavori/index.html",
+    "projects/piko/index.html",
+    "projects/yag/index.html",
+    "projects/middleman/index.html",
+    "servizi/index.html",
+    "sicurezza/index.html",
+    "stile/index.html",
+    "contatti/index.html",
 ]
 VOID_ELEMENTS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",

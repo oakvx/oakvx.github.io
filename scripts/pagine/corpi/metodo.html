@@ -1,0 +1,99 @@
+<main id="main" class="pagina pagina--metodo">
+
+<section class="chi-apertura" aria-labelledby="metodo-titolo">
+    <p class="t-meta"><span>(05) <span data-i18n="nav.method">Metodo</span></span><span data-i18n="me.labelB">Cinque regole, trovate nel codice</span></p>
+    <h1 class="chi-apertura__titolo" id="metodo-titolo" data-split data-i18n-html="me.title">Non ho un manifesto. <em>Ho dei repository.</em></h1>
+    <p class="chi-apertura__coda rivela" style="--ritardo:.5s" data-i18n="me.coda">Rileggendoli, tornano sempre le stesse regole. Eccole, ognuna con le prove.</p>
+</section>
+
+<section class="sezione" aria-label="Regole">
+    <article class="capitolo" id="onesta">
+        <p class="capitolo__num" aria-hidden="true">I</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r1k">Onestà</p><h3 data-i18n="me.r1">Scrivo cosa funziona. E cosa no.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r1text">Un README che elenca solo funzioni è una pubblicità. I miei hanno una sezione «cosa non funziona», e nei progetti di ricerca ogni affermazione porta un’etichetta: provato, non provato, non implementato.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r1a">yag — «Cosa funziona oggi» e «Cosa no», uno accanto all’altro</li>
+                <li data-i18n="me.r1b">middleManPS4 — rinominato da fwSpoofer, perché lì dentro niente falsifica niente</li>
+                <li data-i18n="me.r1c">piko — un elenco di limiti noti più lungo di quello delle funzioni</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r1q">Un comando registrato come inviato non dimostra che sia stato ricevuto.</blockquote>
+    </article>
+
+    <article class="capitolo" id="permesso">
+        <p class="capitolo__num" aria-hidden="true">II</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r2k">Permesso</p><h3 data-i18n="me.r2">Niente succede senza chiedere.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r2text">Quando un programma agisce al posto di qualcuno, deve chiedere prima. Non una volta nelle impostazioni: ogni volta, nel momento in cui conta.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r2a">piko — nessuna esecuzione senza permesso per l’app e piano approvato</li>
+                <li data-i18n="me.r2b">piko — le finestre di password e credenziali vengono rifiutate</li>
+                <li data-i18n="me.r2c">synk — la lista d’attesa contatta solo chi ha dato il consenso, per 30 giorni al massimo</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r2q">Nessun automatismo di default.</blockquote>
+    </article>
+
+    <article class="capitolo" id="locale">
+        <p class="capitolo__num" aria-hidden="true">III</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r3k">Dati</p><h3 data-i18n="me.r3">I tuoi dati restano a casa tua.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r3text">Se una cosa può girare in locale, gira in locale. Il cloud è una scelta da giustificare, non un punto di partenza.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r3a">Brat Animator — nessun backend: audio e video non escono mai dalla scheda</li>
+                <li data-i18n="me.r3b">synk — on-premise, PostgreSQL sul PC del salone; l’AI locale è spenta di default e non vede le note dei clienti</li>
+                <li data-i18n="me.r3c">piko — solo inferenza locale, screenshot uno alla volta e solo su richiesta</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r3q">Il tuo computer è la render farm.</blockquote>
+    </article>
+
+    <article class="capitolo" id="noioso">
+        <p class="capitolo__num" aria-hidden="true">IV</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r4k">Strumenti</p><h3 data-i18n="me.r4">Noioso di proposito.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r4text">Scelgo lo strumento più noioso che fa il lavoro, e scrivo cosa ogni progetto non farà di proposito. Meno dipendenze, meno sorprese.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r4a">yag — C17, libcurl, pthreads: non esegue modelli e non lo farà mai</li>
+                <li data-i18n="me.r4b">middleManPS4 — zero dipendenze, solo libreria standard</li>
+                <li data-i18n="me.r4c">Questo sito — nessun framework, nessuna build, nessuna dipendenza</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r4q">Non è un limite. È il perimetro.</blockquote>
+    </article>
+
+    <article class="capitolo" id="incertezza">
+        <p class="capitolo__num" aria-hidden="true">V</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r5k">Incertezza</p><h3 data-i18n="me.r5">Se non so, si vede.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r5text">I sistemi veri si rompono a metà. Preferisco mostrare uno stato incerto che fingere che sia andato tutto bene: quello che si vede, qualcuno lo può gestire.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r5a">synk — uno slot non è mai dato per libero se Calendar non risponde in modo affidabile</li>
+                <li data-i18n="me.r5b">synk — «in coda» non è «sincronizzato»: gli stati in sospeso sono visibili in dashboard</li>
+                <li data-i18n="me.r5c">yag — l’elenco dei modelli non garantisce che funzionino, e lo dice</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r5q">In coda non vuol dire confermato.</blockquote>
+    </article>
+</section>
+
+<section class="sezione" aria-labelledby="processo-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(vi) <span data-i18n="me.procLabel">Processo</span></p>
+        <h2 class="sezione-titolo" id="processo-titolo" data-split data-i18n-html="me.procTitle">Come va un progetto, <em>più o meno.</em></h2>
+    </header>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="me.p1">Chiedo perché</h3><p data-i18n="me.p1text">Prima del come. Un problema chiaro risparmia settimane di funzioni che nessuno aveva chiesto.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="me.p2">Scrivo i limiti</h3><p data-i18n="me.p2text">Cosa fa, cosa non farà, cosa può andare storto. È il primo file del repository.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="me.p3">Costruisco e provo</h3><p data-i18n="me.p3text">Passi piccoli, test automatici, CI a ogni push. Se non è verificato, c’è scritto.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iv.</span><h3 data-i18n="me.p4">Consegno pulito</h3><p data-i18n="me.p4text">Installer, checksum, documentazione in italiano se chi la usa è italiano. E l’elenco di cosa resta aperto.</p></li>
+    </ol>
+</section>
+
+<a class="prossimo" href="../lavori/" data-velo-n="02" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="me.next">Le prove, per intero</span><span>02</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.archive">Tutti i lavori</span>
+</a>
+
+</main>

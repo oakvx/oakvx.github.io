@@ -1820,3 +1820,48 @@ html.sparo-arrivo::after {
     content: ""; position: absolute; left: -7px; top: -7px; width: 15px; height: 15px;
     background: linear-gradient(var(--bianco-60), var(--bianco-60)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--bianco-60), var(--bianco-60)) 0 50% / 100% 1px no-repeat;
 }
+
+/* Metodo: le prove sotto ogni regola */
+.metodo__prove { display: grid; gap: .45rem; margin-top: .6rem; }
+.metodo__prove li { padding-left: 1.2rem; position: relative; text-transform: none; letter-spacing: .02em; color: var(--bianco-80); }
+.metodo__prove li::before { content: ""; position: absolute; left: 0; top: .7em; width: .6rem; height: 1px; background: var(--cremisi); }
+
+/* Archivio completo: due colonne di schede anche su schermi larghi */
+@media (min-width: 901px) {
+    .archivio__elenco--tutti { grid-template-columns: repeat(3, 1fr); }
+    .archivio__elenco--tutti .repo { border-bottom: 1px solid var(--linea); }
+}
+
+/* Servizi */
+.servizi__aree { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 3rem; }
+.servizio { display: grid; align-content: start; gap: 1.2rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
+.servizio h2 { font: 400 calc(var(--u) * 3.2)/1 var(--serif); letter-spacing: -.02em; }
+.servizio ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+.servizio li { padding: .5rem 0; border-bottom: 1px solid var(--linea); }
+.servizio li::before { content: "— "; color: var(--cremisi); }
+@media (max-width: 760px) { .servizi__aree { grid-template-columns: 1fr; } }
+
+/* Stile */
+.stile__palette { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+.stile__palette li { display: grid; gap: .6rem; }
+.stile__campione { display: block; aspect-ratio: 3 / 4; background: var(--c); border: 1px solid var(--linea-forte); }
+.stile__caratteri { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
+.stile__caratteri article { display: grid; gap: .8rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
+.stile__campione-testo { font-size: calc(var(--u) * 6); line-height: 1; margin: 0; }
+.stile__serif { font-family: var(--serif); }
+.stile__sans { font-family: var(--sans); }
+.stile__stretto { font-stretch: 62%; }
+.stile__largo { font-stretch: 125%; }
+.stile__mono { font-family: var(--mono); }
+@media (max-width: 760px) {
+    .stile__palette { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stile__caratteri { grid-template-columns: 1fr; }
+    .stile__campione-testo { font-size: 3.4rem; }
+}
+.pagina--contatti .scrivimi__elenco b { overflow-wrap: anywhere; font-size: min(1em, 8.2vw); }
+
+/* Dati dai repository */
+.caso-repo { display: grid; gap: .7rem; margin-top: 1.6rem; max-width: 34rem; }
+.caso-repo .t-meta:first-child { display: flex; justify-content: space-between; gap: 1rem; }
+.caso-repo__barra { display: flex; height: 6px; gap: 2px; }
+.caso-repo__barra i { display: block; min-width: 2px; background: color-mix(in srgb, var(--cremisi) calc(100% - var(--i) * 18%), var(--grafite)); }

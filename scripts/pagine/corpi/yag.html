@@ -1,0 +1,58 @@
+<main id="main" class="pagina pagina--caso" data-progetto="yag">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="yg.label">Caso 06 / 07</span><span data-i18n="yg.kind">Gateway AI · infrastruttura</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split><span>yag</span></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="yg.intro">Yet Another Gateway. Un host, tanti modelli, ogni interfaccia. I tuoi server fanno l’inferenza; yag si occupa di tutto il resto: autenticazione, instradamento, traduzione dei protocolli, limiti.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="yg.role">Host, console e client desktop</dd></div>
+            <div><dt>Stack</dt><dd>C17 · libcurl · pthreads · React · TypeScript</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="yg.focus">Protocolli, confini di sicurezza</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="yg.status">Sperimentale · v0.1.0-rc.2</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://github.com/oakvx/yag" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <div class="caso-repo rivela" data-repo="oakvx/yag" hidden><p class="t-meta"><span data-i18n="case.languages">Linguaggi, da GitHub</span><span data-repo-info></span></p><span class="caso-repo__barra" data-repo-barra aria-hidden="true"></span><p class="caso-repo__lingue t-meta" data-repo-lingue></p></div>
+    </div>
+</section>
+
+<section class="sezione caso-capo" aria-labelledby="yg-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="yg-concept" data-split data-i18n-html="yg.conceptTitle">Un router, un traduttore e un buttafuori. <em>Noioso di proposito.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="yg.concept1">Tu hai server compatibili OpenAI; i client parlano OpenAI, Responses o Anthropic. yag sta in mezzo e fa incontrare le due parti.</p>
+        <p data-i18n="yg.concept2">Non esegue modelli e non esegue strumenti, e non lo farà mai. Non è un limite: è il perimetro.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="yg.problem">Il punto di partenza: una chiave davanti a tanti backend, senza che le credenziali dei server arrivino mai al browser.</p>
+</section>
+
+<section class="sezione" aria-labelledby="yg-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.architecture">Architettura</span></p>
+        <h2 id="yg-architettura" data-split data-i18n-html="yg.archTitle">Un binario C17, <em>quattro lavori.</em></h2>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="yg.m1t">Autenticazione</h3><p data-i18n="yg.m1">Una chiave principale più fino a 16 aggiuntive, con chiavi client revocabili e permessi. I segreti dei server restano sull’host. Sempre.</p><span class="modulo__file t-meta">C17</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="yg.m2t">Protocolli</h3><p data-i18n="yg.m2">Chat Completions passante, Responses verso Chat, Anthropic Messages verso Chat, con streaming e strumenti.</p><span class="modulo__file t-meta">SSE · yyjson</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="yg.m3t">Instradamento</h3><p data-i18n="yg.m3">Un server di default più fino a 16 rotte per modello, con un interruttore automatico opzionale per le rotte che falliscono.</p><span class="modulo__file t-meta">libcurl</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="yg.m4t">Limiti</h3><p data-i18n="yg.m4">Corpo da 1 MiB, intestazioni da 16 KiB, 32 connessioni, timeout limitati. Imposti, non suggeriti.</p><span class="modulo__file t-meta">pthreads</span></li>
+    </ul>
+    <div class="tecnologie">
+        <article class="tecnologia"><p class="t-meta">Console</p><h3>React</h3><p data-i18n="yg.t1">Servita dall’host stesso: stato, elenco dei modelli, chat testuale annullabile.</p></article>
+        <article class="tecnologia"><p class="t-meta">Desktop</p><h3 data-i18n="yg.t2t">YAG Desktop</h3><p data-i18n="yg.t2">Uno spazio di chat nativo per Windows, macOS e Linux che si collega all’host in rete locale con una chiave limitata.</p></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="yg.t3k">Automazione</p><h3>GitHub Actions</h3><p data-i18n="yg.t3">Test di host, console e desktop, CodeQL, installer per tre sistemi, release con checksum SHA-256.</p></article>
+    </div>
+</section>
+
+<section class="sezione risultato" aria-labelledby="yg-risultato">
+    <p class="t-meta">(03) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="yg-risultato" data-split data-i18n-html="yg.result">Una base, <em>non una fortezza.</em> Parole sue.</h2>
+    <p class="risultato__note rivela" data-i18n="yg.resultText">Codex CLI e Claude Code completano scambi di testo e strumenti contro un backend simulato; la compatibilità con modelli veri non è ancora verificata, non c’è TLS nativo, e il README dice di non esporlo su una rete non fidata.</p>
+</section>
+
+<a class="prossimo" href="../middleman/" data-velo-n="02.7" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Prossimo caso</span><span>07 / 07</span></span>
+    <span class="prossimo__nome" data-velo-nome>middleManPS4</span>
+</a>
+
+</main>

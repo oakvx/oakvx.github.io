@@ -39,6 +39,7 @@
             commitDay: (n, d) => `${n} commit · ${d}`,
             commitChart: (n, g) => `${n} commit in ${g} giorni di lavoro`,
             commitLive: 'aggiornato da GitHub, adesso',
+            lastPush: 'ultimo push',
             commitOffline: 'GitHub non risponde: dati dell’ultima pubblicazione',
             following: 'seguiti',
             posts: 'post',
@@ -76,6 +77,7 @@
             commitDay: (n, d) => `${n} commit${n === 1 ? '' : 's'} · ${d}`,
             commitChart: (n, g) => `${n} commits over ${g} working days`,
             commitLive: 'updated from GitHub, just now',
+            lastPush: 'last push',
             commitOffline: 'GitHub is not answering: data from the last publish',
             following: 'following',
             posts: 'posts',
@@ -1007,6 +1009,59 @@
             .catch(() => {});
     }
 
+    /* ----------------------------------------------------------------------
+       API pubbliche senza chiavi: meteo di Sassuolo (Open-Meteo), profilo e
+       attività GitHub, linguaggi e stelle dei repository. Cache di un'ora.
+       ---------------------------------------------------------------------- */
+    async function apiCache(url, chiave) {
+        const k = 'oakvx-api-' + chiave;
+        try { const c = JSON.parse(localStorage.getItem(k) || 'null'); if (c && Date.now() - c.quando < 3600e3) return c.dati; } catch {}
+        const r = await fetch(url, url.includes('api.github.com') ? { headers: { Accept: 'application/vnd.github+json' } } : {});
+        if (!r.ok) throw new Error(r.status);
+        const dati = await r.json();
+        try { localStorage.setItem(k, JSON.stringify({ quando: Date.now(), dati })); } catch {}
+        return dati;
+    }
+
+    const METEO = {
+        it: [[0, 'sereno'], [2, 'poco nuvoloso'], [3, 'coperto'], [48, 'nebbia'], [57, 'pioviggine'], [67, 'pioggia'], [77, 'neve'], [82, 'rovesci'], [86, 'neve'], [99, 'temporale']],
+        en: [[0, 'clear'], [2, 'partly cloudy'], [3, 'overcast'], [48, 'fog'], [57, 'drizzle'], [67, 'rain'], [77, 'snow'], [82, 'showers'], [86, 'snow'], [99, 'thunderstorm']],
+    };
+
+    function initApi() {
+        const meteo = $$('[data-meteo]');
+        if (meteo.length) apiCache('https://api.open-meteo.com/v1/forecast?latitude=44.54&longitude=10.78&current=temperature_2m,weather_code&timezone=Europe%2FRome', 'meteo')
+            .then(d => {
+                const c = d.current; if (!c) return;
+                const desc = (METEO[lang] || METEO.it).find(([max]) => c.weather_code <= max)?.[1] || '';
+                meteo.forEach(n => { n.textContent = `· ${Math.round(c.temperature_2m)}° ${desc}`; });
+            }).catch(() => {});
+
+        const set = (k, v) => $$(`[data-api="${k}"]`).forEach(el => { el.textContent = v; });
+        if ($('[data-api="repo"]')) apiCache('https://api.github.com/users/oakvx', 'utente')
+            .then(u => { set('repo', String(u.public_repos)); }).catch(() => {});
+        if ($('[data-api="attivita"]')) apiCache('https://api.github.com/users/oakvx/events/public?per_page=10', 'eventi')
+            .then(ev => {
+                const e = ev.find(x => x.type === 'PushEvent') || ev[0]; if (!e) return;
+                set('attivita', `${e.repo.name.replace(/^oakvx\//, '')} · ${fa(e.created_at)}`);
+            }).catch(() => {});
+
+        $$('[data-repo]').forEach(box => {
+            const repo = box.dataset.repo, id = repo.replace(/\W/g, '_');
+            apiCache(`https://api.github.com/repos/${repo}/languages`, 'lingue-' + id).then(l => {
+                const tot = Object.values(l).reduce((a, b) => a + b, 0); if (!tot) return;
+                const barra = $('[data-repo-barra]', box), elenco = $('[data-repo-lingue]', box);
+                const voci = Object.entries(l).sort((a, b) => b[1] - a[1]).slice(0, 5);
+                barra.replaceChildren(...voci.map(([, n], i) => { const el = document.createElement('i'); el.style.flexGrow = n; el.style.setProperty('--i', i); return el; }));
+                elenco.textContent = voci.map(([n, v]) => `${n} ${(v / tot * 100).toFixed(v / tot < .1 ? 1 : 0)}%`).join(' · ');
+                box.hidden = false;
+            }).catch(() => {});
+            apiCache(`https://api.github.com/repos/${repo}`, 'repo-' + id).then(r => {
+                $('[data-repo-info]', box).textContent = `★ ${r.stargazers_count} · ${t('lastPush')} ${fa(r.pushed_at)}`;
+            }).catch(() => {});
+        });
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1028,6 +1083,7 @@
         initLuce();
         initCommitSito();
         initVivi();
+        initApi();
         initSocial();
         initScorriMorbido();
         initUscita();

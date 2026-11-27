@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="it" data-lang-en-url="/en/projects/middleman/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<link rel="stylesheet" href="../../assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/nero/nero.css">
+<script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/nero.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia</title>
+<meta name="description" content="Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/projects/middleman/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/middleman/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/projects/middleman/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/middleman/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia">
+<meta property="og:description" content="Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.">
+<meta property="og:url" content="https://oakvx.github.io/projects/middleman/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-home-it.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia">
+<meta name="twitter:description" content="Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
+<script type="application/json" id="seo-translations">{"it": {"title": "middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia", "description": "Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.", "canonical": "https://oakvx.github.io/projects/middleman/", "image": "https://oakvx.github.io/assets/social-home-it.png", "image_alt": "Gabriele Lucia / oakvx"}, "en": {"title": "middleManPS4: research with tagged claims | Gabriele Lucia", "description": "A PS4 research lab: C payloads, offline Python analysis and one rule, every claim carries a tag.", "canonical": "https://oakvx.github.io/en/projects/middleman/", "image": "https://oakvx.github.io/assets/social-home-en.png", "image_alt": "Gabriele Lucia / oakvx"}}</script>
+</head>
+<body data-pagina="middleman">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="../../" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/projects/middleman/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/middleman/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
+        </nav>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="../../" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a href="../../#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a href="../../chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a href="../../fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a href="../../metodo/" data-velo-n="05"><span class="indice__n t-meta">05</span><span class="indice__nome" data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a href="../../servizi/" data-velo-n="06"><span class="indice__n t-meta">06</span><span class="indice__nome" data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a href="../../sicurezza/" data-velo-n="07"><span class="indice__n t-meta">07</span><span class="indice__nome" data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a href="../../stile/" data-velo-n="08"><span class="indice__n t-meta">08</span><span class="indice__nome" data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a href="../../contatti/" data-velo-n="09"><span class="indice__n t-meta">09</span><span class="indice__nome" data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="../../projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="../../projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="../../projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="../../projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                    <li><a class="filo" href="../../projects/piko/" data-velo-n="02.5"><span data-velo-nome>piko</span></a></li>
+                    <li><a class="filo" href="../../projects/yag/" data-velo-n="02.6"><span data-velo-nome>yag</span></a></li>
+                    <li><a class="filo" href="../../projects/middleman/" data-velo-n="02.7"><span data-velo-nome>middleManPS4</span></a></li>
+                    <li><a class="filo" href="../../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="../../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
+        </div>
+    </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>02.7</b><span data-titolo data-i18n="seg.middleman">middleManPS4</span><span class="segnapagina__barra"><i></i></span></p>
+
+<main id="main" class="pagina pagina--caso" data-progetto="middleman">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="mm.label">Caso 07 / 07</span><span data-i18n="mm.kind">Ricerca · reverse engineering</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>middleMan<em>PS4</em></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="mm.intro">Un laboratorio che consegna etichette, non promesse. Payload in C, analisi offline di ELF in Python e strumenti di rete che registrano metadati e si rifiutano di registrare altro.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="mm.role">Ricerca, strumenti, documentazione</dd></div>
+            <div><dt>Stack</dt><dd data-i18n="mm.stack">C · Python (solo libreria standard)</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="mm.focus">Prove, onestà delle affermazioni</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="mm.status">Ricerca · in corso · v0.17</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://github.com/oakvx/middleManPS4" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <div class="caso-repo rivela" data-repo="oakvx/middleManPS4" hidden><p class="t-meta"><span data-i18n="case.languages">Linguaggi, da GitHub</span><span data-repo-info></span></p><span class="caso-repo__barra" data-repo-barra aria-hidden="true"></span><p class="caso-repo__lingue t-meta" data-repo-lingue></p></div>
+    </div>
+</section>
+
+<section class="sezione caso-capo" aria-labelledby="mm-concept">
+    <p class="t-meta">(01) <span data-i18n="mm.qLabel">La domanda</span></p>
+    <h2 id="mm-concept" data-split data-i18n-html="mm.qTitle">Dove viene controllata la versione? <em>Risposta: non si sa.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="mm.q1">La ricerca parte da una domanda: la PlayStation Network controlla la versione di sistema sulla console, sul server o in entrambi, e quel controllo è raggiungibile dalla rete?</p>
+        <p data-i18n="mm.q2">Tre condizioni dovrebbero essere vere prima che il resto sia più di un’ipotesi. Nessuna è dimostrata. Il repository raccoglie prove su quei tre punti; non prova ad aggirarli.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="mm.scope">Perimetro: una console e una rete tue. Non è uno sblocco della PSN: niente falsificazione del firmware, niente aggiramento dell’autenticazione, niente intercettazione TLS, niente cattura di credenziali.</p>
+</section>
+
+<section class="sezione" aria-labelledby="mm-regole">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="mm.rulesLabel">Regole di casa</span></p>
+        <h2 id="mm-regole" data-split data-i18n-html="mm.rulesTitle">I vincoli <em>sono il metodo.</em></h2>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="mm.r1t">Sola lettura</h3><p data-i18n="mm.r1">Sulla console lettura del firmware e osservatore leggono soltanto: niente modifica, aggancia o inietta nei processi di sistema.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="mm.r2t">Solo metadati</h3><p data-i18n="mm.r2">Gli strumenti di rete registrano metadati DNS, TCP e TLS. Niente decifratura, niente impersonificazione.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="mm.r3t">Affermazioni etichettate</h3><p data-i18n="mm.r3">Ogni funzione è etichettata come provata, non provata o non implementata. Trovare una stringa non dimostra che quel codice venga eseguito.</p></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="mm.r4t">Una configurazione</h3><p data-i18n="mm.r4">I risultati valgono per una console e un firmware soltanto. È l’unità di misura onesta.</p></li>
+    </ul>
+</section>
+
+<section class="sezione risultato" aria-labelledby="mm-risultato">
+    <p class="t-meta">(03) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="mm-risultato" data-split data-i18n-html="mm.result">Si chiamava fwSpoofer. <em>Poi l’ho rinominato.</em></h2>
+    <p class="risultato__note rivela" data-i18n="mm.resultText">Il nuovo nome è la politica di onestà: lì dentro niente falsifica niente. Zero dipendenze, un banco di ricerca offline e una CI che fa girare i test a ogni push.</p>
+</section>
+
+<a class="prossimo" href="../../lavori/" data-velo-n="02" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="lv.allBack">Torna a tutti i lavori</span><span>02</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.archive">Tutti i lavori</span>
+</a>
+
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto o per dirmi che il sito non ti piace. Rispondo. Non subito, ma rispondo.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo (fa prima)</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="../../" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="../../#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="../../chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="../../fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a class="filo" href="../../metodo/" data-velo-n="05"><span data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a class="filo" href="../../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                <li><a class="filo" href="../../servizi/" data-velo-n="06"><span data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a class="filo" href="../../sicurezza/" data-velo-n="07"><span data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a class="filo" href="../../stile/" data-velo-n="08"><span data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a class="filo" href="../../contatti/" data-velo-n="09"><span data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="../../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena. Sì, quella delle piastrelle.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="../../assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano. Nessun template è stato maltrattato.</span></p>
+</footer>
+
+<script src="../../assets/ingresso/ingresso.js" defer></script>
+</body>
+</html>

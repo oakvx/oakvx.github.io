@@ -18,7 +18,8 @@ function ambiente(renderer) {
         m.lookAt(0, 0, 0);
         studio.add(m);
     };
-    banda(0xfff1e0, 6, 4, 5, -3, 6, 1.2);   // luce di taglio calda, alta e dietro
+    banda(0xfff1e0, 9, 4, 5, -3, 6, 1.4);   // luce di taglio calda, alta e dietro
+    banda(0xffffff, 3, -1, 4, 5, 8, .5);    // una striscia larga davanti: riflesso lungo sul carrello
     banda(0xdfe8ff, 1.2, -5, 1, 4, 3, 6);   // riempimento freddo, debole
     banda(0xc81035, 1.5, 0, -4, 2, 8, .6);  // un filo cremisi da sotto
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -40,12 +41,17 @@ export async function creaPistola(contenitore) {
 
     const scena = new THREE.Scene();
     scena.environment = ambiente(renderer);
-    const taglio = new THREE.DirectionalLight(0xfff0e0, 3.2);
-    taglio.position.set(2, 3, -2);
-    scena.add(taglio);
-    const riempimento = new THREE.DirectionalLight(0xdde6ff, .5);
-    riempimento.position.set(-3, -1, 3);
-    scena.add(riempimento);
+    renderer.toneMappingExposure = 1.25;
+    // luce principale calda dall'alto davanti, bordo freddo da dietro che stacca la sagoma dal nero
+    const chiave = new THREE.DirectionalLight(0xfff1e2, 2.4);
+    chiave.position.set(1.5, 3, 4);
+    scena.add(chiave);
+    const bordo = new THREE.DirectionalLight(0xe6eeff, 4.5);
+    bordo.position.set(-2, 2.5, -4);
+    scena.add(bordo);
+    const cremisi = new THREE.DirectionalLight(0xc81035, 1.2);
+    cremisi.position.set(2, -3, 1);
+    scena.add(cremisi);
 
     const camera = new THREE.PerspectiveCamera(24, 1, .01, 50);
     camera.position.set(0, 0, 6);

@@ -751,8 +751,9 @@ html.sparo-arrivo::after {
 .apertura__nota::before { content: ""; position: absolute; top: 50%; height: 1px; width: 3.2rem; background: var(--bianco-40); }
 .apertura__nota--a { top: 12%; right: 100%; margin-right: 1rem; }
 .apertura__nota--a::before { left: calc(100% + .6rem); transform: rotate(18deg); transform-origin: left center; }
-.apertura__nota--b { bottom: 8%; left: 92%; margin-left: 3.8rem; }
-.apertura__nota--b::before { right: calc(100% + .6rem); transform: rotate(-16deg); transform-origin: right center; }
+/* La seconda nota sta sotto la prima: a destra della scultura c'è la colonna dei numeri dal vivo. */
+.apertura__nota--b { top: calc(12% + 1.9em); right: 100%; margin-right: 1rem; }
+.apertura__nota--b::before { content: none; }
 @media (max-width: 1100px) { .apertura__nota { display: none; } }
 
 /* Colonna dei numeri dal vivo, a destra della scultura */
@@ -1848,7 +1849,7 @@ html.sparo-arrivo::after {
 .stile__palette li { display: grid; gap: .6rem; }
 .stile__campione { display: block; aspect-ratio: 3 / 4; background: var(--c); border: 1px solid var(--linea-forte); }
 .stile__caratteri { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
-.stile__caratteri article { display: grid; gap: .8rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
+.stile__caratteri article { display: grid; align-content: start; gap: .8rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
 .stile__campione-testo { font-size: calc(var(--u) * 6); line-height: 1; margin: 0; }
 .stile__serif { font-family: var(--serif); }
 .stile__sans { font-family: var(--sans); }

@@ -33,7 +33,7 @@ PAGES = [
     ('sicurezza/index.html', 'sicurezza', '../', '/sicurezza/', '07', 'nav.security', 'Sicurezza', False, ''),
     ('stile/index.html', 'stile', '../', '/stile/', '08', 'nav.style', 'Stile', False, ''),
     ('contatti/index.html', 'contatti', '../', '/contatti/', '09', 'nav.contact', 'Contatti', False, ''),
-    ('magazzino/index.html', 'magazzino', '../', '/magazzino/', 'M', 'nav.warehouse', 'Magazzino', False, 'magazzino/magazzino.css magazzino/deposito.js'),
+    ('magazzino/index.html', 'magazzino', '../', '/magazzino/', 'M', 'nav.warehouse', 'Magazzino', False, 'magazzino/magazzino.css magazzino/deposito.js magazzino/corsia.js magazzino/magazzino.js'),
     ('magazzino/scala-40/index.html', 'magazzino-scala40', '../../', '/magazzino/scala-40/', 'M.4', 'gm.scala40', 'Scala 40', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scala40.js'),
     ('magazzino/scopa/index.html', 'magazzino-scopa', '../../', '/magazzino/scopa/', 'M.3', 'gm.scopa', 'Scopa', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scopa.js'),
     ('magazzino/briscola/index.html', 'magazzino-briscola', '../../', '/magazzino/briscola/', 'M.2', 'gm.briscola', 'Briscola', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/briscola.js'),

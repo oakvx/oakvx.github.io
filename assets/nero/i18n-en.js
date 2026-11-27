@@ -574,6 +574,12 @@ window.OAKVX_EN = {
     's4.r4': "You can take the discard only if you use it this turn: to open, to lay down or to add to a group, before you discard. Once open you can add cards to the groups on the table.",
     's4.r5': "You close by discarding your last card. The others take penalties for what they hold (joker 25): whoever reaches 101 is out.",
 
+    'mg.hall': "The hall",
+    'mg.dark': "It’s dark in here",
+    'mg.cord': "Pull the cord",
+    'mg.prev': "Previous crate",
+    'mg.next2': "Next crate",
+
     /* chi sono */
     'about.label': 'About',
     'about.labelB': 'Gabriele Lucia, known as oakvx',

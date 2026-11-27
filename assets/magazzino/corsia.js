@@ -32,7 +32,7 @@
     }
 
     // il bancone del magazziniere sta a sinistra della prima cassa, l'ultima cassa chiude a destra
-    const X_BANCONE = -1.55;
+    const X_BANCONE = -2.1;
     const X_FINE = Math.max(...CASSE.map((_, i) => postoCassa(i).x)) + .45;
 
     /** Quanto può scorrere il centro della telecamera, data la larghezza visibile sul piano degli scaffali. */

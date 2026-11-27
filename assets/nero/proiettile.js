@@ -139,6 +139,7 @@
         window.dispatchEvent(new CustomEvent('nero:sparo'));
         const conPistola = !!(pistola && pistola.pronta());
         const volata = conPistola ? pistola.volata() : { x: 0, y: Math.round(innerHeight * .46) };
+        el.classList.toggle('con-pistola', conPistola); // il proiettile lo disegna la scena 3D
         const inizio = performance.now();
         const tempo = () => performance.now() - inizio;
         if (conPistola) pistola.spara(tempo);

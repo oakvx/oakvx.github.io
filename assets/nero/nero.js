@@ -159,7 +159,7 @@
         const panel = $('[data-indice]');
         if (!button || !panel) return;
         const label = $('[data-burger-label]', button);
-        const outside = $$('body > *:not([data-indice]):not([data-testata]):not(.velo):not(.cursore)');
+        const outside = $$('body > *:not([data-indice]):not([data-testata]):not(.sparo):not(.cursore)');
         let open = false;
 
         const here = location.pathname.replace(/index\.html$/, '');

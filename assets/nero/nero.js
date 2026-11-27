@@ -1083,6 +1083,7 @@
         initScorrimento();
         initIndice();
         initMovimento();
+        window.OAKVX?.proiettile?.avvia?.(); // prima del sipario: lo sparo ha la precedenza
         initVelo();
         initCursore();
         initApertura();

@@ -77,7 +77,7 @@ def main():
         a = R + 'assets/'
         if file.startswith('assets/'):
             a = ''
-        scripts = [f'<script src="{a}nero/nero.js" defer></script>']
+        scripts = [f'<script src="{a}nero/proiettile.js" defer></script>', f'<script src="{a}nero/nero.js" defer></script>']
         if campo:
             scripts.append(f'<script src="{a}nero/campo.js" defer></script>')
         if extra:

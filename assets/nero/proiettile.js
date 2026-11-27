@@ -76,4 +76,55 @@
     }
 
     Object.assign(OAKVX.proiettile, { creaLivello, disegna });
+
+    /* ------------------------------------------------------------ uscita */
+    let pistola = null;
+    let inCorso = false;
+    const CHIAVE = 'nero-sparo';
+
+    function collegaPistola(p) { pistola = p; }
+
+    function calmo() {
+        return matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('paused');
+    }
+
+    function spara(href) {
+        if (inCorso) return;
+        inCorso = true;
+        const el = creaLivello();
+        el.classList.remove('arrivo');
+        el.classList.add('attivo');
+        const conPistola = !!(pistola && pistola.pronta());
+        const volata = conPistola ? pistola.volata() : { x: 0, y: Math.round(innerHeight * .46) };
+        const inizio = performance.now();
+        const tempo = () => performance.now() - inizio;
+        if (conPistola) pistola.spara(tempo);
+        let andato = false;
+        const vai = () => {
+            if (andato) return;
+            andato = true;
+            try { sessionStorage.setItem(CHIAVE, '1'); } catch {}
+            location.href = href;
+        };
+        const passo = () => {
+            const ms = tempo();
+            disegna(fase(ms), volata);
+            if (ms < USCITA_MS) requestAnimationFrame(passo); else vai();
+        };
+        requestAnimationFrame(passo);
+        setTimeout(vai, USCITA_MS + 200); // anche se la scheda smette di disegnare
+    }
+
+    function avvia() {
+        document.addEventListener('click', e => {
+            const a = e.target.closest && e.target.closest('a[href]');
+            if (!a || a.hasAttribute('data-no-velo')) return;
+            const link = { href: a.href, target: a.getAttribute('target') || '', download: a.hasAttribute('download') };
+            if (!vaFatta(e, link, { href: location.href }, calmo())) return;
+            e.preventDefault();
+            spara(a.href);
+        });
+    }
+
+    Object.assign(OAKVX.proiettile, { avvia, spara, collegaPistola });
 })();

@@ -19,6 +19,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Run site unit tests
+        run: node --test 'test/sito/*.test.mjs'
       - name: Run game unit tests
         run: node --test 'gioco/test/unit/*.test.mjs'
       - name: Set up Python

@@ -56,6 +56,17 @@ def cerca(nodo, nomi):
     return None
 
 
+def forma(nodo, profondita=0):
+    """Struttura di un valore senza i contenuti: chiavi e tipi, per adattare NOMI al formato reale."""
+    if profondita > 4:
+        return '...'
+    if isinstance(nodo, dict):
+        return {k: forma(v, profondita + 1) for k, v in nodo.items()}
+    if isinstance(nodo, list):
+        return [forma(nodo[0], profondita + 1)] if nodo else []
+    return type(nodo).__name__
+
+
 def conteggi(risposta):
     if not isinstance(risposta, dict) or risposta.get('ok') is not True:
         return None
@@ -66,6 +77,8 @@ def conteggi(risposta):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--input')
+    ap.add_argument('--stampa-risposta', action='store_true',
+                    help='se i conteggi non si trovano, stampa chiavi e tipi della risposta (non i valori)')
     a = ap.parse_args()
     if a.input:
         testo = Path(a.input).read_text(encoding='utf-8')
@@ -80,7 +93,13 @@ def main():
     c = conteggi(risposta)
     if c is None:
         err = (risposta.get('error') or {}) if isinstance(risposta, dict) else {}
-        print('Nessun conteggio utilizzabile, nessuna modifica.', err.get('code', ''), err.get('hint', ''))
+        print('Nessun conteggio utilizzabile, nessuna modifica.', err.get('code', ''))
+        if err.get('message'):
+            print('Messaggio:', str(err['message'])[:500])
+        if err.get('retry_after_seconds'):
+            print('Riprovare tra (secondi):', err['retry_after_seconds'])
+        if a.stampa_risposta and isinstance(risposta, dict) and risposta.get('ok') is True:
+            print('Forma della risposta:', forma(risposta.get('items')))
         return 0
     manuale = json.loads(MANUALE.read_text(encoding='utf-8'))
     nuovo = {**c, 'aggiornato': datetime.date.today().isoformat()}

@@ -29,8 +29,11 @@ jobs:
           python-version: '3.12'
       - name: Installa agent-reach
         run: pip install "git+https://github.com/Panniantong/Agent-Reach"
+      - name: Stato di agent-reach
+        continue-on-error: true
+        run: agent-reach doctor --text
       - name: Leggi il profilo
-        run: python3 scripts/aggiorna_instagram.py
+        run: python3 scripts/aggiorna_instagram.py --stampa-risposta
       - name: Salva se qualcosa è cambiato
         run: |
           if [ -n "$(git status --porcelain -- assets/social/manuale.json)" ]; then

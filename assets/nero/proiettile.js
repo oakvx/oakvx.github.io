@@ -118,6 +118,8 @@
             andato = true;
             try { sessionStorage.setItem(CHIAVE, String(Date.now())); } catch {}
             location.href = href;
+            // navigazione fermata, risposta senza pagina o download: la pagina torna usabile
+            setTimeout(() => { if (document.visibilityState !== 'hidden') ripristina(); }, 4000);
         };
         const passo = () => {
             const ms = tempo();

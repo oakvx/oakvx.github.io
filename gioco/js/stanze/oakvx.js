@@ -7,65 +7,98 @@
 import * as THREE from 'three';
 import { canvasTex } from '../engine/materiali.js';
 import { normalizza } from '../logica/stanzaOakvx.js';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 900, X1 = 908, Z0 = 0, Z1 = 12, PARETE = 2.2, COLMO = 4.6, CX = 904;
 
 export function costruisci(m, g) {
   const T = () => g.T().stanze.oakvx;
+  // carta da parati blu polvere con piccoli motivi dorati, come nella foto
   const carta = canvasTex(256, 256, (ctx, w, h) => {
-    ctx.fillStyle = '#4c5f7d'; ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = 'rgba(232, 214, 160, 0.55)'; ctx.lineWidth = 3;
-    for (const [x, y, a] of [[40, 50, 0.5], [170, 30, -0.4], [110, 140, 1.2], [210, 190, 0.2], [30, 210, -1]]) {
+    ctx.fillStyle = '#566e94'; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 900; i++) { ctx.fillStyle = `rgba(30,40,70,${Math.random() * 0.08})`; ctx.fillRect(Math.random() * w, Math.random() * h, 2, 2); }
+    ctx.strokeStyle = 'rgba(236, 206, 132, 0.8)'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    for (const [x, y, a] of [[40, 50, 0.5], [170, 34, -0.4], [110, 140, 1.2], [214, 190, 0.2], [34, 210, -1], [150, 236, 2]]) {
       ctx.save(); ctx.translate(x, y); ctx.rotate(a);
-      ctx.beginPath(); ctx.moveTo(-10, 0); ctx.lineTo(10, 0); ctx.moveTo(0, -12); ctx.lineTo(0, 12); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(-9, 6); ctx.quadraticCurveTo(0, -10, 9, 6); ctx.stroke();
+      ctx.beginPath(); ctx.arc(0, 10, 2.5, 0, Math.PI * 2); ctx.stroke();
       ctx.restore();
     }
   });
-  carta.repeat.set(1, 1);
+  // moquette a onde ad incastro, ruggine e senape, con le stelline
   const moquette = canvasTex(512, 512, (ctx, w, h) => {
-    ctx.fillStyle = '#a5481e'; ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = '#d99a2b';
-    for (let y = 0; y < h; y += 128) for (let x = 0; x < w; x += 128) {
+    const passo = 128, alto = 64;
+    for (let r = -1; r < h / alto + 1; r++) {
+      const y = r * alto;
+      ctx.fillStyle = r % 2 ? '#d9a33a' : '#a3431b';
       ctx.beginPath();
-      ctx.ellipse(x + 64, y + 64, 54, 34, 0, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(0, y);
+      for (let x = 0; x <= w; x += 4) ctx.lineTo(x, y + Math.sin((x / passo) * Math.PI * 2) * 18);
+      for (let x = w; x >= 0; x -= 4) ctx.lineTo(x, y + alto + Math.sin((x / passo) * Math.PI * 2 + Math.PI) * 18);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = '#4e1e0b'; ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 4) ctx[x ? 'lineTo' : 'moveTo'](x, y + Math.sin((x / passo) * Math.PI * 2) * 18);
+      ctx.stroke();
     }
-    ctx.strokeStyle = '#5a2410'; ctx.lineWidth = 3;
-    for (let y = 0; y < h; y += 128) for (let x = 0; x < w; x += 128) {
-      ctx.beginPath(); ctx.moveTo(x + 52, y + 64); ctx.lineTo(x + 76, y + 64); ctx.moveTo(x + 64, y + 52); ctx.lineTo(x + 64, y + 76); ctx.stroke();
+    ctx.strokeStyle = 'rgba(70, 25, 8, 0.8)'; ctx.lineWidth = 2;
+    for (let y = 32; y < h; y += 128) for (let x = 64; x < w; x += 128) {
+      for (let k = 0; k < 4; k++) { const a = (k * Math.PI) / 4; ctx.beginPath(); ctx.moveTo(x - Math.cos(a) * 12, y - Math.sin(a) * 12); ctx.lineTo(x + Math.cos(a) * 12, y + Math.sin(a) * 12); ctx.stroke(); }
     }
   });
   const legno = new THREE.MeshLambertMaterial({ color: 0x3b2618 });
   const muro = new THREE.MeshLambertMaterial({ map: carta });
-  carta.repeat.set(4, 1.1);
+  carta.repeat.set(5, 1.2);
   m.stanza({
-    nome: 'oakvx', x0: X0, x1: X1, z0: Z0, z1: Z1, h: PARETE, soffitto: false, ala: 'oakvx', passi: 'moquette',
+    nome: 'oakvx', x0: X0, x1: X1, z0: Z0, z1: Z1, h: PARETE, soffitto: false, ala: 'oakvx', passi: 'moquette', hdr: 'notte',
+    pareti: { n: { aperture: [apertura(902.5), apertura(905.5)] }, w: { aperture: [apertura(8.9)] } },
     materiali: { muro, pavimento: new THREE.MeshLambertMaterial({ map: moquette }), battiscopa: legno, cornice: legno },
     luciPunto: false,
-    atmosfera: { nebbia: 0x0b1424, vicino: 6, lontano: 34, cielo: 0x6c7fa0, terra: 0x2a1a12, intensita: 1.1 },
+    atmosfera: { nebbia: 0x16233b, vicino: 10, lontano: 60, cielo: 0xa6b8de, terra: 0x8a4a1e, intensita: 1.9 },
     suono: { ronzio: 0.05, pioggia: 1 },
   });
-  moquette.repeat.set(2, 3);
+  moquette.repeat.set(1, 1.6);
+
+  // il cielo del temporale, visibile dal tetto di vetro (con qualche lampo lontano)
+  const nuvole = canvasTex(1024, 512, (ctx, w, h) => {
+    const gr = ctx.createLinearGradient(0, 0, 0, h);
+    gr.addColorStop(0, '#040a16'); gr.addColorStop(0.5, '#0f1e36'); gr.addColorStop(1, '#22385a');
+    ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 90; i++) {
+      const x = Math.random() * w, y = Math.random() * h * 0.95, rr = 30 + Math.random() * 120;
+      const n = ctx.createRadialGradient(x, y, 0, x, y, rr);
+      n.addColorStop(0, `rgba(105, 128, 165, ${0.25 + Math.random() * 0.3})`); n.addColorStop(0.6, `rgba(70, 90, 125, 0.12)`); n.addColorStop(1, 'rgba(60, 80, 110, 0)');
+      ctx.fillStyle = n; ctx.fillRect(x - rr, y - rr, rr * 2, rr * 2);
+    }
+  });
+  const cielo = new THREE.Mesh(new THREE.SphereGeometry(40, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshBasicMaterial({ map: nuvole, side: THREE.BackSide, fog: false }));
+  cielo.position.set(CX, -2, (Z0 + Z1) / 2);
+  m.scene.add(cielo);
+  let lampo = 0, prossimoLampo = 12;
+  m.ogniFrame((dt, t) => {
+    if (t > prossimoLampo) { lampo = 1; prossimoLampo = t + 18 + Math.random() * 25; }
+    lampo = Math.max(0, lampo - dt * 3);
+    cielo.material.color.setScalar(1 + lampo * 1.6);
+  });
 
   // timpani (triangoli sopra le pareti corte) e tetto di vetro a falde
   const timpano = new THREE.Shape([new THREE.Vector2(X0 - CX, 0), new THREE.Vector2(X1 - CX, 0), new THREE.Vector2(0, COLMO - PARETE)]);
-  for (const z of [Z0 - 0.15, Z1 + 0.15]) {
-    const t = new THREE.Mesh(new THREE.ExtrudeGeometry(timpano, { depth: 0.3, bevelEnabled: false }), muro);
-    t.position.set(CX, PARETE, z - 0.15);
-    m.scene.add(t);
-  }
+  const tSud = new THREE.Mesh(new THREE.ExtrudeGeometry(timpano, { depth: 0.3, bevelEnabled: false }), muro);
+  tSud.position.set(CX, PARETE, Z0 - 0.3);
+  m.scene.add(tSud);
   const pioggia = canvasTex(256, 512, (ctx, w, h) => {
-    ctx.fillStyle = 'rgba(40, 60, 90, 0.35)'; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(40, 60, 90, 0.06)'; ctx.fillRect(0, 0, w, h);
     for (let i = 0; i < 260; i++) {
       const x = Math.random() * w, y = Math.random() * h, l = 4 + Math.random() * 18;
-      ctx.strokeStyle = `rgba(190, 210, 240, ${0.06 + Math.random() * 0.16})`;
+      ctx.strokeStyle = `rgba(200, 220, 250, ${0.25 + Math.random() * 0.35})`;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.random() * 2 - 1, y + l); ctx.stroke();
-      ctx.fillStyle = 'rgba(210, 225, 250, 0.22)'; ctx.fillRect(x - 0.5, y + l, 1.5, 1.5);
+      ctx.fillStyle = 'rgba(220, 235, 255, 0.55)'; ctx.fillRect(x - 0.5, y + l, 1.5, 1.5);
     }
   });
-  pioggia.repeat.set(10, 6);
-  const vetro = new THREE.MeshLambertMaterial({ map: pioggia, transparent: true, opacity: 0.7, depthWrite: false, side: THREE.DoubleSide, emissive: 0x060c18 });
+  pioggia.repeat.set(6, 4);
+  const vetro = new THREE.MeshBasicMaterial({ map: pioggia, transparent: true, opacity: 0.95, depthWrite: false, side: THREE.DoubleSide, fog: false });
   const falda = Math.hypot(CX - X0, COLMO - PARETE);
   const inclina = Math.atan2(COLMO - PARETE, CX - X0);
   for (const lato of [-1, 1]) {
@@ -83,10 +116,29 @@ export function costruisci(m, g) {
       m.scene.add(trave);
     }
   }
+  // montanti lungo la falda: la griglia scura del tetto di vetro
+  for (const lato of [-1, 1]) for (const t of [0.34, 0.67]) {
+    const arcareccio = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.09, Z1 - Z0 + 0.3), legno);
+    arcareccio.position.set(CX + lato * (CX - X0) * (1 - t), PARETE + (COLMO - PARETE) * t - 0.04, (Z0 + Z1) / 2);
+    m.scene.add(arcareccio);
+  }
   const colmo = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.22, Z1 - Z0 + 0.3), legno);
   colmo.position.set(CX, COLMO - 0.1, (Z0 + Z1) / 2);
   m.scene.add(colmo);
   m.ogniFrame((dt) => { pioggia.offset.y += dt * 0.35; });
+  // timpano nord in vetro, sopra la libreria, con un montante al centro
+  const vetroNord = new THREE.Mesh(new THREE.ShapeGeometry(timpano), vetro);
+  vetroNord.position.set(CX, PARETE, Z1 + 0.05);
+  m.scene.add(vetroNord);
+  const montante = new THREE.Mesh(new THREE.BoxGeometry(0.1, COLMO - PARETE, 0.1), legno);
+  montante.position.set(CX, (PARETE + COLMO) / 2, Z1 + 0.05);
+  m.scene.add(montante);
+  m.box(X0, PARETE - 0.02, Z1, X1, PARETE + 0.1, Z1 + 0.15, legno, { solido: false });
+
+  // luce calda sul pavimento e nella nicchia del letto
+  m.luce(CX, 1.1, 5.5, 2.6, 8, 0xffa860);
+  m.luce(X1 - 0.6, 1.6, 7, 1.4, 4, 0xffcf7a);
+  m.luce(CX, 1.5, Z1 - 1.1, 1.8, 4, 0xffc890);
 
   // due faretti appesi al colmo
   for (const z of [4.5, 7.5]) {
@@ -97,7 +149,7 @@ export function costruisci(m, g) {
     const lampadina = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), new THREE.MeshBasicMaterial({ color: 0xffe3a8 }));
     lampadina.position.copy(f.position).add(new THREE.Vector3(z < 6 ? 0.05 : -0.05, -0.12, 0));
     m.scene.add(lampadina);
-    m.luce(f.position.x, f.position.y - 0.3, z, 3.2, 9, 0xffd7a0);
+    m.luce(f.position.x, f.position.y - 0.3, z, 3.6, 9, 0xffd7a0);
   }
 
   // letto con la coperta verde dentro la libreria
@@ -110,18 +162,26 @@ export function costruisci(m, g) {
   m.box(CX + 1.15, 0, Z1 - 0.45, CX + 2.6, PARETE + 0.4, Z1, libreria);
   m.box(CX - 1.15, 1.7, Z1 - 0.45, CX + 1.15, PARETE + 0.4, Z1, libreria);
   const scaffali = [];
+  const ripiano = new THREE.MeshLambertMaterial({ color: 0x5a3b26 });
+  const colLibri = [0x8a3b2f, 0x2f5a8a, 0xc9a43b, 0x3b7a4f, 0x6b3b8a, 0xd8d2c0, 0x9c6b3a, 0x334a5e];
+  const mLibri = colLibri.map((c) => new THREE.MeshLambertMaterial({ color: c }));
+  const libri = (x0, x1, y) => {
+    for (let x = x0; x < x1 - 0.05;) {
+      const sp = 0.04 + Math.random() * 0.05, alt = 0.2 + Math.random() * 0.12;
+      m.box(x, y, Z1 - 0.62 + Math.random() * 0.04, x + sp, y + alt, Z1 - 0.47, mLibri[Math.floor(Math.random() * mLibri.length)], { solido: false });
+      x += sp + 0.006;
+    }
+  };
   for (const xs of [[CX - 2.55, CX - 1.2], [CX + 1.2, CX + 2.55]]) {
     for (const y of [0.45, 1.05, 1.65]) {
-      m.box(xs[0], y, Z1 - 0.47, xs[1], y + 0.03, Z1 - 0.44, new THREE.MeshLambertMaterial({ color: 0x5a3b26 }), { solido: false });
-      scaffali.push([(xs[0] + xs[1]) / 2, y + 0.03, Z1 - 0.62]);
+      m.box(xs[0], y, Z1 - 0.47, xs[1], y + 0.03, Z1 - 0.44, ripiano, { solido: false });
+      if (y > 1.5) libri(xs[0], xs[1], y + 0.03);
+      else scaffali.push([(xs[0] + xs[1]) / 2, y + 0.03, Z1 - 0.62]);
     }
   }
+  libri(CX - 2.55, CX - 1.95, 0.48);
   // libri colorati sugli scaffali alti
-  const colori = [0x8a3b2f, 0x2f5a8a, 0xc9a43b, 0x3b7a4f, 0x6b3b8a, 0xd8d2c0];
-  for (let i = 0; i < 14; i++) {
-    const x = CX - 1.1 + i * 0.16;
-    m.box(x, 1.73, Z1 - 0.62, x + 0.12, 1.73 + 0.26 + (i % 3) * 0.04, Z1 - 0.47, new THREE.MeshLambertMaterial({ color: colori[i % colori.length] }), { solido: false });
-  }
+  libri(CX - 1.1, CX + 1.1, 1.73);
 
   // la TV a tubo catodico (jukebox) e il videoregistratore
   const tvX = CX + 1.88, tvY = 1.08;
@@ -165,8 +225,18 @@ export function costruisci(m, g) {
   finestrella.rotation.y = -Math.PI / 2;
   m.scene.add(finestrella);
   m.box(X1 - 0.25, 0.95, 6.45, X1, 1.0, 7.55, new THREE.MeshLambertMaterial({ color: 0xd9b23b }));
-  m.box(X0 + 0.02, 0, 8.3, X0 + 0.08, 2.05, 9.5, new THREE.MeshLambertMaterial({ color: 0x2a3340 }));
   for (let k = 0; k < 5; k++) m.box(X0 + 0.02, k * 0.2, 6.2 + k * 0.28, X0 + 0.5, k * 0.2 + 0.2, 6.5 + k * 0.28, new THREE.MeshLambertMaterial({ color: 0x2a3340 }), { solido: false });
+
+  // oggetti scansionati: credenza sotto la falda con enciclopedie e walkman, stereo per terra,
+  // una piantina sul davanzale della finestrella
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('vintage_cabinet_01', X1 - 0.17, 0, 9.4, -Math.PI / 2, { altezza: 1.0 }).then((o) => {
+    if (!o) return;
+    oggetti.metti('book_encyclopedia_set_01', X1 - 0.17, 1.0, 9.15, -Math.PI / 2, { solido: false });
+    oggetti.metti('portable_cassette_player', X1 - 0.2, 1.0, 9.7, -Math.PI / 2 - 0.4, { solido: false });
+  });
+  oggetti.metti('boombox', CX + 1.9, 0, Z1 - 1.25, Math.PI + 0.2);
+  oggetti.metti('potted_plant_04', X1 - 0.13, 1.0, 7.3, 0.8, { solido: false });
 
   // il Mii, seduto sul letto
   g.arredi.mii(CX - 0.6, 0.42, Z1 - 1.6, Math.PI, 'seduto');
@@ -305,13 +375,17 @@ export function costruisci(m, g) {
   });
 
   // la porta con la scaletta porta all'ultima stanza
-  m.zona('verso-contatti', X0, -1, 8.3, X0 + 0.45, 3, 9.5, { ripeti: true });
-  g.su('verso-contatti', () => g.teletrasporta(945, 0, 1.5, Math.PI));
+  for (const x of [902.5, 905.5]) nicchia(m, [x, 0, Z0, 0]);
+  nicchia(m, [X0, 0, 8.9, Math.PI / 2]);
+  collega(g, 'oakvx-contatti', [X0, 0, 8.9, Math.PI / 2], [945, 0, 0, 0]);
+  g.arredi.porta(X0 + 0.06, 0, 8.9, Math.PI / 2, null);
   g.puntoControllo('oakvx', CX, 0, 1.5, Math.PI);
   return {
     debug: {
+      varchi: [{ id: 'oakvx-contatti', da: 'oakvx', a: 'contatti', lato: [X0, 0, 8.9, Math.PI / 2] }],
       porta: [X0, 8.9],
       stato: () => ({
+        modelli: oggetti.quanti(),
         modo2008: g.modo2008Valore() > 0.99 ? 1 : g.modo2008Valore() < 0.01 ? 0 : g.modo2008Valore(),
         caricata, mensola: caricata ? dati.mensola.length : 0, lingue: dati.lingue.length, melodia, suona,
       }),

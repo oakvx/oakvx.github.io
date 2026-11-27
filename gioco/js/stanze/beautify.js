@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { canvasTex } from '../engine/materiali.js';
 import { stanzaProgetto } from '../engine/varchi.js';
 import { creaSaloni } from '../logica/saloni.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = -180, X1 = -150, Z0 = -40, Z1 = -10, H = 4;
 const FRONTE = -16;
@@ -86,6 +87,11 @@ export function costruisci(m, g) {
   g.arredi.didascalia(-157, 1.6, Z1 - 0.03, Math.PI, () => T().testi.beautify, { w: 1.7, h: 1.05 });
   g.arredi.cartello(-165, 3.2, Z1 - 0.03, Math.PI, '07', () => T().cartello);
 
+  // oggetti scansionati
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('potted_plant_04', -179, 0, -11, 0, { altezza: 1.0 });
+  oggetti.metti('side_table_01', -151, 0, -11.2, 0, { altezza: 0.55 });
+  oggetti.metti('modern_arm_chair_01', -153, 0, -12.5, Math.PI + 0.4, { altezza: 0.85 });
   const aiuti = g.aiuti('beautify');
   let fatto = false, soluzione = false, presa = false;
   m.ogniFrame(() => {
@@ -109,7 +115,7 @@ export function costruisci(m, g) {
       posti: { qui: [-172, -12], pannelloReception: [-180, 1.3, -13], pannelloA: [-180, 1.3, -28], poltronaC: poltrone.c },
       poggia: (x, y, z) => { if (appuntamento.tenuto) return; appuntamento.pos.set(x, y, z); appuntamento.vel.set(0, 0, 0); },
       risolvi: () => { fatto = true; aiuti.risolto(); g.lampada('beautify'); },
-      stato: () => ({ disponibile: saloni.disponibile(FASCIA), fatto, soluzione }),
+      stato: () => ({ modelli: oggetti.quanti(), disponibile: saloni.disponibile(FASCIA), fatto, soluzione }),
     },
   };
 }

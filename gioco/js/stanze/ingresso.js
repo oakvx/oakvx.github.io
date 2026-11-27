@@ -2,6 +2,7 @@
 // L'uscita a nord è chiusa da un vetro: oltre il vetro, nel corridoio del percorso, c'è
 // un pannello. Prima prova delle finestre: una qui, una di là.
 import * as THREE from 'three';
+import { creaOggetti } from '../engine/oggetti.js';
 
 export function costruisci(m, g) {
   const mat = m.mat;
@@ -20,12 +21,17 @@ export function costruisci(m, g) {
   vetro.mesh.userData.vetro = true;
 
   // bancone con le due finestre appoggiate sopra
-  const bancone = m.box(-1.4, 0, -2.6, 1.4, 1.05, -1.9, mat.scuro);
-  m.box(-1.5, 1.05, -2.7, 1.5, 1.1, -1.8, mat.cornice, { solido: false });
+  // il bancone è una scrivania d'ufficio in metallo (scansionata); sotto c'è il volume che si esamina
+  const oggetti = creaOggetti(m, g);
+  const bancone = m.box(-0.8, 0, -2.6, 0.8, 0.78, -1.9, mat.scuro);
+  bancone.mesh.visible = false;
+  oggetti.metti('metal_office_desk', 0, 0, -2.25, 0, { altezza: 0.78, solido: false });
+  oggetti.metti('power_box_01', 3.75, 1.2, 2.6, -Math.PI / 2, { altezza: 0.55, solido: false });
+  oggetti.metti('utility_box_01', -3.6, 0, 3.4, Math.PI / 2, { altezza: 1.1 });
   const finestre = new THREE.Group();
   for (const [x, c] of [[-0.35, 0x39c6d9], [0.35, 0xd95bb3]]) {
     const f = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.04, 0.6), new THREE.MeshBasicMaterial({ color: c }));
-    f.position.set(x, 1.13, -2.25);
+    f.position.set(x, 0.8, -2.25);
     finestre.add(f);
   }
   m.scene.add(finestre);
@@ -54,5 +60,5 @@ export function costruisci(m, g) {
   const cartello = g.arredi.cartello(0, 2.93, -3.97, 0, '00', () => g.T().stanze.ingresso.cartello);
   g.puntoControllo('ingresso', 0, 0, 2.6, 0);
 
-  return { debug: { bancone: [0, 0.9, -2.25], stato: () => ({ cartello: cartello.testo }) } };
+  return { debug: { bancone: [0, 0.6, -2.25], stato: () => ({ cartello: cartello.testo, modelli: oggetti.quanti() }) } };
 }

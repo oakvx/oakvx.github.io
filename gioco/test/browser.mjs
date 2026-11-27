@@ -29,7 +29,8 @@ function server() {
 }
 
 const nomi = process.argv.slice(2);
-const tutti = fs.readdirSync(path.join(qui, 'scenari')).filter((f) => f.endsWith('.mjs')).map((f) => f.slice(0, -4)).sort();
+// i file che iniziano con _ sono aiuti condivisi, non scenari
+const tutti = fs.readdirSync(path.join(qui, 'scenari')).filter((f) => f.endsWith('.mjs') && !f.startsWith('_')).map((f) => f.slice(0, -4)).sort();
 const scelti = nomi.length ? nomi : tutti;
 
 const srv = await server();
@@ -46,7 +47,11 @@ for (const nome of scelti) {
   const errori = [];
   page.on('pageerror', (e) => errori.push('pageerror: ' + e.message));
   // gli errori di rete del browser ("Failed to load resource") non sono errori del codice
-  page.on('console', (m) => { if (m.type() === 'error' && !m.text().startsWith('Failed to load resource')) errori.push('console.error: ' + m.text()); });
+  page.on('console', (m) => {
+    if (m.type() === 'error' && !m.text().startsWith('Failed to load resource')) errori.push('console.error: ' + m.text());
+    // errori WebGL (es. feedback loop): il browser salta il disegno, quindi sono bug veri
+    if (m.text().includes('GL_INVALID') && !errori.some((e) => e.includes('GL_INVALID'))) errori.push('webgl: ' + m.text());
+  });
   const aiuto = {
     base,
     leggi: () => page.evaluate(() => window.__gioco.leggi()),
@@ -63,7 +68,8 @@ for (const nome of scelti) {
   };
   try {
     if (mod.prepara) await mod.prepara(page, aiuto);
-    await page.goto(`${base}/gioco/?avvia=gioco&debug&lang=it${mod.query || ''}`);
+    // gli scenari di gioco girano in modalità leggera; quelli sulla resa grafica esportano `pesante`
+    await page.goto(`${base}/gioco/?avvia=gioco&debug&lang=it${mod.pesante ? '' : '&leggero'}${mod.query || ''}`);
     await page.waitForFunction(() => window.__gioco && window.__gioco.leggi, null, { timeout: 30000 });
     await mod.default(page, aiuto);
     if (errori.length) throw new Error(errori.join('\n'));

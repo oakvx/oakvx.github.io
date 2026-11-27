@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { canvasTex } from '../engine/materiali.js';
 import { stanzaProgetto } from '../engine/varchi.js';
 import { parolaAttiva, creaTimeline } from '../logica/brat.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = -140, X1 = -110, Z0 = -20, Z1 = 10, H = 10;
 const FOSSO = { z0: -6, z1: -2 };
@@ -115,6 +116,9 @@ export function costruisci(m, g) {
   leva(-121.6, 0xd95bb3, 'brat-indietro');
   g.arredi.porta(-123, 0, 5.1, Math.PI, () => T().pausa, { w: 0.6, h: 1.4 });
   g.arredi.porta(-121.6, 0, 5.1, Math.PI, () => T().indietro, { w: 0.6, h: 1.4 });
+  // oggetti scansionati
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('bar_chair_round_01', -119.5, 0, 4.2, 0.4, { altezza: 0.75 });
   const aiuti = g.aiuti('brat');
   g.su('oggetto:brat-pausa', () => {
     g.suoni.leva();
@@ -156,7 +160,7 @@ export function costruisci(m, g) {
     debug: {
       ponte: [(PONTE_X[0] + PONTE_X[1]) / 2, FOSSO.z1 + 1, FOSSO.z0 - 1],
       risolvi: () => { fatto = true; aiuti.risolto(); g.lampada('brat'); },
-      stato: () => ({ tempo, parola, solide: [...solide], fermo: timeline.fermo(), fatto, soluzione }),
+      stato: () => ({ modelli: oggetti.quanti(), tempo, parola, solide: [...solide], fermo: timeline.fermo(), fatto, soluzione }),
     },
   };
 }

@@ -6,9 +6,20 @@ import * as THREE from 'three';
 import { matriceAttraverso, clipObliqua } from './proiezione.js';
 
 const vertex = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+// crepa verticale frastagliata (uv in [0,1]²): < 0 dentro la crepa. Condivisa con lo squarcio della cisterna.
+export const CREPA_GLSL = `
+float crepa(vec2 uv){
+  float y = uv.y;
+  float c = 0.5 + 0.07 * sin(y * 23.0) + 0.045 * sin(y * 57.0 + 1.3) + 0.02 * sin(y * 131.0);
+  float w = 0.03 + 0.42 * pow(sin(3.14159 * clamp(y, 0.0, 1.0)), 1.4) * (0.72 + 0.28 * sin(y * 41.0 + 0.7));
+  return abs(uv.x - c) - w;
+}`;
 const fragment = `
-uniform sampler2D tVista; uniform vec2 uRes; uniform float uAttivo; uniform vec3 uNebbia;
+uniform sampler2D tVista; uniform vec2 uRes; uniform float uAttivo; uniform vec3 uNebbia; uniform float uForma;
+varying vec2 vUv;
+${CREPA_GLSL}
 void main(){
+  if (uForma > 0.5 && crepa(vUv) > 0.0) discard;
   if (uAttivo < 0.5) { gl_FragColor = vec4(uNebbia, 1.0); return; }
   gl_FragColor = vec4(texture2D(tVista, gl_FragCoord.xy / uRes).rgb, 1.0);
 }`;
@@ -28,6 +39,9 @@ export class Passaggi {
     this.vcam.matrixWorldAutoUpdate = false;
     this.frustum = new THREE.Frustum();
     this.pool = [0, 1].map(() => new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType }));
+    // texture vuota: nessuna faccia deve tenere legata la texture in cui si sta disegnando (feedback loop)
+    this.vuota = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
+    this.vuota.needsUpdate = true;
   }
 
   ridimensiona(w, h, scala = this.scala) {
@@ -36,9 +50,10 @@ export class Passaggi {
     for (const rt of this.pool) rt.setSize(Math.max(2, Math.floor(w * scala)), Math.max(2, Math.floor(h * scala)));
   }
 
-  faccia(m, w, h) {
+  // forma: 'crepa' ritaglia la faccia a forma di squarcio (si attraversa comunque tutto il rettangolo)
+  faccia(m, w, h, forma = null) {
     const mat = new THREE.ShaderMaterial({
-      uniforms: { tVista: { value: null }, uRes: { value: this.res }, uAttivo: { value: 0 }, uNebbia: { value: new THREE.Color(0x000000) } },
+      uniforms: { tVista: { value: this.vuota }, uRes: { value: this.res }, uAttivo: { value: 0 }, uNebbia: { value: new THREE.Color(0x000000) }, uForma: { value: forma === 'crepa' ? 1 : 0 } },
       vertexShader: vertex,
       fragmentShader: fragment,
     });
@@ -52,9 +67,9 @@ export class Passaggi {
   }
 
   // a, b: matrici (posizione + rotazione) del centro di ciascuna faccia; la faccia guarda verso +z locale
-  aggiungi({ id, a, b, w = 1.4, h = 2.4, doppio = true }) {
+  aggiungi({ id, a, b, w = 1.4, h = 2.4, doppio = true, formaA = null }) {
     if (this.lista.has(id)) this.rimuovi(id);
-    const p = { id, w, h, doppio, attivo: true, a: this.faccia(a, w, h), b: this.faccia(b, w, h) };
+    const p = { id, w, h, doppio, attivo: true, a: this.faccia(a, w, h, formaA), b: this.faccia(b, w, h) };
     p.b.mesh.visible = doppio;
     this.lista.set(id, p);
     return p;
@@ -129,6 +144,7 @@ export class Passaggi {
     const candidate = [];
     for (const [P, Q, p] of this.coppie()) {
       P.mat.uniforms.uAttivo.value = 0;
+      P.mat.uniforms.tVista.value = this.vuota;
       P.mat.uniforms.uNebbia.value.copy(nebbia);
       const centro = new THREE.Vector3().setFromMatrixPosition(P.m);
       if (!this.frustum.intersectsSphere(new THREE.Sphere(centro, Math.hypot(p.w, p.h) / 2))) continue;

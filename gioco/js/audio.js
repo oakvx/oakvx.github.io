@@ -1,4 +1,5 @@
-// Suoni generati con Web Audio: nessun file, nessuna libreria.
+// Effetti sonori: campioni CC0 di Kenney in suoni/ (vedi suoni/LEGGIMI.md); se un file manca
+// si usa il vecchio suono generato con Web Audio. La musica resta generata (musica.js).
 import { Musica } from './musica.js';
 
 export class Suoni {
@@ -11,6 +12,8 @@ export class Suoni {
     this.prossimaGoccia = 0;
     this.prossimoLegno = 0;
     this.musica = new Musica();
+    this.campioni = new Map();   // nome → [AudioBuffer]
+    this.caricati = 0;
     ctx.suAudio((on) => this.volume(on));
   }
 
@@ -41,6 +44,42 @@ export class Suoni {
     // musica liminale (sostituisce il vecchio pad)
     this.musica.collega(ac, this.out);
     this.musica.avvia();
+    this.caricaCampioni();
+  }
+
+  async caricaCampioni() {
+    let elenco;
+    try {
+      const r = await fetch('suoni/elenco.json');
+      if (!r.ok) return;
+      elenco = await r.json();
+    } catch { return; }
+    await Promise.all(Object.entries(elenco).map(async ([nome, file]) => {
+      const buffer = [];
+      for (const f of file) {
+        try {
+          const r = await fetch('suoni/' + f);
+          if (!r.ok) continue;
+          buffer.push(await this.ac.decodeAudioData(await r.arrayBuffer()));
+          this.caricati++;
+        } catch (e) { console.warn('suono non caricato: ' + f, e && e.message); }
+      }
+      if (buffer.length) this.campioni.set(nome, buffer);
+    }));
+  }
+
+  // suona un campione a caso tra le varianti; false se non c'è (allora si usa il suono generato)
+  campione(nome, { gain = 0.5, rate = 1, variazione = 0.06 } = {}) {
+    const lista = this.campioni.get(nome);
+    if (!this.ac || !lista || !lista.length) return false;
+    const src = this.ac.createBufferSource();
+    src.buffer = lista[Math.floor(Math.random() * lista.length)];
+    src.playbackRate.value = rate * (1 - variazione + Math.random() * variazione * 2);
+    const g = this.ac.createGain();
+    g.gain.value = gain;
+    src.connect(g).connect(this.out);
+    src.start();
+    return true;
   }
 
   // rumore in loop filtrato, con un gain controllabile
@@ -75,6 +114,39 @@ export class Suoni {
     return g;
   }
 
+  // ronzio dello squarcio di realtà (cisterna): livello 0..1, chiarezza 0..1 (più vicino, più acuto)
+  squarcio(livello = 0, chiarezza = 0) {
+    if (!this.ac) return;
+    const ac = this.ac;
+    if (!this.gSquarcio) {
+      this.fSquarcio = ac.createBiquadFilter();
+      this.fSquarcio.type = 'lowpass';
+      this.fSquarcio.frequency.value = 300;
+      const tremolo = ac.createGain();
+      this.gSquarcio = ac.createGain();
+      this.gSquarcio.gain.value = 0;
+      this.fSquarcio.connect(tremolo).connect(this.gSquarcio).connect(this.out);
+      const lfo = ac.createOscillator();
+      lfo.frequency.value = 6.3;
+      const lg = ac.createGain();
+      lg.gain.value = 0.35;
+      lfo.connect(lg).connect(tremolo.gain);
+      lfo.start();
+      for (const [f, tipo, g] of [[55, 'sawtooth', 0.05], [110.6, 'square', 0.014], [166.2, 'sawtooth', 0.01], [331, 'triangle', 0.006]]) {
+        const o = ac.createOscillator();
+        o.type = tipo;
+        o.frequency.value = f;
+        const gg = ac.createGain();
+        gg.gain.value = g;
+        o.connect(gg).connect(this.fSquarcio);
+        o.start();
+      }
+    }
+    const t = ac.currentTime;
+    this.gSquarcio.gain.setTargetAtTime(Math.max(0, Math.min(1, livello)) * 0.9, t, 0.25);
+    this.fSquarcio.frequency.setTargetAtTime(220 + Math.max(0, Math.min(1, chiarezza)) * 2600, t, 0.25);
+  }
+
   // livelli d'ambiente della stanza corrente: { ronzio, acqua, pioggia, gocce, legno }
   ambiente(liv) { this.obiettivo = { ronzio: 1, acqua: 0, pioggia: 0, gocce: 0, legno: 0, ...liv }; }
 
@@ -101,11 +173,11 @@ export class Suoni {
     }
     if (L.legno > 0.05 && t > this.prossimoLegno) {
       this.prossimoLegno = t + 3 + Math.random() * 6;
-      this.rumore(0.6, 180 + Math.random() * 120, 4, 0.5 * L.legno);
+      if (!this.campione('scricchiolio', { gain: 0.35 * L.legno, variazione: 0.15 })) this.rumore(0.6, 180 + Math.random() * 120, 4, 0.5 * L.legno);
     }
   }
 
-  tonfo() { this.rumore(0.5, 500, 0.8, 0.5); this.rumore(0.9, 1600, 0.6, 0.25); }
+  tonfo() { if (this.campione('tonfo', { gain: 0.6 })) return; this.rumore(0.5, 500, 0.8, 0.5); this.rumore(0.9, 1600, 0.6, 0.25); }
 
   volume(on) {
     if (this.out) this.out.gain.setTargetAtTime(on ? 1 : 0, this.ac.currentTime, 0.1);
@@ -133,6 +205,7 @@ export class Suoni {
   // il curatore sfoglia il copione
   fruscio() {
     if (!this.ac) return;
+    if (this.campione('fruscio', { gain: 0.45 })) return;
     for (let i = 0; i < 4; i++) setTimeout(() => this.rumore(0.12, 2500 + Math.random() * 1500, 0.8, 0.35), i * 140 + Math.random() * 60);
   }
 
@@ -152,6 +225,7 @@ export class Suoni {
 
   // finestra aperta: arpeggio a pixel, diverso per le due finestre
   finestra(i) {
+    if (this.campione('finestra', { gain: 0.35, rate: i ? 1.25 : 1 })) return;
     const base = i === 0 ? [523.25, 659.25, 783.99] : [783.99, 659.25, 523.25];
     base.forEach((f, k) => this.nota(f, k * 0.045, 0.09, 'square', 0.035));
   }
@@ -159,6 +233,7 @@ export class Suoni {
   // passi: un timbro per materiale, con un po' di variazione per non suonare meccanici
   passo(materiale = 'cemento') {
     if (!this.ac) return;
+    if (materiale !== 'acqua' && this.campione('passo-' + materiale, { gain: materiale === 'metallo' ? 0.18 : 0.35 })) return;
     const v = () => 0.94 + Math.random() * 0.12;
     switch (materiale) {
       case 'metallo': this.rumore(0.12, 2400 * v(), 6, 0.13); this.nota(310 * v(), 0, 0.07, 'triangle', 0.025); break;
@@ -173,23 +248,27 @@ export class Suoni {
   // urto di un cubo: più forte, più grave e più lungo
   urto(forza) {
     const k = Math.max(0, Math.min(1, forza));
+    if (this.campione(k > 0.5 ? 'urto-pesante' : 'urto-leggero', { gain: 0.15 + k * 0.5 })) return;
     this.rumore(0.18 + k * 0.2, 320 + Math.random() * 80, 1.4, 0.45 * k);
     this.nota(70 + Math.random() * 20, 0, 0.12 + k * 0.1, 'sine', 0.08 * k);
   }
 
-  leva() { this.rumore(0.05, 3000, 4, 0.2); this.nota(180, 0.06, 0.05, 'square', 0.04); this.rumore(0.08, 700, 2, 0.25); }
+  leva() { if (this.campione('leva', { gain: 0.5 })) return; this.rumore(0.05, 3000, 4, 0.2); this.nota(180, 0.06, 0.05, 'square', 0.04); this.rumore(0.08, 700, 2, 0.25); }
 
   porta(apre = true) {
+    if (this.campione(apre ? 'porta-apre' : 'porta-chiude', { gain: 0.55 })) return;
     this.rumore(1.1, apre ? 130 : 110, 0.8, 0.35);
     this.nota(55, 0, 1.1, 'sawtooth', 0.02);
     if (this.ac) setTimeout(() => this.rumore(0.2, 260, 1.5, 0.4), 1050);
   }
 
-  lampada() { this.nota(880, 0, 0.5, 'sine', 0.05); this.nota(1318.5, 0.12, 0.7, 'sine', 0.04); this.rumore(0.05, 5000, 3, 0.08); }
-  notifica() { this.nota(659.25, 0, 0.12, 'triangle', 0.05); this.nota(987.77, 0.1, 0.18, 'triangle', 0.05); }
+  lampada() { if (this.campione('lampada', { gain: 0.5, variazione: 0 })) return; this.nota(880, 0, 0.5, 'sine', 0.05); this.nota(1318.5, 0.12, 0.7, 'sine', 0.04); this.rumore(0.05, 5000, 3, 0.08); }
+  notifica() { if (this.campione('notifica', { gain: 0.4 })) return; this.nota(659.25, 0, 0.12, 'triangle', 0.05); this.nota(987.77, 0.1, 0.18, 'triangle', 0.05); }
 
-  errore() { this.nota(140, 0, 0.18, 'square', 0.04); this.nota(110, 0.09, 0.2, 'square', 0.04); }
-  passaggio() { this.rumore(0.35, 900, 0.6, 0.25); }
-  presa() { this.nota(330, 0, 0.06, 'triangle', 0.06); }
-  finale() { [392, 493.88, 587.33, 783.99].forEach((f, k) => this.nota(f, k * 0.18, 1.2, 'sine', 0.05)); }
+  errore() {
+    if (this.campione('errore', { gain: 0.4 })) return; this.nota(140, 0, 0.18, 'square', 0.04); this.nota(110, 0.09, 0.2, 'square', 0.04); }
+  passaggio() { if (this.campione('passaggio', { gain: 0.35 })) return; this.rumore(0.35, 900, 0.6, 0.25); }
+  presa() { if (this.campione('presa', { gain: 0.4 })) return; this.nota(330, 0, 0.06, 'triangle', 0.06); }
+  tasto() { if (this.campione('tasto', { gain: 0.25, variazione: 0.12 })) return; this.nota(1200, 0, 0.02, 'square', 0.01); }
+  finale() { if (this.campione('finale', { gain: 0.5, variazione: 0 })) return; [392, 493.88, 587.33, 783.99].forEach((f, k) => this.nota(f, k * 0.18, 1.2, 'sine', 0.05)); }
 }

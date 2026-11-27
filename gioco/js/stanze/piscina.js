@@ -5,7 +5,9 @@ import * as THREE from 'three';
 import { geoTonda } from '../engine/mondo.js';
 import { canvasTex, materialeTri } from '../engine/materiali.js';
 import { creaAcqua } from '../engine/acqua.js';
-import { cartelloStanza } from '../engine/liminale.js';
+import { apertura, nicchia, collega } from '../engine/varchi.js';
+import { cartelloStanza, miiLiminale, tappa } from '../engine/liminale.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 40.3, X1 = 70, Z0 = 17, Z1 = 21, H = 3.2;
 
@@ -49,6 +51,7 @@ export function costruisci(m, g) {
       w: { aperture: [{ a: 18, b: 20.4, y0: 0, y1: 2.8 }] },
       n: { pannelli: [{ id: 'piscina-inizio', a: 41.2, b: 44.6, y0: 0, y1: 2.6 }] },
       s: { pannelli: [{ id: 'piscina-fine', a: 64, b: 67.6, y0: 0, y1: 2.6 }] },
+      e: { aperture: [apertura(19)] },
     },
     materiali: mat, luciPunto: false, ala: 'transito', passi: 'acqua',
     acqua: { livello: 0.35, corrente: [0, 0] },
@@ -113,12 +116,20 @@ export function costruisci(m, g) {
 
   // la porta rossa in fondo
   const rosso = new THREE.MeshBasicMaterial({ color: 0xff2a3a, fog: false });
-  m.tondo(X1 - 0.06, 0, 18.1, X1, 2.5, 19.9, rosso, { r: 0.02, solido: false });
+  // la porta rossa: un telaio rosso acceso attorno al passaggio verso middleManPS4
+  for (const [z0, z1] of [[18.15, 18.35], [19.65, 19.85]]) m.box(X1 - 0.08, 0, z0, X1 - 0.02, 2.4, z1, rosso, { solido: false });
+  m.box(X1 - 0.08, 2.3, 18.15, X1 - 0.02, 2.45, 19.85, rosso, { solido: false });
+  nicchia(m, [X1, 0, 19, -Math.PI / 2]);
+  collega(g, 'piscina-middleman', [X1, 0, 19, -Math.PI / 2], [110, 0, 0, 0]);
   m.luce(X1 - 0.8, 1.4, 19, 3, 7, 0xff3344);
-  m.zona('porta-rossa', X1 - 1.0, -1, 18.1, X1, 3, 19.9, { ripeti: true });
-  g.su('porta-rossa', () => g.teletrasporta(110, 0, 1.5, Math.PI, () => g.suoni.tonfo()));
 
-  cartelloStanza(m, g, X0 + 1.5, 2.6, Z1 - 0.06, Math.PI, 1848);
+  const cartello = cartelloStanza(m, g, X0 + 1.5, 2.6, Z1 - 0.06, Math.PI, 1848);
+  // vasi di terracotta nell'acqua, come in un cortile di Siviglia allagato
+  const oggetti = creaOggetti(m, g);
+  for (const [x, z] of [[46, 17.45], [56, 20.55], [62, 17.45]]) oggetti.metti('planter_pot_clay', x, 0, z, x, { altezza: 0.7 });
+  // il ricordo di questo transito: l'Erasmus a Siviglia, oltre la corrente
+  const t = tappa(m, g, 'erasmus', 67.2, 0, Z0 + 0.06, 0);
+  const mii = miiLiminale(m, g, 'piscina', 69, 0, 19.6, -Math.PI / 2, [0, 1]);
   g.puntoControllo('piscina', X0 + 0.9, 0, 19.2, -Math.PI / 2);
-  return { debug: { risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
+  return { debug: { stato: () => ({ modelli: oggetti.quanti() }), varchi: [{ id: 'piscina-middleman', da: 'piscina', a: 'middleman', lato: [X1, 0, 19, -Math.PI / 2] }], tappa: t, mii: mii.posto, cartello: () => cartello.testo, risolvi: () => { g.giocatore().pos.set(66, 0.86, 19.2); g.giocatore().vel.set(0, 0, 0); } } };
 }

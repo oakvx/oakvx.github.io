@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { posa } from '../engine/passaggi.js';
 import { PORTE, apertura, nicchia, collega } from '../engine/varchi.js';
 import { PROGETTI } from '../logica/giro.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = -10, X1 = 10, Z0 = -42, Z1 = -26, H = 5;
 const HASH = { yag: 'a3f9c21', piko: '7be04d1', brat: 'c51e9aa', synk: '0d4f7b3', beautify: '9e2a6f0' };
@@ -38,13 +39,14 @@ export function costruisci(m, g) {
   }
 
   // arrivo dal percorso (a senso unico), sulla parete sud
-  g.passaggi.aggiungi({ id: 'percorso-3', a: posa(0, 61.3, -15.7, 0), b: posa(0, 1.3, Z1 - 0.3, Math.PI), w: 3, h: 2.6, doppio: false });
+  g.passaggi.aggiungi({ id: 'percorso-fine', a: posa(0, 21.3, -15.7, 0), b: posa(0, 1.3, Z1 - 0.3, Math.PI), w: 3, h: 2.6, doppio: false });
   g.arredi.porta(0, 0, Z1 - 0.06, Math.PI, null, { w: 3, h: 2.6 });
 
   // uscita: chiusa da una saracinesca finché le lampade non sono cinque
   nicchia(m, USCITA, 2, 2.6);
   const saracinesca = m.box(USCITA[0] - 1, 0, Z0 - 0.3, USCITA[0] + 1, 2.6, Z0 - 0.05, mat.metallo);
-  collega(g, 'uscita-smistamento', USCITA, [0, 0, 7.85, 0], { w: 2, h: 2.6 });
+  // verso il corridoio allagato (primo transito), dalla sua apertura ovest
+  collega(g, 'uscita-smistamento', USCITA, [40.3, 0, 19.2, Math.PI / 2], { w: 2.4, h: 2.8 });
   g.passaggi.attiva('uscita-smistamento', false);
   g.arredi.porta(USCITA[0], 0, Z0 + 0.06, 0, null, { w: 2, h: 2.6 });
 
@@ -69,9 +71,17 @@ export function costruisci(m, g) {
     });
   }
 
+  // la postazione del turno di notte, quadri elettrici e lampade industriali
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('metal_office_desk', -6.5, 0, -40.4, 0, { altezza: 0.78 });
+  oggetti.metti('desk_lamp_arm_01', -6.9, 0.78, -40.5, 0.4, { altezza: 0.45, solido: false });
+  oggetti.metti('binder_notebook', -6, 0.78, -40.3, -0.3, { altezza: 0.05, solido: false });
+  oggetti.metti('power_box_01', 9.75, 1.3, -34, -Math.PI / 2, { altezza: 0.7, solido: false });
+  oggetti.metti('utility_box_01', -9.6, 0, -34, Math.PI / 2, { altezza: 1.3 });
+  for (const x of [-5, 5]) oggetti.metti('industrial_wall_lamp', x, 3.6, Z1 - 0.15, Math.PI, { altezza: 0.4, solido: false });
   g.arredi.cartello(0, 3.4, Z0 + 0.03, 0, '02', () => g.T().stanze.smistamento.cartello);
   g.puntoControllo('smistamento', 0, 0, Z1 - 1.5, 0);
 
   const porte = Object.fromEntries(PROGETTI.map((id) => [id, PORTE[id].hub.slice(0, 1).concat([0, PORTE[id].hub[2], PORTE[id].hub[3]])]));
-  return { debug: { porte, uscita: USCITA, stato: () => ({ aperta: g.giro.uscitaAperta() }) } };
+  return { debug: { porte, uscita: USCITA, stato: () => ({ aperta: g.giro.uscitaAperta(), modelli: oggetti.quanti() }) } };
 }

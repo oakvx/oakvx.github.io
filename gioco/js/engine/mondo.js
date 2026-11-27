@@ -54,6 +54,8 @@ export class Mondo {
     m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
     m.matrixAutoUpdate = false;
     m.updateMatrix();
+    m.castShadow = true;
+    m.receiveShadow = true;
     gruppo.add(m);
     if (!solido) return { mesh: m };
     const s = {

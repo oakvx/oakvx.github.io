@@ -24,6 +24,11 @@ export default async function (page, aiuto) {
   assert.equal((await aiuto.leggi()).portali[1], 'mm-alto');
   // dentro la finestra bassa, fuori da quella alta, poi in cisterna
   await G((p) => { window.__gioco.vai(p[0], 0.87, p[1]); window.__gioco.guarda(p[2]); window.__gioco.tasto('KeyW', true); }, d.entra);
+  // fuori dalla finestra alta si è sulla nicchia: ci si gira verso la porta e si va in cisterna
+  await aiuto.attendi(() => window.__gioco.leggi().y > 2.5, 8000);
+  await G(() => { window.__gioco.tasto('KeyW', false); const s = window.__gioco.leggi(); window.__gioco.vai(s.x, s.y, s.z); });
+  await aiuto.aspetta(150);
+  await G(() => { window.__gioco.mira(118.5, 3.6, 21); window.__gioco.tasto('KeyW', true); });
   await aiuto.attendi(() => window.__gioco.leggi().stanza === 'cisterna', 8000);
   await G(() => window.__gioco.tasto('KeyW', false));
 }

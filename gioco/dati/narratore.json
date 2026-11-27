@@ -25,23 +25,14 @@
       "it": "Il visitatore lanciò un cubo. Il copione non dice niente sui cubi. Il curatore decise che i cubi erano «interattività».",
       "en": "The visitor threw a cube. The script says nothing about cubes. The curator decided cubes were \"interactivity\"."
     },
-    "N-110": {
-      "it": "Un momento. Questa ala non c'è nel copione. C'è una scala mobile. Nessuno mi ha detto che avevamo una scala mobile.",
-      "en": "One moment. This wing isn't in the script. There's an escalator. Nobody told me we had an escalator.",
-      "panico": true
-    },
     "N-111": {
-      "it": "Il corridoio era allagato. Il curatore decise di chiamarlo «installazione». L'acqua scorreva verso la porta rossa, e il visitatore la seguì.",
-      "en": "The corridor was flooded. The curator decided to call it \"an installation\". The water flowed towards the red door, and the visitor followed it."
+      "it": "Il corridoio era allagato, e la corrente spingeva indietro. Il curatore notò, sulla parete in fondo, una porta con scritto 2025. Siviglia, dice il copione.",
+      "en": "The corridor was flooded, and the current pushed backwards. The curator noticed, on the far wall, a door marked 2025. Seville, says the script."
     },
     "N-112": {
-      "it": "Sotto l'edificio c'è una cisterna. Lo sanno tutti tranne me. E la scaletta non c'è più.",
-      "en": "There's a cistern under the building. Everyone knows except me. And the ladder is gone.",
+      "it": "Sotto l'edificio c'è una cisterna. Il copione dice che è grande quanto l'edificio, «Format, 2026». Il copione non ha mai provato ad arrivare in fondo.",
+      "en": "Under the building there's a cistern. The script says it's as big as the building, \"Format, 2026\". The script never tried to reach the end.",
       "panico": true
-    },
-    "N-113": {
-      "it": "Il visitatore salì una scala e si ritrovò in cima a un'altra. Il curatore smise di prendere appunti.",
-      "en": "The visitor climbed a ladder and found themselves at the top of a staircase. The curator stopped taking notes."
     },
     "N-114": {
       "it": "Il visitatore guardò giù. Poi ci finì dentro.",
@@ -49,16 +40,8 @@
       "panico": true
     },
     "N-115": {
-      "it": "Un supermercato. Aperto, illuminato, vuoto. Il curatore controllò se c'era qualcosa da comprare. Non c'era niente da comprare.",
-      "en": "A supermarket. Open, lit, empty. The curator checked if there was anything to buy. There was nothing to buy."
-    },
-    "N-116": {
-      "it": "Il pavimento si muoveva appena. Il curatore sperò fosse una sua impressione.",
-      "en": "The floor was moving, just slightly. The curator hoped it was only a feeling."
-    },
-    "N-117": {
-      "it": "Fuori pioveva. Il visitatore era molto in alto, e la città non finiva. Il curatore, per una volta, rimase zitto ad ascoltare.",
-      "en": "It was raining outside. The visitor was very high up, and the city didn't end. For once, the curator kept quiet and listened."
+      "it": "Un supermercato. Aperto, illuminato, vuoto. Le corsie sono di quando oakvx faceva siti per i negozi della zona. E non finiscono mai.",
+      "en": "A supermarket. Open, lit, empty. The aisles are from when oakvx built websites for local shops. And they never end."
     },
     "N-200": {
       "it": "YAG. Il copione dice che il visitatore, qui, è una richiesta. Una richiesta senza chiave non passa. Nemmeno io, a dire il vero.",
@@ -211,6 +194,14 @@
     "N-311": {
       "it": "Fine del turno. Se vi è piaciuto, l'email è sul muro. Se non vi è piaciuto, l'email è comunque sul muro.",
       "en": "End of shift. If you liked it, the email is on the wall. If you didn't, the email is still on the wall."
+    },
+    "N-116": {
+      "it": "Le cisterne non ronzano. Questa sì. Io seguirei il ronzio: dove è più forte, la realtà ha una crepa.",
+      "en": "Cisterns don't hum. This one does. I'd follow the hum: where it's loudest, reality has a crack."
+    },
+    "N-117": {
+      "it": "Ho acceso una scia sull'acqua: porta allo squarcio. È in alto, su una passerella: una finestra su una colonna, l'altra sul pilastro sopra la passerella.",
+      "en": "I lit a trail on the water: it leads to the tear. It's up high, on a catwalk: one window on a column, the other on the pillar above the catwalk."
     }
   },
   "eventi": {
@@ -227,12 +218,6 @@
     "lancia": [
       "N-005"
     ],
-    "stanza:atrio": [
-      {
-        "id": "N-110",
-        "subito": true
-      }
-    ],
     "stanza:piscina": [
       {
         "id": "N-111",
@@ -245,12 +230,6 @@
         "subito": true
       }
     ],
-    "stanza:spirale": [
-      {
-        "id": "N-113",
-        "subito": true
-      }
-    ],
     "caduta": [
       {
         "id": "N-114",
@@ -260,18 +239,6 @@
     "stanza:supermercato": [
       {
         "id": "N-115",
-        "subito": true
-      }
-    ],
-    "stanza:nave": [
-      {
-        "id": "N-116",
-        "subito": true
-      }
-    ],
-    "stanza:ballatoio": [
-      {
-        "id": "N-117",
         "subito": true
       }
     ],
@@ -448,6 +415,12 @@
         "id": "N-311",
         "subito": true
       }
+    ],
+    "aiuto:indizio:cisterna": [
+      "N-116"
+    ],
+    "aiuto:soluzione:cisterna": [
+      "N-117"
     ]
   }
 }

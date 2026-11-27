@@ -1,30 +1,32 @@
 # Il gioco (v3): "Turno di notte"
 
 Servito in `/gioco/`. Ci si arriva dal menu d'ingresso del sito ("Gioco") o da `/gioco/` (menu Sito/Gioco).
-Il curatore fa il turno di notte nell'edificio di oakvx: un impianto in cemento low poly che "è" il suo
+Il curatore fa il turno di notte nell'edificio di oakvx: un impianto in cemento, intonaco e mattoni che "è" il suo
 profilo GitHub. Il giro dura 10–15 minuti e passa da tutte le stanze: chi gioca una volta vede tutti i progetti.
+Le stanze sono unite da porte vere: la stanza dopo si vede già dalla soglia, senza dissolvenze.
 
-Progetto e piano: `docs/superpowers/specs/2026-11-26-gioco-v3-design.md`, `docs/superpowers/plans/2026-11-26-gioco-v3.md`.
+Progetto e piano: `docs/superpowers/specs/2026-11-26-gioco-v3-design.md`, `docs/superpowers/plans/2026-11-26-gioco-v3.md`;
+resa realistica e cisterna infinita: `docs/superpowers/specs/2026-11-26-gioco-qualita-design.md`, `docs/superpowers/plans/2026-11-26-gioco-qualita.md`.
 
 ## Il giro
 
 | Stanza | File | Cosa si gioca |
 | --- | --- | --- |
 | Ingresso | `stanze/ingresso.js` | si prendono le due finestre al bancone; la prima prova passa oltre un vetro |
-| Percorso | `stanze/percorso.js` | quattro tratti impilati e cuciti da passaggi: 12 m di ingombro, quasi 50 da camminare; le tappe del percorso |
+| Percorso | `stanze/percorso.js` | due tratti impilati e cuciti da un passaggio: 12 m di ingombro, il doppio da camminare; la prima e l'ultima tappa |
 | Smistamento (Backend & App Logic) | `stanze/smistamento.js` | cinque porte con hash di commit, cinque lampade; l'uscita si apre a lampade accese |
 | YAG | `stanze/yag.js` | cubo-chiave, varco di autenticazione con limiti operativi, piedistalli che scelgono il backend |
 | Piko | `stanze/piko.js` | un agente-fantasma propone un piano: approva o rifiuta; uno finisce nel pozzo |
 | Brat Animator | `stanze/brat.js` | desktop gigante, parole del testo come ponte a tempo di musica, leva-timeline |
 | synk | `stanze/synk.js` | pavimento-calendario: tre prenotazioni senza sovrapposizioni, saga di compensazione |
 | Beautify | `stanze/beautify.js` | tre saloni separati dietro le vetrine; l'appuntamento va nel salone libero |
-| Transito A | `stanze/atrio.js`, `stanze/piscina.js` | l'acqua trascina all'indietro: si passa con le finestre |
+| Transito A · Erasmus a Siviglia | `stanze/piscina.js` | l'acqua trascina all'indietro: si passa con le finestre; in fondo la tappa 2025 |
 | middleManPS4 | `stanze/middleman.js` | al buio; la lampada delle prove (F) rivela etichette e pannelli |
-| Transito B | `stanze/cisterna.js`, `stanze/spirale.js` | niente scaletta: alla pedana alta si arriva con le finestre |
+| Transito B · Format | `stanze/cisterna.js` | cisterna infinita: celle che si ripetono senza fine; si segue il ronzio fino allo squarcio di realtà, a mezz'aria, e ci si sale con le finestre; la tappa 2026 |
 | Galleria (Design & Web) | `stanze/galleria.js` | quattro vetrine; lo schermo del portfolio ti inquadra dall'alto; leva del tema |
 | Scrivania (Cosa so fare) | `stanze/scrivania.js` | terminale `portfolio.sh` in cui si scrive davvero; `apri` apre la porta |
 | Commit | `stanze/commit.js` | parete di quadrati che compone il numero dei commit, dal vivo |
-| Transito C | `stanze/supermercato.js`, `stanze/nave.js`, `stanze/ballatoio.js` | corsie che si ripetono: si esce con una finestra sul pannello alto |
+| Transito C · freelance | `stanze/supermercato.js` | corsie che si ripetono: si esce con una finestra sul pannello alto; la tappa 2023 → 2026 |
 | Stanza di oakvx (Fuori orario) | `stanze/oakvx.js` | la mansarda sotto la pioggia, in "modalità 2008"; la TV suona i suoi brani |
 | Contatti | `stanze/contatti.js` | l'ultima stanza; la schermata finale con tempo e segreti |
 
@@ -47,14 +49,32 @@ due finestre, F per la lampada delle prove (in middleManPS4), Esc per la pausa. 
 | `js/engine/varchi.js` | porte tra stanze lontane, coordinate delle porte dei progetti, guscio delle stanze-progetto |
 | `js/engine/proiezione.js` | matematica condivisa di finestre e passaggi |
 | `js/engine/liminale.js` | cartello "stanza N di 2.500" e Mii che gira l'angolo |
-| `js/engine/mondo.js`, `materiali.js`, `arredi.js`, `fisica.js`, `acqua.js` | stanze, tavolozza low poly, arredi (anche il Mii), fisica, acqua |
-| `js/audio.js`, `js/musica.js` | effetti (passi per materiale, urti, leve, porte) e musica liminale generativa che si distorce ai cambi di stanza |
+| `js/engine/mondo.js`, `materiali.js`, `arredi.js`, `fisica.js`, `acqua.js` | stanze, materiali PBR, arredi (anche il Mii), fisica, acqua |
+| `js/engine/asset.js`, `oggetti.js`, `asset/` | caricatore degli asset con progresso e ripiego; oggetti scansionati nelle stanze |
+| `js/audio.js`, `suoni/`, `js/musica.js` | effetti da campioni CC0 di Kenney (passi per materiale, urti, leve, porte; ripiego generato se un file manca) e musica liminale generativa che si distorce ai cambi di stanza |
 | `js/narratore.js`, `dati/narratore.json` | il curatore: righe con ID e mappa `eventi` (evento → righe) |
 | `js/logica/*.js` | logica pura, testata con `node --test`: giro e aiuti, passi, armonia, YAG, Piko, Brat, calendario, saloni, prove, terminale, commit, stanza di oakvx |
 | `contenuti.json` | testi IT/EN di interfaccia e stanze (`stanze.<nome>`), cartigli, azioni |
 
 Contratto di una stanza: `export function costruisci(m, g)` che può restituire `{ debug: { … } }`. In `g` ci sono, tra l'altro,
 `puntoControllo`, `cartiglio`, `lampada`, `aiuti`, `segreto`, `fine`, `passaggi`, `musica`, `commit`, `modoTesto`, `modo2008`, `atmosfera`.
+
+## Resa realistica
+
+Materiali PBR con mappatura nel mondo (`engine/materiali.js`, `pbrMondo`), luce d'ambiente e riflessi da panorami HDR
+(uno per area: `hdr` nella definizione della stanza), un faro d'ombra per stanza (`ombra`), tone mapping ACES nel
+post-processing e oggetti scansionati (`engine/oggetti.js`). Gli asset (texture, panorami, modelli `.glb`) sono CC0 di
+Poly Haven, in `asset/` con l'elenco in `asset/elenco.json`: fonti e licenze in `asset/LEGGIMI.md`; per riscaricarli
+`NODE_USE_ENV_PROXY=1 node gioco/strumenti/scarica-asset.mjs`. Se un asset non arriva (30 s) il gioco va avanti con i
+materiali semplici. `?leggero` (usato dai test di gioco) toglie ombre, panorami e oggetti e abbassa la risoluzione.
+
+## La cisterna infinita
+
+Una griglia 5 × 5 di celle da 18 m attorno al giocatore; uscito dalla cella centrale, `g.trasla(dx, dz)` lo riporta
+indietro di nascosto con cubi e finestre, e una cella logica tiene il conto di dove si trova davvero
+(`logica/cisterna.js`: variazioni per cella e posizione dello squarcio, deterministiche dal seme). Lo squarcio è a
+5–7 celle dall'ingresso; il seme cambia a ogni partita, `?seme=n` lo fissa. Debug: `stanza('cisterna').stato()`
+(`cella`, `squarcio`, `attivo`), `vaiCella(x, z)`, `risolvi()`.
 
 ## La stanza di oakvx
 

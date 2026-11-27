@@ -40,8 +40,6 @@
     "prendi": "Prendi",
     "lascia": "[E] lascia · clic per lanciare",
     "sale": {
-      "atrio": "Atrio",
-      "uscita": "Uscita",
       "gastronomia": "GASTRONOMIA"
     },
     "chiudiCartiglio": "E per chiudere",
@@ -445,8 +443,6 @@
     "prendi": "Pick up",
     "lascia": "[E] drop · click to throw",
     "sale": {
-      "atrio": "Atrium",
-      "uscita": "Exit",
       "gastronomia": "DELI"
     },
     "chiudiCartiglio": "E to close",

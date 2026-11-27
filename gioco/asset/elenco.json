@@ -1,0 +1,318 @@
+{
+ "texture": {
+  "cemento": {
+   "fonte": "Poly Haven",
+   "idFonte": "brushed_concrete",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/cemento/diff.jpg",
+    "nor": "texture/cemento/nor.jpg",
+    "arm": "texture/cemento/arm.jpg"
+   }
+  },
+  "intonaco": {
+   "fonte": "Poly Haven",
+   "idFonte": "painted_plaster_wall",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/intonaco/diff.jpg",
+    "nor": "texture/intonaco/nor.jpg",
+    "arm": "texture/intonaco/arm.jpg"
+   }
+  },
+  "piastrelle": {
+   "fonte": "Poly Haven",
+   "idFonte": "floor_tiles_06",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/piastrelle/diff.jpg",
+    "nor": "texture/piastrelle/nor.jpg",
+    "arm": "texture/piastrelle/arm.jpg"
+   }
+  },
+  "piastrelle-piscina": {
+   "fonte": "Poly Haven",
+   "idFonte": "blue_floor_tiles_01",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/piastrelle-piscina/diff.jpg",
+    "nor": "texture/piastrelle-piscina/nor.jpg",
+    "arm": "texture/piastrelle-piscina/arm.jpg"
+   }
+  },
+  "metallo": {
+   "fonte": "Poly Haven",
+   "idFonte": "blue_metal_plate",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/metallo/diff.jpg",
+    "nor": "texture/metallo/nor.jpg",
+    "arm": "texture/metallo/arm.jpg"
+   }
+  },
+  "lamiera": {
+   "fonte": "Poly Haven",
+   "idFonte": "corrugated_iron_02",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/lamiera/diff.jpg",
+    "nor": "texture/lamiera/nor.jpg",
+    "arm": "texture/lamiera/arm.jpg"
+   }
+  },
+  "legno-scuro": {
+   "fonte": "Poly Haven",
+   "idFonte": "old_wood_floor",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/legno-scuro/diff.jpg",
+    "nor": "texture/legno-scuro/nor.jpg",
+    "arm": "texture/legno-scuro/arm.jpg"
+   }
+  },
+  "parquet": {
+   "fonte": "Poly Haven",
+   "idFonte": "wood_floor",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/parquet/diff.jpg",
+    "nor": "texture/parquet/nor.jpg",
+    "arm": "texture/parquet/arm.jpg"
+   }
+  },
+  "moquette": {
+   "fonte": "Poly Haven",
+   "idFonte": "dirty_carpet",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/moquette/diff.jpg",
+    "nor": "texture/moquette/nor.jpg",
+    "arm": "texture/moquette/arm.jpg"
+   }
+  },
+  "mattoni": {
+   "fonte": "Poly Haven",
+   "idFonte": "brick_wall_001",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/mattoni/diff.jpg",
+    "nor": "texture/mattoni/nor.jpg",
+    "arm": "texture/mattoni/arm.jpg"
+   }
+  },
+  "tufo": {
+   "fonte": "Poly Haven",
+   "idFonte": "rustic_stone_wall",
+   "licenza": "CC0",
+   "file": {
+    "diff": "texture/tufo/diff.jpg",
+    "nor": "texture/tufo/nor.jpg",
+    "arm": "texture/tufo/arm.jpg"
+   }
+  }
+ },
+ "hdr": {
+  "interno-neutro": {
+   "fonte": "Poly Haven",
+   "idFonte": "hospital_room_2",
+   "licenza": "CC0",
+   "file": "hdr/interno-neutro.hdr"
+  },
+  "interno-caldo": {
+   "fonte": "Poly Haven",
+   "idFonte": "artist_workshop",
+   "licenza": "CC0",
+   "file": "hdr/interno-caldo.hdr"
+  },
+  "notte": {
+   "fonte": "Poly Haven",
+   "idFonte": "moonless_golf",
+   "licenza": "CC0",
+   "file": "hdr/notte.hdr"
+  }
+ },
+ "modelli": {
+  "metal_office_desk": {
+   "fonte": "Poly Haven",
+   "idFonte": "metal_office_desk",
+   "licenza": "CC0",
+   "file": "modelli/metal_office_desk.glb",
+   "altezza": 2.0000003576278687
+  },
+  "power_box_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "power_box_01",
+   "licenza": "CC0",
+   "file": "modelli/power_box_01.glb",
+   "altezza": 0.503142774105072
+  },
+  "industrial_wall_lamp": {
+   "fonte": "Poly Haven",
+   "idFonte": "industrial_wall_lamp",
+   "licenza": "CC0",
+   "file": "modelli/industrial_wall_lamp.glb",
+   "altezza": 0.42990660667419434
+  },
+  "utility_box_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "utility_box_01",
+   "licenza": "CC0",
+   "file": "modelli/utility_box_01.glb",
+   "altezza": 1.1203334331512451
+  },
+  "utility_box_02": {
+   "fonte": "Poly Haven",
+   "idFonte": "utility_box_02",
+   "licenza": "CC0",
+   "file": "modelli/utility_box_02.glb",
+   "altezza": 1.1203334331512451
+  },
+  "metal_toolbox": {
+   "fonte": "Poly Haven",
+   "idFonte": "metal_toolbox",
+   "licenza": "CC0",
+   "file": "modelli/metal_toolbox.glb",
+   "altezza": 0.4000099003314972
+  },
+  "drawer_cabinet": {
+   "fonte": "Poly Haven",
+   "idFonte": "drawer_cabinet",
+   "licenza": "CC0",
+   "file": "modelli/drawer_cabinet.glb",
+   "altezza": 1.881253957748413
+  },
+  "modern_arm_chair_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "modern_arm_chair_01",
+   "licenza": "CC0",
+   "file": "modelli/modern_arm_chair_01.glb",
+   "altezza": 1.0228520567470696
+  },
+  "bar_chair_round_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "bar_chair_round_01",
+   "licenza": "CC0",
+   "file": "modelli/bar_chair_round_01.glb",
+   "altezza": 0.7505484623070515
+  },
+  "potted_plant_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "potted_plant_01",
+   "licenza": "CC0",
+   "file": "modelli/potted_plant_01.glb",
+   "altezza": 1.3507787585258484
+  },
+  "potted_plant_02": {
+   "fonte": "Poly Haven",
+   "idFonte": "potted_plant_02",
+   "licenza": "CC0",
+   "file": "modelli/potted_plant_02.glb",
+   "altezza": 0.8411787391305552
+  },
+  "potted_plant_04": {
+   "fonte": "Poly Haven",
+   "idFonte": "potted_plant_04",
+   "licenza": "CC0",
+   "file": "modelli/potted_plant_04.glb",
+   "altezza": 0.2675964875961654
+  },
+  "side_table_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "side_table_01",
+   "licenza": "CC0",
+   "file": "modelli/side_table_01.glb",
+   "altezza": 0.5506622816901654
+  },
+  "planter_pot_clay": {
+   "fonte": "Poly Haven",
+   "idFonte": "planter_pot_clay",
+   "licenza": "CC0",
+   "file": "modelli/planter_pot_clay.glb",
+   "altezza": 0.2659967243671417
+  },
+  "cardboard_box_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "cardboard_box_01",
+   "licenza": "CC0",
+   "file": "modelli/cardboard_box_01.glb",
+   "altezza": 0.5158704221248627
+  },
+  "portable_searchlight": {
+   "fonte": "Poly Haven",
+   "idFonte": "portable_searchlight",
+   "licenza": "CC0",
+   "file": "modelli/portable_searchlight.glb",
+   "altezza": 0.2533835619688034
+  },
+  "desk_lamp_arm_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "desk_lamp_arm_01",
+   "licenza": "CC0",
+   "file": "modelli/desk_lamp_arm_01.glb",
+   "altezza": 0.8790190517902374
+  },
+  "binder_notebook": {
+   "fonte": "Poly Haven",
+   "idFonte": "binder_notebook",
+   "licenza": "CC0",
+   "file": "modelli/binder_notebook.glb",
+   "altezza": 0.5840288400650024
+  },
+  "sofa_02": {
+   "fonte": "Poly Haven",
+   "idFonte": "sofa_02",
+   "licenza": "CC0",
+   "file": "modelli/sofa_02.glb",
+   "altezza": 1.8071673512458801
+  },
+  "modular_industrial_pipes_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "modular_industrial_pipes_01",
+   "licenza": "CC0",
+   "file": "modelli/modular_industrial_pipes_01.glb",
+   "altezza": 1.9546396136283875
+  },
+  "industrial_pipe_lamp": {
+   "fonte": "Poly Haven",
+   "idFonte": "industrial_pipe_lamp",
+   "licenza": "CC0",
+   "file": "modelli/industrial_pipe_lamp.glb",
+   "altezza": 0.3641493618488312
+  },
+  "old_bed_frame": {
+   "fonte": "Poly Haven",
+   "idFonte": "old_bed_frame",
+   "licenza": "CC0",
+   "file": "modelli/old_bed_frame.glb",
+   "altezza": 2.0017260313034058
+  },
+  "vintage_cabinet_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "vintage_cabinet_01",
+   "licenza": "CC0",
+   "file": "modelli/vintage_cabinet_01.glb",
+   "altezza": 2.2350515127764083
+  },
+  "book_encyclopedia_set_01": {
+   "fonte": "Poly Haven",
+   "idFonte": "book_encyclopedia_set_01",
+   "licenza": "CC0",
+   "file": "modelli/book_encyclopedia_set_01.glb",
+   "altezza": 0.5512974057346582
+  },
+  "portable_cassette_player": {
+   "fonte": "Poly Haven",
+   "idFonte": "portable_cassette_player",
+   "licenza": "CC0",
+   "file": "modelli/portable_cassette_player.glb",
+   "altezza": 0.17225529998540878
+  },
+  "boombox": {
+   "fonte": "Poly Haven",
+   "idFonte": "boombox",
+   "licenza": "CC0",
+   "file": "modelli/boombox.glb",
+   "altezza": 0.7237796187400818
+  }
+ }
+}

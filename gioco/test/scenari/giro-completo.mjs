@@ -19,7 +19,7 @@ export default async function (page, aiuto) {
   const misure = {};
   await G(() => { window.__gioco.gioca(); window.__gioco.evento('gesto'); });
   // percorso → smistamento
-  await G(() => window.__gioco.vai(0, 60.87, -12));
+  await G(() => window.__gioco.vai(0, 20.87, -12));
   await cammina(aiuto, 0, 'smistamento');
   // i cinque progetti
   for (const id of ['yag', 'piko', 'brat', 'synk', 'beautify']) {
@@ -28,20 +28,17 @@ export default async function (page, aiuto) {
     await G((k) => window.__gioco.stanza(k).risolvi(), id);
   }
   assert.equal((await aiuto.leggi()).lampade, 5);
-  // uscita dello smistamento → atrio
+  // uscita dello smistamento → corridoio allagato → middleman → cisterna → galleria
   const u = await G(() => window.__gioco.stanza('smistamento').uscita);
   await G((p) => window.__gioco.vai(p[0], 0.87, p[2] + 2), u);
-  await cammina(aiuto, 0, 'atrio');
-  misure.atrio = await fps(page);
-  // transito A → middleman → transito B → galleria
-  await G(() => { window.__gioco.vaiA('piscina'); window.__gioco.stanza('piscina').risolvi(); });
+  await cammina(aiuto, 0, 'piscina');
+  misure.piscina = await fps(page);
+  await G(() => window.__gioco.stanza('piscina').risolvi());
   await cammina(aiuto, -Math.PI / 2, 'middleman');
   await G(() => window.__gioco.stanza('middleman').risolvi());
-  await aiuto.attendi(inStanza, 5000, 'cisterna');
+  await cammina(aiuto, Math.PI, 'cisterna');
   await G(() => window.__gioco.stanza('cisterna').risolvi());
-  await aiuto.attendi(inStanza, 5000, 'spirale');
-  await G(() => window.__gioco.stanza('spirale').risolvi());
-  await cammina(aiuto, Math.PI / 2, 'galleria');
+  await cammina(aiuto, Math.PI, 'galleria');
   misure.galleria = await fps(page);
   // galleria → scrivania → commit → supermercato
   const ug = await G(() => window.__gioco.stanza('galleria').uscita);
@@ -56,11 +53,7 @@ export default async function (page, aiuto) {
   await cammina(aiuto, -Math.PI / 2, 'supermercato');
   // transito C → stanza di oakvx → contatti → fine
   await G(() => window.__gioco.stanza('supermercato').risolvi());
-  await cammina(aiuto, Math.PI, 'nave');
-  await G(() => window.__gioco.stanza('nave').risolvi());
-  await aiuto.attendi(inStanza, 5000, 'ballatoio');
-  await G(() => window.__gioco.stanza('ballatoio').risolvi());
-  await cammina(aiuto, 0, 'oakvx');
+  await cammina(aiuto, Math.PI, 'oakvx');
   const po = await G(() => window.__gioco.stanza('oakvx').porta);
   await G((q) => window.__gioco.vai(q[0] + 1.2, 0.87, q[1]), po);
   await cammina(aiuto, Math.PI / 2, 'contatti');

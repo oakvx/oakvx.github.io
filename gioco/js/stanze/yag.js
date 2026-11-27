@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { posa } from '../engine/passaggi.js';
 import { stanzaProgetto, apertura, nicchia, collega } from '../engine/varchi.js';
 import { instrada, creaLimitatore } from '../logica/yag.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = -100, X1 = -80, Z0 = -20, Z1 = 0, H = 4.5;
 const VARCO = [-90, 0, -8];
@@ -74,6 +75,11 @@ export function costruisci(m, g) {
   g.arredi.didascalia(BACKEND.backend2[0], 1.4, 13.98, Math.PI, () => T().testi.risposta, { w: 1.6, h: 0.8 });
   g.arredi.cartello(-90, 3.4, Z1 - 0.03, Math.PI, '03', () => T().cartello);
 
+  // oggetti scansionati
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('drawer_cabinet', -99.4, 0, -2.5, Math.PI / 2, { altezza: 1.0 });
+  oggetti.metti('metal_toolbox', -99.4, 1.0, -2.5, Math.PI / 2, { altezza: 0.25, solido: false });
+  oggetti.metti('power_box_01', -80.2, 1.4, -5, -Math.PI / 2, { altezza: 0.6, solido: false });
   const aiuti = g.aiuti('yag');
   const limitatore = creaLimitatore({ max: 3, finestra: 2 });
   let autenticato = false;
@@ -135,7 +141,7 @@ export function costruisci(m, g) {
       posti: { chiave: CHIAVE, varco: VARCO, a: PIED.a, b: PIED.b, uscita: USCITA },
       poggia: (x, y, z) => { if (chiave.tenuto) return; chiave.pos.set(x, y, z); chiave.vel.set(0, 0, 0); },
       risolvi: () => { aiuti.risolto(); g.lampada('yag'); },
-      stato: () => ({ autenticato, piedistallo, meta, soluzione }),
+      stato: () => ({ modelli: oggetti.quanti(), autenticato, piedistallo, meta, soluzione }),
     },
   };
 }

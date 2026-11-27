@@ -6,6 +6,7 @@ import { creaArredi } from './engine/arredi.js';
 import { Corpo, muovi, passoCorpo, G } from './engine/fisica.js';
 import { Portali } from './portali.js';
 import { Passaggi } from './engine/passaggi.js';
+import { creaCaricatore } from './engine/asset.js';
 import { Narratore } from './narratore.js';
 import { Suoni } from './audio.js';
 import { reduceMotion } from './menu.js';
@@ -14,7 +15,7 @@ import { creaContapassi } from './logica/passi.js';
 import { totaleCommit } from './logica/commit.js';
 
 const $ = (id) => document.getElementById(id);
-const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'middleman', 'galleria', 'scrivania', 'commit', 'contatti', 'atrio', 'piscina', 'cisterna', 'spirale', 'supermercato', 'nave', 'ballatoio'];
+const STANZE = ['ingresso', 'percorso', 'smistamento', 'yag', 'piko', 'brat', 'synk', 'beautify', 'oakvx', 'middleman', 'galleria', 'scrivania', 'commit', 'contatti', 'piscina', 'cisterna', 'supermercato'];
 const ATMOSFERA = { nebbia: 0x3c423f, vicino: 3, lontano: 26, cielo: 0xe4ece6, terra: 0x404642, intensita: 2.3 };
 const N_LUCI = 10;
 const SPAWN = new THREE.Vector3(0, 0.86, 2.6);
@@ -31,6 +32,11 @@ export async function avvia(ctx) {
   // ---------------------------------------------------------------- renderer e scena
   const canvas = $('scena');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+  // ombre morbide: una sola luce con ombre, quella della stanza in cui si è
+  // ?leggero (solo per i test senza GPU): niente ombre e mezza risoluzione, la logica non cambia
+  const leggero = new URLSearchParams(location.search).has('leggero');
+  renderer.shadowMap.enabled = !leggero;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(FOG);
   scene.fog = new THREE.Fog(FOG, ATMOSFERA.vicino, ATMOSFERA.lontano);
@@ -38,6 +44,12 @@ export async function avvia(ctx) {
   const camera = new THREE.PerspectiveCamera(imp.fov, innerWidth / innerHeight, 0.02, 80);
   camera.rotation.order = 'YXZ';
   const emi = new THREE.HemisphereLight(ATMOSFERA.cielo, ATMOSFERA.terra, ATMOSFERA.intensita);
+  const luceOmbre = new THREE.SpotLight(0xfff1dc, 0, 22, 1.0, 0.6, 1.4);
+  luceOmbre.castShadow = true;
+  luceOmbre.shadow.mapSize.set(1024, 1024);
+  luceOmbre.shadow.bias = -0.0004;
+  luceOmbre.shadow.normalBias = 0.03;
+  scene.add(luceOmbre, luceOmbre.target);
   scene.add(emi);
   // gruppo fisso di luci puntiformi, assegnate alle definizioni più vicine
   const gruppoLuci = Array.from({ length: N_LUCI }, () => {
@@ -48,7 +60,27 @@ export async function avvia(ctx) {
   let assegnate = [];
   let prossimaAssegnazione = 0;
 
-  const mat = creaMateriali(renderer);
+  // asset (texture PBR, panorami, modelli): si chiedono subito, si aspettano prima di entrare
+  const asset = creaCaricatore({ base: 'asset/', modelli: !leggero });
+  asset.suProgresso(({ fatti, totali }) => {
+    if (totali) $('avvio-testo').textContent = `${ctx.T.caricamento} ${fatti}/${totali}`;
+  });
+  const precarica = asset.elenco().then((e) => Promise.all([
+    ...Object.keys(e.texture).map((id) => asset.texture(id)),
+    ...Object.keys(e.hdr).map((id) => asset.hdr(id)),
+  ]));
+  const mat = creaMateriali(renderer, asset);
+  // panorami HDR → luce d'ambiente e riflessi (uno per area)
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const ambienti = new Map();
+  let ambienteAttuale = null;
+  function ambiente(id) {
+    ambienteAttuale = id;
+    if (!ambienti.has(id)) ambienti.set(id, asset.hdr(id).then((t) => (t ? pmrem.fromEquirectangular(t).texture : null)));
+    ambienti.get(id).then((t) => { if (ambienteAttuale === id && !leggero) scene.environment = t; });
+  }
+  scene.environmentIntensity = 1.0;
+  ambiente('interno-neutro');
   const mondo = new Mondo(scene, mat);
   const portali = new Portali(renderer, scene, mondo);
   const passaggi = new Passaggi(renderer, scene);
@@ -103,7 +135,7 @@ export async function avvia(ctx) {
   let commitPromessa = null;
   const aiuti = new Map();
   const g = {
-    mondo, scene, portali, passaggi, emetti, su, cubo, debug: ctx.debug,
+    mondo, scene, portali, passaggi, emetti, asset, su, cubo, debug: ctx.debug,
     T: () => ctx.T,
     lingua: () => ctx.lingua,
     suLingua: (fn) => ctx.suLingua(fn),
@@ -141,6 +173,24 @@ export async function avvia(ctx) {
       return a;
     },
     segreto: (id) => { if (g.giro.segreto(id)) emetti('segreto:' + id); },
+    // sposta di nascosto giocatore, cubi e finestre di (dx, dz) (cisterna infinita);
+    // dentro(pos) sceglie cubi e finestre da spostare; nessun attraversamento viene contato
+    trasla: (dx, dz, dentro = () => true) => {
+      const d = new THREE.Vector3(dx, 0, dz);
+      giocatore.pos.add(d);
+      giocatore.zPrima = [null, null];
+      if (giocatore.zPass) giocatore.zPass.clear();
+      camera.position.add(d);
+      camera.updateMatrixWorld();
+      for (const c of cubi) {
+        if (!c.tenuto && !dentro(c.pos)) continue;
+        c.pos.add(d);
+        if (c.mesh) c.mesh.position.add(d);
+        c.zPrima = [null, null];
+        if (c.zPass) c.zPass.clear();
+      }
+      portali.sposta(dx, dz, dentro);
+    },
     fine: () => fine(),
     teletrasporta: (x, piedi, z, nuovoYaw = null, prima = null) => g.velo(() => {
       if (prima) prima();
@@ -172,10 +222,10 @@ export async function avvia(ctx) {
   // ---------------------------------------------------------------- post-processing
   const rt = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: 4 });
   const post = new THREE.ShaderMaterial({
-    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 }, uModo2008: { value: 0 } },
+    uniforms: { tDiffuse: { value: rt.texture }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uCalmo: { value: imp.calmo ? 1 : 0 }, uModo2008: { value: 0 }, uEsposizione: { value: 1.15 } },
     vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
     fragmentShader: `
-      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo; uniform float uModo2008;
+      uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; uniform float uCalmo; uniform float uModo2008; uniform float uEsposizione;
       varying vec2 vUv;
       float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
       void main(){
@@ -185,20 +235,22 @@ export async function avvia(ctx) {
         // modalità 2008: blocchi JPEG leggeri (sul colore lineare, prima della gamma)
         if (uModo2008 > 0.0) {
           vec2 blocco = (floor(vUv * uRes / 8.0) + 0.5) * 8.0 / uRes;
-          col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.22 * uModo2008);
+          col = mix(col, texture2D(tDiffuse, blocco).rgb, 0.1 * uModo2008);
         }
-        col = pow(max(col, 0.0), vec3(1.0 / 2.2));
+        // tone mapping filmico (ACES, approssimazione di Narkowicz) e codifica sRGB
+        col *= uEsposizione;
+        col = clamp((col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14), 0.0, 1.0);
+        col = mix(col * 12.92, 1.055 * pow(col, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, col));
         if (uModo2008 > 0.0) {
           float m8 = uModo2008;
-          col *= mix(1.0, 1.32 - r2 * 2.4, m8);                                   // flash frontale
-          col = mix(col, vec3(dot(col, vec3(0.299, 0.587, 0.114))), 0.32 * m8);   // colori slavati
+          col *= mix(1.0, 1.16 - r2 * 1.5, m8);                                   // flash frontale
+          col = mix(col, vec3(dot(col, vec3(0.299, 0.587, 0.114))), 0.16 * m8);   // colori un po' slavati
           col *= mix(vec3(1.0), vec3(1.07, 1.0, 0.88), m8);                       // sensore caldo
           col += (hash(vUv * uRes * 0.5 + floor(uTime * 12.0)) - 0.5) * 0.05 * m8;
         }
         col *= vec3(1.0, 0.99, 0.96);
         col *= mix(0.7, 1.0, smoothstep(0.62, 0.08, r2));
         col += (hash(vUv * uRes + fract(uTime) * 91.0) - 0.5) * mix(0.05, 0.02, uCalmo);
-        col = floor(col * 48.0 + 0.5) / 48.0;
         gl_FragColor = vec4(col, 1.0);
       }`,
     depthTest: false,
@@ -209,7 +261,7 @@ export async function avvia(ctx) {
   const postCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
   function ridimensiona() {
-    const pr = Math.min(devicePixelRatio || 1, 1.5);
+    const pr = leggero ? 0.35 : Math.min(devicePixelRatio || 1, 1.5);
     renderer.setPixelRatio(pr);
     renderer.setSize(innerWidth, innerHeight, false);
     const w = Math.floor(innerWidth * pr);
@@ -225,6 +277,20 @@ export async function avvia(ctx) {
   ridimensiona();
 
   // ---------------------------------------------------------------- impostazioni
+  // qualità bassa: mappa d'ombra 1024 e niente ombre dai piccoli oggetti; alta: 2048 e tutto
+  function impostaOmbre(alta) {
+    const lato = alta ? 2048 : 1024;
+    if (luceOmbre.shadow.mapSize.x !== lato) {
+      luceOmbre.shadow.mapSize.set(lato, lato);
+      if (luceOmbre.shadow.map) { luceOmbre.shadow.map.dispose(); luceOmbre.shadow.map = null; }
+    }
+    for (const sld of mondo.solidi) {
+      if (!sld.mesh) continue;
+      const d = sld.max.clone().sub(sld.min);
+      sld.mesh.castShadow = alta || Math.max(d.x, d.y, d.z) >= 1;
+    }
+  }
+
   function applicaImpostazioni() {
     camera.fov = imp.fov;
     camera.updateProjectionMatrix();
@@ -233,6 +299,7 @@ export async function avvia(ctx) {
     $('sottotitoli').className = 'sottotitoli ' + imp.sott + ($('sottotitoli').classList.contains('panico') ? ' panico' : '');
     portali.impostaScala(Number(imp.qual), rt.width, rt.height);
     passaggi.ridimensiona(rt.width, rt.height, Number(imp.qual));
+    impostaOmbre(Number(imp.qual) >= 1);
     $('imp-fov').value = imp.fov;
     $('imp-fov-v').textContent = imp.fov + '°';
     $('imp-sens').value = imp.sens;
@@ -563,6 +630,15 @@ export async function avvia(ctx) {
         suoni.musica.transizione();
       }
       if (controlli.has(nome)) ultimoControllo = nome;
+      if (s.atmosfera !== 'eredita') {
+        ambiente(s.hdr || 'interno-neutro');
+        const o = s.ombra || { pos: [(s.x0 + s.x1) / 2, s.y0 + s.h - 0.15, (s.z0 + s.z1) / 2], bersaglio: [(s.x0 + s.x1) / 2, s.y0, (s.z0 + s.z1) / 2] };
+        luceOmbre.position.set(...o.pos);
+        luceOmbre.target.position.set(...o.bersaglio);
+        luceOmbre.intensity = o.intensita ?? 14;
+        luceOmbre.distance = Math.max(12, s.h * 3 + Math.hypot(s.x1 - s.x0, s.z1 - s.z0));
+        luceOmbre.angle = o.angolo ?? Math.min(1.25, Math.atan2(Math.hypot(s.x1 - s.x0, s.z1 - s.z0) / 2, s.h) + 0.15);
+      }
       emetti('stanza:' + nome);
     }
     mondo.controllaZone(giocatore.pos, (z) => emetti(z));
@@ -579,7 +655,7 @@ export async function avvia(ctx) {
     scene.fog.far += (atmo.lontano - scene.fog.far) * k;
     emi.color.lerp(cCielo.set(atmo.cielo), k);
     emi.groundColor.lerp(cTerra.set(atmo.terra), k);
-    emi.intensity += (atmo.intensita - emi.intensity) * k;
+    emi.intensity += (atmo.intensita * 0.55 - emi.intensity) * k;   // il resto lo fa il panorama HDR
   }
 
   function aggiornaLuci(t) {
@@ -671,9 +747,12 @@ export async function avvia(ctx) {
       // i test non possono ottenere il pointer lock: entrano in gioco direttamente
       gioca: () => { stato = 'gioco'; mostra(null); },
       materiali: () => Object.keys(mat),
+      resa: () => ({ toneMapping: 'ACESFilmic', ombre: renderer.shadowMap.enabled, mappaOmbra: luceOmbre.shadow.mapSize.x, ambiente: ambienteAttuale }),
+      asset: () => asset.progresso(),
       tempoMusica: () => suoni.musica.tempo(),
       avanzaAiuti: (sec) => aggiornaAiuti(sec),
       avviaAudio: () => suoni.avvia(),
+      suoni: () => ({ caricati: suoni.caricati, prova: (n) => suoni.campione(n, { gain: 0 }) }),
       livelloAudio: () => {
         if (!suoni.ac) return 0;
         if (!suoni.analizzatore) { suoni.analizzatore = suoni.ac.createAnalyser(); suoni.musica.master.connect(suoni.analizzatore); }
@@ -690,6 +769,7 @@ export async function avvia(ctx) {
       cubi: () => cubi.map((c) => ({ x: c.pos.x, y: c.pos.y, z: c.pos.z })),
       vaiA: (nome) => { ultimoControllo = nome; riprendi(); },
       stanza: (nome) => debugStanze[nome],
+      varchi: () => Object.values(debugStanze).flatMap((d) => d.varchi || []),
       mira: (x, y, z) => {
         const d = new THREE.Vector3(x, y, z).sub(camera.position);
         yaw = Math.atan2(-d.x, -d.z);
@@ -703,6 +783,8 @@ export async function avvia(ctx) {
   emetti('inizio');
   renderer.setAnimationLoop(ciclo);
   $('avvio-testo').removeAttribute('data-t');
+  await precarica;
+  await asset.tutti();
   $('avvio-testo').textContent = ctx.T.comandi;
   $('caricatore').hidden = true;
   $('avvio-entra').hidden = false;

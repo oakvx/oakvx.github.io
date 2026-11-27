@@ -87,6 +87,15 @@
         return 1 - cubica((t - 15) / 45);
     }
 
+    /** Punto del volo a v (0..1): Bézier quadratica che esce lungo l'asse della canna
+        (controllo = partenza + asse · 0,35 · distanza) e finisce davanti alla camera. */
+    function traiettoria(v, partenza, asse, arrivo) {
+        const d = Math.hypot(arrivo[0] - partenza[0], arrivo[1] - partenza[1], arrivo[2] - partenza[2]);
+        const c = partenza.map((x, i) => x + asse[i] * .35 * d);
+        const u = 1 - v;
+        return partenza.map((x, i) => u * u * x + 2 * u * v * c[i] + v * v * arrivo[i]);
+    }
+
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
     const VALIDITA_MS = 3000;
     function arrivoValido(valore, adesso) {
@@ -97,7 +106,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, traiettoria, USCITA_MS, VOLO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;

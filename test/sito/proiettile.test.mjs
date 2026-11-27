@@ -116,3 +116,11 @@ test('carrello: arretra in 15 ms e torna avanti entro 60 ms', () => {
     assert.ok(p.carrello(330) > 0 && p.carrello(330) < 1);
     assert.equal(p.carrello(361), 0);
 });
+
+test('traiettoria: parte dalla volata, arriva alla camera, esce lungo la canna', () => {
+    const a = [0, 0, 0], asse = [1, 0, 0], b = [0, 0, 5];
+    assert.deepEqual(p.traiettoria(0, a, asse, b), a);
+    assert.deepEqual(p.traiettoria(1, a, asse, b).map(n => +n.toFixed(9)), b);
+    const q = p.traiettoria(0.001, a, asse, b), l = Math.hypot(...q);
+    assert.ok(q[0] / l > 0.999);   // la tangente all'uscita è l'asse della canna
+});

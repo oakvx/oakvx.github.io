@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="it" data-lang-en-url="/en/servizi/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<link rel="stylesheet" href="../assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/nero/nero.css">
+<script src="../assets/nero/proiettile.js" defer></script>
+<script src="../assets/nero/nero.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Servizi | Gabriele Lucia (oakvx)</title>
+<meta name="description" content="Cosa fa Gabriele Lucia per chi gli scrive: siti web, software e backend, grafica e social, assistenza informatica.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/servizi/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/servizi/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/servizi/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/servizi/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="Servizi | Gabriele Lucia (oakvx)">
+<meta property="og:description" content="Cosa fa Gabriele Lucia per chi gli scrive: siti web, software e backend, grafica e social, assistenza informatica.">
+<meta property="og:url" content="https://oakvx.github.io/servizi/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-home-it.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Servizi | Gabriele Lucia (oakvx)">
+<meta name="twitter:description" content="Cosa fa Gabriele Lucia per chi gli scrive: siti web, software e backend, grafica e social, assistenza informatica.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
+<script type="application/json" id="seo-translations">{"it": {"title": "Servizi | Gabriele Lucia (oakvx)", "description": "Cosa fa Gabriele Lucia per chi gli scrive: siti web, software e backend, grafica e social, assistenza informatica.", "canonical": "https://oakvx.github.io/servizi/", "image": "https://oakvx.github.io/assets/social-home-it.png", "image_alt": "Gabriele Lucia / oakvx"}, "en": {"title": "Services | Gabriele Lucia (oakvx)", "description": "What Gabriele Lucia does for the people who write to him: websites, software and backend, graphics and social media, IT support.", "canonical": "https://oakvx.github.io/en/servizi/", "image": "https://oakvx.github.io/assets/social-home-en.png", "image_alt": "Gabriele Lucia / oakvx"}}</script>
+</head>
+<body data-pagina="servizi">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="../" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/servizi/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../en/servizi/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
+        </nav>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="../" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a href="../#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a href="../chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a href="../fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a href="../metodo/" data-velo-n="05"><span class="indice__n t-meta">05</span><span class="indice__nome" data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a href="../servizi/" data-velo-n="06"><span class="indice__n t-meta">06</span><span class="indice__nome" data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a href="../sicurezza/" data-velo-n="07"><span class="indice__n t-meta">07</span><span class="indice__nome" data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a href="../stile/" data-velo-n="08"><span class="indice__n t-meta">08</span><span class="indice__nome" data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a href="../contatti/" data-velo-n="09"><span class="indice__n t-meta">09</span><span class="indice__nome" data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="../projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="../projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="../projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="../projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                    <li><a class="filo" href="../projects/piko/" data-velo-n="02.5"><span data-velo-nome>piko</span></a></li>
+                    <li><a class="filo" href="../projects/yag/" data-velo-n="02.6"><span data-velo-nome>yag</span></a></li>
+                    <li><a class="filo" href="../projects/middleman/" data-velo-n="02.7"><span data-velo-nome>middleManPS4</span></a></li>
+                    <li><a class="filo" href="../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
+        </div>
+    </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>06</b><span data-titolo data-i18n="nav.services">Servizi</span><span class="segnapagina__barra"><i></i></span></p>
+
+<main id="main" class="pagina pagina--servizi">
+
+<section class="chi-apertura" aria-labelledby="servizi-titolo">
+    <p class="t-meta"><span>(06) <span data-i18n="nav.services">Servizi</span></span><span data-i18n="sv.labelB">Quattro aree, una persona</span></p>
+    <h1 class="chi-apertura__titolo" id="servizi-titolo" data-split data-i18n-html="sv.title">Cosa faccio. <em>E cosa ti arriva.</em></h1>
+    <p class="chi-apertura__coda rivela" style="--ritardo:.5s" data-i18n="sv.coda">Siti, software, grafica e assistenza informatica. Spesso per lo stesso cliente, a volte nella stessa settimana.</p>
+</section>
+
+<section class="sezione" aria-label="Aree">
+    <div class="servizi__aree">
+        <article class="servizio rivela">
+            <p class="area__n" aria-hidden="true">i.</p>
+            <h2 data-i18n="sv.a1">Siti web</h2>
+            <p data-i18n="sv.a1text">Siti vetrina e landing page che si aprono in fretta e si trovano su Google. Dal 2023 al 2026 li ho fatti per officine, centri estetici e utensilerie.</p>
+            <ul>
+                <li data-i18n="sv.a1a">Siti vetrina e landing page</li>
+                <li data-i18n="sv.a1b">SEO e indicizzazione</li>
+                <li data-i18n="sv.a1c">Pubblicazione online</li>
+                <li data-i18n="sv.a1d">Pagine social aziendali</li>
+                <li data-i18n="sv.a1e">Desktop e mobile, tema chiaro e scuro</li>
+            </ul>
+            <p class="area__pratica t-meta" data-i18n="sv.a1p">Esempio: Spinotto Felice</p>
+        </article>
+        <article class="servizio rivela">
+            <p class="area__n" aria-hidden="true">ii.</p>
+            <h2 data-i18n="sv.a2">Software e backend</h2>
+            <p data-i18n="sv.a2text">La parte che non si vede: gestionali, database, automazioni e integrazioni. Fatti per reggere quando qualcosa fuori si rompe.</p>
+            <ul>
+                <li data-i18n="sv.a2a">Gestionali e dashboard</li>
+                <li data-i18n="sv.a2b">Database relazionali: PostgreSQL, MySQL, SQL Server</li>
+                <li data-i18n="sv.a2c">Integrazioni: WhatsApp, Google Calendar, API</li>
+                <li data-i18n="sv.a2d">Automazioni e lavori pianificati</li>
+                <li data-i18n="sv.a2e">Modelli AI locali, quando hanno senso</li>
+            </ul>
+            <p class="area__pratica t-meta" data-i18n="sv.a2p">Esempi: synk, Beautify, yag</p>
+        </article>
+        <article class="servizio rivela">
+            <p class="area__n" aria-hidden="true">iii.</p>
+            <h2 data-i18n="sv.a3">Grafica e social</h2>
+            <p data-i18n="sv.a3text">La parte visiva, tenuta vicina al codice: quello che pubblichi, quello che clicchi, quello che ricordi.</p>
+            <ul>
+                <li data-i18n="sv.a3a">Contenuti per i social</li>
+                <li data-i18n="sv.a3b">Progettazione di interfacce</li>
+                <li data-i18n="sv.a3c">Loghi</li>
+                <li data-i18n="sv.a3d">Testi animati e video</li>
+            </ul>
+            <p class="area__pratica t-meta" data-i18n="sv.a3p">Esempio: Brat Animator, e questo sito</p>
+        </article>
+        <article class="servizio rivela">
+            <p class="area__n" aria-hidden="true">iv.</p>
+            <h2 data-i18n="sv.a4">Assistenza informatica</h2>
+            <p data-i18n="sv.a4text">Computer, reti e periferiche che smettono di funzionare nel momento peggiore. L’ho fatto ogni giorno alla Starbotica di Siviglia, in inglese e spagnolo.</p>
+            <ul>
+                <li data-i18n="sv.a4a">Windows: installazione, aggiornamenti, riparazioni</li>
+                <li data-i18n="sv.a4b">Reti locali e Wi-Fi</li>
+                <li data-i18n="sv.a4c">Stampanti e periferiche</li>
+                <li data-i18n="sv.a4d">Account e posta</li>
+                <li data-i18n="sv.a4e">Risoluzione di problemi hardware e software, con documentazione</li>
+            </ul>
+            <p class="area__pratica t-meta" data-i18n="sv.a4p">Esempio: Erasmus+ alla Starbotica, 2025</p>
+        </article>
+    </div>
+</section>
+
+<section class="sezione" aria-labelledby="insieme-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(v) <span data-i18n="sv.togetherLabel">Insieme</span></p>
+        <h2 class="sezione-titolo" id="insieme-titolo" data-split data-i18n-html="sv.togetherTitle">Una persona <em>per più di un problema.</em></h2>
+    </header>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="sv.t1">Sito e prenotazioni</h3><p data-i18n="sv.t1text">Il sito vetrina e il gestionale dietro parlano la stessa lingua, perché li ho scritti entrambi.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="sv.t2">Logo e sito</h3><p data-i18n="sv.t2text">La grafica nasce pensando al sito, non adattata dopo.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="sv.t3">Sito e computer dell’ufficio</h3><p data-i18n="sv.t3text">Chi mette online il sito può anche capire perché la stampante dell’ufficio non vede più la rete.</p></li>
+    </ol>
+</section>
+
+<a class="prossimo" href="../contatti/" data-velo-n="09" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="sv.next">Hai qualcosa in mente?</span><span>09</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.contact">Contatti</span>
+</a>
+
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto o per dirmi che il sito non ti piace. Rispondo. Non subito, ma rispondo.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo (fa prima)</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="../" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="../#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="../chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="../fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a class="filo" href="../metodo/" data-velo-n="05"><span data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a class="filo" href="../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                <li><a class="filo" href="../servizi/" data-velo-n="06"><span data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a class="filo" href="../sicurezza/" data-velo-n="07"><span data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a class="filo" href="../stile/" data-velo-n="08"><span data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a class="filo" href="../contatti/" data-velo-n="09"><span data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena. Sì, quella delle piastrelle.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="../assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano. Nessun template è stato maltrattato.</span></p>
+</footer>
+
+<script src="../assets/ingresso/ingresso.js" defer></script>
+</body>
+</html>

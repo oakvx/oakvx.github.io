@@ -75,27 +75,31 @@ export async function creaPistola(contenitore) {
 
     // volata: estremità della canna, nelle coordinate originali
     const VOLATA = new THREE.Vector3(.176, .057, 0);
-    geo.computeBoundingBox();
-    const centro = geo.boundingBox.getCenter(new THREE.Vector3());
-    const lunghezza = geo.boundingBox.max.x - geo.boundingBox.min.x;
+    // misure della sola pistola (computeBoundingBox guarderebbe tutti i vertici del file)
+    const scatola = new THREE.Box3();
+    const v = new THREE.Vector3();
+    for (const i of tenuti) scatola.expandByPoint(v.fromBufferAttribute(pos, i));
+    const centro = scatola.getCenter(new THREE.Vector3());
+    const lunghezza = scatola.max.x - scatola.min.x;
     pistola.position.copy(centro).multiplyScalar(-1);
     const punta = new THREE.Object3D();
     punta.position.copy(VOLATA).sub(centro);
 
     const perno = new THREE.Group();            // ruota attorno al centro della pistola
     perno.add(pistola, punta);
-    perno.scale.setScalar(1.45 / lunghezza);
-    perno.rotation.y = -.22;                     // un filo di tre quarti, per dare spessore
+    perno.scale.setScalar(1.6 / lunghezza);
+    const POSA = new THREE.Euler(.1, -.55, 0);   // tre quarti, un poco dall'alto: si legge il volume
+    perno.rotation.copy(POSA);
     const gruppo = new THREE.Group();
     gruppo.add(perno);
     scena.add(gruppo);
 
     const riposo = new THREE.Vector3();
     const tmp = new THREE.Vector3();
-    // mette la volata a (26% larghezza, 46% altezza) dello schermo
+    // mette la volata a (40% larghezza, 46% altezza) dello schermo: la pistola si vede intera
     function piazza() {
         const meta = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
-        const obiettivo = new THREE.Vector3((.26 * 2 - 1) * meta * camera.aspect, (1 - .46 * 2) * meta, 0);
+        const obiettivo = new THREE.Vector3((.40 * 2 - 1) * meta * camera.aspect, (1 - .46 * 2) * meta, 0);
         gruppo.position.set(0, 0, 0);
         gruppo.updateMatrixWorld(true);
         punta.getWorldPosition(tmp);
@@ -129,7 +133,7 @@ export async function creaPistola(contenitore) {
             const k = f.sparo > 0 && f.sparo < 1 ? Math.sin(Math.min(1, f.sparo * 1.6) * Math.PI) : 0;
             gruppo.position.x = fuori + (riposo.x - fuori) * facile(f.pistola) - k * .05;
             gruppo.position.y = riposo.y;
-            perno.rotation.z = k * .14;           // la canna si alza di circa 8°
+            perno.rotation.set(POSA.x, POSA.y, k * .14); // la canna si alza di circa 8°
             disegna();
             if (ms < window.OAKVX.proiettile.USCITA_MS + 60) raf = requestAnimationFrame(passo);
         };
@@ -139,7 +143,7 @@ export async function creaPistola(contenitore) {
     // posizione della volata sullo schermo, a riposo
     function volata() {
         gruppo.position.copy(riposo);
-        perno.rotation.z = 0;
+        perno.rotation.copy(POSA);
         gruppo.updateMatrixWorld(true);
         punta.getWorldPosition(tmp).project(camera);
         return { x: Math.round((tmp.x + 1) / 2 * innerWidth), y: Math.round((1 - tmp.y) / 2 * innerHeight) };

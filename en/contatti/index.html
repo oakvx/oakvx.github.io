@@ -14,6 +14,7 @@
 <link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/nero/nero.css">
 <script src="/assets/nero/proiettile.js" defer></script>
+<script src="/assets/nero/gelatina.js" defer></script>
 <script src="/assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Contact | Gabriele Lucia (oakvx)</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="/en/magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Warehouse</span></a>
         <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/contatti/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/contatti/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -101,7 +103,7 @@
 <section class="chi-apertura" aria-labelledby="contatti-titolo">
     <p class="t-meta"><span>(09) <span data-i18n="nav.contact">Contact</span></span><span data-i18n="ct.labelB">Sassuolo, Modena</span></p>
     <h1 class="chi-apertura__titolo" id="contatti-titolo" data-split data-i18n-html="ct.title">Tell me what you need. <em>I'll tell you if I can.</em></h1>
-    <p class="chi-apertura__coda rivela" style="--ritardo:.5s" data-i18n="ct.coda">It starts with an email. I reply. Not right away, but I reply.</p>
+    <p class="chi-apertura__coda rivela" style="--ritardo:.5s" data-i18n="ct.coda">It starts with an email. We'll figure out the rest after.</p>
 </section>
 
 <section class="sezione" aria-label="Canali">
@@ -122,8 +124,13 @@
         <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="ct.h2">Why</h3><p data-i18n="ct.h2text">What should change once it's done. It matters more than the how.</p></li>
         <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="ct.h3">When</h3><p data-i18n="ct.h3text">If there's a date that can't move, say so straight away.</p></li>
     </ol>
-    <p class="t-meta" style="margin-top:2rem" data-i18n="ct.lang">Write in Italian, English, Spanish or Greek: I reply in the same one.</p>
+    <p class="t-meta" style="margin-top:2rem" data-i18n="ct.lang">Write in Italian, English, Spanish, Greek or Chinese: I reply in the same one.</p>
 </section>
+
+<a class="prossimo" href="/en/" data-velo-n="01" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="ct.next">Start again from the entrance</span><span>01</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.home">Entrance</span>
+</a>
 
 </main>
 

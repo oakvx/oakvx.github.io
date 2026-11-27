@@ -14,6 +14,7 @@
 <link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/nero/nero.css">
 <script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/gelatina.js" defer></script>
 <script src="../../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Brat Animator: lyric video nel browser | Gabriele Lucia</title>
@@ -54,6 +55,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/brat-animator/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/brat-animator/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -127,7 +129,7 @@
 </figure>
 
 <section class="sezione caso-capo" aria-labelledby="brat-concept">
-    <p class="t-meta">(01) Concept</p>
+    <p class="t-meta">(i) Concept</p>
     <h2 id="brat-concept" data-split data-i18n-html="brat.conceptTitle">Dal testo al video, <em>senza uscire dal browser. Né dalla sedia.</em></h2>
     <div class="caso-capo__testo rivela">
         <p data-i18n="brat.concept1">Ho riunito importazione dei testi, ricerca su LRCLIB, modifica del timing, stile ed esportazione in un unico editor statico.</p>
@@ -138,7 +140,7 @@
 
 <section class="sezione" aria-labelledby="brat-processo">
     <div class="caso-capo">
-        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <p class="t-meta">(ii) <span data-i18n="case.process">Processo</span></p>
         <h2 id="brat-processo" data-split data-i18n-html="brat.processTitle">Tre passaggi, <em>dal timestamp al fotogramma.</em></h2>
     </div>
     <ol class="passi">
@@ -160,7 +162,7 @@
 
 <section class="sezione" aria-labelledby="brat-architettura">
     <div class="caso-capo">
-        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <p class="t-meta">(iii) <span data-i18n="case.architecture">Architettura</span></p>
         <h2 id="brat-architettura" data-split data-i18n-html="brat.archTitle">Quattro moduli, <em>ognuno con un compito.</em></h2>
         <p class="caso-capo__testo rivela" data-i18n="brat.archText">I moduli del repository separano parsing, timing, riconoscimento dei media e verifica delle capacità di esportazione.</p>
     </div>
@@ -180,7 +182,7 @@
 </section>
 
 <section class="sezione risultato" aria-labelledby="brat-risultato">
-    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <p class="t-meta">(iv) <span data-i18n="case.result">Risultato</span></p>
     <h2 class="risultato__frase" id="brat-risultato" data-split data-i18n-html="brat.result">Un editor completo dentro <em>una pagina statica.</em> Ancora mi stupisce.</h2>
     <p class="risultato__note rivela" data-i18n="brat.resultText">Oggi è alla versione 5.0, con editor semplice e avanzato. Legge LRC, TTML, YAML, WebVTT e SRT, ed esporta MP4 e WebM senza server.</p>
 </section>

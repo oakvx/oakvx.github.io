@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="it" data-lang-en-url="/en/magazzino/scala-40/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<link rel="stylesheet" href="../../assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/nero/nero.css">
+<link rel="stylesheet" href="../../assets/magazzino/magazzino.css">
+<script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/gelatina.js" defer></script>
+<script src="../../assets/nero/nero.js" defer></script>
+<script src="../../assets/magazzino/carte.js" defer></script>
+<script src="../../assets/magazzino/disegno.js" defer></script>
+<script src="../../assets/magazzino/deposito.js" defer></script>
+<script src="../../assets/magazzino/tavolo.js" defer></script>
+<script src="../../assets/magazzino/scala40.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Scala 40 | Magazzino di oakvx</title>
+<meta name="description" content="Scala 40 gratis nel browser contro il computer: due mazzi, quattro jolly, si apre con 40 punti. Senza registrarsi.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/magazzino/scala-40/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/scala-40/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/scala-40/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/scala-40/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="Scala 40 | Magazzino di oakvx">
+<meta property="og:description" content="Scala 40 gratis nel browser contro il computer: due mazzi, quattro jolly, si apre con 40 punti. Senza registrarsi.">
+<meta property="og:url" content="https://oakvx.github.io/magazzino/scala-40/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-home-it.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scala 40 | Magazzino di oakvx">
+<meta name="twitter:description" content="Scala 40 gratis nel browser contro il computer: due mazzi, quattro jolly, si apre con 40 punti. Senza registrarsi.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-it.png">
+<script type="application/json" id="seo-translations">{"it": {"title": "Scala 40 | Magazzino di oakvx", "description": "Scala 40 gratis nel browser contro il computer: due mazzi, quattro jolly, si apre con 40 punti. Senza registrarsi.", "canonical": "https://oakvx.github.io/magazzino/scala-40/", "image": "https://oakvx.github.io/assets/social-home-it.png", "image_alt": "Gabriele Lucia / oakvx"}, "en": {"title": "Scala 40 | oakvx Warehouse", "description": "Free Scala 40 in the browser against the computer: two decks, four jokers, open with 40 points. No sign-up.", "canonical": "https://oakvx.github.io/en/magazzino/scala-40/", "image": "https://oakvx.github.io/assets/social-home-en.png", "image_alt": "Gabriele Lucia / oakvx"}}</script>
+</head>
+<body data-pagina="magazzino-scala40">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="../../" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/magazzino/scala-40/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/magazzino/scala-40/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
+        </nav>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="../../" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a href="../../#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a href="../../chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a href="../../fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a href="../../metodo/" data-velo-n="05"><span class="indice__n t-meta">05</span><span class="indice__nome" data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a href="../../servizi/" data-velo-n="06"><span class="indice__n t-meta">06</span><span class="indice__nome" data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a href="../../sicurezza/" data-velo-n="07"><span class="indice__n t-meta">07</span><span class="indice__nome" data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a href="../../stile/" data-velo-n="08"><span class="indice__n t-meta">08</span><span class="indice__nome" data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a href="../../contatti/" data-velo-n="09"><span class="indice__n t-meta">09</span><span class="indice__nome" data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="../../projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="../../projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="../../projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="../../projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                    <li><a class="filo" href="../../projects/piko/" data-velo-n="02.5"><span data-velo-nome>piko</span></a></li>
+                    <li><a class="filo" href="../../projects/yag/" data-velo-n="02.6"><span data-velo-nome>yag</span></a></li>
+                    <li><a class="filo" href="../../projects/middleman/" data-velo-n="02.7"><span data-velo-nome>middleManPS4</span></a></li>
+                    <li><a class="filo" href="../../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="../../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
+        </div>
+    </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>M.4</b><span data-titolo data-i18n="gm.scala40">Scala 40</span><span class="segnapagina__barra"><i></i></span></p>
+
+<main id="main" class="pagina pagina--magazzino">
+
+<section class="gioco" aria-labelledby="gioco-titolo">
+    <div class="gioco__testa">
+        <h1 class="gioco__titolo" id="gioco-titolo" data-i18n-html="s4.title">Scala 40. <em>Apri con quaranta, chiudi con stile.</em></h1>
+    </div>
+    <div data-gioco="scala-40"></div>
+</section>
+
+<section class="regole" aria-labelledby="regole-titolo">
+    <h2 id="regole-titolo" data-i18n="gm.rules">Come si gioca</h2>
+    <ul>
+        <li data-i18n="s4.r1">Due mazzi francesi con quattro jolly, tredici carte a testa. A ogni turno peschi una carta e ne scarti una.</li>
+        <li data-i18n="s4.r2">Combinazioni: tris o poker (stesso valore, semi diversi) e scale dello stesso seme, almeno tre carte. L’asso va prima del 2 o dopo il re, mai in mezzo.</li>
+        <li data-i18n="s4.r3">Si apre calando almeno 40 punti: asso 11, figure 10, le altre il loro valore. Un jolly al massimo per combinazione.</li>
+        <li data-i18n="s4.r4">Lo scarto si prende solo se ti serve in questo turno: per aprire, per calare o per attaccarlo, e va usato prima di scartare. Dopo l’apertura puoi attaccare carte ai gruppi in tavola.</li>
+        <li data-i18n="s4.r5">Chiudi scartando l’ultima carta. Gli altri si prendono le penalità di quello che hanno in mano (jolly 25): chi arriva a 101 è fuori.</li>
+    </ul>
+</section>
+
+<a class="prossimo" href="../" data-velo-n="M" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="gm.back">Torna agli scaffali</span><span>M</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.warehouse">Magazzino</span>
+</a>
+
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto o per dirmi che il sito non ti piace. Rispondo. Non subito, ma rispondo.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo (fa prima)</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="../../" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="../../#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="../../chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="../../fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a class="filo" href="../../metodo/" data-velo-n="05"><span data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a class="filo" href="../../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                <li><a class="filo" href="../../servizi/" data-velo-n="06"><span data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a class="filo" href="../../sicurezza/" data-velo-n="07"><span data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a class="filo" href="../../stile/" data-velo-n="08"><span data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a class="filo" href="../../contatti/" data-velo-n="09"><span data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="../../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena. Sì, quella delle piastrelle.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="../../assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano. Nessun template è stato maltrattato.</span></p>
+</footer>
+
+<script src="../../assets/ingresso/ingresso.js" defer></script>
+</body>
+</html>

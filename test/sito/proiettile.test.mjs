@@ -31,8 +31,8 @@ test('vaFatta: con movimento ridotto non spara mai', () => {
 test('usaPistola: solo puntatore fine, almeno 900px, WebGL e senza calma', () => {
     const ok = { puntatoreFine: true, larghezza: 1440, webgl: true, calmo: false };
     assert.equal(p.usaPistola(ok), true);
-    assert.equal(p.usaPistola({ ...ok, puntatoreFine: false }), false);
-    assert.equal(p.usaPistola({ ...ok, larghezza: 899 }), false);
+    assert.equal(p.usaPistola({ ...ok, puntatoreFine: false }), true);
+    assert.equal(p.usaPistola({ ...ok, larghezza: 390 }), true);
     assert.equal(p.usaPistola({ ...ok, webgl: false }), false);
     assert.equal(p.usaPistola({ ...ok, calmo: true }), false);
 });
@@ -87,11 +87,13 @@ test('faseVolo: con la pistola il proiettile vola verso chi guarda fino a coprir
     const f0 = p.faseVolo(0);
     assert.equal(f0.volo, 0);
     assert.equal(f0.copertura, 0);
-    assert.ok(p.faseVolo(310).lampo > .8);             // si spara dopo un'entrata senza fretta
+    assert.ok(p.faseVolo(301).lampo > .8);             // si spara dopo un'entrata senza fretta
+    assert.equal(p.faseVolo(340).lampo, 0);            // la vampa non dura più di due fotogrammi
     assert.equal(p.faseVolo(200).lampo, 0);
     assert.ok(p.faseVolo(150).pistola > 0 && p.faseVolo(150).pistola < 1);
     assert.equal(p.faseVolo(290).pistola, 1);
-    assert.equal(p.faseVolo(320).volo, 0);
+    assert.equal(p.faseVolo(300).volo, 0);
+    assert.ok(p.faseVolo(301).volo > 0 && p.faseVolo(301).volo < .01);    // appena uscito dalla canna
     assert.ok(p.faseVolo(700).volo > 0 && p.faseVolo(700).volo < .5);   // parte lento, poi accelera
     assert.equal(p.faseVolo(1300).volo, 1);
     assert.equal(p.faseVolo(1200).copertura, 0);
@@ -110,9 +112,68 @@ test('rinculo: molla smorzata, scatto in ~30 ms, piccolo rimbalzo, poi fermo', (
     assert.ok(Math.min(...curva) < -.05, 'nessun rimbalzo');      // scende un filo sotto lo zero
     assert.ok(Math.abs(p.rinculo(800)) < .02);
 });
-test('carrello: arretra in 15 ms e torna avanti entro 60 ms', () => {
+test('carrello: dopo l’uscita del proiettile arretra in 15 ms e torna avanti entro 60 ms', () => {
     assert.equal(p.carrello(299), 0);
-    assert.equal(p.carrello(315), 1);
+    assert.equal(p.carrello(302), 0);                  // fermo finché il proiettile non è uscito
+    assert.equal(p.carrello(317), 1);
     assert.ok(p.carrello(330) > 0 && p.carrello(330) < 1);
-    assert.equal(p.carrello(361), 0);
+    assert.equal(p.carrello(362), 0);
+});
+
+test('traiettoria: parte dalla volata, arriva alla camera, esce lungo la canna', () => {
+    const a = [0, 0, 0], asse = [1, 0, 0], b = [0, 0, 5];
+    assert.deepEqual(p.traiettoria(0, a, asse, b), a);
+    assert.deepEqual(p.traiettoria(1, a, asse, b).map(n => +n.toFixed(9)), b);
+    const q = p.traiettoria(0.001, a, asse, b), l = Math.hypot(...q);
+    assert.ok(q[0] / l > 0.999);   // la tangente all'uscita è l'asse della canna
+});
+
+test('centroCanna: centro dell’anello più avanti, ignorando il resto del carrello', () => {
+    const punti = [];
+    for (let i = 0; i < 16; i++) {
+        const a = i / 16 * Math.PI * 2;
+        punti.push([.2, .05 + Math.cos(a) * .01, .002 + Math.sin(a) * .01]);
+    }
+    for (let i = 0; i < 40; i++) punti.push([.1 + (i % 9) * .01, .03 + (i % 5) * .01, -.01 + (i % 3) * .01]);
+    const c = p.centroCanna(punti);
+    assert.ok(Math.abs(c[0] - .2) < 1e-6 && Math.abs(c[1] - .05) < 1e-6 && Math.abs(c[2] - .002) < 1e-6, String(c));
+});
+
+test('centroCanna: il mirino sopra la volata non sposta il centro', () => {
+    const punti = [];
+    for (let i = 0; i < 24; i++) {
+        const a = i / 24 * Math.PI * 2;
+        for (const r of [.0045, .0075]) punti.push([.2, .061 + Math.cos(a) * r, Math.sin(a) * r]);
+    }
+    punti.push([.2, .074, -.001], [.2, .074, .001], [.199, .0745, 0]);   // mirino
+    const c = p.centroCanna(punti);
+    assert.ok(Math.abs(c[1] - .061) < .0005 && Math.abs(c[2]) < .0005, String(c));
+});
+
+test('ordine degli eventi dello sparo, come in una semiautomatica vera', () => {
+    const S = p.SPARO_MS, campioni = [];
+    for (let ms = S - 20; ms <= S + 400; ms++) campioni.push({ ms, f: p.faseVolo(ms), c: p.carrello(ms), r: p.rinculo(ms), b: p.bossolo(ms) });
+    const primo = cond => campioni.find(cond)?.ms;
+    // 1. lampo e uscita del proiettile nello stesso istante
+    assert.equal(primo(x => x.f.lampo > 0), S);
+    assert.ok(primo(x => x.f.volo > 0) - S <= 1, 'il proiettile esce dopo il lampo');
+    // 2. il carrello si muove solo dopo l'uscita del proiettile
+    assert.ok(primo(x => x.c > 0) > S, 'carrello prima del proiettile');
+    // 3. carrello in fondo prima del massimo rilevamento della canna
+    const fondo = primo(x => x.c >= .999);
+    const piccoR = campioni.reduce((a, x) => x.r > a.r ? x : a).ms;
+    assert.ok(fondo < piccoR, `carrello in fondo a ${fondo}, rilevamento massimo a ${piccoR}`);
+    // 4. il bossolo esce quando il carrello ha fatto almeno l'80% della corsa
+    const esce = primo(x => x.b > 0);
+    assert.ok(campioni.find(x => x.ms === esce).c >= .8 || campioni.filter(x => x.ms < esce).some(x => x.c >= .8), 'bossolo troppo presto');
+    // 5. il lampo dura al massimo due fotogrammi
+    assert.ok(campioni.filter(x => x.f.lampo > 0).every(x => x.ms <= S + 34), 'lampo troppo lungo');
+});
+
+test('il proiettile si stacca subito dalla canna, poi rallenta e cresce verso chi guarda', () => {
+    const S = p.SPARO_MS;
+    assert.ok(p.faseVolo(S + 30).volo >= .05, 'a 30 ms dallo sparo deve essere già lontano dalla volata');
+    assert.ok(p.faseVolo(S + 40).volo <= .12, 'lo stacco è breve');
+    assert.ok(p.faseVolo(700).volo < .5);
+    for (let ms = S; ms < 1300; ms++) assert.ok(p.faseVolo(ms + 1).volo >= p.faseVolo(ms).volo, `torna indietro a ${ms}`);
 });

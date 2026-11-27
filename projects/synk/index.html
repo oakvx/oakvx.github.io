@@ -14,6 +14,7 @@
 <link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/nero/nero.css">
 <script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/gelatina.js" defer></script>
 <script src="../../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Synk: prenotazioni via WhatsApp | Gabriele Lucia</title>
@@ -54,6 +55,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/synk/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/synk/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -125,18 +127,18 @@
 </figure>
 
 <section class="sezione caso-capo" aria-labelledby="synk-concept">
-    <p class="t-meta">(01) Concept</p>
+    <p class="t-meta">(i) Concept</p>
     <h2 id="synk-concept" data-split data-i18n-html="synk.conceptTitle">Uno slot non è mai <em>dato per</em> libero.</h2>
     <div class="caso-capo__testo rivela">
         <p data-i18n="synk.concept1">I clienti scrivono su WhatsApp con parole loro; synk capisce cosa serve e prenota. La parte difficile non è la chat: è tenere d’accordo un database locale e Google Calendar quando uno dei due non risponde.</p>
-        <p data-i18n="synk.concept2">Quindi le regole sono esplicite: se Calendar non risponde in modo affidabile, lo slot non è libero. In coda non vuol dire sincronizzato. Ogni stato incerto è visibile in dashboard e si può passare a una persona.</p>
+        <p data-i18n="synk.concept2">Quindi le regole sono esplicite: se Calendar non risponde in modo affidabile, lo slot non è libero, e una richiesta in coda resta in coda finché non è sincronizzata. Ogni stato incerto si vede in dashboard e si può passare a una persona.</p>
     </div>
     <p class="caso-capo__lato rivela" data-i18n="synk.problem">Il punto di partenza: non esiste una transazione unica fra PostgreSQL e Google. Le garanzie vanno costruite a mano.</p>
 </section>
 
 <section class="sezione" aria-labelledby="synk-flusso">
     <div class="caso-capo">
-        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <p class="t-meta">(ii) <span data-i18n="case.process">Processo</span></p>
         <h2 id="synk-flusso" data-split data-i18n-html="synk.flowTitle">Dalla chat <em>al lavoro fatto. Senza telefonate.</em></h2>
     </div>
     <div class="flusso rivela" data-flusso>
@@ -174,7 +176,7 @@
 
 <section class="sezione" aria-labelledby="synk-architettura">
     <div class="caso-capo">
-        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <p class="t-meta">(iii) <span data-i18n="case.architecture">Architettura</span></p>
         <h2 id="synk-architettura" data-split data-i18n-html="synk.archTitle">Le garanzie stanno <em>nel database.</em></h2>
         <p class="caso-capo__testo rivela" data-i18n="synk.archText">Una dashboard PHP, un backend Node.js e PostgreSQL 16 in Docker Compose, con tutte le porte su 127.0.0.1. AI locale opzionale con Ollama, spenta di default e tenuta lontana dalle note dei clienti.</p>
     </div>
@@ -187,7 +189,7 @@
 </section>
 
 <section class="sezione risultato" aria-labelledby="synk-risultato">
-    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <p class="t-meta">(iv) <span data-i18n="case.result">Risultato</span></p>
     <h2 class="risultato__frase" id="synk-risultato" data-split data-i18n-html="synk.result">Trentamila righe perché un messaggio <em>diventi un appuntamento.</em></h2>
     <p class="risultato__note rivela" data-i18n="synk.resultText">Una release candidate con CI, script di installazione per Windows e una checklist di collaudo. Il README stesso dice di non usarla con clienti veri prima di chiudere i rilievi di sicurezza aperti; l’integrazione WhatsApp usa WhatsApp Web, non l’API ufficiale Business.</p>
 </section>

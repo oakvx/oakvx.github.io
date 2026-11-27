@@ -33,6 +33,11 @@ PAGES = [
     ('sicurezza/index.html', 'sicurezza', '../', '/sicurezza/', '07', 'nav.security', 'Sicurezza', False, ''),
     ('stile/index.html', 'stile', '../', '/stile/', '08', 'nav.style', 'Stile', False, ''),
     ('contatti/index.html', 'contatti', '../', '/contatti/', '09', 'nav.contact', 'Contatti', False, ''),
+    ('magazzino/index.html', 'magazzino', '../', '/magazzino/', 'M', 'nav.warehouse', 'Magazzino', False, 'magazzino/magazzino.css magazzino/deposito.js'),
+    ('magazzino/scala-40/index.html', 'magazzino-scala40', '../../', '/magazzino/scala-40/', 'M.4', 'gm.scala40', 'Scala 40', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scala40.js'),
+    ('magazzino/scopa/index.html', 'magazzino-scopa', '../../', '/magazzino/scopa/', 'M.3', 'gm.scopa', 'Scopa', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scopa.js'),
+    ('magazzino/briscola/index.html', 'magazzino-briscola', '../../', '/magazzino/briscola/', 'M.2', 'gm.briscola', 'Briscola', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/briscola.js'),
+    ('magazzino/blackjack/index.html', 'magazzino-blackjack', '../../', '/magazzino/blackjack/', 'M.1', 'gm.blackjack', 'Blackjack', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/blackjack.js'),
 ]
 
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.
@@ -51,6 +56,16 @@ SEO_NUOVE = {
                     'Security | Gabriele Lucia (oakvx)', 'How Gabriele Lucia handles data and security in his projects, with evidence from the code, and what he does not promise.', 'home'),
     '/stile/': ('Stile | Gabriele Lucia (oakvx)', 'La guida grafica di questo sito: palette, tipografia, griglia, componenti e movimento.',
                 'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'home'),
+    '/magazzino/blackjack/': ('Blackjack | Magazzino di oakvx', 'Blackjack gratis nel browser contro il banco, con gettoni finti: sei mazzi, il banco sta su 17, il blackjack paga 3 a 2.',
+                    'Blackjack | oakvx Warehouse', 'Free blackjack in the browser against the dealer, with fake chips: six decks, dealer stands on 17, blackjack pays 3 to 2.', 'home'),
+    '/magazzino/briscola/': ('Briscola | Magazzino di oakvx', 'Briscola gratis nel browser con le carte siciliane, uno contro il computer. Senza registrarsi.',
+                    'Briscola | oakvx Warehouse', 'Free briscola in the browser with Sicilian cards, one on one against the computer. No sign-up.', 'home'),
+    '/magazzino/scopa/': ('Scopa | Magazzino di oakvx', 'Scopa gratis nel browser con le carte siciliane: settebello, primiera, si va a 11 contro il computer.',
+                    'Scopa | oakvx Warehouse', 'Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.', 'home'),
+    '/magazzino/scala-40/': ('Scala 40 | Magazzino di oakvx', 'Scala 40 gratis nel browser contro il computer: due mazzi, quattro jolly, si apre con 40 punti. Senza registrarsi.',
+                    'Scala 40 | oakvx Warehouse', 'Free Scala 40 in the browser against the computer: two decks, four jokers, open with 40 points. No sign-up.', 'home'),
+    '/magazzino/': ('Magazzino | oakvx', 'Il Magazzino di oakvx: carte siciliane, blackjack con gettoni finti e classici da giocare nel browser. Gratis, senza registrarsi.',
+                    'Warehouse | oakvx', 'The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.', 'home'),
     '/contatti/': ('Contatti | Gabriele Lucia (oakvx)', 'Come scrivere a Gabriele Lucia (oakvx): email, GitHub, lingue in cui risponde.',
                    'Contact | Gabriele Lucia (oakvx)', 'How to reach Gabriele Lucia (oakvx): email, GitHub, languages he replies in.', 'home'),
     '/projects/middleman/': ('middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia', 'Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.',
@@ -133,6 +148,8 @@ def commit_sito():
 def main():
     commit = commit_sito()
     testata = (HERE / 'testata.html').read_text()
+    tecnologie = (HERE / 'tecnologie.html').read_text()
+    tecnologie_sito = (HERE / 'tecnologie-sito.html').read_text()
     colophon = (HERE / 'colophon.html').read_text()
     for file, body, R, route, num, tkey, titolo, campo, extra in PAGES:
         target = SITE / file
@@ -143,11 +160,14 @@ def main():
         a = R + 'assets/'
         if file.startswith('assets/'):
             a = ''
-        scripts = [f'<script src="{a}nero/proiettile.js" defer></script>', f'<script src="{a}nero/nero.js" defer></script>']
+        scripts = [f'<script src="{a}nero/proiettile.js" defer></script>', f'<script src="{a}nero/gelatina.js" defer></script>', f'<script src="{a}nero/nero.js" defer></script>']
         if campo:
             scripts.append(f'<script src="{a}nero/campo.js" defer></script>')
-        if extra:
-            scripts.append(f'<script src="{a}{extra}" defer></script>')
+        for x in extra.split():
+            if x.endswith('.css'):
+                scripts.insert(0, f'<link rel="stylesheet" href="{a}{x}">')
+            else:
+                scripts.append(f'<script src="{a}{x}" defer></script>')
         head = f"""<!doctype html>
 <html lang="it" data-lang-en-url="{en_url}">
 <head>
@@ -168,7 +188,8 @@ def main():
 </head>
 """
         part = lambda s: (s.replace('%R%', R).replace('%ROUTE%', route).replace('%N%', num)
-                          .replace('%TKEY%', tkey).replace('%TITOLO%', titolo))
+                          .replace('%TKEY%', tkey).replace('%TITOLO%', titolo)
+                          .replace('%TECNOLOGIE_SITO%', tecnologie_sito).replace('%TECNOLOGIE%', tecnologie))
         content = (HERE / 'corpi' / f'{body}.html').read_text()
         for k, v in commit.items():
             content = content.replace(k, v)

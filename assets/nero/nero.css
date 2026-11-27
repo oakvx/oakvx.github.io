@@ -1162,6 +1162,7 @@ html.sparo-arrivo::after {
     color: transparent; -webkit-text-stroke: 1px var(--bianco-40);
 }
 .capitolo__testa { grid-column: 4 / span 5; display: grid; gap: .9rem; }
+.capitolo__testa h2,
 .capitolo__testa h3 { font: 400 clamp(2.2rem, calc(var(--u) * 4.4), 3.34rem)/.95 var(--serif); letter-spacing: -.025em; }
 .capitolo__corpo { grid-column: 4 / span 5; display: grid; gap: 1rem; color: var(--bianco-80); }
 .capitolo__citazione {
@@ -1835,7 +1836,7 @@ html.sparo-arrivo::after {
 /* Servizi */
 .servizi__aree { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 3rem; }
 .servizio { display: grid; align-content: start; gap: 1.2rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
-.servizio h2 { font: 400 calc(var(--u) * 3.2)/1 var(--serif); letter-spacing: -.02em; }
+.servizio h2 { font: 400 clamp(2rem, calc(var(--u) * 3.2), 3rem)/1 var(--serif); letter-spacing: -.02em; }
 .servizio ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
 .servizio li { padding: .5rem 0; border-bottom: 1px solid var(--linea); }
 .servizio li::before { content: "— "; color: var(--cremisi); }
@@ -1858,10 +1859,56 @@ html.sparo-arrivo::after {
     .stile__caratteri { grid-template-columns: 1fr; }
     .stile__campione-testo { font-size: 3.4rem; }
 }
-.pagina--contatti .scrivimi__elenco b { overflow-wrap: anywhere; font-size: min(1em, 8.2vw); }
+.pagina--contatti .scrivimi__elenco b { overflow-wrap: anywhere; font-size: clamp(1.4rem, 8.2vw, 3.2rem); }
+body:has(.pagina--contatti) .colophon__testa,
+body:has(.pagina--contatti) .colophon__corpo { display: none; }
 
 /* Dati dai repository */
 .caso-repo { display: grid; gap: .7rem; margin-top: 1.6rem; max-width: 34rem; }
 .caso-repo .t-meta:first-child { display: flex; justify-content: space-between; gap: 1rem; }
 .caso-repo__barra { display: flex; height: 6px; gap: 2px; }
 .caso-repo__barra i { display: block; min-width: 2px; background: color-mix(in srgb, var(--cremisi) calc(100% - var(--i) * 18%), var(--grafite)); }
+
+/* Tecnologie: quadratini gelatinosi */
+.gelatine { list-style: none; margin: 0; padding: 1rem 0 4rem; display: flex; flex-wrap: wrap; gap: 1.1rem .9rem; }
+.gelatine li { position: relative; }
+.gelatina {
+    --dim: clamp(3.6rem, calc(var(--u) * 5.4), 5rem);
+    display: grid; place-items: center; width: var(--dim); height: var(--dim);
+    transform: translateY(var(--dy, 0)) rotate(var(--rot, 0deg));
+    cursor: grab; outline: none; touch-action: manipulation;
+}
+.gelatina__corpo {
+    display: grid; place-items: center; width: 100%; height: 100%;
+    background: var(--bg); color: var(--fg);
+    border-radius: 30%;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .08), 0 .6rem 1.4rem rgb(0 0 0 / .45);
+    transform: translate(var(--gx, 0px), var(--gy, 0px)) rotate(var(--gr, 0deg)) scale(var(--gsx, 1), var(--gsy, 1)) rotate(calc(var(--gr, 0deg) * -1));
+    will-change: transform;
+}
+.gelatina__corpo svg { width: 46%; height: 46%; }
+.gelatina__sigla { font: 600 1.35rem/1 var(--mono); letter-spacing: -.04em; }
+.gelatina:focus-visible .gelatina__corpo { box-shadow: 0 0 0 2px var(--bianco), 0 0 0 5px var(--cremisi); }
+.gelatina__nota {
+    position: absolute; left: 50%; top: calc(100% + .7rem); z-index: 5;
+    width: max-content; max-width: 15rem; padding: .55rem .7rem;
+    background: var(--bianco); color: var(--nero);
+    font: 400 .82rem/1.35 var(--sans); text-align: left;
+    transform: translate(-50%, -.3rem); opacity: 0; pointer-events: none;
+    transition: opacity .18s, transform .18s;
+}
+.gelatina__nota b { display: block; font-weight: 600; }
+.gelatine li:hover .gelatina__nota,
+.gelatina:focus-visible + .gelatina__nota,
+.gelatine li.mostra .gelatina__nota { opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 760px) { .gelatine { gap: .9rem .7rem; } }
+
+/* Magazzino: tasto in testata */
+.testata__magazzino {
+    display: inline-flex; align-items: center; padding: .42rem .6rem;
+    border: 1px solid var(--cremisi); color: var(--bianco);
+    font: 400 .72rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+    transition: background .2s;
+}
+.testata__magazzino:hover, .testata__magazzino[aria-current="page"] { background: var(--cremisi); }
+@media (max-width: 420px) { .testata__ora { display: none; } }

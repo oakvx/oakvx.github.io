@@ -14,6 +14,7 @@
 <link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/nero/nero.css">
 <script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/gelatina.js" defer></script>
 <script src="../../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>piko: un agente locale che chiede il permesso | Gabriele Lucia</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/piko/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/piko/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -115,7 +117,7 @@
 </section>
 
 <section class="sezione caso-capo" aria-labelledby="pk-concept">
-    <p class="t-meta">(01) Concept</p>
+    <p class="t-meta">(i) Concept</p>
     <h2 id="pk-concept" data-split data-i18n-html="pk.conceptTitle">Fammi vedere. <em>Lo faccio io.</em> Dopo che dici sì.</h2>
     <div class="caso-capo__testo rivela">
         <p data-i18n="pk.concept1">Quasi tutti gli agenti chiedono fiducia all’inizio e agiscono in sottofondo. piko fa il contrario: niente cloud, niente flusso dello schermo in background, nessuna azione senza approvazione.</p>
@@ -126,7 +128,7 @@
 
 <section class="sezione" aria-labelledby="pk-processo">
     <div class="caso-capo">
-        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <p class="t-meta">(ii) <span data-i18n="case.process">Processo</span></p>
         <h2 id="pk-processo" data-split data-i18n-html="pk.processTitle">Cinque passaggi. <em>Uno è tuo.</em></h2>
     </div>
     <ol class="passi passi--cinque">
@@ -140,7 +142,7 @@
 
 <section class="sezione" aria-labelledby="pk-architettura">
     <div class="caso-capo">
-        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <p class="t-meta">(iii) <span data-i18n="case.architecture">Architettura</span></p>
         <h2 id="pk-architettura" data-split data-i18n-html="pk.archTitle">Costruito per essere <em>fermato.</em></h2>
     </div>
     <ul class="moduli">
@@ -152,7 +154,7 @@
 </section>
 
 <section class="sezione risultato" aria-labelledby="pk-risultato">
-    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <p class="t-meta">(iv) <span data-i18n="case.result">Risultato</span></p>
     <h2 class="risultato__frase" id="pk-risultato" data-split data-i18n-html="pk.result">Un agente che puoi <em>davvero</em> lasciare da solo con il tuo PC.</h2>
     <p class="risultato__note rivela" data-i18n="pk.resultText">Ogni push produce un installer per Windows; le build verdi escono come prerelease con checksum SHA-256, dopo un test reale di UI Automation e uno di installazione e disinstallazione su Windows. È ancora un’alpha, e il README lo dice per prima cosa.</p>
 </section>

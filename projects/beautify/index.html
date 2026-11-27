@@ -14,6 +14,7 @@
 <link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/nero/nero.css">
 <script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/gelatina.js" defer></script>
 <script src="../../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Beautify: gestionale PHP e MySQL | Gabriele Lucia</title>
@@ -54,6 +55,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/beautify/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/beautify/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -109,7 +111,7 @@
     <p class="caso-apertura__meta t-meta"><span data-i18n="case.label3">Caso 03 / 07</span><span data-i18n="beautify.kind">Gestionale multisalone · progetto di diploma</span><span>2026</span></p>
     <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>Beauti<em>fy.</em></h1>
     <div class="caso-apertura__piede">
-        <p class="caso-apertura__intro rivela" data-i18n="beautify.intro">Un gestionale per più saloni: clienti, servizi, orari e appuntamenti nello stesso posto. Il mio progetto di diploma, in PHP e MySQL. Non il solito esercizio.</p>
+        <p class="caso-apertura__intro rivela" data-i18n="beautify.intro">Un gestionale per più saloni: clienti, servizi, orari e appuntamenti nello stesso posto. Il mio progetto di diploma, in PHP e MySQL.</p>
         <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
             <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="beautify.role">Ruolo tecnico principale: database e backend</dd></div>
             <div><dt>Stack</dt><dd>PHP / MySQL</dd></div>
@@ -127,7 +129,7 @@
 </figure>
 
 <section class="sezione caso-capo" aria-labelledby="beautify-concept">
-    <p class="t-meta">(01) Concept</p>
+    <p class="t-meta">(i) Concept</p>
     <h2 id="beautify-concept" data-split data-i18n-html="beautify.conceptTitle">Più saloni, <em>un gestionale solo. Nessuna sovrapposizione.</em></h2>
     <div class="caso-capo__testo rivela">
         <p data-i18n="beautify.concept1">Beautify gestisce clienti, appuntamenti, utenti e servizi per più saloni. Include prenotazione pubblica, magazzino e analitiche, con sezioni distinte per proprietari e dipendenti.</p>
@@ -137,7 +139,7 @@
 
 <section class="sezione" aria-labelledby="beautify-processo">
     <div class="caso-capo">
-        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <p class="t-meta">(ii) <span data-i18n="case.process">Processo</span></p>
         <h2 id="beautify-processo" data-split data-i18n-html="beautify.processTitle">Come funziona, <em>dal login all’orario libero.</em></h2>
     </div>
     <ol class="passi">
@@ -164,7 +166,7 @@
 
 <section class="sezione" aria-labelledby="beautify-architettura">
     <div class="caso-capo">
-        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <p class="t-meta">(iii) <span data-i18n="case.architecture">Architettura</span></p>
         <h2 id="beautify-architettura" data-split data-i18n-html="beautify.archTitle">Lato server, <em>lato dati.</em></h2>
         <p class="caso-capo__testo rivela" data-i18n="beautify.archText">Ho sviluppato il backend PHP e il database MySQL, con flussi CRUD, contesto del salone e controlli di disponibilità condivisi tra agenda e prenotazione pubblica.</p>
     </div>
@@ -180,8 +182,8 @@
 </section>
 
 <section class="sezione risultato" aria-labelledby="beautify-risultato">
-    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
-    <h2 class="risultato__frase" id="beautify-risultato" data-split data-i18n-html="beautify.result">Un gestionale vero, <em>non il solito esercizio.</em> Ci tengo a ripeterlo.</h2>
+    <p class="t-meta">(iv) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="beautify-risultato" data-split data-i18n-html="beautify.result">Un gestionale vero, <em>non il solito esercizio.</em></h2>
     <p class="risultato__note rivela" data-i18n="beautify.resultText">La versione consegnata propone slot ogni 30 minuti e applica un anticipo minimo di 15 minuti; agenda e prenotazione pubblica usano gli stessi controlli.</p>
 </section>
 

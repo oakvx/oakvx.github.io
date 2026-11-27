@@ -14,6 +14,7 @@
 <link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/nero/nero.css">
 <script src="/assets/nero/proiettile.js" defer></script>
+<script src="/assets/nero/gelatina.js" defer></script>
 <script src="/assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>middleManPS4: research with tagged claims | Gabriele Lucia</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="/en/magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Warehouse</span></a>
         <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/middleman/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/projects/middleman/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -115,7 +117,7 @@
 </section>
 
 <section class="sezione caso-capo" aria-labelledby="mm-concept">
-    <p class="t-meta">(01) <span data-i18n="mm.qLabel">The question</span></p>
+    <p class="t-meta">(i) <span data-i18n="mm.qLabel">The question</span></p>
     <h2 id="mm-concept" data-split data-i18n-html="mm.qTitle">Where is the version check made? <em>Answer: unknown.</em></h2>
     <div class="caso-capo__testo rivela">
         <p data-i18n="mm.q1">The research starts from one question: does the PlayStation Network check the reported system version on the console, on the server, or both, and is that check even reachable from the network?</p>
@@ -126,7 +128,7 @@
 
 <section class="sezione" aria-labelledby="mm-regole">
     <div class="caso-capo">
-        <p class="t-meta">(02) <span data-i18n="mm.rulesLabel">House rules</span></p>
+        <p class="t-meta">(ii) <span data-i18n="mm.rulesLabel">House rules</span></p>
         <h2 id="mm-regole" data-split data-i18n-html="mm.rulesTitle">The constraints <em>are the method.</em></h2>
     </div>
     <ul class="moduli">
@@ -138,7 +140,7 @@
 </section>
 
 <section class="sezione risultato" aria-labelledby="mm-risultato">
-    <p class="t-meta">(03) <span data-i18n="case.result">Result</span></p>
+    <p class="t-meta">(iii) <span data-i18n="case.result">Result</span></p>
     <h2 class="risultato__frase" id="mm-risultato" data-split data-i18n-html="mm.result">It was called fwSpoofer. <em>Then I renamed it.</em></h2>
     <p class="risultato__note rivela" data-i18n="mm.resultText">The rename is the honesty policy: nothing in here spoofs anything. Zero runtime dependencies, an offline research workbench and a CI that runs the tests on every push.</p>
 </section>

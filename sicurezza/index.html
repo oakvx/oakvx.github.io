@@ -14,6 +14,7 @@
 <link rel="preload" href="../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/nero/nero.css">
 <script src="../assets/nero/proiettile.js" defer></script>
+<script src="../assets/nero/gelatina.js" defer></script>
 <script src="../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Sicurezza | Gabriele Lucia (oakvx)</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/sicurezza/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../en/sicurezza/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -112,7 +114,7 @@
     <div class="aperte">
         <article class="aperta rivela"><p class="t-meta">01</p><h3 data-i18n="sc.s1">Nessuno ti segue</h3><p data-i18n="sc.s1text">Niente analitiche, niente cookie di tracciamento, niente pubblicità. I font sono serviti da qui, non da altri.</p></article>
         <article class="aperta rivela"><p class="t-meta">02</p><h3 data-i18n="sc.s2">Poche chiamate fuori</h3><p data-i18n="sc.s2text">Le richieste esterne vanno solo all’API pubblica di GitHub (commit, repo, linguaggi) e a Open-Meteo (il meteo di Sassuolo, non il tuo). Niente chiavi, niente dati tuoi inviati.</p></article>
-        <article class="aperta rivela"><p class="t-meta">03</p><h3 data-i18n="sc.s3">Poco nel tuo browser</h3><p data-i18n="sc.s3text">Solo la lingua, se hai fermato le animazioni e una copia in cache dei contatori. Niente che ti identifichi.</p></article>
+        <article class="aperta rivela"><p class="t-meta">03</p><h3 data-i18n="sc.s3">Poco nel tuo browser</h3><p data-i18n="sc.s3text">La lingua, se hai fermato le animazioni, una copia in cache dei contatori e, nel Magazzino, gettoni finti e partite in corso. Niente che ti identifichi, niente che esca dal browser.</p></article>
         <article class="aperta rivela"><p class="t-meta">04</p><h3 data-i18n="sc.s4">Ogni versione resta</h3><p data-i18n="sc.s4text">Il codice è pubblico su GitHub e ogni modifica è un commit: si può controllare e tornare indietro.</p></article>
     </div>
 </section>

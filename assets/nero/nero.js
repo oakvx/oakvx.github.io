@@ -1062,6 +1062,57 @@
         });
     }
 
+    /* ----------------------------------------------------------------------
+       Tecnologie: il quadratino si aggancia al cursore, lo segue un poco e,
+       lasciato, torna a casa rimbalzando. Fisica in gelatina.js.
+       ---------------------------------------------------------------------- */
+    function initGelatina() {
+        const G = window.OAKVX?.gelatina;
+        const voci = $$('[data-gelatine] > li');
+        if (!G || !voci.length) return;
+        const MAX = 18, PRESA = .35;
+        const vive = new Set();
+        let raf = 0, prima = 0;
+        const stati = new Map(voci.map(li => [li, { s: { x: 0, y: 0, vx: 0, vy: 0 }, b: { x: 0, y: 0 }, corpo: $('.gelatina__corpo', li) }]));
+        const lim = v => Math.max(-MAX, Math.min(MAX, v));
+        const scrivi = st => {
+            const f = G.forma(st.s), c = st.corpo.style;
+            c.setProperty('--gx', st.s.x.toFixed(2) + 'px'); c.setProperty('--gy', st.s.y.toFixed(2) + 'px');
+            c.setProperty('--gr', f.rot.toFixed(1) + 'deg');
+            c.setProperty('--gsx', f.sx.toFixed(3)); c.setProperty('--gsy', f.sy.toFixed(3));
+        };
+        const giro = t => {
+            const dt = Math.min(1 / 30, ((t - prima) / 1000) || 1 / 60); prima = t;
+            for (const li of [...vive]) {
+                const st = stati.get(li);
+                st.s = G.passo(st.s, st.b, dt);
+                scrivi(st);
+                const fermo = Math.hypot(st.s.x - st.b.x, st.s.y - st.b.y) < .05 && Math.hypot(st.s.vx, st.s.vy) < .5;
+                if (fermo && !st.b.x && !st.b.y) { st.s = { x: 0, y: 0, vx: 0, vy: 0 }; scrivi(st); vive['delete'](li); }
+            }
+            raf = vive.size ? requestAnimationFrame(giro) : 0;
+        };
+        const sveglia = li => { vive.add(li); if (!raf) { prima = performance.now(); raf = requestAnimationFrame(giro); } };
+        const mostra = li => { li.classList.add('mostra'); clearTimeout(li._nota); li._nota = setTimeout(() => li.classList.remove('mostra'), 1500); };
+        for (const li of voci) {
+            const st = stati.get(li), q = $('.gelatina', li);
+            li.addEventListener('pointermove', e => {
+                if (e.pointerType === 'touch' || calm()) return;
+                const r = q.getBoundingClientRect();
+                st.b = { x: lim((e.clientX - r.left - r.width / 2) * PRESA), y: lim((e.clientY - r.top - r.height / 2) * PRESA) };
+                sveglia(li);
+            });
+            li.addEventListener('pointerleave', () => { st.b = { x: 0, y: 0 }; if (!calm()) sveglia(li); });
+            li.addEventListener('pointerdown', e => {
+                if (e.pointerType !== 'touch') return;
+                mostra(li);
+                if (calm()) return;
+                st.s = { ...st.s, vx: (Math.random() - .5) * 500, vy: -650 };
+                sveglia(li);
+            });
+        }
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1084,6 +1135,7 @@
         initCommitSito();
         initVivi();
         initApi();
+        initGelatina();
         initSocial();
         initScorriMorbido();
         initUscita();

@@ -14,6 +14,7 @@
 <link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/nero/nero.css">
 <script src="/assets/nero/proiettile.js" defer></script>
+<script src="/assets/nero/gelatina.js" defer></script>
 <script src="/assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Security | Gabriele Lucia (oakvx)</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="/en/magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Warehouse</span></a>
         <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/sicurezza/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/sicurezza/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -112,7 +114,7 @@
     <div class="aperte">
         <article class="aperta rivela"><p class="t-meta">01</p><h3 data-i18n="sc.s1">Nobody follows you</h3><p data-i18n="sc.s1text">No analytics, no tracking cookies, no ads. Fonts are served from here, not from someone else.</p></article>
         <article class="aperta rivela"><p class="t-meta">02</p><h3 data-i18n="sc.s2">Few outside calls</h3><p data-i18n="sc.s2text">External requests go only to GitHub's public API (commits, repos, languages) and Open-Meteo (Sassuolo's weather, not yours). No keys, nothing about you is sent.</p></article>
-        <article class="aperta rivela"><p class="t-meta">03</p><h3 data-i18n="sc.s3">Little in your browser</h3><p data-i18n="sc.s3text">Only your language, whether you paused the animations and a cached copy of the counters. Nothing that identifies you.</p></article>
+        <article class="aperta rivela"><p class="t-meta">03</p><h3 data-i18n="sc.s3">Little in your browser</h3><p data-i18n="sc.s3text">Your language, whether you paused the animations, a cached copy of the counters and, in the Warehouse, fake chips and games in progress. Nothing that identifies you, nothing that leaves the browser.</p></article>
         <article class="aperta rivela"><p class="t-meta">04</p><h3 data-i18n="sc.s4">Every version stays</h3><p data-i18n="sc.s4text">The code is public on GitHub and every change is a commit: anything can be checked and rolled back.</p></article>
     </div>
 </section>

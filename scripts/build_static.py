@@ -41,6 +41,11 @@ PAGE_FILES = [
     "sicurezza/index.html",
     "stile/index.html",
     "contatti/index.html",
+    "magazzino/index.html",
+    "magazzino/scala-40/index.html",
+    "magazzino/scopa/index.html",
+    "magazzino/briscola/index.html",
+    "magazzino/blackjack/index.html",
 ]
 SITEMAP_FILES = [
     "index.html",
@@ -60,6 +65,11 @@ SITEMAP_FILES = [
     "sicurezza/index.html",
     "stile/index.html",
     "contatti/index.html",
+    "magazzino/index.html",
+    "magazzino/scala-40/index.html",
+    "magazzino/scopa/index.html",
+    "magazzino/briscola/index.html",
+    "magazzino/blackjack/index.html",
 ]
 VOID_ELEMENTS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",

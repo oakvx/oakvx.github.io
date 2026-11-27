@@ -14,6 +14,7 @@
 <link rel="preload" href="../../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/nero/nero.css">
 <script src="../../assets/nero/proiettile.js" defer></script>
+<script src="../../assets/nero/gelatina.js" defer></script>
 <script src="../../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/projects/middleman/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../../en/projects/middleman/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -115,7 +117,7 @@
 </section>
 
 <section class="sezione caso-capo" aria-labelledby="mm-concept">
-    <p class="t-meta">(01) <span data-i18n="mm.qLabel">La domanda</span></p>
+    <p class="t-meta">(i) <span data-i18n="mm.qLabel">La domanda</span></p>
     <h2 id="mm-concept" data-split data-i18n-html="mm.qTitle">Dove viene controllata la versione? <em>Risposta: non si sa.</em></h2>
     <div class="caso-capo__testo rivela">
         <p data-i18n="mm.q1">La ricerca parte da una domanda: la PlayStation Network controlla la versione di sistema sulla console, sul server o in entrambi, e quel controllo è raggiungibile dalla rete?</p>
@@ -126,7 +128,7 @@
 
 <section class="sezione" aria-labelledby="mm-regole">
     <div class="caso-capo">
-        <p class="t-meta">(02) <span data-i18n="mm.rulesLabel">Regole di casa</span></p>
+        <p class="t-meta">(ii) <span data-i18n="mm.rulesLabel">Regole di casa</span></p>
         <h2 id="mm-regole" data-split data-i18n-html="mm.rulesTitle">I vincoli <em>sono il metodo.</em></h2>
     </div>
     <ul class="moduli">
@@ -138,7 +140,7 @@
 </section>
 
 <section class="sezione risultato" aria-labelledby="mm-risultato">
-    <p class="t-meta">(03) <span data-i18n="case.result">Risultato</span></p>
+    <p class="t-meta">(iii) <span data-i18n="case.result">Risultato</span></p>
     <h2 class="risultato__frase" id="mm-risultato" data-split data-i18n-html="mm.result">Si chiamava fwSpoofer. <em>Poi l’ho rinominato.</em></h2>
     <p class="risultato__note rivela" data-i18n="mm.resultText">Il nuovo nome è la politica di onestà: lì dentro niente falsifica niente. Zero dipendenze, un banco di ricerca offline e una CI che fa girare i test a ogni push.</p>
 </section>

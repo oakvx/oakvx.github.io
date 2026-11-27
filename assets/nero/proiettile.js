@@ -34,9 +34,9 @@
         return true;
     }
 
-    /** La pistola 3D vale il peso solo su un computer vero. */
+    /** La pistola 3D parte ovunque ci sia WebGL, telefoni compresi, salvo movimento ridotto. */
     function usaPistola(ambiente) {
-        return !!(ambiente.puntatoreFine && ambiente.larghezza >= 900 && ambiente.webgl && !ambiente.calmo);
+        return !!(ambiente.webgl && !ambiente.calmo);
     }
 
     /** Stato della sequenza d'uscita al tempo ms (ogni valore 0..1). */
@@ -55,16 +55,34 @@
     }
 
     /** Con la pistola 3D: il proiettile inciso esce dalla canna e vola verso chi guarda,
-        sempre più grande, finché copre lo schermo. */
+        sempre più grande, finché copre lo schermo.
+
+        Ordine del ciclo di una semiautomatica a corto rinculo (canna basculante, come la Browning):
+        accensione → il proiettile lascia la canna (frazioni di millisecondo) con la vampa, che dura
+        meno di un millisecondo → solo dopo l'uscita la canna si sblocca e il carrello arretra fino in
+        fondo (pochi ms) → a fine corsa l'estrattore lancia il bossolo di lato → il carrello torna in
+        batteria → la mano assorbe il colpo e la canna si alza, con il picco del rilevamento ben dopo
+        che il carrello è arrivato in fondo. Qui i tempi sono rallentati ma l'ordine e le proporzioni
+        restano quelli; i test in test/sito/proiettile.test.mjs li fissano. */
     const VOLO_MS = 1400;
     const SPARO_MS = 300;                       // la pistola entra con calma, poi spara
+    const SBLOCCO_MS = 2;                       // il carrello parte appena dopo l'uscita del proiettile
+    const CORSA_MS = 15;                        // arretramento del carrello
+    const RITORNO_MS = 45;                      // ritorno in batteria
+    const STACCO_MS = 40, STACCO = .08;         // in 40 ms fa l'8% della strada: si separa dalla canna prima che si alzi
+    function voloA(ms) {
+        if (ms <= SPARO_MS) return 0;
+        if (ms < SPARO_MS + STACCO_MS) { const u = (ms - SPARO_MS) / STACCO_MS; return STACCO * (1 - (1 - u) * (1 - u)); }
+        const t = tratto(ms, SPARO_MS + STACCO_MS, 1300);
+        return STACCO + (1 - STACCO) * t * t * t;   // poi cubica: rallenta, e cresce addosso a chi guarda
+    }
     function faseVolo(ms) {
-        const t = tratto(ms, SPARO_MS + 20, 1300);
         return {
             pistola: Math.min(tratto(ms, 0, 280), 1 - tratto(ms, 850, 1200)),
             sparo: tratto(ms, SPARO_MS, SPARO_MS + 120),
-            lampo: ms < SPARO_MS || ms > SPARO_MS + 110 ? 0 : Math.exp(-(ms - SPARO_MS) / 47),
-            volo: t * t * t,                      // cubica in entrata: lento all'uscita, poi addosso
+            // la vampa: piena all'istante dello sparo, sparita in due fotogrammi
+            lampo: ms < SPARO_MS || ms > SPARO_MS + 34 ? 0 : Math.exp(-(ms - SPARO_MS) / 8),
+            volo: voloA(ms),
             fumo: tratto(ms, SPARO_MS + 20, VOLO_MS),
             copertura: tratto(ms, 1300, VOLO_MS)
         };
@@ -79,12 +97,41 @@
         return t < 0 ? 0 : molla(t) / PICCO;
     }
 
-    /** Carrello 0..1: arretra in 15 ms, torna in batteria entro 60 ms. */
+    /** Carrello 0..1: parte dopo l'uscita del proiettile, arretra in CORSA_MS, torna in RITORNO_MS. */
     function carrello(ms) {
-        const t = ms - SPARO_MS;
-        if (t < 0 || t >= 60) return 0;
-        if (t <= 15) return 1 - Math.pow(1 - t / 15, 2);
-        return 1 - cubica((t - 15) / 45);
+        const t = ms - SPARO_MS - SBLOCCO_MS;
+        if (t <= 0 || t >= CORSA_MS + RITORNO_MS) return 0;
+        if (t <= CORSA_MS) return 1 - Math.pow(1 - t / CORSA_MS, 2);
+        return 1 - cubica((t - CORSA_MS) / RITORNO_MS);
+    }
+
+    /** Bossolo 0..1 lungo i suoi 700 ms di volo: esce quando il carrello ha fatto l'80% della corsa. */
+    const BOSSOLO_MS = SPARO_MS + SBLOCCO_MS + CORSA_MS * (1 - Math.sqrt(.2));
+    function bossolo(ms) {
+        return ms <= BOSSOLO_MS || ms >= BOSSOLO_MS + 700 ? 0 : (ms - BOSSOLO_MS) / 700;
+    }
+
+    /** Punto del volo a v (0..1): Bézier quadratica che esce lungo l'asse della canna
+        (controllo = partenza + asse · 0,35 · distanza) e finisce davanti alla camera. */
+    function traiettoria(v, partenza, asse, arrivo) {
+        const d = Math.hypot(arrivo[0] - partenza[0], arrivo[1] - partenza[1], arrivo[2] - partenza[2]);
+        const c = partenza.map((x, i) => x + asse[i] * .35 * d);
+        const u = 1 - v;
+        return partenza.map((x, i) => u * u * x + 2 * u * v * c[i] + v * v * arrivo[i]);
+    }
+
+    /** Volata ricavata dal modello: tra i punti più avanti (x ≥ maxX − tolleranza) prende la mediana
+        di y e z. Gli anelli della canna sono simmetrici, il mirino sono pochi punti: la mediana non lo sente.
+        Restituisce [maxX, y, z]. */
+    function centroCanna(punti, tolleranza = .002) {
+        let maxX = -Infinity;
+        for (const q of punti) if (q[0] > maxX) maxX = q[0];
+        const fronte = punti.filter(q => q[0] >= maxX - tolleranza);
+        const mediana = k => {
+            const v = fronte.map(q => q[k]).sort((a, b) => a - b), m = v.length >> 1;
+            return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+        };
+        return [maxX, mediana(1), mediana(2)];
     }
 
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
@@ -97,7 +144,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, traiettoria, centroCanna, bossolo, USCITA_MS, VOLO_MS, SPARO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;

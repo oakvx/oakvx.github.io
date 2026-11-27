@@ -14,6 +14,7 @@
 <link rel="preload" href="../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/nero/nero.css">
 <script src="../assets/nero/proiettile.js" defer></script>
+<script src="../assets/nero/gelatina.js" defer></script>
 <script src="../assets/nero/nero.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Metodo | Gabriele Lucia (oakvx)</title>
@@ -47,6 +48,7 @@
     </a>
     <div class="testata__azioni">
         <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
         <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
             <a href="https://oakvx.github.io/metodo/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../en/metodo/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
         </nav>
@@ -107,12 +109,12 @@
 <section class="sezione" aria-label="Regole">
     <article class="capitolo" id="onesta">
         <p class="capitolo__num" aria-hidden="true">I</p>
-        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r1k">Onestà</p><h3 data-i18n="me.r1">Scrivo cosa funziona. E cosa no.</h3></div>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r1k">Onestà</p><h2 data-i18n="me.r1">Scrivo cosa funziona. E cosa no.</h2></div>
         <div class="capitolo__corpo rivela">
             <p data-i18n="me.r1text">Un README che elenca solo funzioni è una pubblicità. I miei hanno una sezione «cosa non funziona», e nei progetti di ricerca ogni affermazione porta un’etichetta: provato, non provato, non implementato.</p>
             <ul class="metodo__prove t-meta">
                 <li data-i18n="me.r1a">yag — «Cosa funziona oggi» e «Cosa no», uno accanto all’altro</li>
-                <li data-i18n="me.r1b">middleManPS4 — rinominato da fwSpoofer, perché lì dentro niente falsifica niente</li>
+                <li data-i18n="me.r1b">middleManPS4 — prima si chiamava fwSpoofer; il nome è cambiato perché non falsifica nulla</li>
                 <li data-i18n="me.r1c">piko — un elenco di limiti noti più lungo di quello delle funzioni</li>
             </ul>
         </div>
@@ -121,7 +123,7 @@
 
     <article class="capitolo" id="permesso">
         <p class="capitolo__num" aria-hidden="true">II</p>
-        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r2k">Permesso</p><h3 data-i18n="me.r2">Niente succede senza chiedere.</h3></div>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r2k">Permesso</p><h2 data-i18n="me.r2">Niente succede senza chiedere.</h2></div>
         <div class="capitolo__corpo rivela">
             <p data-i18n="me.r2text">Quando un programma agisce al posto di qualcuno, deve chiedere prima. Non una volta nelle impostazioni: ogni volta, nel momento in cui conta.</p>
             <ul class="metodo__prove t-meta">
@@ -135,7 +137,7 @@
 
     <article class="capitolo" id="locale">
         <p class="capitolo__num" aria-hidden="true">III</p>
-        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r3k">Dati</p><h3 data-i18n="me.r3">I tuoi dati restano a casa tua.</h3></div>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r3k">Dati</p><h2 data-i18n="me.r3">I tuoi dati restano a casa tua.</h2></div>
         <div class="capitolo__corpo rivela">
             <p data-i18n="me.r3text">Se una cosa può girare in locale, gira in locale. Il cloud è una scelta da giustificare, non un punto di partenza.</p>
             <ul class="metodo__prove t-meta">
@@ -149,7 +151,7 @@
 
     <article class="capitolo" id="noioso">
         <p class="capitolo__num" aria-hidden="true">IV</p>
-        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r4k">Strumenti</p><h3 data-i18n="me.r4">Noioso di proposito.</h3></div>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r4k">Strumenti</p><h2 data-i18n="me.r4">Noioso di proposito.</h2></div>
         <div class="capitolo__corpo rivela">
             <p data-i18n="me.r4text">Scelgo lo strumento più noioso che fa il lavoro, e scrivo cosa ogni progetto non farà di proposito. Meno dipendenze, meno sorprese.</p>
             <ul class="metodo__prove t-meta">
@@ -163,7 +165,7 @@
 
     <article class="capitolo" id="incertezza">
         <p class="capitolo__num" aria-hidden="true">V</p>
-        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r5k">Incertezza</p><h3 data-i18n="me.r5">Se non so, si vede.</h3></div>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r5k">Incertezza</p><h2 data-i18n="me.r5">Se non so, si vede.</h2></div>
         <div class="capitolo__corpo rivela">
             <p data-i18n="me.r5text">I sistemi veri si rompono a metà. Preferisco mostrare uno stato incerto che fingere che sia andato tutto bene: quello che si vede, qualcuno lo può gestire.</p>
             <ul class="metodo__prove t-meta">
@@ -179,7 +181,7 @@
 <section class="sezione" aria-labelledby="processo-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(vi) <span data-i18n="me.procLabel">Processo</span></p>
-        <h2 class="sezione-titolo" id="processo-titolo" data-split data-i18n-html="me.procTitle">Come va un progetto, <em>più o meno.</em></h2>
+        <h2 class="sezione-titolo" id="processo-titolo" data-split data-i18n-html="me.procTitle">Come va un progetto, <em>di solito.</em></h2>
     </header>
     <ol class="passi">
         <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="me.p1">Chiedo perché</h3><p data-i18n="me.p1text">Prima del come. Un problema chiaro risparmia settimane di funzioni che nessuno aveva chiesto.</p></li>

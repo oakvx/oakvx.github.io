@@ -208,7 +208,7 @@
             avversari: [{ nome: `${T.pc} · ${b}`, carte: s.mani[1].length }],
             tavolo: s.tavolo,
             tavoloSelezionate: s.tavolo.map((c, j) => (segnate.includes(c.id) ? j : -1)).filter(j => j >= 0),
-            mazzo: s.mazzo.length || null,
+            pila: s.mazzo.length,
             mano: s.mani[0],
             selezionate: scelta == null ? [] : [scelta],
             manoAttiva: s.fase === 'gioco' && s.turno === 0,

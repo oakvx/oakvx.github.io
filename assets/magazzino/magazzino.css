@@ -132,3 +132,10 @@
 .mg3d__gioca:hover { background: var(--bianco) !important; color: var(--nero) !important; }
 @media (max-width: 760px) { .mg3d__scena { height: 64vh; } .mg3d__barra { grid-template-columns: 1fr; } .mg3d__nav { justify-content: center; } }
 .mg3d [hidden] { display: none !important; }
+
+/* il mazzo sul tavolo */
+.tavolo__pila { position: relative; display: block; width: var(--carta); aspect-ratio: 2 / 3; margin-right: .6rem; }
+.tavolo__pila-carta { position: absolute; inset: 0; transform: translate(calc(var(--i) * 3px), calc(var(--i) * -3px)); }
+.tavolo__pila-carta svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 .15rem .3rem rgb(0 0 0 / .5)); }
+.tavolo__pila-n { position: absolute; left: 50%; bottom: -.9rem; transform: translateX(-50%); padding: .15rem .5rem; border: 1px solid var(--linea-forte); background: var(--nero); font: 400 .72rem/1 var(--mono); letter-spacing: .08em; }
+.tavolo__centro:has(.tavolo__pila) { padding-bottom: 1rem; }

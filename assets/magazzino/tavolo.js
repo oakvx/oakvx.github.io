@@ -59,7 +59,15 @@
             }));
 
             const voci = v.tavolo || [];
-            centro.replaceChildren(...voci.map((x, i) => {
+            // il mazzo coperto sul tavolo: tante carte impilate quante ne restano (una ogni otto, al massimo sei)
+            const pile = [];
+            if (v.pila > 0) {
+                const pila = el('span', 'tavolo__pila', { role: 'img', 'aria-label': lingua() === 'en' ? `Deck: ${v.pila} cards` : `Mazzo: ${v.pila} carte` });
+                for (let i = 0; i < Math.min(6, Math.ceil(v.pila / 8)); i++) { const c = el('span', 'tavolo__pila-carta'); c.style.setProperty('--i', i); c.innerHTML = D().dorso(tipo); pila.append(c); }
+                const n = el('span', 'tavolo__pila-n'); n.textContent = String(v.pila); pila.append(n);
+                pile.push(pila);
+            }
+            centro.replaceChildren(...pile, ...voci.map((x, i) => {
                 const gruppo = Array.isArray(x) ? x : [x];
                 const selezionata = (v.tavoloSelezionate || []).includes(i);
                 if (onTavolo) {

@@ -10,20 +10,20 @@ const liscia = t => t * t * (3 - 2 * t);
 const aspetta = ms => new Promise(r => setTimeout(r, ms));
 
 /* ------------------------------------------------------------------ texture disegnate */
-function tela(w, h, disegna) {
+export function tela(w, h, disegna) {
     const c = document.createElement('canvas'); c.width = w; c.height = h;
     disegna(c.getContext('2d'), w, h);
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
     return t;
 }
-function grana(g, w, h, forza = 10, n = 9000) {
+export function grana(g, w, h, forza = 10, n = 9000) {
     for (let i = 0; i < n; i++) {
         const v = (Math.random() - .5) * forza;
         g.fillStyle = v > 0 ? `rgba(255,255,255,${v / 100})` : `rgba(0,0,0,${-v / 100})`;
         g.fillRect(Math.random() * w, Math.random() * h, 1.5, 1.5);
     }
 }
-const ORO = '#d8b45a', PANNO = '#0d5236';
+export const ORO = '#d8b45a', PANNO = '#0d5236';
 
 function textureFelt(raggio) {
     return tela(2048, 2048, (g, W, H) => {
@@ -91,7 +91,7 @@ function textureSfondo() {
 const PELLE = '#e9b98e', PELLE_OMBRA = '#c98f66', CAMICIA = '#f2efe8', GILET = '#16161a', CARTONE = '#c8ae7d';
 
 // un pezzo di cartoncino: sagoma disegnata, bordo tagliato, spessore finto dietro
-function pezzo(w, h, disegna, { px = .5, py = 1 } = {}) {
+export function pezzo(w, h, disegna, { px = .5, py = 1 } = {}) {
     const S = 512, aspetto = w / h, cw = aspetto >= 1 ? S : Math.round(S * aspetto), ch = aspetto >= 1 ? Math.round(S / aspetto) : S;
     const fronte = tela(cw, ch, (g, W, H) => {
         g.save(); disegna(g, W, H); g.restore();
@@ -106,7 +106,7 @@ function pezzo(w, h, disegna, { px = .5, py = 1 } = {}) {
     const g = new THREE.Group(); g.add(retro, m);
     return { g, mat };
 }
-function fermacampione() {
+export function fermacampione() {
     const g = new THREE.Group();
     const ottone = new THREE.MeshStandardMaterial({ color: '#c9a24a', metalness: 1, roughness: .28 });
     const testa = new THREE.Mesh(new THREE.SphereGeometry(.022, 20, 10, 0, Math.PI * 2, 0, Math.PI / 2), ottone);
@@ -117,7 +117,7 @@ function fermacampione() {
 }
 const tondo = (g, x, y, w, h, r) => { g.beginPath(); g.roundRect(x, y, w, h, r); };
 
-function facce() {
+function facce(opz = {}) {
     const testa = (bocca, occhi) => (g, W, H) => {
         g.lineJoin = 'round';
         // orecchie
@@ -130,14 +130,27 @@ function facce() {
         g.moveTo(W * .1, H * .5); g.bezierCurveTo(W * .08, H * .05, W * .92, H * .02, W * .9, H * .5);
         g.bezierCurveTo(W * .86, H * .3, W * .7, H * .24, W * .38, H * .26); g.bezierCurveTo(W * .22, H * .28, W * .14, H * .38, W * .1, H * .5); g.fill();
         g.strokeStyle = 'rgba(255,255,255,.25)'; g.lineWidth = 4; g.beginPath(); g.moveTo(W * .36, H * .1); g.quadraticCurveTo(W * .5, H * .16, W * .8, H * .2); g.stroke();
+        if (opz.berretto) {   // coppola
+            g.fillStyle = opz.berretto; g.beginPath(); g.moveTo(W * .08, H * .34); g.bezierCurveTo(W * .04, H * .0, W * .96, H * .0, W * .92, H * .34); g.closePath(); g.fill();
+            g.fillStyle = 'rgba(0,0,0,.28)'; g.beginPath(); g.ellipse(W * .5, H * .335, W * .45, H * .055, 0, 0, 7); g.fill();
+            g.fillStyle = opz.berretto; g.beginPath(); g.ellipse(W * .5, H * .32, W * .43, H * .045, 0, 0, 7); g.fill();
+            g.fillStyle = 'rgba(255,255,255,.12)'; g.beginPath(); g.ellipse(W * .4, H * .1, W * .2, H * .05, -.3, 0, 7); g.fill();
+            g.fillStyle = 'rgba(0,0,0,.35)'; g.beginPath(); g.arc(W * .5, H * .05, W * .018, 0, 7); g.fill();
+        }
         // sopracciglia
         g.strokeStyle = '#1b120c'; g.lineWidth = 9; g.lineCap = 'round';
         g.beginPath(); g.moveTo(W * .27, H * .42); g.quadraticCurveTo(W * .35, H * .38, W * .43, H * .41); g.stroke();
         g.beginPath(); g.moveTo(W * .57, H * .41); g.quadraticCurveTo(W * .65, H * .38, W * .73, H * .42); g.stroke();
         // occhi
         g.fillStyle = '#1b120c';
-        if (occhi) { g.beginPath(); g.ellipse(W * .35, H * .5, W * .04, H * .045, 0, 0, 7); g.ellipse(W * .65, H * .5, W * .04, H * .045, 0, 0, 7); g.fill();
+        if (occhi === 'aperti') { g.beginPath(); g.ellipse(W * .35, H * .5, W * .04, H * .045, 0, 0, 7); g.ellipse(W * .65, H * .5, W * .04, H * .045, 0, 0, 7); g.fill();
             g.fillStyle = '#fff'; g.beginPath(); g.arc(W * .36, H * .49, W * .012, 0, 7); g.arc(W * .66, H * .49, W * .012, 0, 7); g.fill(); }
+        else if (occhi === 'mezzi') {   // occhi pesanti: palpebre abbassate a metà, borse sotto
+            g.beginPath(); g.ellipse(W * .35, H * .508, W * .04, H * .036, 0, 0, 7); g.ellipse(W * .65, H * .508, W * .04, H * .036, 0, 0, 7); g.fill();
+            g.fillStyle = PELLE; g.fillRect(W * .28, H * .45, W * .14, H * .05); g.fillRect(W * .58, H * .45, W * .14, H * .05);
+            g.strokeStyle = '#1b120c'; g.lineWidth = 7; g.beginPath(); g.moveTo(W * .29, H * .5); g.lineTo(W * .41, H * .5); g.moveTo(W * .59, H * .5); g.lineTo(W * .71, H * .5); g.stroke();
+            g.strokeStyle = 'rgba(120,60,40,.4)'; g.lineWidth = 5; g.beginPath(); g.arc(W * .35, H * .535, W * .05, .2, Math.PI - .2); g.arc(W * .65, H * .535, W * .05, .2, Math.PI - .2); g.stroke();
+        }
         else { g.lineWidth = 6; g.beginPath(); g.moveTo(W * .3, H * .5); g.quadraticCurveTo(W * .35, H * .53, W * .4, H * .5); g.moveTo(W * .6, H * .5); g.quadraticCurveTo(W * .65, H * .53, W * .7, H * .5); g.stroke(); }
         // naso e baffi
         g.strokeStyle = PELLE_OMBRA; g.lineWidth = 6; g.beginPath(); g.moveTo(W * .5, H * .52); g.quadraticCurveTo(W * .46, H * .62, W * .51, H * .64); g.stroke();
@@ -155,11 +168,13 @@ function facce() {
         g.fillStyle = 'rgba(200,16,53,.12)'; g.beginPath(); g.arc(W * .26, H * .66, W * .07, 0, 7); g.arc(W * .74, H * .66, W * .07, 0, 7); g.fill();
     };
     const out = {};
-    for (const b of ['chiusa', 'aperta']) for (const o of [true, false]) out[`${b}-${o ? 'aperti' : 'chiusi'}`] = tela(400, 480, testa(b, o));
+    for (const b of ['chiusa', 'aperta']) for (const o of ['aperti', 'chiusi', 'mezzi']) out[`${b}-${o}`] = tela(400, 480, testa(b, o));
     return out;
 }
 
-function creaMazziere() {
+/** Il pupazzo di cartoncino. opz: gilet, papillon (colori), targa (testo), berretto (colore), occhi (chiave iniziale). */
+export function creaMazziere(opz = {}) {
+    const gilet = opz.gilet || GILET, papillon = opz.papillon || '#c81035', targa = opz.targa || 'OAKVX';
     const radice = new THREE.Group();
     const busto = pezzo(.62, .74, (g, W, H) => {
         // sagoma: spalle arrotondate che scendono
@@ -167,18 +182,18 @@ function creaMazziere() {
         sagoma(); g.fillStyle = CAMICIA; g.fill();
         g.save(); sagoma(); g.clip();
         // gilet a V
-        g.fillStyle = GILET; g.beginPath(); g.moveTo(0, H * .1); g.lineTo(W * .4, H * .08); g.lineTo(W * .5, H * .62); g.lineTo(W * .6, H * .08); g.lineTo(W, H * .1); g.lineTo(W, H); g.lineTo(0, H); g.fill();
+        g.fillStyle = gilet; g.beginPath(); g.moveTo(0, H * .1); g.lineTo(W * .4, H * .08); g.lineTo(W * .5, H * .62); g.lineTo(W * .6, H * .08); g.lineTo(W, H * .1); g.lineTo(W, H); g.lineTo(0, H); g.fill();
         g.strokeStyle = 'rgba(255,255,255,.08)'; g.lineWidth = 4; g.stroke();
         // bottoni e taschino
         g.fillStyle = ORO; for (let i = 0; i < 3; i++) { g.beginPath(); g.arc(W * .5, H * (.7 + i * .1), W * .016, 0, 7); g.fill(); }
         g.fillStyle = '#e8e6e1'; g.beginPath(); g.moveTo(W * .7, H * .38); g.lineTo(W * .82, H * .36); g.lineTo(W * .76, H * .3); g.fill();
         // targhetta
         tondo(g, W * .18, H * .4, W * .2, H * .06, 6); g.fillStyle = ORO; g.fill();
-        g.fillStyle = GILET; g.font = `700 ${W * .035}px "Nero Sans", Arial, sans-serif`; g.textAlign = 'center'; g.fillText('OAKVX', W * .28, H * .445);
+        g.fillStyle = GILET; g.font = `700 ${W * .035}px "Nero Sans", Arial, sans-serif`; g.textAlign = 'center'; g.fillText(targa, W * .28, H * .445);
         g.restore();
         // colletto e papillon
         g.fillStyle = '#fff'; g.beginPath(); g.moveTo(W * .38, H * .02); g.lineTo(W * .5, H * .12); g.lineTo(W * .44, H * .16); g.closePath(); g.moveTo(W * .62, H * .02); g.lineTo(W * .5, H * .12); g.lineTo(W * .56, H * .16); g.closePath(); g.fill();
-        g.fillStyle = '#c81035'; g.beginPath(); g.moveTo(W * .5, H * .13); g.lineTo(W * .38, H * .07); g.lineTo(W * .38, H * .19); g.closePath(); g.moveTo(W * .5, H * .13); g.lineTo(W * .62, H * .07); g.lineTo(W * .62, H * .19); g.closePath(); g.fill();
+        g.fillStyle = papillon; g.beginPath(); g.moveTo(W * .5, H * .13); g.lineTo(W * .38, H * .07); g.lineTo(W * .38, H * .19); g.closePath(); g.moveTo(W * .5, H * .13); g.lineTo(W * .62, H * .07); g.lineTo(W * .62, H * .19); g.closePath(); g.fill();
         g.beginPath(); g.arc(W * .5, H * .13, W * .025, 0, 7); g.fill();
         sagoma(); g.strokeStyle = 'rgba(40,25,10,.6)'; g.lineWidth = 6; g.stroke();
     }, { px: .5, py: 0 });
@@ -187,7 +202,7 @@ function creaMazziere() {
 
     // collo e testa
     const collo = new THREE.Group(); collo.position.set(0, .3 + .7, .006); radice.add(collo);
-    const volto = facce();
+    const volto = facce({ berretto: opz.berretto });
     const testa = pezzo(.34, .41, (g, W, H) => g.drawImage(volto['chiusa-aperti'].image, 0, 0, W, H), { px: .5, py: .06 });
     collo.add(testa.g); collo.add(fermacampione());
     const cambiaFaccia = chiave => { testa.mat.map = volto[chiave]; testa.mat.needsUpdate = true; };

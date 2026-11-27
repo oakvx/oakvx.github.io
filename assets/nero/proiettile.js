@@ -208,7 +208,7 @@
             el.style.setProperty('--a', a.toFixed(4));
             el.style.setProperty('--c', '1'); // il buio si apre dal centro: il proiettile è appena passato
             if (t < 1) requestAnimationFrame(passo);
-            else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); }
+            else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); el.style.removeProperty('--c'); }
         };
         requestAnimationFrame(passo);
     }

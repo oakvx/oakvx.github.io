@@ -8,6 +8,9 @@
 (function () {
     'use strict';
 
+    // indirizzo di questo file, per trovare pistola.js accanto
+    const QUI = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : '';
+
     const USCITA_MS = 900;
     const ARRIVO_MS = 600;
 
@@ -147,8 +150,41 @@
         ['--s', '--p', '--f', '--c', '--a', '--d'].forEach(k => livello.style.removeProperty(k));
     }
 
+    /* ------------------------------------------------- pistola a richiesta */
+    function webgl() {
+        try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
+    }
+
+    let promessa = null;
+    function caricaPistola() {
+        if (promessa || !QUI) return promessa;
+        promessa = import(new URL('pistola.js', QUI).href)
+            .then(m => m.creaPistola(creaLivello()))
+            .then(p => { collegaPistola(p); return p; })
+            .catch(err => { console.warn('pistola:', err); return null; });
+        return promessa;
+    }
+
+    function preparaPistola() {
+        const ok = usaPistola({
+            puntatoreFine: matchMedia('(pointer: fine) and (hover: hover)').matches,
+            larghezza: innerWidth,
+            webgl: webgl(),
+            calmo: calmo()
+        });
+        if (!ok) return;
+        const dopo = () => ('requestIdleCallback' in window ? requestIdleCallback(caricaPistola, { timeout: 3000 }) : setTimeout(caricaPistola, 1200));
+        if (document.readyState === 'complete') dopo(); else addEventListener('load', dopo, { once: true });
+        // chi punta subito un link non deve aspettare l'inattività
+        document.addEventListener('pointerover', e => {
+            const a = e.target.closest && e.target.closest('a[href]');
+            if (a && !a.hasAttribute('data-no-velo') && new URL(a.href, location.href).origin === location.origin) caricaPistola();
+        }, { passive: true });
+    }
+
     function avvia() {
         apri();
+        preparaPistola();
         addEventListener('pageshow', e => { if (e.persisted) ripristina(); });
         document.addEventListener('click', e => {
             const a = e.target.closest && e.target.closest('a[href]');
@@ -160,5 +196,5 @@
         });
     }
 
-    Object.assign(OAKVX.proiettile, { avvia, spara, collegaPistola });
+    Object.assign(OAKVX.proiettile, { avvia, spara, collegaPistola, caricaPistola });
 })();

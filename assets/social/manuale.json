@@ -1,0 +1,9 @@
+{
+ "nota": "Conteggi scritti a mano. Instagram non li mostra senza accesso: quando vuoi aggiorna follower, seguiti, post e la data (AAAA-MM-GG). Finché follower è null la card Instagram resta nascosta.",
+ "instagram:oakvx": {
+  "follower": null,
+  "seguiti": null,
+  "post": null,
+  "aggiornato": null
+ }
+}

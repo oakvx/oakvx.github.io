@@ -921,9 +921,20 @@
         let dati = {}, scelte = {};
         try { dati = (await (await fetch(new URL('social.json', base), { cache: 'no-cache' })).json()).account || {}; } catch {}
         try { scelte = await (await fetch(new URL('scelte.json', base), { cache: 'no-cache' })).json(); } catch {}
+        // conteggi scritti a mano (Instagram): valgono solo se c'è il numero di follower
+        try {
+            const manuale = await (await fetch(new URL('manuale.json', base), { cache: 'no-cache' })).json();
+            for (const [chiave, v] of Object.entries(manuale)) {
+                if (!v || typeof v !== 'object' || v.follower == null) continue;
+                const [piattaforma, handle] = chiave.split(':');
+                dati[chiave] = { piattaforma, handle, ...(dati[chiave] || {}), ...v, aggiornato: v.aggiornato ? v.aggiornato + 'T12:00:00' : null, storia: dati[chiave]?.storia || [] };
+            }
+        } catch {}
         const asset = p => new URL(p.replace(/^assets\/social\//, ''), base).href;
 
         $$('.profilo', box).forEach(card => {
+            // una card senza nessun conteggio disponibile resta nascosta
+            if (!$$('[data-scegli]', card).some(b => dati[b.dataset.scegli]?.follower != null)) { card.hidden = true; return; }
             const campo = k => $(`[data-campo-profilo="${k}"]`, card);
             const mostra = chiave => {
                 const [piattaforma, handle] = chiave.split(':');

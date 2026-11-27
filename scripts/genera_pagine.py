@@ -43,33 +43,33 @@ PAGES = [
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.
 SEO_NUOVE = {
     '/metodo/': ('Metodo | Gabriele Lucia (oakvx)', 'Come lavora Gabriele Lucia: i principi che tornano in ogni suo progetto, con le prove prese dal codice.',
-                 'Method | Gabriele Lucia (oakvx)', 'How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.', 'home'),
+                 'Method | Gabriele Lucia (oakvx)', 'How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.', 'metodo'),
     '/lavori/': ('Tutti i lavori | Gabriele Lucia (oakvx)', 'Tutti i progetti di Gabriele Lucia: casi studio, strumenti, ricerca ed esperimenti, con stato e tecnologie.',
-                 'All work | Gabriele Lucia (oakvx)', 'Every project by Gabriele Lucia: case studies, tools, research and experiments, with status and technologies.', 'home'),
+                 'All work | Gabriele Lucia (oakvx)', 'Every project by Gabriele Lucia: case studies, tools, research and experiments, with status and technologies.', 'lavori'),
     '/projects/piko/': ('piko: un agente locale che chiede il permesso | Gabriele Lucia', 'piko osserva l’app in primo piano, scrive un piano con un modello locale e agisce solo dopo l’approvazione. Windows, Python, Tauri.',
-                        'piko: a local agent that asks first | Gabriele Lucia', 'piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.', 'home'),
+                        'piko: a local agent that asks first | Gabriele Lucia', 'piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.', 'piko'),
     '/projects/yag/': ('yag: un gateway AI in C17 | Gabriele Lucia', 'Yet Another Gateway: autenticazione, instradamento e traduzione fra OpenAI, Responses e Anthropic in un binario C17.',
-                       'yag: an AI gateway in C17 | Gabriele Lucia', 'Yet Another Gateway: authentication, routing and translation between OpenAI, Responses and Anthropic in one C17 binary.', 'home'),
+                       'yag: an AI gateway in C17 | Gabriele Lucia', 'Yet Another Gateway: authentication, routing and translation between OpenAI, Responses and Anthropic in one C17 binary.', 'yag'),
     '/servizi/': ('Servizi | Gabriele Lucia (oakvx)', 'Cosa fa Gabriele Lucia per chi gli scrive: siti web, software e backend, grafica e social, assistenza informatica.',
-                  'Services | Gabriele Lucia (oakvx)', 'What Gabriele Lucia does for the people who write to him: websites, software and backend, graphics and social media, IT support.', 'home'),
+                  'Services | Gabriele Lucia (oakvx)', 'What Gabriele Lucia does for the people who write to him: websites, software and backend, graphics and social media, IT support.', 'servizi'),
     '/sicurezza/': ('Sicurezza | Gabriele Lucia (oakvx)', 'Come Gabriele Lucia tratta dati e sicurezza nei suoi progetti, con le prove dal codice, e cosa non promette.',
-                    'Security | Gabriele Lucia (oakvx)', 'How Gabriele Lucia handles data and security in his projects, with evidence from the code, and what he does not promise.', 'home'),
+                    'Security | Gabriele Lucia (oakvx)', 'How Gabriele Lucia handles data and security in his projects, with evidence from the code, and what he does not promise.', 'sicurezza'),
     '/stile/': ('Stile | Gabriele Lucia (oakvx)', 'La guida grafica di questo sito: palette, tipografia, griglia, componenti e movimento.',
-                'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'home'),
+                'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'stile'),
     '/magazzino/blackjack/': ('Blackjack | Magazzino di oakvx', 'Blackjack gratis nel browser contro il banco, con gettoni finti: sei mazzi, il banco sta su 17, il blackjack paga 3 a 2.',
-                    'Blackjack | oakvx Warehouse', 'Free blackjack in the browser against the dealer, with fake chips: six decks, dealer stands on 17, blackjack pays 3 to 2.', 'home'),
+                    'Blackjack | oakvx Warehouse', 'Free blackjack in the browser against the dealer, with fake chips: six decks, dealer stands on 17, blackjack pays 3 to 2.', 'blackjack'),
     '/magazzino/briscola/': ('Briscola | Magazzino di oakvx', 'Briscola gratis nel browser con le carte siciliane, uno contro il computer. Senza registrarsi.',
-                    'Briscola | oakvx Warehouse', 'Free briscola in the browser with Sicilian cards, one on one against the computer. No sign-up.', 'home'),
+                    'Briscola | oakvx Warehouse', 'Free briscola in the browser with Sicilian cards, one on one against the computer. No sign-up.', 'briscola'),
     '/magazzino/scopa/': ('Scopa | Magazzino di oakvx', 'Scopa gratis nel browser con le carte siciliane: settebello, primiera, si va a 11 contro il computer.',
-                    'Scopa | oakvx Warehouse', 'Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.', 'home'),
+                    'Scopa | oakvx Warehouse', 'Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.', 'scopa'),
     '/magazzino/scala-40/': ('Scala 40 | Magazzino di oakvx', 'Scala 40 gratis nel browser contro il computer: due mazzi, quattro jolly, si apre con 40 punti. Senza registrarsi.',
-                    'Scala 40 | oakvx Warehouse', 'Free Scala 40 in the browser against the computer: two decks, four jokers, open with 40 points. No sign-up.', 'home'),
+                    'Scala 40 | oakvx Warehouse', 'Free Scala 40 in the browser against the computer: two decks, four jokers, open with 40 points. No sign-up.', 'scala-40'),
     '/magazzino/': ('Magazzino | oakvx', 'Il Magazzino di oakvx: carte siciliane, blackjack con gettoni finti e classici da giocare nel browser. Gratis, senza registrarsi.',
-                    'Warehouse | oakvx', 'The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.', 'home'),
+                    'Warehouse | oakvx', 'The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.', 'magazzino'),
     '/contatti/': ('Contatti | Gabriele Lucia (oakvx)', 'Come scrivere a Gabriele Lucia (oakvx): email, GitHub, lingue in cui risponde.',
-                   'Contact | Gabriele Lucia (oakvx)', 'How to reach Gabriele Lucia (oakvx): email, GitHub, languages he replies in.', 'home'),
+                   'Contact | Gabriele Lucia (oakvx)', 'How to reach Gabriele Lucia (oakvx): email, GitHub, languages he replies in.', 'contatti'),
     '/projects/middleman/': ('middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia', 'Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.',
-                             'middleManPS4: research with tagged claims | Gabriele Lucia', 'A PS4 research lab: C payloads, offline Python analysis and one rule, every claim carries a tag.', 'home'),
+                             'middleManPS4: research with tagged claims | Gabriele Lucia', 'A PS4 research lab: C payloads, offline Python analysis and one rule, every claim carries a tag.', 'middleman'),
 }
 
 
@@ -180,6 +180,8 @@ def main():
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="{a}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{a}favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="{a}apple-touch-icon.png">
 <link rel="preload" href="{a}nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{a}nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{a}nero/nero.css">

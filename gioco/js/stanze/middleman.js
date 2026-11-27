@@ -27,9 +27,11 @@ export function costruisci(m, g) {
       n: { aperture: [apertura(110)] },
       s: { aperture: [{ ...apertura(USCITA[0]), y0: USCITA[1], y1: USCITA[1] + 2.3 }] },
     },
-    materiali: { pavimento: mat.metallo },
+    // al buio davvero: niente panorama HDR (ambiente), niente faro d'ombra, soffitto che non riflette luce finta
+    materiali: { pavimento: mat.metallo, soffitto: mat.scuro },
     luciPunto: false,
-    atmosfera: { nebbia: 0x020304, vicino: 1, lontano: 14, cielo: 0x1d262b, terra: 0x020304, intensita: 0.12 },
+    ombra: { pos: [110, H - 0.2, 10], bersaglio: [110, 0, 10], intensita: 0 },
+    atmosfera: { nebbia: 0x020304, vicino: 1, lontano: 14, cielo: 0x1d262b, terra: 0x020304, intensita: 0.12, ambiente: 0.02 },
     suono: { ronzio: 0.2 },
   });
   for (const id of ['mm-basso', 'mm-esca', 'mm-alto']) m.pannelli.get(id).bloccato = true;
@@ -91,7 +93,7 @@ export function costruisci(m, g) {
     const cam = g.camera;
     const dentro = g.giocatore().pos.x > X0 && g.giocatore().pos.x < X1 && g.giocatore().pos.z > Z0 && g.giocatore().pos.z < Z1;
     const on = accesa && dentro;
-    cono.intensity = on ? 9 : 0;
+    cono.intensity = on ? 12 : 0;
     if (!on) return;
     const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(cam.quaternion);
     cono.position.copy(cam.position);

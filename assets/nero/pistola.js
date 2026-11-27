@@ -84,6 +84,29 @@ function creaProiettile() {
     return { volo, proiettile };
 }
 
+/* Componenti connesse di una mesh indicizzata (vertici uniti per posizione), con la scatola di ognuna. */
+function pezzi(pos, indici) {
+    const chiave = i => Math.round(pos.getX(i) * 1e5) + ',' + Math.round(pos.getY(i) * 1e5) + ',' + Math.round(pos.getZ(i) * 1e5);
+    const id = new Map(), rep = new Map();
+    for (const i of indici) { const k = chiave(i); if (!id.has(k)) id.set(k, id.size); rep.set(i, id.get(k)); }
+    const padre = new Int32Array(id.size).map((_, i) => i);
+    const radice = x => { while (padre[x] !== x) { padre[x] = padre[padre[x]]; x = padre[x]; } return x; };
+    for (let t = 0; t < indici.length; t += 3) {
+        const a = radice(rep.get(indici[t]));
+        padre[radice(rep.get(indici[t + 1]))] = a;
+        padre[radice(rep.get(indici[t + 2]))] = a;
+    }
+    const scatole = new Map();
+    for (const i of indici) {
+        const r = radice(rep.get(i));
+        let b = scatole.get(r);
+        if (!b) scatole.set(r, b = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity });
+        const x = pos.getX(i), y = pos.getY(i);
+        b.minX = Math.min(b.minX, x); b.maxX = Math.max(b.maxX, x); b.minY = Math.min(b.minY, y); b.maxY = Math.max(b.maxY, y);
+    }
+    return { scatola: i => scatole.get(radice(rep.get(i))) };
+}
+
 export async function creaPistola(contenitore) {
     const canvas = document.createElement('canvas');
     canvas.className = 'sparo__pistola';
@@ -133,8 +156,36 @@ export async function creaPistola(contenitore) {
         const cartucciaSciolta = cx > .044 && cx < .063 && cy > -.04 && cy < -.004;
         if (pistolaInBasso && !cartucciaSciolta) tenuti.push(indici[t], indici[t + 1], indici[t + 2]);
     }
-    geo.setIndex(tenuti);
+    // Il carrello (la parte alta che scorre allo sparo) è fatto di pezzi staccati dal fusto:
+    // si raggruppano i triangoli per vertici condivisi e si tengono i pezzi dentro la sua sagoma.
+    const pezzo = pezzi(pos, tenuti);
+    const fusto = [], carr = [], cartuccia = [];
+    for (let t = 0; t < tenuti.length; t += 3) {
+        const b = pezzo.scatola(tenuti[t]);
+        const diCarrello = b.minY >= .044 && b.maxX <= .107 && b.minX >= -.037;
+        (diCarrello ? carr : fusto).push(tenuti[t], tenuti[t + 1], tenuti[t + 2]);
+    }
+    for (let t = 0; t < indici.length; t += 3) {
+        let cx = 0, cy = 0;
+        for (let k = 0; k < 3; k++) { cx += pos.getX(indici[t + k]); cy += pos.getY(indici[t + k]); }
+        cx /= 3; cy /= 3;
+        if (cx > .044 && cx < .063 && cy > -.04 && cy < -.004) cartuccia.push(indici[t], indici[t + 1], indici[t + 2]);
+    }
+    geo.setIndex(fusto);
+    const geoCarrello = geo.clone(); geoCarrello.setIndex(carr);
+    // un bossolo sparato è vuoto: via la punta (la parte alta della cartuccia)
+    let cimaB = -Infinity;
+    for (const i of cartuccia) cimaB = Math.max(cimaB, pos.getY(i));
+    const soloBossolo = [];
+    for (let t = 0; t < cartuccia.length; t += 3) {
+        let cy = 0;
+        for (let k = 0; k < 3; k++) cy += pos.getY(cartuccia[t + k]);
+        if (cy / 3 < cimaB - .011) soloBossolo.push(cartuccia[t], cartuccia[t + 1], cartuccia[t + 2]);
+    }
+    cartuccia.length = 0; cartuccia.push(...soloBossolo);
+    const geoBossolo = geo.clone(); geoBossolo.setIndex(cartuccia);
     const pistola = new THREE.Mesh(geo, originale.material);
+    const carrelloMesh = new THREE.Mesh(geoCarrello, originale.material);
 
     // volata: estremità della canna, nelle coordinate originali
     const VOLATA = new THREE.Vector3(.176, .057, 0);
@@ -145,11 +196,12 @@ export async function creaPistola(contenitore) {
     const centro = scatola.getCenter(new THREE.Vector3());
     const lunghezza = scatola.max.x - scatola.min.x;
     pistola.position.copy(centro).multiplyScalar(-1);
+    carrelloMesh.position.copy(pistola.position);
     const punta = new THREE.Object3D();
     punta.position.copy(VOLATA).sub(centro);
 
     const perno = new THREE.Group();            // ruota attorno al centro della pistola
-    perno.add(pistola, punta);
+    perno.add(pistola, carrelloMesh, punta);
     perno.scale.setScalar(1.6 / lunghezza);
     const POSA = new THREE.Euler(.1, -.55, 0);   // tre quarti, un poco dall'alto: si legge il volume
     perno.rotation.copy(POSA);
@@ -167,6 +219,33 @@ export async function creaPistola(contenitore) {
     const { volo, proiettile } = creaProiettile();
     volo.visible = false;
     scena.add(volo);
+
+    // bossolo: espulso dalla finestra del carrello, in alto a destra, ruotando, poi cade
+    const scatolaB = new THREE.Box3();           // solo i vertici del bossolo, non tutto il file
+    for (const i of cartuccia) scatolaB.expandByPoint(v.fromBufferAttribute(pos, i));
+    const centroB = scatolaB.getCenter(new THREE.Vector3());
+    const bossoloMesh = new THREE.Mesh(geoBossolo, originale.material);
+    bossoloMesh.position.copy(centroB).multiplyScalar(-1);
+    const bossolo = new THREE.Group();
+    bossolo.add(bossoloMesh);
+    bossolo.scale.setScalar(perno.scale.x);
+    bossolo.visible = false;
+    scena.add(bossolo);
+    const finestra = new THREE.Object3D();          // finestra di espulsione, sul fianco del carrello
+    finestra.position.set(.035, .066, .012).sub(centro);
+    perno.add(finestra);
+    const partenzaB = new THREE.Vector3();
+    let bossoloPartito = false;
+    function bossoloVolo(ms) {
+        const t = (ms - 310) / 1000;
+        if (t < 0) bossoloPartito = false;
+        bossolo.visible = t >= 0 && t < .7;
+        if (!bossolo.visible) return;
+        // la partenza si fissa al primo fotogramma utile, anche se il computer ne salta qualcuno
+        if (!bossoloPartito) { finestra.getWorldPosition(partenzaB); bossoloPartito = true; }
+        bossolo.position.set(partenzaB.x + .9 * t, partenzaB.y + 2.2 * t - 4.5 * t * t, partenzaB.z + .4 * t);
+        bossolo.rotation.set(t * 9, t * 4, -t * 22);
+    }
     // la luce del colpo: illumina la pistola per un istante
     const bagliore = new THREE.PointLight(0xffd29a, 0, 3, 2);
     scena.add(bagliore);
@@ -205,6 +284,7 @@ export async function creaPistola(contenitore) {
 
     const partenzaMondo = new THREE.Vector3();
     const arrivoMondo = new THREE.Vector3();
+    let proiettilePartito = false;
     const scalaPartenza = .16;                   // lunghezza ~0,16: un proiettile accanto a una pistola lunga 1,6
 
     const facile = t => 1 - Math.pow(1 - t, 3);
@@ -219,34 +299,43 @@ export async function creaPistola(contenitore) {
         // arrivo: appena davanti alla camera, al centro dello schermo
         arrivoMondo.set(0, 0, camera.position.z - .55);
         cancelAnimationFrame(raf);
+        bossoloPartito = false; proiettilePartito = false;
         const passo = () => {
             const ms = tempo();
             const f = fase(ms);
             const P = window.OAKVX.proiettile;
             const k = P.rinculo(ms);
             if (ms < 600) {
-                // entrata: scivola da sinistra e si assesta, la canna che scende al livello
-                const e = facile(Math.min(1, ms / 280));
-                gruppo.position.set(fuori + (riposo.x - fuori) * e, riposo.y - (1 - e) * .18, riposo.z);
-                gruppo.rotation.z = (1 - e) * .22;
+                // entrata: il braccio la porta su da sotto a sinistra e si ferma con un leggero assestamento
+                const e = Math.min(1, ms / 280), c = 1.5;
+                const r = 1 + (c + 1) * Math.pow(e - 1, 3) + c * Math.pow(e - 1, 2);   // ease-out con un filo di oltre
+                gruppo.position.set(fuori + (riposo.x - fuori) * r, riposo.y - (1 - r) * .5, riposo.z);
+                gruppo.rotation.z = (1 - r) * .35;
             } else {
-                // uscita: abbassa l'arma e la porta fuori in basso a sinistra, accelerando
-                const u = 1 - f.pistola, q = u * u * u;
-                gruppo.position.set(riposo.x - q * 2.2, riposo.y - q * .9, riposo.z);
-                gruppo.rotation.z = -q * .5;
+                // uscita: il braccio si abbassa e la porta fuori dal basso
+                const u = 1 - f.pistola, q = u * u;
+                gruppo.position.set(riposo.x - q * .35, riposo.y - q * 1.7, riposo.z);
+                gruppo.rotation.z = -q * .7;
             }
-            scatto.rotation.set(0, 0, k * .3);    // la canna scatta in su di ~17°
-            scatto.position.x = presa.x - k * .07; // e l'arma arretra un poco
+            scatto.rotation.set(0, 0, k * .26);             // la canna scatta in su di ~15°, poi rimbalza un filo
+            scatto.position.x = presa.x - Math.max(0, k) * .06; // e l'arma arretra nel polso
+            carrelloMesh.position.x = pistola.position.x - P.carrello(ms) * .028; // il carrello scorre indietro e torna
+            // scossa: tre fotogrammi di tremolio dopo il colpo
+            const sc = ms > 300 && ms < 360 ? (1 - (ms - 300) / 60) * .012 : 0;
+            camera.position.set((Math.random() - .5) * sc, (Math.random() - .5) * sc, 6);
+            camera.updateMatrixWorld();
+            bossoloVolo(ms);
             gruppo.updateMatrixWorld(true);
             punta.getWorldPosition(tmp);
             bagliore.position.copy(tmp);
             bagliore.intensity = (f.lampo || 0) * 6;
+            if (f.volo === 0) proiettilePartito = false;
             volo.visible = f.volo > 0 && f.copertura < 1;
             if (volo.visible) {
                 // dalla volata verso la camera: si avvicina, cresce e si gira a mostrare l'incisione
                 const v = f.volo;
                 // finché è a ridosso della canna la segue nel rinculo, poi tira dritto
-                if (v < .03) punta.getWorldPosition(partenzaMondo);
+                if (v < .03 || !proiettilePartito) { punta.getWorldPosition(partenzaMondo); proiettilePartito = true; }
                 volo.position.lerpVectors(partenzaMondo, arrivoMondo, v);
                 volo.scale.setScalar(scalaPartenza * (1 + v * 5));
                 volo.rotation.set(0, -.15 - v * .55, -v * .12);

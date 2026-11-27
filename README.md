@@ -104,7 +104,8 @@ Tutte le pagine (home, chi-sono, casi studio, fuori-orario, 404, crediti) usano 
 ## Commit del sito e profili social
 
 - **Commit del sito** (home, sezione "Questo sito"): totale, giorni di lavoro e istogramma per giorno dei commit di questo repository. `nero.js` li legge dall'API pubblica di GitHub (`/repos/oakvx/oakvx.github.io/commits`, cache di un'ora in `localStorage`, chiave `oakvx-commit-sito-v1`); senza rete restano i valori scritti nella pagina alla pubblicazione.
-- **Profili social** (Fuori orario): Instagram @oakvx, TikTok @oakvx.sh e @uvst.oakvx. La GitHub Action [`social.yml`](.github/workflows/social.yml) esegue ogni ora `scripts/social.mjs`, che legge solo i conteggi pubblici e l'avatar e aggiorna `assets/social/social.json`; il commit parte solo quando un valore cambia, e se una piattaforma non risponde resta l'ultimo valore valido.
+- **Profili social** (Fuori orario): TikTok @oakvx.sh e @uvst.oakvx si aggiornano da soli. La GitHub Action [`social.yml`](.github/workflows/social.yml) esegue ogni ora `scripts/social.mjs`, che legge solo i conteggi pubblici e l'avatar e aggiorna `assets/social/social.json`; il commit parte solo quando un valore cambia, e se una piattaforma non risponde resta l'ultimo valore valido.
+- Instagram @oakvx non mostra i conteggi senza accesso, quindi si aggiorna a mano in `assets/social/manuale.json` (follower, seguiti, post, data). Finché `follower` è `null` la card Instagram resta nascosta.
 - Le storie e i video da mostrare nelle card si scelgono a mano in `assets/social/scelte.json`: per ogni account un elenco di `{ "tipo", "titolo", "immagine", "link" }`, con le immagini in `assets/social/scelte/`.
 
 ## Sviluppo locale

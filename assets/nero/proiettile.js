@@ -54,6 +54,21 @@
         };
     }
 
+    /** Con la pistola 3D: il proiettile inciso esce dalla canna e vola verso chi guarda,
+        sempre più grande, finché copre lo schermo. */
+    const VOLO_MS = 1400;
+    function faseVolo(ms) {
+        const t = tratto(ms, 170, 1300);
+        return {
+            pistola: Math.min(tratto(ms, 0, 180), 1 - tratto(ms, 750, 1100)),
+            sparo: tratto(ms, 150, 260),
+            lampo: ms < 150 || ms > 260 ? 0 : Math.exp(-(ms - 150) / 47),
+            volo: t * t * t,                      // cubica in entrata: lento all'uscita, poi addosso
+            fumo: tratto(ms, 170, VOLO_MS),
+            copertura: tratto(ms, 1300, VOLO_MS)
+        };
+    }
+
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
     const VALIDITA_MS = 3000;
     function arrivoValido(valore, adesso) {
@@ -64,7 +79,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, cubica, arrivoValido, USCITA_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;

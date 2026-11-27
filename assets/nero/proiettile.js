@@ -70,12 +70,21 @@
         };
     }
 
-    /** Rinculo 0..1: scatto in una trentina di ms, poi rientro smorzato. */
+    /** Rinculo: molla sotto-smorzata (polso che assorbe il colpo). Picco 1 a ~30 ms, rimbalzo ~-0,2. */
+    const ZETA = .45, OMEGA = 41.2, OMEGA_D = OMEGA * Math.sqrt(1 - ZETA * ZETA);
+    const molla = t => Math.exp(-ZETA * OMEGA * t) * Math.sin(OMEGA_D * t);
+    const PICCO = molla(Math.atan(OMEGA_D / (ZETA * OMEGA)) / OMEGA_D);
     function rinculo(ms) {
         const t = (ms - SPARO_MS) / 1000;
-        if (t < 0) return 0;
-        const v = (1 - Math.exp(-t / .012)) * Math.exp(-t / .09);
-        return Math.min(1, v / .655);             // .655 ≈ picco della curva: il massimo vale 1
+        return t < 0 ? 0 : molla(t) / PICCO;
+    }
+
+    /** Carrello 0..1: arretra in 15 ms, torna in batteria entro 60 ms. */
+    function carrello(ms) {
+        const t = ms - SPARO_MS;
+        if (t < 0 || t >= 60) return 0;
+        if (t <= 15) return 1 - Math.pow(1 - t / 15, 2);
+        return 1 - cubica((t - 15) / 45);
     }
 
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
@@ -88,7 +97,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;

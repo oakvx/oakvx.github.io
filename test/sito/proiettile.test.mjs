@@ -100,10 +100,19 @@ test('faseVolo: con la pistola il proiettile vola verso chi guarda fino a coprir
     assert.equal(p.faseVolo(p.VOLO_MS).pistola, 0);
 });
 
-test('rinculo: scatto rapido verso l\'alto, poi torna fermo', () => {
+test('rinculo: molla smorzata, scatto in ~30 ms, piccolo rimbalzo, poi fermo', () => {
     assert.equal(p.rinculo(299), 0);
-    const picco = Math.max(...[310, 320, 330, 340, 350].map(p.rinculo));
-    assert.ok(picco > .6 && picco <= 1);
-    assert.ok(p.rinculo(330) > p.rinculo(500));
-    assert.ok(p.rinculo(800) < .02);
+    const curva = Array.from({ length: 80 }, (_, i) => p.rinculo(300 + i * 5));
+    const picco = Math.max(...curva);
+    const quando = 300 + curva.indexOf(picco) * 5;
+    assert.ok(picco > .95 && picco <= 1.0001, 'picco ' + picco);
+    assert.ok(quando >= 320 && quando <= 345, 'picco a ' + quando);
+    assert.ok(Math.min(...curva) < -.05, 'nessun rimbalzo');      // scende un filo sotto lo zero
+    assert.ok(Math.abs(p.rinculo(800)) < .02);
+});
+test('carrello: arretra in 15 ms e torna avanti entro 60 ms', () => {
+    assert.equal(p.carrello(299), 0);
+    assert.equal(p.carrello(315), 1);
+    assert.ok(p.carrello(330) > 0 && p.carrello(330) < 1);
+    assert.equal(p.carrello(361), 0);
 });

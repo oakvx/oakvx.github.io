@@ -154,7 +154,7 @@ window.OAKVX_EN = {
     'about.k4': 'Craft',
     'about.v4': 'Junior developer and graphic designer',
     'about.figA': 'Fig. 01',
-    'about.figCaption': "Self-portrait in points. I drew the Mii, and the poses.",
+    'about.figCaption': "Self-portrait in points: my Mii, recomposed in six poses",
     'about.hold': 'Press and hold: change pose',
     'about.portraitLabel': "(i) Where I start from",
     'about.portrait1': "I started by taking programs apart to see what was inside. I wanted to understand how they worked and, while I was at it, make one of my own.",

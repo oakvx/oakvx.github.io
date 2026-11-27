@@ -29,6 +29,10 @@ PAGES = [
     ('projects/piko/index.html', 'piko', '../../', '/projects/piko/', '02.5', 'seg.piko', 'piko', False, ''),
     ('projects/yag/index.html', 'yag', '../../', '/projects/yag/', '02.6', 'seg.yag', 'yag', False, ''),
     ('projects/middleman/index.html', 'middleman', '../../', '/projects/middleman/', '02.7', 'seg.middleman', 'middleManPS4', False, ''),
+    ('servizi/index.html', 'servizi', '../', '/servizi/', '06', 'nav.services', 'Servizi', False, ''),
+    ('sicurezza/index.html', 'sicurezza', '../', '/sicurezza/', '07', 'nav.security', 'Sicurezza', False, ''),
+    ('stile/index.html', 'stile', '../', '/stile/', '08', 'nav.style', 'Stile', False, ''),
+    ('contatti/index.html', 'contatti', '../', '/contatti/', '09', 'nav.contact', 'Contatti', False, ''),
 ]
 
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.
@@ -41,6 +45,14 @@ SEO_NUOVE = {
                         'piko: a local agent that asks first | Gabriele Lucia', 'piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.', 'home'),
     '/projects/yag/': ('yag: un gateway AI in C17 | Gabriele Lucia', 'Yet Another Gateway: autenticazione, instradamento e traduzione fra OpenAI, Responses e Anthropic in un binario C17.',
                        'yag: an AI gateway in C17 | Gabriele Lucia', 'Yet Another Gateway: authentication, routing and translation between OpenAI, Responses and Anthropic in one C17 binary.', 'home'),
+    '/servizi/': ('Servizi | Gabriele Lucia (oakvx)', 'Cosa fa Gabriele Lucia per chi gli scrive: siti web, software e backend, grafica e social, assistenza informatica.',
+                  'Services | Gabriele Lucia (oakvx)', 'What Gabriele Lucia does for the people who write to him: websites, software and backend, graphics and social media, IT support.', 'home'),
+    '/sicurezza/': ('Sicurezza | Gabriele Lucia (oakvx)', 'Come Gabriele Lucia tratta dati e sicurezza nei suoi progetti, con le prove dal codice, e cosa non promette.',
+                    'Security | Gabriele Lucia (oakvx)', 'How Gabriele Lucia handles data and security in his projects, with evidence from the code, and what he does not promise.', 'home'),
+    '/stile/': ('Stile | Gabriele Lucia (oakvx)', 'La guida grafica di questo sito: palette, tipografia, griglia, componenti e movimento.',
+                'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'home'),
+    '/contatti/': ('Contatti | Gabriele Lucia (oakvx)', 'Come scrivere a Gabriele Lucia (oakvx): email, GitHub, lingue in cui risponde.',
+                   'Contact | Gabriele Lucia (oakvx)', 'How to reach Gabriele Lucia (oakvx): email, GitHub, languages he replies in.', 'home'),
     '/projects/middleman/': ('middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia', 'Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.',
                              'middleManPS4: research with tagged claims | Gabriele Lucia', 'A PS4 research lab: C payloads, offline Python analysis and one rule, every claim carries a tag.', 'home'),
 }

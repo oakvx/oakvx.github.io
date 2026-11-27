@@ -144,6 +144,7 @@ ENTRY_PAGES = (
     "projects/brat-animator/index.html", "projects/synk/index.html",
     "metodo/index.html", "lavori/index.html", "projects/piko/index.html",
     "projects/yag/index.html", "projects/middleman/index.html",
+    "servizi/index.html", "sicurezza/index.html", "stile/index.html", "contatti/index.html",
 )
 
 

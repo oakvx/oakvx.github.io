@@ -37,6 +37,10 @@ PAGE_FILES = [
     "projects/piko/index.html",
     "projects/yag/index.html",
     "projects/middleman/index.html",
+    "servizi/index.html",
+    "sicurezza/index.html",
+    "stile/index.html",
+    "contatti/index.html",
 ]
 SITEMAP_FILES = [
     "index.html",
@@ -52,6 +56,10 @@ SITEMAP_FILES = [
     "projects/piko/index.html",
     "projects/yag/index.html",
     "projects/middleman/index.html",
+    "servizi/index.html",
+    "sicurezza/index.html",
+    "stile/index.html",
+    "contatti/index.html",
 ]
 VOID_ELEMENTS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",

@@ -130,4 +130,44 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/projects/middleman/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/middleman/"/>
   </url>
+  <url><loc>https://oakvx.github.io/servizi/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/servizi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/servizi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/servizi/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/servizi/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/servizi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/servizi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/servizi/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/sicurezza/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/sicurezza/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/sicurezza/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/sicurezza/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/sicurezza/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/sicurezza/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/sicurezza/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/sicurezza/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/stile/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/stile/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/stile/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/stile/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/stile/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/stile/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/stile/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/stile/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/contatti/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/contatti/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/contatti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/contatti/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/contatti/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/contatti/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/contatti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/contatti/"/>
+  </url>
 </urlset>

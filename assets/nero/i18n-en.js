@@ -513,6 +513,7 @@ window.OAKVX_EN = {
 
     'st.toolsLabel': "Built with",
     'st.toolsTitle': "Eight tools. <em>Touch them, they bounce.</em>",
+    'cr.magazzino': 'The shelves, lamp, hand truck and cardboard box in the 3D Warehouse come from Poly Haven, CC0 licence: <a href="https://polyhaven.com/a/steel_frame_shelves_01">Steel Frame Shelves 01</a> by James Ray Cock, <a href="https://polyhaven.com/a/hanging_industrial_lamp">Hanging Industrial Lamp</a> by Kuutti Siitonen, <a href="https://polyhaven.com/a/hand_truck">Hand Truck</a> by Mutanzom3D and <a href="https://polyhaven.com/a/cardboard_box_01">Cardboard Box 01</a> by Rahul Chaudhary; geometry quantized and textures recompressed to WebP (<code>scripts/prepara_modelli_magazzino.sh</code>). Crates, emblems and the warehouse keeper are drawn in code.',
     'cr.icons': "The technology logos in About and Style come from <a href=\"https://simpleicons.org/\">Simple Icons</a> (CC0 licence); the marks belong to their owners.",
 
     'nav.warehouse': "Warehouse",

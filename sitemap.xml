@@ -180,6 +180,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/"/>
   </url>
+  <url><loc>https://oakvx.github.io/magazzino/scala-40/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/scala-40/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/scala-40/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/scala-40/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/magazzino/scala-40/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/scala-40/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/scala-40/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/scala-40/"/>
+  </url>
   <url><loc>https://oakvx.github.io/magazzino/scopa/</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/scopa/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/scopa/"/>

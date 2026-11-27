@@ -87,12 +87,23 @@ test('faseVolo: con la pistola il proiettile vola verso chi guarda fino a coprir
     const f0 = p.faseVolo(0);
     assert.equal(f0.volo, 0);
     assert.equal(f0.copertura, 0);
-    assert.ok(p.faseVolo(160).lampo > .8);
-    assert.equal(p.faseVolo(170).volo, 0);
+    assert.ok(p.faseVolo(310).lampo > .8);             // si spara dopo un'entrata senza fretta
+    assert.equal(p.faseVolo(200).lampo, 0);
+    assert.ok(p.faseVolo(150).pistola > 0 && p.faseVolo(150).pistola < 1);
+    assert.equal(p.faseVolo(290).pistola, 1);
+    assert.equal(p.faseVolo(320).volo, 0);
     assert.ok(p.faseVolo(700).volo > 0 && p.faseVolo(700).volo < .5);   // parte lento, poi accelera
     assert.equal(p.faseVolo(1300).volo, 1);
     assert.equal(p.faseVolo(1200).copertura, 0);
     assert.equal(p.faseVolo(p.VOLO_MS).copertura, 1);
     assert.equal(p.faseVolo(400).pistola, 1);
     assert.equal(p.faseVolo(p.VOLO_MS).pistola, 0);
+});
+
+test('rinculo: scatto rapido verso l\'alto, poi torna fermo', () => {
+    assert.equal(p.rinculo(299), 0);
+    const picco = Math.max(...[310, 320, 330, 340, 350].map(p.rinculo));
+    assert.ok(picco > .6 && picco <= 1);
+    assert.ok(p.rinculo(330) > p.rinculo(500));
+    assert.ok(p.rinculo(800) < .02);
 });

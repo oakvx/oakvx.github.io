@@ -57,16 +57,25 @@
     /** Con la pistola 3D: il proiettile inciso esce dalla canna e vola verso chi guarda,
         sempre più grande, finché copre lo schermo. */
     const VOLO_MS = 1400;
+    const SPARO_MS = 300;                       // la pistola entra con calma, poi spara
     function faseVolo(ms) {
-        const t = tratto(ms, 170, 1300);
+        const t = tratto(ms, SPARO_MS + 20, 1300);
         return {
-            pistola: Math.min(tratto(ms, 0, 180), 1 - tratto(ms, 750, 1100)),
-            sparo: tratto(ms, 150, 260),
-            lampo: ms < 150 || ms > 260 ? 0 : Math.exp(-(ms - 150) / 47),
+            pistola: Math.min(tratto(ms, 0, 280), 1 - tratto(ms, 850, 1200)),
+            sparo: tratto(ms, SPARO_MS, SPARO_MS + 120),
+            lampo: ms < SPARO_MS || ms > SPARO_MS + 110 ? 0 : Math.exp(-(ms - SPARO_MS) / 47),
             volo: t * t * t,                      // cubica in entrata: lento all'uscita, poi addosso
-            fumo: tratto(ms, 170, VOLO_MS),
+            fumo: tratto(ms, SPARO_MS + 20, VOLO_MS),
             copertura: tratto(ms, 1300, VOLO_MS)
         };
+    }
+
+    /** Rinculo 0..1: scatto in una trentina di ms, poi rientro smorzato. */
+    function rinculo(ms) {
+        const t = (ms - SPARO_MS) / 1000;
+        if (t < 0) return 0;
+        const v = (1 - Math.exp(-t / .012)) * Math.exp(-t / .09);
+        return Math.min(1, v / .655);             // .655 ≈ picco della curva: il massimo vale 1
     }
 
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
@@ -79,7 +88,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;

@@ -228,16 +228,16 @@ window.OAKVX_EN = {
 
     /* Brat Animator */
     'brat.kind': 'Creative editor · browser',
-    'brat.intro': 'Synced lyrics, an editable timeline and Canvas rendering, brought together in an editor that exports the video straight from the browser. Born as a game, now at version 5.',
+    'brat.intro': "Synced lyrics, an editable timeline and Canvas rendering, in an editor that exports the video from the browser. Born as a game, now at version 5. The game got out of hand.",
     'brat.role': 'Application development',
     'brat.focus': 'Timing, motion, export',
     'brat.project': 'Browser tool · v5',
     'brat.alt': 'Brat Animator 4.0 interface with timeline, video preview and style controls',
     'brat.caption': 'Brat Animator 4.0 — real screenshot with demo text',
-    'brat.conceptTitle': 'From text to video, <em>without leaving the browser.</em>',
+    'brat.conceptTitle': "From text to video, <em>without leaving the browser. Or the chair.</em>",
     'brat.concept1': 'I brought lyric import, LRCLIB search, timing editing, styling and export together in a single static editor.',
-    'brat.concept2': 'Text and media are processed in the browser: there’s no backend to send them to.',
-    'brat.problem': 'The starting point: animating text in time with music, line by line, without a video editing program.',
+    'brat.concept2': "Text and media stay in the browser: there's no server to send them to, so there's none to pay for either.",
+    'brat.problem': "The starting point: animating text in time with music, line by line, without opening a video editor and without losing the afternoon.",
     'brat.processTitle': 'Three steps, <em>from timestamp to frame.</em>',
     'brat.s1': 'It starts from the text',
     'brat.s1text': 'The editor imports LRC lyrics with timestamps and can search them on LRCLIB. Lines and timings stay editable.',
@@ -267,7 +267,7 @@ window.OAKVX_EN = {
     'brat.t4': 'Real-time export, including local audio or audio from a compatible direct media URL.',
     'brat.t5k': 'Storage',
     'brat.t5': 'Keeps the uploaded media; the project state stays in localStorage.',
-    'brat.result': 'A complete editor that lives in <em>a static page.</em>',
+    'brat.result': "A complete editor inside <em>a static page.</em> It still surprises me.",
     'brat.resultText': 'Today it’s at version 5.0, with simple and advanced editors. It reads LRC, TTML, YAML, WebVTT and SRT, and exports MP4 and WebM with no server.',
 
     /* Synk */

@@ -81,3 +81,18 @@ test('cubica: parte lenta, finisce lenta, simmetrica', () => {
     assert.ok(p.cubica(.1) < .01);
     assert.ok(Math.abs(p.cubica(.2) + p.cubica(.8) - 1) < 1e-9);
 });
+
+test('faseVolo: con la pistola il proiettile vola verso chi guarda fino a coprire lo schermo', () => {
+    assert.equal(p.VOLO_MS, 1400);
+    const f0 = p.faseVolo(0);
+    assert.equal(f0.volo, 0);
+    assert.equal(f0.copertura, 0);
+    assert.ok(p.faseVolo(160).lampo > .8);
+    assert.equal(p.faseVolo(170).volo, 0);
+    assert.ok(p.faseVolo(700).volo > 0 && p.faseVolo(700).volo < .5);   // parte lento, poi accelera
+    assert.equal(p.faseVolo(1300).volo, 1);
+    assert.equal(p.faseVolo(1200).copertura, 0);
+    assert.equal(p.faseVolo(p.VOLO_MS).copertura, 1);
+    assert.equal(p.faseVolo(400).pistola, 1);
+    assert.equal(p.faseVolo(p.VOLO_MS).pistola, 0);
+});

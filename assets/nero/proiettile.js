@@ -54,6 +54,21 @@
         };
     }
 
+    /** Con la pistola 3D: il proiettile inciso esce dalla canna e vola verso chi guarda,
+        sempre più grande, finché copre lo schermo. */
+    const VOLO_MS = 1400;
+    function faseVolo(ms) {
+        const t = tratto(ms, 170, 1300);
+        return {
+            pistola: Math.min(tratto(ms, 0, 180), 1 - tratto(ms, 750, 1100)),
+            sparo: tratto(ms, 150, 260),
+            lampo: ms < 150 || ms > 260 ? 0 : Math.exp(-(ms - 150) / 47),
+            volo: t * t * t,                      // cubica in entrata: lento all'uscita, poi addosso
+            fumo: tratto(ms, 170, VOLO_MS),
+            copertura: tratto(ms, 1300, VOLO_MS)
+        };
+    }
+
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
     const VALIDITA_MS = 3000;
     function arrivoValido(valore, adesso) {
@@ -64,7 +79,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, cubica, arrivoValido, USCITA_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, cubica, arrivoValido, USCITA_MS, VOLO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;
@@ -129,9 +144,19 @@
         return matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('paused');
     }
 
-    function spara(href) {
+    const ATTESA_PISTOLA_MS = 2500;
+
+    function spara(href, giaAtteso = false) {
         if (inCorso) return;
         inCorso = true;
+        if (!giaAtteso && promessa && !(pistola && pistola.pronta())) {
+            // la pistola sta ancora scaricando: meglio un attimo di attesa che uno sparo senza pistola
+            let partito = false;
+            const via = () => { if (!partito) { partito = true; inCorso = false; spara(href, true); } };
+            promessa.then(via);
+            setTimeout(via, ATTESA_PISTOLA_MS);
+            return;
+        }
         const el = creaLivello();
         el.classList.remove('arrivo');
         el.classList.add('attivo');
@@ -143,6 +168,9 @@
         const inizio = performance.now();
         const tempo = () => performance.now() - inizio;
         if (conPistola) pistola.spara(tempo);
+        // con la pistola il proiettile 3D fa da transizione: niente scia orizzontale
+        const durata = conPistola ? VOLO_MS : USCITA_MS;
+        const statoA = ms => (conPistola ? { ...faseVolo(ms), proiettile: 0, fascio: 0 } : fase(ms));
         let andato = false;
         const vai = () => {
             if (andato) return;
@@ -154,11 +182,11 @@
         };
         const passo = () => {
             const ms = tempo();
-            disegna(fase(ms), volata);
-            if (ms < USCITA_MS) requestAnimationFrame(passo); else vai();
+            disegna(statoA(ms), volata);
+            if (ms < durata) requestAnimationFrame(passo); else vai();
         };
         requestAnimationFrame(passo);
-        setTimeout(vai, USCITA_MS + 200); // anche se la scheda smette di disegnare
+        setTimeout(vai, durata + 200); // anche se la scheda smette di disegnare
     }
 
     /* ------------------------------------------------------------ arrivo */
@@ -178,9 +206,9 @@
             const t = Math.min(1, (performance.now() - inizio) / ARRIVO_MS);
             const a = 1 - Math.pow(1 - t, 3);
             el.style.setProperty('--a', a.toFixed(4));
-            el.style.setProperty('--c', (1 - a).toFixed(4));
+            el.style.setProperty('--c', '1'); // il buio si apre dal centro: il proiettile è appena passato
             if (t < 1) requestAnimationFrame(passo);
-            else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); }
+            else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); el.style.removeProperty('--c'); }
         };
         requestAnimationFrame(passo);
     }
@@ -216,7 +244,8 @@
             calmo: calmo()
         });
         if (!ok) return;
-        const dopo = () => ('requestIdleCallback' in window ? requestIdleCallback(caricaPistola, { timeout: 3000 }) : setTimeout(caricaPistola, 1200));
+        // subito dopo la pagina: chi clicca presto deve trovarla pronta
+        const dopo = () => setTimeout(caricaPistola, 0);
         if (document.readyState === 'complete') dopo(); else addEventListener('load', dopo, { once: true });
         // chi punta subito un link non deve aspettare l'inattività
         document.addEventListener('pointerover', e => {

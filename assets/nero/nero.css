@@ -409,7 +409,7 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
 .sparo__pistola { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
 /* il buio che copre la pagina alla fine dello sparo e si apre all'arrivo */
 .sparo::after { content: ""; position: absolute; inset: 0; z-index: 3; background: var(--nero); opacity: var(--c, 0); }
-.sparo.con-pistola .sparo__proiettile { display: none; }
+.sparo.con-pistola .sparo__proiettile, .sparo.con-pistola .sparo__fascio, .sparo.con-pistola .sparo__scritta { display: none; }
 .sparo__fascio {
     position: absolute; left: 0; top: 0;
     width: 100vw; height: 100vh;
@@ -462,7 +462,12 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     opacity: min(1, calc(var(--p) * 40));
     will-change: transform;
 }
-.sparo.arrivo .sparo__fascio { display: none; }
+.sparo.arrivo .sparo__fascio, .sparo.arrivo .sparo__scritta { display: none; }
+.sparo.arrivo::after {
+    --r: calc(var(--a, 0) * 80vmax);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1px));
+    mask-image: radial-gradient(circle at 50% 50%, transparent var(--r), #000 calc(var(--r) + 1px));
+}
 .sparo.arrivo .sparo__scritta { z-index: 4; left: 50%; top: 50%; padding-left: 0; font-size: 4.5vh; color: rgb(232 230 225 / .7); transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
 html.sparo-arrivo::after {
     content: ""; position: fixed; inset: 0; z-index: 2500; background: var(--nero);

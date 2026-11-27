@@ -129,9 +129,19 @@
         return matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('paused');
     }
 
-    function spara(href) {
+    const ATTESA_PISTOLA_MS = 2500;
+
+    function spara(href, giaAtteso = false) {
         if (inCorso) return;
         inCorso = true;
+        if (!giaAtteso && promessa && !(pistola && pistola.pronta())) {
+            // la pistola sta ancora scaricando: meglio un attimo di attesa che uno sparo senza pistola
+            let partito = false;
+            const via = () => { if (!partito) { partito = true; inCorso = false; spara(href, true); } };
+            promessa.then(via);
+            setTimeout(via, ATTESA_PISTOLA_MS);
+            return;
+        }
         const el = creaLivello();
         el.classList.remove('arrivo');
         el.classList.add('attivo');
@@ -216,7 +226,8 @@
             calmo: calmo()
         });
         if (!ok) return;
-        const dopo = () => ('requestIdleCallback' in window ? requestIdleCallback(caricaPistola, { timeout: 3000 }) : setTimeout(caricaPistola, 1200));
+        // subito dopo la pagina: chi clicca presto deve trovarla pronta
+        const dopo = () => setTimeout(caricaPistola, 0);
         if (document.readyState === 'complete') dopo(); else addEventListener('load', dopo, { once: true });
         // chi punta subito un link non deve aspettare l'inattività
         document.addEventListener('pointerover', e => {

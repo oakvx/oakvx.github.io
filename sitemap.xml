@@ -180,4 +180,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/"/>
   </url>
+  <url><loc>https://oakvx.github.io/magazzino/blackjack/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/blackjack/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/blackjack/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/blackjack/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/magazzino/blackjack/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/magazzino/blackjack/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/magazzino/blackjack/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/magazzino/blackjack/"/>
+  </url>
 </urlset>

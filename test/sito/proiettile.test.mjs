@@ -49,3 +49,12 @@ test('costanti dei tempi', () => {
     assert.equal(p.USCITA_MS, 900);
     assert.equal(p.ARRIVO_MS, 600);
 });
+
+test('arrivoValido: solo un segnale scritto da meno di 3 secondi', () => {
+    const adesso = 1_000_000;
+    assert.equal(p.arrivoValido(String(adesso - 500), adesso), true);
+    assert.equal(p.arrivoValido(String(adesso - 3500), adesso), false);   // es. dopo un giro nel gioco
+    assert.equal(p.arrivoValido('1', adesso), false);                     // vecchio formato
+    assert.equal(p.arrivoValido(null, adesso), false);
+    assert.equal(p.arrivoValido(String(adesso + 10_000), adesso), false); // orologio indietro
+});

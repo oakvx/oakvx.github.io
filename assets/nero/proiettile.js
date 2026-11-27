@@ -47,8 +47,17 @@
         };
     }
 
+    /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
+    const VALIDITA_MS = 3000;
+    function arrivoValido(valore, adesso) {
+        const t = Number(valore);
+        if (!valore || !Number.isFinite(t)) return false;
+        const eta = adesso - t;
+        return eta >= 0 && eta < VALIDITA_MS;
+    }
+
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, USCITA_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, arrivoValido, USCITA_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;
@@ -107,7 +116,7 @@
         const vai = () => {
             if (andato) return;
             andato = true;
-            try { sessionStorage.setItem(CHIAVE, '1'); } catch {}
+            try { sessionStorage.setItem(CHIAVE, String(Date.now())); } catch {}
             location.href = href;
         };
         const passo = () => {
@@ -123,7 +132,7 @@
     function apri() {
         const root = document.documentElement;
         let arrivato = false;
-        try { arrivato = sessionStorage.getItem(CHIAVE) === '1'; sessionStorage.removeItem(CHIAVE); } catch {}
+        try { arrivato = arrivoValido(sessionStorage.getItem(CHIAVE), Date.now()); sessionStorage.removeItem(CHIAVE); } catch {}
         if (!root.classList.contains('sparo-arrivo')) return;
         if (!arrivato || calmo()) { root.classList.remove('sparo-arrivo'); return; }
         const el = creaLivello();

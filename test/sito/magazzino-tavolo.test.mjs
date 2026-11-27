@@ -69,3 +69,19 @@ test('dopo una mossa il fuoco torna sulla stessa carta o sulla prima della mano'
     assert.ok(ora.includes(doc.activeElement), 'il fuoco è su un bottone che non esiste più');
     assert.equal(doc.activeElement.dataset.carta, 'spade-2');
 });
+
+test('pila: il mazzo coperto sul tavolo, con le carte rimaste', () => {
+    const radice = doc.createElement('div');
+    const t = T.monta(radice, {});
+    const base = { dorso: 'siciliane', mano: [], avversari: [], tavolo: [carta('denari', 7)], azioni: [], messaggio: '' };
+    t.mostra({ ...base, pila: 28 });
+    const pila = radice.querySelector('.tavolo__pila');
+    assert.ok(pila, 'il mazzo c’è');
+    assert.equal(pila.getAttribute('aria-label'), 'Mazzo: 28 carte');
+    assert.ok(pila.querySelectorAll('.tavolo__pila-carta').length >= 3, 'è un mazzo, non una carta sola');
+    assert.ok(pila.querySelector('.tavolo__pila-n').textContent === '28');
+    t.mostra({ ...base, pila: 1 });
+    assert.equal(radice.querySelector('.tavolo__pila').querySelectorAll('.tavolo__pila-carta').length, 1);
+    t.mostra({ ...base, pila: 0 });
+    assert.equal(radice.querySelector('.tavolo__pila'), null, 'a mazzo finito non c’è più');
+});

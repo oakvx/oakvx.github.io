@@ -18,6 +18,8 @@
 <script src="/assets/nero/gelatina.js" defer></script>
 <script src="/assets/nero/nero.js" defer></script>
 <script src="/assets/magazzino/deposito.js" defer></script>
+<script src="/assets/magazzino/corsia.js" defer></script>
+<script src="/assets/magazzino/magazzino.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Warehouse | oakvx</title>
 <meta name="description" content="The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.">
@@ -108,6 +110,20 @@
     <p class="magazzino-apertura__coda rivela" style="--ritardo:.4s" data-i18n="mg.coda">Cards, a casino with fake chips and a few classics. Free, no sign-up, and your real money stays where it is.</p>
 </section>
 
+<section class="mg3d" data-magazzino-3d hidden aria-labelledby="mg3d-titolo">
+    <h2 class="mg3d__titolo" id="mg3d-titolo" data-i18n="mg.hall">The hall</h2>
+    <div class="mg3d__scena"></div>
+    <div class="mg3d__barra">
+        <div class="mg3d__testo"><p class="mg3d__nome" data-i18n="mg.dark">It’s dark in here</p><p class="mg3d__riga" aria-live="polite"></p></div>
+        <button type="button" class="bj3d__azione mg3d__cordino" data-cordino data-i18n="mg.cord">Pull the cord</button>
+        <div class="mg3d__nav" hidden>
+            <button type="button" class="bj3d__azione" data-prec aria-label="Previous crate" data-i18n-aria="mg.prev">←</button>
+            <button type="button" class="bj3d__azione" data-succ aria-label="Next crate" data-i18n-aria="mg.next2">→</button>
+            <a class="bj3d__azione mg3d__gioca" data-gioca href="#" hidden data-i18n="mg.play">Play</a>
+        </div>
+    </div>
+</section>
+
 <section class="scaffale" aria-labelledby="scaffale-a">
     <header class="scaffale__testa">
         <p class="t-meta">(i) <span data-i18n="mg.shelfA">Shelf A</span></p>
@@ -127,13 +143,13 @@
         <h2 id="scaffale-b" data-i18n="mg.shelfBName">Still in the boxes</h2>
     </header>
     <ul class="casse casse--piccole">
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-01</p><h3 class="cassa__nome">Roulette</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-02</p><h3 class="cassa__nome">Texas hold’em</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-03</p><h3 class="cassa__nome" data-i18n="mg.solitaire">Solitaire</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-04</p><h3 class="cassa__nome">Sudoku</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-05</p><h3 class="cassa__nome" data-i18n="mg.mines">Minesweeper</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-06</p><h3 class="cassa__nome" data-i18n="mg.draughts">Draughts</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-07</p><h3 class="cassa__nome" data-i18n="mg.four">Four in a row</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="roulette"><p class="cassa__codice t-meta">B-01</p><h3 class="cassa__nome">Roulette</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="texas"><p class="cassa__codice t-meta">B-02</p><h3 class="cassa__nome">Texas hold’em</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="solitario"><p class="cassa__codice t-meta">B-03</p><h3 class="cassa__nome" data-i18n="mg.solitaire">Solitaire</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="sudoku"><p class="cassa__codice t-meta">B-04</p><h3 class="cassa__nome">Sudoku</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="campo-minato"><p class="cassa__codice t-meta">B-05</p><h3 class="cassa__nome" data-i18n="mg.mines">Minesweeper</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="dama"><p class="cassa__codice t-meta">B-06</p><h3 class="cassa__nome" data-i18n="mg.draughts">Draughts</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="forza-4"><p class="cassa__codice t-meta">B-07</p><h3 class="cassa__nome" data-i18n="mg.four">Four in a row</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">Coming soon</span></li>
     </ul>
 </section>
 
@@ -143,8 +159,8 @@
         <h2 id="scaffale-c" data-i18n="mg.shelfCName">Already here</h2>
     </header>
     <ul class="casse">
-        <li class="cassa"><a class="cassa__link" href="/gioco/" data-velo-n="3D"><p class="cassa__codice t-meta">C-01</p><h3 class="cassa__nome" data-i18n="mg.game3d">The 3D game</h3><p class="cassa__riga" data-i18n="mg.game3dText">A curator on their first day at work. About fifteen minutes, on a computer.</p><span class="cassa__stato t-meta" data-i18n="mg.play">Play</span></a></li>
-        <li class="cassa"><a class="cassa__link" href="/en/chi-sono/#term-titolo" data-velo-n="03"><p class="cassa__codice t-meta">C-02</p><h3 class="cassa__nome" data-i18n="mg.term">The terminal</h3><p class="cassa__riga" data-i18n="mg.termText">The terminal in About: type and it answers.</p><span class="cassa__stato t-meta" data-i18n="mg.open">Open</span></a></li>
+        <li class="cassa" data-cassa="gioco-3d"><a class="cassa__link" href="/gioco/" data-velo-n="3D"><p class="cassa__codice t-meta">C-01</p><h3 class="cassa__nome" data-i18n="mg.game3d">The 3D game</h3><p class="cassa__riga" data-i18n="mg.game3dText">A curator on their first day at work. About fifteen minutes, on a computer.</p><span class="cassa__stato t-meta" data-i18n="mg.play">Play</span></a></li>
+        <li class="cassa" data-cassa="terminale"><a class="cassa__link" href="/en/chi-sono/#term-titolo" data-velo-n="03"><p class="cassa__codice t-meta">C-02</p><h3 class="cassa__nome" data-i18n="mg.term">The terminal</h3><p class="cassa__riga" data-i18n="mg.termText">The terminal in About: type and it answers.</p><span class="cassa__stato t-meta" data-i18n="mg.open">Open</span></a></li>
     </ul>
 </section>
 

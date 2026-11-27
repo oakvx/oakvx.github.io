@@ -513,6 +513,7 @@ window.OAKVX_EN = {
 
     'st.toolsLabel': "Built with",
     'st.toolsTitle': "Eight tools. <em>Touch them, they bounce.</em>",
+    'cr.magazzino': 'The shelves, lamp, hand truck and cardboard box in the 3D Warehouse come from Poly Haven, CC0 licence: <a href="https://polyhaven.com/a/steel_frame_shelves_01">Steel Frame Shelves 01</a> by James Ray Cock, <a href="https://polyhaven.com/a/hanging_industrial_lamp">Hanging Industrial Lamp</a> by Kuutti Siitonen, <a href="https://polyhaven.com/a/hand_truck">Hand Truck</a> by Mutanzom3D and <a href="https://polyhaven.com/a/cardboard_box_01">Cardboard Box 01</a> by Rahul Chaudhary; geometry quantized and textures recompressed to WebP (<code>scripts/prepara_modelli_magazzino.sh</code>). Crates, emblems and the warehouse keeper are drawn in code.',
     'cr.icons': "The technology logos in About and Style come from <a href=\"https://simpleicons.org/\">Simple Icons</a> (CC0 licence); the marks belong to their owners.",
 
     'nav.warehouse': "Warehouse",
@@ -572,6 +573,12 @@ window.OAKVX_EN = {
     's4.r3': "You open by laying down at least 40 points: ace 11, picture cards 10, the rest their value. One joker at most per meld.",
     's4.r4': "You can take the discard only if you use it this turn: to open, to lay down or to add to a group, before you discard. Once open you can add cards to the groups on the table.",
     's4.r5': "You close by discarding your last card. The others take penalties for what they hold (joker 25): whoever reaches 101 is out.",
+
+    'mg.hall': "The hall",
+    'mg.dark': "It’s dark in here",
+    'mg.cord': "Pull the cord",
+    'mg.prev': "Previous crate",
+    'mg.next2': "Next crate",
 
     /* chi sono */
     'about.label': 'About',

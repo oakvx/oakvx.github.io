@@ -18,7 +18,8 @@ function ambiente(renderer) {
         m.lookAt(0, 0, 0);
         studio.add(m);
     };
-    banda(0xfff1e0, 6, 4, 5, -3, 6, 1.2);   // luce di taglio calda, alta e dietro
+    banda(0xfff1e0, 9, 4, 5, -3, 6, 1.4);   // luce di taglio calda, alta e dietro
+    banda(0xffffff, 3, -1, 4, 5, 8, .5);    // una striscia larga davanti: riflesso lungo sul carrello
     banda(0xdfe8ff, 1.2, -5, 1, 4, 3, 6);   // riempimento freddo, debole
     banda(0xc81035, 1.5, 0, -4, 2, 8, .6);  // un filo cremisi da sotto
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -33,19 +34,25 @@ export async function creaPistola(contenitore) {
     contenitore.prepend(canvas);
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+    // la pistola resta in scena meno di un secondo: densità contenuta, molti meno pixel da riempire
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.25));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0x000000, 0);
 
     const scena = new THREE.Scene();
     scena.environment = ambiente(renderer);
-    const taglio = new THREE.DirectionalLight(0xfff0e0, 3.2);
-    taglio.position.set(2, 3, -2);
-    scena.add(taglio);
-    const riempimento = new THREE.DirectionalLight(0xdde6ff, .5);
-    riempimento.position.set(-3, -1, 3);
-    scena.add(riempimento);
+    renderer.toneMappingExposure = 1.25;
+    // luce principale calda dall'alto davanti, bordo freddo da dietro che stacca la sagoma dal nero
+    const chiave = new THREE.DirectionalLight(0xfff1e2, 2.4);
+    chiave.position.set(1.5, 3, 4);
+    scena.add(chiave);
+    const bordo = new THREE.DirectionalLight(0xe6eeff, 4.5);
+    bordo.position.set(-2, 2.5, -4);
+    scena.add(bordo);
+    const cremisi = new THREE.DirectionalLight(0xc81035, 1.2);
+    cremisi.position.set(2, -3, 1);
+    scena.add(cremisi);
 
     const camera = new THREE.PerspectiveCamera(24, 1, .01, 50);
     camera.position.set(0, 0, 6);
@@ -70,32 +77,74 @@ export async function creaPistola(contenitore) {
         const cartucciaSciolta = cx > .044 && cx < .063 && cy > -.04 && cy < -.004;
         if (pistolaInBasso && !cartucciaSciolta) tenuti.push(indici[t], indici[t + 1], indici[t + 2]);
     }
+    // la cartuccia sciolta accanto alla pistola diventa il proiettile: se ne tiene la punta
+    const cartuccia = [];
+    let cimaY = -Infinity;
+    for (let t = 0; t < indici.length; t += 3) {
+        let cx = 0, cy = 0;
+        for (let k = 0; k < 3; k++) { cx += pos.getX(indici[t + k]); cy += pos.getY(indici[t + k]); }
+        cx /= 3; cy /= 3;
+        if (cx > .044 && cx < .063 && cy > -.04 && cy < -.004) {
+            cartuccia.push(indici[t], indici[t + 1], indici[t + 2]);
+            for (let k = 0; k < 3; k++) cimaY = Math.max(cimaY, pos.getY(indici[t + k]));
+        }
+    }
+    const punte = [];
+    for (let t = 0; t < cartuccia.length; t += 3) {
+        let cy = 0;
+        for (let k = 0; k < 3; k++) cy += pos.getY(cartuccia[t + k]);
+        if (cy / 3 > cimaY - .011) punte.push(cartuccia[t], cartuccia[t + 1], cartuccia[t + 2]);
+    }
+    const geoProiettile = originale.geometry.clone().applyMatrix4(originale.matrixWorld);
+    geoProiettile.setIndex(punte);
+
     geo.setIndex(tenuti);
     const pistola = new THREE.Mesh(geo, originale.material);
 
     // volata: estremità della canna, nelle coordinate originali
     const VOLATA = new THREE.Vector3(.176, .057, 0);
-    geo.computeBoundingBox();
-    const centro = geo.boundingBox.getCenter(new THREE.Vector3());
-    const lunghezza = geo.boundingBox.max.x - geo.boundingBox.min.x;
+    // misure della sola pistola (computeBoundingBox guarderebbe tutti i vertici del file)
+    const scatola = new THREE.Box3();
+    const v = new THREE.Vector3();
+    for (const i of tenuti) scatola.expandByPoint(v.fromBufferAttribute(pos, i));
+    const centro = scatola.getCenter(new THREE.Vector3());
+    const lunghezza = scatola.max.x - scatola.min.x;
     pistola.position.copy(centro).multiplyScalar(-1);
     const punta = new THREE.Object3D();
     punta.position.copy(VOLATA).sub(centro);
 
     const perno = new THREE.Group();            // ruota attorno al centro della pistola
     perno.add(pistola, punta);
-    perno.scale.setScalar(1.45 / lunghezza);
-    perno.rotation.y = -.22;                     // un filo di tre quarti, per dare spessore
+    perno.scale.setScalar(1.6 / lunghezza);
+    const POSA = new THREE.Euler(.1, -.55, 0);   // tre quarti, un poco dall'alto: si legge il volume
+    perno.rotation.copy(POSA);
     const gruppo = new THREE.Group();
     gruppo.add(perno);
     scena.add(gruppo);
 
+    const scatolaP = new THREE.Box3();
+    for (const i of punte) scatolaP.expandByPoint(v.fromBufferAttribute(pos, i));
+    const centroP = scatolaP.getCenter(new THREE.Vector3());
+    const ogiva = new THREE.Mesh(geoProiettile, originale.material);
+    ogiva.position.copy(centroP).multiplyScalar(-1);
+    const proiettile = new THREE.Group();        // asse lungo della punta su +x, cioè verso il volo
+    proiettile.add(ogiva);
+    ogiva.parent.rotation.z = -Math.PI / 2;
+    const volo = new THREE.Group();
+    volo.add(proiettile);
+    volo.scale.setScalar(perno.scale.x * 1.4);   // un filo più grande del vero, se no non si vede
+    volo.visible = false;
+    scena.add(volo);
+    // la luce del colpo: illumina la pistola per un istante
+    const bagliore = new THREE.PointLight(0xffd29a, 0, 3, 2);
+    scena.add(bagliore);
+
     const riposo = new THREE.Vector3();
     const tmp = new THREE.Vector3();
-    // mette la volata a (26% larghezza, 46% altezza) dello schermo
+    // mette la volata a (40% larghezza, 46% altezza) dello schermo: la pistola si vede intera
     function piazza() {
         const meta = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
-        const obiettivo = new THREE.Vector3((.26 * 2 - 1) * meta * camera.aspect, (1 - .46 * 2) * meta, 0);
+        const obiettivo = new THREE.Vector3((.40 * 2 - 1) * meta * camera.aspect, (1 - .46 * 2) * meta, 0);
         gruppo.position.set(0, 0, 0);
         gruppo.updateMatrixWorld(true);
         punta.getWorldPosition(tmp);
@@ -113,7 +162,25 @@ export async function creaPistola(contenitore) {
     dimensiona();
     addEventListener('resize', dimensiona);
 
+    // Prepara tutto subito (shader compilati, texture caricate sulla GPU) disegnando una volta
+    // con la pistola fuori campo: al clic il primo fotogramma non deve aspettare nulla.
+    renderer.compile(scena, camera);
+    gruppo.position.x = riposo.x - 6;
+    renderer.render(scena, camera);
+    gruppo.position.copy(riposo);
+
     function disegna() { renderer.render(scena, camera); }
+
+    const partenzaMondo = new THREE.Vector3();
+    const raggio = new THREE.Raycaster();
+    const piano = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const ndc = new THREE.Vector2();
+    // punto nel mondo che sullo schermo cade in (nx, ny), alla profondità z
+    function suPiano(nx, ny, z) {
+        piano.constant = -z;
+        raggio.setFromCamera(ndc.set(nx, ny), camera);
+        return raggio.ray.intersectPlane(piano, new THREE.Vector3()) || new THREE.Vector3();
+    }
 
     const facile = t => 1 - Math.pow(1 - t, 3);
     let raf = 0;
@@ -122,6 +189,8 @@ export async function creaPistola(contenitore) {
     function spara(tempo) {
         const fase = window.OAKVX.proiettile.fase;
         const fuori = riposo.x - 2.4;            // abbastanza a sinistra da essere fuori schermo
+        const partenza = volata();
+        punta.getWorldPosition(partenzaMondo); // volata() lascia tmp proiettato sullo schermo
         cancelAnimationFrame(raf);
         const passo = () => {
             const ms = tempo();
@@ -129,7 +198,18 @@ export async function creaPistola(contenitore) {
             const k = f.sparo > 0 && f.sparo < 1 ? Math.sin(Math.min(1, f.sparo * 1.6) * Math.PI) : 0;
             gruppo.position.x = fuori + (riposo.x - fuori) * facile(f.pistola) - k * .05;
             gruppo.position.y = riposo.y;
-            perno.rotation.z = k * .14;           // la canna si alza di circa 8°
+            perno.rotation.set(POSA.x, POSA.y, k * .14); // la canna si alza di circa 8°
+            gruppo.updateMatrixWorld(true);
+            punta.getWorldPosition(tmp);
+            bagliore.position.copy(tmp);
+            bagliore.intensity = (f.lampo || 0) * 6;
+            volo.visible = f.proiettile > 0 && f.proiettile < 1;
+            if (volo.visible) {
+                // stessa x sullo schermo della scia: dalla volata a oltre il bordo destro
+                const x0 = partenza.x, xs = x0 + (innerWidth * 1.08 - x0) * f.proiettile;
+                volo.position.copy(suPiano((xs / innerWidth) * 2 - 1, 1 - (partenza.y / innerHeight) * 2, partenzaMondo.z));
+                proiettile.rotation.x += .9;             // rigatura: gira su sé stesso
+            }
             disegna();
             if (ms < window.OAKVX.proiettile.USCITA_MS + 60) raf = requestAnimationFrame(passo);
         };
@@ -139,7 +219,7 @@ export async function creaPistola(contenitore) {
     // posizione della volata sullo schermo, a riposo
     function volata() {
         gruppo.position.copy(riposo);
-        perno.rotation.z = 0;
+        perno.rotation.copy(POSA);
         gruppo.updateMatrixWorld(true);
         punta.getWorldPosition(tmp).project(camera);
         return { x: Math.round((tmp.x + 1) / 2 * innerWidth), y: Math.round((1 - tmp.y) / 2 * innerHeight) };

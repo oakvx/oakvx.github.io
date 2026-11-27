@@ -395,7 +395,7 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
    --s sparo · --p proiettile · --f fascio · --c copertura, tutti 0..1
    -------------------------------------------------------------------------- */
 .sparo {
-    --x0: 0px; --y: 46vh; --s: 0; --p: 0; --f: 0; --c: 0;
+    --x0: 0px; --y: 46vh; --s: 0; --p: 0; --f: 0; --c: 0; --fumo: 0; --testo: 0; --traccia: 1;
     position: fixed; inset: 0; z-index: 2600;
     pointer-events: none; overflow: hidden;
 }
@@ -406,51 +406,69 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     background: radial-gradient(ellipse 70% 60% at 22% 46%, rgb(5 5 5 / .25), rgb(5 5 5 / .8));
     opacity: var(--d, 0);
 }
-.sparo__pistola { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sparo__pistola { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+/* il buio che copre la pagina alla fine dello sparo e si apre all'arrivo */
+.sparo::after { content: ""; position: absolute; inset: 0; z-index: 3; background: var(--nero); opacity: var(--c, 0); }
+.sparo.con-pistola .sparo__proiettile { display: none; }
 .sparo__fascio {
-    position: absolute;
-    /* da sinistra alla volata, poi su tutto lo schermo quando copre */
-    left: calc(var(--x0) * (1 - var(--c)));
-    top: var(--y);
-    width: calc((100vw - var(--x0) + 8vw) * var(--p) + var(--x0) * var(--c));
-    height: calc(2px + var(--f) * 15vh + var(--c) * 210vh);
-    transform: translateY(-50%);
-    display: flex; align-items: center; overflow: hidden;
-    background: color-mix(in srgb, #050505 calc(var(--c) * var(--c) * 100%), #E8E6E1);
-    box-shadow: 0 0 calc(10px + var(--f) * 50px) rgb(200 16 53 / calc(.55 * (1 - var(--c)))), 0 0 120px rgb(232 230 225 / calc(.25 * (1 - var(--c))));
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 calc(10% * (1 - var(--c))));
-    mask-image: linear-gradient(90deg, transparent, #000 calc(10% * (1 - var(--c))));
+    position: absolute; left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    transform-origin: 0 0;
+    transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--sx, 0), var(--sy, 0));
+    will-change: transform;
+    background: rgb(240 236 228);
+    opacity: calc(.85 * var(--traccia, 1));
 }
 .sparo__scritta {
-    flex: none; padding-left: 2vw;
-    font: 700 calc(4px + var(--f) * 10vh) / 1 var(--sans);
-    font-stretch: 62%; letter-spacing: -.01em;
+    position: absolute; left: var(--x0); top: var(--y);
+    padding-left: 1.4vw;
+    font: 600 3.2vh / 1 var(--sans);
+    font-stretch: 70%; letter-spacing: .04em;
     white-space: nowrap;
-    color: #050505;
-    opacity: calc(var(--f) * (1 - var(--c) * 1.4));
+    color: rgb(5 5 5 / .78);
+    transform-origin: left center;
+    transform: translateY(-50%) scale(max(.04, var(--f)));
+    opacity: max(0, var(--testo, 0));
+    will-change: transform, opacity;
 }
 .sparo__lampo {
     position: absolute; left: var(--x0); top: var(--y);
-    width: 34vh; height: 34vh; translate: -50% -50%;
-    background: radial-gradient(closest-side, #fff, rgb(255 236 210 / .8) 30%, rgb(200 16 53 / .35) 60%, transparent);
-    opacity: var(--s); scale: calc(.4 + var(--s) * .8);
+    width: 9vh; height: 4.5vh; translate: -18% -50%;
+    background:
+        radial-gradient(ellipse 50% 22% at 30% 50%, #fff, rgb(255 222 170 / .9) 40%, transparent 72%),
+        radial-gradient(ellipse 12% 42% at 22% 50%, rgb(255 236 200 / .8), transparent 70%),
+        radial-gradient(closest-side, rgb(255 190 120 / .25), transparent);
+    opacity: var(--s); scale: calc(.6 + var(--s) * .5) calc(.7 + var(--s) * .4);
+    mix-blend-mode: screen;
 }
+.sparo__fumo {
+    position: absolute; left: var(--x0); top: var(--y);
+    width: 7vh; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(200 196 190 / .2), rgb(200 196 190 / .08) 55%, transparent);
+    will-change: transform, opacity;
+    translate: calc(-30% + var(--fumo) * var(--dx, 2vh)) calc(-50% - var(--fumo) * var(--dy, 7vh));
+    scale: calc(.4 + var(--fumo) * var(--k, 1.6));
+    opacity: calc(min(1, var(--fumo) * 12) * (1 - var(--fumo)) * .9);
+}
+.sparo__fumo:nth-of-type(2) { --dx: -1vh; --dy: 10vh; --k: 2.2; width: 5vh; }
+.sparo__fumo:nth-of-type(3) { --dx: 4vh; --dy: 5vh; --k: 1.2; width: 4vh; }
 .sparo__proiettile {
-    position: absolute; top: var(--y);
-    left: calc(var(--x0) + (100vw - var(--x0) + 8vw) * var(--p));
-    width: 2.6rem; height: 6px; translate: -100% -50%;
+    position: absolute; left: 0; top: var(--y);
+    width: 2.6rem; height: 6px;
     border-radius: 6px;
     background: linear-gradient(90deg, transparent, #fff 70%, #ffe7c4);
     box-shadow: 0 0 18px 4px rgb(255 240 220 / .9), 0 0 50px 10px rgb(200 16 53 / .45);
+    transform: translateX(calc(var(--x0) + (100vw - var(--x0) + 8vw) * var(--p))) translate(-100%, -50%);
     opacity: min(1, calc(var(--p) * 40));
+    will-change: transform;
 }
-.sparo.arrivo .sparo__fascio { left: 0; width: 100vw; height: calc((1 - var(--a, 0)) * 210vh + 2px); background: color-mix(in srgb, #050505 calc((1 - var(--a, 0)) * 100%), #E8E6E1); -webkit-mask-image: none; mask-image: none; }
-.sparo.arrivo .sparo__scritta { font-size: 13vh; opacity: calc(1 - var(--a, 0) * 1.6); color: #E8E6E1; padding-left: 0; margin: 0 auto; }
+.sparo.arrivo .sparo__fascio { display: none; }
+.sparo.arrivo .sparo__scritta { z-index: 4; left: 50%; top: 50%; padding-left: 0; font-size: 4.5vh; color: rgb(232 230 225 / .7); transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
 html.sparo-arrivo::after {
     content: ""; position: fixed; inset: 0; z-index: 2500; background: var(--nero);
     animation: velo-sicurezza .01s 1.6s forwards;
 }
-@media (max-width: 600px) { .sparo__scritta { font-size: calc(3px + var(--f) * 6vh); } .sparo.arrivo .sparo__scritta { font-size: 8vh; } }
+@media (max-width: 600px) { .sparo__scritta { font-size: 2.4vh; } .sparo.arrivo .sparo__scritta { font-size: 4vh; } }
 
 /* --------------------------------------------------------------------------
    Cursore

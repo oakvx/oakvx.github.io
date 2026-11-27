@@ -472,6 +472,7 @@
             new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) kick(); }).observe(box);
         }
         document.addEventListener('visibilitychange', kick);
+        addEventListener('nero:sparo', () => { visible = false; cancelAnimationFrame(raf); raf = 0; });
         addEventListener('nero:movimento', () => {
             if (calm()) { morph = 1; morphing = false; hold = 0; mouseOn = 0; draw(); }
             else kick();

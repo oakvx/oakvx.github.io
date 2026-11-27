@@ -101,11 +101,11 @@
         const el = creaLivello();
         const W = innerWidth, H = innerHeight;
         const x0 = volata.x, y = volata.y;
-        const sinistra = x0 * (1 - f.copertura);
-        const larghezza = (W - x0 + W * .08) * f.proiettile + x0 * f.copertura;
         // scia sottile; quando copre diventa un'ombra scura che si allarga, non una banda bianca
-        const altezza = 1.5 + f.fascio * H * .045 + f.copertura * f.copertura * H * 2.1;
-        rettangolo(el, sinistra, y - altezza / 2, larghezza, altezza, Math.min(1, f.copertura * 2.2));
+        // la scia resta sottile e sfuma; a coprire la pagina è il buio (--c su .sparo::after)
+        const altezza = 1.5 + f.fascio * H * .03;
+        rettangolo(el, x0, y - altezza / 2, (W - x0 + W * .08) * f.proiettile, altezza, f.copertura);
+        el.style.setProperty('--traccia', (1 - f.copertura).toFixed(4));
         el.style.setProperty('--x0', x0 + 'px');
         el.style.setProperty('--y', y + 'px');
         el.style.setProperty('--s', (f.lampo || 0).toFixed(3));
@@ -178,8 +178,7 @@
             const t = Math.min(1, (performance.now() - inizio) / ARRIVO_MS);
             const a = 1 - Math.pow(1 - t, 3);
             el.style.setProperty('--a', a.toFixed(4));
-            const H = innerHeight, altezza = (1 - a) * H * 2.1 + 2;
-            rettangolo(el, 0, H / 2 - altezza / 2, innerWidth, altezza, 1 - a);
+            el.style.setProperty('--c', (1 - a).toFixed(4));
             if (t < 1) requestAnimationFrame(passo);
             else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); }
         };
@@ -191,7 +190,7 @@
         inCorso = false;
         if (!livello) return;
         livello.classList.remove('attivo', 'arrivo');
-        ['--s', '--p', '--f', '--c', '--a', '--d', '--sx', '--sy', '--tx', '--ty', '--testo'].forEach(k => livello.style.removeProperty(k));
+        ['--s', '--p', '--f', '--c', '--a', '--d', '--sx', '--sy', '--tx', '--ty', '--testo', '--traccia', '--fumo'].forEach(k => livello.style.removeProperty(k));
     }
 
     /* ------------------------------------------------- pistola a richiesta */

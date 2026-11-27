@@ -8,7 +8,7 @@ function finestraFinta() {
     const elemento = () => {
         const classi = new Set();
         return {
-            classList: { add: (...c) => c.forEach(x => classi.add(x)), remove: (...c) => c.forEach(x => classi.delete(x)), contains: c => classi.has(c) },
+            classList: { add: (...c) => c.forEach(x => classi.add(x)), remove: (...c) => c.forEach(x => classi.delete(x)), toggle: (c, on) => (on ? classi.add(c) : classi.delete(c)), contains: c => classi.has(c) },
             style: { setProperty() {}, removeProperty() {} },
             setAttribute() {}, append() {}, prepend() {},
             set innerHTML(v) {}, set className(v) { v.split(' ').forEach(x => classi.add(x)); }

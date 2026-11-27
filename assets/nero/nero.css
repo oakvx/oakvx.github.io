@@ -395,7 +395,7 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
    --s sparo · --p proiettile · --f fascio · --c copertura, tutti 0..1
    -------------------------------------------------------------------------- */
 .sparo {
-    --x0: 0px; --y: 46vh; --s: 0; --p: 0; --f: 0; --c: 0;
+    --x0: 0px; --y: 46vh; --s: 0; --p: 0; --f: 0; --c: 0; --fumo: 0; --testo: 0; --traccia: 1;
     position: fixed; inset: 0; z-index: 2600;
     pointer-events: none; overflow: hidden;
 }
@@ -407,6 +407,8 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     opacity: var(--d, 0);
 }
 .sparo__pistola { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+/* il buio che copre la pagina alla fine dello sparo e si apre all'arrivo */
+.sparo::after { content: ""; position: absolute; inset: 0; z-index: 3; background: var(--nero); opacity: var(--c, 0); }
 .sparo.con-pistola .sparo__proiettile { display: none; }
 .sparo__fascio {
     position: absolute; left: 0; top: 0;
@@ -414,8 +416,8 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     transform-origin: 0 0;
     transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--sx, 0), var(--sy, 0));
     will-change: transform;
-    background: color-mix(in srgb, #050505 calc(var(--c) * 100%), rgb(240 236 228));
-    opacity: calc(.9 + var(--c) * .1);
+    background: rgb(240 236 228);
+    opacity: calc(.85 * var(--traccia, 1));
 }
 .sparo__scritta {
     position: absolute; left: var(--x0); top: var(--y);
@@ -460,7 +462,8 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     opacity: min(1, calc(var(--p) * 40));
     will-change: transform;
 }
-.sparo.arrivo .sparo__scritta { left: 50%; top: 50%; padding-left: 0; font-size: 4.5vh; color: rgb(232 230 225 / .7); transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
+.sparo.arrivo .sparo__fascio { display: none; }
+.sparo.arrivo .sparo__scritta { z-index: 4; left: 50%; top: 50%; padding-left: 0; font-size: 4.5vh; color: rgb(232 230 225 / .7); transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
 html.sparo-arrivo::after {
     content: ""; position: fixed; inset: 0; z-index: 2500; background: var(--nero);
     animation: velo-sicurezza .01s 1.6s forwards;

@@ -49,15 +49,16 @@ assets/
   nero/                    sistema "Nero": nero.css, nero.js, campo.js (WebGL),
                            i18n-en.js (dizionario inglese), fonts/
   ingresso/                menu d'ingresso Sito/Gioco
-  avatars/                 pose del Mii (GIF, WebP, primi fotogrammi -still.webp)
+  avatars/                 primi fotogrammi del Mii (-still.webp)
   work/, fuori-orario/     immagini dei progetti e di Fuori orario
   github-stats.js          contatore di commit pubblici
   CREDITS.html             provenienza dei materiali
-  polaroid/, wiiu/, after-hours/
-                           sistemi della versione precedente, non più collegati dalle pagine
+  favicon.svg, favicon.ico, apple-touch-icon.png
+  social-<pagina>-<it|en>.png  immagini social 1200x630, generate da scripts/genera_social.mjs
 scripts/
   build_static.py          genera en/ e sitemap.xml
   check_site.py            controlli statici
+  genera_social.mjs        genera le immagini social (PLAYWRIGHT_PATH=$(npm root -g)/playwright node scripts/genera_social.mjs)
   extract-translations.cjs legge DYN da nero.js e il dizionario da i18n-en.js
 .github/workflows/site-check.yml
 ```
@@ -143,3 +144,5 @@ La CI ([`site-check.yml`](.github/workflows/site-check.yml), su push, pull reque
 ## Crediti
 
 Provenienza e descrizione dei materiali: [`assets/CREDITS.html`](assets/CREDITS.html). Font con licenza OFL (`assets/nero/fonts/Fraunces-OFL.txt`, `assets/nero/fonts/Archivo-OFL.txt`, `assets/CascadiaCode-OFL.txt`). Grafiche, avatar e sculture di punti sono opera dell'autore.
+
+Chiamate di rete a runtime: `api.github.com` (commit e repository) e `api.open-meteo.com` (meteo nel menu, senza chiavi né cookie).

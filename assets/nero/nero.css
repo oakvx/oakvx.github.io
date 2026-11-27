@@ -29,11 +29,12 @@
     --nero: #050505;
     --bianco: #E8E6E1;
     --cremisi: #C81035;
+    --cremisi-testo: #E8344F; /* 4,9:1 su nero: per il cremisi in corpo piccolo */
     --grafite: #292929;
 
     --bianco-80: rgb(232 230 225 / .8);
     --bianco-60: rgb(232 230 225 / .6);
-    --bianco-40: rgb(232 230 225 / .4);
+    --bianco-40: rgb(232 230 225 / .55);
     --linea: rgb(232 230 225 / .14);
     --linea-forte: rgb(232 230 225 / .28);
     --superficie: #0c0c0c;
@@ -120,7 +121,7 @@ em, i { font-style: italic; }
 ::selection { background: var(--cremisi); color: var(--bianco); }
 
 :focus-visible {
-    outline: 1px solid var(--cremisi);
+    outline: 2px solid var(--bianco);
     outline-offset: 4px;
 }
 
@@ -252,7 +253,7 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     font: italic 500 1.55rem/1 var(--serif);
     letter-spacing: -.02em;
 }
-.testata__nome b { font-weight: inherit; color: var(--cremisi); }
+.testata__nome b { font-weight: inherit; color: var(--cremisi-testo); }
 .testata__ruolo { display: none; }
 @media (min-width: 900px) { .testata__ruolo { display: inline; } }
 
@@ -333,7 +334,7 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
 }
 .indice__voci a:hover .indice__nome,
 .indice__voci a:focus-visible .indice__nome { font-style: italic; transform: translateX(.18em); }
-.indice__voci a[aria-current="page"] .indice__nome { color: var(--cremisi); font-style: italic; }
+.indice__voci a[aria-current="page"] .indice__nome { color: var(--cremisi-testo); font-style: italic; }
 .indice__nota { justify-self: end; }
 .indice__lato {
     grid-column: 10 / span 3;
@@ -602,7 +603,7 @@ html.sparo-arrivo::after {
     letter-spacing: -.02em;
     overflow-wrap: anywhere;
 }
-.colophon__email span { color: var(--cremisi); font-style: italic; }
+.colophon__email span { color: var(--cremisi-testo); font-style: italic; }
 .colophon__azioni { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; }
 .colophon__azioni a, .colophon__azioni button { padding: .35rem 0; }
 .colophon__azioni a:hover, .colophon__azioni button:hover { color: var(--bianco); }
@@ -943,7 +944,7 @@ html.sparo-arrivo::after {
 .repo a:hover { padding-left: 1rem; }
 .repo__nome { grid-column: 1 / span 4; font: 400 1rem/1.3 var(--mono); }
 .repo__nome b { font-weight: 400; color: var(--bianco-40); }
-.repo a:hover .repo__nome { color: var(--cremisi); }
+.repo a:hover .repo__nome { color: var(--cremisi-testo); }
 .repo__desc { grid-column: 5 / span 5; color: var(--bianco-60); font-size: .95rem; line-height: 1.5; }
 .repo__dati { grid-column: 10 / span 3; text-align: right; }
 @media (max-width: 820px) {

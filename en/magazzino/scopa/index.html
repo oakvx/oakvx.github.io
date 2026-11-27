@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
-<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},1500)}})();</script>
 <link rel="stylesheet" href="/assets/ingresso/ingresso.css">
 <script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/nero/nero.css">
@@ -38,12 +40,12 @@
 <meta property="og:url" content="https://oakvx.github.io/en/magazzino/scopa/">
 <meta property="og:locale" content="en_GB">
 <meta property="og:locale:alternate" content="it_IT">
-<meta property="og:image" content="https://oakvx.github.io/assets/social-home-en.png">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-scopa-en.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Scopa | oakvx Warehouse">
 <meta name="twitter:description" content="Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.">
-<meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-en.png">
-<script type="application/json" id="seo-translations">{"it":{"title":"Scopa | Magazzino di oakvx","description":"Scopa gratis nel browser con le carte siciliane: settebello, primiera, si va a 11 contro il computer.","canonical":"https://oakvx.github.io/magazzino/scopa/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx"},"en":{"title":"Scopa | oakvx Warehouse","description":"Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.","canonical":"https://oakvx.github.io/en/magazzino/scopa/","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx"}}</script>
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-scopa-en.png">
+<script type="application/json" id="seo-translations">{"it":{"title":"Scopa | Magazzino di oakvx","description":"Scopa gratis nel browser con le carte siciliane: settebello, primiera, si va a 11 contro il computer.","canonical":"https://oakvx.github.io/magazzino/scopa/","image":"https://oakvx.github.io/assets/social-scopa-it.png","image_alt":"Gabriele Lucia / oakvx"},"en":{"title":"Scopa | oakvx Warehouse","description":"Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.","canonical":"https://oakvx.github.io/en/magazzino/scopa/","image":"https://oakvx.github.io/assets/social-scopa-en.png","image_alt":"Gabriele Lucia / oakvx"}}</script>
 </head>
 <body data-pagina="magazzino-scopa">
 <a class="salta" href="#main" data-i18n="ui.skip">Skip to content</a>

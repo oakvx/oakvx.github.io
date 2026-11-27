@@ -316,16 +316,16 @@ window.OAKVX_EN = {
 
     /* Beautify */
     'beautify.kind': 'Multi-salon management system · diploma project',
-    'beautify.intro': 'A management system for several salons: clients, services, availability and appointments share the same context. My final diploma project, in PHP and MySQL.',
+    'beautify.intro': "A management system for several salons: clients, services, time slots and appointments in one place. My diploma project, in PHP and MySQL. Not the usual exercise.",
     'beautify.role': 'Lead technical role: database and backend',
     'beautify.focus': 'CRUD and relational data',
     'beautify.project': 'Diploma project',
     'beautify.alt': 'Original Beautify logo',
     'beautify.caption': 'Beautify — the project’s original logo',
-    'beautify.conceptTitle': 'Several salons, <em>one management system.</em>',
+    'beautify.conceptTitle': "Several salons, <em>one system. No overlaps.</em>",
     'beautify.concept1': 'Beautify manages clients, appointments, users and services for several salons. It includes public booking, inventory and analytics, with separate sections for owners and employees.',
-    'beautify.problem': 'The starting point: several businesses in the same system, with data that must not mix and appointments that must not overlap.',
-    'beautify.processTitle': 'How it works, <em>from login to time slot.</em>',
+    'beautify.problem': "The starting point: several businesses in the same system, data that mustn't mix and time slots that mustn't step on each other.",
+    'beautify.processTitle': "How it works, <em>from login to a free slot.</em>",
     'beautify.s1': 'A salon and its users',
     'beautify.s1text': 'After login, the session identifies the active salon. Users can be linked to several salons; the owner or employee role decides which sections are accessible.',
     'beautify.s2': 'Finding a time',
@@ -350,7 +350,7 @@ window.OAKVX_EN = {
     'beautify.t1': 'Backend with mysqli, sessions, permissions and CRUD operations.',
     'beautify.t2k': 'Data and relations',
     'beautify.t2': 'User-salon associations make it possible to manage several businesses with distinct roles.',
-    'beautify.result': 'A real management system, <em>not the usual exercise.</em>',
+    'beautify.result': "A real management system, <em>not the usual exercise.</em> The examiners agreed.",
     'beautify.resultText': 'The delivered version offers slots every 30 minutes and enforces a minimum 15-minute notice; the calendar and public booking use the same checks.',
 
     /* Spinotto Felice */

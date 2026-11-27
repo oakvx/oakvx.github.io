@@ -580,6 +580,8 @@ window.OAKVX_EN = {
     'mg.prev': "Previous crate",
     'mg.next2': "Next crate",
 
+    'gm.rulesLink': "How to play ↓",
+
     /* chi sono */
     'about.label': 'About',
     'about.labelB': 'Gabriele Lucia, known as oakvx',

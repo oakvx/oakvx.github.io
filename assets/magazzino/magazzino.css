@@ -139,3 +139,29 @@
 .tavolo__pila-carta svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 .15rem .3rem rgb(0 0 0 / .5)); }
 .tavolo__pila-n { position: absolute; left: 50%; bottom: -.9rem; transform: translateX(-50%); padding: .15rem .5rem; border: 1px solid var(--linea-forte); background: var(--nero); font: 400 .72rem/1 var(--mono); letter-spacing: .08em; }
 .tavolo__centro:has(.tavolo__pila) { padding-bottom: 1rem; }
+
+/* A tutto schermo: la scena riempie lo schermo, i comandi stanno sopra, le regole e l'elenco più giù */
+.pagina--magazzino .mg3d { position: relative; margin: 0; border: 0; height: 100vh; height: 100dvh; min-height: 30rem; }
+.pagina--magazzino .mg3d__scena { position: absolute; inset: 0; height: auto; min-height: 0; }
+.pagina--magazzino .mg3d__barra, .pagina--magazzino .bj3d__barra { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; border: 0; padding: 4rem var(--margine, 4vw) 1.4rem; background: linear-gradient(to top, rgb(5 4 3 / .95) 40%, rgb(5 4 3 / 0)); }
+.pagina--magazzino .gioco { position: relative; padding: 0; }
+.pagina--magazzino .gioco__testa { position: absolute; z-index: 3; top: 5.4rem; left: var(--margine, 4vw); right: var(--margine, 4vw); margin: 0; pointer-events: none; align-items: flex-start; }
+.pagina--magazzino .gioco__testa > * { pointer-events: auto; }
+.pagina--magazzino .gioco__titolo { font-size: clamp(1.7rem, calc(var(--u) * 3.4), 3rem); text-shadow: 0 .1rem 1rem rgb(0 0 0 / .85); }
+.gioco__regole { align-self: center; color: var(--bianco-80); text-decoration: none; padding: .4rem 0; border-bottom: 1px solid var(--linea-forte); }
+.gioco__regole:hover { color: var(--bianco); }
+.pagina--magazzino .gioco [data-gioco] { height: 100vh; height: 100dvh; max-height: none; }
+.pagina--magazzino .bj3d { position: relative; display: block; border: 0; }
+.pagina--magazzino .bj3d__scena { position: absolute; inset: 0; height: auto; min-height: 0; }
+.pagina--magazzino .tavolo { --carta: clamp(4.4rem, min(13vw, 17vh), 9rem); border: 0; padding: 9.5rem clamp(1rem, 4vw, 3rem) 1.6rem; grid-template-rows: auto minmax(0, 1fr) auto auto auto; align-content: stretch; }
+.pagina--magazzino .tavolo__centro { align-self: center; }
+.pagina--magazzino .tavolo:not(.bj3d) {
+    background: radial-gradient(120% 95% at 50% 42%, #167050 0%, #0d4a33 55%, #072b1e 100%);
+    box-shadow: inset 0 0 0 .55rem #3a2414, inset 0 0 0 .7rem rgb(0 0 0 / .45), inset 0 0 9rem rgb(0 0 0 / .5);
+}
+.pagina--magazzino [data-gioco="scala-40"] { --carta: clamp(3.4rem, min(8.5vw, 13vh), 6.6rem); }
+@media (max-width: 760px) {
+    .pagina--magazzino .mg3d__scena { height: auto; }
+    .pagina--magazzino .gioco__testa { top: 4.8rem; }
+    .pagina--magazzino .tavolo { padding-top: 11.5rem; }
+}

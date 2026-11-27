@@ -237,9 +237,9 @@ export async function creaPistola(contenitore) {
     const partenzaB = new THREE.Vector3();
     let bossoloPartito = false;
     function bossoloVolo(ms) {
-        const t = (ms - 310) / 1000;
-        if (t < 0) bossoloPartito = false;
-        bossolo.visible = t >= 0 && t < .7;
+        const k = window.OAKVX.proiettile.bossolo(ms), t = k * .7;   // secondi di volo
+        if (k === 0) bossoloPartito = false;
+        bossolo.visible = k > 0;
         if (!bossolo.visible) return;
         // la partenza si fissa al primo fotogramma utile, anche se il computer ne salta qualcuno
         if (!bossoloPartito) { finestra.getWorldPosition(partenzaB); bossoloPartito = true; }

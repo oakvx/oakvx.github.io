@@ -444,11 +444,11 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
 .sparo__fumo {
     position: absolute; left: var(--x0); top: var(--y);
     width: 7vh; aspect-ratio: 1; border-radius: 50%;
-    background: radial-gradient(closest-side, rgb(200 196 190 / .22), transparent);
+    background: radial-gradient(closest-side, rgb(200 196 190 / .2), rgb(200 196 190 / .08) 55%, transparent);
+    will-change: transform, opacity;
     translate: calc(-30% + var(--fumo) * var(--dx, 2vh)) calc(-50% - var(--fumo) * var(--dy, 7vh));
     scale: calc(.4 + var(--fumo) * var(--k, 1.6));
     opacity: calc(min(1, var(--fumo) * 12) * (1 - var(--fumo)) * .9);
-    filter: blur(4px);
 }
 .sparo__fumo:nth-of-type(2) { --dx: -1vh; --dy: 10vh; --k: 2.2; width: 5vh; }
 .sparo__fumo:nth-of-type(3) { --dx: 4vh; --dy: 5vh; --k: 1.2; width: 4vh; }

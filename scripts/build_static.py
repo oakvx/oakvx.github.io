@@ -41,6 +41,7 @@ PAGE_FILES = [
     "sicurezza/index.html",
     "stile/index.html",
     "contatti/index.html",
+    "magazzino/index.html",
 ]
 SITEMAP_FILES = [
     "index.html",
@@ -60,6 +61,7 @@ SITEMAP_FILES = [
     "sicurezza/index.html",
     "stile/index.html",
     "contatti/index.html",
+    "magazzino/index.html",
 ]
 VOID_ELEMENTS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",

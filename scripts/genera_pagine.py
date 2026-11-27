@@ -33,6 +33,7 @@ PAGES = [
     ('sicurezza/index.html', 'sicurezza', '../', '/sicurezza/', '07', 'nav.security', 'Sicurezza', False, ''),
     ('stile/index.html', 'stile', '../', '/stile/', '08', 'nav.style', 'Stile', False, ''),
     ('contatti/index.html', 'contatti', '../', '/contatti/', '09', 'nav.contact', 'Contatti', False, ''),
+    ('magazzino/index.html', 'magazzino', '../', '/magazzino/', 'M', 'nav.warehouse', 'Magazzino', False, 'magazzino/magazzino.css magazzino/deposito.js'),
 ]
 
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.
@@ -51,6 +52,8 @@ SEO_NUOVE = {
                     'Security | Gabriele Lucia (oakvx)', 'How Gabriele Lucia handles data and security in his projects, with evidence from the code, and what he does not promise.', 'home'),
     '/stile/': ('Stile | Gabriele Lucia (oakvx)', 'La guida grafica di questo sito: palette, tipografia, griglia, componenti e movimento.',
                 'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'home'),
+    '/magazzino/': ('Magazzino | oakvx', 'Il Magazzino di oakvx: carte siciliane, blackjack con gettoni finti e classici da giocare nel browser. Gratis, senza registrarsi.',
+                    'Warehouse | oakvx', 'The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.', 'home'),
     '/contatti/': ('Contatti | Gabriele Lucia (oakvx)', 'Come scrivere a Gabriele Lucia (oakvx): email, GitHub, lingue in cui risponde.',
                    'Contact | Gabriele Lucia (oakvx)', 'How to reach Gabriele Lucia (oakvx): email, GitHub, languages he replies in.', 'home'),
     '/projects/middleman/': ('middleManPS4: ricerca con le affermazioni etichettate | Gabriele Lucia', 'Un laboratorio di ricerca su PS4: payload in C, analisi offline in Python e una regola sola, ogni affermazione porta un’etichetta.',
@@ -148,8 +151,11 @@ def main():
         scripts = [f'<script src="{a}nero/proiettile.js" defer></script>', f'<script src="{a}nero/gelatina.js" defer></script>', f'<script src="{a}nero/nero.js" defer></script>']
         if campo:
             scripts.append(f'<script src="{a}nero/campo.js" defer></script>')
-        if extra:
-            scripts.append(f'<script src="{a}{extra}" defer></script>')
+        for x in extra.split():
+            if x.endswith('.css'):
+                scripts.insert(0, f'<link rel="stylesheet" href="{a}{x}">')
+            else:
+                scripts.append(f'<script src="{a}{x}" defer></script>')
         head = f"""<!doctype html>
 <html lang="it" data-lang-en-url="{en_url}">
 <head>

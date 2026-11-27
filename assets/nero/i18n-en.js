@@ -306,6 +306,9 @@ window.OAKVX_EN = {
     'synk.m1t': "No double bookings",
     'synk.m4t': "Privacy",
 
+    'home.methodLink': "How I work",
+    'home.allWork': "All work, including piko, yag and middleManPS4",
+
     /* chi sono */
     'about.label': 'About',
     'about.labelB': 'Gabriele Lucia, known as oakvx',
@@ -377,10 +380,10 @@ window.OAKVX_EN = {
     'about.termAria': 'Terminal command',
 
     /* casi studio: comuni */
-    'case.label1': 'Case 01 / 04',
-    'case.label2': 'Case 02 / 04',
-    'case.label3': 'Case 03 / 04',
-    'case.label4': 'Case 04 / 04',
+    'case.label1': 'Case 01 / 07',
+    'case.label2': 'Case 02 / 07',
+    'case.label3': 'Case 03 / 07',
+    'case.label4': 'Case 04 / 07',
     'case.role': "My role",
     'case.roleShort': 'Role',
     'case.project': "Project",

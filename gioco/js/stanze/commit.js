@@ -3,6 +3,7 @@
 import * as THREE from 'three';
 import { cifre } from '../logica/commit.js';
 import { apertura, nicchia, collega } from '../engine/varchi.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 230, X1 = 250, Z0 = 0, Z1 = 14, H = 5;
 const USCITA = [X1, 0, 7];
@@ -12,7 +13,7 @@ export function costruisci(m, g) {
   const mat = m.mat;
   const T = () => g.T().stanze.commit;
   m.stanza({
-    nome: 'commit', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'commit', passi: 'cemento',
+    nome: 'commit', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'commit', passi: 'cemento', hdr: 'interno-caldo',
     pareti: { e: { aperture: [apertura(USCITA[2])] }, n: { aperture: [apertura(240)] } },
     luci: [[240, 5, 0.6, 1.6]], intensita: 1.6, raggio: 12,
     atmosfera: { nebbia: 0x0d1416, vicino: 4, lontano: 30, cielo: 0x9ec9d4, terra: 0x101719, intensita: 1.3 },
@@ -65,7 +66,12 @@ export function costruisci(m, g) {
   m.scene.add(cartellino);
   g.arredi.didascalia(X0 + 0.03, 1.6, 7, Math.PI / 2, () => T().testi.recenti, { w: 1.6, h: 1 });
   g.arredi.cartello(240, 4.2, Z0 + 0.03, 0, '11', () => T().cartello);
+  // oggetti scansionati: un divano davanti al muro, per guardare i numeri salire
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('sofa_02', 237, 0, 4.2, 0);
+  oggetti.metti('side_table_01', 235.4, 0, 4.2, 0);
+  oggetti.metti('potted_plant_02', X0 + 0.6, 0, Z0 + 0.7, 0.4);
   g.puntoControllo('commit', 240, 0, 1.5, Math.PI);
 
-  return { debug: { varchi: [{ id: 'commit-supermercato', da: 'commit', a: 'supermercato', lato: [X1, 0, USCITA[2], -Math.PI / 2] }], uscita: [X1 - 0.3, USCITA[2]], xColonna, stato: () => ({ testo, accesi }) } };
+  return { debug: { varchi: [{ id: 'commit-supermercato', da: 'commit', a: 'supermercato', lato: [X1, 0, USCITA[2], -Math.PI / 2] }], uscita: [X1 - 0.3, USCITA[2]], xColonna, stato: () => ({ modelli: oggetti.quanti(), testo, accesi }) } };
 }

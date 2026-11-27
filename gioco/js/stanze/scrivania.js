@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { esegui } from '../logica/terminale.js';
 import { apertura, nicchia, collega } from '../engine/varchi.js';
+import { creaOggetti } from '../engine/oggetti.js';
 
 const X0 = 200, X1 = 212, Z0 = 0, Z1 = 12, H = 3.5;
 const PORTA = [206, 0, Z1];
@@ -13,7 +14,7 @@ export function costruisci(m, g) {
   const mat = m.mat;
   const T = () => g.T().stanze.scrivania;
   m.stanza({
-    nome: 'scrivania', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'strumenti', passi: 'moquette',
+    nome: 'scrivania', x0: X0, x1: X1, z0: Z0, z1: Z1, h: H, ala: 'strumenti', passi: 'moquette', hdr: 'interno-caldo',
     pareti: { s: { aperture: [apertura(PORTA[0])] }, n: { aperture: [apertura(206)] } },
     materiali: { pavimento: mat.moquette },
     luci: [[206, 4, 0.5, 1.2]], intensita: 1.8, raggio: 8, coloreLuce: 0xffe2b8,
@@ -110,6 +111,13 @@ export function costruisci(m, g) {
       () => T().aree[k], { w: 1.4, h: 0.8 });
   });
   g.arredi.cartello(206, 2.9, Z0 + 0.03, 0, '10', () => T().cartello);
+  // oggetti scansionati: lampada e quaderno sulla scrivania, una seconda scrivania, poltrona, pianta
+  const oggetti = creaOggetti(m, g);
+  oggetti.metti('desk_lamp_arm_01', 204.5, 0.78, 8.2, Math.PI - 0.5, { altezza: 0.6, solido: false });
+  oggetti.metti('binder_notebook', 207.4, 0.78, 8.0, 0.25, { solido: false });
+  oggetti.metti('metal_office_desk', X0 + 1.2, 0, Z0 + 0.6, 0);
+  oggetti.metti('modern_arm_chair_01', X1 - 0.7, 0, Z1 - 1.2, -Math.PI * 0.75);
+  oggetti.metti('potted_plant_02', X0 + 0.6, 0, Z1 - 0.7, 1.3);
   g.puntoControllo('scrivania', 206, 0, 1.5, Math.PI);
 
   return {
@@ -117,7 +125,7 @@ export function costruisci(m, g) {
       varchi: [{ id: 'scrivania-commit', da: 'scrivania', a: 'commit', lato: [PORTA[0], 0, Z1, Math.PI] }],
       uscita: [PORTA[0], Z1 - 0.3],
       risolvi: () => apri(),
-      stato: () => ({ terminale: attivo, righe: [...righe], aperta, soluzione }),
+      stato: () => ({ modelli: oggetti.quanti(), terminale: attivo, righe: [...righe], aperta, soluzione }),
     },
   };
 }

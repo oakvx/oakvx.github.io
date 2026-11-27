@@ -1820,3 +1820,14 @@ html.sparo-arrivo::after {
     content: ""; position: absolute; left: -7px; top: -7px; width: 15px; height: 15px;
     background: linear-gradient(var(--bianco-60), var(--bianco-60)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--bianco-60), var(--bianco-60)) 0 50% / 100% 1px no-repeat;
 }
+
+/* Metodo: le prove sotto ogni regola */
+.metodo__prove { display: grid; gap: .45rem; margin-top: .6rem; }
+.metodo__prove li { padding-left: 1.2rem; position: relative; text-transform: none; letter-spacing: .02em; color: var(--bianco-80); }
+.metodo__prove li::before { content: ""; position: absolute; left: 0; top: .7em; width: .6rem; height: 1px; background: var(--cremisi); }
+
+/* Archivio completo: due colonne di schede anche su schermi larghi */
+@media (min-width: 901px) {
+    .archivio__elenco--tutti { grid-template-columns: repeat(3, 1fr); }
+    .archivio__elenco--tutti .repo { border-bottom: 1px solid var(--linea); }
+}

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en" data-lang-en-url="/en/metodo/" data-static-lang="en" data-lang-it-url="/metodo/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<link rel="stylesheet" href="/assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/nero/nero.css">
+<script src="/assets/nero/proiettile.js" defer></script>
+<script src="/assets/nero/nero.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Method | Gabriele Lucia (oakvx)</title>
+<meta name="description" content="How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/en/metodo/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/metodo/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/metodo/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/metodo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="Method | Gabriele Lucia (oakvx)">
+<meta property="og:description" content="How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.">
+<meta property="og:url" content="https://oakvx.github.io/en/metodo/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-home-en.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Method | Gabriele Lucia (oakvx)">
+<meta name="twitter:description" content="How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-en.png">
+<script type="application/json" id="seo-translations">{"it":{"title":"Metodo | Gabriele Lucia (oakvx)","description":"Come lavora Gabriele Lucia: i principi che tornano in ogni suo progetto, con le prove prese dal codice.","canonical":"https://oakvx.github.io/metodo/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx"},"en":{"title":"Method | Gabriele Lucia (oakvx)","description":"How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.","canonical":"https://oakvx.github.io/en/metodo/","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx"}}</script>
+</head>
+<body data-pagina="metodo">
+<a class="salta" href="#main" data-i18n="ui.skip">Skip to content</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="/en/" aria-label="oakvx, back to the entrance" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — development and design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/metodo/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/metodo/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
+        </nav>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Index</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Site index" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pages" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="/en/" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Entrance</span></a></li>
+                <li><a href="/en/#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Work</span></a></li>
+                <li><a href="/en/chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">About</span></a></li>
+                <li><a href="/en/fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">After hours</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contact</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Case studies</p>
+                <ul>
+                    <li><a class="filo" href="/en/projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="/en/projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="/en/projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="/en/projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Elsewhere</p>
+                <ul>
+                    <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game, if you've got time</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause animations</span></button>
+        </div>
+    </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>05</b><span data-titolo data-i18n="nav.method">Method</span><span class="segnapagina__barra"><i></i></span></p>
+
+<main id="main" class="pagina pagina--metodo">
+
+<section class="chi-apertura" aria-labelledby="metodo-titolo">
+    <p class="t-meta"><span>(05) <span data-i18n="nav.method">Method</span></span><span data-i18n="me.labelB">Five rules, found in the code</span></p>
+    <h1 class="chi-apertura__titolo" id="metodo-titolo" data-split data-i18n-html="me.title">I don't have a manifesto. <em>I have repositories.</em></h1>
+    <p class="chi-apertura__coda rivela" style="--ritardo:.5s" data-i18n="me.coda">Reading them back, the same rules keep coming up. Here they are, each with the evidence.</p>
+</section>
+
+<section class="sezione" aria-label="Regole">
+    <article class="capitolo" id="onesta">
+        <p class="capitolo__num" aria-hidden="true">I</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r1k">Honesty</p><h3 data-i18n="me.r1">I write down what works. And what doesn't.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r1text">A README that only lists features is an advert. Mine have a “what doesn't work” section, and in the research projects every claim carries a label: tested, untested, not implemented.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r1a">yag — “What works today” and “What doesn't”, side by side</li>
+                <li data-i18n="me.r1b">middleManPS4 — renamed from fwSpoofer, because nothing in it spoofs anything</li>
+                <li data-i18n="me.r1c">piko — a list of known limitations longer than the feature list</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r1q">A command recorded as sent doesn't prove it was received.</blockquote>
+    </article>
+
+    <article class="capitolo" id="permesso">
+        <p class="capitolo__num" aria-hidden="true">II</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r2k">Consent</p><h3 data-i18n="me.r2">Nothing happens without asking.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r2text">When software acts in someone else's name, it has to ask first. Not once in the settings: every time, at the moment it matters.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r2a">piko — no run without a per-app permission and an approved plan</li>
+                <li data-i18n="me.r2b">piko — password and credential windows are refused</li>
+                <li data-i18n="me.r2c">synk — the waiting list only contacts people who gave consent, for 30 days at most</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r2q">No autonomous default.</blockquote>
+    </article>
+
+    <article class="capitolo" id="locale">
+        <p class="capitolo__num" aria-hidden="true">III</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r3k">Data</p><h3 data-i18n="me.r3">Your data stays at your place.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r3text">If something can run locally, it runs locally. The cloud is a choice to justify, not a starting point.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r3a">Brat Animator — no backend: audio and video never leave the tab</li>
+                <li data-i18n="me.r3b">synk — on-premise, PostgreSQL on the salon's PC; the local AI is off by default and never sees client notes</li>
+                <li data-i18n="me.r3c">piko — local inference only, screenshots one at a time and only on request</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r3q">Your machine is the render farm.</blockquote>
+    </article>
+
+    <article class="capitolo" id="noioso">
+        <p class="capitolo__num" aria-hidden="true">IV</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r4k">Tools</p><h3 data-i18n="me.r4">Boring on purpose.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r4text">I pick the most boring tool that does the job, and I write down what each project deliberately won't do. Fewer dependencies, fewer surprises.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r4a">yag — C17, libcurl, pthreads: it never runs a model and never will</li>
+                <li data-i18n="me.r4b">middleManPS4 — zero runtime dependencies, standard library only</li>
+                <li data-i18n="me.r4c">This site — no framework, no build step, no runtime dependencies</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r4q">That's not a limitation. That's the scope.</blockquote>
+    </article>
+
+    <article class="capitolo" id="incertezza">
+        <p class="capitolo__num" aria-hidden="true">V</p>
+        <div class="capitolo__testa"><p class="t-meta" data-i18n="me.r5k">Uncertainty</p><h3 data-i18n="me.r5">If I don't know, it shows.</h3></div>
+        <div class="capitolo__corpo rivela">
+            <p data-i18n="me.r5text">Real systems fail halfway. I'd rather show an uncertain state than pretend everything went fine: someone can deal with what they can see.</p>
+            <ul class="metodo__prove t-meta">
+                <li data-i18n="me.r5a">synk — a slot is never assumed free if Calendar doesn't answer reliably</li>
+                <li data-i18n="me.r5b">synk — “queued” is not “synced”: pending and attention states are visible in the dashboard</li>
+                <li data-i18n="me.r5c">yag — the model list is not a health guarantee, and it says so</li>
+            </ul>
+        </div>
+        <blockquote class="capitolo__citazione rivela" data-i18n="me.r5q">Queued is not confirmed.</blockquote>
+    </article>
+</section>
+
+<section class="sezione" aria-labelledby="processo-titolo">
+    <header class="sezione-testa">
+        <p class="t-meta">(vi) <span data-i18n="me.procLabel">Process</span></p>
+        <h2 class="sezione-titolo" id="processo-titolo" data-split data-i18n-html="me.procTitle">How a project goes, <em>more or less.</em></h2>
+    </header>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="me.p1">I ask why</h3><p data-i18n="me.p1text">Before how. A clear problem saves weeks of features nobody asked for.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="me.p2">I write down the limits</h3><p data-i18n="me.p2text">What it does, what it won't do, what could go wrong. It's the first file in the repository.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="me.p3">I build and test</h3><p data-i18n="me.p3text">Small steps, automatic tests, CI on every push. If it isn't verified, it's labelled as such.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iv.</span><h3 data-i18n="me.p4">I hand it over clean</h3><p data-i18n="me.p4text">Installers, checksums, documentation in Italian when the user is Italian. And a list of what's still open.</p></li>
+    </ol>
+</section>
+
+<a class="prossimo" href="/en/lavori/" data-velo-n="02" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="me.next">The evidence, in full</span><span>02</span></span>
+    <span class="prossimo__nome" data-velo-nome data-i18n="nav.archive">All work</span>
+</a>
+
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contact</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Write to <em>me.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">For a job, a project, or to tell me you don't like the site. I reply. Not right away, but I reply.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copy the address (it's quicker)</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Index</h3>
+            <ul>
+                <li><a class="filo" href="/en/" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Entrance</span></a></li>
+                <li><a class="filo" href="/en/#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Work</span></a></li>
+                <li><a class="filo" href="/en/chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">About</span></a></li>
+                <li><a class="filo" href="/en/fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">After hours</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Elsewhere</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game, if you've got time</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Where</h3>
+            <p data-i18n="foot.whereText">Sassuolo, near Modena. Yes, the tiles one.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Notes</h3>
+            <ul>
+                <li><a class="filo" href="/en/assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Material credits</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause animations</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Back to top</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Written by hand. No templates were harmed.</span></p>
+</footer>
+
+<script src="/assets/ingresso/ingresso.js" defer></script>
+</body>
+</html>

@@ -1162,6 +1162,7 @@ html.sparo-arrivo::after {
     color: transparent; -webkit-text-stroke: 1px var(--bianco-40);
 }
 .capitolo__testa { grid-column: 4 / span 5; display: grid; gap: .9rem; }
+.capitolo__testa h2,
 .capitolo__testa h3 { font: 400 clamp(2.2rem, calc(var(--u) * 4.4), 3.34rem)/.95 var(--serif); letter-spacing: -.025em; }
 .capitolo__corpo { grid-column: 4 / span 5; display: grid; gap: 1rem; color: var(--bianco-80); }
 .capitolo__citazione {
@@ -1835,7 +1836,7 @@ html.sparo-arrivo::after {
 /* Servizi */
 .servizi__aree { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 3rem; }
 .servizio { display: grid; align-content: start; gap: 1.2rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
-.servizio h2 { font: 400 calc(var(--u) * 3.2)/1 var(--serif); letter-spacing: -.02em; }
+.servizio h2 { font: 400 clamp(2rem, calc(var(--u) * 3.2), 3rem)/1 var(--serif); letter-spacing: -.02em; }
 .servizio ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
 .servizio li { padding: .5rem 0; border-bottom: 1px solid var(--linea); }
 .servizio li::before { content: "— "; color: var(--cremisi); }
@@ -1858,7 +1859,9 @@ html.sparo-arrivo::after {
     .stile__caratteri { grid-template-columns: 1fr; }
     .stile__campione-testo { font-size: 3.4rem; }
 }
-.pagina--contatti .scrivimi__elenco b { overflow-wrap: anywhere; font-size: min(1em, 8.2vw); }
+.pagina--contatti .scrivimi__elenco b { overflow-wrap: anywhere; font-size: clamp(1.4rem, 8.2vw, 3.2rem); }
+body:has(.pagina--contatti) .colophon__testa,
+body:has(.pagina--contatti) .colophon__corpo { display: none; }
 
 /* Dati dai repository */
 .caso-repo { display: grid; gap: .7rem; margin-top: 1.6rem; max-width: 34rem; }

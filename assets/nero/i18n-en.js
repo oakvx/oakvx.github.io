@@ -451,6 +451,10 @@ window.OAKVX_EN = {
     'about.l3text': "English, Spanish, Greek and Chinese, learned at different times for different reasons.",
     'about.loveMore': "The full story is in Off hours",
 
+    'about.next': "When I'm not working",
+    'fo.next': "The serious side, in five rules",
+    'ct.next': "Start again from the entrance",
+
     /* chi sono */
     'about.label': 'About',
     'about.labelB': 'Gabriele Lucia, known as oakvx',

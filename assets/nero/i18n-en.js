@@ -362,8 +362,8 @@ window.OAKVX_EN = {
     'sc.siteTitle': "I start <em>with my own.</em>",
     'sc.s1': "Nobody follows you",
     'sc.s1text': "No analytics, no tracking cookies, no ads. Fonts are served from here, not from someone else.",
-    'sc.s2': "One outside call",
-    'sc.s2text': "The only external request goes to GitHub's public API, for the commit counters. No keys, no personal data.",
+    'sc.s2': "Few outside calls",
+    'sc.s2text': "External requests go only to GitHub's public API (commits, repos, languages) and Open-Meteo (Sassuolo's weather, not yours). No keys, nothing about you is sent.",
     'sc.s3': "Little in your browser",
     'sc.s3text': "Only your language, whether you paused the animations and a cached copy of the counters. Nothing that identifies you.",
     'sc.s4': "Every version stays",
@@ -430,6 +430,10 @@ window.OAKVX_EN = {
     'ct.h3': "When",
     'ct.h3text': "If there's a date that can't move, say so straight away.",
     'ct.lang': "Write in Italian, English, Spanish or Greek: I reply in the same one.",
+
+    'home.liveRepos': "Public repos",
+    'home.liveActivity': "Latest activity on GitHub",
+    'case.languages': "Languages, from GitHub",
 
     /* chi sono */
     'about.label': 'About',

@@ -515,6 +515,7 @@ window.OAKVX_EN = {
     'cr.icons': "The technology logos in About and Style come from <a href=\"https://simpleicons.org/\">Simple Icons</a> (CC0 licence); the marks belong to their owners.",
 
     'nav.warehouse': "Warehouse",
+    'gm.blackjack': "Blackjack",
     'mg.label': "Warehouse · open all night",
     'mg.chips': "Chips",
     'mg.title': "The Warehouse. <em>Stuff to play, not to look at.</em>",
@@ -541,6 +542,15 @@ window.OAKVX_EN = {
     'mg.termText': "Ask me two questions, typed. It's in About.",
     'mg.open': "Open",
     'mg.next': "Back to the serious part",
+
+    'bj.title': "Blackjack. <em>The dealer stands on 17.</em>",
+    'gm.rules': "How to play",
+    'bj.r1': "Get closer to 21 than the dealer without going over. Picture cards are worth 10, aces 1 or 11.",
+    'bj.r2': "Six French decks, reshuffled when a quarter is left. The dealer stands on 17, soft 17 included.",
+    'bj.r3': "Blackjack (ace and a ten-value card) pays 3 to 2. A win pays 1 to 1, a tie gives your bet back.",
+    'bj.r4': "You can double on your first two cards (one more card, double bet) and split a pair once. No insurance.",
+    'bj.r5': "The chips are fake and stay in your browser. If you run out, you get a refill.",
+    'gm.back': "Back to the shelves",
 
     /* chi sono */
     'about.label': 'About',

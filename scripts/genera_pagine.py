@@ -34,6 +34,7 @@ PAGES = [
     ('stile/index.html', 'stile', '../', '/stile/', '08', 'nav.style', 'Stile', False, ''),
     ('contatti/index.html', 'contatti', '../', '/contatti/', '09', 'nav.contact', 'Contatti', False, ''),
     ('magazzino/index.html', 'magazzino', '../', '/magazzino/', 'M', 'nav.warehouse', 'Magazzino', False, 'magazzino/magazzino.css magazzino/deposito.js'),
+    ('magazzino/blackjack/index.html', 'magazzino-blackjack', '../../', '/magazzino/blackjack/', 'M.1', 'gm.blackjack', 'Blackjack', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/blackjack.js'),
 ]
 
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.
@@ -52,6 +53,8 @@ SEO_NUOVE = {
                     'Security | Gabriele Lucia (oakvx)', 'How Gabriele Lucia handles data and security in his projects, with evidence from the code, and what he does not promise.', 'home'),
     '/stile/': ('Stile | Gabriele Lucia (oakvx)', 'La guida grafica di questo sito: palette, tipografia, griglia, componenti e movimento.',
                 'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'home'),
+    '/magazzino/blackjack/': ('Blackjack | Magazzino di oakvx', 'Blackjack gratis nel browser contro il banco, con gettoni finti: sei mazzi, il banco sta su 17, il blackjack paga 3 a 2.',
+                    'Blackjack | oakvx Warehouse', 'Free blackjack in the browser against the dealer, with fake chips: six decks, dealer stands on 17, blackjack pays 3 to 2.', 'home'),
     '/magazzino/': ('Magazzino | oakvx', 'Il Magazzino di oakvx: carte siciliane, blackjack con gettoni finti e classici da giocare nel browser. Gratis, senza registrarsi.',
                     'Warehouse | oakvx', 'The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.', 'home'),
     '/contatti/': ('Contatti | Gabriele Lucia (oakvx)', 'Come scrivere a Gabriele Lucia (oakvx): email, GitHub, lingue in cui risponde.',

@@ -34,7 +34,8 @@ export async function creaPistola(contenitore) {
     contenitore.prepend(canvas);
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+    // la pistola resta in scena meno di un secondo: densità contenuta, molti meno pixel da riempire
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.25));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0x000000, 0);
@@ -122,6 +123,13 @@ export async function creaPistola(contenitore) {
     }
     dimensiona();
     addEventListener('resize', dimensiona);
+
+    // Prepara tutto subito (shader compilati, texture caricate sulla GPU) disegnando una volta
+    // con la pistola fuori campo: al clic il primo fotogramma non deve aspettare nulla.
+    renderer.compile(scena, camera);
+    gruppo.position.x = riposo.x - 6;
+    renderer.render(scena, camera);
+    gruppo.position.copy(riposo);
 
     function disegna() { renderer.render(scena, camera); }
 

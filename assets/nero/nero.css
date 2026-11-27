@@ -1536,7 +1536,7 @@ html.sparo-arrivo::after {
 .calm .stato::before { animation: none; }
 
 .vetrina { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gola); row-gap: 3rem; align-items: end; }
-.oggetto { position: relative; display: grid; gap: 1rem; }
+.oggetto { position: relative; display: grid; gap: 1rem; min-width: 0; }
 .oggetto:nth-child(1) { grid-column: 1 / span 5; }
 .oggetto:nth-child(2) { grid-column: 7 / span 6; }
 .oggetto:nth-child(3) { grid-column: 2 / span 4; }
@@ -1775,7 +1775,8 @@ html.sparo-arrivo::after {
     linear-gradient(var(--linea), var(--linea)) 0 50% / 100% 1px no-repeat; }
 
 /* Fuori orario: le console come oggetti appoggiati sul piano di lavoro */
-.oggetto__luce { border-bottom: 0; }
+.oggetto__luce { border-bottom: 0; width: 100%; min-width: 0; overflow: hidden; }
+.oggetto__luce img { max-width: 100%; }
 .oggetto figcaption { padding-top: .6rem; border-top: 1px solid var(--linea-forte); }
 .gioco__copertina { padding: 10px; background-color: transparent; }
 

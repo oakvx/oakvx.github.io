@@ -429,11 +429,27 @@ window.OAKVX_EN = {
     'ct.h2text': "What should change once it's done. It matters more than the how.",
     'ct.h3': "When",
     'ct.h3text': "If there's a date that can't move, say so straight away.",
-    'ct.lang': "Write in Italian, English, Spanish or Greek: I reply in the same one.",
+    'ct.lang': "Write in Italian, English, Spanish, Greek or Chinese: I reply in the same one.",
 
     'home.liveRepos': "Public repos",
     'home.liveActivity': "Latest activity on GitHub",
     'case.languages': "Languages, from GitHub",
+
+    'about.toolsLabel': "What I work with",
+    'about.toolsTitle': "The tools, <em>taken from the repos, not from a wish list.</em>",
+    'about.t1t': "Web",
+    'about.t2t': "Backend",
+    'about.t3t': "Data",
+    'about.t4t': "Shipping it",
+    'about.loveLabel': "What I love",
+    'about.loveTitle': "When the laptop is closed. <em>Rarely.</em>",
+    'about.l1': "Consoles",
+    'about.l1text': "3DS, Wii, Wii U, PS4: opened, modded, closed again. All still working.",
+    'about.l2': "Games",
+    'about.l2text': "Rayman Legends, Yo-kai Watch 2, Just Dance 2017. Judge freely.",
+    'about.l3': "Languages",
+    'about.l3text': "English, Spanish, Greek and Chinese, learned at different times for different reasons.",
+    'about.loveMore': "The full story is in Off hours",
 
     /* chi sono */
     'about.label': 'About',

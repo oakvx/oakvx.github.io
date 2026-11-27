@@ -153,8 +153,15 @@ export async function creaPistola(contenitore) {
     perno.scale.setScalar(1.6 / lunghezza);
     const POSA = new THREE.Euler(.1, -.55, 0);   // tre quarti, un poco dall'alto: si legge il volume
     perno.rotation.copy(POSA);
+    // il rinculo ruota attorno alla presa (sopra l'impugnatura), non al centro dell'arma
+    perno.updateMatrix();
+    const presa = new THREE.Vector3(-.035, .035, 0).sub(centro).applyMatrix4(perno.matrix);
+    const scatto = new THREE.Group();
+    scatto.position.copy(presa);
+    perno.position.sub(presa);
+    scatto.add(perno);
     const gruppo = new THREE.Group();
-    gruppo.add(perno);
+    gruppo.add(scatto);
     scena.add(gruppo);
 
     const { volo, proiettile } = creaProiettile();
@@ -215,10 +222,21 @@ export async function creaPistola(contenitore) {
         const passo = () => {
             const ms = tempo();
             const f = fase(ms);
-            const k = f.sparo > 0 && f.sparo < 1 ? Math.sin(Math.min(1, f.sparo * 1.6) * Math.PI) : 0;
-            gruppo.position.x = fuori + (riposo.x - fuori) * facile(f.pistola) - k * .05;
-            gruppo.position.y = riposo.y;
-            perno.rotation.set(POSA.x, POSA.y, k * .14); // la canna si alza di circa 8°
+            const P = window.OAKVX.proiettile;
+            const k = P.rinculo(ms);
+            if (ms < 600) {
+                // entrata: scivola da sinistra e si assesta, la canna che scende al livello
+                const e = facile(Math.min(1, ms / 280));
+                gruppo.position.set(fuori + (riposo.x - fuori) * e, riposo.y - (1 - e) * .18, riposo.z);
+                gruppo.rotation.z = (1 - e) * .22;
+            } else {
+                // uscita: abbassa l'arma e la porta fuori in basso a sinistra, accelerando
+                const u = 1 - f.pistola, q = u * u * u;
+                gruppo.position.set(riposo.x - q * 2.2, riposo.y - q * .9, riposo.z);
+                gruppo.rotation.z = -q * .5;
+            }
+            scatto.rotation.set(0, 0, k * .3);    // la canna scatta in su di ~17°
+            scatto.position.x = presa.x - k * .07; // e l'arma arretra un poco
             gruppo.updateMatrixWorld(true);
             punta.getWorldPosition(tmp);
             bagliore.position.copy(tmp);
@@ -227,6 +245,8 @@ export async function creaPistola(contenitore) {
             if (volo.visible) {
                 // dalla volata verso la camera: si avvicina, cresce e si gira a mostrare l'incisione
                 const v = f.volo;
+                // finché è a ridosso della canna la segue nel rinculo, poi tira dritto
+                if (v < .03) punta.getWorldPosition(partenzaMondo);
                 volo.position.lerpVectors(partenzaMondo, arrivoMondo, v);
                 volo.scale.setScalar(scalaPartenza * (1 + v * 5));
                 volo.rotation.set(0, -.15 - v * .55, -v * .12);
@@ -241,15 +261,26 @@ export async function creaPistola(contenitore) {
     // posizione della volata sullo schermo, a riposo
     function volata() {
         gruppo.position.copy(riposo);
+        gruppo.rotation.set(0, 0, 0);
         perno.rotation.copy(POSA);
+        scatto.rotation.set(0, 0, 0);
+        scatto.position.copy(presa);
         gruppo.updateMatrixWorld(true);
         punta.getWorldPosition(tmp).project(camera);
         return { x: Math.round((tmp.x + 1) / 2 * innerWidth), y: Math.round((1 - tmp.y) / 2 * innerHeight) };
     }
 
+    // volata nella posa di adesso (senza riportare l'arma a riposo): per lampo e fumo
+    const qui = new THREE.Vector3();
+    function volataOra() {
+        punta.getWorldPosition(qui).project(camera);
+        return { x: Math.round((qui.x + 1) / 2 * innerWidth), y: Math.round((1 - qui.y) / 2 * innerHeight) };
+    }
+
     return {
         pronta: () => true,
         volata,
+        volataOra,
         spara,
         disegna,
         distruggi() { removeEventListener('resize', dimensiona); renderer.dispose(); canvas.remove(); }

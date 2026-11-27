@@ -191,7 +191,7 @@
         };
         const passo = () => {
             const ms = tempo();
-            disegna(statoA(ms), volata);
+            disegna(statoA(ms), conPistola && pistola.volataOra ? pistola.volataOra() : volata);
             if (ms < durata) requestAnimationFrame(passo); else vai();
         };
         requestAnimationFrame(passo);

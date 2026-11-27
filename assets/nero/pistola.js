@@ -114,13 +114,41 @@ export async function creaPistola(contenitore) {
 
     function disegna() { renderer.render(scena, camera); }
 
+    const facile = t => 1 - Math.pow(1 - t, 3);
+    let raf = 0;
+
+    /* Entra da sinistra, spara (rinculo secco), esce: i tempi arrivano da fase() di proiettile.js. */
+    function spara(tempo) {
+        const fase = window.OAKVX.proiettile.fase;
+        const fuori = riposo.x - 2.4;            // abbastanza a sinistra da essere fuori schermo
+        cancelAnimationFrame(raf);
+        const passo = () => {
+            const ms = tempo();
+            const f = fase(ms);
+            const k = f.sparo > 0 && f.sparo < 1 ? Math.sin(Math.min(1, f.sparo * 1.6) * Math.PI) : 0;
+            gruppo.position.x = fuori + (riposo.x - fuori) * facile(f.pistola) - k * .05;
+            gruppo.position.y = riposo.y;
+            perno.rotation.z = k * .14;           // la canna si alza di circa 8°
+            disegna();
+            if (ms < window.OAKVX.proiettile.USCITA_MS + 60) raf = requestAnimationFrame(passo);
+        };
+        raf = requestAnimationFrame(passo);
+    }
+
+    // posizione della volata sullo schermo, a riposo
+    function volata() {
+        gruppo.position.copy(riposo);
+        perno.rotation.z = 0;
+        gruppo.updateMatrixWorld(true);
+        punta.getWorldPosition(tmp).project(camera);
+        return { x: Math.round((tmp.x + 1) / 2 * innerWidth), y: Math.round((1 - tmp.y) / 2 * innerHeight) };
+    }
+
     return {
         pronta: () => true,
-        volata: () => ({ x: 0, y: Math.round(innerHeight * .46) }),
-        spara: () => {},
+        volata,
+        spara,
         disegna,
-        // accesso per regolare l'orientamento durante lo sviluppo
-        _gruppo: gruppo, _perno: perno, _camera: camera,
         distruggi() { removeEventListener('resize', dimensiona); renderer.dispose(); canvas.remove(); }
     };
 }

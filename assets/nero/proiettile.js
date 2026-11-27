@@ -73,6 +73,7 @@
         el.style.setProperty('--p', f.proiettile.toFixed(4));
         el.style.setProperty('--f', f.fascio.toFixed(4));
         el.style.setProperty('--c', f.copertura.toFixed(4));
+        el.style.setProperty('--d', Math.max(f.pistola, f.copertura).toFixed(4));
     }
 
     Object.assign(OAKVX.proiettile, { creaLivello, disegna });
@@ -143,7 +144,7 @@
         inCorso = false;
         if (!livello) return;
         livello.classList.remove('attivo', 'arrivo');
-        ['--s', '--p', '--f', '--c', '--a'].forEach(k => livello.style.removeProperty(k));
+        ['--s', '--p', '--f', '--c', '--a', '--d'].forEach(k => livello.style.removeProperty(k));
     }
 
     function avvia() {

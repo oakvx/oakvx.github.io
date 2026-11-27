@@ -386,6 +386,12 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     pointer-events: none; overflow: hidden;
 }
 .sparo.attivo { pointer-events: auto; }
+/* la pagina si abbassa mentre la pistola è in scena */
+.sparo::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 22% 46%, rgb(5 5 5 / .25), rgb(5 5 5 / .8));
+    opacity: var(--d, 0);
+}
 .sparo__pistola { position: absolute; inset: 0; width: 100%; height: 100%; }
 .sparo__fascio {
     position: absolute;

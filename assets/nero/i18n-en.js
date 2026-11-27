@@ -432,9 +432,9 @@ window.OAKVX_EN = {
 
     /* 404 */
     'nf.label': 'Error 404 — page not found',
-    'nf.title': 'This page isn’t here.',
-    'nf.text': 'I looked for it too. Nothing.',
-    'nf.home': 'Back to the entrance',
+    'nf.title': "There's nothing here.",
+    'nf.text': "I didn't lose it.",
+    'nf.home': "Go back where there's something",
     'nf.work': 'See the work',
 
     /* crediti */

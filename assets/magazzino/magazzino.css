@@ -71,7 +71,7 @@
 .tavolo__carta--mano { transition: transform .18s; }
 .tavolo__carta--mano:hover:not([disabled]), .tavolo__carta--mano:focus-visible { transform: translateY(-.6rem); }
 .tavolo__carta--mano.scelta, .tavolo [aria-pressed="true"] { transform: translateY(-.9rem); outline: 3px solid var(--cremisi); outline-offset: 3px; border-radius: 10%; }
-.tavolo__carta--mano[disabled] { cursor: default; opacity: .75; }
+.tavolo__carta--mano[disabled] { cursor: default; }
 .tavolo__carta:focus-visible { outline: 3px solid var(--cremisi); outline-offset: 3px; }
 .tavolo__azioni { display: flex; justify-content: center; flex-wrap: wrap; gap: .6rem; }
 .tavolo .tavolo__azione { padding: .7rem 1.1rem; border: 1px solid var(--bianco-40); font: 400 .78rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }

@@ -66,8 +66,9 @@
                     b.addEventListener('click', () => onTavolo(i));
                     return b;
                 }
-                const g = el('span', gruppo.length > 1 ? 'tavolo__gruppo' : 'tavolo__posto', { role: 'img', 'aria-label': gruppo.map(c => D().nome(c, lingua())).join(', ') });
-                for (const c of gruppo) { const s = el('span', 'tavolo__carta'); s.innerHTML = D().carta(c); g.append(s); }
+                const nomeDi = c => c.coperta ? (lingua() === 'en' ? 'Face-down card' : 'Carta coperta') : D().nome(c, lingua());
+                const g = el('span', gruppo.length > 1 ? 'tavolo__gruppo' : 'tavolo__posto', { role: 'img', 'aria-label': gruppo.map(nomeDi).join(', ') });
+                for (const c of gruppo) { const s = el('span', 'tavolo__carta'); s.innerHTML = c.coperta ? D().dorso(tipo) : D().carta(c); g.append(s); }
                 return g;
             }));
             if (v.mazzo != null) {

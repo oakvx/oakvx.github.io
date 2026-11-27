@@ -48,3 +48,12 @@ test('annuncia scrive nella regione per i lettori di schermo', () => {
     assert.equal(r.getAttribute('aria-live'), 'polite');
     assert.equal(r.textContent, 'Il computer gioca il tre di coppe');
 });
+
+test('una carta coperta sul tavolo mostra il dorso e non il suo nome', () => {
+    const radice = doc.createElement('div');
+    const t = T.monta(radice, {});
+    t.mostra({ dorso: 'francesi', mano: [], avversari: [], tavolo: [carta('cuori', 10), { coperta: true, id: 'coperta' }], azioni: [], messaggio: '' });
+    const posti = radice.querySelector('.tavolo__centro').children;
+    assert.equal(posti[1].getAttribute('aria-label'), 'Carta coperta');
+    assert.ok(posti[1].children[0].innerHTML.includes('Dorso'));
+});

@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
 <link rel="stylesheet" href="./assets/ingresso/ingresso.css">
-<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="./assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="./assets/nero/nero.css">
+<script src="./assets/nero/proiettile.js" defer></script>
 <script src="./assets/nero/nero.js" defer></script>
 <script src="./assets/nero/campo.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -63,11 +65,11 @@
     <div class="indice__griglia">
         <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
             <ol>
-                <li><a href="./" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">chi, cosa, dove</span></a></li>
-                <li><a href="./#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span><span class="indice__nota t-meta" data-i18n="nav.workNote">quattro casi studio</span></a></li>
-                <li><a href="./chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">persona, percorso, metodo</span></a></li>
-                <li><a href="./fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">quando nessuno me lo chiede</span></a></li>
-                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contatti</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">si parte da un’email</span></a></li>
+                <li><a href="./" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">si comincia da qui</span></a></li>
+                <li><a href="./#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span><span class="indice__nota t-meta" data-i18n="nav.workNote">quattro, e reggono</span></a></li>
+                <li><a href="./chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">più o meno tutto</span></a></li>
+                <li><a href="./fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">quando nessuno guarda</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contatti</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">rispondo, con calma</span></a></li>
             </ol>
         </nav>
         <div class="indice__lato">
@@ -83,7 +85,7 @@
             <div>
                 <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
                 <ul>
-                    <li><a class="filo" href="./gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+                    <li><a class="filo" href="./gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
                     <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                     <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
                 </ul>
@@ -97,18 +99,25 @@
 <main id="main" class="pagina pagina--home">
 
 <section class="apertura" aria-labelledby="apertura-titolo">
-    <div class="apertura__campo campo" id="campo-apertura" data-campo data-forme="scultura|immagine:/assets/avatars/showingoff-still.webp" data-nomi="scultura|il Mii di oakvx" data-nomi-en="sculpture|oakvx’s Mii" data-punti="26000" data-spostamento="0.26,0.1" data-scala="0.6" data-area=".apertura" data-luce="0.5">
+    <div class="apertura__campo campo" id="campo-apertura" data-campo data-forme="scultura|immagine:/assets/avatars/showingoff-still.webp" data-nomi="scultura|il Mii di oakvx" data-nomi-en="sculpture|oakvx’s Mii" data-punti="26000" data-spostamento="0.12,0.1" data-scala="0.56" data-area=".apertura" data-luce="0.5">
         <canvas></canvas>
         <div class="campo__ripiego" aria-hidden="true"></div>
     </div>
+    <div class="apertura__mirino" aria-hidden="true"><span class="apertura__cerchio"></span><span class="apertura__croce"></span><span class="apertura__nota apertura__nota--a t-meta" data-i18n="home.noteHold">tienila premuta: si rompe, poi si rimette a posto</span><span class="apertura__nota apertura__nota--b t-meta" data-i18n="home.noteLight">la luce segue il cursore. il resto no</span></div>
+    <dl class="apertura__vivi t-meta" aria-label="Numeri dal vivo" data-i18n-aria="home.liveAria">
+        <div><dt data-i18n="home.liveCommits">Commit di questo sito</dt><dd><b data-vivo="commit">—</b><span class="apertura__barre" data-vivo="barre" aria-hidden="true"></span></dd></div>
+        <div><dt>TikTok @oakvx.sh</dt><dd><b data-vivo="tiktok">—</b> <span data-i18n="home.liveFollowers">follower</span></dd></div>
+        <div><dt data-i18n="home.liveTime">Ora a Sassuolo</dt><dd><b><time data-ora>--:--</time></b></dd></div>
+        <div><dt data-i18n="home.liveLast">Ultimo commit</dt><dd data-vivo="ultimo">—</dd></div>
+    </dl>
     <p class="apertura__meta t-meta">
-        <span data-i18n="home.metaA">Portfolio — 2026</span>
+        <span data-i18n="home.metaA">Portfolio — 2026, aggiornato più spesso del necessario</span>
         <span data-i18n="home.metaB">Sviluppo web · Backend · Grafica</span>
         <span>44.53° N — 10.78° E</span>
     </p>
-    <h1 class="apertura__titolo" id="apertura-titolo"><span class="sr-only" data-i18n="home.h1Sr">Gabriele Lucia, in arte oakvx: sviluppatore e designer.</span><span data-lettere aria-hidden="true">oakvx</span></h1>
+    <h1 class="apertura__titolo" id="apertura-titolo"><span class="sr-only" data-i18n="home.h1Sr">Gabriele Lucia, in arte oakvx: sviluppatore e designer.</span><span data-lettere aria-hidden="true">oakvx.</span></h1>
     <div class="apertura__piede">
-        <p class="apertura__intro" data-i18n-html="home.intro"><span class="corsivo">Ciao, sono oakvx.</span> All’anagrafe Gabriele Lucia. Faccio siti, applicazioni web e grafica, e studio Ingegneria Informatica a UNIMORE. Sto a Sassuolo.</p>
+        <p class="apertura__intro" data-i18n-html="home.intro"><span class="apertura__frase">Faccio siti, software e grafica. Di solito funzionano al primo colpo. <em>Di solito.</em></span> Gabriele Lucia, Sassuolo. Studio Ingegneria Informatica a UNIMORE.</p>
         <ul class="apertura__ruoli t-meta">
             <li data-i18n="home.role1">Sviluppo web</li>
             <li data-i18n="home.role2">Backend e dati</li>
@@ -117,31 +126,37 @@
         <div class="apertura__azione">
             <button class="tieni t-meta" type="button" data-tieni="campo-apertura" aria-describedby="stato-apertura">
                 <span class="tieni__anello" aria-hidden="true"><svg viewBox="0 0 36 36"><circle class="fondo" cx="18" cy="18" r="15.9" pathLength="100"/><circle class="carica" cx="18" cy="18" r="15.9" pathLength="100"/></svg></span>
-                <span class="tieni__testo"><span data-i18n="home.hold">Tieni premuto</span><small><span data-i18n="home.holdNote">ricompone la scultura</span> · <span id="stato-apertura" data-campo-stato="campo-apertura" aria-live="polite">01 / 02</span></small></span>
+                <span class="tieni__testo"><span data-i18n="home.hold">Tieni premuto</span><small><span data-i18n="home.holdNote">la rompi, si ricompone</span> · <span id="stato-apertura" data-campo-stato="campo-apertura" aria-live="polite">01 / 02</span></small></span>
             </button>
         </div>
     </div>
 </section>
 
+<div class="nastro" aria-hidden="true" data-nastro>
+    <div class="nastro__riga">
+        <div class="nastro__pezzo"><span data-i18n="home.role1">Sviluppo web</span><i></i><span data-i18n="home.role2">Backend e dati</span><i></i><span data-i18n="home.role3">Grafica e interfacce</span><i></i><span>oakvx</span><i></i></div>
+    </div>
+</div>
+
 <section class="manifesto contenitore" aria-label="Metodo" data-i18n-aria="home.manifestoAria">
     <p class="t-meta">(01) <span data-i18n="home.manifestoLabel">Metodo</span></p>
-    <p class="manifesto__testo" data-scorri-parole data-i18n-html="home.manifesto">Mi sono avvicinato alla programmazione per curiosità. Oggi la parte che preferisco è sempre la stessa: capire <em>cosa non funziona</em>, trovare una soluzione e vederla prendere forma. Codice e grafica, per me, sono <span class="cremisi">due lati dello stesso lavoro.</span></p>
-    <p class="manifesto__firma t-meta"><span data-i18n="home.manifestoSign">— oakvx, Sassuolo</span><a class="filo" href="chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="home.manifestoLink">La storia completa</span> <span class="freccia" aria-hidden="true"></span></a></p>
+    <p class="manifesto__testo" data-scorri-parole data-i18n-html="home.manifesto">Ho iniziato per curiosità e sono rimasto per i problemi. Mi piace capire <em>cosa non funziona</em>, sistemarlo e far finta che fosse facile. Codice e grafica, per me, sono <span class="cremisi">lo stesso lavoro visto da due lati.</span></p>
+    <p class="manifesto__firma t-meta"><span data-i18n="home.manifestoSign">— oakvx, Sassuolo</span><a class="filo" href="chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="home.manifestoLink">La versione lunga</span> <span class="freccia" aria-hidden="true"></span></a></p>
 </section>
 
 <section class="sezione lavori" id="lavori" aria-labelledby="lavori-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(02) <span data-i18n="home.workLabel">Lavori</span></p>
-        <h2 class="sezione-titolo" id="lavori-titolo" data-split data-i18n-html="home.workTitle">Cose che ho fatto, <em>e che rifarei.</em></h2>
-        <p class="sezione-nota rivela" data-i18n="home.workNote">Quattro progetti, quattro problemi diversi: un editor creativo, un flusso conversazionale, un gestionale per più saloni e un sito vetrina.</p>
+        <h2 class="sezione-titolo" id="lavori-titolo" data-split data-i18n-html="home.workTitle">Quattro progetti. <em>Ne avrei altri, ma questi reggono.</em></h2>
+        <p class="sezione-nota rivela" data-i18n="home.workNote">Un editor creativo, un assistente su WhatsApp, un gestionale e un sito vetrina. Problemi diversi, stessa testardaggine.</p>
     </header>
-    <ol class="lavori__elenco" data-anteprime>
+    <ol class="lavori__elenco">
         <li class="lavoro">
             <a class="lavoro__link" href="projects/brat-animator/" data-cursore="Apri" data-velo-n="02.1">
                 <span class="lavoro__n t-meta">01</span>
                 <span class="lavoro__nome" data-velo-nome>Brat Animator</span>
                 <span class="lavoro__tipo t-meta" data-i18n="home.w1type">Editor creativo · browser</span>
-                <span class="lavoro__desc" data-i18n="home.w1desc">Un editor che trasforma testi sincronizzati in lyric video, con timeline e rendering direttamente nel browser.</span>
+                <span class="lavoro__desc" data-i18n="home.w1desc">Trasforma testi sincronizzati in lyric video, tutto nel browser. Nato per gioco, arrivato alla versione 5. Il gioco mi è sfuggito di mano.</span>
                 <img class="lavoro__img" src="assets/work/brat-editor-small.webp" width="720" height="500" alt="" loading="lazy" decoding="async">
             </a>
         </li>
@@ -150,7 +165,7 @@
                 <span class="lavoro__n t-meta">02</span>
                 <span class="lavoro__nome" data-velo-nome>Synk</span>
                 <span class="lavoro__tipo t-meta" data-i18n="home.w2type">Automazione conversazionale</span>
-                <span class="lavoro__desc" data-i18n="home.w2desc">Un assistente su WhatsApp che capisce cosa serve e collega prenotazioni, Google Calendar e dashboard gestionale.</span>
+                <span class="lavoro__desc" data-i18n="home.w2desc">Le persone scrivono su WhatsApp come gli pare. Synk capisce cosa vogliono e lo mette in calendario.</span>
                 <img class="lavoro__img" src="assets/work/synk-cover-small.webp" width="720" height="366" alt="" loading="lazy" decoding="async">
             </a>
         </li>
@@ -159,7 +174,7 @@
                 <span class="lavoro__n t-meta">03</span>
                 <span class="lavoro__nome" data-velo-nome>Beautify</span>
                 <span class="lavoro__tipo t-meta" data-i18n="home.w3type">Gestionale · progetto di diploma</span>
-                <span class="lavoro__desc" data-i18n="home.w3desc">Un CRM per più saloni: clienti, servizi, disponibilità e appuntamenti nello stesso contesto. Database e backend sono miei.</span>
+                <span class="lavoro__desc" data-i18n="home.w3desc">Un gestionale per più saloni: clienti, servizi e orari che non si pestano i piedi. Database e backend sono miei.</span>
                 <img class="lavoro__img contiene" src="assets/beautify-logo.svg" width="400" height="400" alt="" loading="lazy" decoding="async">
             </a>
         </li>
@@ -168,7 +183,7 @@
                 <span class="lavoro__n t-meta">04</span>
                 <span class="lavoro__nome" data-velo-nome>Spinotto Felice</span>
                 <span class="lavoro__tipo t-meta" data-i18n="home.w4type">Sito vetrina · demo</span>
-                <span class="lavoro__desc" data-i18n="home.w4desc">Un sito vetrina per un’attività che non esiste. Il negozio è finto, il sito no.</span>
+                <span class="lavoro__desc" data-i18n="home.w4desc">Un sito vetrina per un negozio che non esiste. Il negozio è finto, il sito no.</span>
                 <img class="lavoro__img" src="assets/work/autoofficina-cover-small.webp" width="720" height="500" alt="" loading="lazy" decoding="async">
             </a>
         </li>
@@ -178,8 +193,8 @@
 <section class="sezione tappe" id="percorso" aria-labelledby="tappe-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(03) <span data-i18n="home.pathLabel">Percorso</span></p>
-        <h2 class="sezione-titolo" id="tappe-titolo" data-split data-i18n-html="home.pathTitle">Ogni tappa smussa <em>uno spigolo.</em></h2>
-        <p class="sezione-nota rivela" data-i18n="home.pathNote">Dalla scuola all’università: siti per attività locali, un Erasmus a Siviglia, l’automazione industriale.</p>
+        <h2 class="sezione-titolo" id="tappe-titolo" data-split data-i18n-html="home.pathTitle">Ogni tappa smussa uno spigolo. <em>Qualcuno è rimasto.</em></h2>
+        <p class="sezione-nota rivela" data-i18n="home.pathNote">Scuola, clienti veri, un Erasmus a Siviglia, macchine industriali. Adesso l’università.</p>
     </header>
     <ol class="tappe__elenco">
         <li class="tappa"><a href="chi-sono/#inizio" data-velo-n="03"><span class="tappa__n t-meta">01</span><span class="tappa__anno">2021 — 2026</span><span class="tappa__nome" data-velo-nome>IIS A. Volta</span><span class="tappa__nota t-meta" data-i18n="home.p1">Informatica e Telecomunicazioni · Sassuolo</span></a></li>
@@ -193,27 +208,27 @@
 <section class="sezione mestiere" id="strumenti" aria-labelledby="mestiere-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(04) <span data-i18n="home.skillsLabel">Mestiere</span></p>
-        <h2 class="sezione-titolo" id="mestiere-titolo" data-split data-i18n-html="home.skillsTitle">Tre aree di lavoro, <em>un solo modo di farlo.</em></h2>
+        <h2 class="sezione-titolo" id="mestiere-titolo" data-split data-i18n-html="home.skillsTitle">Tre cose che so fare. <em>Le altre le imparo quando servono.</em></h2>
     </header>
     <div class="mestiere__aree">
         <article class="area rivela">
             <p class="area__n" aria-hidden="true">i.</p>
             <h3 data-i18n="home.a1">Sviluppo web</h3>
-            <p data-i18n="home.a1text">Siti e applicazioni web: interfacce, pubblicazione e indicizzazione sui motori di ricerca.</p>
+            <p data-i18n="home.a1text">Siti e applicazioni web che si aprono in fretta e si trovano su Google.</p>
             <ul><li>HTML · CSS · JavaScript</li><li data-i18n="home.a1b">SEO e pubblicazione</li><li data-i18n="home.a1c">Pagine social aziendali</li></ul>
             <p class="area__pratica t-meta" data-i18n="home.a1p">In pratica: siti per officine, centri estetici e utensilerie, dal 2023 al 2026.</p>
         </article>
         <article class="area rivela">
             <p class="area__n" aria-hidden="true">ii.</p>
             <h3 data-i18n="home.a2">Backend e dati</h3>
-            <p data-i18n="home.a2text">Logica lato server e database relazionali, dai CRUD all’automazione.</p>
+            <p data-i18n="home.a2text">La parte che non si vede: server, database, automazioni. Se funziona, nessuno se ne accorge.</p>
             <ul><li>Node.js · PHP</li><li>PostgreSQL · MySQL</li><li data-i18n="home.a2c">T-SQL su SQL Server</li></ul>
             <p class="area__pratica t-meta" data-i18n="home.a2p">In pratica: Synk, Beautify, Format SRL.</p>
         </article>
         <article class="area rivela">
             <p class="area__n" aria-hidden="true">iii.</p>
             <h3 data-i18n="home.a3">Grafica e interfacce</h3>
-            <p data-i18n="home.a3text">La parte visiva del lavoro, che affianco allo sviluppo software.</p>
+            <p data-i18n="home.a3text">Interfacce e contenuti per i social. Il motivo per cui il codice, poi, si guarda volentieri.</p>
             <ul><li data-i18n="home.a3a">Contenuti per i social</li><li data-i18n="home.a3b">Progettazione di interfacce</li><li data-i18n="home.a3c">Testi animati su Canvas</li></ul>
             <p class="area__pratica t-meta" data-i18n="home.a3p">In pratica: Brat Animator, pagine social.</p>
         </article>
@@ -229,8 +244,8 @@
 <section class="sezione archivio" id="attivita-github" aria-labelledby="archivio-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(05) <span data-i18n="home.archiveLabel">Archivio aperto</span></p>
-        <h2 class="sezione-titolo" id="archivio-titolo" data-split data-i18n-html="home.archiveTitle">Il codice, <em>alla luce del sole.</em></h2>
-        <p class="sezione-nota rivela" data-i18n="home.archiveNote">Quattro repository pubblici fuori dai casi studio: un agente locale, un gateway AI, reverse engineering e un Hackintosh.</p>
+        <h2 class="sezione-titolo" id="archivio-titolo" data-split data-i18n-html="home.archiveTitle">Il codice è pubblico. <em>Giudicate pure.</em></h2>
+        <p class="sezione-nota rivela" data-i18n="home.archiveNote">Quattro repository fuori dai casi studio: un agente locale, un gateway AI, un po’ di reverse engineering e un Hackintosh.</p>
     </header>
     <ul class="archivio__elenco">
         <li class="repo"><a href="https://github.com/oakvx/piko" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>piko</span><span class="repo__desc" data-i18n="home.r1">Un agente locale per Windows: guarda l’app che hai davanti, scrive un piano con un modello Ollama locale, aspetta che tu lo legga e solo dopo clicca e scrive. Niente cloud, nessuna azione senza approvazione.</span><span class="repo__dati t-meta" data-i18n="home.r1d">Python — ★ 10 — alpha preview</span></a></li>
@@ -238,43 +253,43 @@
         <li class="repo"><a href="https://github.com/oakvx/middleManPS4" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvx/</b>middleManPS4</span><span class="repo__desc" data-i18n="home.r3">Reverse engineering su PS4: strumenti Python (solo libreria standard) e payload in C su come si carica un payload, cosa c’è nei binari e cosa passa sulla rete. Solo diagnostica e analisi offline.</span><span class="repo__dati t-meta" data-i18n="home.r3d">Python · C — ricerca, v0.17</span></a></li>
         <li class="repo"><a href="https://github.com/oakvxish/Lenovo-Ideapad-3-15ITL6-Hackintosh-EFI" target="_blank" rel="noopener noreferrer"><span class="repo__nome"><b>oakvxish/</b>Hackintosh-EFI</span><span class="repo__desc" data-i18n="home.r4">La EFI per far girare macOS Catalina 10.15.7 su un Lenovo IdeaPad 3 15ITL6.</span><span class="repo__dati t-meta" data-i18n="home.r4d">EFI · macOS 10.15.7 — ★ 4</span></a></li>
     </ul>
-    <p class="archivio__piede t-meta"><a class="filo" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer" data-i18n="home.archiveAll">Tutti i repository su github.com/oakvx</a><span><span data-i18n="home.archiveGame">Preferisci esplorare? C’è anche</span> <a class="filo" href="gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></span></p>
+    <p class="archivio__piede t-meta"><a class="filo" href="https://github.com/oakvx?tab=repositories" target="_blank" rel="noopener noreferrer" data-i18n="home.archiveAll">Tutti i repository su github.com/oakvx</a><span><span data-i18n="home.archiveGame">Hai tempo da perdere? C’è anche</span> <a class="filo" href="gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></span></p>
 </section>
 
 <section class="sezione cantiere" id="commit-sito" aria-labelledby="cantiere-titolo" data-commit-sito>
     <header class="sezione-testa">
         <p class="t-meta">(06) <span data-i18n="home.siteLabel">Questo sito</span></p>
-        <h2 class="sezione-titolo" id="cantiere-titolo" data-split data-i18n-html="home.siteTitle">Rifatto, limato, <em>committato.</em></h2>
-        <p class="sezione-nota rivela" data-i18n="home.siteNote">Ogni commit di questo repository, giorno per giorno. I numeri arrivano in diretta da GitHub.</p>
+        <h2 class="sezione-titolo" id="cantiere-titolo" data-split data-i18n-html="home.siteTitle">Rifatto, limato, <em>committato.</em> Più volte.</h2>
+        <p class="sezione-nota rivela" data-i18n="home.siteNote">Ogni commit di questo repository, giorno per giorno, in diretta da GitHub. Sì, alcuni giorni ho esagerato.</p>
     </header>
     <div class="cantiere__corpo">
-        <p class="cantiere__numero"><span data-commit-totale>67</span> <span class="t-meta" data-i18n="home.siteUnit">commit</span></p>
+        <p class="cantiere__numero"><span data-commit-totale>152</span> <span class="t-meta" data-i18n="home.siteUnit">commit</span></p>
         <dl class="cantiere__dati t-meta">
             <div><dt data-i18n="home.siteFirst">Primo commit</dt><dd data-commit-primo>4 nov 2026</dd></div>
-            <div><dt data-i18n="home.siteDays">Giorni di lavoro</dt><dd data-commit-giorni>6</dd></div>
-            <div><dt data-i18n="home.siteBest">Giorno record</dt><dd data-commit-record>37 · 26 nov 2026</dd></div>
-            <div><dt data-i18n="home.siteLast">Ultimo</dt><dd><a class="filo" href="https://github.com/oakvx/oakvx.github.io/commits" target="_blank" rel="noopener noreferrer" data-commit-ultimo>Merge pull request #17 from oakvx/sito-nero</a></dd></div>
+            <div><dt data-i18n="home.siteDays">Giorni di lavoro</dt><dd data-commit-giorni>7</dd></div>
+            <div><dt data-i18n="home.siteBest">Giorno record</dt><dd data-commit-record>65 · 27 nov 2026</dd></div>
+            <div><dt data-i18n="home.siteLast">Ultimo</dt><dd><a class="filo" href="https://github.com/oakvx/oakvx.github.io/commits" target="_blank" rel="noopener noreferrer" data-commit-ultimo>Lift the beam if the navigation never happens</a></dd></div>
         </dl>
         <div class="cantiere__grafico" data-commit-grafico role="img" aria-label="Commit per giorno" data-i18n-aria="home.siteChartAria"></div>
         <p class="cantiere__asse t-meta" aria-hidden="true"><span data-commit-da>4 nov 2026</span><span data-i18n="home.siteToday">oggi</span></p>
         <p class="cantiere__stato t-meta" data-commit-stato aria-live="polite"></p>
     </div>
-    <script type="application/json" id="commit-sito-dati">{"totale": 67, "giorni": {"2026-11-04": 1, "2026-11-07": 6, "2026-11-09": 1, "2026-11-19": 2, "2026-11-21": 20, "2026-11-26": 37}, "ultimo": "Merge pull request #17 from oakvx/sito-nero"}</script>
+    <script type="application/json" id="commit-sito-dati">{"totale": 152, "giorni": {"2026-11-04": 1, "2026-11-07": 6, "2026-11-09": 1, "2026-11-19": 2, "2026-11-21": 20, "2026-11-26": 57, "2026-11-27": 65}, "ultimo": "Lift the beam if the navigation never happens"}</script>
 </section>
 
 </main>
 
 <footer class="colophon" id="contatti">
     <div class="colophon__testa">
-        <p class="t-meta"><span data-i18n="foot.label">Contatti</span> — <span data-i18n="foot.label2">fine della pagina</span></p>
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span> — <span data-i18n="foot.label2">qui finisce</span></p>
         <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
     </div>
     <div class="colophon__corpo">
-        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto, o anche solo per dirmi che il sito ti è piaciuto (o no). Rispondo, giuro.</p>
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto o per dirmi che il sito non ti piace. Rispondo. Non subito, ma rispondo.</p>
         <div class="colophon__contatto">
             <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
             <div class="colophon__azioni t-meta">
-                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo</button>
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo (fa prima)</button>
                 <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
             </div>
         </div>
@@ -294,12 +309,12 @@
             <ul>
                 <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
                 <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
-                <li><a class="filo" href="./gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D</span></a></li>
+                <li><a class="filo" href="./gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
             </ul>
         </div>
         <div>
             <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
-            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena.</p>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena. Sì, quella delle piastrelle.</p>
             <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
         </div>
         <div>
@@ -312,7 +327,7 @@
         </div>
     </div>
     <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
-    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano: HTML, CSS, JavaScript e WebGL</span></p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano. Nessun template è stato maltrattato.</span></p>
 </footer>
 
 <script src="./assets/ingresso/ingresso.js" defer></script>

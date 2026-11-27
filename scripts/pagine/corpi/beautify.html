@@ -1,0 +1,87 @@
+<main id="main" class="pagina pagina--caso" data-progetto="beautify">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label3">Caso 03 / 04</span><span data-i18n="beautify.kind">Gestionale multisalone · progetto di diploma</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>Beauti<em>fy.</em></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="beautify.intro">Un gestionale per più saloni: clienti, servizi, orari e appuntamenti nello stesso posto. Il mio progetto di diploma, in PHP e MySQL. Non il solito esercizio.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="beautify.role">Ruolo tecnico principale: database e backend</dd></div>
+            <div><dt>Stack</dt><dd>PHP / MySQL</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="beautify.focus">CRUD e dati relazionali</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="beautify.project">Progetto di diploma</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://github.com/oakvxish/maturita" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </div>
+</section>
+
+<figure class="caso-figura rivela-maschera">
+    <div class="beautify-logo"><img src="../../assets/beautify-logo.svg" width="400" height="400" alt="Logo originale di Beautify" data-i18n-alt="beautify.alt"></div>
+    <figcaption class="t-meta"><span data-i18n="beautify.caption">Beautify — logo originale del progetto</span><span>fig. 01</span></figcaption>
+</figure>
+
+<section class="sezione caso-capo" aria-labelledby="beautify-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="beautify-concept" data-split data-i18n-html="beautify.conceptTitle">Più saloni, <em>un gestionale solo. Nessuna sovrapposizione.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="beautify.concept1">Beautify gestisce clienti, appuntamenti, utenti e servizi per più saloni. Include prenotazione pubblica, magazzino e analitiche, con sezioni distinte per proprietari e dipendenti.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="beautify.problem">Il punto di partenza: più attività nello stesso sistema, dati che non si devono mescolare e orari che non si devono pestare i piedi.</p>
+</section>
+
+<section class="sezione" aria-labelledby="beautify-processo">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <h2 id="beautify-processo" data-split data-i18n-html="beautify.processTitle">Come funziona, <em>dal login all’orario libero.</em></h2>
+    </div>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="beautify.s1">Un salone, i suoi utenti</h3><p data-i18n="beautify.s1text">Dopo il login la sessione identifica il salone attivo. Gli utenti possono essere collegati a più saloni; il ruolo di proprietario o dipendente decide le sezioni accessibili.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="beautify.s2">Trovare un orario</h3><p data-i18n="beautify.s2text">Il flusso pubblico seleziona salone, servizio e data. La logica PHP calcola gli slot considerando durata, fasce di apertura e capienza del personale.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="beautify.s3">Gestire i dati</h3><p data-i18n="beautify.s3text">Il backend usa mysqli per clienti, servizi, appuntamenti e impostazioni. Le query includono il salone attivo, così i dati delle attività restano separati.</p></li>
+    </ol>
+    <div class="orari rivela" data-orari>
+        <div class="orari__comandi">
+            <p class="t-meta" data-i18n="beautify.slotLabel">Durata del servizio</p>
+            <div class="orari__durate" role="group" aria-label="Durata del servizio" data-i18n-aria="beautify.slotLabel">
+                <button type="button" data-durata="30" aria-pressed="false">30 min</button>
+                <button type="button" data-durata="60" aria-pressed="true">60 min</button>
+                <button type="button" data-durata="90" aria-pressed="false">90 min</button>
+            </div>
+            <p class="orari__esito" aria-live="polite"></p>
+            <p class="t-meta" data-orari-nota aria-live="polite"></p>
+        </div>
+        <div class="orari__griglia" aria-label="Orari della giornata" data-i18n-aria="beautify.gridAria"></div>
+        <p class="orari__legenda t-meta"><span data-i18n="beautify.legend1">Barrato: già occupato</span><span data-i18n="beautify.legend2">Spento: il servizio non ci sta</span><span data-i18n="beautify.legend3">Simulazione con fasce di esempio</span></p>
+    </div>
+    <p class="t-meta" style="margin-top:1rem" data-i18n="beautify.slotNote">La stessa idea del controllo condiviso tra agenda e prenotazione pubblica: slot ogni 30 minuti, confrontati con gli intervalli già occupati.</p>
+</section>
+
+<section class="sezione" aria-labelledby="beautify-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <h2 id="beautify-architettura" data-split data-i18n-html="beautify.archTitle">Lato server, <em>lato dati.</em></h2>
+        <p class="caso-capo__testo rivela" data-i18n="beautify.archText">Ho sviluppato il backend PHP e il database MySQL, con flussi CRUD, contesto del salone e controlli di disponibilità condivisi tra agenda e prenotazione pubblica.</p>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="beautify.m1t">PHP, lato server</h3><p data-i18n="beautify.m1">Mysqli, sessioni, permessi e operazioni CRUD. Le pagine sono renderizzate dal server; i form inviano richieste GET e POST.</p><span class="modulo__file t-meta">PHP</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="beautify.m2t">MySQL, lato dati</h3><p data-i18n="beautify.m2">Lo schema collega saloni, clienti, servizi e appuntamenti, con associazioni tra utenti e saloni e ruoli distinti.</p><span class="modulo__file t-meta">MySQL</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="beautify.m3t">Gestionale</h3><p data-i18n="beautify.m3">Storico cliente, magazzino e analitiche. Il database contiene anche le tabelle per il recupero degli account.</p><span class="modulo__file t-meta">CRUD</span></li>
+    </ul>
+    <div class="tecnologie">
+        <article class="tecnologia"><p class="t-meta" data-i18n="beautify.t1k">Logica lato server</p><h3>PHP</h3><p data-i18n="beautify.t1">Backend con mysqli, sessioni, permessi e operazioni CRUD.</p><a class="t-meta filo" href="https://www.php.net/manual/en/intro-whatis.php" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="beautify.t2k">Dati e relazioni</p><h3>MySQL</h3><p data-i18n="beautify.t2">Le associazioni utente-salone permettono di gestire più attività con ruoli distinti.</p><a class="t-meta filo" href="https://dev.mysql.com/doc/refman/8.4/en/what-is-mysql.html" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+    </div>
+</section>
+
+<section class="sezione risultato" aria-labelledby="beautify-risultato">
+    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="beautify-risultato" data-split data-i18n-html="beautify.result">Un gestionale vero, <em>non il solito esercizio.</em> Ci tengo a ripeterlo.</h2>
+    <p class="risultato__note rivela" data-i18n="beautify.resultText">La versione consegnata propone slot ogni 30 minuti e applica un anticipo minimo di 15 minuti; agenda e prenotazione pubblica usano gli stessi controlli.</p>
+</section>
+
+<a class="prossimo" href="../autoofficina/" data-velo-n="02.4" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Prossimo caso</span><span>04 / 04</span></span>
+    <span class="prossimo__nome" data-velo-nome>Spinotto Felice</span>
+</a>
+
+</main>

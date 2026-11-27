@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
 <link rel="stylesheet" href="/assets/ingresso/ingresso.css">
-<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/nero/nero.css">
+<script src="/assets/nero/proiettile.js" defer></script>
 <script src="/assets/nero/nero.js" defer></script>
 <script src="/assets/github-stats.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -62,11 +64,11 @@
     <div class="indice__griglia">
         <nav class="indice__voci" aria-label="Pages" data-i18n-aria="nav.aria">
             <ol>
-                <li><a href="/en/" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Entrance</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">who, what, where</span></a></li>
-                <li><a href="/en/#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Work</span><span class="indice__nota t-meta" data-i18n="nav.workNote">four case studies</span></a></li>
-                <li><a href="/en/chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">About</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">person, path, method</span></a></li>
-                <li><a href="/en/fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">After hours</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">when nobody asks me to</span></a></li>
-                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contact</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">it starts with an email</span></a></li>
+                <li><a href="/en/" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Entrance</span><span class="indice__nota t-meta" data-i18n="nav.homeNote">it starts here</span></a></li>
+                <li><a href="/en/#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Work</span><span class="indice__nota t-meta" data-i18n="nav.workNote">four, and they hold up</span></a></li>
+                <li><a href="/en/chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">About</span><span class="indice__nota t-meta" data-i18n="nav.aboutNote">more or less everything</span></a></li>
+                <li><a href="/en/fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">After hours</span><span class="indice__nota t-meta" data-i18n="nav.afterNote">when nobody's looking</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contact</span><span class="indice__nota t-meta" data-i18n="nav.contactNote">I reply, eventually</span></a></li>
             </ol>
         </nav>
         <div class="indice__lato">
@@ -82,7 +84,7 @@
             <div>
                 <p class="t-meta" data-i18n="nav.elsewhere">Elsewhere</p>
                 <ul>
-                    <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game</span></a></li>
+                    <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game, if you've got time</span></a></li>
                     <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                     <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
                 </ul>
@@ -100,15 +102,15 @@
     <p class="t-meta" style="grid-column:1/-1">(04) <span data-i18n="fo.label">After hours — the computer stays on a little longer than it should</span></p>
     <h1 class="fo-apertura__titolo" id="fo-titolo" data-split data-i18n-html="fo.title">After <em>hours.</em></h1>
     <div class="fo-apertura__piede">
-        <p class="fo-apertura__sotto rivela" data-i18n="fo.sub">What I do when nobody asks me to.</p>
-        <p class="fo-apertura__testo rivela" style="--ritardo:.12s" data-i18n="fo.intro">I write code with no particular purpose, mostly because I like understanding how things work. Every now and then I rebuild from scratch something that already worked, just because in the meantime I figured out a better way to do it. Yes, I know.</p>
+        <p class="fo-apertura__sotto rivela" data-i18n="fo.sub">What I do when nobody's looking. More or less always.</p>
+        <p class="fo-apertura__testo rivela" style="--ritardo:.12s" data-i18n="fo.intro">I write code with no particular purpose, because I like understanding how things work. Every now and then I rebuild something that already worked. Yes, I know.</p>
     </div>
 </section>
 
 <section class="sezione" aria-labelledby="aperte-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(i) <span data-i18n="fo.openLabel">Still open</span></p>
-        <h2 class="sezione-titolo" id="aperte-titolo" data-split data-i18n-html="fo.openTitle">Four things that stay open <em>when I log off.</em></h2>
+        <h2 class="sezione-titolo" id="aperte-titolo" data-split data-i18n-html="fo.openTitle">Four things that stay open <em>when I log off. If I log off.</em></h2>
     </header>
     <div class="aperte">
         <article class="aperta rivela"><p class="t-meta">01</p><h3 data-i18n="fo.o1">Free time</h3><p data-i18n="fo.o1text">Personal projects. They almost always start from a small idea and end up becoming a real tool, with a few more features than needed.</p></article>
@@ -123,7 +125,7 @@
     <header class="sezione-testa">
         <p class="t-meta">(ii) <span data-i18n="fo.consolesLabel">Consoles</span></p>
         <h2 class="sezione-titolo" id="console-titolo" data-split data-i18n-html="fo.consolesTitle">The consoles I modded. <em>None were mistreated.</em></h2>
-        <p class="sezione-nota rivela" data-i18n="fo.consolesNote">Hover over an object to turn on the light.</p>
+        <p class="sezione-nota rivela" data-i18n="fo.consolesNote">Hover over an object to turn on the light. Warranties long expired.</p>
     </header>
     <div class="vetrina">
         <figure class="oggetto rivela">
@@ -148,7 +150,7 @@
 <section class="sezione" aria-labelledby="giochi-titolo">
     <header class="sezione-testa">
         <p class="t-meta">(iii) <span data-i18n="fo.gamesLabel">Favourite games</span></p>
-        <h2 class="sezione-titolo" id="giochi-titolo" data-split data-i18n-html="fo.gamesTitle">Three games. <em>Don’t judge.</em></h2>
+        <h2 class="sezione-titolo" id="giochi-titolo" data-split data-i18n-html="fo.gamesTitle">Three games. <em>Don't judge. Fine, judge.</em></h2>
     </header>
     <div class="giochi">
         <article class="gioco rivela">
@@ -181,7 +183,7 @@
 <section class="sezione social" id="social" aria-labelledby="social-titolo" data-social>
     <header class="sezione-testa">
         <p class="t-meta">(vii) <span data-i18n="fo.socialLabel">Elsewhere, live</span></p>
-        <h2 class="sezione-titolo" id="social-titolo" data-split data-i18n-html="fo.socialTitle">Where I post, <em>counted every hour.</em></h2>
+        <h2 class="sezione-titolo" id="social-titolo" data-split data-i18n-html="fo.socialTitle">Where I post, <em>counted every hour by a patient robot.</em></h2>
         <p class="sezione-nota rivela" data-i18n="fo.socialNote">Only public counts and content I picked. No follower lists. A GitHub Action checks the profiles every hour.</p>
     </header>
     <div class="social__griglia">
@@ -248,22 +250,22 @@
     <p class="t-meta" id="parola-titolo">(vi) <span data-i18n="fo.wordLabel">Word of the day</span></p>
     <p class="parola-giorno__parola" lang="el" data-split>ταξίδι</p>
     <p class="t-meta" data-i18n="fo.wordMeaning">taxídi — journey</p>
-    <p class="parola-giorno__nota rivela" data-i18n="fo.wordNote">I start from a simple question about how something works, and end up reading far more than I really needed to.</p>
+    <p class="parola-giorno__nota rivela" data-i18n="fo.wordNote">I start from a simple question about how something works and end up reading far more than necessary. Today it was Greek's turn.</p>
 </section>
 
 </main>
 
 <footer class="colophon" id="contatti">
     <div class="colophon__testa">
-        <p class="t-meta"><span data-i18n="foot.label">Contact</span> — <span data-i18n="foot.label2">end of the page</span></p>
+        <p class="t-meta"><span data-i18n="foot.label">Contact</span> — <span data-i18n="foot.label2">this is where it ends</span></p>
         <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Write to <em>me.</em></h2>
     </div>
     <div class="colophon__corpo">
-        <p class="colophon__sotto" data-i18n="foot.sub">For a job, a project, or just to tell me you liked the site (or didn’t). I reply, I promise.</p>
+        <p class="colophon__sotto" data-i18n="foot.sub">For a job, a project, or to tell me you don't like the site. I reply. Not right away, but I reply.</p>
         <div class="colophon__contatto">
             <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
             <div class="colophon__azioni t-meta">
-                <button type="button" data-copia-email data-i18n="foot.copy">Copy the address</button>
+                <button type="button" data-copia-email data-i18n="foot.copy">Copy the address (it's quicker)</button>
                 <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
             </div>
         </div>
@@ -283,12 +285,12 @@
             <ul>
                 <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
                 <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
-                <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game</span></a></li>
+                <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game, if you've got time</span></a></li>
             </ul>
         </div>
         <div>
             <h3 class="t-meta" data-i18n="foot.where">Where</h3>
-            <p data-i18n="foot.whereText">Sassuolo, province of Modena, Italy.</p>
+            <p data-i18n="foot.whereText">Sassuolo, near Modena. Yes, the tiles one.</p>
             <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
         </div>
         <div>
@@ -301,7 +303,7 @@
         </div>
     </div>
     <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
-    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Written by hand: HTML, CSS, JavaScript and WebGL</span></p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Written by hand. No templates were harmed.</span></p>
 </footer>
 
 <script src="/assets/ingresso/ingresso.js" defer></script>

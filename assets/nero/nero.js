@@ -27,7 +27,7 @@
             identity: 'Junior developer & graphic designer.\nSassuolo, Italia.\nIngegneria Informatica @ UNIMORE.',
             skills: 'Web          HTML / CSS / JavaScript\nBackend      Node.js / PHP\nDati         PostgreSQL / MySQL / T-SQL\nGrafica      social / interfacce\nAutomazione  PLC / SQL Server',
             languages: 'italiano     madrelingua\ninglese      C1\nspagnolo     B1\ngreco        B1\ncinese       A2',
-            unknown: 'Comando non trovato. Digita help.',
+            unknown: 'Comando non trovato. Digita help, non ti giudico.',
             projects: 'Progetti:',
             coffee: '418 Sono una teiera. Chiedilo a oakvx di persona.',
             slotFree: n => n === 1 ? '<em>1</em> orario libero' : `<em>${n}</em> orari liberi`,
@@ -38,7 +38,7 @@
             locale: 'it-IT',
             commitDay: (n, d) => `${n} commit · ${d}`,
             commitChart: (n, g) => `${n} commit in ${g} giorni di lavoro`,
-            commitLive: 'aggiornato da GitHub',
+            commitLive: 'aggiornato da GitHub, adesso',
             commitOffline: 'GitHub non risponde: dati dell’ultima pubblicazione',
             following: 'seguiti',
             posts: 'post',
@@ -64,7 +64,7 @@
             identity: 'Junior developer & graphic designer.\nSassuolo, Italy.\nComputer Engineering @ UNIMORE.',
             skills: 'Web          HTML / CSS / JavaScript\nBackend      Node.js / PHP\nData         PostgreSQL / MySQL / T-SQL\nDesign       social / interfaces\nAutomation   PLC / SQL Server',
             languages: 'Italian      native\nEnglish      C1\nSpanish      B1\nGreek        B1\nChinese      A2',
-            unknown: 'Command not found. Type help.',
+            unknown: 'Command not found. Type help, I won’t judge.',
             projects: 'Projects:',
             coffee: '418 I’m a teapot. Ask oakvx in person.',
             slotFree: n => n === 1 ? '<em>1</em> free slot' : `<em>${n}</em> free slots`,
@@ -75,7 +75,7 @@
             locale: 'en-GB',
             commitDay: (n, d) => `${n} commit${n === 1 ? '' : 's'} · ${d}`,
             commitChart: (n, g) => `${n} commits over ${g} working days`,
-            commitLive: 'updated from GitHub',
+            commitLive: 'updated from GitHub, just now',
             commitOffline: 'GitHub is not answering: data from the last publish',
             following: 'following',
             posts: 'posts',
@@ -159,7 +159,7 @@
         const panel = $('[data-indice]');
         if (!button || !panel) return;
         const label = $('[data-burger-label]', button);
-        const outside = $$('body > *:not([data-indice]):not([data-testata]):not(.velo):not(.cursore)');
+        const outside = $$('body > *:not([data-indice]):not([data-testata]):not(.sparo):not(.cursore)');
         let open = false;
 
         const here = location.pathname.replace(/index\.html$/, '');
@@ -232,54 +232,6 @@
             dispatchEvent(new CustomEvent('nero:movimento', { detail: { paused: calm() } }));
         });
         sync();
-    }
-
-    /* ----------------------------------------------------------------------
-       Velo: sipario tra una pagina e l'altra, con numero e titolo di arrivo.
-       ---------------------------------------------------------------------- */
-    function initVelo() {
-        const velo = document.createElement('div');
-        velo.className = 'velo';
-        velo.setAttribute('aria-hidden', 'true');
-        velo.innerHTML = '<div class="velo__testo"><span class="velo__n t-meta"></span><span class="velo__titolo"></span></div>';
-        document.body.append(velo);
-        const n = $('.velo__n', velo), titolo = $('.velo__titolo', velo);
-
-        // Arrivo
-        let arrivo = null;
-        try { arrivo = JSON.parse(sessionStorage.getItem('nero-velo') || 'null'); sessionStorage.removeItem('nero-velo'); } catch {}
-        if (root.classList.contains('velo-entra')) {
-            if (arrivo && !calm()) {
-                n.textContent = arrivo.n || '';
-                titolo.textContent = arrivo.titolo || '';
-                velo.classList.add('scopre');
-                velo.addEventListener('animationend', e => { if (e.target === velo) velo.className = 'velo'; }, { once: false });
-            }
-            root.classList.remove('velo-entra');
-        }
-
-        document.addEventListener('click', e => {
-            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-            const a = e.target.closest('a[href]');
-            if (!a || a.target === '_blank' || a.hasAttribute('download') || a.dataset.noVelo !== undefined) return;
-            const url = new URL(a.href, location.href);
-            if (url.origin !== location.origin || !/^https?:$/.test(url.protocol)) return;
-            if (url.pathname === location.pathname && url.search === location.search) return; // ancora nella stessa pagina
-            if (calm()) return;
-            e.preventDefault();
-            const dest = {
-                n: a.dataset.veloN || '',
-                titolo: a.dataset.velo || (a.querySelector('[data-velo-nome]')?.textContent || a.textContent).trim().split('\n')[0].slice(0, 40)
-            };
-            n.textContent = dest.n;
-            titolo.textContent = dest.titolo;
-            try { sessionStorage.setItem('nero-velo', JSON.stringify(dest)); } catch {}
-            velo.className = 'velo copre';
-            setTimeout(() => { location.href = url.href; }, 820);
-        });
-
-        // Ritorno dalla cache del browser: il velo non deve restare chiuso.
-        addEventListener('pageshow', e => { if (e.persisted) velo.className = 'velo'; });
     }
 
     /* ----------------------------------------------------------------------
@@ -429,7 +381,14 @@
                 word.append(s);
             });
         }
-        requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.add('pronta')));
+        const via = () => requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.add('pronta')));
+        // con il menu d'ingresso aperto le lettere aspettano: salgono mentre il menu si alza
+        if (root.classList.contains('ingresso-attivo')) {
+            let partito = false;
+            const parti = () => { if (!partito) { partito = true; setTimeout(via, calm() ? 0 : 420); } };
+            addEventListener('ingresso:esce', parti, { once: true });
+            addEventListener('ingresso:chiuso', parti, { once: true });
+        } else via();
         if (!finePointer.matches) return;
         const letters = $$('.apertura__lettera', sec);
         let raf = 0, mx = 0, my = 0;
@@ -450,61 +409,6 @@
             });
         });
         sec.addEventListener('pointerleave', () => letters.forEach(l => { l.style.transform = ''; }));
-    }
-
-    /* ----------------------------------------------------------------------
-       Indice dei lavori: anteprima che segue il cursore, inclinata dalla velocità.
-       ---------------------------------------------------------------------- */
-    function initAnteprime() {
-        const list = $('[data-anteprime]');
-        if (!list || !finePointer.matches || !matchMedia('(min-width: 901px)').matches) return;
-        const box = document.createElement('div');
-        box.className = 'anteprima';
-        box.setAttribute('aria-hidden', 'true');
-        const tag = document.createElement('span');
-        tag.className = 'anteprima__etichetta t-meta';
-        box.append(tag);
-        const items = $$('.lavoro', list);
-        const imgs = items.map(item => {
-            const src = $('.lavoro__img', item);
-            const img = new Image();
-            img.src = src?.currentSrc || src?.src || '';
-            img.alt = '';
-            if (src?.classList.contains('contiene')) img.className = 'contiene';
-            box.append(img);
-            return img;
-        });
-        document.body.append(box);
-        let x = 0, y = 0, bx = 0, by = 0, vx = 0, raf = 0, active = false;
-        const loop = () => {
-            const k = calm() ? 1 : .14;
-            const nx = bx + (x - bx) * k, ny = by + (y - by) * k;
-            vx = nx - bx; bx = nx; by = ny;
-            const skew = Math.max(-12, Math.min(12, vx * .6));
-            box.style.transform = `translate(${bx + 28}px, ${by - box.offsetHeight / 2}px) rotate(${skew * .25}deg) skewX(${-skew}deg)`;
-            raf = active || Math.abs(vx) > .05 ? requestAnimationFrame(loop) : 0;
-        };
-        list.addEventListener('pointermove', e => {
-            x = e.clientX; y = e.clientY;
-            if (!raf) raf = requestAnimationFrame(loop);
-        });
-        items.forEach((item, i) => {
-            const link = $('.lavoro__link', item);
-            const show = () => {
-                active = true;
-                imgs.forEach((im, j) => im.classList.toggle('attiva', i === j));
-                tag.textContent = $('.lavoro__n', item)?.textContent + ' — ' + ($('.lavoro__tipo', item)?.textContent || '');
-                box.classList.add('visibile');
-                list.classList.add('ha-anteprima');
-                if (!raf) raf = requestAnimationFrame(loop);
-            };
-            link.addEventListener('pointerenter', e => { if (!bx) { bx = x = e.clientX; by = y = e.clientY; } show(); });
-        });
-        list.addEventListener('pointerleave', () => {
-            active = false;
-            box.classList.remove('visibile');
-            list.classList.remove('ha-anteprima');
-        });
     }
 
     /* ----------------------------------------------------------------------
@@ -838,6 +742,7 @@
             if (dati.ultimo) set('[data-commit-ultimo]', dati.ultimo);
             grafico.setAttribute('aria-label', t('commitChart')(dati.totale, date.length));
             if (stato) stato.textContent = live === true ? t('commitLive') : live === false ? t('commitOffline') : '';
+            dispatchEvent(new CustomEvent('nero:commit', { detail: dati }));
         };
 
         const leggi = async () => {
@@ -914,9 +819,20 @@
         let dati = {}, scelte = {};
         try { dati = (await (await fetch(new URL('social.json', base), { cache: 'no-cache' })).json()).account || {}; } catch {}
         try { scelte = await (await fetch(new URL('scelte.json', base), { cache: 'no-cache' })).json(); } catch {}
+        // conteggi scritti a mano (Instagram): valgono solo se c'è il numero di follower
+        try {
+            const manuale = await (await fetch(new URL('manuale.json', base), { cache: 'no-cache' })).json();
+            for (const [chiave, v] of Object.entries(manuale)) {
+                if (!v || typeof v !== 'object' || v.follower == null) continue;
+                const [piattaforma, handle] = chiave.split(':');
+                dati[chiave] = { piattaforma, handle, ...(dati[chiave] || {}), ...v, aggiornato: v.aggiornato ? v.aggiornato + 'T12:00:00' : null, storia: dati[chiave]?.storia || [] };
+            }
+        } catch {}
         const asset = p => new URL(p.replace(/^assets\/social\//, ''), base).href;
 
         $$('.profilo', box).forEach(card => {
+            // una card senza nessun conteggio disponibile resta nascosta
+            if (!$$('[data-scegli]', card).some(b => dati[b.dataset.scegli]?.follower != null)) { card.hidden = true; return; }
             const campo = k => $(`[data-campo-profilo="${k}"]`, card);
             const mostra = chiave => {
                 const [piattaforma, handle] = chiave.split(':');
@@ -979,18 +895,129 @@
         });
     }
 
+
+    /* ----------------------------------------------------------------------
+       Scroll morbido con inerzia (solo rotella, solo puntatore fine).
+       Lo scroll resta quello nativo: tastiera, barra e ancore funzionano come sempre.
+       ---------------------------------------------------------------------- */
+    function initScorriMorbido() {
+        if (!finePointer.matches) return;
+        let target = scrollY, current = scrollY, raf = 0, attivo = false;
+        const max = () => document.documentElement.scrollHeight - innerHeight;
+        const loop = () => {
+            current += (target - current) * .1;
+            if (Math.abs(target - current) < .4) { current = target; raf = 0; attivo = false; }
+            else raf = requestAnimationFrame(loop);
+            window.scrollTo({ top: current, behavior: 'instant' });
+        };
+        addEventListener('wheel', e => {
+            if (calm() || e.ctrlKey || e.defaultPrevented) return;
+            if (root.classList.contains('indice-aperto') || root.classList.contains('ingresso-attivo')) return;
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+            if (e.target.closest?.('.term__out, .profilo__scelte, dialog, textarea, select')) return;
+            e.preventDefault();
+            if (!attivo) current = target = scrollY;
+            const d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
+            target = Math.max(0, Math.min(max(), target + d));
+            attivo = true;
+            if (!raf) raf = requestAnimationFrame(loop);
+        }, { passive: false });
+        // tastiera, barra di scorrimento, ancore: si riparte da dove si trova davvero la pagina
+        addEventListener('scroll', () => { if (!attivo) current = target = scrollY; }, { passive: true });
+        addEventListener('keydown', () => { if (attivo) { cancelAnimationFrame(raf); raf = 0; attivo = false; } });
+    }
+
+    /* ----------------------------------------------------------------------
+       Uscita dall'apertura: scorrendo, le lettere si separano a velocità diverse
+       e la scultura arretra nel buio.
+       ---------------------------------------------------------------------- */
+    function initUscita() {
+        const sec = $('.apertura');
+        if (!sec) return;
+        let ticking = false;
+        const update = () => {
+            ticking = false;
+            const p = calm() ? 0 : Math.min(1, Math.max(0, scrollY / (sec.offsetHeight * .85)));
+            sec.style.setProperty('--uscita', p.toFixed(4));
+        };
+        addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+        addEventListener('nero:movimento', update);
+        update();
+    }
+
+    /* ----------------------------------------------------------------------
+       Nastro: una riga di testo che scorre e si inclina con la velocità dello scroll.
+       ---------------------------------------------------------------------- */
+    function initNastro() {
+        $$('[data-nastro]').forEach(box => {
+            const riga = $('.nastro__riga', box);
+            const pezzo = $('.nastro__pezzo', riga);
+            if (!riga || !pezzo) return;
+            // abbastanza copie da coprire due schermi
+            const copie = Math.max(2, Math.ceil((innerWidth * 2) / Math.max(1, pezzo.offsetWidth)));
+            for (let i = 1; i < copie; i++) riga.append(pezzo.cloneNode(true));
+            let x = 0, v = 0, lastY = scrollY, raf = 0, visibile = false;
+            const w = () => pezzo.offsetWidth;
+            const loop = () => {
+                const dy = scrollY - lastY;
+                lastY = scrollY;
+                v += (dy - v) * .12;
+                x -= .45 + Math.abs(v) * .35;
+                if (-x >= w()) x += w();
+                const skew = Math.max(-14, Math.min(14, v * -.5));
+                riga.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0) skewX(${skew.toFixed(2)}deg)`;
+                raf = visibile && !calm() && !document.hidden ? requestAnimationFrame(loop) : 0;
+            };
+            const kick = () => { if (!raf && visibile && !calm()) raf = requestAnimationFrame(loop); };
+            quandoVisibile(box, () => { visibile = true; kick(); }, () => { visibile = false; });
+            document.addEventListener('visibilitychange', kick);
+            addEventListener('nero:movimento', () => { if (calm()) riga.style.transform = ''; else kick(); });
+        });
+    }
+
+
+    /* ----------------------------------------------------------------------
+       Numeri dal vivo nell'apertura: commit (dagli stessi dati della sezione
+       "Questo sito"), follower TikTok (da social.json), ultimo commit.
+       ---------------------------------------------------------------------- */
+    function initVivi() {
+        const box = $('.apertura__vivi');
+        if (!box) return;
+        const set = (k, v) => { const el = $(`[data-vivo="${k}"]`, box); if (el && v != null) el.textContent = v; };
+        const commit = dati => {
+            set('commit', dati.totale.toLocaleString(t('locale')));
+            if (dati.ultimo) set('ultimo', dati.ultimo);
+            const barre = $('[data-vivo="barre"]', box);
+            const oggi = new Date(); oggi.setHours(12, 0, 0, 0);
+            const giorni = [];
+            for (let i = 13; i >= 0; i--) {
+                const d = new Date(oggi); d.setDate(d.getDate() - i);
+                const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                giorni.push(dati.giorni?.[k] || 0);
+            }
+            const max = Math.max(1, ...giorni);
+            barre.replaceChildren(...giorni.map(n => { const i = document.createElement('i'); i.style.height = (n / max * 100).toFixed(1) + '%'; return i; }));
+        };
+        try { const s = JSON.parse($('#commit-sito-dati')?.textContent || 'null'); if (s) commit(s); } catch {}
+        addEventListener('nero:commit', e => commit(e.detail));
+        const base = new URL('assets/social/', new URL($('script[src*="nero/nero.js"]').src, location.href).href.replace(/assets\/nero\/nero\.js.*$/, ''));
+        fetch(new URL('social.json', base), { cache: 'no-cache' })
+            .then(r => r.json())
+            .then(d => { const n = d.account?.['tiktok:oakvx.sh']?.follower; if (n != null) set('tiktok', n.toLocaleString(t('locale'))); })
+            .catch(() => {});
+    }
+
     function init() {
         initLingue();
         initOra();
         initScorrimento();
         initIndice();
         initMovimento();
-        initVelo();
+        window.OAKVX?.proiettile?.avvia?.();
         initCursore();
         initApertura();
         initRivela();
         initParoleScorrevoli();
-        initAnteprime();
         initCopia();
         initDecifra();
         initParallasse();
@@ -1000,7 +1027,11 @@
         initOrari();
         initLuce();
         initCommitSito();
+        initVivi();
         initSocial();
+        initScorriMorbido();
+        initUscita();
+        initNastro();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

@@ -1,0 +1,101 @@
+<main id="main" class="pagina pagina--caso" data-progetto="synk">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label2">Caso 02 / 04</span><span data-i18n="synk.kind">Automazione conversazionale</span><span data-i18n="synk.kind2">Applicazione web</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>Synk<b>.</b></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="synk.intro">Synk gestisce le richieste e gli appuntamenti che arrivano su WhatsApp. Dietro la chat ci sono un intent picker, un database locale, Google Calendar e una dashboard per chi segue l’attività.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="synk.role">Intent picker, backend, dashboard e fine-tuning</dd></div>
+            <div><dt>Stack</dt><dd>Node.js / PostgreSQL / llama.cpp</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="synk.focus">Automazione conversazionale</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="synk.kind2">Applicazione web</dd></div>
+        </dl>
+    </div>
+</section>
+
+<figure class="caso-figura rivela-maschera">
+    <img src="../../assets/work/synk-cover.webp" width="1600" height="813" alt="Synkris: materiale promozionale del progetto Synk" data-i18n-alt="synk.alt">
+    <figcaption class="t-meta"><span data-i18n="synk.caption">Synkris — materiale promozionale fornito</span><span>fig. 01</span></figcaption>
+</figure>
+
+<section class="sezione caso-capo" aria-labelledby="synk-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="synk-concept" data-split data-i18n-html="synk.conceptTitle">Chi scrive resta su WhatsApp. <em>Il resto succede dietro, in silenzio.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="synk.concept1">Si può scrivere con parole proprie, in modo naturale: Synk riconosce il motivo del messaggio e apre la conversazione giusta.</p>
+        <p data-i18n="synk.concept2">Durante lo scambio raccoglie i dettagli necessari prima di passare la richiesta al sistema gestionale.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="synk.problem">Il punto di partenza: le richieste arrivano in chat, ognuna scritta a modo suo, e devono diventare appuntamenti ordinati. Senza che nessuno debba leggere tutto a mano.</p>
+</section>
+
+<section class="sezione" aria-labelledby="synk-flusso">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <h2 id="synk-flusso" data-split data-i18n-html="synk.flowTitle">Dalla chat <em>al lavoro fatto. Senza telefonate.</em></h2>
+    </div>
+    <div class="flusso rivela" data-flusso>
+        <span class="flusso__segnale" aria-hidden="true"></span>
+        <div class="flusso__nodo">
+            <p class="t-meta">01</p>
+            <h3 data-i18n="synk.n1">Messaggio WhatsApp</h3>
+            <p data-i18n="synk.n1text">La persona scrive al salone. Il nucleo normalizza il testo, controlla i duplicati e recupera il contesto della chat.</p>
+            <p class="flusso__bolla" data-bolla data-i18n="synk.b1">Che orari fate sabato?</p>
+            <p class="flusso__bolla" data-bolla hidden data-i18n="synk.b2">Posso spostare l’appuntamento di giovedì?</p>
+            <p class="flusso__bolla" data-bolla hidden data-i18n="synk.b3">Vorrei prenotare un taglio.</p>
+        </div>
+        <div class="flusso__nodo">
+            <p class="t-meta">02</p>
+            <h3>Intent picker</h3>
+            <p data-i18n="synk.n2text">Capisce che cosa serve e seleziona il percorso adatto. Regex e logica personalizzata lavorano insieme.</p>
+        </div>
+        <div class="flusso__nodo">
+            <p class="t-meta">03</p>
+            <h3 data-i18n="synk.n3">Il flusso giusto</h3>
+            <ul class="flusso__vie">
+                <li data-i18n="synk.v1">Informazioni</li>
+                <li data-i18n="synk.v2">Modifica</li>
+                <li data-i18n="synk.v3">Nuova prenotazione</li>
+            </ul>
+        </div>
+        <div class="flusso__nodo">
+            <p class="t-meta">04</p>
+            <h3 data-i18n="synk.n4">Gestione</h3>
+            <p data-i18n="synk.n4text">Database, Google Calendar e dashboard: gli appuntamenti si ritrovano in entrambi i posti.</p>
+        </div>
+    </div>
+    <p class="t-meta" style="margin-top:1rem" data-i18n="synk.flowNote">Messaggi di esempio, scritti per questa pagina. Passa su una strada per sceglierla.</p>
+</section>
+
+<section class="sezione" aria-labelledby="synk-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <h2 id="synk-architettura" data-split data-i18n-html="synk.archTitle">Il mio lavoro, <em>pezzo per pezzo.</em></h2>
+        <p class="caso-capo__testo rivela" data-i18n="synk.archText">Ho lavorato sul backend Node.js e sul pannello gestionale. Ho anche fatto fine-tuning di modelli quantizzati da 4B con llama.cpp.</p>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3>Intent picker</h3><p data-i18n="synk.m1">Capisce il motivo del messaggio e seleziona il percorso adatto.</p><span class="modulo__file t-meta">Node.js · Regex</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="synk.m2t">Database e calendario</h3><p data-i18n="synk.m2">Il database locale raccoglie appuntamenti, servizi, persone del team e dati dell’attività. Gli appuntamenti si ritrovano anche in Google Calendar.</p><span class="modulo__file t-meta">PostgreSQL</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="synk.m3t">Dashboard gestionale</h3><p data-i18n="synk.m3">Da qui il team aggiorna i dati e consulta le analitiche sull’attività.</p><span class="modulo__file t-meta" data-i18n="synk.m3f">Pannello web</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3>Fine-tuning</h3><p data-i18n="synk.m4">Fine-tuning di modelli quantizzati da 4B usando llama.cpp.</p><span class="modulo__file t-meta">llama.cpp · 4B</span></li>
+    </ul>
+    <div class="tecnologie">
+        <article class="tecnologia"><p class="t-meta">Backend</p><h3>Node.js</h3><p data-i18n="synk.t1">Collega i messaggi in arrivo ai flussi di Synk e coordina chat, dati e calendario.</p><a class="t-meta filo" href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="synk.t2k">Riconoscimento testo</p><h3>Regex</h3><p data-i18n="synk.t2">Insieme alla logica personalizzata, riconoscono i messaggi ricevuti su WhatsApp.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="synk.t3k">Database relazionale</p><h3>PostgreSQL</h3><p data-i18n="synk.t3">Conserva i dati dell’attività e li rende disponibili per aggiornamenti e analitiche in dashboard.</p><a class="t-meta filo" href="https://www.postgresql.org/about/" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta">Fine-tuning · 4B</p><h3>llama.cpp</h3><p data-i18n="synk.t4">Fine-tuning di modelli quantizzati da 4B.</p><a class="t-meta filo" href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+    </div>
+</section>
+
+<section class="sezione risultato" aria-labelledby="synk-risultato">
+    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="synk-risultato" data-split data-i18n-html="synk.result">Un messaggio scritto male che diventa <em>un appuntamento in calendario.</em></h2>
+    <p class="risultato__note rivela" data-i18n="synk.resultText">Gli appuntamenti finiscono nel database locale e su Google Calendar; la dashboard permette di modificare i dati e leggere le analitiche sull’attività.</p>
+</section>
+
+<a class="prossimo" href="../beautify/" data-velo-n="02.3" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Prossimo caso</span><span>03 / 04</span></span>
+    <span class="prossimo__nome" data-velo-nome>Beautify</span>
+</a>
+
+</main>

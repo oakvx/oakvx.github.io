@@ -479,6 +479,14 @@
         new ResizeObserver(resize).observe(box);
         resize();
         box.classList.add('pronto');
+        // se il menu d'ingresso è aperto, i punti restano sparsi e si ricompongono quando si entra nel sito
+        if (root.classList.contains('ingresso-attivo') && !calm()) {
+            morphing = false;
+            let partito = false;
+            const parti = () => { if (partito) return; partito = true; morph = 0; morphing = true; kick(); };
+            addEventListener('ingresso:esce', parti, { once: true });
+            addEventListener('ingresso:chiuso', parti, { once: true });
+        }
         kick();
     }
 

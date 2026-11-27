@@ -72,12 +72,23 @@ Alla prima pagina aperta in una sessione compare un menu a tutto schermo ("Ciao,
 
 ## Sistema di pagine
 
+Le pagine italiane si **generano** da `scripts/pagine/`: `testata.html` e `colophon.html` sono uguali per tutte, `corpi/*.html` contiene il corpo di ciascuna. Dopo una modifica:
+
+```bash
+python3 scripts/genera_pagine.py   # riscrive le pagine italiane, conservando i metadati SEO
+python3 scripts/build_static.py    # rigenera en/ e sitemap.xml
+```
+
 Tutte le pagine (home, chi-sono, casi studio, fuori-orario, 404, crediti) usano lo stesso sistema "Nero": nero `#050505`, bianco caldo `#E8E6E1`, accento cremisi `#C81035`, grafite `#292929`. Direzione e regole sono descritte in `docs/superpowers/specs/2026-11-26-sito-nero-design.md`.
 
 - `assets/nero/nero.css` contiene token, tipografia, testata, indice, colophon e le composizioni di ogni pagina. Ogni caso studio ha la propria impaginazione (`[data-progetto]`).
 - `assets/nero/nero.js` gestisce lingua, ora di Sassuolo, indice a tutto schermo, sipario tra le pagine, cursore, rivelazioni, anteprime dei lavori, copia dell'email, terminale `portfolio.sh` e i momenti interattivi dei casi studio (lyric video, flusso di Synk, orari di Beautify, luce di Spinotto Felice). Ogni modulo parte solo se trova il proprio markup.
-- Testata, indice e colophon sono uguali in tutte le pagine: se li modifichi, modificali ovunque.
+- Testata, indice e colophon stanno una volta sola in `scripts/pagine/`.
 - Il sipario usa `sessionStorage` (`nero-velo`) per mostrare numero e titolo della pagina di arrivo.
+- Le misure fluide usano l'unità `--u = min(1vw, 1.9vh)`: su un monitor largo e basso seguono l'altezza, così titoli e spazi restano in proporzione; oltre 1680px il contenuto resta centrato.
+- **Banco di lavoro**: griglia fissa a 1px sotto ogni pagina (`body::after`), croci agli angoli delle aperture, tacche d'angolo al posto dei riquadri pieni (`.term`, `.lyric`, `.flusso`, `.orari`, `.profilo`, `.tecnologie`, `.oggetto__luce`, `.gioco__copertina`). In home la scultura sta dentro un cerchio di misura con mirino cremisi, accanto a una colonna di numeri dal vivo (commit del sito, follower TikTok, ora, ultimo commit).
+- **Transizione tra le pagine**: `assets/nero/proiettile.js` intercetta i clic sui link interni (non con Ctrl/Cmd, nuove schede, download, ancore nella stessa pagina o movimento ridotto) e disegna lampo, proiettile e un fascio di luce con "oakvx." che copre la pagina; la successiva si apre dalla stessa banda. Su computer `assets/nero/pistola.js` carica dopo la pagina la pistola 3D (`assets/nero/pistola/pistola.glb`, Poly Haven, CC0) con three.js del gioco, tramite la import map `three` presente in ogni pagina. Regole e tempi hanno test in `test/sito/` (`node --test 'test/sito/*.test.mjs'`).
+- Esperienza in home: scroll morbido con inerzia (solo rotella), apertura che si scompone scorrendo (`--uscita`), nastro di testo legato alla velocità dello scroll; scegliendo "Sito" nel menu d'ingresso la scultura si ricompone e le lettere salgono. Tutto si spegne con movimento ridotto o "Ferma animazioni".
 
 ## Internazionalizzazione
 
@@ -104,7 +115,8 @@ Tutte le pagine (home, chi-sono, casi studio, fuori-orario, 404, crediti) usano 
 ## Commit del sito e profili social
 
 - **Commit del sito** (home, sezione "Questo sito"): totale, giorni di lavoro e istogramma per giorno dei commit di questo repository. `nero.js` li legge dall'API pubblica di GitHub (`/repos/oakvx/oakvx.github.io/commits`, cache di un'ora in `localStorage`, chiave `oakvx-commit-sito-v1`); senza rete restano i valori scritti nella pagina alla pubblicazione.
-- **Profili social** (Fuori orario): Instagram @oakvx, TikTok @oakvx.sh e @uvst.oakvx. La GitHub Action [`social.yml`](.github/workflows/social.yml) esegue ogni ora `scripts/social.mjs`, che legge solo i conteggi pubblici e l'avatar e aggiorna `assets/social/social.json`; il commit parte solo quando un valore cambia, e se una piattaforma non risponde resta l'ultimo valore valido.
+- **Profili social** (Fuori orario): TikTok @oakvx.sh e @uvst.oakvx si aggiornano da soli. La GitHub Action [`social.yml`](.github/workflows/social.yml) esegue ogni ora `scripts/social.mjs`, che legge solo i conteggi pubblici e l'avatar e aggiorna `assets/social/social.json`; il commit parte solo quando un valore cambia, e se una piattaforma non risponde resta l'ultimo valore valido.
+- Instagram @oakvx non mostra i conteggi senza accesso, quindi si aggiorna a mano in `assets/social/manuale.json` (follower, seguiti, post, data). Finché `follower` è `null` la card Instagram resta nascosta.
 - Le storie e i video da mostrare nelle card si scelgono a mano in `assets/social/scelte.json`: per ogni account un elenco di `{ "tipo", "titolo", "immagine", "link" }`, con le immagini in `assets/social/scelte/`.
 
 ## Sviluppo locale

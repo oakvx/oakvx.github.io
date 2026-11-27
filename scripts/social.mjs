@@ -2,8 +2,7 @@
 /* Conteggi pubblici dei profili social, aggiornati ogni ora dalla GitHub Action
  * .github/workflows/social.yml. Solo numeri pubblici e avatar: nessun elenco di follower.
  *
- *   Instagram  @oakvx
- *   TikTok     @oakvx.sh, @uvst.oakvx
+ *   TikTok     @oakvx.sh, @uvst.oakvx   (Instagram @oakvx: a mano, in manuale.json)
  *
  * Scrive assets/social/social.json (e gli avatar in assets/social/) solo quando un valore cambia;
  * se una piattaforma non risponde conserva l'ultimo valore valido. Node 22, nessuna dipendenza.
@@ -15,8 +14,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = path.join(ROOT, 'assets/social');
 const FILE = path.join(DIR, 'social.json');
+// Instagram non mostra i conteggi a chi non ha fatto l'accesso: @oakvx si aggiorna a mano
+// in assets/social/manuale.json. La funzione instagram() resta per un eventuale uso futuro.
 const ACCOUNTS = [
-    { piattaforma: 'instagram', handle: 'oakvx' },
     { piattaforma: 'tiktok', handle: 'oakvx.sh' },
     { piattaforma: 'tiktok', handle: 'uvst.oakvx' }
 ];

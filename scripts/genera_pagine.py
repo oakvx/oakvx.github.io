@@ -37,7 +37,7 @@ PAGES = [
     ('magazzino/scala-40/index.html', 'magazzino-scala40', '../../', '/magazzino/scala-40/', 'M.4', 'gm.scala40', 'Scala 40', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scala40.js'),
     ('magazzino/scopa/index.html', 'magazzino-scopa', '../../', '/magazzino/scopa/', 'M.3', 'gm.scopa', 'Scopa', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scopa.js'),
     ('magazzino/briscola/index.html', 'magazzino-briscola', '../../', '/magazzino/briscola/', 'M.2', 'gm.briscola', 'Briscola', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/briscola.js'),
-    ('magazzino/blackjack/index.html', 'magazzino-blackjack', '../../', '/magazzino/blackjack/', 'M.1', 'gm.blackjack', 'Blackjack', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/blackjack.js'),
+    ('magazzino/blackjack/index.html', 'magazzino-blackjack', '../../', '/magazzino/blackjack/', 'M.1', 'gm.blackjack', 'Blackjack', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/regia.js magazzino/blackjack.js'),
 ]
 
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.

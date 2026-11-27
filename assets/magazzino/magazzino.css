@@ -95,3 +95,24 @@
     [data-gioco="scala-40"] .tavolo__mano { gap: 0; padding-left: 1.4rem; }
     [data-gioco="scala-40"] .tavolo__carta--mano { margin-left: -1.4rem; }
 }
+
+/* Blackjack 3D */
+.bj3d { display: grid; gap: 0; border: 1px solid var(--linea-forte); background: #0a0503; }
+.bj3d__scena { position: relative; height: min(72vh, 46rem); min-height: 26rem; overflow: hidden; }
+.bj3d__scena canvas { display: block; width: 100%; height: 100%; }
+.bj3d__fumetto {
+    position: absolute; left: 0; top: 0; max-width: 16rem; padding: .6rem .85rem; pointer-events: none;
+    background: #f4f1ea; color: #050505; font: 600 clamp(.95rem, 1.6vw, 1.15rem)/1.25 var(--sans);
+    border-radius: 1rem; box-shadow: 0 .4rem 1.2rem rgb(0 0 0 / .45);
+    opacity: 0; transition: opacity .18s;
+}
+.bj3d__fumetto::after { content: ""; position: absolute; left: 50%; bottom: -.55rem; border: .6rem solid transparent; border-top-color: #f4f1ea; border-bottom: 0; transform: translateX(-50%); }
+.bj3d__fumetto.acceso { opacity: 1; }
+.bj3d__barra { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .8rem 1.4rem; padding: 1rem 1.2rem; border-top: 1px solid var(--linea); background: #0d0a08; }
+.bj3d__msg { font: italic 400 clamp(1.05rem, 1.7vw, 1.35rem)/1.3 var(--serif); color: var(--bianco-80); }
+.bj3d__saldo { justify-self: end; }
+.bj3d__azioni { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .6rem; }
+.bj3d__azione { padding: .85rem 1.25rem; border: 1px solid var(--bianco-40); background: none; color: var(--bianco); font: 400 .8rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; touch-action: manipulation; }
+.bj3d__azione:hover:not([disabled]) { background: var(--bianco); color: var(--nero); }
+.bj3d__azione[disabled] { opacity: .35; cursor: default; }
+@media (max-width: 760px) { .bj3d__scena { height: 62vh; } .bj3d__azioni { justify-content: center; } }

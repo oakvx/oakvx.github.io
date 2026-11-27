@@ -34,9 +34,9 @@
         return true;
     }
 
-    /** La pistola 3D vale il peso solo su un computer vero. */
+    /** La pistola 3D parte ovunque ci sia WebGL, telefoni compresi, salvo movimento ridotto. */
     function usaPistola(ambiente) {
-        return !!(ambiente.puntatoreFine && ambiente.larghezza >= 900 && ambiente.webgl && !ambiente.calmo);
+        return !!(ambiente.webgl && !ambiente.calmo);
     }
 
     /** Stato della sequenza d'uscita al tempo ms (ogni valore 0..1). */

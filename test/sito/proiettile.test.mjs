@@ -31,8 +31,8 @@ test('vaFatta: con movimento ridotto non spara mai', () => {
 test('usaPistola: solo puntatore fine, almeno 900px, WebGL e senza calma', () => {
     const ok = { puntatoreFine: true, larghezza: 1440, webgl: true, calmo: false };
     assert.equal(p.usaPistola(ok), true);
-    assert.equal(p.usaPistola({ ...ok, puntatoreFine: false }), false);
-    assert.equal(p.usaPistola({ ...ok, larghezza: 899 }), false);
+    assert.equal(p.usaPistola({ ...ok, puntatoreFine: false }), true);
+    assert.equal(p.usaPistola({ ...ok, larghezza: 390 }), true);
     assert.equal(p.usaPistola({ ...ok, webgl: false }), false);
     assert.equal(p.usaPistola({ ...ok, calmo: true }), false);
 });

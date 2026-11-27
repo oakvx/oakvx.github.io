@@ -113,6 +113,8 @@ window.OAKVX_EN = {
     'home.archiveAll': 'All repositories on github.com/oakvx',
     'home.archiveGame': 'Rather explore? There’s also',
 
+    'home.noteHold': 'press and hold: it breaks, then puts itself back together',
+    'home.noteLight': 'the light follows the cursor. nothing else does',
     'home.liveAria': 'Live numbers',
     'home.liveCommits': 'Commits to this site',
     'home.liveFollowers': 'followers',

@@ -721,6 +721,16 @@ html.sparo-arrivo::after {
 @media (max-aspect-ratio: 23/20) { .apertura__mirino { left: 50%; width: min(70vw, 44vh); } }
 
 
+
+/* Annotazioni accanto alla scultura: una riga, una freccia sottile */
+.apertura__nota { position: absolute; white-space: nowrap; color: var(--bianco-60); text-transform: none; letter-spacing: .02em; }
+.apertura__nota::before { content: ""; position: absolute; top: 50%; height: 1px; width: 3.2rem; background: var(--bianco-40); }
+.apertura__nota--a { top: 12%; right: 100%; margin-right: 1rem; }
+.apertura__nota--a::before { left: calc(100% + .6rem); transform: rotate(18deg); transform-origin: left center; }
+.apertura__nota--b { bottom: 8%; left: 92%; margin-left: 3.8rem; }
+.apertura__nota--b::before { right: calc(100% + .6rem); transform: rotate(-16deg); transform-origin: right center; }
+@media (max-width: 1100px) { .apertura__nota { display: none; } }
+
 /* Colonna dei numeri dal vivo, a destra della scultura */
 .apertura__vivi {
     position: absolute; z-index: 1;

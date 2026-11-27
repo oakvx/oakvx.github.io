@@ -1902,3 +1902,13 @@ body:has(.pagina--contatti) .colophon__corpo { display: none; }
 .gelatina:focus-visible + .gelatina__nota,
 .gelatine li.mostra .gelatina__nota { opacity: 1; transform: translate(-50%, 0); }
 @media (max-width: 760px) { .gelatine { gap: .9rem .7rem; } }
+
+/* Magazzino: tasto in testata */
+.testata__magazzino {
+    display: inline-flex; align-items: center; padding: .42rem .6rem;
+    border: 1px solid var(--cremisi); color: var(--bianco);
+    font: 400 .72rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+    transition: background .2s;
+}
+.testata__magazzino:hover, .testata__magazzino[aria-current="page"] { background: var(--cremisi); }
+@media (max-width: 420px) { .testata__ora { display: none; } }

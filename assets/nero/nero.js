@@ -429,7 +429,14 @@
                 word.append(s);
             });
         }
-        requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.add('pronta')));
+        const via = () => requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.add('pronta')));
+        // con il menu d'ingresso aperto le lettere aspettano: salgono mentre il menu si alza
+        if (root.classList.contains('ingresso-attivo')) {
+            let partito = false;
+            const parti = () => { if (!partito) { partito = true; setTimeout(via, calm() ? 0 : 420); } };
+            addEventListener('ingresso:esce', parti, { once: true });
+            addEventListener('ingresso:chiuso', parti, { once: true });
+        } else via();
         if (!finePointer.matches) return;
         const letters = $$('.apertura__lettera', sec);
         let raf = 0, mx = 0, my = 0;
@@ -979,6 +986,86 @@
         });
     }
 
+
+    /* ----------------------------------------------------------------------
+       Scroll morbido con inerzia (solo rotella, solo puntatore fine).
+       Lo scroll resta quello nativo: tastiera, barra e ancore funzionano come sempre.
+       ---------------------------------------------------------------------- */
+    function initScorriMorbido() {
+        if (!finePointer.matches) return;
+        let target = scrollY, current = scrollY, raf = 0, attivo = false;
+        const max = () => document.documentElement.scrollHeight - innerHeight;
+        const loop = () => {
+            current += (target - current) * .1;
+            if (Math.abs(target - current) < .4) { current = target; raf = 0; attivo = false; }
+            else raf = requestAnimationFrame(loop);
+            window.scrollTo({ top: current, behavior: 'instant' });
+        };
+        addEventListener('wheel', e => {
+            if (calm() || e.ctrlKey || e.defaultPrevented) return;
+            if (root.classList.contains('indice-aperto') || root.classList.contains('ingresso-attivo')) return;
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+            if (e.target.closest?.('.term__out, .profilo__scelte, dialog, textarea, select')) return;
+            e.preventDefault();
+            if (!attivo) current = target = scrollY;
+            const d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
+            target = Math.max(0, Math.min(max(), target + d));
+            attivo = true;
+            if (!raf) raf = requestAnimationFrame(loop);
+        }, { passive: false });
+        // tastiera, barra di scorrimento, ancore: si riparte da dove si trova davvero la pagina
+        addEventListener('scroll', () => { if (!attivo) current = target = scrollY; }, { passive: true });
+        addEventListener('keydown', () => { if (attivo) { cancelAnimationFrame(raf); raf = 0; attivo = false; } });
+    }
+
+    /* ----------------------------------------------------------------------
+       Uscita dall'apertura: scorrendo, le lettere si separano a velocità diverse
+       e la scultura arretra nel buio.
+       ---------------------------------------------------------------------- */
+    function initUscita() {
+        const sec = $('.apertura');
+        if (!sec) return;
+        let ticking = false;
+        const update = () => {
+            ticking = false;
+            const p = calm() ? 0 : Math.min(1, Math.max(0, scrollY / (sec.offsetHeight * .85)));
+            sec.style.setProperty('--uscita', p.toFixed(4));
+        };
+        addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+        addEventListener('nero:movimento', update);
+        update();
+    }
+
+    /* ----------------------------------------------------------------------
+       Nastro: una riga di testo che scorre e si inclina con la velocità dello scroll.
+       ---------------------------------------------------------------------- */
+    function initNastro() {
+        $$('[data-nastro]').forEach(box => {
+            const riga = $('.nastro__riga', box);
+            const pezzo = $('.nastro__pezzo', riga);
+            if (!riga || !pezzo) return;
+            // abbastanza copie da coprire due schermi
+            const copie = Math.max(2, Math.ceil((innerWidth * 2) / Math.max(1, pezzo.offsetWidth)));
+            for (let i = 1; i < copie; i++) riga.append(pezzo.cloneNode(true));
+            let x = 0, v = 0, lastY = scrollY, raf = 0, visibile = false;
+            const w = () => pezzo.offsetWidth;
+            const loop = () => {
+                const dy = scrollY - lastY;
+                lastY = scrollY;
+                v += (dy - v) * .12;
+                x -= .45 + Math.abs(v) * .35;
+                if (-x >= w()) x += w();
+                const skew = Math.max(-14, Math.min(14, v * -.5));
+                riga.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0) skewX(${skew.toFixed(2)}deg)`;
+                raf = visibile && !calm() && !document.hidden ? requestAnimationFrame(loop) : 0;
+            };
+            const kick = () => { if (!raf && visibile && !calm()) raf = requestAnimationFrame(loop); };
+            quandoVisibile(box, () => { visibile = true; kick(); }, () => { visibile = false; });
+            document.addEventListener('visibilitychange', kick);
+            addEventListener('nero:movimento', () => { if (calm()) riga.style.transform = ''; else kick(); });
+        });
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1001,6 +1088,9 @@
         initLuce();
         initCommitSito();
         initSocial();
+        initScorriMorbido();
+        initUscita();
+        initNastro();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

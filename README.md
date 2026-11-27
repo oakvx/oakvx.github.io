@@ -78,6 +78,8 @@ Tutte le pagine (home, chi-sono, casi studio, fuori-orario, 404, crediti) usano 
 - `assets/nero/nero.js` gestisce lingua, ora di Sassuolo, indice a tutto schermo, sipario tra le pagine, cursore, rivelazioni, anteprime dei lavori, copia dell'email, terminale `portfolio.sh` e i momenti interattivi dei casi studio (lyric video, flusso di Synk, orari di Beautify, luce di Spinotto Felice). Ogni modulo parte solo se trova il proprio markup.
 - Testata, indice e colophon sono uguali in tutte le pagine: se li modifichi, modificali ovunque.
 - Il sipario usa `sessionStorage` (`nero-velo`) per mostrare numero e titolo della pagina di arrivo.
+- Le misure fluide usano l'unità `--u = min(1vw, 1.9vh)`: su un monitor largo e basso seguono l'altezza, così titoli e spazi restano in proporzione; oltre 1680px il contenuto resta centrato.
+- Esperienza in home: scroll morbido con inerzia (solo rotella), apertura che si scompone scorrendo (`--uscita`), nastro di testo legato alla velocità dello scroll; scegliendo "Sito" nel menu d'ingresso la scultura si ricompone e le lettere salgono. Tutto si spegne con movimento ridotto o "Ferma animazioni".
 
 ## Internazionalizzazione
 

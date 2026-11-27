@@ -94,6 +94,7 @@
         };
         if (calmo()) { fine(); return; }
         sblocca();
+        dispatchEvent(new CustomEvent('ingresso:esce'));
         dialog.classList.add('esce');
         setTimeout(fine, 700);
     }

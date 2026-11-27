@@ -1,0 +1,87 @@
+<main id="main" class="pagina pagina--caso" data-progetto="brat">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label1">Caso 01 / 04</span><span data-i18n="brat.kind">Editor creativo · browser</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split><span>brat</span> <span>animator.</span></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="brat.intro">Testi sincronizzati, timeline modificabile e rendering su Canvas, riuniti in un editor che esporta il video direttamente dal browser. Nato per gioco, arrivato alla versione 5.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="brat.role">Sviluppo dell’applicazione</dd></div>
+            <div><dt>Stack</dt><dd>JavaScript / Canvas</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="brat.focus">Timing, motion, export</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="brat.project">Strumento nel browser · v5</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://oakvx.github.io/bratAnimator/" target="_blank" rel="noopener noreferrer" data-i18n="case.openApp">Apri l’app</a><a href="https://github.com/oakvx/bratAnimator" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </div>
+</section>
+
+<figure class="caso-figura rivela-maschera">
+    <img src="../../assets/work/brat-editor.webp" width="1440" height="1000" alt="Interfaccia di Brat Animator 4.0 con timeline, anteprima video e controlli di stile" data-i18n-alt="brat.alt">
+    <figcaption class="t-meta"><span data-i18n="brat.caption">Brat Animator 4.0 — schermata reale con testo dimostrativo</span><span>fig. 01</span></figcaption>
+</figure>
+
+<section class="sezione caso-capo" aria-labelledby="brat-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="brat-concept" data-split data-i18n-html="brat.conceptTitle">Dal testo al video, <em>senza uscire dal browser.</em></h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="brat.concept1">Ho riunito importazione dei testi, ricerca su LRCLIB, modifica del timing, stile ed esportazione in un unico editor statico.</p>
+        <p data-i18n="brat.concept2">Testi e media vengono elaborati nel browser: non c’è un backend a cui mandarli.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="brat.problem">Il punto di partenza: animare un testo a tempo di musica, riga per riga, senza un programma di montaggio.</p>
+</section>
+
+<section class="sezione" aria-labelledby="brat-processo">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <h2 id="brat-processo" data-split data-i18n-html="brat.processTitle">Tre passaggi, <em>dal timestamp al fotogramma.</em></h2>
+    </div>
+    <ol class="passi">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="brat.s1">Si parte dal testo</h3><p data-i18n="brat.s1text">L’editor importa testi LRC con timestamp e permette di cercarli su LRCLIB. Le righe e i tempi restano modificabili.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="brat.s2">Dal timing ai fotogrammi</h3><p data-i18n="brat.s2text">La timeline collega parole e caratteri al tempo. Canvas 2D disegna il testo con lo stile e le animazioni scelte nell’editor.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="brat.s3">Esportare il video</h3><p data-i18n="brat.s3text">WebCodecs e un muxer MP4 permettono l’export veloce solo video nei browser compatibili. MediaRecorder registra in tempo reale e può includere l’audio caricato.</p></li>
+    </ol>
+    <div class="lyric rivela" data-lyric role="img" aria-label="Dimostrazione: tre righe LRC che diventano testo animato, parola per parola" data-i18n-aria="brat.lyricAria">
+        <ol class="lyric__lrc" aria-hidden="true">
+            <li data-t="0" data-parole="gabriele lucia"><span>[00:00.00]</span>gabriele lucia</li>
+            <li data-t="2" data-parole="codice e grafica"><span>[00:02.00]</span>codice e grafica</li>
+            <li data-t="4" data-parole="demo portfolio"><span>[00:04.00]</span>demo portfolio</li>
+        </ol>
+        <div class="lyric__palco" aria-hidden="true"><p class="lyric__riga"></p></div>
+        <div class="lyric__tempo t-meta" aria-hidden="true"><span data-lyric-tempo>00:00.00</span><span class="lyric__traccia"><i></i></span><span>00:06.00</span></div>
+    </div>
+    <p class="t-meta" style="margin-top:1rem" data-i18n="brat.lyricNote">Le stesse tre righe dimostrative della schermata, rianimate qui con CSS e JavaScript.</p>
+</section>
+
+<section class="sezione" aria-labelledby="brat-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <h2 id="brat-architettura" data-split data-i18n-html="brat.archTitle">Quattro moduli, <em>ognuno con un compito.</em></h2>
+        <p class="caso-capo__testo rivela" data-i18n="brat.archText">I moduli del repository separano parsing, timing, riconoscimento dei media e verifica delle capacità di esportazione.</p>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="brat.m1">Parsing LRC</h3><p data-i18n="brat.m1text">Parsing LRC, timestamp Enhanced LRC, righe modificabili e migrazione del formato progetto.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/core.js" target="_blank" rel="noopener noreferrer">core.js</a></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="brat.m2">Timeline e timing</h3><p data-i18n="brat.m2text">Timeline condivisa per parole e caratteri; segmentazione Unicode e analisi dell’energia audio per guidare le stime.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/timing.js" target="_blank" rel="noopener noreferrer">timing.js</a></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="brat.m3">Riconoscimento media</h3><p data-i18n="brat.m3text">Riconoscimento dei tipi di media e dei riferimenti YouTube usati come anteprima.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/media.js" target="_blank" rel="noopener noreferrer">media.js</a></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="brat.m4">Capacità del browser</h3><p data-i18n="brat.m4text">Controlli WebCodecs per l’export MP4 veloce: le capacità disponibili decidono il percorso di esportazione.</p><a class="t-meta filo" href="https://github.com/oakvx/bratAnimator/blob/main/assets/js/export.js" target="_blank" rel="noopener noreferrer">export.js</a></li>
+    </ul>
+    <div class="tecnologie">
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t1k">Logica dell’editor</p><h3>JavaScript</h3><p data-i18n="brat.t1">Coordina parsing, timestamp, timeline e controlli di stile.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t2k">Disegno dei fotogrammi</p><h3>Canvas 2D</h3><p data-i18n="brat.t2">Trasforma la timeline delle parole in immagini animate, con stile, posizione ed effetti.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t3k">Codifica video</p><h3>WebCodecs</h3><p data-i18n="brat.t3">Il percorso di export veloce, solo video. L’app verifica il supporto del browser prima di renderlo disponibile.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t4k">Tempo reale</p><h3>MediaRecorder</h3><p data-i18n="brat.t4">Export in tempo reale, anche con audio locale o da un URL media diretto compatibile.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+        <article class="tecnologia"><p class="t-meta" data-i18n="brat.t5k">Archiviazione</p><h3>IndexedDB</h3><p data-i18n="brat.t5">Conserva i media caricati; lo stato del progetto resta in localStorage.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
+    </div>
+</section>
+
+<section class="sezione risultato" aria-labelledby="brat-risultato">
+    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="brat-risultato" data-split data-i18n-html="brat.result">Un editor completo che vive in <em>una pagina statica.</em></h2>
+    <p class="risultato__note rivela" data-i18n="brat.resultText">Oggi è alla versione 5.0, con editor semplice e avanzato. Legge LRC, TTML, YAML, WebVTT e SRT, ed esporta MP4 e WebM senza server.</p>
+</section>
+
+<a class="prossimo" href="../synk/" data-velo-n="02.2" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Prossimo caso</span><span>02 / 04</span></span>
+    <span class="prossimo__nome" data-velo-nome>Synk</span>
+</a>
+
+</main>

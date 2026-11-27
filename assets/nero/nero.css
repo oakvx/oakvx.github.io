@@ -1667,7 +1667,7 @@ html.sparo-arrivo::after {
    Tacche: quattro angoli segnati a 1px al posto dei riquadri pieni.
    I componenti si aggiungono all'elenco; il loro bordo pieno sparisce.
    -------------------------------------------------------------------------- */
-.term, .lyric, .flusso, .orari, .profilo, .tecnologie {
+.term, .lyric, .flusso, .orari, .profilo, .tecnologie, .oggetto__luce, .gioco__copertina {
     --tacca: 12px;
     --tacca-colore: rgb(232 230 225 / .5);
     border-color: transparent;
@@ -1773,3 +1773,8 @@ html.sparo-arrivo::after {
     linear-gradient(rgb(200 16 53 / .7), rgb(200 16 53 / .7)) 50% 50% / 22% 1px no-repeat,
     linear-gradient(var(--linea), var(--linea)) 50% 0 / 1px 100% no-repeat,
     linear-gradient(var(--linea), var(--linea)) 0 50% / 100% 1px no-repeat; }
+
+/* Fuori orario: le console come oggetti appoggiati sul piano di lavoro */
+.oggetto__luce { border-bottom: 0; }
+.oggetto figcaption { padding-top: .6rem; border-top: 1px solid var(--linea-forte); }
+.gioco__copertina { padding: 10px; background-color: transparent; }

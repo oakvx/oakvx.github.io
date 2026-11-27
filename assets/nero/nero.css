@@ -1763,3 +1763,13 @@ html.sparo-arrivo::after {
     .caso-scheda dt { margin: 0; }
     .caso-apertura__intro { grid-column: 1 / span 6; }
 }
+
+/* Chi sono: il ritratto in punti dentro un cerchio di misura, come la scultura della home */
+.ritratto__scena::before, .ritratto__scena::after { content: ""; position: absolute; pointer-events: none; z-index: 1; border-radius: 50%; }
+.ritratto__scena::before { inset: 9%; border: 1px solid rgb(232 230 225 / .14); }
+.ritratto__scena::after { inset: 24%; border: 1px dashed rgb(232 230 225 / .08); }
+.ritratto__scena { background:
+    linear-gradient(rgb(200 16 53 / .7), rgb(200 16 53 / .7)) 50% 50% / 1px 22% no-repeat,
+    linear-gradient(rgb(200 16 53 / .7), rgb(200 16 53 / .7)) 50% 50% / 22% 1px no-repeat,
+    linear-gradient(var(--linea), var(--linea)) 50% 0 / 1px 100% no-repeat,
+    linear-gradient(var(--linea), var(--linea)) 0 50% / 100% 1px no-repeat; }

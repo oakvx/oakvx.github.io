@@ -28,6 +28,62 @@ function ambiente(renderer) {
     return mappa;
 }
 
+/* Proiettile al rame tornito (LatheGeometry), con "oakvx." inciso lungo il fianco:
+   una texture disegnata su canvas fa da colore, rilievo e rugosità dell'incisione. */
+function creaProiettile() {
+    const r = .17;
+    const profilo = [new THREE.Vector2(0, 0), new THREE.Vector2(r * .92, 0), new THREE.Vector2(r, .03)];
+    for (let i = 1; i <= 24; i++) profilo.push(new THREE.Vector2(r, .03 + .52 * i / 24));          // fianco
+    for (let i = 1; i <= 24; i++) {                                                                 // ogiva
+        const a = i / 24;
+        profilo.push(new THREE.Vector2(r * Math.cos(a * Math.PI / 2) ** .8 * (1 - a * .02), .55 + .45 * Math.sin(a * Math.PI / 2)));
+    }
+    const geo = new THREE.LatheGeometry(profilo, 96);
+    // v della texture: i punti del fianco vanno da 3/51 a 27/51
+    const vDa = 3 / (profilo.length - 1), vA = 27 / (profilo.length - 1);
+
+    const W = 1024, H = 1024;
+    const tela = n => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+    const colore = tela(), rilievo = tela(), ruvido = tela();
+    const scrivi = (c, fondo, inchiostro) => {
+        const g = c.getContext('2d');
+        g.fillStyle = fondo; g.fillRect(0, 0, W, H);
+        // il testo corre lungo l'asse (v), su una striscia di u davanti
+        const y0 = (1 - vA) * H, y1 = (1 - vDa) * H;
+        g.save();
+        g.translate(W * .25, (y0 + y1) / 2);
+        g.rotate(-Math.PI / 2);
+        g.fillStyle = inchiostro;
+        g.textAlign = 'center'; g.textBaseline = 'middle';
+        g.font = '700 ' + Math.round(W * .085) + 'px "Nero Sans", Arial, sans-serif';
+        const lung = y1 - y0;
+        const m = g.measureText('oakvx.').width;
+        g.scale(Math.min(1, lung * .86 / m), 1);
+        g.fillText('oakvx.', 0, 0);
+        g.restore();
+        // due anelli di zigrinatura alle estremità del fianco
+        g.fillStyle = inchiostro;
+        g.fillRect(0, y1 - H * .012, W, H * .006);
+        g.fillRect(0, y0 + H * .006, W, H * .006);
+    };
+    scrivi(colore, '#ffffff', '#3a3a3a');
+    scrivi(rilievo, '#ffffff', '#000000');
+    scrivi(ruvido, '#5a5a5a', '#e0e0e0');
+    const tex = (c, srgb) => { const t = new THREE.CanvasTexture(c); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t; };
+    const mat = new THREE.MeshStandardMaterial({
+        color: 0xc8773e, metalness: 1, roughness: 1,
+        map: tex(colore, true), bumpMap: tex(rilievo), bumpScale: 3, roughnessMap: tex(ruvido)
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    geo.rotateZ(-Math.PI / 2);                   // asse sul +x: la punta guarda dove vola
+    geo.translate(-.5, 0, 0);                    // centrato
+    const proiettile = new THREE.Group();        // gira su sé stesso (rigatura)
+    proiettile.add(mesh);
+    const volo = new THREE.Group();              // posizione, orientamento e scala del volo
+    volo.add(proiettile);
+    return { volo, proiettile };
+}
+
 export async function creaPistola(contenitore) {
     const canvas = document.createElement('canvas');
     canvas.className = 'sparo__pistola';
@@ -77,27 +133,6 @@ export async function creaPistola(contenitore) {
         const cartucciaSciolta = cx > .044 && cx < .063 && cy > -.04 && cy < -.004;
         if (pistolaInBasso && !cartucciaSciolta) tenuti.push(indici[t], indici[t + 1], indici[t + 2]);
     }
-    // la cartuccia sciolta accanto alla pistola diventa il proiettile: se ne tiene la punta
-    const cartuccia = [];
-    let cimaY = -Infinity;
-    for (let t = 0; t < indici.length; t += 3) {
-        let cx = 0, cy = 0;
-        for (let k = 0; k < 3; k++) { cx += pos.getX(indici[t + k]); cy += pos.getY(indici[t + k]); }
-        cx /= 3; cy /= 3;
-        if (cx > .044 && cx < .063 && cy > -.04 && cy < -.004) {
-            cartuccia.push(indici[t], indici[t + 1], indici[t + 2]);
-            for (let k = 0; k < 3; k++) cimaY = Math.max(cimaY, pos.getY(indici[t + k]));
-        }
-    }
-    const punte = [];
-    for (let t = 0; t < cartuccia.length; t += 3) {
-        let cy = 0;
-        for (let k = 0; k < 3; k++) cy += pos.getY(cartuccia[t + k]);
-        if (cy / 3 > cimaY - .011) punte.push(cartuccia[t], cartuccia[t + 1], cartuccia[t + 2]);
-    }
-    const geoProiettile = originale.geometry.clone().applyMatrix4(originale.matrixWorld);
-    geoProiettile.setIndex(punte);
-
     geo.setIndex(tenuti);
     const pistola = new THREE.Mesh(geo, originale.material);
 
@@ -122,17 +157,7 @@ export async function creaPistola(contenitore) {
     gruppo.add(perno);
     scena.add(gruppo);
 
-    const scatolaP = new THREE.Box3();
-    for (const i of punte) scatolaP.expandByPoint(v.fromBufferAttribute(pos, i));
-    const centroP = scatolaP.getCenter(new THREE.Vector3());
-    const ogiva = new THREE.Mesh(geoProiettile, originale.material);
-    ogiva.position.copy(centroP).multiplyScalar(-1);
-    const proiettile = new THREE.Group();        // asse lungo della punta su +x, cioè verso il volo
-    proiettile.add(ogiva);
-    ogiva.parent.rotation.z = -Math.PI / 2;
-    const volo = new THREE.Group();
-    volo.add(proiettile);
-    volo.scale.setScalar(perno.scale.x * 1.4);   // un filo più grande del vero, se no non si vede
+    const { volo, proiettile } = creaProiettile();
     volo.visible = false;
     scena.add(volo);
     // la luce del colpo: illumina la pistola per un istante
@@ -172,25 +197,20 @@ export async function creaPistola(contenitore) {
     function disegna() { renderer.render(scena, camera); }
 
     const partenzaMondo = new THREE.Vector3();
-    const raggio = new THREE.Raycaster();
-    const piano = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-    const ndc = new THREE.Vector2();
-    // punto nel mondo che sullo schermo cade in (nx, ny), alla profondità z
-    function suPiano(nx, ny, z) {
-        piano.constant = -z;
-        raggio.setFromCamera(ndc.set(nx, ny), camera);
-        return raggio.ray.intersectPlane(piano, new THREE.Vector3()) || new THREE.Vector3();
-    }
+    const arrivoMondo = new THREE.Vector3();
+    const scalaPartenza = .16;                   // lunghezza ~0,16: un proiettile accanto a una pistola lunga 1,6
 
     const facile = t => 1 - Math.pow(1 - t, 3);
     let raf = 0;
 
     /* Entra da sinistra, spara (rinculo secco), esce: i tempi arrivano da fase() di proiettile.js. */
     function spara(tempo) {
-        const fase = window.OAKVX.proiettile.fase;
+        const fase = window.OAKVX.proiettile.faseVolo;
         const fuori = riposo.x - 2.4;            // abbastanza a sinistra da essere fuori schermo
         const partenza = volata();
         punta.getWorldPosition(partenzaMondo); // volata() lascia tmp proiettato sullo schermo
+        // arrivo: appena davanti alla camera, al centro dello schermo
+        arrivoMondo.set(0, 0, camera.position.z - .55);
         cancelAnimationFrame(raf);
         const passo = () => {
             const ms = tempo();
@@ -203,15 +223,17 @@ export async function creaPistola(contenitore) {
             punta.getWorldPosition(tmp);
             bagliore.position.copy(tmp);
             bagliore.intensity = (f.lampo || 0) * 6;
-            volo.visible = f.proiettile > 0 && f.proiettile < 1;
+            volo.visible = f.volo > 0 && f.copertura < 1;
             if (volo.visible) {
-                // stessa x sullo schermo della scia: dalla volata a oltre il bordo destro
-                const x0 = partenza.x, xs = x0 + (innerWidth * 1.08 - x0) * f.proiettile;
-                volo.position.copy(suPiano((xs / innerWidth) * 2 - 1, 1 - (partenza.y / innerHeight) * 2, partenzaMondo.z));
-                proiettile.rotation.x += .9;             // rigatura: gira su sé stesso
+                // dalla volata verso la camera: si avvicina, cresce e si gira a mostrare l'incisione
+                const v = f.volo;
+                volo.position.lerpVectors(partenzaMondo, arrivoMondo, v);
+                volo.scale.setScalar(scalaPartenza * (1 + v * 5));
+                volo.rotation.set(0, -.15 - v * .55, -v * .12);
+                proiettile.rotation.x = -Math.PI / 2 + (.75 - v) * .9; // l'incisione arriva di fronte alla fine
             }
             disegna();
-            if (ms < window.OAKVX.proiettile.USCITA_MS + 60) raf = requestAnimationFrame(passo);
+            if (ms < window.OAKVX.proiettile.VOLO_MS + 60) raf = requestAnimationFrame(passo);
         };
         raf = requestAnimationFrame(passo);
     }

@@ -168,6 +168,9 @@
         const inizio = performance.now();
         const tempo = () => performance.now() - inizio;
         if (conPistola) pistola.spara(tempo);
+        // con la pistola il proiettile 3D fa da transizione: niente scia orizzontale
+        const durata = conPistola ? VOLO_MS : USCITA_MS;
+        const statoA = ms => (conPistola ? { ...faseVolo(ms), proiettile: 0, fascio: 0 } : fase(ms));
         let andato = false;
         const vai = () => {
             if (andato) return;
@@ -179,11 +182,11 @@
         };
         const passo = () => {
             const ms = tempo();
-            disegna(fase(ms), volata);
-            if (ms < USCITA_MS) requestAnimationFrame(passo); else vai();
+            disegna(statoA(ms), volata);
+            if (ms < durata) requestAnimationFrame(passo); else vai();
         };
         requestAnimationFrame(passo);
-        setTimeout(vai, USCITA_MS + 200); // anche se la scheda smette di disegnare
+        setTimeout(vai, durata + 200); // anche se la scheda smette di disegnare
     }
 
     /* ------------------------------------------------------------ arrivo */
@@ -203,7 +206,7 @@
             const t = Math.min(1, (performance.now() - inizio) / ARRIVO_MS);
             const a = 1 - Math.pow(1 - t, 3);
             el.style.setProperty('--a', a.toFixed(4));
-            el.style.setProperty('--c', (1 - a).toFixed(4));
+            el.style.setProperty('--c', '1'); // il buio si apre dal centro: il proiettile è appena passato
             if (t < 1) requestAnimationFrame(passo);
             else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); }
         };

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" data-lang-en-url="/en/projects/piko/" data-static-lang="en" data-lang-it-url="/projects/piko/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
+<link rel="stylesheet" href="/assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/nero/nero.css">
+<script src="/assets/nero/proiettile.js" defer></script>
+<script src="/assets/nero/nero.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>piko: a local agent that asks first | Gabriele Lucia</title>
+<meta name="description" content="piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/en/projects/piko/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/projects/piko/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/projects/piko/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/piko/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="piko: a local agent that asks first | Gabriele Lucia">
+<meta property="og:description" content="piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.">
+<meta property="og:url" content="https://oakvx.github.io/en/projects/piko/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-home-en.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="piko: a local agent that asks first | Gabriele Lucia">
+<meta name="twitter:description" content="piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-home-en.png">
+<script type="application/json" id="seo-translations">{"it":{"title":"piko: un agente locale che chiede il permesso | Gabriele Lucia","description":"piko osserva l’app in primo piano, scrive un piano con un modello locale e agisce solo dopo l’approvazione. Windows, Python, Tauri.","canonical":"https://oakvx.github.io/projects/piko/","image":"https://oakvx.github.io/assets/social-home-it.png","image_alt":"Gabriele Lucia / oakvx"},"en":{"title":"piko: a local agent that asks first | Gabriele Lucia","description":"piko looks at the foreground app, writes a plan with a local model and acts only after approval. Windows, Python, Tauri.","canonical":"https://oakvx.github.io/en/projects/piko/","image":"https://oakvx.github.io/assets/social-home-en.png","image_alt":"Gabriele Lucia / oakvx"}}</script>
+</head>
+<body data-pagina="piko">
+<a class="salta" href="#main" data-i18n="ui.skip">Skip to content</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="/en/" aria-label="oakvx, back to the entrance" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — development and design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time></p>
+        <nav class="lingue t-meta" aria-label="Language" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/projects/piko/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="/en/projects/piko/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
+        </nav>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Index</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Site index" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pages" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="/en/" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Entrance</span></a></li>
+                <li><a href="/en/#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Work</span></a></li>
+                <li><a href="/en/chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">About</span></a></li>
+                <li><a href="/en/fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">After hours</span></a></li>
+                <li><a href="#contatti"><span class="indice__n t-meta">05</span><span class="indice__nome" data-i18n="nav.contact">Contact</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Case studies</p>
+                <ul>
+                    <li><a class="filo" href="/en/projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="/en/projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="/en/projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="/en/projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Elsewhere</p>
+                <ul>
+                    <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game, if you've got time</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause animations</span></button>
+        </div>
+    </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>02.5</b><span data-titolo data-i18n="seg.piko">piko</span><span class="segnapagina__barra"><i></i></span></p>
+
+<main id="main" class="pagina pagina--caso" data-progetto="piko">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="pk.label">Case 05 / 07</span><span data-i18n="pk.kind">Local agent · Windows</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>piko<em>.</em></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="pk.intro">An agent that uses your PC like you do, and asks before it touches anything. It looks at the app in front of it, writes a plan with a local model, waits for you to read it and only then clicks and types.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">My role</dt><dd data-i18n="pk.role">Everything: backend, interface, installer</dd></div>
+            <div><dt>Stack</dt><dd>Python · FastAPI · SQLite · React · Tauri</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="pk.focus">Consent, Windows UI Automation</dd></div>
+            <div><dt data-i18n="case.project">Project</dt><dd data-i18n="pk.status">Alpha preview · ★ 10</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://github.com/oakvx/piko" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://github.com/oakvx/piko/releases" target="_blank" rel="noopener noreferrer" data-i18n="pk.releases">Releases</a></p>
+    </div>
+</section>
+
+<section class="sezione caso-capo" aria-labelledby="pk-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="pk-concept" data-split data-i18n-html="pk.conceptTitle">Show me. <em>I'll do it.</em> After you say yes.</h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="pk.concept1">Most agents ask for trust up front and act in the background. piko works the other way round: no cloud, no background screen stream, no action without approval.</p>
+        <p data-i18n="pk.concept2">It reads the window through Windows UI Automation, the same information screen readers use. Screenshots only when you ask, one at a time.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="pk.problem">The starting point: letting a model act on a real PC without handing it the keys to everything.</p>
+</section>
+
+<section class="sezione" aria-labelledby="pk-processo">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Process</span></p>
+        <h2 id="pk-processo" data-split data-i18n-html="pk.processTitle">Five steps. <em>One of them is yours.</em></h2>
+    </div>
+    <ol class="passi passi--cinque">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="pk.s1">Observe</h3><p data-i18n="pk.s1text">Reads the foreground window through UI Automation.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="pk.s2">Plan</h3><p data-i18n="pk.s2text">The local model returns a structured JSON plan.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="pk.s3">You approve</h3><p data-i18n="pk.s3text">Nothing runs until you've read it and said yes.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iv.</span><h3 data-i18n="pk.s4">Execute</h3><p data-i18n="pk.s4text">Only in the apps you granted for this session.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">v.</span><h3 data-i18n="pk.s5">Verify</h3><p data-i18n="pk.s5text">Checks the expected elements are there. If not, it fails out loud.</p></li>
+    </ol>
+</section>
+
+<section class="sezione" aria-labelledby="pk-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(03) <span data-i18n="case.architecture">Architecture</span></p>
+        <h2 id="pk-architettura" data-split data-i18n-html="pk.archTitle">Built to be <em>stopped.</em></h2>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="pk.m1t">Session state</h3><p data-i18n="pk.m1">A state machine on SQLite. A session interrupted by a restart is marked failed, never resumed silently.</p><span class="modulo__file t-meta">Python · SQLite</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="pk.m2t">Permissions</h3><p data-i18n="pk.m2">Per session and per app. Password and credential windows are refused outright.</p><span class="modulo__file t-meta">UI Automation</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="pk.m3t">Teach and Skills</h3><p data-i18n="pk.m3">A consent-based, time-bounded recorder turns a demonstration into a draft Skill: versioned, with rollback. It never records typed characters.</p><span class="modulo__file t-meta">JSON · SQLite</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3>Workfield</h3><p data-i18n="pk.m4">The desktop interface, talking to a loopback-only, token-protected API.</p><span class="modulo__file t-meta">React · Tauri</span></li>
+    </ul>
+</section>
+
+<section class="sezione risultato" aria-labelledby="pk-risultato">
+    <p class="t-meta">(04) <span data-i18n="case.result">Result</span></p>
+    <h2 class="risultato__frase" id="pk-risultato" data-split data-i18n-html="pk.result">An agent you can <em>actually</em> leave alone with your PC.</h2>
+    <p class="risultato__note rivela" data-i18n="pk.resultText">Every push builds a Windows installer; green builds go out as prereleases with a SHA-256 checksum, after a real UI Automation test and an install/uninstall test on hosted Windows. It's still an alpha, and the README says so first.</p>
+</section>
+
+<a class="prossimo" href="/en/projects/yag/" data-velo-n="02.6" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Next case</span><span>06 / 07</span></span>
+    <span class="prossimo__nome" data-velo-nome>yag</span>
+</a>
+
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contact</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Write to <em>me.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">For a job, a project, or to tell me you don't like the site. I reply. Not right away, but I reply.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copy the address (it's quicker)</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Index</h3>
+            <ul>
+                <li><a class="filo" href="/en/" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Entrance</span></a></li>
+                <li><a class="filo" href="/en/#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Work</span></a></li>
+                <li><a class="filo" href="/en/chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">About</span></a></li>
+                <li><a class="filo" href="/en/fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">After hours</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Elsewhere</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="/gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">The 3D game, if you've got time</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Where</h3>
+            <p data-i18n="foot.whereText">Sassuolo, near Modena. Yes, the tiles one.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Notes</h3>
+            <ul>
+                <li><a class="filo" href="/en/assets/CREDITS.html" data-velo-n="06"><span data-velo-nome data-i18n="foot.credits">Material credits</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause animations</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Back to top</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Written by hand. No templates were harmed.</span></p>
+</footer>
+
+<script src="/assets/ingresso/ingresso.js" defer></script>
+</body>
+</html>

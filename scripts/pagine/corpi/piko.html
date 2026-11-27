@@ -1,0 +1,66 @@
+<main id="main" class="pagina pagina--caso" data-progetto="piko">
+
+<section class="caso-apertura" aria-labelledby="caso-titolo">
+    <p class="caso-apertura__meta t-meta"><span data-i18n="pk.label">Caso 05 / 07</span><span data-i18n="pk.kind">Agente locale · Windows</span><span>2026</span></p>
+    <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>piko<em>.</em></h1>
+    <div class="caso-apertura__piede">
+        <p class="caso-apertura__intro rivela" data-i18n="pk.intro">Un agente che usa il PC come lo useresti tu, e chiede prima di toccare qualsiasi cosa. Guarda l’app che hai davanti, scrive un piano con un modello locale, aspetta che tu lo legga e solo dopo clicca e scrive.</p>
+        <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="pk.role">Tutto: backend, interfaccia, installer</dd></div>
+            <div><dt>Stack</dt><dd>Python · FastAPI · SQLite · React · Tauri</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="pk.focus">Consenso, UI Automation di Windows</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="pk.status">Alpha preview · ★ 10</dd></div>
+        </dl>
+        <p class="caso-link rivela" style="--ritardo:.25s"><a href="https://github.com/oakvx/piko" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://github.com/oakvx/piko/releases" target="_blank" rel="noopener noreferrer" data-i18n="pk.releases">Release</a></p>
+    </div>
+</section>
+
+<section class="sezione caso-capo" aria-labelledby="pk-concept">
+    <p class="t-meta">(01) Concept</p>
+    <h2 id="pk-concept" data-split data-i18n-html="pk.conceptTitle">Fammi vedere. <em>Lo faccio io.</em> Dopo che dici sì.</h2>
+    <div class="caso-capo__testo rivela">
+        <p data-i18n="pk.concept1">Quasi tutti gli agenti chiedono fiducia all’inizio e agiscono in sottofondo. piko fa il contrario: niente cloud, niente flusso dello schermo in background, nessuna azione senza approvazione.</p>
+        <p data-i18n="pk.concept2">Legge la finestra con la UI Automation di Windows, le stesse informazioni che usano i lettori di schermo. Screenshot solo quando li chiedi, uno alla volta.</p>
+    </div>
+    <p class="caso-capo__lato rivela" data-i18n="pk.problem">Il punto di partenza: far agire un modello su un PC vero senza dargli le chiavi di tutto.</p>
+</section>
+
+<section class="sezione" aria-labelledby="pk-processo">
+    <div class="caso-capo">
+        <p class="t-meta">(02) <span data-i18n="case.process">Processo</span></p>
+        <h2 id="pk-processo" data-split data-i18n-html="pk.processTitle">Cinque passaggi. <em>Uno è tuo.</em></h2>
+    </div>
+    <ol class="passi passi--cinque">
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">i.</span><h3 data-i18n="pk.s1">Osserva</h3><p data-i18n="pk.s1text">Legge la finestra in primo piano con la UI Automation.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">ii.</span><h3 data-i18n="pk.s2">Pianifica</h3><p data-i18n="pk.s2text">Il modello locale restituisce un piano strutturato in JSON.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iii.</span><h3 data-i18n="pk.s3">Approvi tu</h3><p data-i18n="pk.s3text">Non parte niente finché non l’hai letto e hai detto sì.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">iv.</span><h3 data-i18n="pk.s4">Esegue</h3><p data-i18n="pk.s4text">Solo nelle app che hai autorizzato per questa sessione.</p></li>
+        <li class="passo rivela"><span class="passo__n" aria-hidden="true">v.</span><h3 data-i18n="pk.s5">Verifica</h3><p data-i18n="pk.s5text">Controlla che gli elementi attesi ci siano. Se no, fallisce ad alta voce.</p></li>
+    </ol>
+</section>
+
+<section class="sezione" aria-labelledby="pk-architettura">
+    <div class="caso-capo">
+        <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
+        <h2 id="pk-architettura" data-split data-i18n-html="pk.archTitle">Costruito per essere <em>fermato.</em></h2>
+    </div>
+    <ul class="moduli">
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="pk.m1t">Stato della sessione</h3><p data-i18n="pk.m1">Una macchina a stati su SQLite. Una sessione interrotta da un riavvio viene segnata come fallita, mai ripresa in silenzio.</p><span class="modulo__file t-meta">Python · SQLite</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="pk.m2t">Permessi</h3><p data-i18n="pk.m2">Per sessione e per app. Le finestre di password e credenziali sono rifiutate a priori.</p><span class="modulo__file t-meta">UI Automation</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="pk.m3t">Insegna e Skill</h3><p data-i18n="pk.m3">Un registratore a tempo e con consenso trasforma una dimostrazione in una Skill in bozza: versionata, con rollback. Non registra mai i tasti digitati.</p><span class="modulo__file t-meta">JSON · SQLite</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3>Workfield</h3><p data-i18n="pk.m4">L’interfaccia desktop, che parla con un’API raggiungibile solo in locale e protetta da token.</p><span class="modulo__file t-meta">React · Tauri</span></li>
+    </ul>
+</section>
+
+<section class="sezione risultato" aria-labelledby="pk-risultato">
+    <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
+    <h2 class="risultato__frase" id="pk-risultato" data-split data-i18n-html="pk.result">Un agente che puoi <em>davvero</em> lasciare da solo con il tuo PC.</h2>
+    <p class="risultato__note rivela" data-i18n="pk.resultText">Ogni push produce un installer per Windows; le build verdi escono come prerelease con checksum SHA-256, dopo un test reale di UI Automation e uno di installazione e disinstallazione su Windows. È ancora un’alpha, e il README lo dice per prima cosa.</p>
+</section>
+
+<a class="prossimo" href="../yag/" data-velo-n="02.6" data-cursore="Avanti">
+    <span class="t-meta"><span data-i18n="case.next">Prossimo caso</span><span>06 / 07</span></span>
+    <span class="prossimo__nome" data-velo-nome>yag</span>
+</a>
+
+</main>

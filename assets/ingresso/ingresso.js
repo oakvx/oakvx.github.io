@@ -13,19 +13,19 @@
             label: 'Scegli come visitare il portfolio',
             firma: 'junior web developer · Sassuolo',
             titolo: 'Ciao, sono oakvx.',
-            intro: 'Faccio siti e interfacce, e penso che un\'interfaccia debba raccontare chi la possiede. Qui puoi scegliere: il sito, veloce e chiaro, con progetti, percorso e contatti. Oppure il gioco, dove c\'è un curatore al primo giorno di lavoro e nessuna regola è garantita.',
-            sito: 'Sito', sitoNota: 'progetti, percorso, contatti',
-            gioco: 'Gioco', giocoNota: '3D, da computer, circa 15 minuti',
-            touch: 'Il gioco è pensato per computer con tastiera e mouse: da qui ti conviene il sito.'
+            intro: 'Faccio siti, software e grafica. Puoi scegliere: il sito, che va dritto al punto. Oppure il gioco, dove c\'è un curatore al primo giorno di lavoro e nessuna regola è garantita. Non ti offendi se scegli il sito, tranquillo.',
+            sito: 'Sito', sitoNota: 'progetti, percorso, contatti. Veloce',
+            gioco: 'Gioco', giocoNota: '3D, da computer, circa 15 minuti. Se hai tempo',
+            touch: 'Il gioco vuole tastiera e mouse. Da qui ti conviene il sito, fidati.'
         },
         en: {
             label: 'Choose how to visit the portfolio',
             firma: 'junior web developer · Sassuolo, Italy',
             titolo: 'Hi, I\'m oakvx.',
-            intro: 'I build websites and interfaces, and I think an interface should tell you who owns it. You can choose: the site, fast and clear, with projects, path and contacts. Or the game, with a curator on their first day at work and no rule guaranteed.',
-            sito: 'Site', sitoNota: 'projects, path, contacts',
-            gioco: 'Game', giocoNota: '3D, desktop, about 15 minutes',
-            touch: 'The game is made for a computer with keyboard and mouse: from here, the site will suit you better.'
+            intro: 'I make websites, software and graphics. You can choose: the site, which gets straight to the point. Or the game, with a curator on their first day at work and no rule guaranteed. No hard feelings if you pick the site.',
+            sito: 'Site', sitoNota: 'projects, path, contacts. Quick',
+            gioco: 'Game', giocoNota: '3D, desktop, about 15 minutes. If you have time',
+            touch: 'The game wants a keyboard and mouse. From here, the site is your best bet, trust me.'
         }
     }[lang];
 

@@ -1662,3 +1662,25 @@ html.sparo-arrivo::after {
         left bottom, left bottom, right bottom, right bottom;
     background-repeat: no-repeat;
 }
+
+/* Croci di riferimento ai quattro angoli delle aperture, sul filo del margine. */
+.apertura, .chi-apertura, .caso-apertura, .fo-apertura, .vuoto, .crediti-apertura { position: relative; }
+.apertura::after, .chi-apertura::after, .caso-apertura::after, .fo-apertura::after, .vuoto::after, .crediti-apertura::after {
+    --croce: rgb(232 230 225 / .45);
+    --b: calc(var(--bordo) - 7px);
+    content: ""; position: absolute; z-index: 0; pointer-events: none;
+    inset: calc(var(--testata) + .5rem) 0 .75rem;
+    background-image:
+        linear-gradient(var(--croce), var(--croce)), linear-gradient(var(--croce), var(--croce)),
+        linear-gradient(var(--croce), var(--croce)), linear-gradient(var(--croce), var(--croce)),
+        linear-gradient(var(--croce), var(--croce)), linear-gradient(var(--croce), var(--croce)),
+        linear-gradient(var(--croce), var(--croce)), linear-gradient(var(--croce), var(--croce));
+    background-size: 15px 1px, 1px 15px, 15px 1px, 1px 15px, 15px 1px, 1px 15px, 15px 1px, 1px 15px;
+    background-position:
+        var(--b) 7px, calc(var(--b) + 7px) 0,
+        calc(100% - var(--b)) 7px, calc(100% - var(--b) - 7px) 0,
+        var(--b) calc(100% - 7px), calc(var(--b) + 7px) 100%,
+        calc(100% - var(--b)) calc(100% - 7px), calc(100% - var(--b) - 7px) 100%;
+    background-repeat: no-repeat;
+}
+@media (max-width: 600px) { .apertura::after, .chi-apertura::after, .caso-apertura::after, .fo-apertura::after, .vuoto::after, .crediti-apertura::after { display: none; } }

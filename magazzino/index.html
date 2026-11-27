@@ -18,6 +18,8 @@
 <script src="../assets/nero/gelatina.js" defer></script>
 <script src="../assets/nero/nero.js" defer></script>
 <script src="../assets/magazzino/deposito.js" defer></script>
+<script src="../assets/magazzino/corsia.js" defer></script>
+<script src="../assets/magazzino/magazzino.js" defer></script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Magazzino | oakvx</title>
 <meta name="description" content="Il Magazzino di oakvx: carte siciliane, blackjack con gettoni finti e classici da giocare nel browser. Gratis, senza registrarsi.">
@@ -108,6 +110,20 @@
     <p class="magazzino-apertura__coda rivela" style="--ritardo:.4s" data-i18n="mg.coda">Carte, casinò con gettoni finti e qualche classico. Gratis, senza registrarti, e i soldi veri restano dove sono.</p>
 </section>
 
+<section class="mg3d" data-magazzino-3d hidden aria-labelledby="mg3d-titolo">
+    <h2 class="mg3d__titolo" id="mg3d-titolo" data-i18n="mg.hall">Il capannone</h2>
+    <div class="mg3d__scena"></div>
+    <div class="mg3d__barra">
+        <div class="mg3d__testo"><p class="mg3d__nome" data-i18n="mg.dark">Qui è buio</p><p class="mg3d__riga" aria-live="polite"></p></div>
+        <button type="button" class="bj3d__azione mg3d__cordino" data-cordino data-i18n="mg.cord">Tira il cordino</button>
+        <div class="mg3d__nav" hidden>
+            <button type="button" class="bj3d__azione" data-prec aria-label="Cassa precedente" data-i18n-aria="mg.prev">←</button>
+            <button type="button" class="bj3d__azione" data-succ aria-label="Cassa successiva" data-i18n-aria="mg.next2">→</button>
+            <a class="bj3d__azione mg3d__gioca" data-gioca href="#" hidden data-i18n="mg.play">Gioca</a>
+        </div>
+    </div>
+</section>
+
 <section class="scaffale" aria-labelledby="scaffale-a">
     <header class="scaffale__testa">
         <p class="t-meta">(i) <span data-i18n="mg.shelfA">Scaffale A</span></p>
@@ -127,13 +143,13 @@
         <h2 id="scaffale-b" data-i18n="mg.shelfBName">Ancora negli scatoloni</h2>
     </header>
     <ul class="casse casse--piccole">
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-01</p><h3 class="cassa__nome">Roulette</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-02</p><h3 class="cassa__nome">Texas hold’em</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-03</p><h3 class="cassa__nome" data-i18n="mg.solitaire">Solitario</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-04</p><h3 class="cassa__nome">Sudoku</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-05</p><h3 class="cassa__nome" data-i18n="mg.mines">Campo minato</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-06</p><h3 class="cassa__nome" data-i18n="mg.draughts">Dama</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
-        <li class="cassa cassa--chiusa"><p class="cassa__codice t-meta">B-07</p><h3 class="cassa__nome" data-i18n="mg.four">Forza 4</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="roulette"><p class="cassa__codice t-meta">B-01</p><h3 class="cassa__nome">Roulette</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="texas"><p class="cassa__codice t-meta">B-02</p><h3 class="cassa__nome">Texas hold’em</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="solitario"><p class="cassa__codice t-meta">B-03</p><h3 class="cassa__nome" data-i18n="mg.solitaire">Solitario</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="sudoku"><p class="cassa__codice t-meta">B-04</p><h3 class="cassa__nome">Sudoku</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="campo-minato"><p class="cassa__codice t-meta">B-05</p><h3 class="cassa__nome" data-i18n="mg.mines">Campo minato</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="dama"><p class="cassa__codice t-meta">B-06</p><h3 class="cassa__nome" data-i18n="mg.draughts">Dama</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
+        <li class="cassa cassa--chiusa" data-cassa="forza-4"><p class="cassa__codice t-meta">B-07</p><h3 class="cassa__nome" data-i18n="mg.four">Forza 4</h3><span class="cassa__stato t-meta" data-i18n="mg.soon">In arrivo</span></li>
     </ul>
 </section>
 
@@ -143,8 +159,8 @@
         <h2 id="scaffale-c" data-i18n="mg.shelfCName">Già qui</h2>
     </header>
     <ul class="casse">
-        <li class="cassa"><a class="cassa__link" href="../gioco/" data-velo-n="3D"><p class="cassa__codice t-meta">C-01</p><h3 class="cassa__nome" data-i18n="mg.game3d">Il gioco in 3D</h3><p class="cassa__riga" data-i18n="mg.game3dText">Un curatore al primo giorno di lavoro. Un quarto d’ora, da computer.</p><span class="cassa__stato t-meta" data-i18n="mg.play">Gioca</span></a></li>
-        <li class="cassa"><a class="cassa__link" href="../chi-sono/#term-titolo" data-velo-n="03"><p class="cassa__codice t-meta">C-02</p><h3 class="cassa__nome" data-i18n="mg.term">Il terminale</h3><p class="cassa__riga" data-i18n="mg.termText">Il terminale di Chi sono: scrivi e ti risponde.</p><span class="cassa__stato t-meta" data-i18n="mg.open">Apri</span></a></li>
+        <li class="cassa" data-cassa="gioco-3d"><a class="cassa__link" href="../gioco/" data-velo-n="3D"><p class="cassa__codice t-meta">C-01</p><h3 class="cassa__nome" data-i18n="mg.game3d">Il gioco in 3D</h3><p class="cassa__riga" data-i18n="mg.game3dText">Un curatore al primo giorno di lavoro. Un quarto d’ora, da computer.</p><span class="cassa__stato t-meta" data-i18n="mg.play">Gioca</span></a></li>
+        <li class="cassa" data-cassa="terminale"><a class="cassa__link" href="../chi-sono/#term-titolo" data-velo-n="03"><p class="cassa__codice t-meta">C-02</p><h3 class="cassa__nome" data-i18n="mg.term">Il terminale</h3><p class="cassa__riga" data-i18n="mg.termText">Il terminale di Chi sono: scrivi e ti risponde.</p><span class="cassa__stato t-meta" data-i18n="mg.open">Apri</span></a></li>
     </ul>
 </section>
 

@@ -1,0 +1,43 @@
+/* Magazzino: un deposito ordinato, dentro la palette del sito. */
+
+.magazzino-apertura { padding: max(8rem, calc(var(--u) * 14)) var(--margine, 4vw) calc(var(--u) * 6); }
+.magazzino-apertura > .t-meta { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.magazzino-saldo b { color: var(--bianco); font-weight: 600; margin-left: .4rem; }
+.magazzino-apertura__titolo { font: 400 clamp(3rem, calc(var(--u) * 9), 8rem)/.9 var(--serif); letter-spacing: -.035em; margin: 2.4rem 0 1.6rem; max-width: 14ch; }
+.magazzino-apertura__titolo em { color: var(--cremisi); }
+.magazzino-apertura__coda { max-width: 34rem; color: var(--bianco-60); font: italic 400 clamp(1.1rem, calc(var(--u) * 1.6), 1.5rem)/1.35 var(--serif); }
+
+.scaffale { padding: calc(var(--u) * 5) var(--margine, 4vw); border-top: 1px solid var(--linea); }
+.scaffale__testa { display: flex; align-items: baseline; gap: 1.6rem; margin-bottom: 2rem; }
+.scaffale__testa h2 { font: 700 clamp(1.6rem, calc(var(--u) * 3), 2.6rem)/1 var(--sans); font-stretch: 62%; text-transform: uppercase; letter-spacing: .04em; }
+
+.casse { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1.4rem; }
+.casse--piccole { grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); }
+
+/* la cassa: assi, una traversa in diagonale, l'etichetta incollata */
+.cassa {
+    position: relative; min-height: 13rem; padding: 1.1rem 1.1rem 1rem;
+    display: grid; grid-template-rows: auto 1fr auto; gap: .6rem;
+    background:
+        linear-gradient(to bottom right, transparent calc(50% - 1px), var(--linea) calc(50% - 1px), var(--linea) calc(50% + 1px), transparent calc(50% + 1px)),
+        repeating-linear-gradient(to bottom, var(--superficie) 0 3.2rem, var(--nero) 3.2rem calc(3.2rem + 2px));
+    border: 2px solid var(--linea-forte);
+    transition: transform .25s, border-color .25s;
+}
+.casse--piccole .cassa { min-height: 8.5rem; }
+.cassa:has(.cassa__link) { padding: 0; display: block; }
+.cassa__link { min-height: inherit; height: 100%; padding: 1.1rem 1.1rem 1rem; display: grid; grid-template-rows: auto 1fr auto; gap: .6rem; color: inherit; }
+.cassa__codice { justify-self: start; padding: .2rem .45rem; background: var(--bianco); color: var(--nero) !important; }
+.cassa__nome {
+    align-self: center; justify-self: start; padding: .3rem .6rem;
+    background: var(--nero); font: 800 clamp(1.5rem, calc(var(--u) * 2.4), 2.2rem)/1 var(--sans); font-stretch: 62%;
+    text-transform: uppercase; letter-spacing: .05em;
+}
+.cassa__riga { padding: .5rem .6rem; background: rgb(5 5 5 / .85); color: var(--bianco-80); font-size: .95rem; line-height: 1.4; }
+.cassa__stato { justify-self: end; }
+.cassa:not(.cassa--chiusa) .cassa__stato { color: var(--cremisi); }
+.cassa:not(.cassa--chiusa):hover, .cassa:not(.cassa--chiusa):focus-within { transform: translateY(-.35rem) rotate(-.6deg); border-color: var(--cremisi); }
+.cassa--chiusa { opacity: .62; }
+.cassa--chiusa .cassa__nome { color: var(--bianco-80); }
+:root.calm .cassa { transition: none; }
+:root.calm .cassa:hover { transform: none; }

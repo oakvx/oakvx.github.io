@@ -45,4 +45,15 @@
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
     OAKVX.deposito = { crea, SALDO_INIZIALE };
+
+    // nelle pagine: mostra il saldo dove c'è [data-gettoni] e lo tiene aggiornato
+    const doc = window.document;
+    if (doc && doc.querySelectorAll) {
+        const mostra = () => {
+            const d = crea(), lingua = doc.documentElement.lang === 'en' ? 'en-GB' : 'it-IT';
+            doc.querySelectorAll('[data-gettoni]').forEach(el => { el.textContent = d.saldo().toLocaleString(lingua); });
+        };
+        if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', mostra); else mostra();
+        window.addEventListener('oakvx:gettoni', mostra);
+    }
 })();

@@ -1859,3 +1859,9 @@ html.sparo-arrivo::after {
     .stile__campione-testo { font-size: 3.4rem; }
 }
 .pagina--contatti .scrivimi__elenco b { overflow-wrap: anywhere; font-size: min(1em, 8.2vw); }
+
+/* Dati dai repository */
+.caso-repo { display: grid; gap: .7rem; margin-top: 1.6rem; max-width: 34rem; }
+.caso-repo .t-meta:first-child { display: flex; justify-content: space-between; gap: 1rem; }
+.caso-repo__barra { display: flex; height: 6px; gap: 2px; }
+.caso-repo__barra i { display: block; min-width: 2px; background: color-mix(in srgb, var(--cremisi) calc(100% - var(--i) * 18%), var(--grafite)); }

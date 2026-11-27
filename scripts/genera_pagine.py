@@ -87,6 +87,7 @@ def main():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{{"imports":{{"three":"/gioco/vendor/three/three.module.js"}}}}</script>
 {BOOT}
 <link rel="stylesheet" href="{a}ingresso/ingresso.css">
 {PREPAINT}

@@ -252,10 +252,11 @@ export async function creaPistola(contenitore) {
 
     const riposo = new THREE.Vector3();
     const tmp = new THREE.Vector3();
-    // mette la volata a (40% larghezza, 46% altezza) dello schermo: la pistola si vede intera
+    // mette la volata a (40% larghezza, 46% altezza) dello schermo, 70% in verticale: la pistola si vede intera
     function piazza() {
         const meta = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
-        const obiettivo = new THREE.Vector3((.40 * 2 - 1) * meta * camera.aspect, (1 - .46 * 2) * meta, 0);
+        const fx = camera.aspect < 1 ? .70 : .40;     // in verticale la volata va più a destra, l'impugnatura resta in campo
+        const obiettivo = new THREE.Vector3((fx * 2 - 1) * meta * camera.aspect, (1 - .46 * 2) * meta, 0);
         gruppo.position.set(0, 0, 0);
         gruppo.updateMatrixWorld(true);
         punta.getWorldPosition(tmp);
@@ -267,6 +268,10 @@ export async function creaPistola(contenitore) {
         const w = innerWidth, h = innerHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
+        // in verticale (telefono) si allarga il campo: la pistola deve stare intera in larghezza
+        const minimo = .8;
+        camera.fov = camera.aspect >= minimo ? 24
+            : THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(12)) * minimo / camera.aspect));
         camera.updateProjectionMatrix();
         piazza();
     }

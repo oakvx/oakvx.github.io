@@ -235,54 +235,6 @@
     }
 
     /* ----------------------------------------------------------------------
-       Velo: sipario tra una pagina e l'altra, con numero e titolo di arrivo.
-       ---------------------------------------------------------------------- */
-    function initVelo() {
-        const velo = document.createElement('div');
-        velo.className = 'velo';
-        velo.setAttribute('aria-hidden', 'true');
-        velo.innerHTML = '<div class="velo__testo"><span class="velo__n t-meta"></span><span class="velo__titolo"></span></div>';
-        document.body.append(velo);
-        const n = $('.velo__n', velo), titolo = $('.velo__titolo', velo);
-
-        // Arrivo
-        let arrivo = null;
-        try { arrivo = JSON.parse(sessionStorage.getItem('nero-velo') || 'null'); sessionStorage.removeItem('nero-velo'); } catch {}
-        if (root.classList.contains('velo-entra')) {
-            if (arrivo && !calm()) {
-                n.textContent = arrivo.n || '';
-                titolo.textContent = arrivo.titolo || '';
-                velo.classList.add('scopre');
-                velo.addEventListener('animationend', e => { if (e.target === velo) velo.className = 'velo'; }, { once: false });
-            }
-            root.classList.remove('velo-entra');
-        }
-
-        document.addEventListener('click', e => {
-            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-            const a = e.target.closest('a[href]');
-            if (!a || a.target === '_blank' || a.hasAttribute('download') || a.dataset.noVelo !== undefined) return;
-            const url = new URL(a.href, location.href);
-            if (url.origin !== location.origin || !/^https?:$/.test(url.protocol)) return;
-            if (url.pathname === location.pathname && url.search === location.search) return; // ancora nella stessa pagina
-            if (calm()) return;
-            e.preventDefault();
-            const dest = {
-                n: a.dataset.veloN || '',
-                titolo: a.dataset.velo || (a.querySelector('[data-velo-nome]')?.textContent || a.textContent).trim().split('\n')[0].slice(0, 40)
-            };
-            n.textContent = dest.n;
-            titolo.textContent = dest.titolo;
-            try { sessionStorage.setItem('nero-velo', JSON.stringify(dest)); } catch {}
-            velo.className = 'velo copre';
-            setTimeout(() => { location.href = url.href; }, 820);
-        });
-
-        // Ritorno dalla cache del browser: il velo non deve restare chiuso.
-        addEventListener('pageshow', e => { if (e.persisted) velo.className = 'velo'; });
-    }
-
-    /* ----------------------------------------------------------------------
        Cursore: punto + anello, con etichette contestuali.
        ---------------------------------------------------------------------- */
     function initCursore() {
@@ -1083,8 +1035,7 @@
         initScorrimento();
         initIndice();
         initMovimento();
-        window.OAKVX?.proiettile?.avvia?.(); // prima del sipario: lo sparo ha la precedenza
-        initVelo();
+        window.OAKVX?.proiettile?.avvia?.();
         initCursore();
         initApertura();
         initRivela();

@@ -374,47 +374,7 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
 }
 @media (max-width: 900px) { .segnapagina { display: none; } }
 
-/* --------------------------------------------------------------------------
-   Velo: transizione tra le pagine.
-   -------------------------------------------------------------------------- */
-
-html.velo-entra::after {
-    content: ""; position: fixed; inset: 0; z-index: 2500; background: var(--nero);
-    animation: velo-sicurezza .01s 1.6s forwards;
-}
 @keyframes velo-sicurezza { to { opacity: 0; visibility: hidden; } }
-
-.velo {
-    position: fixed; inset: 0; z-index: 2600;
-    display: grid; place-items: end start;
-    padding: var(--bordo);
-    background: var(--nero);
-    pointer-events: none;
-    clip-path: inset(100% 0 0 0);
-}
-.velo::before {
-    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
-    background: var(--cremisi);
-}
-.velo__testo {
-    display: flex; align-items: baseline; gap: 1.2rem;
-    overflow: hidden;
-}
-.velo__n { color: var(--cremisi); }
-.velo__titolo {
-    font: italic 400 clamp(2.5rem, calc(var(--u) * 9), 6.84rem)/1 var(--serif);
-    letter-spacing: -.025em;
-    transform: translateY(110%);
-}
-.velo.copre { pointer-events: auto; animation: velo-copre .75s var(--morbido) forwards; }
-.velo.copre .velo__titolo { animation: velo-titolo .8s .22s var(--entra) forwards; }
-.velo.scopre { clip-path: inset(0 0 0 0); animation: velo-scopre .9s .08s var(--morbido) forwards; }
-.velo.scopre .velo__titolo { transform: none; animation: velo-titolo-esce .6s var(--esce) forwards; }
-@keyframes velo-copre { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
-@keyframes velo-scopre { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); } }
-@keyframes velo-titolo { to { transform: none; } }
-@keyframes velo-titolo-esce { to { transform: translateY(-110%); } }
-
 
 /* --------------------------------------------------------------------------
    Sparo: lampo, proiettile e fascio di luce con "oakvx." (assets/nero/proiettile.js)
@@ -1652,7 +1612,7 @@ html.sparo-arrivo::after {
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
 .paused *, .paused *::before, .paused *::after { animation-play-state: paused !important; }
-.paused .velo { display: none; }
+.paused .sparo { display: none; }
 
 @media print {
     body::before, .testata, .indice, .segnapagina, .cursore, .campo, .tieni { display: none !important; }

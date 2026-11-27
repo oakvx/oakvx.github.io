@@ -660,15 +660,15 @@ html.sparo-arrivo::after {
 .apertura__meta span:nth-child(2) { text-align: center; }
 .apertura__titolo {
     grid-column: 1 / -1; grid-row: 2;
-    margin: 0 0 0 -.04em;
-    font: italic 400 clamp(6rem, calc(var(--u) * 27), 24rem)/.74 var(--serif);
-    letter-spacing: -.045em;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
+    margin: 0 0 -.02em -.03em;
+    font: 700 clamp(6rem, calc(var(--u) * 31), 27rem)/.76 var(--sans);
+    font-stretch: 62%;
+    letter-spacing: -.035em;
     pointer-events: none;
     mix-blend-mode: difference;
 }
 .apertura__lettera { display: inline-block; will-change: transform; }
-.apertura__lettera:nth-child(2) { color: var(--cremisi); mix-blend-mode: normal; }
+.apertura__lettera:last-child { color: var(--cremisi); }
 .js .apertura__lettera { transform: translateY(18%); opacity: 0; transition: transform 1.6s var(--entra), opacity 1.2s; transition-delay: calc(.25s + var(--i) * 80ms); }
 .js .apertura.pronta .apertura__lettera { transform: none; opacity: 1; }
 .calm .apertura__lettera { transform: none !important; opacity: 1 !important; }
@@ -687,7 +687,8 @@ html.sparo-arrivo::after {
     max-width: 34rem;
     color: var(--bianco-80);
 }
-.apertura__intro .corsivo { color: var(--bianco); font-size: 1.12em; }
+.apertura__frase { display: block; margin-bottom: .5rem; color: var(--bianco); font: 400 1.25em/1.25 var(--serif); }
+.apertura__frase em { color: var(--cremisi); }
 .apertura__ruoli { grid-column: 7 / span 3; display: grid; gap: .1rem; }
 .apertura__ruoli li::before { content: "— "; color: var(--cremisi); }
 .apertura__azione { grid-column: 10 / span 3; justify-self: end; }
@@ -707,7 +708,7 @@ html.sparo-arrivo::after {
 .apertura__campo { scale: calc(1 - var(--uscita) * .22); opacity: calc(1 - var(--uscita) * .9); transform-origin: 64% 45%; }
 .apertura__titolo { filter: blur(calc(var(--uscita) * 5px)); }
 .apertura__lettera { translate: 0 calc(var(--uscita) * (-30% - var(--i) * 22%)); }
-.apertura__lettera:nth-child(2) { translate: 0 calc(var(--uscita) * -12%); }
+.apertura__lettera:last-child { translate: 0 calc(var(--uscita) * -12%); }
 .apertura__meta, .apertura__piede { translate: 0 calc(var(--uscita) * -3rem); opacity: calc(1 - var(--uscita) * 1.4); }
 
 /* Nastro di testo */

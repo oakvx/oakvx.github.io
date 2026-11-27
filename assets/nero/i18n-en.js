@@ -46,7 +46,7 @@ window.OAKVX_EN = {
     'home.metaA': 'Portfolio — 2026',
     'home.metaB': 'Web development · Backend · Design',
     'home.h1Sr': 'Gabriele Lucia, known as oakvx: developer and designer.',
-    'home.intro': '<span class="corsivo">Hi, I’m oakvx.</span> Gabriele Lucia on paper. I make websites, web applications and graphics, and I study Computer Engineering at UNIMORE. Based in Sassuolo, Italy.',
+    'home.intro': '<span class="apertura__frase">I make websites, software and graphics. They usually work on the first try. <em>Usually.</em></span> Gabriele Lucia, Sassuolo. Computer Engineering student at UNIMORE.',
     'home.role1': 'Web development',
     'home.role2': 'Backend and data',
     'home.role3': 'Graphics and interfaces',

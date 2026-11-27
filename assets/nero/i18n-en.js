@@ -357,6 +357,7 @@ window.OAKVX_EN = {
     'sv.next': "Got something in mind?",
     'sc.labelB': "What I actually do, what I don't promise",
     'sc.title': "Security isn't a badge. <em>It's a list of choices.</em>",
+    'sp.title': "Scopa. <em>Settebello or nothing.</em>",
     'sc.coda': "Here are mine, project by project. And, further down, what I won't promise.",
     'sc.siteLabel': "This site",
     'sc.siteTitle': "I start <em>with my own.</em>",
@@ -516,6 +517,8 @@ window.OAKVX_EN = {
 
     'nav.warehouse': "Warehouse",
     'gm.blackjack': "Blackjack",
+    'gm.briscola': "Briscola",
+    'gm.scopa': "Scopa",
     'mg.label': "Warehouse · open all night",
     'mg.chips': "Chips",
     'mg.title': "The Warehouse. <em>Stuff to play, not to look at.</em>",
@@ -551,6 +554,16 @@ window.OAKVX_EN = {
     'bj.r4': "You can double on your first two cards (one more card, double bet) and split a pair once. No insurance.",
     'bj.r5': "The chips are fake and stay in your browser. If you run out, you get a refill.",
     'gm.back': "Back to the shelves",
+
+    'br.title': "Briscola. <em>Sicilian cards, no mercy.</em>",
+    'br.r1': "Forty Sicilian cards, three in each hand. The last card of the deck, face up, sets the trump suit.",
+    'br.r2': "You don’t have to follow suit. The strongest card of the suit led takes the trick, unless a trump shows up.",
+    'br.r3': "Order: ace, three, king, knight, jack, 7, 6, 5, 4, 2. Whoever takes draws first and leads next.",
+    'br.r4': "Points: ace 11, three 10, king 4, knight 3, jack 2. There are 120 in total: more than 60 wins.",
+    'sp.r1': "Sicilian cards, three each and four on the table. With a card you take the one of the same value, or several cards adding up to it.",
+    'sp.r2': "If there’s a card of the same value on the table, you must take that one. If more takes are possible, tap the table cards and then yours.",
+    'sp.r3': "Clearing the table is a scopa, one point. Not on the very last play, and the cards left go to whoever took last.",
+    'sp.r4': "At the end of each hand: a point each for cards (more than 20), coins (more than 5), the settebello and the primiera. First to 11.",
 
     /* chi sono */
     'about.label': 'About',

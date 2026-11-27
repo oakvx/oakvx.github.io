@@ -34,6 +34,8 @@ PAGES = [
     ('stile/index.html', 'stile', '../', '/stile/', '08', 'nav.style', 'Stile', False, ''),
     ('contatti/index.html', 'contatti', '../', '/contatti/', '09', 'nav.contact', 'Contatti', False, ''),
     ('magazzino/index.html', 'magazzino', '../', '/magazzino/', 'M', 'nav.warehouse', 'Magazzino', False, 'magazzino/magazzino.css magazzino/deposito.js'),
+    ('magazzino/scopa/index.html', 'magazzino-scopa', '../../', '/magazzino/scopa/', 'M.3', 'gm.scopa', 'Scopa', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/scopa.js'),
+    ('magazzino/briscola/index.html', 'magazzino-briscola', '../../', '/magazzino/briscola/', 'M.2', 'gm.briscola', 'Briscola', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/briscola.js'),
     ('magazzino/blackjack/index.html', 'magazzino-blackjack', '../../', '/magazzino/blackjack/', 'M.1', 'gm.blackjack', 'Blackjack', False, 'magazzino/magazzino.css magazzino/carte.js magazzino/disegno.js magazzino/deposito.js magazzino/tavolo.js magazzino/blackjack.js'),
 ]
 
@@ -55,6 +57,10 @@ SEO_NUOVE = {
                 'Style | Gabriele Lucia (oakvx)', 'The style guide of this site: palette, typography, grid, components and motion.', 'home'),
     '/magazzino/blackjack/': ('Blackjack | Magazzino di oakvx', 'Blackjack gratis nel browser contro il banco, con gettoni finti: sei mazzi, il banco sta su 17, il blackjack paga 3 a 2.',
                     'Blackjack | oakvx Warehouse', 'Free blackjack in the browser against the dealer, with fake chips: six decks, dealer stands on 17, blackjack pays 3 to 2.', 'home'),
+    '/magazzino/briscola/': ('Briscola | Magazzino di oakvx', 'Briscola gratis nel browser con le carte siciliane, uno contro il computer. Senza registrarsi.',
+                    'Briscola | oakvx Warehouse', 'Free briscola in the browser with Sicilian cards, one on one against the computer. No sign-up.', 'home'),
+    '/magazzino/scopa/': ('Scopa | Magazzino di oakvx', 'Scopa gratis nel browser con le carte siciliane: settebello, primiera, si va a 11 contro il computer.',
+                    'Scopa | oakvx Warehouse', 'Free scopa in the browser with Sicilian cards: settebello, primiera, first to 11 against the computer.', 'home'),
     '/magazzino/': ('Magazzino | oakvx', 'Il Magazzino di oakvx: carte siciliane, blackjack con gettoni finti e classici da giocare nel browser. Gratis, senza registrarsi.',
                     'Warehouse | oakvx', 'The oakvx Warehouse: Sicilian cards, blackjack with fake chips and classics to play in the browser. Free, no sign-up.', 'home'),
     '/contatti/': ('Contatti | Gabriele Lucia (oakvx)', 'Come scrivere a Gabriele Lucia (oakvx): email, GitHub, lingue in cui risponde.',

@@ -42,6 +42,8 @@ PAGE_FILES = [
     "stile/index.html",
     "contatti/index.html",
     "magazzino/index.html",
+    "magazzino/scopa/index.html",
+    "magazzino/briscola/index.html",
     "magazzino/blackjack/index.html",
 ]
 SITEMAP_FILES = [
@@ -63,6 +65,8 @@ SITEMAP_FILES = [
     "stile/index.html",
     "contatti/index.html",
     "magazzino/index.html",
+    "magazzino/scopa/index.html",
+    "magazzino/briscola/index.html",
     "magazzino/blackjack/index.html",
 ]
 VOID_ELEMENTS = {

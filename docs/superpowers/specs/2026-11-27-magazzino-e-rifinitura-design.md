@@ -106,19 +106,19 @@ Requisiti:
 
 ### Giochi, in ordine
 1. Blackjack (mazzo francese, gettoni)
-2. Briscola (mazzo da 40, 1 contro 1, poi 2 contro 2)
-3. Scopa (scopa classica, conteggio carte/denari/settebello/primiera/scope)
+2. Briscola (carte siciliane da 40, 1 contro 1, poi 2 contro 2)
+3. Scopa (carte siciliane, scopa classica, conteggio carte/denari/settebello/primiera/scope)
 4. Scala 40 (due mazzi francesi con jolly, apertura a 40)
-5. Carioca (variante da confermare con oakvx)
+5. Carioca, nella versione di oakvx: combinazioni coppia, tris, poker, tric trac, bomba e chiusura. Le regole esatte le descrive oakvx; finché non ci sono, la carioca resta fuori dal piano di esecuzione
 Poi: roulette, Texas hold'em, solitario, sudoku, campo minato, dama, forza 4.
 
 Il gioco 3D esistente (`/gioco/`) e il terminale di Chi sono si collegano dal Magazzino.
 
 ### Motore comune (`assets/magazzino/`)
-- Mazzi (napoletano 40, francese 52 + jolly), mischiata con generatore a seme (partite riproducibili nei test), mano, tavolo, turni, punteggi.
+- Mazzi (siciliano 40, francese 52 + jolly), mischiata con generatore a seme (partite riproducibili nei test), mano, tavolo, turni, punteggi.
 - Avversari per gioco, con due livelli (normale, difficile): briscola e scopa euristiche (carichi, settebello, primiera, scope); scala 40 e carioca con ricerca di combinazioni.
 - Regole e punteggi come funzioni pure, testate con `node --test`.
-- Interfaccia: carte in SVG disegnate da noi (stile napoletano reinterpretato in nero e cremisi; francese pulito), trascinamento e tocco, tastiera, annunci per lettori di schermo, animazioni di distribuzione e presa che rispettano il movimento ridotto.
+- Interfaccia: carte in SVG disegnate da noi (stile siciliano reinterpretato in nero e cremisi, spade ricurve come scimitarre; francese pulito), trascinamento e tocco, tastiera, annunci per lettori di schermo, animazioni di distribuzione e presa che rispettano il movimento ridotto.
 - Testi e regole in IT/EN col sistema esistente; pagina "come si gioca" breve per ogni gioco.
 
 ### Fase 2 — con gli amici
@@ -132,7 +132,7 @@ Il gioco 3D esistente (`/gioco/`) e il terminale di Chi sono si collegano dal Ma
 - Dettagli delle curve della pistola, purché basate su riferimenti reali e documentate.
 - Ordine dei commit (piccoli, uno per pezzo).
 
-## Domande aperte per oakvx
+## Decisioni di oakvx
 
-1. Carioca: quale versione? (contratti per mano, numero di mazzi, punteggi)
-2. Mazzo da 40: napoletano o piacentino? (scelta provvisoria: napoletano)
+- Mazzo da 40: **carte siciliane**.
+- Carioca: la versione con **coppia, tris, poker, tric trac, bomba e chiusura**. Non ho trovato fonti pubblicate su questa variante: le regole (carte distribuite, cosa sono tric trac e bomba, come si chiude, punteggi) le scrive oakvx prima che la carioca entri nel piano.

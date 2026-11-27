@@ -1754,3 +1754,12 @@ html.sparo-arrivo::after {
     .repo__dati { order: -1; text-align: left; }
     .repo__desc { flex: 1; }
 }
+
+/* Casi studio: scheda tecnica in colonna, come i numeri dal vivo della home */
+@media (min-width: 901px) {
+    .caso-scheda { grid-column: 9 / span 4; grid-template-columns: 1fr; gap: 0; }
+    .caso-scheda > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: .7rem 0; border-top: 1px solid var(--linea-forte); }
+    .caso-scheda > div:last-child { border-bottom: 1px solid var(--linea); }
+    .caso-scheda dt { margin: 0; }
+    .caso-apertura__intro { grid-column: 1 / span 6; }
+}

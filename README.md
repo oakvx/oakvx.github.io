@@ -72,11 +72,18 @@ Alla prima pagina aperta in una sessione compare un menu a tutto schermo ("Ciao,
 
 ## Sistema di pagine
 
+Le pagine italiane si **generano** da `scripts/pagine/`: `testata.html` e `colophon.html` sono uguali per tutte, `corpi/*.html` contiene il corpo di ciascuna. Dopo una modifica:
+
+```bash
+python3 scripts/genera_pagine.py   # riscrive le pagine italiane, conservando i metadati SEO
+python3 scripts/build_static.py    # rigenera en/ e sitemap.xml
+```
+
 Tutte le pagine (home, chi-sono, casi studio, fuori-orario, 404, crediti) usano lo stesso sistema "Nero": nero `#050505`, bianco caldo `#E8E6E1`, accento cremisi `#C81035`, grafite `#292929`. Direzione e regole sono descritte in `docs/superpowers/specs/2026-11-26-sito-nero-design.md`.
 
 - `assets/nero/nero.css` contiene token, tipografia, testata, indice, colophon e le composizioni di ogni pagina. Ogni caso studio ha la propria impaginazione (`[data-progetto]`).
 - `assets/nero/nero.js` gestisce lingua, ora di Sassuolo, indice a tutto schermo, sipario tra le pagine, cursore, rivelazioni, anteprime dei lavori, copia dell'email, terminale `portfolio.sh` e i momenti interattivi dei casi studio (lyric video, flusso di Synk, orari di Beautify, luce di Spinotto Felice). Ogni modulo parte solo se trova il proprio markup.
-- Testata, indice e colophon sono uguali in tutte le pagine: se li modifichi, modificali ovunque.
+- Testata, indice e colophon stanno una volta sola in `scripts/pagine/`.
 - Il sipario usa `sessionStorage` (`nero-velo`) per mostrare numero e titolo della pagina di arrivo.
 - Le misure fluide usano l'unità `--u = min(1vw, 1.9vh)`: su un monitor largo e basso seguono l'altezza, così titoli e spazi restano in proporzione; oltre 1680px il contenuto resta centrato.
 - Esperienza in home: scroll morbido con inerzia (solo rotella), apertura che si scompone scorrendo (`--uscita`), nastro di testo legato alla velocità dello scroll; scegliendo "Sito" nel menu d'ingresso la scultura si ricompone e le lettere salgono. Tutto si spegne con movimento ridotto o "Ferma animazioni".

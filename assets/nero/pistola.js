@@ -187,8 +187,8 @@ export async function creaPistola(contenitore) {
     const pistola = new THREE.Mesh(geo, originale.material);
     const carrelloMesh = new THREE.Mesh(geoCarrello, originale.material);
 
-    // volata: estremità della canna, nelle coordinate originali
-    const VOLATA = new THREE.Vector3(.176, .057, 0);
+    // volata: centro degli anelli della canna, ricavato dai vertici (coordinate originali)
+    const VOLATA = new THREE.Vector3(...window.OAKVX.proiettile.centroCanna(tenuti.map(i => [pos.getX(i), pos.getY(i), pos.getZ(i)])));
     // misure della sola pistola (computeBoundingBox guarderebbe tutti i vertici del file)
     const scatola = new THREE.Box3();
     const v = new THREE.Vector3();
@@ -289,6 +289,10 @@ export async function creaPistola(contenitore) {
 
     const partenzaMondo = new THREE.Vector3();
     const arrivoMondo = new THREE.Vector3();
+    const asseMondo = new THREE.Vector3();          // direzione della canna nel mondo, all'uscita
+    const X = new THREE.Vector3(1, 0, 0);
+    const qAsse = new THREE.Quaternion(), qFine = new THREE.Quaternion(), qTmp = new THREE.Quaternion();
+    const eFine = new THREE.Euler();
     let proiettilePartito = false;
     const scalaPartenza = .16;                   // lunghezza ~0,16: un proiettile accanto a una pistola lunga 1,6
 
@@ -340,10 +344,20 @@ export async function creaPistola(contenitore) {
                 // dalla volata verso la camera: si avvicina, cresce e si gira a mostrare l'incisione
                 const v = f.volo;
                 // finché è a ridosso della canna la segue nel rinculo, poi tira dritto
-                if (v < .03 || !proiettilePartito) { punta.getWorldPosition(partenzaMondo); proiettilePartito = true; }
-                volo.position.lerpVectors(partenzaMondo, arrivoMondo, v);
+                if (v < .03 || !proiettilePartito) {
+                    punta.getWorldPosition(partenzaMondo);
+                    asseMondo.copy(X).applyQuaternion(punta.getWorldQuaternion(qTmp)).normalize();
+                    proiettilePartito = true;
+                }
+                // esce sull'asse della canna, poi curva verso chi guarda
+                const q = P.traiettoria(v, partenzaMondo.toArray(), asseMondo.toArray(), arrivoMondo.toArray());
+                volo.position.set(q[0], q[1], q[2]);
                 volo.scale.setScalar(scalaPartenza * (1 + v * 5));
-                volo.rotation.set(0, -.15 - v * .55, -v * .12);
+                // orientato come la canna finché è appena uscito, poi si gira di lato a mostrare l'incisione
+                qAsse.setFromUnitVectors(X, asseMondo);
+                qFine.setFromEuler(eFine.set(0, -.15 - v * .55, -v * .12));
+                const giro = Math.min(1, Math.max(0, (v - .12) / .3));
+                volo.quaternion.copy(qAsse).slerp(qFine, giro * giro * (3 - 2 * giro));
                 proiettile.rotation.x = -Math.PI / 2 + (.75 - v) * .9; // l'incisione arriva di fronte alla fine
             }
             disegna();

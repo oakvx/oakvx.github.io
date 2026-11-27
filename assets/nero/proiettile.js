@@ -96,6 +96,20 @@
         return partenza.map((x, i) => u * u * x + 2 * u * v * c[i] + v * v * arrivo[i]);
     }
 
+    /** Volata ricavata dal modello: tra i punti più avanti (x ≥ maxX − tolleranza) prende la mediana
+        di y e z. Gli anelli della canna sono simmetrici, il mirino sono pochi punti: la mediana non lo sente.
+        Restituisce [maxX, y, z]. */
+    function centroCanna(punti, tolleranza = .002) {
+        let maxX = -Infinity;
+        for (const q of punti) if (q[0] > maxX) maxX = q[0];
+        const fronte = punti.filter(q => q[0] >= maxX - tolleranza);
+        const mediana = k => {
+            const v = fronte.map(q => q[k]).sort((a, b) => a - b), m = v.length >> 1;
+            return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+        };
+        return [maxX, mediana(1), mediana(2)];
+    }
+
     /** Il segnale lasciato dall'uscita vale solo se è appena stato scritto (ms dell'orologio). */
     const VALIDITA_MS = 3000;
     function arrivoValido(valore, adesso) {
@@ -106,7 +120,7 @@
     }
 
     const OAKVX = window.OAKVX || (window.OAKVX = {});
-    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, traiettoria, USCITA_MS, VOLO_MS, ARRIVO_MS });
+    OAKVX.proiettile = Object.assign(OAKVX.proiettile || {}, { vaFatta, usaPistola, fase, faseVolo, rinculo, carrello, cubica, arrivoValido, traiettoria, centroCanna, USCITA_MS, VOLO_MS, ARRIVO_MS });
 
     /* ---------------------------------------------------------------- DOM */
     let livello = null;

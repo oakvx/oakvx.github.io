@@ -124,3 +124,25 @@ test('traiettoria: parte dalla volata, arriva alla camera, esce lungo la canna',
     const q = p.traiettoria(0.001, a, asse, b), l = Math.hypot(...q);
     assert.ok(q[0] / l > 0.999);   // la tangente all'uscita è l'asse della canna
 });
+
+test('centroCanna: centro dell’anello più avanti, ignorando il resto del carrello', () => {
+    const punti = [];
+    for (let i = 0; i < 16; i++) {
+        const a = i / 16 * Math.PI * 2;
+        punti.push([.2, .05 + Math.cos(a) * .01, .002 + Math.sin(a) * .01]);
+    }
+    for (let i = 0; i < 40; i++) punti.push([.1 + (i % 9) * .01, .03 + (i % 5) * .01, -.01 + (i % 3) * .01]);
+    const c = p.centroCanna(punti);
+    assert.ok(Math.abs(c[0] - .2) < 1e-6 && Math.abs(c[1] - .05) < 1e-6 && Math.abs(c[2] - .002) < 1e-6, String(c));
+});
+
+test('centroCanna: il mirino sopra la volata non sposta il centro', () => {
+    const punti = [];
+    for (let i = 0; i < 24; i++) {
+        const a = i / 24 * Math.PI * 2;
+        for (const r of [.0045, .0075]) punti.push([.2, .061 + Math.cos(a) * r, Math.sin(a) * r]);
+    }
+    punti.push([.2, .074, -.001], [.2, .074, .001], [.199, .0745, 0]);   // mirino
+    const c = p.centroCanna(punti);
+    assert.ok(Math.abs(c[1] - .061) < .0005 && Math.abs(c[2]) < .0005, String(c));
+});

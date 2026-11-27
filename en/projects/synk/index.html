@@ -98,15 +98,15 @@
 <main id="main" class="pagina pagina--caso" data-progetto="synk">
 
 <section class="caso-apertura" aria-labelledby="caso-titolo">
-    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label2">Case 02 / 04</span><span data-i18n="synk.kind">Conversational automation</span><span data-i18n="synk.kind2">Web application</span></p>
+    <p class="caso-apertura__meta t-meta"><span data-i18n="case.label2">Case 02 / 04</span><span data-i18n="synk.kind">Conversational automation</span><span data-i18n="synk.kind2">Release candidate 1.2.0-rc.6</span></p>
     <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>Synk<b>.</b></h1>
     <div class="caso-apertura__piede">
-        <p class="caso-apertura__intro rivela" data-i18n="synk.intro">Synk handles the requests and appointments that arrive on WhatsApp. Behind the chat there are an intent picker, a local database, Google Calendar and a dashboard for whoever runs the business.</p>
+        <p class="caso-apertura__intro rivela" data-i18n="synk.intro">An on-premise system for appointment-based salons: bookings, WhatsApp and Google Calendar, with consistency made explicit. It runs on a PC in the salon, not in someone else's cloud.</p>
         <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
-            <div><dt data-i18n="case.role">My role</dt><dd data-i18n="synk.role">Intent picker, backend, dashboard and fine-tuning</dd></div>
-            <div><dt>Stack</dt><dd>Node.js / PostgreSQL / llama.cpp</dd></div>
-            <div><dt>Focus</dt><dd data-i18n="synk.focus">Conversational automation</dd></div>
-            <div><dt data-i18n="case.project">Project</dt><dd data-i18n="synk.kind2">Web application</dd></div>
+            <div><dt data-i18n="case.role">My role</dt><dd data-i18n="synk.role">Backend, data model, dashboard, release</dd></div>
+            <div><dt>Stack</dt><dd>Node.js · PHP 8.3 · PostgreSQL 16 · Docker</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="synk.focus">Consistency, privacy, reliability</dd></div>
+            <div><dt data-i18n="case.project">Project</dt><dd data-i18n="synk.kind2">Release candidate 1.2.0-rc.6</dd></div>
         </dl>
     </div>
 </section>
@@ -118,12 +118,12 @@
 
 <section class="sezione caso-capo" aria-labelledby="synk-concept">
     <p class="t-meta">(01) Concept</p>
-    <h2 id="synk-concept" data-split data-i18n-html="synk.conceptTitle">People stay on WhatsApp. <em>The rest happens behind it, quietly.</em></h2>
+    <h2 id="synk-concept" data-split data-i18n-html="synk.conceptTitle">A slot is never <em>assumed</em> free.</h2>
     <div class="caso-capo__testo rivela">
-        <p data-i18n="synk.concept1">You can write in your own words, naturally: Synk recognises the reason for the message and opens the right conversation.</p>
-        <p data-i18n="synk.concept2">During the exchange it collects the details it needs before passing the request to the management system.</p>
+        <p data-i18n="synk.concept1">Clients write on WhatsApp in their own words; synk works out what they need and books it. The hard part isn't the chat: it's keeping a local database and Google Calendar in agreement when one of them doesn't answer.</p>
+        <p data-i18n="synk.concept2">So the rules are explicit: if Calendar doesn't answer reliably, the slot isn't free. Queued is not synced. Every uncertain state is visible in the dashboard and can be handed to a person.</p>
     </div>
-    <p class="caso-capo__lato rivela" data-i18n="synk.problem">The starting point: requests arrive in a chat, each written in its own way, and have to become tidy appointments. Without anyone reading them all by hand.</p>
+    <p class="caso-capo__lato rivela" data-i18n="synk.problem">The starting point: there's no distributed transaction between PostgreSQL and Google. You have to build the guarantees yourself.</p>
 </section>
 
 <section class="sezione" aria-labelledby="synk-flusso">
@@ -167,27 +167,21 @@
 <section class="sezione" aria-labelledby="synk-architettura">
     <div class="caso-capo">
         <p class="t-meta">(03) <span data-i18n="case.architecture">Architecture</span></p>
-        <h2 id="synk-architettura" data-split data-i18n-html="synk.archTitle">My work, <em>piece by piece.</em></h2>
-        <p class="caso-capo__testo rivela" data-i18n="synk.archText">I worked on the Node.js backend and the management panel. I also fine-tuned quantised 4B models with llama.cpp.</p>
+        <h2 id="synk-architettura" data-split data-i18n-html="synk.archTitle">The guarantees live <em>in the database.</em></h2>
+        <p class="caso-capo__testo rivela" data-i18n="synk.archText">A PHP dashboard, a Node.js backend and PostgreSQL 16 in Docker Compose, all ports on 127.0.0.1. Optional local AI with Ollama, off by default and kept away from client notes.</p>
     </div>
     <ul class="moduli">
-        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3>Intent picker</h3><p data-i18n="synk.m1">Understands the reason for the message and selects the right path.</p><span class="modulo__file t-meta">Node.js · Regex</span></li>
-        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="synk.m2t">Database and calendar</h3><p data-i18n="synk.m2">The local database holds appointments, services, team members and business data. Appointments also appear in Google Calendar.</p><span class="modulo__file t-meta">PostgreSQL</span></li>
-        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="synk.m3t">Management dashboard</h3><p data-i18n="synk.m3">Where the team updates data and reads the business analytics.</p><span class="modulo__file t-meta" data-i18n="synk.m3f">Web panel</span></li>
-        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3>Fine-tuning</h3><p data-i18n="synk.m4">Fine-tuning of quantised 4B models using llama.cpp.</p><span class="modulo__file t-meta">llama.cpp · 4B</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="synk.m1t">No double bookings</h3><p data-i18n="synk.m1">An exclusion constraint on time ranges stops two active appointments of the same operator from overlapping. The database refuses, not the code.</p><span class="modulo__file t-meta">PostgreSQL · gist</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="synk.m2t">Transactional outbox</h3><p data-i18n="synk.m2">Whoever changes an appointment queues the Calendar job in the same transaction; the call happens later, idempotent, with exponential retries and a fencing token so a stale worker can't close someone else's job.</p><span class="modulo__file t-meta">Node.js</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="synk.m3t">Compensation saga</h3><p data-i18n="synk.m3">For Calendar-first bookings, a pending record that doesn't confirm in time is undone instead of left half-done.</p><span class="modulo__file t-meta" data-i18n="synk.m3f">Saga</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="synk.m4t">Privacy</h3><p data-i18n="synk.m4">A waiting list that needs consent and expires within 30 days, access and deletion requests tracked by reference and hash, never by chat content, encrypted backups.</p><span class="modulo__file t-meta">GDPR</span></li>
     </ul>
-    <div class="tecnologie">
-        <article class="tecnologia"><p class="t-meta">Backend</p><h3>Node.js</h3><p data-i18n="synk.t1">Connects incoming messages to Synk’s flows and coordinates chat, data and calendar.</p><a class="t-meta filo" href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentation</a></article>
-        <article class="tecnologia"><p class="t-meta" data-i18n="synk.t2k">Text recognition</p><h3>Regex</h3><p data-i18n="synk.t2">Together with custom logic, they recognise the messages received on WhatsApp.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentation</a></article>
-        <article class="tecnologia"><p class="t-meta" data-i18n="synk.t3k">Relational database</p><h3>PostgreSQL</h3><p data-i18n="synk.t3">Stores the business data and makes it available for updates and dashboard analytics.</p><a class="t-meta filo" href="https://www.postgresql.org/about/" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentation</a></article>
-        <article class="tecnologia"><p class="t-meta">Fine-tuning · 4B</p><h3>llama.cpp</h3><p data-i18n="synk.t4">Fine-tuning of quantised 4B models.</p><a class="t-meta filo" href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentation</a></article>
-    </div>
 </section>
 
 <section class="sezione risultato" aria-labelledby="synk-risultato">
     <p class="t-meta">(04) <span data-i18n="case.result">Result</span></p>
-    <h2 class="risultato__frase" id="synk-risultato" data-split data-i18n-html="synk.result">A badly written message that becomes <em>an appointment in the calendar.</em></h2>
-    <p class="risultato__note rivela" data-i18n="synk.resultText">Appointments end up in the local database and in Google Calendar; the dashboard lets the team edit data and read the business analytics.</p>
+    <h2 class="risultato__frase" id="synk-risultato" data-split data-i18n-html="synk.result">Thirty thousand lines so that a message <em>becomes an appointment.</em></h2>
+    <p class="risultato__note rivela" data-i18n="synk.resultText">A release candidate with CI, Windows installation scripts and a test checklist. The README itself says not to use it with real clients before the open security findings are closed; the WhatsApp integration uses WhatsApp Web, not the official Business API.</p>
 </section>
 
 <a class="prossimo" href="/en/projects/beautify/" data-velo-n="02.3" data-cursore="Avanti">

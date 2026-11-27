@@ -4,12 +4,12 @@
     <p class="caso-apertura__meta t-meta"><span data-i18n="case.label2">Caso 02 / 04</span><span data-i18n="synk.kind">Automazione conversazionale</span><span data-i18n="synk.kind2">Applicazione web</span></p>
     <h1 class="caso-apertura__titolo" id="caso-titolo" data-split>Synk<b>.</b></h1>
     <div class="caso-apertura__piede">
-        <p class="caso-apertura__intro rivela" data-i18n="synk.intro">Synk gestisce le richieste e gli appuntamenti che arrivano su WhatsApp. Dietro la chat ci sono un intent picker, un database locale, Google Calendar e una dashboard per chi segue l’attività.</p>
+        <p class="caso-apertura__intro rivela" data-i18n="synk.intro">Un sistema on-premise per saloni su appuntamento: prenotazioni, WhatsApp e Google Calendar, con la consistenza resa esplicita. Gira su un PC del salone, non nel cloud di qualcun altro.</p>
         <dl class="caso-scheda t-meta rivela" style="--ritardo:.15s">
-            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="synk.role">Intent picker, backend, dashboard e fine-tuning</dd></div>
-            <div><dt>Stack</dt><dd>Node.js / PostgreSQL / llama.cpp</dd></div>
-            <div><dt>Focus</dt><dd data-i18n="synk.focus">Automazione conversazionale</dd></div>
-            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="synk.kind2">Applicazione web</dd></div>
+            <div><dt data-i18n="case.role">Il mio ruolo</dt><dd data-i18n="synk.role">Backend, modello dati, dashboard, rilascio</dd></div>
+            <div><dt>Stack</dt><dd>Node.js · PHP 8.3 · PostgreSQL 16 · Docker</dd></div>
+            <div><dt>Focus</dt><dd data-i18n="synk.focus">Consistenza, privacy, affidabilità</dd></div>
+            <div><dt data-i18n="case.project">Progetto</dt><dd data-i18n="synk.kind2">Release candidate 1.2.0-rc.6</dd></div>
         </dl>
     </div>
 </section>
@@ -21,12 +21,12 @@
 
 <section class="sezione caso-capo" aria-labelledby="synk-concept">
     <p class="t-meta">(01) Concept</p>
-    <h2 id="synk-concept" data-split data-i18n-html="synk.conceptTitle">Chi scrive resta su WhatsApp. <em>Il resto succede dietro, in silenzio.</em></h2>
+    <h2 id="synk-concept" data-split data-i18n-html="synk.conceptTitle">Uno slot non è mai <em>dato per</em> libero.</h2>
     <div class="caso-capo__testo rivela">
-        <p data-i18n="synk.concept1">Si può scrivere con parole proprie, in modo naturale: Synk riconosce il motivo del messaggio e apre la conversazione giusta.</p>
-        <p data-i18n="synk.concept2">Durante lo scambio raccoglie i dettagli necessari prima di passare la richiesta al sistema gestionale.</p>
+        <p data-i18n="synk.concept1">I clienti scrivono su WhatsApp con parole loro; synk capisce cosa serve e prenota. La parte difficile non è la chat: è tenere d’accordo un database locale e Google Calendar quando uno dei due non risponde.</p>
+        <p data-i18n="synk.concept2">Quindi le regole sono esplicite: se Calendar non risponde in modo affidabile, lo slot non è libero. In coda non vuol dire sincronizzato. Ogni stato incerto è visibile in dashboard e si può passare a una persona.</p>
     </div>
-    <p class="caso-capo__lato rivela" data-i18n="synk.problem">Il punto di partenza: le richieste arrivano in chat, ognuna scritta a modo suo, e devono diventare appuntamenti ordinati. Senza che nessuno debba leggere tutto a mano.</p>
+    <p class="caso-capo__lato rivela" data-i18n="synk.problem">Il punto di partenza: non esiste una transazione unica fra PostgreSQL e Google. Le garanzie vanno costruite a mano.</p>
 </section>
 
 <section class="sezione" aria-labelledby="synk-flusso">
@@ -70,27 +70,21 @@
 <section class="sezione" aria-labelledby="synk-architettura">
     <div class="caso-capo">
         <p class="t-meta">(03) <span data-i18n="case.architecture">Architettura</span></p>
-        <h2 id="synk-architettura" data-split data-i18n-html="synk.archTitle">Il mio lavoro, <em>pezzo per pezzo.</em></h2>
-        <p class="caso-capo__testo rivela" data-i18n="synk.archText">Ho lavorato sul backend Node.js e sul pannello gestionale. Ho anche fatto fine-tuning di modelli quantizzati da 4B con llama.cpp.</p>
+        <h2 id="synk-architettura" data-split data-i18n-html="synk.archTitle">Le garanzie stanno <em>nel database.</em></h2>
+        <p class="caso-capo__testo rivela" data-i18n="synk.archText">Una dashboard PHP, un backend Node.js e PostgreSQL 16 in Docker Compose, con tutte le porte su 127.0.0.1. AI locale opzionale con Ollama, spenta di default e tenuta lontana dalle note dei clienti.</p>
     </div>
     <ul class="moduli">
-        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3>Intent picker</h3><p data-i18n="synk.m1">Capisce il motivo del messaggio e seleziona il percorso adatto.</p><span class="modulo__file t-meta">Node.js · Regex</span></li>
-        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="synk.m2t">Database e calendario</h3><p data-i18n="synk.m2">Il database locale raccoglie appuntamenti, servizi, persone del team e dati dell’attività. Gli appuntamenti si ritrovano anche in Google Calendar.</p><span class="modulo__file t-meta">PostgreSQL</span></li>
-        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="synk.m3t">Dashboard gestionale</h3><p data-i18n="synk.m3">Da qui il team aggiorna i dati e consulta le analitiche sull’attività.</p><span class="modulo__file t-meta" data-i18n="synk.m3f">Pannello web</span></li>
-        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3>Fine-tuning</h3><p data-i18n="synk.m4">Fine-tuning di modelli quantizzati da 4B usando llama.cpp.</p><span class="modulo__file t-meta">llama.cpp · 4B</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">01</span><h3 data-i18n="synk.m1t">Niente sovrapposizioni</h3><p data-i18n="synk.m1">Un vincolo di esclusione sugli intervalli impedisce che due appuntamenti attivi della stessa operatrice si sovrappongano. Rifiuta il database, non il codice.</p><span class="modulo__file t-meta">PostgreSQL · gist</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">02</span><h3 data-i18n="synk.m2t">Outbox transazionale</h3><p data-i18n="synk.m2">Chi modifica un appuntamento accoda il lavoro per Calendar nella stessa transazione; la chiamata avviene dopo, idempotente, con tentativi esponenziali e un token che impedisce a un worker scaduto di chiudere il lavoro di un altro.</p><span class="modulo__file t-meta">Node.js</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">03</span><h3 data-i18n="synk.m3t">Saga di compensazione</h3><p data-i18n="synk.m3">Per le prenotazioni che partono da Calendar, un record in sospeso che non si conferma in tempo viene annullato invece di restare a metà.</p><span class="modulo__file t-meta" data-i18n="synk.m3f">Saga</span></li>
+        <li class="modulo rivela"><span class="modulo__n t-meta">04</span><h3 data-i18n="synk.m4t">Privacy</h3><p data-i18n="synk.m4">Lista d’attesa con consenso che scade entro 30 giorni, richieste di accesso e cancellazione registrate con riferimento e hash, mai con il contenuto delle chat, backup cifrati.</p><span class="modulo__file t-meta">GDPR</span></li>
     </ul>
-    <div class="tecnologie">
-        <article class="tecnologia"><p class="t-meta">Backend</p><h3>Node.js</h3><p data-i18n="synk.t1">Collega i messaggi in arrivo ai flussi di Synk e coordina chat, dati e calendario.</p><a class="t-meta filo" href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
-        <article class="tecnologia"><p class="t-meta" data-i18n="synk.t2k">Riconoscimento testo</p><h3>Regex</h3><p data-i18n="synk.t2">Insieme alla logica personalizzata, riconoscono i messaggi ricevuti su WhatsApp.</p><a class="t-meta filo" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
-        <article class="tecnologia"><p class="t-meta" data-i18n="synk.t3k">Database relazionale</p><h3>PostgreSQL</h3><p data-i18n="synk.t3">Conserva i dati dell’attività e li rende disponibili per aggiornamenti e analitiche in dashboard.</p><a class="t-meta filo" href="https://www.postgresql.org/about/" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
-        <article class="tecnologia"><p class="t-meta">Fine-tuning · 4B</p><h3>llama.cpp</h3><p data-i18n="synk.t4">Fine-tuning di modelli quantizzati da 4B.</p><a class="t-meta filo" href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer" data-i18n="case.docs">Documentazione</a></article>
-    </div>
 </section>
 
 <section class="sezione risultato" aria-labelledby="synk-risultato">
     <p class="t-meta">(04) <span data-i18n="case.result">Risultato</span></p>
-    <h2 class="risultato__frase" id="synk-risultato" data-split data-i18n-html="synk.result">Un messaggio scritto male che diventa <em>un appuntamento in calendario.</em></h2>
-    <p class="risultato__note rivela" data-i18n="synk.resultText">Gli appuntamenti finiscono nel database locale e su Google Calendar; la dashboard permette di modificare i dati e leggere le analitiche sull’attività.</p>
+    <h2 class="risultato__frase" id="synk-risultato" data-split data-i18n-html="synk.result">Trentamila righe perché un messaggio <em>diventi un appuntamento.</em></h2>
+    <p class="risultato__note rivela" data-i18n="synk.resultText">Una release candidate con CI, script di installazione per Windows e una checklist di collaudo. Il README stesso dice di non usarla con clienti veri prima di chiudere i rilievi di sicurezza aperti; l’integrazione WhatsApp usa WhatsApp Web, non l’API ufficiale Business.</p>
 </section>
 
 <a class="prossimo" href="../beautify/" data-velo-n="02.3" data-cursore="Avanti">

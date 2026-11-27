@@ -29,6 +29,12 @@ jobs:
           python-version: '3.12'
       - name: Installa agent-reach
         run: pip install "git+https://github.com/Panniantong/Agent-Reach"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Aggiungi il canale Instagram
+        continue-on-error: true
+        run: agent-reach add instagram
       - name: Stato di agent-reach
         continue-on-error: true
         run: agent-reach doctor --text

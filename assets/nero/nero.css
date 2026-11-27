@@ -703,6 +703,23 @@ html.sparo-arrivo::after {
 }
 
 
+
+/* Cerchio di misura e mirino sulla scultura (stesso centro di data-spostamento 0.26, 0.1) */
+.apertura__mirino {
+    position: absolute; z-index: -1; pointer-events: none;
+    left: 63%; top: 45%;
+    width: min(56vh, 40vw); aspect-ratio: 1;
+    translate: -50% -50%;
+    scale: calc(1 - var(--uscita, 0) * .22); opacity: calc(1 - var(--uscita, 0) * 1.2);
+}
+.apertura__cerchio { position: absolute; inset: 0; border: 1px solid rgb(232 230 225 / .14); border-radius: 50%; }
+.apertura__cerchio::before { content: ""; position: absolute; inset: 18%; border: 1px dashed rgb(232 230 225 / .08); border-radius: 50%; }
+.apertura__croce { position: absolute; inset: 22%; }
+.apertura__croce::before, .apertura__croce::after { content: ""; position: absolute; background: var(--cremisi); opacity: .8; }
+.apertura__croce::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+.apertura__croce::after { top: 50%; left: 0; right: 0; height: 1px; }
+@media (max-aspect-ratio: 23/20) { .apertura__mirino { left: 50%; width: min(70vw, 44vh); } }
+
 /* Uscita dall'apertura, guidata da --uscita (0 → 1) */
 .apertura { --uscita: 0; }
 .apertura__campo { scale: calc(1 - var(--uscita) * .22); opacity: calc(1 - var(--uscita) * .9); transform-origin: 64% 45%; }

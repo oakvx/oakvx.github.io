@@ -115,7 +115,40 @@
         setTimeout(vai, USCITA_MS + 200); // anche se la scheda smette di disegnare
     }
 
+    /* ------------------------------------------------------------ arrivo */
+    function apri() {
+        const root = document.documentElement;
+        let arrivato = false;
+        try { arrivato = sessionStorage.getItem(CHIAVE) === '1'; sessionStorage.removeItem(CHIAVE); } catch {}
+        if (!root.classList.contains('sparo-arrivo')) return;
+        if (!arrivato || calmo()) { root.classList.remove('sparo-arrivo'); return; }
+        const el = creaLivello();
+        el.classList.add('arrivo');
+        el.style.setProperty('--y', Math.round(innerHeight / 2) + 'px');
+        el.style.setProperty('--a', '0');
+        root.classList.remove('sparo-arrivo');
+        const inizio = performance.now();
+        const passo = () => {
+            const t = Math.min(1, (performance.now() - inizio) / ARRIVO_MS);
+            const a = 1 - Math.pow(1 - t, 3);
+            el.style.setProperty('--a', a.toFixed(4));
+            if (t < 1) requestAnimationFrame(passo);
+            else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); }
+        };
+        requestAnimationFrame(passo);
+    }
+
+    // tornando indietro dalla cache del browser la pagina non deve restare coperta
+    function ripristina() {
+        inCorso = false;
+        if (!livello) return;
+        livello.classList.remove('attivo', 'arrivo');
+        ['--s', '--p', '--f', '--c', '--a'].forEach(k => livello.style.removeProperty(k));
+    }
+
     function avvia() {
+        apri();
+        addEventListener('pageshow', e => { if (e.persisted) ripristina(); });
         document.addEventListener('click', e => {
             const a = e.target.closest && e.target.closest('a[href]');
             if (!a || a.hasAttribute('data-no-velo')) return;

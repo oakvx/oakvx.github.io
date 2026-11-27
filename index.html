@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},4000)}})();</script>
 <link rel="stylesheet" href="./assets/ingresso/ingresso.css">
-<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-velo'))r.classList.add('velo-entra')}catch{}})();</script>
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{if(!reduce&&!paused&&sessionStorage.getItem('nero-sparo'))r.classList.add('sparo-arrivo')}catch{}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#050505">
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
@@ -255,18 +255,18 @@
         <p class="sezione-nota rivela" data-i18n="home.siteNote">Ogni commit di questo repository, giorno per giorno. I numeri arrivano in diretta da GitHub.</p>
     </header>
     <div class="cantiere__corpo">
-        <p class="cantiere__numero"><span data-commit-totale>108</span> <span class="t-meta" data-i18n="home.siteUnit">commit</span></p>
+        <p class="cantiere__numero"><span data-commit-totale>109</span> <span class="t-meta" data-i18n="home.siteUnit">commit</span></p>
         <dl class="cantiere__dati t-meta">
             <div><dt data-i18n="home.siteFirst">Primo commit</dt><dd data-commit-primo>4 nov 2026</dd></div>
             <div><dt data-i18n="home.siteDays">Giorni di lavoro</dt><dd data-commit-giorni>7</dd></div>
             <div><dt data-i18n="home.siteBest">Giorno record</dt><dd data-commit-record>57 · 26 nov 2026</dd></div>
-            <div><dt data-i18n="home.siteLast">Ultimo</dt><dd><a class="filo" href="https://github.com/oakvx/oakvx.github.io/commits" target="_blank" rel="noopener noreferrer" data-commit-ultimo>Draw the light beam layer for page changes</a></dd></div>
+            <div><dt data-i18n="home.siteLast">Ultimo</dt><dd><a class="filo" href="https://github.com/oakvx/oakvx.github.io/commits" target="_blank" rel="noopener noreferrer" data-commit-ultimo>Fire the beam on internal link clicks</a></dd></div>
         </dl>
         <div class="cantiere__grafico" data-commit-grafico role="img" aria-label="Commit per giorno" data-i18n-aria="home.siteChartAria"></div>
         <p class="cantiere__asse t-meta" aria-hidden="true"><span data-commit-da>4 nov 2026</span><span data-i18n="home.siteToday">oggi</span></p>
         <p class="cantiere__stato t-meta" data-commit-stato aria-live="polite"></p>
     </div>
-    <script type="application/json" id="commit-sito-dati">{"totale": 108, "giorni": {"2026-11-04": 1, "2026-11-07": 6, "2026-11-09": 1, "2026-11-19": 2, "2026-11-21": 20, "2026-11-26": 57, "2026-11-27": 21}, "ultimo": "Draw the light beam layer for page changes"}</script>
+    <script type="application/json" id="commit-sito-dati">{"totale": 109, "giorni": {"2026-11-04": 1, "2026-11-07": 6, "2026-11-09": 1, "2026-11-19": 2, "2026-11-21": 20, "2026-11-26": 57, "2026-11-27": 22}, "ultimo": "Fire the beam on internal link clicks"}</script>
 </section>
 
 </main>

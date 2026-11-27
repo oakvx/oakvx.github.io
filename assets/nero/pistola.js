@@ -300,17 +300,12 @@ export async function creaPistola(contenitore) {
     let raf = 0;
 
     /* Entra da sinistra, spara (rinculo secco), esce: i tempi arrivano da fase() di proiettile.js. */
-    function spara(tempo) {
-        const fase = window.OAKVX.proiettile.faseVolo;
-        const fuori = riposo.x - 2.4;            // abbastanza a sinistra da essere fuori schermo
-        const partenza = volata();
-        punta.getWorldPosition(partenzaMondo); // volata() lascia tmp proiettato sullo schermo
-        // arrivo: appena davanti alla camera, al centro dello schermo
-        arrivoMondo.set(0, 0, camera.position.z - .55);
-        cancelAnimationFrame(raf);
-        bossoloPartito = false; proiettilePartito = false;
-        const passo = () => {
-            const ms = tempo();
+    // la posa completa della scena al tempo ms della sequenza (senza disegnare)
+    function posa(ms) {
+            const fase = window.OAKVX.proiettile.faseVolo;
+            const fuori = riposo.x - 2.4;            // abbastanza a sinistra da essere fuori schermo
+            // arrivo: appena davanti alla camera, al centro dello schermo
+            arrivoMondo.set(0, 0, camera.position.z - .55);
             const f = fase(ms);
             const P = window.OAKVX.proiettile;
             const k = P.rinculo(ms);
@@ -343,8 +338,7 @@ export async function creaPistola(contenitore) {
             if (volo.visible) {
                 // dalla volata verso la camera: si avvicina, cresce e si gira a mostrare l'incisione
                 const v = f.volo;
-                // finché è a ridosso della canna la segue nel rinculo, poi tira dritto
-                if (v < .03 || !proiettilePartito) {
+                if (!proiettilePartito) {   // la partenza è la volata all'istante dello sparo: poi il proiettile va per conto suo
                     punta.getWorldPosition(partenzaMondo);
                     asseMondo.copy(X).applyQuaternion(punta.getWorldQuaternion(qTmp)).normalize();
                     proiettilePartito = true;
@@ -360,10 +354,28 @@ export async function creaPistola(contenitore) {
                 volo.quaternion.copy(qAsse).slerp(qFine, giro * giro * (3 - 2 * giro));
                 proiettile.rotation.x = -Math.PI / 2 + (.75 - v) * .9; // l'incisione arriva di fronte alla fine
             }
+    }
+
+    function spara(tempo) {
+        cancelAnimationFrame(raf);
+        bossoloPartito = false; proiettilePartito = false;
+        const passo = () => {
+            const ms = tempo();
+            posa(ms);
             disegna();
             if (ms < window.OAKVX.proiettile.VOLO_MS + 60) raf = requestAnimationFrame(passo);
         };
         raf = requestAnimationFrame(passo);
+    }
+
+    // un solo fotogramma al tempo ms, per controllare la sequenza ferma
+    function fotogramma(ms) {
+        cancelAnimationFrame(raf);
+        bossoloPartito = false; proiettilePartito = false;
+        // ripercorre la sequenza a 60 fps: proiettile e bossolo fissano la partenza come dal vivo
+        for (let t = 0; t < ms; t += 1000 / 60) posa(t);
+        posa(ms);
+        disegna();
     }
 
     // posizione della volata sullo schermo, a riposo
@@ -390,6 +402,7 @@ export async function creaPistola(contenitore) {
         volata,
         volataOra,
         spara,
+        fotogramma,
         disegna,
         distruggi() { removeEventListener('resize', dimensiona); renderer.dispose(); canvas.remove(); }
     };

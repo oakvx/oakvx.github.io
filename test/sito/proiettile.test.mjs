@@ -93,7 +93,7 @@ test('faseVolo: con la pistola il proiettile vola verso chi guarda fino a coprir
     assert.ok(p.faseVolo(150).pistola > 0 && p.faseVolo(150).pistola < 1);
     assert.equal(p.faseVolo(290).pistola, 1);
     assert.equal(p.faseVolo(300).volo, 0);
-    assert.ok(p.faseVolo(320).volo > 0 && p.faseVolo(320).volo < .001);   // appena uscito dalla canna
+    assert.ok(p.faseVolo(301).volo > 0 && p.faseVolo(301).volo < .01);    // appena uscito dalla canna
     assert.ok(p.faseVolo(700).volo > 0 && p.faseVolo(700).volo < .5);   // parte lento, poi accelera
     assert.equal(p.faseVolo(1300).volo, 1);
     assert.equal(p.faseVolo(1200).copertura, 0);
@@ -168,4 +168,12 @@ test('ordine degli eventi dello sparo, come in una semiautomatica vera', () => {
     assert.ok(campioni.find(x => x.ms === esce).c >= .8 || campioni.filter(x => x.ms < esce).some(x => x.c >= .8), 'bossolo troppo presto');
     // 5. il lampo dura al massimo due fotogrammi
     assert.ok(campioni.filter(x => x.f.lampo > 0).every(x => x.ms <= S + 34), 'lampo troppo lungo');
+});
+
+test('il proiettile si stacca subito dalla canna, poi rallenta e cresce verso chi guarda', () => {
+    const S = p.SPARO_MS;
+    assert.ok(p.faseVolo(S + 30).volo >= .05, 'a 30 ms dallo sparo deve essere già lontano dalla volata');
+    assert.ok(p.faseVolo(S + 40).volo <= .12, 'lo stacco è breve');
+    assert.ok(p.faseVolo(700).volo < .5);
+    for (let ms = S; ms < 1300; ms++) assert.ok(p.faseVolo(ms + 1).volo >= p.faseVolo(ms).volo, `torna indietro a ${ms}`);
 });

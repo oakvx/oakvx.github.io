@@ -69,14 +69,20 @@
     const SBLOCCO_MS = 2;                       // il carrello parte appena dopo l'uscita del proiettile
     const CORSA_MS = 15;                        // arretramento del carrello
     const RITORNO_MS = 45;                      // ritorno in batteria
+    const STACCO_MS = 40, STACCO = .08;         // in 40 ms fa l'8% della strada: si separa dalla canna prima che si alzi
+    function voloA(ms) {
+        if (ms <= SPARO_MS) return 0;
+        if (ms < SPARO_MS + STACCO_MS) { const u = (ms - SPARO_MS) / STACCO_MS; return STACCO * (1 - (1 - u) * (1 - u)); }
+        const t = tratto(ms, SPARO_MS + STACCO_MS, 1300);
+        return STACCO + (1 - STACCO) * t * t * t;   // poi cubica: rallenta, e cresce addosso a chi guarda
+    }
     function faseVolo(ms) {
-        const t = tratto(ms, SPARO_MS, 1300);
         return {
             pistola: Math.min(tratto(ms, 0, 280), 1 - tratto(ms, 850, 1200)),
             sparo: tratto(ms, SPARO_MS, SPARO_MS + 120),
             // la vampa: piena all'istante dello sparo, sparita in due fotogrammi
             lampo: ms < SPARO_MS || ms > SPARO_MS + 34 ? 0 : Math.exp(-(ms - SPARO_MS) / 8),
-            volo: t * t * t,                      // cubica in entrata: lento all'uscita, poi addosso
+            volo: voloA(ms),
             fumo: tratto(ms, SPARO_MS + 20, VOLO_MS),
             copertura: tratto(ms, 1300, VOLO_MS)
         };

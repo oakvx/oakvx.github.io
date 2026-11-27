@@ -49,6 +49,7 @@ export async function creaPistola(contenitore) {
 
     const camera = new THREE.PerspectiveCamera(24, 1, .01, 50);
     camera.position.set(0, 0, 6);
+    camera.updateMatrixWorld(); // senza, project() divide per zero prima del primo disegno
 
     const gltf = await new GLTFLoader().loadAsync(MODELLO);
     let originale;

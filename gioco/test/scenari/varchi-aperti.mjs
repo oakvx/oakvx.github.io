@@ -27,6 +27,8 @@ export default async function (page, aiuto) {
   const varchi = await G(() => window.__gioco.varchi());
   assert.equal(varchi.length, 8);
   for (const v of varchi) {
+    // una porta che esiste solo in un punto preciso (lo squarcio della cisterna) si prepara prima
+    await G((d) => window.__gioco.stanza(d).preparaVarco?.(), v.da);
     await attraversa(page, aiuto, v.lato, v.a);
     const s = await aiuto.leggi();
     // indietro: ci si gira e si riattraversa

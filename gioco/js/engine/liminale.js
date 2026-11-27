@@ -6,12 +6,14 @@ import { formatta } from '../logica/commit.js';
 export function cartelloStanza(m, g, x, y, z, ry, n) {
   const fmt = (v) => (g.lingua() === 'en' ? formatta(v).replace(/\./g, ',') : formatta(v));
   let totale = '2.500';
+  // tex.numero si può cambiare (poi tex.ridisegna()): la cisterna infinita lo fa a ogni cella
   const tex = g.texTesto(512, 128, (ctx, w, h) => {
     ctx.fillStyle = '#1c1f1d'; ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = '#e3e7e2'; ctx.font = '700 44px monospace'; ctx.textAlign = 'center';
-    tex.testo = g.T().stanzaDi.replace('{n}', fmt(n)).replace('{tot}', totale);
+    tex.testo = g.T().stanzaDi.replace('{n}', fmt(tex.numero)).replace('{tot}', totale);
     ctx.fillText(tex.testo, w / 2, 80);
   });
+  tex.numero = n;
   tex.ridisegna();
   g.suLingua(() => tex.ridisegna());
   if (g.commit) g.commit().then((c) => { totale = c.testo; tex.ridisegna(); }).catch(() => {});
@@ -26,6 +28,7 @@ export function cartelloStanza(m, g, x, y, z, ry, n) {
 const visti = new Set();
 export function miiLiminale(m, g, id, x, y, z, ry, verso = [1, 0]) {
   const mii = g.arredi.mii(x, y, z, ry, 'gira');
+  const posto = [x, y, z];
   let via = -1;
   m.ogniFrame((dt) => {
     if (!mii.visible) return;
@@ -42,7 +45,17 @@ export function miiLiminale(m, g, id, x, y, z, ry, verso = [1, 0]) {
       if (via > 0.45) mii.visible = false;
     }
   });
-  return { id, posto: [x, y, z] };
+  // sposta(nx, nz): nuovo posto (finché non è stato visto); posto è aggiornato sul posto
+  return {
+    id, posto,
+    sposta(nx, nz) {
+      if (via >= 0) return;
+      x = posto[0] = nx;
+      z = posto[2] = nz;
+      mii.position.x = x;
+      mii.position.z = z;
+    },
+  };
 }
 
 // una tappa del percorso: porta chiusa con l'anno sopra; esaminarla (E) apre il cartiglio

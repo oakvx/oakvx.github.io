@@ -30,8 +30,8 @@
       "en": "The corridor was flooded, and the current pushed backwards. The curator noticed, on the far wall, a door marked 2025. Seville, says the script."
     },
     "N-112": {
-      "it": "Sotto l'edificio c'è una cisterna, con tubi e quadri elettrici. Il copione la chiama «Format, 2026». La scaletta non c'è più.",
-      "en": "Under the building there's a cistern, with pipes and control panels. The script calls it \"Format, 2026\". The ladder is gone.",
+      "it": "Sotto l'edificio c'è una cisterna. Il copione dice che è grande quanto l'edificio, «Format, 2026». Il copione non ha mai provato ad arrivare in fondo.",
+      "en": "Under the building there's a cistern. The script says it's as big as the building, \"Format, 2026\". The script never tried to reach the end.",
       "panico": true
     },
     "N-114": {
@@ -194,6 +194,14 @@
     "N-311": {
       "it": "Fine del turno. Se vi è piaciuto, l'email è sul muro. Se non vi è piaciuto, l'email è comunque sul muro.",
       "en": "End of shift. If you liked it, the email is on the wall. If you didn't, the email is still on the wall."
+    },
+    "N-116": {
+      "it": "Le cisterne non ronzano. Questa sì. Io seguirei il ronzio: dove è più forte, la realtà ha una crepa.",
+      "en": "Cisterns don't hum. This one does. I'd follow the hum: where it's loudest, reality has a crack."
+    },
+    "N-117": {
+      "it": "Ho acceso una scia sull'acqua: porta allo squarcio. È in alto, su una passerella: una finestra su una colonna, l'altra sul pilastro sopra la passerella.",
+      "en": "I lit a trail on the water: it leads to the tear. It's up high, on a catwalk: one window on a column, the other on the pillar above the catwalk."
     }
   },
   "eventi": {
@@ -407,6 +415,12 @@
         "id": "N-311",
         "subito": true
       }
+    ],
+    "aiuto:indizio:cisterna": [
+      "N-116"
+    ],
+    "aiuto:soluzione:cisterna": [
+      "N-117"
     ]
   }
 }

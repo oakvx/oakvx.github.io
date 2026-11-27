@@ -90,8 +90,11 @@ export class Portali {
   // prova a piazzare la finestra i dove punta il raggio; restituisce l'esito
   piazza(i, hit) {
     const id = hit.object.userData.pannello;
-    const pan = this.mondo.pannelli.get(id);
+    let pan = this.mondo.pannelli.get(id);
     if (!pan || !hit.face || pan.bloccato) return 'no';
+    // blocco con più facce (le colonne della cisterna): conta la faccia colpita
+    if (pan.facce) pan = pan.facce.find((f) => hit.face.normal.dot(f.normale) > 0.9);
+    if (!pan) return 'no';
     if (hit.face.normal.dot(pan.normale) < 0.9) return 'no';
     if (pan.b - pan.a < W || pan.y1 - pan.y0 < H) return 'no';
     let u = pan.asse === 'x' ? hit.point.x : hit.point.z;
@@ -99,7 +102,7 @@ export class Portali {
     let y = hit.point.y;
     y = y - pan.y0 < H ? pan.y0 + H / 2 + 0.02 : Math.min(pan.y1 - H / 2 - 0.02, Math.max(pan.y0 + H / 2 + 0.02, y));
     const altro = this.p[1 - i];
-    if (altro.attivo && altro.pannello === id && Math.abs(altro.u - u) < W + 0.05 && Math.abs(altro.y - y) < H) return 'occupato';
+    if (altro.attivo && altro.chiave === pan.id && Math.abs(altro.u - u) < W + 0.05 && Math.abs(altro.y - y) < H) return 'occupato';
     const off = 0.012;
     const pos = pan.asse === 'x'
       ? new THREE.Vector3(u, y, pan.faccia + pan.normale.z * off)
@@ -110,6 +113,7 @@ export class Portali {
     P.inv.copy(P.fis).invert();
     P.eff.copy(this.reindirizzi.get(id) || P.fis);
     P.pannello = id;
+    P.chiave = pan.id;
     P.proibito = pan.proibito;
     P.u = u;
     P.y = y;
@@ -121,6 +125,26 @@ export class Portali {
     this.p[0].mat.uniforms.uCollegato.value = c;
     this.p[1].mat.uniforms.uCollegato.value = c;
     return pan.proibito ? 'proibito' : 'ok';
+  }
+
+  // trasla le finestre piazzate di (dx, dz), come il resto dello spazio (cisterna infinita);
+  // dentro(pos) sceglie quali finestre spostare
+  sposta(dx, dz, dentro = () => true) {
+    const pos = new THREE.Vector3();
+    const t = new THREE.Matrix4().makeTranslation(dx, 0, dz);
+    for (const P of this.p) {
+      if (!P.attivo) continue;
+      pos.setFromMatrixPosition(P.fis);
+      if (!dentro(pos)) continue;
+      const stessa = P.eff.equals(P.fis);
+      P.fis.premultiply(t);
+      P.inv.copy(P.fis).invert();
+      if (stessa) P.eff.copy(P.fis);
+      const pan = this.mondo.pannelli.get(P.pannello);
+      P.u += pan && pan.asse === 'z' ? dz : dx;
+      P.mesh.matrix.copy(P.fis);
+      P.mesh.matrixWorldNeedsUpdate = true;
+    }
   }
 
   // pannelli da non considerare solidi per un corpo che sta passando in una finestra

@@ -28,12 +28,12 @@ export function nicchia(m, [x, y0, z, ry], w = W, h = H) {
   m.box(cx - mx, y0, cz - mz, cx + mx, y0 + h + 0.3, cz + mz, m.mat.scuro);
 }
 
-export function collega(g, id, a, b, { w = W, h = H, doppio = true } = {}) {
+export function collega(g, id, a, b, { w = W, h = H, doppio = true, formaA = null } = {}) {
   return g.passaggi.aggiungi({
     id,
     a: posa(a[0], a[1] + h / 2, a[2], a[3]),
     b: posa(b[0], b[1] + h / 2, b[2], b[3]),
-    w, h, doppio,
+    w, h, doppio, formaA,
   });
 }
 

@@ -37,7 +37,8 @@ export function costruisci(m, g) {
   m.box(NICCHIA.x0, 0, NICCHIA.z0, NICCHIA.x1, NICCHIA.y, NICCHIA.z1, mat.metallo);
   nicchia(m, [110, 0, Z0, 0]);
   nicchia(m, USCITA);
-  collega(g, 'middleman-cisterna', USCITA, [300, 0, 26, Math.PI / 2]);
+  // si arriva al muro d'ingresso della cisterna infinita (cella logica 0, 0: vedi stanze/cisterna.js)
+  collega(g, 'middleman-cisterna', USCITA, [301, 0, 9, Math.PI / 2]);
   g.arredi.porta(USCITA[0], USCITA[1], Z1 - 0.06, Math.PI, null);
 
   // una sola luce, debole, sulla didascalia vicino all'ingresso

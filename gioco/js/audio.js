@@ -114,6 +114,39 @@ export class Suoni {
     return g;
   }
 
+  // ronzio dello squarcio di realtà (cisterna): livello 0..1, chiarezza 0..1 (più vicino, più acuto)
+  squarcio(livello = 0, chiarezza = 0) {
+    if (!this.ac) return;
+    const ac = this.ac;
+    if (!this.gSquarcio) {
+      this.fSquarcio = ac.createBiquadFilter();
+      this.fSquarcio.type = 'lowpass';
+      this.fSquarcio.frequency.value = 300;
+      const tremolo = ac.createGain();
+      this.gSquarcio = ac.createGain();
+      this.gSquarcio.gain.value = 0;
+      this.fSquarcio.connect(tremolo).connect(this.gSquarcio).connect(this.out);
+      const lfo = ac.createOscillator();
+      lfo.frequency.value = 6.3;
+      const lg = ac.createGain();
+      lg.gain.value = 0.35;
+      lfo.connect(lg).connect(tremolo.gain);
+      lfo.start();
+      for (const [f, tipo, g] of [[55, 'sawtooth', 0.05], [110.6, 'square', 0.014], [166.2, 'sawtooth', 0.01], [331, 'triangle', 0.006]]) {
+        const o = ac.createOscillator();
+        o.type = tipo;
+        o.frequency.value = f;
+        const gg = ac.createGain();
+        gg.gain.value = g;
+        o.connect(gg).connect(this.fSquarcio);
+        o.start();
+      }
+    }
+    const t = ac.currentTime;
+    this.gSquarcio.gain.setTargetAtTime(Math.max(0, Math.min(1, livello)) * 0.9, t, 0.25);
+    this.fSquarcio.frequency.setTargetAtTime(220 + Math.max(0, Math.min(1, chiarezza)) * 2600, t, 0.25);
+  }
+
   // livelli d'ambiente della stanza corrente: { ronzio, acqua, pioggia, gocce, legno }
   ambiente(liv) { this.obiettivo = { ronzio: 1, acqua: 0, pioggia: 0, gocce: 0, legno: 0, ...liv }; }
 

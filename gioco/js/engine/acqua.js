@@ -5,12 +5,13 @@ import * as THREE from 'three';
 const vertex = `
 uniform float uTempo;
 uniform vec2 uFlusso;
+uniform vec2 uScarto;
 varying vec3 vWP;
 #include <fog_pars_vertex>
 void main(){
   vec3 p = position;
   vec4 wp = modelMatrix * vec4(p, 1.0);
-  vec2 q = wp.xz - uFlusso * uTempo;
+  vec2 q = wp.xz + uScarto - uFlusso * uTempo;
   wp.y += sin(q.x * 1.7 + q.y * 0.9) * 0.012 + sin(q.y * 2.3 - uTempo * 1.1) * 0.008;
   vWP = wp.xyz;
   vec4 mvPosition = viewMatrix * wp;
@@ -24,6 +25,7 @@ uniform vec2 uFlusso;
 uniform vec3 uColore;
 uniform vec3 uRiflesso;
 uniform float uOpacita;
+uniform vec2 uScarto;
 varying vec3 vWP;
 #include <fog_pars_fragment>
 float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
@@ -41,7 +43,7 @@ float onde(vec2 p){
   return v;
 }
 void main(){
-  vec2 p = vWP.xz;
+  vec2 p = vWP.xz + uScarto;
   float e = 0.06;
   float h = onde(p);
   vec3 n = normalize(vec3(onde(p + vec2(e, 0.0)) - h, 0.09, onde(p + vec2(0.0, e)) - h));
@@ -55,11 +57,13 @@ void main(){
   #include <fog_fragment>
 }`;
 
+// uScarto (mesh.material.uniforms.uScarto): spostamento delle coordinate del disegno
 export function creaAcqua(m, x0, z0, x1, z1, y, { flusso = [0.3, 0], colore = 0x2b6f7a, riflesso = 0xd6eef2, opacita = 0.62 } = {}) {
   const mat = new THREE.ShaderMaterial({
     uniforms: THREE.UniformsUtils.merge([THREE.UniformsLib.fog, {
       uTempo: { value: 0 },
       uFlusso: { value: new THREE.Vector2(...flusso) },
+      uScarto: { value: new THREE.Vector2(0, 0) },
       uColore: { value: new THREE.Color(colore) },
       uRiflesso: { value: new THREE.Color(riflesso) },
       uOpacita: { value: opacita },

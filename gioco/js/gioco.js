@@ -173,6 +173,24 @@ export async function avvia(ctx) {
       return a;
     },
     segreto: (id) => { if (g.giro.segreto(id)) emetti('segreto:' + id); },
+    // sposta di nascosto giocatore, cubi e finestre di (dx, dz) (cisterna infinita);
+    // dentro(pos) sceglie cubi e finestre da spostare; nessun attraversamento viene contato
+    trasla: (dx, dz, dentro = () => true) => {
+      const d = new THREE.Vector3(dx, 0, dz);
+      giocatore.pos.add(d);
+      giocatore.zPrima = [null, null];
+      if (giocatore.zPass) giocatore.zPass.clear();
+      camera.position.add(d);
+      camera.updateMatrixWorld();
+      for (const c of cubi) {
+        if (!c.tenuto && !dentro(c.pos)) continue;
+        c.pos.add(d);
+        if (c.mesh) c.mesh.position.add(d);
+        c.zPrima = [null, null];
+        if (c.zPass) c.zPass.clear();
+      }
+      portali.sposta(dx, dz, dentro);
+    },
     fine: () => fine(),
     teletrasporta: (x, piedi, z, nuovoYaw = null, prima = null) => g.velo(() => {
       if (prima) prima();

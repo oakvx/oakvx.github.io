@@ -1182,7 +1182,8 @@ html.sparo-arrivo::after {
     font: 400 .9rem/1.6 var(--mono);
 }
 .term__barra { display: flex; justify-content: space-between; padding: .7rem 1rem; border-bottom: 1px solid var(--linea); }
-.term__out { height: 22rem; overflow-y: auto; padding: 1rem; white-space: pre-wrap; color: var(--bianco-80); }
+.term__out { height: 22rem; overflow-y: auto; padding: 1rem; color: var(--bianco-80); }
+.term__out p { white-space: pre-wrap; }
 .term__out p { margin: 0 0 .25rem; }
 .term__out b { color: var(--cremisi); font-weight: 400; }
 .term__out a { color: var(--bianco); text-decoration: underline; text-underline-offset: .2em; text-decoration-color: var(--cremisi); }

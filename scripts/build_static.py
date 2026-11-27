@@ -333,16 +333,51 @@ def get_seo(root: Element, route: str) -> dict[str, str]:
     return seo
 
 
-def update_schema(value: object, seo: dict[str, str], current_route: str) -> object:
+# Schema.org page types whose name, description and URL follow the page language.
+PAGE_TYPES = {"WebPage", "CollectionPage", "ContactPage", "ProfilePage", "AboutPage"}
+# Italian strings that appear in the JSON-LD (breadcrumbs, Person, services, games).
+SCHEMA_TEXT_EN = {
+    "Developer e graphic designer": "Developer and graphic designer",
+    "Chi sono": "About me",
+    "Fuori orario": "After hours",
+    "Crediti dei materiali": "Materials credits",
+    "Metodo": "Method",
+    "Tutti i lavori": "All work",
+    "Servizi": "Services",
+    "Sicurezza": "Security",
+    "Stile": "Style",
+    "Contatti": "Contact",
+    "Magazzino": "Warehouse",
+    "Siti web": "Websites",
+    "Software e backend": "Software and backend",
+    "Grafica e social": "Graphics and social media",
+    "Assistenza informatica": "IT support",
+    "Gioco di carte": "Card game",
+}
+SOURCE_SUFFIX = (" — codice sorgente", " — source code")
+
+
+def translate_string(text: str, mapping: dict[str, str]) -> str:
+    if text in mapping:
+        return mapping[text]
+    if text.endswith(SOURCE_SUFFIX[0]):
+        return text[: -len(SOURCE_SUFFIX[0])] + SOURCE_SUFFIX[1]
+    return text
+
+
+def update_schema(value: object, seo: dict[str, str], current_route: str, mapping: dict[str, str] | None = None) -> object:
+    mapping = SCHEMA_TEXT_EN if mapping is None else mapping
     if isinstance(value, list):
-        return [update_schema(item, seo, current_route) for item in value]
+        return [update_schema(item, seo, current_route, mapping) for item in value]
+    if isinstance(value, str):
+        return translate_string(value, mapping)
     if not isinstance(value, dict):
         return value
-    result = {key: update_schema(item, seo, current_route) for key, item in value.items()}
+    result = {key: update_schema(item, seo, current_route, mapping) for key, item in value.items()}
     types = result.get("@type", [])
     if isinstance(types, str):
         types = [types]
-    if "WebPage" in types:
+    if PAGE_TYPES.intersection(types):
         result["url"] = seo["canonical"]
         result["name"] = seo["title"]
         result["description"] = seo["description"]
@@ -376,6 +411,21 @@ def translate_document(doc: Element, source_file: str, en: dict[str, str], dyn: 
     route = source_route(source_file)
     en_route = ROUTE_TO_EN[route]
     seo = get_seo(doc, route)
+    # Italian title, description and image caption, mapped to their English
+    # versions so the same strings inside the JSON-LD are translated too.
+    it_seo: dict[str, str] = {}
+    script = find_by_id(doc, "seo-translations")
+    if script:
+        try:
+            it_seo = json.loads(inner_text(script)).get("it", {})
+        except (json.JSONDecodeError, TypeError):
+            it_seo = {}
+    it_seo.setdefault("title", next((inner_text(n) for n in walk(doc) if n.tag == "title"), ""))
+    it_seo.setdefault("description", next((n.get("content", "") for n in walk(doc) if n.tag == "meta" and n.get("name", "").lower() == "description"), ""))
+    mapping = dict(SCHEMA_TEXT_EN)
+    for key in ("title", "description", "image_alt"):
+        if it_seo.get(key) and seo.get(key):
+            mapping[it_seo[key]] = seo[key]
 
     # Replace the small, runtime-only labels as well as the text nodes. The
     # script still owns interactive state after load, while crawlers get English.
@@ -437,7 +487,7 @@ def translate_document(doc: Element, source_file: str, en: dict[str, str], dyn: 
         if node.tag == "script" and node.get("type", "").lower() == "application/ld+json":
             try:
                 parsed = json.loads(inner_text(node))
-                set_text(node, json.dumps(update_schema(parsed, seo, route), ensure_ascii=False, separators=(",", ":")))
+                set_text(node, json.dumps(update_schema(parsed, seo, route, mapping), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
             except (json.JSONDecodeError, TypeError):
                 pass
         if node.tag == "script" and node.get("id") == "seo-translations":
@@ -506,6 +556,7 @@ def extract_dictionaries() -> tuple[dict[str, str], dict[str, str]]:
         check=True,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     )
     data = json.loads(result.stdout)
     return data["en"], data["dyn"]

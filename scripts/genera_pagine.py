@@ -133,6 +133,8 @@ def commit_sito():
 def main():
     commit = commit_sito()
     testata = (HERE / 'testata.html').read_text()
+    tecnologie = (HERE / 'tecnologie.html').read_text()
+    tecnologie_sito = (HERE / 'tecnologie-sito.html').read_text()
     colophon = (HERE / 'colophon.html').read_text()
     for file, body, R, route, num, tkey, titolo, campo, extra in PAGES:
         target = SITE / file
@@ -143,7 +145,7 @@ def main():
         a = R + 'assets/'
         if file.startswith('assets/'):
             a = ''
-        scripts = [f'<script src="{a}nero/proiettile.js" defer></script>', f'<script src="{a}nero/nero.js" defer></script>']
+        scripts = [f'<script src="{a}nero/proiettile.js" defer></script>', f'<script src="{a}nero/gelatina.js" defer></script>', f'<script src="{a}nero/nero.js" defer></script>']
         if campo:
             scripts.append(f'<script src="{a}nero/campo.js" defer></script>')
         if extra:
@@ -168,7 +170,8 @@ def main():
 </head>
 """
         part = lambda s: (s.replace('%R%', R).replace('%ROUTE%', route).replace('%N%', num)
-                          .replace('%TKEY%', tkey).replace('%TITOLO%', titolo))
+                          .replace('%TKEY%', tkey).replace('%TITOLO%', titolo)
+                          .replace('%TECNOLOGIE_SITO%', tecnologie_sito).replace('%TECNOLOGIE%', tecnologie))
         content = (HERE / 'corpi' / f'{body}.html').read_text()
         for k, v in commit.items():
             content = content.replace(k, v)

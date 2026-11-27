@@ -58,7 +58,7 @@ oakvx ha scelto la 1.
 - Transizione: pistola **3D vera** (asset scaricato), proiettile, fascio con "oakvx.".
 - Approccio 1.
 
-## Proposte del builder (da confermare leggendo)
+## Proposte approvate da oakvx il 2026-11-27
 
 ### Linguaggio visivo
 
@@ -79,7 +79,8 @@ oakvx ha scelto la 1.
 Regole: frasi corte, prima persona, ironia asciutta che punta a se stesso o alla situazione, mai al visitatore;
 nessun superlativo; i fatti restano esatti.
 
-- Home, sotto il nome: «Faccio siti e software. Funzionano. Il resto lo vedi da solo.»
+- Home, sotto il nome: «Faccio siti, software e grafica. Di solito funzionano al primo colpo. Di solito.»
+  (La prima proposta, «Funzionano. Il resto lo vedi da solo.», è stata scartata da oakvx: troppo antipatica. L'ironia va su di sé, mai sul visitatore.)
 - Lavori: «Quattro progetti. Ne avrei altri, ma questi reggono.»
 - Chi sono: «Ho iniziato smontando programmi per vedere cosa c'era dentro. Non ho ancora smesso, e nessuno me l'ha chiesto.»
 - Contatti: «Scrivimi. Rispondo. Non subito, ma rispondo.»

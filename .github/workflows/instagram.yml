@@ -1,15 +1,16 @@
 name: Instagram
 
-# Una volta al giorno legge il profilo @oakvx con agent-reach (solo lettura) e aggiorna
-# assets/social/manuale.json. Se Instagram chiede il login, blocca o limita le richieste,
-# il passo termina senza modificare nulla e il workflow resta verde.
+# Una volta al giorno apre il profilo pubblico @oakvx con un browser (Playwright), legge follower,
+# seguiti e post dalla descrizione della pagina e aggiorna assets/social/manuale.json.
+# Se Instagram mostra il login o i numeri non si leggono, non cambia niente e il workflow resta verde.
+# Lo screenshot della pagina resta scaricabile da "Artifacts" nel riepilogo del run.
 on:
   schedule:
     - cron: '41 5 * * *'
   workflow_dispatch:
   push:
     paths:
-      - scripts/aggiorna_instagram.py
+      - scripts/instagram_pagina.mjs
       - .github/workflows/instagram.yml
 
 permissions:
@@ -24,22 +25,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Installa agent-reach
-        run: pip install "git+https://github.com/Panniantong/Agent-Reach"
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Aggiungi il canale Instagram
-        continue-on-error: true
-        run: agent-reach add instagram
-      - name: Stato di agent-reach
-        continue-on-error: true
-        run: agent-reach doctor --text
+      - name: Installa Playwright
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/pw" playwright
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
       - name: Leggi il profilo
-        run: python3 scripts/aggiorna_instagram.py --stampa-risposta
+        env:
+          PLAYWRIGHT_PATH: ${{ runner.temp }}/pw/node_modules/playwright
+        run: node scripts/instagram_pagina.mjs "$RUNNER_TEMP/instagram.png"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: instagram-screenshot
+          path: ${{ runner.temp }}/instagram.png
+          retention-days: 7
+          if-no-files-found: ignore
       - name: Salva se qualcosa è cambiato
         run: |
           if [ -n "$(git status --porcelain -- assets/social/manuale.json)" ]; then

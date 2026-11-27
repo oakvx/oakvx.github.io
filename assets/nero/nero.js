@@ -797,6 +797,7 @@
             if (dati.ultimo) set('[data-commit-ultimo]', dati.ultimo);
             grafico.setAttribute('aria-label', t('commitChart')(dati.totale, date.length));
             if (stato) stato.textContent = live === true ? t('commitLive') : live === false ? t('commitOffline') : '';
+            dispatchEvent(new CustomEvent('nero:commit', { detail: dati }));
         };
 
         const leggi = async () => {
@@ -1029,6 +1030,38 @@
         });
     }
 
+
+    /* ----------------------------------------------------------------------
+       Numeri dal vivo nell'apertura: commit (dagli stessi dati della sezione
+       "Questo sito"), follower TikTok (da social.json), ultimo commit.
+       ---------------------------------------------------------------------- */
+    function initVivi() {
+        const box = $('.apertura__vivi');
+        if (!box) return;
+        const set = (k, v) => { const el = $(`[data-vivo="${k}"]`, box); if (el && v != null) el.textContent = v; };
+        const commit = dati => {
+            set('commit', dati.totale.toLocaleString(t('locale')));
+            if (dati.ultimo) set('ultimo', dati.ultimo);
+            const barre = $('[data-vivo="barre"]', box);
+            const oggi = new Date(); oggi.setHours(12, 0, 0, 0);
+            const giorni = [];
+            for (let i = 13; i >= 0; i--) {
+                const d = new Date(oggi); d.setDate(d.getDate() - i);
+                const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                giorni.push(dati.giorni?.[k] || 0);
+            }
+            const max = Math.max(1, ...giorni);
+            barre.replaceChildren(...giorni.map(n => { const i = document.createElement('i'); i.style.height = (n / max * 100).toFixed(1) + '%'; return i; }));
+        };
+        try { const s = JSON.parse($('#commit-sito-dati')?.textContent || 'null'); if (s) commit(s); } catch {}
+        addEventListener('nero:commit', e => commit(e.detail));
+        const base = new URL('assets/social/', new URL($('script[src*="nero/nero.js"]').src, location.href).href.replace(/assets\/nero\/nero\.js.*$/, ''));
+        fetch(new URL('social.json', base), { cache: 'no-cache' })
+            .then(r => r.json())
+            .then(d => { const n = d.account?.['tiktok:oakvx.sh']?.follower; if (n != null) set('tiktok', n.toLocaleString(t('locale'))); })
+            .catch(() => {});
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1050,6 +1083,7 @@
         initOrari();
         initLuce();
         initCommitSito();
+        initVivi();
         initSocial();
         initScorriMorbido();
         initUscita();

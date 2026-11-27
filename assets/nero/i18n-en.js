@@ -113,6 +113,11 @@ window.OAKVX_EN = {
     'home.archiveAll': 'All repositories on github.com/oakvx',
     'home.archiveGame': 'Rather explore? There’s also',
 
+    'home.liveAria': 'Live numbers',
+    'home.liveCommits': 'Commits to this site',
+    'home.liveFollowers': 'followers',
+    'home.liveTime': 'Time in Sassuolo',
+    'home.liveLast': 'Latest commit',
     'home.siteLabel': 'This site',
     'home.siteTitle': 'Rebuilt, polished, <em>committed.</em>',
     'home.siteNote': 'Every commit to this repository, day by day. The numbers come live from GitHub.',

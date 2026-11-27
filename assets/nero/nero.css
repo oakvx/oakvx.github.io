@@ -704,11 +704,11 @@ html.sparo-arrivo::after {
 
 
 
-/* Cerchio di misura e mirino sulla scultura (stesso centro di data-spostamento 0.26, 0.1) */
+/* Cerchio di misura e mirino sulla scultura (stesso centro di data-spostamento 0.12, 0.1) */
 .apertura__mirino {
     position: absolute; z-index: -1; pointer-events: none;
-    left: 63%; top: 45%;
-    width: min(56vh, 40vw); aspect-ratio: 1;
+    left: 56%; top: 45%;
+    width: min(52vh, 36vw); aspect-ratio: 1;
     translate: -50% -50%;
     scale: calc(1 - var(--uscita, 0) * .22); opacity: calc(1 - var(--uscita, 0) * 1.2);
 }
@@ -720,13 +720,30 @@ html.sparo-arrivo::after {
 .apertura__croce::after { top: 50%; left: 0; right: 0; height: 1px; }
 @media (max-aspect-ratio: 23/20) { .apertura__mirino { left: 50%; width: min(70vw, 44vh); } }
 
+
+/* Colonna dei numeri dal vivo, a destra della scultura */
+.apertura__vivi {
+    position: absolute; z-index: 1;
+    right: var(--bordo); top: calc(var(--testata) + 4.5rem);
+    width: clamp(13rem, 18vw, 17rem);
+    display: grid; gap: 1.1rem;
+}
+.apertura__vivi > div { padding-top: .55rem; border-top: 1px solid var(--linea-forte); }
+.apertura__vivi dt { color: var(--bianco-40); margin-bottom: .3rem; }
+.apertura__vivi dd { color: var(--bianco-80); text-transform: none; letter-spacing: .02em; }
+.apertura__vivi b { font: 300 clamp(1.8rem, calc(var(--u) * 2.8), 2.6rem)/1 var(--serif); letter-spacing: -.02em; color: var(--bianco); font-variant-numeric: lining-nums; }
+.apertura__barre { display: flex; align-items: flex-end; gap: 2px; height: 1.6rem; margin-top: .5rem; }
+.apertura__barre i { flex: 1; min-height: 1px; background: var(--bianco-60); }
+.apertura__barre i:last-child { background: var(--cremisi); }
+@media (max-width: 900px) { .apertura__vivi { display: none; } }
+
 /* Uscita dall'apertura, guidata da --uscita (0 → 1) */
 .apertura { --uscita: 0; }
-.apertura__campo { scale: calc(1 - var(--uscita) * .22); opacity: calc(1 - var(--uscita) * .9); transform-origin: 64% 45%; }
+.apertura__campo { scale: calc(1 - var(--uscita) * .22); opacity: calc(1 - var(--uscita) * .9); transform-origin: 56% 45%; }
 .apertura__titolo { filter: blur(calc(var(--uscita) * 5px)); }
 .apertura__lettera { translate: 0 calc(var(--uscita) * (-30% - var(--i) * 22%)); }
 .apertura__lettera:last-child { translate: 0 calc(var(--uscita) * -12%); }
-.apertura__meta, .apertura__piede { translate: 0 calc(var(--uscita) * -3rem); opacity: calc(1 - var(--uscita) * 1.4); }
+.apertura__meta, .apertura__piede, .apertura__vivi { translate: 0 calc(var(--uscita) * -3rem); opacity: calc(1 - var(--uscita) * 1.4); }
 
 /* Nastro di testo */
 .nastro {

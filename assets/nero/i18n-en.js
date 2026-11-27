@@ -350,7 +350,7 @@ window.OAKVX_EN = {
     'beautify.t1': 'Backend with mysqli, sessions, permissions and CRUD operations.',
     'beautify.t2k': 'Data and relations',
     'beautify.t2': 'User-salon associations make it possible to manage several businesses with distinct roles.',
-    'beautify.result': "A real management system, <em>not the usual exercise.</em> The examiners agreed.",
+    'beautify.result': "A real management system, <em>not the usual exercise.</em> Worth saying twice.",
     'beautify.resultText': 'The delivered version offers slots every 30 minutes and enforces a minimum 15-minute notice; the calendar and public booking use the same checks.',
 
     /* Spinotto Felice */

@@ -107,6 +107,8 @@
         const el = creaLivello();
         el.classList.remove('arrivo');
         el.classList.add('attivo');
+        // le altre scene WebGL si fermano: per un secondo la GPU è tutta della pistola
+        window.dispatchEvent(new CustomEvent('nero:sparo'));
         const conPistola = !!(pistola && pistola.pronta());
         const volata = conPistola ? pistola.volata() : { x: 0, y: Math.round(innerHeight * .46) };
         const inizio = performance.now();

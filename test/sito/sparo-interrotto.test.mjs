@@ -24,6 +24,8 @@ function finestraFinta() {
         setTimeout: (fn, ms) => { timer.push({ fn, ms }); return timer.length; },
         matchMedia: () => ({ matches: false }),
         innerHeight: 900, innerWidth: 1440,
+        CustomEvent: class { constructor(type) { this.type = type; } },
+        dispatchEvent() {},
         Date
     };
     return { w, timer };

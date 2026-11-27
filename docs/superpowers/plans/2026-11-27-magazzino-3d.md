@@ -28,7 +28,8 @@
 - `CASSE`: 13 voci `{ id, codice, nome, emblema, aperta, href, livello }`; aperte: blackjack, briscola, scopa, scala-40, gioco-3d, terminale (livello 0); chiuse: roulette, texas, solitario, sudoku, campo-minato, dama, forza-4 (livello 1).
 - `postoCassa(i) -> {x, y}`: stesso passo per tutti, livello 0 a y=0, livello 1 più in alto; nessuna sovrapposizione.
 - `limitiCamera(larghezzaVista) -> {min, max}`; `cassaVicina(x) -> indice` tra le aperte.
-- `puffo(t, seme) -> [{pos, giro}]` pallini di polistirolo in uscita, deterministici col seme, ≤ 200, arco con gravità.
+- `riempimento(seme) -> [{pos, giro}]` pallini fermi dentro la cassa (≤ 160); `puffo(t, seme) -> [{pos, giro}]` pochi pallini (≤ 60) che si alzano piano e ricadono, deterministici col seme.
+- `poseAnnoiato(ms) -> pose` (come `OAKVX.regia.posa`: gomito sul bancone, faccia sulla mano, respiro lento) e `occhiAnnoiato(ms) -> 'mezzi'|'chiusi'` (mezzi quasi sempre, chiusi per un battito lento ogni 3–6 s).
 - `accensione(t) -> number[]` luminosità 0..1 di 4 neon che si accendono a scatti, tutti a 1 dopo 1,4 s.
 - [ ] Test (falliscono) → implementazione → verde → commit.
 
@@ -39,7 +40,8 @@
 
 ### Task 3: Scena
 **Files:** Modify `assets/magazzino/blackjack3d.js` (esporta `creaMazziere(opz)`, `tela`, `grana`, `pezzo`, `fermacampione`); Create `assets/magazzino/magazzino3d.js` (`creaMagazzino(contenitore, opzioni) -> Promise<Scena>`).
-- Cassa unica (assi, listelli, angolari, stencil, nastro per le chiuse), 13 emblemi, coperchio che si solleva, polistirolo, oggetto interno.
+- Cassa unica (assi, listelli, angolari, stencil, nastro per le chiuse), 13 emblemi, coperchio che si solleva piano, polistirolo dentro, oggetto appoggiato nel polistirolo.
+- Il mazziere diventa parametrizzabile (colori, berretto, targhetta, occhi `mezzi`) per fare il magazziniere.
 - Scaffali/lampada/carrello/cartone dai GLB; neon e cordino; bancone con registro e magazziniere.
 - Interfaccia: `seleziona(i)`, `apri(i)`, `parla(testo)`, `accendi()`, `su(cb)` per eventi.
 - [ ] Screenshot desktop e telefono: buio, luce accesa, cassa aperta → commit.

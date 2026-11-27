@@ -11,8 +11,8 @@ Il Magazzino oggi è un elenco di casse in HTML. oakvx lo vuole come un posto ve
 - **Casse tutte uguali, ognuna con il suo simbolo.** La cassa di legno è sempre la stessa; sopra ha un emblema in 3D e davanti il codice e il nome stampati a stencil.
   - Giochi già pronti, sul ripiano basso: Blackjack = una fiche; Scopa = una scopa; Scala 40 = una scala a pioli; Briscola = una carta con un asso; Il gioco in 3D = un cubetto con un occhio; Il terminale = un piccolo monitor.
   - Giochi «in arrivo», sul ripiano alto, con la cassa chiusa e il nastro «IN ARRIVO»: Roulette = una ruota; Texas hold'em = un cappello da cowboy; Solitario = una carta sola; Sudoku = un blocco 3×3; Campo minato = una mina; Dama = una pedina; Forza 4 = un disco con quattro puntini.
-- **Casse che si aprono, alla Animation Throwdown.** Selezionando una cassa il coperchio si solleva, esce uno sbuffo di polistirolo (pallini bianchi) e dentro si vede l'oggetto del gioco (le fiches, le carte…). Un clic sulla cassa già aperta, o il bottone «Gioca», porta al gioco con la transizione della pistola.
-- **Il magazziniere di cartoncino**, stesso stile e stessa costruzione del mazziere (fermacampioni, due bocche), con berretto, gilet marrone e targhetta «MAGAZZINO». Sta a un bancone con un registro e commenta la cassa selezionata con una battuta breve, in tono tranquillo.
+- **Casse che si aprono, come un ritrovamento (alla Animation Throwdown).** La cassa è piena di polistirolo (pallini bianchi). Selezionandola il coperchio si solleva piano; pochi pallini si alzano e ricadono lenti, e nel polistirolo si vede l'oggetto del gioco appoggiato con delicatezza: la fiche, le carte… Un clic sulla cassa già aperta, o il bottone «Gioca», porta al gioco con la transizione della pistola.
+- **Il magazziniere di cartoncino, annoiato e mezzo addormentato.** Stesso stile e stessa costruzione del mazziere (fermacampioni, due bocche), con berretto, gilet marrone e targhetta «MAGAZZINO». Sta dietro un bancone col gomito appoggiato e la faccia sulla mano, gli occhi pesanti a metà e un respiro lento; ogni tanto sbatte piano le palpebre. Ogni 12–15 secondi dice qualcosa senza alzare la testa («Venite a giocare. Tanto è gratis.») e commenta la cassa selezionata con una battuta svogliata.
 - **Barra in HTML sotto la scena**: nome del gioco, riga di descrizione, bottoni precedente/successivo e «Gioca» (link vero). L'elenco di tutte le casse resta sotto la scena, come oggi.
 
 ## Non-obiettivi
@@ -36,7 +36,7 @@ Il Magazzino oggi è un elenco di casse in HTML. oakvx lo vuole come un posto ve
 ## Decisioni
 - Emblemi: Scopa e Scala 40 sono giochi di parole sul nome (la scopa, la scala). Tutti gli emblemi sono scelti da me, oakvx può cambiarli.
 - Il gioco in 3D e il terminale restano nello scaffale C come «già qui» e si aprono come gli altri.
-- Pose, layout delle casse, scorrimento della telecamera e lancio dei pallini sono funzioni pure, testate.
+- Pose, layout delle casse, scorrimento della telecamera, polistirolo e occhi pesanti del magazziniere sono funzioni pure, testate.
 
 ## Lasciato al builder
 Colori e disegno degli stencil, durata esatta delle animazioni, battute del magazziniere (brevi, tono tranquillo, mai su etichette).

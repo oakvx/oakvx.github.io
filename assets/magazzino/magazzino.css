@@ -41,3 +41,50 @@
 .cassa--chiusa .cassa__nome { color: var(--bianco-80); }
 :root.calm .cassa { transition: none; }
 :root.calm .cassa:hover { transform: none; }
+
+/* Tavolo da gioco */
+.gioco { padding: max(7rem, calc(var(--u) * 11)) var(--margine, 4vw) calc(var(--u) * 5); }
+.gioco__testa { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.gioco__titolo { font: 400 clamp(2.4rem, calc(var(--u) * 6), 5rem)/.95 var(--serif); letter-spacing: -.03em; }
+.gioco__titolo em { color: var(--cremisi); }
+.tavolo {
+    --carta: clamp(4.2rem, 13vw, 7.4rem);
+    position: relative; display: grid; gap: 1.2rem; padding: 1.4rem;
+    background: radial-gradient(120% 90% at 50% 40%, #12100e, var(--nero));
+    border: 1px solid var(--linea-forte); min-height: 30rem;
+}
+.tavolo button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.tavolo__avversari { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.tavolo__avversario { display: grid; justify-items: center; gap: .5rem; }
+.tavolo__dorsi { display: flex; }
+.tavolo__dorso { width: calc(var(--carta) * .55); margin-left: calc(var(--carta) * -.36); }
+.tavolo__dorso:first-child { margin-left: 0; }
+.tavolo__dorso svg, .tavolo__carta svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 .3rem .6rem rgb(0 0 0 / .5)); }
+.tavolo__centro { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .8rem; min-height: calc(var(--carta) * 1.6); }
+.tavolo__carta, .tavolo__posto { display: block; width: var(--carta); }
+.tavolo__gruppo { display: flex; padding: .3rem; border: 1px dashed var(--linea-forte); }
+.tavolo__gruppo .tavolo__carta { width: calc(var(--carta) * .7); margin-left: calc(var(--carta) * -.4); }
+.tavolo__gruppo .tavolo__carta:first-child { margin-left: 0; }
+.tavolo__mazzo { padding: .4rem .6rem; border: 1px solid var(--linea-forte); }
+.tavolo__messaggio { text-align: center; min-height: 1.5em; font: italic 400 clamp(1.05rem, calc(var(--u) * 1.6), 1.4rem)/1.3 var(--serif); color: var(--bianco-80); }
+.tavolo__mano { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; }
+.tavolo__carta--mano { transition: transform .18s; }
+.tavolo__carta--mano:hover:not([disabled]), .tavolo__carta--mano:focus-visible { transform: translateY(-.6rem); }
+.tavolo__carta--mano.scelta, .tavolo [aria-pressed="true"] { transform: translateY(-.9rem); outline: 3px solid var(--cremisi); outline-offset: 3px; border-radius: 10%; }
+.tavolo__carta--mano[disabled] { cursor: default; opacity: .75; }
+.tavolo__carta:focus-visible { outline: 3px solid var(--cremisi); outline-offset: 3px; }
+.tavolo__azioni { display: flex; justify-content: center; flex-wrap: wrap; gap: .6rem; }
+.tavolo .tavolo__azione { padding: .7rem 1.1rem; border: 1px solid var(--bianco-40); font: 400 .78rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.tavolo .tavolo__azione:hover:not([disabled]) { background: var(--bianco); color: var(--nero); }
+.tavolo .tavolo__azione[disabled] { opacity: .35; cursor: default; }
+.tavolo__annuncio { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@keyframes entra-carta { from { opacity: 0; transform: translateY(-1.2rem) rotate(-4deg); } }
+.tavolo .tavolo__carta { animation: entra-carta .28s ease-out both; }
+:root.calm .tavolo .tavolo__carta { animation: none; }
+:root.calm .tavolo__carta--mano { transition: none; }
+
+/* come si gioca */
+.regole { padding: calc(var(--u) * 5) var(--margine, 4vw); border-top: 1px solid var(--linea); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 2rem; }
+.regole h2 { font: 400 clamp(1.8rem, calc(var(--u) * 3.4), 3rem)/1 var(--serif); }
+.regole ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .6rem; color: var(--bianco-80); }
+@media (max-width: 760px) { .regole { grid-template-columns: 1fr; } .tavolo { padding: .9rem; min-height: 26rem; } }

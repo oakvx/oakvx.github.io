@@ -797,7 +797,7 @@ html.sparo-arrivo::after {
     .manifesto > .t-meta { margin-bottom: 2rem; padding: 0; }
 }
 
-/* Indice dei lavori: righe editoriali, anteprima che segue il cursore. */
+/* Indice dei lavori: righe editoriali sul telefono, colonne da 901px (vedi in fondo). */
 .lavori__elenco { border-top: 1px solid var(--linea); counter-reset: lavoro; }
 .lavoro { border-bottom: 1px solid var(--linea); position: relative; }
 .lavoro__link {
@@ -1738,4 +1738,19 @@ html.sparo-arrivo::after {
     .lavoro__link:hover .lavoro__img, .lavoro__link:focus-visible .lavoro__img { filter: none; }
     .lavoro__link:hover .lavoro__img.contiene { filter: none; }
     .lavoro__desc { order: 5; }
+}
+
+/* Archivio dei repository: le stesse colonne dei lavori. */
+@media (min-width: 901px) {
+    .archivio__elenco {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--linea-forte); border-bottom: 1px solid var(--linea);
+    }
+    .repo { border-bottom: 0; border-left: 1px solid var(--linea); }
+    .repo:last-child { border-right: 1px solid var(--linea); }
+    .repo a { display: flex; flex-direction: column; gap: .9rem; height: 100%; padding: 1.2rem 1.2rem 2rem; }
+    .repo a:hover { padding-left: 1.2rem; background: var(--superficie); }
+    .repo__nome { font-size: 1.05rem; }
+    .repo__dati { order: -1; text-align: left; }
+    .repo__desc { flex: 1; }
 }

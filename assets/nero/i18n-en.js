@@ -366,7 +366,7 @@ window.OAKVX_EN = {
     'sc.s2': "Few outside calls",
     'sc.s2text': "External requests go only to GitHub's public API (commits, repos, languages) and Open-Meteo (Sassuolo's weather, not yours). No keys, nothing about you is sent.",
     'sc.s3': "Little in your browser",
-    'sc.s3text': "Only your language, whether you paused the animations and a cached copy of the counters. Nothing that identifies you.",
+    'sc.s3text': "Your language, whether you paused the animations, a cached copy of the counters and, in the Warehouse, fake chips and games in progress. Nothing that identifies you, nothing that leaves the browser.",
     'sc.s4': "Every version stays",
     'sc.s4text': "The code is public on GitHub and every change is a commit: anything can be checked and rolled back.",
     'sc.p1': "Nothing without permission",

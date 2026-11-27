@@ -312,12 +312,13 @@ export function costruisci(m, g) {
     // ronzio dello squarcio, più forte e più chiaro avvicinandosi
     const sx = SQ.x + (sq[0] - lc[0]) * LATO, sz = SQ.z + (sq[1] - lc[1]) * LATO;
     const d = Math.hypot(sx - p.x, sz - p.z);
-    if (t > prossimoSuono || qui !== eraQui) {
+    // dentro: ogni 0,2 s; fuori: una volta sola, uscendo
+    if (qui ? t > prossimoSuono : eraQui) {
       prossimoSuono = t + 0.2;
-      eraQui = qui;
       if (qui) g.suoni.squarcio(Math.max(0.08, 1 - d / (8 * LATO)), Math.max(0, 1 - d / 40));
       else g.suoni.squarcio(0, 0);
     }
+    eraQui = qui;
     // la scia di luce
     const mostra = scia && qui && d > 2;
     const ux = (sx - p.x) / (d || 1), uz = (sz - p.z) / (d || 1);

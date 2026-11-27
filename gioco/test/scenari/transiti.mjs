@@ -24,7 +24,7 @@ export default async function (page, aiuto) {
   await G(() => window.__gioco.stanza('middleman').risolvi());
   await cammina(aiuto, Math.PI, inStanza, 6000, 'cisterna');
 
-  // B (Format): dalla pedana alta della cisterna si va direttamente in galleria
+  // B (Format): dallo squarcio della cisterna infinita (risolvi: già sulla passerella) si va in galleria
   await G(() => window.__gioco.stanza('cisterna').risolvi());
   await cammina(aiuto, Math.PI, inStanza, 6000, 'galleria');
 

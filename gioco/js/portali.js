@@ -114,6 +114,7 @@ export class Portali {
     P.eff.copy(this.reindirizzi.get(id) || P.fis);
     P.pannello = id;
     P.chiave = pan.id;
+    P.asse = pan.asse;
     P.proibito = pan.proibito;
     P.u = u;
     P.y = y;
@@ -140,8 +141,7 @@ export class Portali {
       P.fis.premultiply(t);
       P.inv.copy(P.fis).invert();
       if (stessa) P.eff.copy(P.fis);
-      const pan = this.mondo.pannelli.get(P.pannello);
-      P.u += pan && pan.asse === 'z' ? dz : dx;
+      P.u += P.asse === 'z' ? dz : dx;
       P.mesh.matrix.copy(P.fis);
       P.mesh.matrixWorldNeedsUpdate = true;
     }

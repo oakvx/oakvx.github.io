@@ -408,26 +408,26 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
 }
 .sparo__pistola { position: absolute; inset: 0; width: 100%; height: 100%; }
 .sparo__fascio {
-    position: absolute;
-    /* da sinistra alla volata, poi su tutto lo schermo quando copre */
-    left: calc(var(--x0) * (1 - var(--c)));
-    top: var(--y);
-    width: calc((100vw - var(--x0) + 8vw) * var(--p) + var(--x0) * var(--c));
-    height: calc(2px + var(--f) * 15vh + var(--c) * 210vh);
-    transform: translateY(-50%);
-    display: flex; align-items: center; overflow: hidden;
-    background: color-mix(in srgb, #050505 calc(var(--c) * var(--c) * 100%), #E8E6E1);
-    box-shadow: 0 0 calc(10px + var(--f) * 50px) rgb(200 16 53 / calc(.55 * (1 - var(--c)))), 0 0 120px rgb(232 230 225 / calc(.25 * (1 - var(--c))));
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 calc(10% * (1 - var(--c))));
-    mask-image: linear-gradient(90deg, transparent, #000 calc(10% * (1 - var(--c))));
+    position: absolute; left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    transform-origin: 0 0;
+    transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--sx, 0), var(--sy, 0));
+    will-change: transform;
+    /* bordi cremisi sottili: scalano insieme al fascio */
+    background: linear-gradient(rgb(200 16 53 / calc(.9 * (1 - var(--c)))), transparent 6%, transparent 94%, rgb(200 16 53 / calc(.9 * (1 - var(--c))))),
+        color-mix(in srgb, #050505 calc(var(--c) * 100%), #E8E6E1);
 }
 .sparo__scritta {
-    flex: none; padding-left: 2vw;
-    font: 700 calc(4px + var(--f) * 10vh) / 1 var(--sans);
+    position: absolute; left: var(--x0); top: var(--y);
+    padding-left: 2vw;
+    font: 700 10vh / 1 var(--sans);
     font-stretch: 62%; letter-spacing: -.01em;
     white-space: nowrap;
     color: #050505;
-    opacity: calc(var(--f) * (1 - var(--c) * 1.4));
+    transform-origin: left center;
+    transform: translateY(-50%) scale(max(.04, var(--f)));
+    opacity: var(--testo, 0);
+    will-change: transform, opacity;
 }
 .sparo__lampo {
     position: absolute; left: var(--x0); top: var(--y);
@@ -436,21 +436,21 @@ a:hover .freccia--giu { transform: rotate(135deg) translate(.1em, -.1em); }
     opacity: var(--s); scale: calc(.4 + var(--s) * .8);
 }
 .sparo__proiettile {
-    position: absolute; top: var(--y);
-    left: calc(var(--x0) + (100vw - var(--x0) + 8vw) * var(--p));
-    width: 2.6rem; height: 6px; translate: -100% -50%;
+    position: absolute; left: 0; top: var(--y);
+    width: 2.6rem; height: 6px;
     border-radius: 6px;
     background: linear-gradient(90deg, transparent, #fff 70%, #ffe7c4);
     box-shadow: 0 0 18px 4px rgb(255 240 220 / .9), 0 0 50px 10px rgb(200 16 53 / .45);
+    transform: translateX(calc(var(--x0) + (100vw - var(--x0) + 8vw) * var(--p))) translate(-100%, -50%);
     opacity: min(1, calc(var(--p) * 40));
+    will-change: transform;
 }
-.sparo.arrivo .sparo__fascio { left: 0; width: 100vw; height: calc((1 - var(--a, 0)) * 210vh + 2px); background: color-mix(in srgb, #050505 calc((1 - var(--a, 0)) * 100%), #E8E6E1); -webkit-mask-image: none; mask-image: none; }
-.sparo.arrivo .sparo__scritta { font-size: 13vh; opacity: calc(1 - var(--a, 0) * 1.6); color: #E8E6E1; padding-left: 0; margin: 0 auto; }
+.sparo.arrivo .sparo__scritta { left: 50%; top: 50%; padding-left: 0; font-size: 13vh; color: #E8E6E1; transform: translate(-50%, -50%); opacity: calc(1 - var(--a, 0) * 1.6); }
 html.sparo-arrivo::after {
     content: ""; position: fixed; inset: 0; z-index: 2500; background: var(--nero);
     animation: velo-sicurezza .01s 1.6s forwards;
 }
-@media (max-width: 600px) { .sparo__scritta { font-size: calc(3px + var(--f) * 6vh); } .sparo.arrivo .sparo__scritta { font-size: 8vh; } }
+@media (max-width: 600px) { .sparo__scritta { font-size: 6vh; } .sparo.arrivo .sparo__scritta { font-size: 8vh; } }
 
 /* --------------------------------------------------------------------------
    Cursore

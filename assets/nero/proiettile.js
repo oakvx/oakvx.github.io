@@ -69,23 +69,41 @@
         livello.setAttribute('aria-hidden', 'true');
         const scritta = Array.from({ length: 14 }, () => 'oakvx.').join(' ');
         livello.innerHTML =
-            '<span class="sparo__fascio"><span class="sparo__scritta">' + scritta + '</span></span>' +
+            '<span class="sparo__fascio"></span>' +
+            '<span class="sparo__scritta">' + scritta + '</span>' +
             '<span class="sparo__lampo"></span>' +
             '<span class="sparo__proiettile"></span>';
         document.body.append(livello);
         return livello;
     }
 
+    /* Il fascio è un rettangolo a tutto schermo spostato e scalato con transform:
+       niente ricalcolo dell'impaginazione a ogni fotogramma. */
+    function rettangolo(el, sinistra, alto, larghezza, altezza, buio) {
+        const W = innerWidth, H = innerHeight;
+        el.style.setProperty('--tx', sinistra.toFixed(1) + 'px');
+        el.style.setProperty('--ty', alto.toFixed(1) + 'px');
+        el.style.setProperty('--sx', Math.max(0, larghezza / W).toFixed(5));
+        el.style.setProperty('--sy', Math.max(0, altezza / H).toFixed(5));
+        el.style.setProperty('--c', buio.toFixed(4));
+    }
+
     /** Disegna lo stato f = fase(ms) a partire dalla volata {x, y} in pixel. */
     function disegna(f, volata) {
         const el = creaLivello();
-        el.style.setProperty('--x0', volata.x + 'px');
-        el.style.setProperty('--y', volata.y + 'px');
+        const W = innerWidth, H = innerHeight;
+        const x0 = volata.x, y = volata.y;
+        const sinistra = x0 * (1 - f.copertura);
+        const larghezza = (W - x0 + W * .08) * f.proiettile + x0 * f.copertura;
+        const altezza = 2 + f.fascio * H * .15 + f.copertura * H * 2.1;
+        rettangolo(el, sinistra, y - altezza / 2, larghezza, altezza, f.copertura * f.copertura);
+        el.style.setProperty('--x0', x0 + 'px');
+        el.style.setProperty('--y', y + 'px');
         el.style.setProperty('--s', (f.sparo > 0 && f.sparo < 1 ? Math.sin(f.sparo * Math.PI) : 0).toFixed(3));
         el.style.setProperty('--p', f.proiettile.toFixed(4));
         el.style.setProperty('--f', f.fascio.toFixed(4));
-        el.style.setProperty('--c', f.copertura.toFixed(4));
         el.style.setProperty('--d', Math.max(f.pistola, f.copertura).toFixed(4));
+        el.style.setProperty('--testo', (f.fascio * (1 - f.copertura * 1.4)).toFixed(4));
     }
 
     Object.assign(OAKVX.proiettile, { creaLivello, disegna });
@@ -149,6 +167,8 @@
             const t = Math.min(1, (performance.now() - inizio) / ARRIVO_MS);
             const a = 1 - Math.pow(1 - t, 3);
             el.style.setProperty('--a', a.toFixed(4));
+            const H = innerHeight, altezza = (1 - a) * H * 2.1 + 2;
+            rettangolo(el, 0, H / 2 - altezza / 2, innerWidth, altezza, 1 - a);
             if (t < 1) requestAnimationFrame(passo);
             else { el.classList.remove('arrivo'); el.style.removeProperty('--a'); }
         };
@@ -160,7 +180,7 @@
         inCorso = false;
         if (!livello) return;
         livello.classList.remove('attivo', 'arrivo');
-        ['--s', '--p', '--f', '--c', '--a', '--d'].forEach(k => livello.style.removeProperty(k));
+        ['--s', '--p', '--f', '--c', '--a', '--d', '--sx', '--sy', '--tx', '--ty', '--testo'].forEach(k => livello.style.removeProperty(k));
     }
 
     /* ------------------------------------------------- pistola a richiesta */

@@ -309,8 +309,8 @@ def get_seo(root: Element, route: str) -> dict[str, str]:
     seo = dict(translations.get("en", {}))
     if route == "/fuori-orario/":
         seo.update({
-            "title": "AFTER HOURS | Gabriele Lucia — Developer & Graphic Designer",
-            "description": "AFTER HOURS: the channel for what stays open after I log off. Personal projects, consoles, games, languages and curiosities by Gabriele Lucia (oakvx).",
+            "title": "After hours | Gabriele Lucia — Developer & Graphic Designer",
+            "description": "After hours: the channel for what stays open after I log off. Personal projects, consoles, games, languages and curiosities by Gabriele Lucia (oakvx).",
             "image": ORIGIN + "/assets/social-home-en.png",
             "image_alt": "Gabriele Lucia / oakvx — After Hours.",
         })

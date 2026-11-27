@@ -33,7 +33,7 @@
 
     --bianco-80: rgb(232 230 225 / .8);
     --bianco-60: rgb(232 230 225 / .6);
-    --bianco-40: rgb(232 230 225 / .4);
+    --bianco-40: rgb(232 230 225 / .55);
     --linea: rgb(232 230 225 / .14);
     --linea-forte: rgb(232 230 225 / .28);
     --superficie: #0c0c0c;
@@ -120,7 +120,7 @@ em, i { font-style: italic; }
 ::selection { background: var(--cremisi); color: var(--bianco); }
 
 :focus-visible {
-    outline: 1px solid var(--cremisi);
+    outline: 2px solid var(--bianco);
     outline-offset: 4px;
 }
 

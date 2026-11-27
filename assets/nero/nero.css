@@ -1868,3 +1868,37 @@ body:has(.pagina--contatti) .colophon__corpo { display: none; }
 .caso-repo .t-meta:first-child { display: flex; justify-content: space-between; gap: 1rem; }
 .caso-repo__barra { display: flex; height: 6px; gap: 2px; }
 .caso-repo__barra i { display: block; min-width: 2px; background: color-mix(in srgb, var(--cremisi) calc(100% - var(--i) * 18%), var(--grafite)); }
+
+/* Tecnologie: quadratini gelatinosi */
+.gelatine { list-style: none; margin: 0; padding: 1rem 0 4rem; display: flex; flex-wrap: wrap; gap: 1.1rem .9rem; }
+.gelatine li { position: relative; }
+.gelatina {
+    --dim: clamp(3.6rem, calc(var(--u) * 5.4), 5rem);
+    display: grid; place-items: center; width: var(--dim); height: var(--dim);
+    transform: translateY(var(--dy, 0)) rotate(var(--rot, 0deg));
+    cursor: grab; outline: none; touch-action: manipulation;
+}
+.gelatina__corpo {
+    display: grid; place-items: center; width: 100%; height: 100%;
+    background: var(--bg); color: var(--fg);
+    border-radius: 30%;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .08), 0 .6rem 1.4rem rgb(0 0 0 / .45);
+    transform: translate(var(--gx, 0px), var(--gy, 0px)) rotate(var(--gr, 0deg)) scale(var(--gsx, 1), var(--gsy, 1)) rotate(calc(var(--gr, 0deg) * -1));
+    will-change: transform;
+}
+.gelatina__corpo svg { width: 46%; height: 46%; }
+.gelatina__sigla { font: 600 1.35rem/1 var(--mono); letter-spacing: -.04em; }
+.gelatina:focus-visible .gelatina__corpo { box-shadow: 0 0 0 2px var(--bianco), 0 0 0 5px var(--cremisi); }
+.gelatina__nota {
+    position: absolute; left: 50%; top: calc(100% + .7rem); z-index: 5;
+    width: max-content; max-width: 15rem; padding: .55rem .7rem;
+    background: var(--bianco); color: var(--nero);
+    font: 400 .82rem/1.35 var(--sans); text-align: left;
+    transform: translate(-50%, -.3rem); opacity: 0; pointer-events: none;
+    transition: opacity .18s, transform .18s;
+}
+.gelatina__nota b { display: block; font-weight: 600; }
+.gelatine li:hover .gelatina__nota,
+.gelatina:focus-visible + .gelatina__nota,
+.gelatine li.mostra .gelatina__nota { opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 760px) { .gelatine { gap: .9rem .7rem; } }

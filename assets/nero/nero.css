@@ -190,7 +190,7 @@ em, i { font-style: italic; }
 
 .sezione {
     position: relative;
-    padding: clamp(5rem, calc(var(--u) * 11), 8.5rem) var(--bordo);
+    padding: clamp(3.5rem, calc(var(--u) * 7.5), 6rem) var(--bordo);
 }
 
 .regola {
@@ -576,7 +576,7 @@ html.sparo-arrivo::after {
 
 .colophon {
     position: relative; z-index: 1;
-    padding: clamp(6rem, calc(var(--u) * 13), 9.12rem) var(--bordo) 0;
+    padding: clamp(4.5rem, calc(var(--u) * 9), 6.5rem) var(--bordo) 0;
     border-top: 1px solid var(--linea);
     overflow: hidden;
 }
@@ -725,6 +725,15 @@ html.sparo-arrivo::after {
 @media (max-width: 560px) {
     .apertura__ruoli, .apertura__azione { grid-column: 1 / -1; justify-self: start; }
 }
+/* Sul telefono la scultura scende fino al testo: una velatura del nero lo tiene leggibile. */
+@media (max-width: 900px) {
+    .apertura__piede { position: relative; }
+    .apertura__piede::before {
+        content: ""; position: absolute; z-index: -1; pointer-events: none;
+        inset: 0 calc(var(--bordo) * -1) -3.4rem;
+        background: linear-gradient(to bottom, rgb(5 5 5 / .5), rgb(5 5 5 / .8) 2.5rem);
+    }
+}
 
 
 
@@ -802,7 +811,7 @@ html.sparo-arrivo::after {
 /* Manifesto: le parole si accendono mentre scorri. */
 .manifesto {
     display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gola);
-    padding-block: clamp(8rem, calc(var(--u) * 18), 12.16rem);
+    padding-block: clamp(5rem, calc(var(--u) * 11), 8rem);
 }
 .manifesto > .t-meta { grid-column: 1 / span 3; padding-top: 1.2em; }
 .manifesto__testo {

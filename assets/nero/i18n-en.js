@@ -109,6 +109,7 @@ window.OAKVX_EN = {
     'home.r4d': 'EFI · macOS 10.15.7 — ★ 4',
     'home.archiveAll': 'All repositories on github.com/oakvx',
     'home.archiveGame': "Got time to kill? There's also",
+    'home.archiveGameLink': 'the 3D game',
 
     'home.noteHold': 'press and hold: it breaks, then puts itself back together',
     'home.noteLight': 'the light follows the cursor. nothing else does',

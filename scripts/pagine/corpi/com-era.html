@@ -1,0 +1,53 @@
+<main id="main" class="pagina">
+<section class="crediti-apertura" aria-labelledby="comera-titolo">
+    <p class="t-meta">(N.3) <span data-i18n="ce.label">Note — com’era</span></p>
+    <h1 id="comera-titolo" data-split data-i18n-html="ce.title">Prima del nero, <em>c’era l’azzurro.</em></h1>
+    <p class="rivela" data-i18n="ce.intro">Il sito fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato. Ingrandisci e spostati come su un tavolo da disegno.</p>
+</section>
+
+<section class="tavola" data-tavola aria-labelledby="comera-titolo">
+    <div class="tavola__barra t-meta">
+        <div class="tavola__scelte" role="group" aria-label="Tavole" data-i18n-aria="ce.platesAria">
+            <button type="button" data-tavola-n="0" aria-pressed="true">01 <span data-i18n="ce.plate1">l’apertura</span></button>
+            <button type="button" data-tavola-n="1" aria-pressed="false">02 <span data-i18n="ce.plate2">la home intera</span></button>
+        </div>
+        <div class="tavola__comandi" role="group" aria-label="Zoom" data-i18n-aria="ce.zoomAria">
+            <output class="tavola__scala" data-tavola-scala>100%</output>
+            <button type="button" data-zoom="out" aria-label="Riduci" data-i18n-aria="ce.zoomOut">−</button>
+            <button type="button" data-zoom="in" aria-label="Ingrandisci" data-i18n-aria="ce.zoomIn">+</button>
+            <button type="button" data-zoom="fit" data-i18n="ce.fit">adatta</button>
+            <button type="button" data-zoom="1">1:1</button>
+        </div>
+    </div>
+    <div class="tavola__vista" tabindex="0" data-tavola-vista aria-label="Tavola da disegno: trascina per spostarti" data-i18n-aria="ce.viewAria">
+        <div class="tavola__foglio" data-tavola-foglio>
+            <img src="../assets/com-era/apertura-2026-11.webp" width="1440" height="900" alt="La home di oakvx com’era a novembre 2026: sfondo azzurro chiaro, nome in Nunito nero e blu, l’avatar Mii a destra." data-i18n-alt="ce.alt1" draggable="false" decoding="async" data-titolo="01 — l’apertura" data-titolo-en="01 — the opening">
+            <img src="../assets/com-era/home-2026-11.webp" width="1440" height="7179" alt="La home intera com’era: chi sono, il percorso, i progetti, la piazza dei repository con i Mii, gli strumenti e i contatti." data-i18n-alt="ce.alt2" draggable="false" decoding="async" loading="lazy" data-titolo="02 — la home intera" data-titolo-en="02 — the whole home page" hidden>
+        </div>
+    </div>
+    <p class="tavola__aiuto t-meta" data-i18n="ce.help">trascina o rotella per spostarti · ctrl + rotella per ingrandire · 1 2 tavole · f adatta · 0 scala 1:1</p>
+    <dl class="cartiglio t-meta">
+        <div><dt data-i18n="ce.k1">oggetto</dt><dd data-i18n="ce.v1">oakvx.github.io, com’era</dd></div>
+        <div><dt data-i18n="ce.k2">tavola</dt><dd data-tavola-titolo>01 — l’apertura</dd></div>
+        <div><dt data-i18n="ce.k3">foglio</dt><dd data-tavola-misure>1440 × 900 px</dd></div>
+        <div><dt data-i18n="ce.k4">codice</dt><dd>commit 57b8364 · 26.11.2026</dd></div>
+        <div><dt data-i18n="ce.k5">caratteri</dt><dd data-i18n="ce.v5">Nunito · un sans tondo a peso 900</dd></div>
+        <div><dt data-i18n="ce.k6">disegnato</dt><dd>Gabriele Lucia</dd></div>
+        <div><dt>rev. a</dt><dd data-i18n="ce.v7">26.11.2026 · il sito diventa Nero, questa tavola resta com’era</dd></div>
+    </dl>
+</section>
+
+<div class="contenitore" style="padding-bottom:clamp(5rem,10vw,9rem)">
+    <section class="voce-crediti" id="cambiato">
+        <h2 data-i18n="ce.diffTitle">Cosa è cambiato</h2>
+        <div class="voce-crediti__corpo">
+            <ul>
+                <li data-i18n="ce.diff1">Lo sfondo chiaro è diventato nero: #050505, non #000.</li>
+                <li data-i18n="ce.diff2">Nunito ha lasciato il posto a tre caratteri: Fraunces per i titoli, Archivo per il testo, Cascadia Code per date e numeri.</li>
+                <li data-i18n="ce.diff3">L’azzurro è sparito: resta un solo colore d’accento, il cremisi.</li>
+                <li data-i18n="ce.diff4">Il Mii fermo nell’apertura è diventato una scultura di punti in WebGL, che si rompe e si ricompone.</li>
+            </ul>
+        </div>
+    </section>
+</div>
+</main>

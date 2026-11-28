@@ -23,7 +23,9 @@ PAGES = [
     ('fuori-orario/index.html', 'fuori-orario', '../', '/fuori-orario/', '04', 'nav.after', 'Fuori orario', False, 'github-stats.js'),
     ('fuori-orario/classic/index.html', 'classic', '../../', '/fuori-orario/classic/', '04', 'nav.after', 'Fuori orario', False, ''),
     ('404.html', '404', '/', '/404.html', '—', 'seg.404', 'Pagina non trovata', True, ''),
-    ('assets/CREDITS.html', 'credits', '../', '/assets/CREDITS.html', '06', 'foot.credits', 'Crediti dei materiali', False, ''),
+    ('crediti/index.html', 'crediti', '../', '/crediti/', 'N.2', 'foot.credits', 'Crediti dei materiali', False, ''),
+    ('privacy/index.html', 'privacy', '../', '/privacy/', 'N.1', 'foot.privacy', 'Privacy', False, ''),
+    ('com-era/index.html', 'com-era', '../', '/com-era/', 'N.3', 'foot.before', 'Com’era', False, ''),
     ('metodo/index.html', 'metodo', '../', '/metodo/', '05', 'nav.method', 'Metodo', False, ''),
     ('lavori/index.html', 'lavori', '../', '/lavori/', '02', 'nav.archive', 'Tutti i lavori', False, ''),
     ('projects/piko/index.html', 'piko', '../../', '/projects/piko/', '02.5', 'seg.piko', 'piko', False, ''),
@@ -70,6 +72,12 @@ WEBSITE = {'@type': 'WebSite', '@id': ORIGIN + '/#website', 'url': ORIGIN + '/',
 
 # Metadati delle pagine nate dopo il primo sito: titolo e descrizione nelle due lingue.
 SEO_NUOVE = {
+    '/crediti/': ('Crediti dei materiali | Gabriele Lucia (oakvx)', 'Font, immagini, modelli 3D e materiali dei progetti: licenze e provenienza di tutto quello che si vede nel sito di Gabriele Lucia.',
+                  'Materials credits | Gabriele Lucia (oakvx)', 'Fonts, images, 3D models and project materials: licences and origin of everything on Gabriele Lucia’s site.', 'crediti'),
+    '/privacy/': ('Privacy | Gabriele Lucia (oakvx)', 'Il sito di Gabriele Lucia non usa cookie né statistiche: cosa resta nel browser, quali servizi vedono la visita e cosa succede se gli scrivi.',
+                  'Privacy | Gabriele Lucia (oakvx)', 'Gabriele Lucia’s site uses no cookies and no analytics: what stays in your browser, which services see your visit and what happens if you write.', 'privacy'),
+    '/com-era/': ('Com’era: il sito prima del nero | Gabriele Lucia (oakvx)', 'Il sito di Gabriele Lucia fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato, su una tavola da disegno da ingrandire.',
+                  'As it was: the site before the black | Gabriele Lucia (oakvx)', 'Gabriele Lucia’s site until 26 November 2026, rebuilt from that day’s code and photographed, on a drawing sheet you can zoom.', 'com-era'),
     '/metodo/': ('Metodo | Gabriele Lucia (oakvx)', 'Come lavora Gabriele Lucia: i principi che tornano in ogni suo progetto, con le prove prese dal codice.',
                  'Method | Gabriele Lucia (oakvx)', 'How Gabriele Lucia works: the principles that show up in every project, with evidence from the code.', 'metodo'),
     '/lavori/': ('Portfolio: tutti i lavori | Gabriele Lucia (oakvx)', 'Tutti i progetti di Gabriele Lucia: casi studio, strumenti, ricerca ed esperimenti, con stato e tecnologie.',
@@ -103,6 +111,9 @@ SEO_NUOVE = {
 # Dati strutturati delle pagine nuove: tipo di pagina, briciole (nome italiano e
 # percorso; build_static.py traduce i nomi) ed eventuale oggetto principale.
 SCHEMA_NUOVE = {
+    '/crediti/': {'tipo': 'WebPage', 'briciole': [('Crediti dei materiali', '/crediti/')]},
+    '/privacy/': {'tipo': 'WebPage', 'briciole': [('Privacy', '/privacy/')]},
+    '/com-era/': {'tipo': 'WebPage', 'briciole': [('Com’era', '/com-era/')]},
     '/metodo/': {'tipo': 'WebPage', 'briciole': [('Metodo', '/metodo/')]},
     '/lavori/': {'tipo': 'CollectionPage', 'briciole': [('Tutti i lavori', '/lavori/')]},
     '/servizi/': {'tipo': 'WebPage', 'briciole': [('Servizi', '/servizi/')],

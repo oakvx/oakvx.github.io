@@ -28,7 +28,9 @@ PAGE_FILES = [
     "projects/beautify/index.html",
     "projects/brat-animator/index.html",
     "projects/synk/index.html",
-    "assets/CREDITS.html",
+    "crediti/index.html",
+    "privacy/index.html",
+    "com-era/index.html",
     "fuori-orario/index.html",
     "fuori-orario/classic/index.html",
     "404.html",
@@ -54,7 +56,9 @@ SITEMAP_FILES = [
     "projects/beautify/index.html",
     "projects/autoofficina/index.html",
     "projects/brat-animator/index.html",
-    "assets/CREDITS.html",
+    "crediti/index.html",
+    "privacy/index.html",
+    "com-era/index.html",
     "fuori-orario/index.html",
     "metodo/index.html",
     "lavori/index.html",
@@ -230,7 +234,7 @@ def canonical_route(path: str) -> str:
     if path.endswith("/index.html"):
         path = path[:-len("index.html")]
     existing_file = ROOT / path.lstrip("/")
-    if path != "/" and not existing_file.is_file() and path.endswith("/") is False and path not in {"/404.html", "/assets/CREDITS.html"}:
+    if path != "/" and not existing_file.is_file() and path.endswith("/") is False and path not in {"/404.html"}:
         # Preserve extensionless files; slash-terminate extensionless directory routes.
         if Path(path).suffix == "":
             path += "/"
@@ -341,6 +345,7 @@ SCHEMA_TEXT_EN = {
     "Chi sono": "About me",
     "Fuori orario": "After hours",
     "Crediti dei materiali": "Materials credits",
+    "Com’era": "As it was",
     "Metodo": "Method",
     "Tutti i lavori": "All work",
     "Servizi": "Services",

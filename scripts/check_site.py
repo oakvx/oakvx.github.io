@@ -138,7 +138,7 @@ def audit_page(relative: str, language: str, route: str, check_seo: bool = False
 
 
 ENTRY_PAGES = (
-    "index.html", "404.html", "chi-sono/index.html", "assets/CREDITS.html",
+    "index.html", "404.html", "chi-sono/index.html", "crediti/index.html", "privacy/index.html", "com-era/index.html",
     "fuori-orario/index.html", "fuori-orario/classic/index.html",
     "projects/autoofficina/index.html", "projects/beautify/index.html",
     "projects/brat-animator/index.html", "projects/synk/index.html",

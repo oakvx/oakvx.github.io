@@ -60,15 +60,35 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/projects/brat-animator/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/projects/brat-animator/"/>
   </url>
-  <url><loc>https://oakvx.github.io/assets/CREDITS.html</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/assets/CREDITS.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/assets/CREDITS.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/assets/CREDITS.html"/>
+  <url><loc>https://oakvx.github.io/crediti/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/crediti/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/crediti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/crediti/"/>
   </url>
-  <url><loc>https://oakvx.github.io/en/assets/CREDITS.html</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/assets/CREDITS.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/assets/CREDITS.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/assets/CREDITS.html"/>
+  <url><loc>https://oakvx.github.io/en/crediti/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/crediti/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/crediti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/crediti/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/privacy/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/privacy/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/com-era/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/com-era/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/com-era/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/com-era/"/>
+  </url>
+  <url><loc>https://oakvx.github.io/en/com-era/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/com-era/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/com-era/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/com-era/"/>
   </url>
   <url><loc>https://oakvx.github.io/fuori-orario/</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://oakvx.github.io/fuori-orario/"/>

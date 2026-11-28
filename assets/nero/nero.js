@@ -1694,6 +1694,356 @@
         addEventListener('pointerdown', e => { if (attiva && !e.altKey) accendi(false); }, true);
     }
 
+    /* ----------------------------------------------------------------------
+       Bottoni magnetici: l'email e i comandi principali si lasciano tirare
+       dal cursore quando gli passa vicino, poi tornano a posto con un rimbalzo.
+       ---------------------------------------------------------------------- */
+    function initMagneti() {
+        if (!finePointer.matches) return;
+        const voci = $$('.colophon__email, .colophon__azioni > a, .colophon__azioni > button, .testata__magazzino, .scrivimi__elenco a, .lingue a');
+        if (!voci.length) return;
+        const stato = new Map(voci.map(el => [el, { x: 0, y: 0 }]));
+        let raf = 0, mx = -1e4, my = -1e4;
+        const aggiorna = () => {
+            raf = 0;
+            stato.forEach((s, el) => {
+                const r = el.getBoundingClientRect();
+                const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+                const campo = Math.max(r.width, r.height) * .5 + 46;
+                const dx = mx - cx, dy = my - cy, d = Math.hypot(dx, dy);
+                // la forza cresce avvicinandosi, ma non oltre una dozzina di pixel
+                const f = calm() || d > campo ? 0 : (1 - d / campo) * .38;
+                const x = Math.max(-14, Math.min(14, dx * f)), y = Math.max(-10, Math.min(10, dy * f));
+                if (Math.abs(x - s.x) + Math.abs(y - s.y) < .2) return;
+                s.x = x; s.y = y;
+                el.classList.toggle('magnete', f > 0);
+                el.style.translate = f > 0 ? `${x.toFixed(1)}px ${y.toFixed(1)}px` : '';
+            });
+        };
+        addEventListener('pointermove', e => {
+            if (e.pointerType !== 'mouse') return;
+            mx = e.clientX; my = e.clientY;
+            if (!raf) raf = requestAnimationFrame(aggiorna);
+        }, { passive: true });
+        document.addEventListener('pointerleave', () => { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(aggiorna); });
+        addEventListener('nero:movimento', () => { if (calm()) stato.forEach((s, el) => { s.x = s.y = 0; el.style.translate = ''; el.classList.remove('magnete'); }); });
+    }
+
+    /* ----------------------------------------------------------------------
+       Mascotte del piede: un gatto nero, un corvo e una paperella di gomma,
+       disegnati a tratto come la firma. Sono fatti di pezzi montati su perni:
+       gli occhi seguono il cursore, la testa si gira, coda e testa si possono
+       trascinare e tornano a posto a molla. Con le animazioni ferme restano
+       disegni fermi.
+       ---------------------------------------------------------------------- */
+    const MASCOTTE = {
+        gatto: {
+            box: '0 0 150 160',
+            svg: `
+<g data-parte="coda" data-perno="104 146" data-molla="38 .18" data-limiti="-28 36" data-trascina>
+  <path class="m-linea" d="M104 146c22 2 34-12 30-32-3-14 2-24 12-30" fill="none" stroke-width="5"/>
+  <path class="m-nero" d="M104 146c22 2 34-12 30-32-3-14 2-24 12-30" fill="none" stroke-width="2.4"/>
+</g>
+<path class="m-corpo" d="M46 152c-9-27-4-56 16-66h30c20 10 25 39 16 66z"/>
+<path class="m-linea" d="M64 152l2-26M90 152l-2-26" fill="none"/>
+<g data-parte="testa" data-perno="77 90" data-molla="60 .2" data-limiti="-20 20" data-guarda="1 0" data-trascina>
+  <path class="m-corpo" d="M52 74c0-11 4-20 10-25l-4-23 18 15h2l18-15-4 23c6 5 10 14 10 25 0 16-12 24-25 24S52 90 52 74z"/>
+  <path class="m-linea" d="M60 33l9 9M94 33l-9 9" fill="none" stroke-width="1"/>
+  <g data-occhio="65 70 2.2"><ellipse class="m-bianco" cx="65" cy="70" rx="6" ry="6.5"/><circle class="m-pupilla m-cremisi" cx="65" cy="70" r="2.8"/></g>
+  <g data-occhio="89 70 2.2"><ellipse class="m-bianco" cx="89" cy="70" rx="6" ry="6.5"/><circle class="m-pupilla m-cremisi" cx="89" cy="70" r="2.8"/></g>
+  <g class="m-palpebre"><path class="m-corpo" d="M58 63h14v14H58zM82 63h14v14H82z" stroke="none"/><path class="m-linea" d="M59 71c3 3 9 3 12 0M83 71c3 3 9 3 12 0" fill="none"/></g>
+  <path class="m-cremisi-pieno" d="M74 79h6l-3 4z"/>
+  <path class="m-linea" d="M77 83c-1 3-5 4-7 2M77 83c1 3 5 4 7 2M58 80l-14-3M58 84l-13 3M96 80l14-3M96 84l13 3" fill="none" stroke-width="1"/>
+</g>
+<g class="m-zeta" aria-hidden="true"><text x="104" y="40">z</text><text x="114" y="26">z</text><text x="124" y="12">z</text></g>`,
+        },
+        corvo: {
+            box: '0 0 150 140',
+            svg: `
+<g data-parte="coda" data-perno="118 90" data-molla="45 .16" data-limiti="-18 26" data-trascina>
+  <path class="m-corpo" d="M114 84l32 18-6 4 4 6-34-16z"/>
+</g>
+<path class="m-linea" d="M74 100l-2 22m-6 0h14M90 100l2 22m-6 0h14" fill="none"/>
+<path class="m-corpo" d="M42 74c0-18 18-28 40-24 22 4 36 18 38 38-12 10-40 16-60 8-12-5-18-12-18-22z"/>
+<path class="m-linea" d="M62 70c16-6 36 2 46 18M70 80c12-2 24 2 32 10" fill="none" stroke-width="1"/>
+<g data-parte="testa" data-perno="56 62" data-molla="70 .22" data-limiti="-24 24" data-guarda=".25 -1.2" data-trascina>
+  <path class="m-corpo" d="M34 50c0-12 10-21 22-20 12 1 18 11 16 22-2 9-10 15-20 15-11 0-18-7-18-17z"/>
+  <path class="m-corpo" d="M36 44l-28 8 28 6z"/>
+  <path class="m-linea" d="M8 52h28" fill="none" stroke-width="1"/>
+  <g data-occhio="49 45 1.6"><circle class="m-cremisi-anello" cx="49" cy="45" r="5"/><circle class="m-pupilla m-bianco-pieno" cx="49" cy="45" r="2"/></g>
+  <g class="m-palpebre"><path class="m-corpo" d="M43 39h12v12H43z" stroke="none"/><path class="m-linea" d="M44 46c3 2 7 2 10 0" fill="none"/></g>
+</g>`,
+        },
+        paperella: {
+            box: '0 0 140 130',
+            svg: `
+<g class="m-galleggia">
+  <path class="m-corpo" d="M30 88c0-14 16-18 34-14l32-6c14-2 22 8 20 22-2 18-22 26-46 26-24 0-40-10-40-28z"/>
+  <path class="m-corpo" d="M114 78l14-14-4 20z"/>
+  <path class="m-linea" d="M62 90c8-7 24-7 30 4-8 7-22 7-30-4z" fill="none"/>
+  <g data-parte="testa" data-perno="56 76" data-molla="55 .18" data-limiti="-18 18" data-guarda=".2 -1" data-trascina>
+    <circle class="m-corpo" cx="52" cy="52" r="21"/>
+    <path class="m-cremisi-pieno" d="M33 54c-9-1-15 3-13 8 6 3 13 1 18-2z"/>
+    <path class="m-linea" d="M22 59c5 1 10 0 14-2" fill="none" stroke-width="1"/>
+    <g data-occhio="48 46 1.8"><circle class="m-bianco" cx="48" cy="46" r="5"/><circle class="m-pupilla m-nero-pieno" cx="48" cy="46" r="2.4"/></g>
+    <g class="m-palpebre"><path class="m-corpo" d="M42 40h12v12H42z" stroke="none"/><path class="m-linea" d="M43 47c3 2 7 2 10 0" fill="none"/></g>
+  </g>
+</g>
+<path class="m-acqua" d="M14 122c10-4 20 4 30 0s20 4 30 0 20 4 30 0 20 4 30 0" fill="none"/>`,
+        },
+    };
+    const VERSI = {
+        it: { gatto: ['Mrrr.', 'Non ora.', 'Miao. Basta così.'], corvo: ['Cra!', 'Cra. Cra.', 'Questo luccica?'], paperella: ['Squeak!', 'Spiegami il bug.', 'Riga per riga.', 'Hai provato a riavviare?'] },
+        en: { gatto: ['Mrrr.', 'Not now.', 'Meow. That’s enough.'], corvo: ['Caw!', 'Caw. Caw.', 'Is that shiny?'], paperella: ['Squeak!', 'Explain the bug to me.', 'Line by line.', 'Have you tried restarting?'] },
+    }[lang];
+
+    function initMascotte() {
+        const firma = $('.colophon__firma');
+        if (!firma) return;
+        const piede = firma.parentElement;
+        const banda = document.createElement('div');
+        banda.className = 'mascotte';
+        banda.setAttribute('aria-hidden', 'true');
+        piede.append(banda);
+        const tutte = [];
+        let mx = innerWidth / 2, my = innerHeight / 2, fermo = performance.now(), raf = 0, visibile = false;
+
+        Object.entries(MASCOTTE).forEach(([nome, m]) => {
+            const box = document.createElement('div');
+            box.className = 'mascotta mascotta--' + nome;
+            box.innerHTML = `<svg viewBox="${m.box}" xmlns="http://www.w3.org/2000/svg">${m.svg}</svg><span class="mascotta__fumetto"></span>`;
+            banda.append(box);
+            const svg = $('svg', box);
+            const parti = $$('[data-parte]', svg).map(g => {
+                const [px, py] = g.dataset.perno.split(' ').map(Number);
+                const [k, smorza] = g.dataset.molla.split(' ').map(Number);
+                const [min, max] = g.dataset.limiti.split(' ').map(Number);
+                g.style.transformOrigin = `${px}px ${py}px`;
+                return { g, px, py, k, smorza, min, max, guarda: (g.dataset.guarda || '').split(' ').map(Number), a: 0, v: 0, presa: null };
+            });
+            const occhi = $$('[data-occhio]', svg).map(g => {
+                const [cx, cy, r] = g.dataset.occhio.split(' ').map(Number);
+                return { p: $('.m-pupilla', g), cx, cy, r };
+            });
+            const mascotta = { nome, box, svg, parti, occhi, battito: performance.now() + 1500 + Math.random() * 3000, verso: 0 };
+            tutte.push(mascotta);
+
+            // trascinare un pezzo: l'angolo segue il puntatore intorno al perno
+            parti.forEach(pt => {
+                if (!pt.g.hasAttribute('data-trascina')) return;
+                pt.g.addEventListener('pointerdown', e => {
+                    if (calm()) return;
+                    e.preventDefault(); e.stopPropagation();
+                    pt.g.setPointerCapture(e.pointerId);
+                    const c = perno(svg, pt);
+                    pt.presa = { a0: Math.atan2(e.clientY - c.y, e.clientX - c.x), da: pt.a, mosso: false };
+                    box.classList.add('presa');
+                    sveglia();
+                });
+                pt.g.addEventListener('pointermove', e => {
+                    if (!pt.presa) return;
+                    const c = perno(svg, pt);
+                    const d = (Math.atan2(e.clientY - c.y, e.clientX - c.x) - pt.presa.a0) * 180 / Math.PI;
+                    const ang = pt.presa.da + ((d + 540) % 360 - 180);
+                    if (Math.abs(ang - pt.presa.da) > 2) pt.presa.mosso = true;
+                    pt.a = Math.max(pt.min * 1.6, Math.min(pt.max * 1.6, ang));
+                    pt.v = 0;
+                });
+                const lascia = () => { if (!pt.presa) return; const mosso = pt.presa.mosso; pt.presa = null; box.classList.remove('presa'); if (!mosso) parla(mascotta); sveglia(); };
+                pt.g.addEventListener('pointerup', lascia);
+                pt.g.addEventListener('pointercancel', lascia);
+            });
+            // un clic sul corpo: la mascotte reagisce e dice qualcosa
+            svg.addEventListener('click', e => { if (!e.target.closest('[data-trascina]')) parla(mascotta); });
+        });
+
+        function perno(svg, pt) {
+            const m = svg.getScreenCTM();
+            return m ? { x: m.a * pt.px + m.c * pt.py + m.e, y: m.b * pt.px + m.d * pt.py + m.f } : { x: 0, y: 0 };
+        }
+        let timerFumetto = 0;
+        function parla(m) {
+            const frasi = VERSI[m.nome];
+            const f = $('.mascotta__fumetto', m.box);
+            f.textContent = frasi[m.verso++ % frasi.length];
+            m.box.classList.remove('parla', 'scatta'); void m.box.offsetWidth;
+            m.box.classList.add('parla', 'scatta');
+            clearTimeout(m.timer);
+            m.timer = setTimeout(() => m.box.classList.remove('parla'), 1900);
+            // un colpo alla testa e alla coda, come uno scatto
+            m.parti.forEach(pt => { pt.v += (Math.random() > .5 ? 1 : -1) * (pt.max - pt.min) * 3; });
+            fermo = performance.now();
+            banda.classList.remove('dorme');
+            sveglia();
+        }
+
+        let ultimo = performance.now();
+        const passo = now => {
+            raf = 0;
+            const dt = Math.min(.04, (now - ultimo) / 1000); ultimo = now;
+            const quiete = calm();
+            const dorme = !quiete && now - fermo > 6000;
+            banda.classList.toggle('dorme', dorme);
+            let attivo = false;
+            tutte.forEach(m => {
+                // battito di ciglia
+                if (!quiete && now > m.battito) { m.box.classList.add('batte'); setTimeout(() => m.box.classList.remove('batte'), 140); m.battito = now + 2200 + Math.random() * 4200; }
+                const mat = m.svg.getScreenCTM();
+                m.parti.forEach(pt => {
+                    if (pt.presa) { attivo = true; return; }
+                    let bersaglio = 0;
+                    if (!quiete && pt.guarda.length === 2 && mat && !(dorme && m.nome === 'gatto')) {
+                        const c = perno(m.svg, pt);
+                        // la testa si inclina verso il cursore: [orizzontale, verticale] per ogni mascotte
+                        const [gh, gv] = pt.guarda;
+                        bersaglio = Math.max(pt.min, Math.min(pt.max, ((mx - c.x) / innerWidth * gh + (my - c.y) / innerHeight * gv) * 40));
+                    }
+                    if (!quiete && pt.g.dataset.parte === 'coda') bersaglio += Math.sin(now / (dorme ? 1400 : 700) + m.nome.length) * (dorme ? 4 : 9);
+                    if (quiete) { pt.a = 0; pt.v = 0; }
+                    else {
+                        pt.v += ((bersaglio - pt.a) * pt.k - pt.v * pt.k * pt.smorza) * dt;
+                        pt.a += pt.v * dt;
+                        if (Math.abs(pt.v) > .05 || Math.abs(bersaglio - pt.a) > .05) attivo = true;
+                    }
+                    pt.g.style.transform = pt.a ? `rotate(${pt.a.toFixed(2)}deg)` : '';
+                });
+                if (mat) {
+                    const inv = mat.inverse();
+                    const lx = inv.a * mx + inv.c * my + inv.e, ly = inv.b * mx + inv.d * my + inv.f;
+                    m.occhi.forEach(o => {
+                        if (quiete) { o.p.removeAttribute('transform'); return; }
+                        const dx = lx - o.cx, dy = ly - o.cy, d = Math.hypot(dx, dy) || 1, s = Math.min(1, d / 60) * o.r;
+                        o.p.setAttribute('transform', `translate(${(dx / d * s).toFixed(2)} ${(dy / d * s).toFixed(2)})`);
+                    });
+                }
+            });
+            // finché sono visibili si continua: la coda ondeggia sempre un po'
+            if (visibile && !quiete && !document.hidden) raf = requestAnimationFrame(passo);
+            else if (attivo && !quiete) raf = requestAnimationFrame(passo);
+        };
+        const sveglia = () => { if (!raf) { ultimo = performance.now(); raf = requestAnimationFrame(passo); } };
+
+        // posizione: sedute sulle lettere della firma
+        const posa = () => {
+            const rp = piede.getBoundingClientRect(), rf = firma.getBoundingClientRect();
+            const fs = parseFloat(getComputedStyle(firma).fontSize);
+            banda.style.setProperty('--firma-x', (rf.left - rp.left).toFixed(0) + 'px');
+            banda.style.setProperty('--firma-y', (rf.top - rp.top).toFixed(0) + 'px');
+            banda.style.setProperty('--firma-w', rf.width.toFixed(0) + 'px');
+            banda.style.setProperty('--firma-fs', fs.toFixed(1) + 'px');
+        };
+        posa();
+        addEventListener('resize', posa);
+        document.fonts?.ready.then(posa);
+        addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; fermo = performance.now(); if (visibile) sveglia(); }, { passive: true });
+        addEventListener('scroll', () => { fermo = performance.now(); }, { passive: true });
+        quandoVisibile(banda, () => { visibile = true; posa(); sveglia(); }, () => { visibile = false; });
+        document.addEventListener('visibilitychange', sveglia);
+        addEventListener('nero:movimento', () => { banda.classList.remove('dorme'); sveglia(); });
+    }
+
+    /* ----------------------------------------------------------------------
+       Tavola da disegno (Com'era): il vecchio sito fotografato, da spostare
+       trascinando e da ingrandire con ctrl + rotella o con i comandi.
+       Tasti: 1 e 2 cambiano tavola, f adatta, 0 scala 1:1, + e − ingrandiscono.
+       ---------------------------------------------------------------------- */
+    function initTavola() {
+        $$('[data-tavola]').forEach(box => {
+            const vista = $('[data-tavola-vista]', box), foglio = $('[data-tavola-foglio]', box);
+            const tavole = $$('img', foglio), scelte = $$('[data-tavola-n]', box);
+            const scalaOut = $('[data-tavola-scala]', box), titolo = $('[data-tavola-titolo]', box), misure = $('[data-tavola-misure]', box);
+            let n = 0, s = 1, x = 0, y = 0, presa = null;
+            const img = () => tavole[n];
+            const dim = () => ({ w: Number(img().getAttribute('width')), h: Number(img().getAttribute('height')) });
+            const limita = () => {
+                // il foglio non scappa mai del tutto dalla vista
+                const { w, h } = dim(), vw = vista.clientWidth, vh = vista.clientHeight, m = 60;
+                const fw = w * s, fh = h * s;
+                x = fw < vw ? (vw - fw) / 2 : Math.min(m, Math.max(vw - fw - m, x));
+                y = fh < vh ? (vh - fh) / 2 : Math.min(m, Math.max(vh - fh - m, y));
+            };
+            const disegna = () => {
+                limita();
+                foglio.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+                scalaOut.value = Math.round(s * 100) + '%';
+            };
+            const zoom = (k, cx = vista.clientWidth / 2, cy = vista.clientHeight / 2) => {
+                const nuova = Math.max(.08, Math.min(3, s * k));
+                x = cx - (cx - x) * (nuova / s);
+                y = cy - (cy - y) * (nuova / s);
+                s = nuova;
+                disegna();
+            };
+            const adatta = () => {
+                const { w, h } = dim(), vw = vista.clientWidth, vh = vista.clientHeight;
+                // la tavola lunga si adatta in larghezza e parte dall'alto
+                s = h / w > 2 ? Math.min(1, (vw - 48) / w) : Math.min((vw - 48) / w, (vh - 48) / h);
+                x = (vw - w * s) / 2; y = h / w > 2 ? 24 : (vh - h * s) / 2;
+                disegna();
+            };
+            const unoAUno = () => { const { w } = dim(); s = 1; x = (vista.clientWidth - w) / 2; y = 24; disegna(); };
+            const scegli = i => {
+                n = Math.max(0, Math.min(tavole.length - 1, i));
+                tavole.forEach((t, j) => { t.hidden = j !== n; });
+                scelte.forEach((b, j) => b.setAttribute('aria-pressed', String(j === n)));
+                const t = img();
+                if (titolo) titolo.textContent = (lang === 'en' && t.dataset.titoloEn) || t.dataset.titolo || '';
+                if (misure) misure.textContent = `${t.getAttribute('width')} × ${t.getAttribute('height')} px`;
+                adatta();
+            };
+            scelte.forEach((b, i) => b.addEventListener('click', () => scegli(i)));
+            $$('[data-zoom]', box).forEach(b => b.addEventListener('click', () => {
+                const z = b.dataset.zoom;
+                if (z === 'in') zoom(1.25); else if (z === 'out') zoom(1 / 1.25); else if (z === 'fit') adatta(); else unoAUno();
+            }));
+            vista.addEventListener('pointerdown', e => {
+                if (e.button !== 0) return;
+                presa = { px: e.clientX, py: e.clientY, x, y };
+                vista.setPointerCapture(e.pointerId);
+                vista.classList.add('presa');
+            });
+            vista.addEventListener('pointermove', e => {
+                if (!presa) return;
+                x = presa.x + e.clientX - presa.px; y = presa.y + e.clientY - presa.py;
+                disegna();
+            });
+            const lascia = () => { presa = null; vista.classList.remove('presa'); };
+            vista.addEventListener('pointerup', lascia);
+            vista.addEventListener('pointercancel', lascia);
+            vista.addEventListener('wheel', e => {
+                const r = vista.getBoundingClientRect();
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    zoom(Math.exp(-e.deltaY * .0025), e.clientX - r.left, e.clientY - r.top);
+                    return;
+                }
+                // la rotella sposta il foglio finché c'è strada; poi lascia scorrere la pagina
+                const prima = y;
+                x -= e.deltaX; y -= e.deltaY;
+                disegna();
+                if (Math.abs(y - prima) > .5 || e.deltaX) e.preventDefault();
+            }, { passive: false });
+            vista.addEventListener('keydown', e => {
+                const k = e.key.toLowerCase();
+                const passo = 60;
+                if (k === '1' || k === '2') scegli(Number(k) - 1);
+                else if (k === 'f') adatta();
+                else if (k === '0') unoAUno();
+                else if (k === '+' || k === '=') zoom(1.25);
+                else if (k === '-') zoom(1 / 1.25);
+                else if (k === 'arrowleft') { x += passo; disegna(); }
+                else if (k === 'arrowright') { x -= passo; disegna(); }
+                else if (k === 'arrowup') { y += passo; disegna(); }
+                else if (k === 'arrowdown') { y -= passo; disegna(); }
+                else return;
+                e.preventDefault();
+            });
+            addEventListener('resize', adatta);
+            tavole.forEach(t => t.addEventListener('load', () => { if (t === img()) adatta(); }));
+            scegli(0);
+        });
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1729,6 +2079,9 @@
         initCondensa();
         initInchiostro();
         initTorcia();
+        initMagneti();
+        initMascotte();
+        initTavola();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

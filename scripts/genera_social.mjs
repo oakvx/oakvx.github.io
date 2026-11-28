@@ -1,5 +1,6 @@
 // Genera le immagini social 1200x630 (assets/social-<chiave>-<lingua>.png) con Playwright.
 // Uso: PLAYWRIGHT_PATH=$(npm root -g)/playwright node scripts/genera_social.mjs
+// Con un Chromium già sul disco: CHROMIUM=<percorso di chrome> (come per scripts/cv/genera_cv.cjs)
 import { createRequire } from 'node:module';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -13,6 +14,9 @@ const FIRMA = { it: 'Gabriele Lucia, detto oakvx', en: 'Gabriele Lucia, a.k.a. o
 
 // chiave: [etichetta it, etichetta en, titolo it, titolo en, sotto it, sotto en] (<em> = cremisi corsivo)
 const PAGINE = {
+    crediti: ['(N.2) NOTE', '(N.2) NOTES', 'Chi ha fatto <em>cosa.</em>', 'Who made <em>what.</em>', 'Licenze e provenienza dei materiali', 'Licences and origin of the materials'],
+    privacy: ['(N.1) NOTE', '(N.1) NOTES', 'Cosa so di te. <em>Quasi niente.</em>', 'What I know about you. <em>Almost nothing.</em>', 'Niente cookie, niente statistiche', 'No cookies, no analytics'],
+    'com-era': ['(N.3) NOTE', '(N.3) NOTES', 'Prima del nero, <em>c’era l’azzurro.</em>', 'Before the black, <em>there was blue.</em>', 'Il sito fino al 26 novembre 2026', 'The site until 26 November 2026'],
     contatti: ['(09) CONTATTI', '(09) CONTACT', 'Dimmi cosa ti serve. <em>Ti dico se posso.</em>', 'Tell me what you need. <em>I’ll tell you if I can.</em>'],
     lavori: ['(02) TUTTI I LAVORI', '(02) ALL WORK', 'Tutto quello che ho fatto. <em>Anche le cose piccole.</em>', 'Everything I’ve built. <em>Including the small stuff.</em>'],
     metodo: ['(05) METODO', '(05) METHOD', 'Non ho un manifesto. <em>Ho dei repository.</em>', 'I don’t have a manifesto. <em>I have repositories.</em>'],
@@ -48,7 +52,7 @@ em{font-style:italic;color:#C81035}
 <p class="m" style="left:64px;top:58px">${etichetta}</p><p class="m" style="right:64px;top:58px">OAKVX.GITHUB.IO</p><i class="dot"></i>
 <h1 class="${titolo.length > 40 ? 'l' : ''}">${titolo}</h1><div class="r"></div><p class="s">${sotto}</p><p class="m" style="right:64px;top:550px;font-size:15px">2026</p>`;
 
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 for (const [chiave, v] of Object.entries(PAGINE)) {
     for (const [i, lingua] of ['it', 'en'].entries()) {

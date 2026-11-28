@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="it" data-lang-en-url="/en/com-era/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="importmap">{"imports":{"three":"/gioco/vendor/three/three.module.js"}}</script>
+<script data-ingresso-bootstrap>(()=>{const r=document.documentElement;let seen=false;try{seen=sessionStorage.getItem('oakvx-ingresso')==='1'}catch{}const v=new URLSearchParams(location.search).get('ingresso'),bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);if(v==='1'||(v!=='0'&&!seen&&!bot)){r.classList.add('ingresso-attivo');setTimeout(()=>{if(!window.__oakvxIngresso)r.classList.remove('ingresso-attivo')},1500)}})();</script>
+<link rel="stylesheet" href="../assets/ingresso/ingresso.css">
+<script>(()=>{const r=document.documentElement;r.classList.add('js');let lang=null,paused=false;const bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse/i.test(navigator.userAgent);try{lang=localStorage.getItem('lang');paused=localStorage.getItem('motion')==='paused'}catch{}const q=new URLSearchParams(location.search).get('lang');if(q==='it'||q==='en'){lang=q;try{localStorage.setItem('lang',q)}catch{}}if(!lang&&!bot&&(navigator.language||'').toLowerCase().startsWith('en'))lang='en';if(lang==='en'&&r.dataset.staticLang!=='en'&&r.dataset.langEnUrl&&!bot){location.replace(r.dataset.langEnUrl+location.hash);return}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||paused)r.classList.add('calm');if(paused)r.classList.add('paused');try{const e=Date.now()-Number(sessionStorage.getItem('nero-sparo'));if(!reduce&&!paused&&e>=0&&e<3000)r.classList.add('sparo-arrivo')}catch{}})();</script>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/nero/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/nero/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/nero/nero.css">
+<script src="../assets/nero/proiettile.js" defer></script>
+<script src="../assets/nero/gelatina.js" defer></script>
+<script src="../assets/nero/nero.js" defer></script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Com’era: il sito prima del nero | Gabriele Lucia (oakvx)</title>
+<meta name="description" content="Il sito di Gabriele Lucia fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato, su una tavola da disegno da ingrandire.">
+<meta name="author" content="Gabriele Lucia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://oakvx.github.io/com-era/">
+<link rel="alternate" hreflang="it" href="https://oakvx.github.io/com-era/">
+<link rel="alternate" hreflang="en" href="https://oakvx.github.io/en/com-era/">
+<link rel="alternate" hreflang="x-default" href="https://oakvx.github.io/com-era/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gabriele Lucia / oakvx">
+<meta property="og:title" content="Com’era: il sito prima del nero | Gabriele Lucia (oakvx)">
+<meta property="og:description" content="Il sito di Gabriele Lucia fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato, su una tavola da disegno da ingrandire.">
+<meta property="og:url" content="https://oakvx.github.io/com-era/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:image" content="https://oakvx.github.io/assets/social-com-era-it.png">
+<meta property="og:image:secure_url" content="https://oakvx.github.io/assets/social-com-era-it.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Com’era: il sito prima del nero — Gabriele Lucia / oakvx">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Com’era: il sito prima del nero | Gabriele Lucia (oakvx)">
+<meta name="twitter:description" content="Il sito di Gabriele Lucia fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato, su una tavola da disegno da ingrandire.">
+<meta name="twitter:image" content="https://oakvx.github.io/assets/social-com-era-it.png">
+<meta name="twitter:image:alt" content="Com’era: il sito prima del nero — Gabriele Lucia / oakvx">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://oakvx.github.io/#person","name":"Gabriele Lucia","alternateName":"oakvx","url":"https://oakvx.github.io/chi-sono/","image":"https://oakvx.github.io/assets/avatars/showingoff-still.webp","sameAs":["https://github.com/oakvx","https://github.com/oakvxish","https://www.tiktok.com/@oakvx.sh","https://www.tiktok.com/@uvst.oakvx","https://www.instagram.com/oakvx/"],"jobTitle":"Developer e graphic designer","homeLocation":{"@type":"Place","name":"Sassuolo","address":{"@type":"PostalAddress","addressLocality":"Sassuolo","addressRegion":"MO","addressCountry":"IT"}},"affiliation":{"@type":"CollegeOrUniversity","name":"Università degli Studi di Modena e Reggio Emilia","alternateName":"UNIMORE","url":"https://www.unimore.it/"},"knowsLanguage":["it","en","es","el","zh"]},{"@type":"WebSite","@id":"https://oakvx.github.io/#website","url":"https://oakvx.github.io/","name":"Gabriele Lucia / oakvx","alternateName":"oakvx","inLanguage":["it","en"],"publisher":{"@id":"https://oakvx.github.io/#person"}},{"@type":"WebPage","@id":"https://oakvx.github.io/com-era/#webpage","url":"https://oakvx.github.io/com-era/","name":"Com’era: il sito prima del nero | Gabriele Lucia (oakvx)","description":"Il sito di Gabriele Lucia fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato, su una tavola da disegno da ingrandire.","inLanguage":"it","isPartOf":{"@id":"https://oakvx.github.io/#website"},"author":{"@id":"https://oakvx.github.io/#person"},"primaryImageOfPage":{"@id":"https://oakvx.github.io/com-era/#primaryimage"},"breadcrumb":{"@id":"https://oakvx.github.io/com-era/#breadcrumb"}},{"@type":"ImageObject","@id":"https://oakvx.github.io/com-era/#primaryimage","url":"https://oakvx.github.io/assets/social-com-era-it.png","contentUrl":"https://oakvx.github.io/assets/social-com-era-it.png","width":1200,"height":630,"caption":"Com’era: il sito prima del nero — Gabriele Lucia / oakvx","inLanguage":"it"},{"@type":"BreadcrumbList","@id":"https://oakvx.github.io/com-era/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://oakvx.github.io/"},{"@type":"ListItem","position":2,"name":"Com’era","item":"https://oakvx.github.io/com-era/"}]}]}</script>
+<script type="application/json" id="seo-translations">{"it": {"title": "Com’era: il sito prima del nero | Gabriele Lucia (oakvx)", "description": "Il sito di Gabriele Lucia fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato, su una tavola da disegno da ingrandire.", "canonical": "https://oakvx.github.io/com-era/", "image": "https://oakvx.github.io/assets/social-com-era-it.png", "image_alt": "Com’era: il sito prima del nero — Gabriele Lucia / oakvx"}, "en": {"title": "As it was: the site before the black | Gabriele Lucia (oakvx)", "description": "Gabriele Lucia’s site until 26 November 2026, rebuilt from that day’s code and photographed, on a drawing sheet you can zoom.", "canonical": "https://oakvx.github.io/en/com-era/", "image": "https://oakvx.github.io/assets/social-com-era-en.png", "image_alt": "As it was: the site before the black — Gabriele Lucia / oakvx"}}</script>
+</head>
+<body data-pagina="com-era">
+<a class="salta" href="#main" data-i18n="ui.skip">Vai al contenuto</a>
+<header class="testata" data-testata>
+    <a class="testata__marchio" href="../" aria-label="oakvx, torna all’ingresso" data-i18n-aria="ui.homeAria">
+        <span class="testata__nome">oak<b>v</b>x</span>
+        <span class="testata__ruolo t-meta" data-i18n="ui.role">Gabriele Lucia — sviluppo e design</span>
+    </a>
+    <div class="testata__azioni">
+        <p class="testata__ora t-meta"><span data-i18n="ui.place">Sassuolo</span> <time data-ora>--:--</time> <span data-meteo></span></p>
+        <a class="testata__magazzino" href="../magazzino/" data-velo-n="M"><span data-velo-nome data-i18n="nav.warehouse">Magazzino</span></a>
+        <nav class="lingue t-meta" aria-label="Lingua" data-i18n-aria="ui.langAria">
+            <a href="https://oakvx.github.io/com-era/" data-lang-switch="it" hreflang="it" lang="it" data-no-velo>IT</a><span aria-hidden="true">/</span><a href="../en/com-era/" data-lang-switch="en" hreflang="en" lang="en" data-no-velo>EN</a>
+        </nav>
+        <button class="testata__indice" type="button" aria-expanded="false" aria-controls="indice" data-apri-indice><span data-burger-label>Indice</span><span class="testata__indice-segno" aria-hidden="true"></span></button>
+    </div>
+</header>
+<div class="indice" id="indice" role="dialog" aria-modal="true" aria-label="Indice del sito" data-i18n-aria="nav.dialog" data-indice hidden>
+    <div class="indice__griglia">
+        <nav class="indice__voci" aria-label="Pagine" data-i18n-aria="nav.aria">
+            <ol>
+                <li><a href="../" data-velo-n="01"><span class="indice__n t-meta">01</span><span class="indice__nome" data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a href="../#lavori" data-velo-n="02"><span class="indice__n t-meta">02</span><span class="indice__nome" data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a href="../chi-sono/" data-velo-n="03"><span class="indice__n t-meta">03</span><span class="indice__nome" data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a href="../fuori-orario/" data-velo-n="04"><span class="indice__n t-meta">04</span><span class="indice__nome" data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a href="../metodo/" data-velo-n="05"><span class="indice__n t-meta">05</span><span class="indice__nome" data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a href="../servizi/" data-velo-n="06"><span class="indice__n t-meta">06</span><span class="indice__nome" data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a href="../sicurezza/" data-velo-n="07"><span class="indice__n t-meta">07</span><span class="indice__nome" data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a href="../stile/" data-velo-n="08"><span class="indice__n t-meta">08</span><span class="indice__nome" data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a href="../contatti/" data-velo-n="09"><span class="indice__n t-meta">09</span><span class="indice__nome" data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ol>
+        </nav>
+        <div class="indice__lato">
+            <div>
+                <p class="t-meta" data-i18n="nav.cases">Casi studio</p>
+                <ul>
+                    <li><a class="filo" href="../projects/brat-animator/" data-velo-n="02.1"><span data-velo-nome>Brat Animator</span></a></li>
+                    <li><a class="filo" href="../projects/synk/" data-velo-n="02.2"><span data-velo-nome>Synk</span></a></li>
+                    <li><a class="filo" href="../projects/beautify/" data-velo-n="02.3"><span data-velo-nome>Beautify</span></a></li>
+                    <li><a class="filo" href="../projects/autoofficina/" data-velo-n="02.4"><span data-velo-nome>Spinotto Felice</span></a></li>
+                    <li><a class="filo" href="../projects/piko/" data-velo-n="02.5"><span data-velo-nome>piko</span></a></li>
+                    <li><a class="filo" href="../projects/yag/" data-velo-n="02.6"><span data-velo-nome>yag</span></a></li>
+                    <li><a class="filo" href="../projects/middleman/" data-velo-n="02.7"><span data-velo-nome>middleManPS4</span></a></li>
+                    <li><a class="filo" href="../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="t-meta" data-i18n="nav.elsewhere">Altrove</p>
+                <ul>
+                    <li><a class="filo" href="../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+                    <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a class="filo" href="mailto:gabrielelucia07@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <button class="indice__animazioni t-meta" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button>
+        </div>
+    </div>
+</div>
+<p class="segnapagina t-meta" aria-hidden="true"><b>N.3</b><span data-titolo data-i18n="foot.before">Com’era</span><span class="segnapagina__barra"><i></i></span></p>
+
+<main id="main" class="pagina">
+<section class="crediti-apertura" aria-labelledby="comera-titolo">
+    <p class="t-meta">(N.3) <span data-i18n="ce.label">Note — com’era</span></p>
+    <h1 id="comera-titolo" data-split data-i18n-html="ce.title">Prima del nero, <em>c’era l’azzurro.</em></h1>
+    <p class="rivela" data-i18n="ce.intro">Il sito fino al 26 novembre 2026, ricostruito dal codice di quel giorno e fotografato. Ingrandisci e spostati come su un tavolo da disegno.</p>
+</section>
+
+<section class="tavola" data-tavola aria-labelledby="comera-titolo">
+    <div class="tavola__barra t-meta">
+        <div class="tavola__scelte" role="group" aria-label="Tavole" data-i18n-aria="ce.platesAria">
+            <button type="button" data-tavola-n="0" aria-pressed="true">01 <span data-i18n="ce.plate1">l’apertura</span></button>
+            <button type="button" data-tavola-n="1" aria-pressed="false">02 <span data-i18n="ce.plate2">la home intera</span></button>
+        </div>
+        <div class="tavola__comandi" role="group" aria-label="Zoom" data-i18n-aria="ce.zoomAria">
+            <output class="tavola__scala" data-tavola-scala>100%</output>
+            <button type="button" data-zoom="out" aria-label="Riduci" data-i18n-aria="ce.zoomOut">−</button>
+            <button type="button" data-zoom="in" aria-label="Ingrandisci" data-i18n-aria="ce.zoomIn">+</button>
+            <button type="button" data-zoom="fit" data-i18n="ce.fit">adatta</button>
+            <button type="button" data-zoom="1">1:1</button>
+        </div>
+    </div>
+    <div class="tavola__vista" tabindex="0" data-tavola-vista aria-label="Tavola da disegno: trascina per spostarti" data-i18n-aria="ce.viewAria">
+        <div class="tavola__foglio" data-tavola-foglio>
+            <img src="../assets/com-era/apertura-2026-11.webp" width="1440" height="900" alt="La home di oakvx com’era a novembre 2026: sfondo azzurro chiaro, nome in Nunito nero e blu, l’avatar Mii a destra." data-i18n-alt="ce.alt1" draggable="false" decoding="async" data-titolo="01 — l’apertura" data-titolo-en="01 — the opening">
+            <img src="../assets/com-era/home-2026-11.webp" width="1440" height="7179" alt="La home intera com’era: chi sono, il percorso, i progetti, la piazza dei repository con i Mii, gli strumenti e i contatti." data-i18n-alt="ce.alt2" draggable="false" decoding="async" loading="lazy" data-titolo="02 — la home intera" data-titolo-en="02 — the whole home page" hidden>
+        </div>
+    </div>
+    <p class="tavola__aiuto t-meta" data-i18n="ce.help">trascina o rotella per spostarti · ctrl + rotella per ingrandire · 1 2 tavole · f adatta · 0 scala 1:1</p>
+    <dl class="cartiglio t-meta">
+        <div><dt data-i18n="ce.k1">oggetto</dt><dd data-i18n="ce.v1">oakvx.github.io, com’era</dd></div>
+        <div><dt data-i18n="ce.k2">tavola</dt><dd data-tavola-titolo>01 — l’apertura</dd></div>
+        <div><dt data-i18n="ce.k3">foglio</dt><dd data-tavola-misure>1440 × 900 px</dd></div>
+        <div><dt data-i18n="ce.k4">codice</dt><dd>commit 57b8364 · 26.11.2026</dd></div>
+        <div><dt data-i18n="ce.k5">caratteri</dt><dd data-i18n="ce.v5">Nunito · un sans tondo a peso 900</dd></div>
+        <div><dt data-i18n="ce.k6">disegnato</dt><dd>Gabriele Lucia</dd></div>
+        <div><dt>rev. a</dt><dd data-i18n="ce.v7">26.11.2026 · il sito diventa Nero, questa tavola resta com’era</dd></div>
+    </dl>
+</section>
+
+<div class="contenitore" style="padding-bottom:clamp(5rem,10vw,9rem)">
+    <section class="voce-crediti" id="cambiato">
+        <h2 data-i18n="ce.diffTitle">Cosa è cambiato</h2>
+        <div class="voce-crediti__corpo">
+            <ul>
+                <li data-i18n="ce.diff1">Lo sfondo chiaro è diventato nero: #050505, non #000.</li>
+                <li data-i18n="ce.diff2">Nunito ha lasciato il posto a tre caratteri: Fraunces per i titoli, Archivo per il testo, Cascadia Code per date e numeri.</li>
+                <li data-i18n="ce.diff3">L’azzurro è sparito: resta un solo colore d’accento, il cremisi.</li>
+                <li data-i18n="ce.diff4">Il Mii fermo nell’apertura è diventato una scultura di punti in WebGL, che si rompe e si ricompone.</li>
+            </ul>
+        </div>
+    </section>
+</div>
+</main>
+
+<footer class="colophon" id="contatti">
+    <div class="colophon__testa">
+        <p class="t-meta"><span data-i18n="foot.label">Contatti</span></p>
+        <h2 class="colophon__titolo" data-split data-i18n-html="foot.title">Scrivi<em>mi.</em></h2>
+    </div>
+    <div class="colophon__corpo">
+        <p class="colophon__sotto" data-i18n="foot.sub">Per un lavoro, un progetto o per dirmi che il sito non ti piace. Rispondo. Non subito, ma rispondo.</p>
+        <div class="colophon__contatto">
+            <a class="colophon__email filo" href="mailto:gabrielelucia07@gmail.com" data-cursore="Email">gabrielelucia07<span>@</span>gmail.com</a>
+            <div class="colophon__azioni t-meta">
+                <button type="button" data-copia-email data-i18n="foot.copy">Copia l’indirizzo (fa prima)</button>
+                <a href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">GitHub / oakvx <span class="freccia" aria-hidden="true"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="colophon__griglia">
+        <div>
+            <h3 class="t-meta" data-i18n="foot.index">Indice</h3>
+            <ul>
+                <li><a class="filo" href="../" data-velo-n="01"><span data-velo-nome data-i18n="nav.home">Ingresso</span></a></li>
+                <li><a class="filo" href="../#lavori" data-velo-n="02"><span data-velo-nome data-i18n="nav.work">Lavori</span></a></li>
+                <li><a class="filo" href="../chi-sono/" data-velo-n="03"><span data-velo-nome data-i18n="nav.about">Chi sono</span></a></li>
+                <li><a class="filo" href="../fuori-orario/" data-velo-n="04"><span data-velo-nome data-i18n="nav.after">Fuori orario</span></a></li>
+                <li><a class="filo" href="../metodo/" data-velo-n="05"><span data-velo-nome data-i18n="nav.method">Metodo</span></a></li>
+                <li><a class="filo" href="../lavori/" data-velo-n="02"><span data-velo-nome data-i18n="nav.archive">Tutti i lavori</span></a></li>
+                <li><a class="filo" href="../servizi/" data-velo-n="06"><span data-velo-nome data-i18n="nav.services">Servizi</span></a></li>
+                <li><a class="filo" href="../sicurezza/" data-velo-n="07"><span data-velo-nome data-i18n="nav.security">Sicurezza</span></a></li>
+                <li><a class="filo" href="../stile/" data-velo-n="08"><span data-velo-nome data-i18n="nav.style">Stile</span></a></li>
+                <li><a class="filo" href="../contatti/" data-velo-n="09"><span data-velo-nome data-i18n="nav.contact">Contatti</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="nav.elsewhere">Altrove</h3>
+            <ul>
+                <li><a class="filo" href="https://github.com/oakvx" target="_blank" rel="noopener noreferrer">github.com/oakvx</a></li>
+                <li><a class="filo" href="https://github.com/oakvxish" target="_blank" rel="noopener noreferrer">github.com/oakvxish</a></li>
+                <li><a class="filo" href="../gioco/" data-velo-n="3D"><span data-velo-nome data-i18n="nav.game">Il gioco in 3D, se hai tempo</span></a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.where">Dove</h3>
+            <p data-i18n="foot.whereText">Sassuolo, provincia di Modena. Sì, quella delle piastrelle.</p>
+            <p class="t-meta">44.53° N — 10.78° E · <time data-ora>--:--</time></p>
+        </div>
+        <div>
+            <h3 class="t-meta" data-i18n="foot.notes">Note</h3>
+            <ul>
+                <li><a class="filo" href="../crediti/" data-velo-n="N.2"><span data-velo-nome data-i18n="foot.credits">Crediti dei materiali</span></a></li>
+                <li><a class="filo" href="../privacy/" data-velo-n="N.1"><span data-velo-nome data-i18n="foot.privacy">Privacy, cioè quasi niente</span></a></li>
+                <li><a class="filo" href="../com-era/" data-velo-n="N.3"><span data-velo-nome data-i18n="foot.before">Com’era prima del nero</span></a></li>
+                <li><button class="filo" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Ferma animazioni</span></button></li>
+                <li><a class="filo" href="#main" data-i18n="foot.top">Torna su</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="colophon__firma" aria-hidden="true">oak<b>v</b>x</p>
+    <p class="colophon__fondo t-meta"><span>© 2026 Gabriele Lucia</span><span data-i18n="foot.made">Scritto a mano. Nessun template è stato maltrattato.</span></p>
+</footer>
+
+<script src="../assets/ingresso/ingresso.js" defer></script>
+</body>
+</html>

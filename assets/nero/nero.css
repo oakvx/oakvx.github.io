@@ -1559,6 +1559,19 @@ html.sparo-arrivo::after {
 .stato::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--cremisi); animation: pulsa 2.4s ease-in-out infinite; }
 @keyframes pulsa { 50% { opacity: .25; } }
 .calm .stato::before { animation: none; }
+/* Disponibilità: in home sotto la presentazione, in Contatti sotto la frase d'apertura. */
+.apertura__stato { grid-column: 1 / span 6; grid-row: 2; margin-top: 0; color: var(--bianco-80); }
+/* .chi-apertura > .t-meta la stenderebbe su tutta la riga, giustificata ai lati. */
+.chi-apertura > .chi-apertura__stato { grid-column: 7 / span 6; justify-content: flex-start; gap: .7rem; margin-top: 0; color: var(--bianco-80); }
+/* Il pallino resta accanto alla prima riga anche quando il testo va a capo. */
+.apertura__stato, .chi-apertura > .chi-apertura__stato { flex-wrap: nowrap; align-items: flex-start; }
+.apertura__stato::before, .chi-apertura__stato::before { flex: none; margin-top: .35em; }
+/* Sul telefono la disponibilità sta subito sotto la presentazione. */
+@media (max-width: 900px) {
+    .apertura__stato { grid-column: 1 / -1; grid-row: auto; order: 1; }
+    .apertura__ruoli, .apertura__azione { order: 2; }
+}
+@media (max-width: 820px) { .chi-apertura > .chi-apertura__stato { grid-column: 1 / -1; } }
 
 .vetrina { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gola); row-gap: 3rem; align-items: end; }
 .oggetto { position: relative; display: grid; gap: 1rem; min-width: 0; }

@@ -2,7 +2,7 @@
 /* Conteggi pubblici dei profili social, aggiornati ogni ora dalla GitHub Action
  * .github/workflows/social.yml. Solo numeri pubblici e avatar: nessun elenco di follower.
  *
- *   TikTok     @oakvx.sh, @uvst.oakvx   (Instagram @oakvx: workflow instagram.yml, in manuale.json)
+ *   TikTok     @oakvx.sh, @uvst.oakvx   (Instagram @oakvx: a mano, in manuale.json)
  *
  * Scrive assets/social/social.json (e gli avatar in assets/social/) solo quando un valore cambia;
  * se una piattaforma non risponde conserva l'ultimo valore valido. Node 22, nessuna dipendenza.

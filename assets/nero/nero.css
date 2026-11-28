@@ -1926,3 +1926,31 @@ body:has(.pagina--contatti) .colophon__corpo { display: none; }
 }
 .testata__magazzino:hover, .testata__magazzino[aria-current="page"] { background: var(--cremisi); }
 @media (max-width: 420px) { .testata__ora { display: none; } }
+
+/* ==========================================================================
+   Effetti: titoli che respirano, Archivo che si stira, immagini in particelle,
+   etichette che si decodificano, firma che si riempie. Tutti spenti da
+   "Ferma animazioni" e da prefers-reduced-motion (in nero.js).
+   ========================================================================== */
+.respiro__l { transition: font-variation-settings .5s var(--morbido, ease-out); }
+.respira .respiro__l { display: inline-block; text-align: center; white-space: pre; }
+/* finita la rivelazione, la maschera delle parole non deve tagliare le lettere più grasse */
+.js [data-split].visto.respira .parola { overflow: visible; }
+
+.apertura__titolo { font-stretch: var(--stira, 62%); transform: scaleX(var(--stira-x, 1)); transform-origin: 0 50%; }
+.strumenti__elenco li { font-stretch: var(--stira, 62%); }
+.strumenti__elenco li:hover { font-stretch: 125%; }
+
+.sciogli { position: absolute; pointer-events: none; z-index: 1; }
+@media (min-width: 901px) {
+    .lavoro__link.sciogli-attivo .lavoro__img { opacity: 0; filter: none; transition: none; }
+}
+
+.colophon__firma {
+    padding-block: .14em .06em;
+    margin-top: calc(clamp(2rem, calc(var(--u) * 5), 3.04rem) - .14em);
+    background: linear-gradient(to top, var(--cremisi) var(--riempi, 0%), transparent calc(var(--riempi, 0%) + .5%)) no-repeat;
+    -webkit-background-clip: text; background-clip: text;
+}
+.colophon__firma b { color: transparent; }
+.calm .colophon__firma { background: none; }

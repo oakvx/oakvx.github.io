@@ -1390,6 +1390,310 @@
         addEventListener('nero:movimento', chiedi);
     }
 
+    /* ----------------------------------------------------------------------
+       La scultura che diventa testo: scorrendo verso i lavori, una pioggia di
+       punti (gli stessi della scultura: bianco caldo, qualche cremisi) cade
+       dall'alto e si posa sulle lettere di "Quattro progetti.". Legato allo
+       scorrimento, quindi reversibile.
+       ---------------------------------------------------------------------- */
+    function initCondensa() {
+        const h = $('.lavori #lavori-titolo, #lavori > header #lavori-titolo') || $('#lavori-titolo');
+        if (!h || !h.matches('[data-split]')) return;
+        const canvas = document.createElement('canvas');
+        canvas.className = 'condensa';
+        canvas.setAttribute('aria-hidden', 'true');
+        document.body.append(canvas);
+        const g = canvas.getContext('2d');
+        if (!g) { canvas.remove(); return; }
+        let punti = null, campW = 0, raf = 0, visibile = false, t = 0, ultimo = 0, dpr = 1;
+
+        const campiona = () => {
+            const rh = h.getBoundingClientRect();
+            if (!rh.width) return false;
+            const W = Math.ceil(rh.width), H = Math.ceil(rh.height);
+            const off = document.createElement('canvas');
+            off.width = W; off.height = H;
+            const og = off.getContext('2d', { willReadFrequently: true });
+            og.fillStyle = '#fff';
+            og.textBaseline = 'alphabetic';
+            $$('.parola > span', h).forEach(sp => {
+                const cs = getComputedStyle(sp);
+                const size = parseFloat(cs.fontSize);
+                og.font = `${cs.fontStyle} ${cs.fontWeight} ${size}px ${cs.fontFamily}`;
+                const r = sp.getBoundingClientRect();
+                const m = og.measureText(sp.textContent);
+                const asc = m.fontBoundingBoxAscent ?? size * .95, desc = m.fontBoundingBoxDescent ?? size * .25;
+                const lh = parseFloat(cs.lineHeight) || size;
+                // la riga di base, come la mette il browser: mezza interlinea sopra
+                const base = r.top - rh.top + (lh - (asc + desc)) / 2 + asc;
+                og.fillText(sp.textContent, r.left - rh.left, base);
+            });
+            const px = og.getImageData(0, 0, W, H).data;
+            const pieni = [];
+            const passo = innerWidth < 700 ? 2 : 3;
+            for (let y = 0; y < H; y += passo) for (let x = 0; x < W; x += passo) if (px[(y * W + x) * 4 + 3] > 120) pieni.push([x, y]);
+            const quanti = Math.min(pieni.length, innerWidth < 700 ? 1600 : 3200);
+            const r = rng(31);
+            punti = [];
+            for (let i = 0; i < quanti; i++) {
+                const p = pieni[(r() * pieni.length) | 0];
+                punti.push({
+                    tx: p[0] + r() * passo, ty: p[1] + r() * passo,
+                    // partenza: in alto, sparsi, come pulviscolo che si stacca dalla scultura
+                    sx: (r() - .5) * innerWidth * 1.1 + innerWidth / 2, sy: -innerHeight * (.05 + r() * .7),
+                    d: r(), a: r() * Math.PI * 2, rosso: r() > .962, l: .55 + r() * .45, z: .7 + r() * .9,
+                });
+            }
+            campW = innerWidth;
+            return true;
+        };
+        // stesso generatore deterministico della scultura: ogni visita, la stessa pioggia
+        function rng(seme) {
+            let s = seme >>> 0;
+            return () => { s = (s + 0x6D2B79F5) >>> 0; let x = s; x = Math.imul(x ^ (x >>> 15), x | 1); x ^= x + Math.imul(x ^ (x >>> 7), x | 61); return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+        }
+        const misura = () => {
+            dpr = Math.min(2, devicePixelRatio || 1);
+            canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
+            g.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        const avanzamento = () => {
+            const r = h.getBoundingClientRect();
+            return Math.max(0, Math.min(1, (innerHeight * 1.02 - r.top) / (innerHeight * .62)));
+        };
+        const spento = () => {
+            canvas.style.opacity = '0';
+            h.classList.remove('condensa-attivo');
+            h.style.removeProperty('--condensa');
+        };
+        const disegna = now => {
+            raf = 0;
+            if (calm() || !visibile) { spento(); return; }
+            t += Math.min(.05, (now - (ultimo || now)) / 1000); ultimo = now;
+            if (!punti || campW !== innerWidth) { if (!campiona()) return; }
+            const p = avanzamento();
+            const rh = h.getBoundingClientRect();
+            g.clearRect(0, 0, innerWidth, innerHeight);
+            if (p <= 0 || p >= 1) {
+                // a fine corsa resta il testo vero; prima di cominciare, niente
+                canvas.style.opacity = '0';
+                h.classList.toggle('condensa-attivo', p <= 0);
+                h.style.setProperty('--condensa', p >= 1 ? '1' : '0');
+                return;
+            }
+            h.classList.add('condensa-attivo');
+            // il testo vero compare solo negli ultimi istanti, sotto ai punti che si posano
+            const vero = Math.max(0, Math.min(1, (p - .86) / .14));
+            h.style.setProperty('--condensa', (vero * vero).toFixed(3));
+            canvas.style.opacity = '1';
+            const sbiadisci = 1 - vero;
+            for (const q of punti) {
+                const k0 = Math.max(0, Math.min(1, (p - q.d * .35) / .65));
+                const k = 1 - Math.pow(1 - k0, 3);
+                const arco = Math.sin(Math.PI * k);
+                const x = q.sx + (rh.left + q.tx - q.sx) * k + Math.sin(t * .9 + q.a) * arco * 26 * q.z;
+                const y = q.sy + (rh.top + q.ty - q.sy) * k + Math.cos(t * .7 + q.a * 1.3) * arco * 18 * q.z;
+                const al = Math.min(1, k0 * 6) * sbiadisci * q.l;
+                if (al < .02) continue;
+                g.fillStyle = q.rosso ? `rgba(200,16,53,${al})` : `rgba(232,230,225,${al})`;
+                const lato = (1.1 + arco * 1.2) * q.z;
+                g.fillRect(x - lato / 2, y - lato / 2, lato, lato);
+            }
+            raf = requestAnimationFrame(disegna);
+        };
+        const chiedi = () => { if (!raf && visibile && !calm()) raf = requestAnimationFrame(disegna); };
+        misura();
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([en]) => { visibile = en.isIntersecting; if (visibile) chiedi(); else if (!calm()) { const fatto = avanzamento() >= 1; h.classList.toggle('condensa-attivo', !fatto); h.style.setProperty('--condensa', fatto ? '1' : '0'); canvas.style.opacity = '0'; } },
+                { rootMargin: '0px 0px 25% 0px' }).observe(h);
+        } else return;
+        addEventListener('scroll', chiedi, { passive: true });
+        addEventListener('resize', () => { misura(); punti = null; chiedi(); });
+        document.fonts?.ready.then(() => { punti = null; chiedi(); });
+        addEventListener('nero:movimento', () => { if (calm()) spento(); else chiedi(); });
+    }
+
+    /* ----------------------------------------------------------------------
+       Inchiostro cremisi al clic: una goccia si allarga e per un attimo
+       deforma quello che c'è sotto (backdrop-filter con una mappa di
+       spostamento ad anello), poi si richiude.
+       ---------------------------------------------------------------------- */
+    function initInchiostro() {
+        if (document.querySelector('.pagina--magazzino')) return;
+        const deforma = CSS.supports?.('backdrop-filter', 'url(#x)');
+        let mappa = '';
+        const creaMappa = () => {
+            const N = 128, c = document.createElement('canvas');
+            c.width = c.height = N;
+            const g = c.getContext('2d');
+            if (!g) return '';
+            const img = g.createImageData(N, N);
+            for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+                const dx = (x + .5) / N * 2 - 1, dy = (y + .5) / N * 2 - 1, r = Math.hypot(dx, dy);
+                // un anello: spinge verso fuori sul bordo esterno, verso dentro su quello interno
+                const a = r >= 1 ? 0 : Math.sin(Math.PI * r) * Math.pow(r, 1.5);
+                const i = (y * N + x) * 4;
+                img.data[i] = 128 + 127 * a * (dx / (r || 1));
+                img.data[i + 1] = 128 + 127 * a * (dy / (r || 1));
+                img.data[i + 2] = 128; img.data[i + 3] = 255;
+            }
+            g.putImageData(img, 0, 0);
+            return c.toDataURL();
+        };
+        const NS = 'http://www.w3.org/2000/svg';
+        let svg = null, n = 0;
+        const filtro = () => {
+            if (!svg) {
+                svg = document.createElementNS(NS, 'svg');
+                svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
+                svg.style.position = 'absolute';
+                document.body.append(svg);
+            }
+            const id = 'inchiostro-' + (++n);
+            const f = document.createElementNS(NS, 'filter');
+            f.id = id;
+            ['x', 'y'].forEach(k => f.setAttribute(k, '0'));
+            ['width', 'height'].forEach(k => f.setAttribute(k, '1'));
+            f.setAttribute('color-interpolation-filters', 'sRGB');
+            f.setAttribute('primitiveUnits', 'objectBoundingBox');
+            const im = document.createElementNS(NS, 'feImage');
+            im.setAttribute('href', mappa);
+            im.setAttribute('preserveAspectRatio', 'none');
+            ['x', 'y'].forEach(k => im.setAttribute(k, '0'));
+            ['width', 'height'].forEach(k => im.setAttribute(k, '1'));
+            im.setAttribute('result', 'm');
+            const d = document.createElementNS(NS, 'feDisplacementMap');
+            d.setAttribute('in', 'SourceGraphic'); d.setAttribute('in2', 'm');
+            d.setAttribute('xChannelSelector', 'R'); d.setAttribute('yChannelSelector', 'G');
+            d.setAttribute('scale', '0');
+            f.append(im, d);
+            svg.append(f);
+            return { id, f, d };
+        };
+        addEventListener('pointerdown', e => {
+            if (calm() || e.button !== 0 || !e.isPrimary) return;
+            if (e.target.closest('input, textarea, select, [contenteditable], .sparo, .ingresso, [data-tieni], .apertura')) return;
+            const goccia = document.createElement('div');
+            goccia.className = 'inchiostro';
+            goccia.setAttribute('aria-hidden', 'true');
+            goccia.style.left = e.clientX + 'px';
+            goccia.style.top = e.clientY + 'px';
+            let fx = null;
+            if (deforma) {
+                if (!mappa) mappa = creaMappa();
+                if (mappa) { fx = filtro(); goccia.style.backdropFilter = `url(#${fx.id})`; goccia.style.webkitBackdropFilter = `url(#${fx.id})`; }
+            }
+            document.body.append(goccia);
+            const t0 = performance.now(), durata = 900;
+            const step = now => {
+                const p = Math.min(1, (now - t0) / durata);
+                const k = 1 - Math.pow(1 - p, 3);
+                goccia.style.setProperty('--k', k.toFixed(4));
+                // forza dello spostamento, in frazione del riquadro (primitiveUnits = objectBoundingBox)
+                if (fx) fx.d.setAttribute('scale', (Math.sin(Math.PI * Math.min(1, p * 1.15)) * .09 * (1 - p * .6)).toFixed(4));
+                if (p < 1) requestAnimationFrame(step);
+                else { goccia.remove(); fx?.f.remove(); }
+            };
+            requestAnimationFrame(step);
+        }, { passive: true });
+    }
+
+    /* ----------------------------------------------------------------------
+       Torcia segreta: tenendo premuto Alt il cursore diventa una torcia che
+       mostra cosa c'è dietro la pagina: la griglia, le misure vere degli
+       elementi e qualche nota a margine. Non è movimento, quindi resta
+       disponibile anche con le animazioni ferme.
+       ---------------------------------------------------------------------- */
+    function initTorcia() {
+        if (!finePointer.matches) return;
+        const NOTE = {
+            it: [
+                ['.apertura__titolo', 'Archivo al 62% di larghezza. Al 125% non ci stava.'],
+                ['[data-campo]', 'Punti in WebGL, senza librerie. Tienila premuta.'],
+                ['.nastro', 'Si inclina con la velocità di scorrimento.'],
+                ['.sezione-titolo', 'Fraunces, asse SOFT a 50: morbido, ma non troppo.'],
+                ['.lavori__elenco', 'Un solo colore d’accento. Questo.'],
+                ['main .t-meta', 'Cascadia Code: il font del terminale, qui solo per date e numeri.'],
+                ['.colophon__firma', 'Il nero non è #000. È #050505.'],
+            ],
+            en: [
+                ['.apertura__titolo', 'Archivo at 62% width. At 125% it didn’t fit.'],
+                ['[data-campo]', 'WebGL points, no libraries. Press and hold it.'],
+                ['.nastro', 'It leans with your scrolling speed.'],
+                ['.sezione-titolo', 'Fraunces, SOFT axis at 50: soft, but not too soft.'],
+                ['.lavori__elenco', 'One accent colour. This one.'],
+                ['main .t-meta', 'Cascadia Code: the terminal font, here only for dates and numbers.'],
+                ['.colophon__firma', 'The black isn’t #000. It’s #050505.'],
+            ],
+        }[lang];
+        const strato = document.createElement('div');
+        strato.className = 'torcia';
+        strato.setAttribute('aria-hidden', 'true');
+        strato.innerHTML = '<div class="torcia__griglia">' + '<i></i>'.repeat(12) + '</div><div class="torcia__segni"></div>';
+        document.body.append(strato);
+        const segni = $('.torcia__segni', strato);
+        let attiva = false, raf = 0, mx = innerWidth / 2, my = innerHeight / 2;
+
+        const px = v => Math.round(parseFloat(v));
+        const etichetta = el => {
+            const cs = getComputedStyle(el);
+            const nome = el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + (el.classList[0] ? '.' + el.classList[0] : '');
+            if (el.tagName === 'IMG') return `${nome} · ${el.naturalWidth}×${el.naturalHeight} · ${(el.currentSrc || el.src).split('.').pop().split('?')[0]}`;
+            if (el.matches('section, footer')) return `${nome} · padding ${px(cs.paddingTop)}px`;
+            const fam = cs.fontFamily.split(',')[0].replace(/"/g, '').replace('Nero ', '');
+            const lh = cs.lineHeight === 'normal' ? 'normal' : (parseFloat(cs.lineHeight) / parseFloat(cs.fontSize)).toFixed(2);
+            return `${nome} · ${fam} ${cs.fontWeight}${cs.fontStyle === 'italic' ? ' it' : ''} · ${px(cs.fontSize)}px/${lh}`;
+        };
+        const disegna = () => {
+            raf = 0;
+            if (!attiva) return;
+            strato.style.setProperty('--tx', mx + 'px');
+            strato.style.setProperty('--ty', my + 'px');
+            const H = innerHeight;
+            let html = '';
+            $$('main h1, main h2, main h3, main img, main p, main section, .colophon h2, .colophon__firma, .apertura__titolo').forEach(el => {
+                const r = el.getBoundingClientRect();
+                if (r.bottom < -40 || r.top > H + 40 || r.width < 8 || r.height < 8) return;
+                // solo quello che sta vicino alla torcia, così le etichette non si accavallano
+                const vicino = mx > r.left - 260 && mx < r.right + 260 && my > r.top - 260 && my < r.bottom + 260;
+                if (!vicino) return;
+                html += `<div class="torcia__box${el.matches('section, footer') ? ' torcia__box--sezione' : ''}" style="left:${r.left.toFixed(0)}px;top:${r.top.toFixed(0)}px;width:${r.width.toFixed(0)}px;height:${r.height.toFixed(0)}px"><span>${etichetta(el).replace(/</g, '&lt;')}</span></div>`;
+            });
+            const usate = new Set();
+            NOTE.forEach(([sel, testo], i) => {
+                const el = $$(sel).find(x => { const r = x.getBoundingClientRect(); return r.bottom > 0 && r.top < H && r.width > 0; });
+                if (!el || usate.has(el)) return;
+                usate.add(el);
+                const r = el.getBoundingClientRect();
+                const x = Math.min(innerWidth - 300, Math.max(16, r.left + Math.min(r.width * .55, 420)));
+                const y = Math.max(16, Math.min(H - 60, r.top - 14));
+                html += `<p class="torcia__nota" style="left:${x.toFixed(0)}px;top:${y.toFixed(0)}px;--g:${(i % 2 ? 1.5 : -2)}deg">${testo}</p>`;
+            });
+            segni.innerHTML = html;
+        };
+        const chiedi = () => { if (!raf) raf = requestAnimationFrame(disegna); };
+        const accendi = on => {
+            if (attiva === on) return;
+            attiva = on;
+            strato.classList.toggle('accesa', on);
+            root.classList.toggle('torcia-accesa', on);
+            if (on) chiedi(); else segni.innerHTML = '';
+        };
+        addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; if (attiva) chiedi(); }, { passive: true });
+        addEventListener('scroll', () => { if (attiva) chiedi(); }, { passive: true });
+        addEventListener('keydown', e => {
+            if (e.key !== 'Alt' || e.repeat) return;
+            // Alt da solo: niente menu del browser, si accende la torcia
+            e.preventDefault();
+            accendi(true);
+        });
+        addEventListener('keyup', e => { if (e.key === 'Alt') { e.preventDefault(); accendi(false); } });
+        addEventListener('blur', () => accendi(false));
+        document.addEventListener('visibilitychange', () => { if (document.hidden) accendi(false); });
+        // con Alt premuto, un clic non deve aprire il link (Alt+clic scarica i file)
+        addEventListener('pointerdown', e => { if (attiva && !e.altKey) accendi(false); }, true);
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1422,6 +1726,9 @@
         initSciogli();
         initDecodifica();
         initRiempi();
+        initCondensa();
+        initInchiostro();
+        initTorcia();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Gabriele Lucia (oakvx) — Curriculum</title>
+<!-- Sorgente del CV. Il PDF in assets/cv/ si rigenera con: node scripts/cv/genera_cv.mjs
+     Contiene solo informazioni già pubblicate sul sito. Pagina 1 in italiano, pagina 2 in inglese. -->
+<style>
+@font-face { font-family: "Nero Serif"; src: url('../../assets/nero/fonts/fraunces.woff2') format('woff2'); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Nero Serif"; src: url('../../assets/nero/fonts/fraunces-italic.woff2') format('woff2'); font-weight: 100 900; font-style: italic; }
+@font-face { font-family: "Nero Sans"; src: url('../../assets/nero/fonts/archivo.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; }
+@font-face { font-family: "Nero Mono"; src: url('../../assets/cascadia-code.woff2') format('woff2'); font-weight: 200 700; }
+
+@page { size: A4; margin: 0; }
+:root {
+    --nero: #050505; --carta: #FBFAF7; --cremisi: #C81035; --grafite: #292929;
+    --tenue: #5c5b58; --linea: #d9d6cf;
+    --serif: "Nero Serif", Georgia, serif;
+    --sans: "Nero Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "Nero Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #e8e6e1; }
+body { font: 400 9.4pt/1.45 var(--sans); color: var(--nero); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+p, h1, h2, h3, ul, dl, dd { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.foglio {
+    width: 210mm; height: 297mm; margin: 0 auto 8mm; padding: 13mm 16mm 11mm;
+    background: var(--carta); position: relative; overflow: hidden;
+    display: grid; grid-template-rows: auto auto 1fr auto; row-gap: 5.5mm;
+    break-after: page;
+}
+.foglio:last-child { break-after: auto; margin-bottom: 0; }
+@media print { html, body { background: var(--carta); } .foglio { margin: 0; } }
+
+.meta { font: 400 7pt/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); }
+
+/* Testa */
+.testa { display: grid; grid-template-columns: 1fr auto; column-gap: 8mm; align-items: end; padding-bottom: 5mm; border-bottom: 1.2pt solid var(--nero); }
+.testa h1 { font: 400 34pt/.95 var(--serif); letter-spacing: -.03em; font-variation-settings: "opsz" 144, "SOFT" 50; }
+.testa h1 em { font-style: italic; color: var(--cremisi); }
+.testa .ruolo { margin-top: 2.5mm; font: italic 400 12.5pt/1.25 var(--serif); color: var(--grafite); }
+.contatti { text-align: right; display: grid; gap: .9mm; font: 400 7.6pt/1.35 var(--mono); letter-spacing: .02em; }
+.contatti b { font-weight: 400; color: var(--nero); }
+
+/* Disponibilità e profilo */
+.apertura { display: grid; grid-template-columns: 1fr 1.35fr; column-gap: 8mm; align-items: start; }
+.stato { display: flex; gap: 2.2mm; align-items: baseline; font: 400 7.6pt/1.45 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--nero); }
+.stato::before { content: ""; flex: none; width: 2mm; height: 2mm; border-radius: 50%; background: var(--cremisi); transform: translateY(-.2mm); }
+.profilo { font: 400 11pt/1.4 var(--serif); letter-spacing: -.01em; color: var(--grafite); }
+
+/* Corpo in due colonne */
+.corpo { display: grid; grid-template-columns: 1.55fr 1fr; column-gap: 9mm; align-content: start; }
+.colonna { display: grid; align-content: start; row-gap: 5mm; }
+h2 { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 1.6mm; margin-bottom: 2.8mm; border-bottom: .6pt solid var(--linea); font: 400 14pt/1 var(--serif); letter-spacing: -.02em; }
+h2 span { font: 400 7pt/1 var(--mono); letter-spacing: .08em; color: var(--cremisi); }
+
+.voce { display: grid; row-gap: .8mm; padding-bottom: 2.8mm; }
+.voce + .voce { padding-top: 2.8mm; border-top: .5pt dashed var(--linea); }
+.voce h3 { font: 600 10pt/1.25 var(--sans); }
+.voce h3 small { font-weight: 400; color: var(--tenue); }
+.voce p { color: var(--grafite); }
+
+.progetti li { display: grid; grid-template-columns: 27mm 1fr; column-gap: 3mm; padding: 1.7mm 0; border-top: .5pt solid var(--linea); }
+.progetti li:first-child { border-top: 0; padding-top: 0; }
+.progetti b { font: 400 11pt/1.2 var(--serif); letter-spacing: -.01em; }
+.progetti p { color: var(--grafite); font-size: 8.6pt; line-height: 1.4; }
+.progetti .meta { display: block; margin-top: .4mm; }
+
+.competenze { display: grid; row-gap: 2.6mm; }
+.competenze dt { margin-bottom: .6mm; }
+.competenze dd { font-size: 8.8pt; line-height: 1.45; }
+
+.lingue li { display: flex; justify-content: space-between; padding: 1.1mm 0; border-top: .5pt solid var(--linea); font-size: 8.8pt; }
+.lingue li:first-child { border-top: 0; padding-top: 0; }
+.lingue span { font: 400 7.2pt/1.6 var(--mono); letter-spacing: .06em; color: var(--tenue); }
+
+.piede { display: flex; justify-content: space-between; padding-top: 3mm; border-top: .6pt solid var(--linea); }
+.piede b { font-weight: 400; color: var(--cremisi); }
+</style>
+</head>
+<body>
+
+<!-- ================================ ITALIANO ================================ -->
+<section class="foglio" lang="it">
+    <header class="testa">
+        <div>
+            <h1>Gabriele Lucia <em>oakvx</em></h1>
+            <p class="ruolo">Sviluppatore web e graphic designer junior</p>
+        </div>
+        <ul class="contatti">
+            <li><b>gabrielelucia07@gmail.com</b></li>
+            <li>oakvx.github.io</li>
+            <li>github.com/oakvx</li>
+            <li>Sassuolo (MO), Italia</li>
+        </ul>
+    </header>
+
+    <div class="apertura">
+        <p class="stato">Disponibile per progetti freelance: siti web e lavori simili. Da subito, provincia di Modena o da remoto.</p>
+        <p class="profilo">Faccio siti, software e grafica. Dal 2023 realizzo siti per attività locali, curando interfaccia, pubblicazione e indicizzazione su Google. Studio Ingegneria Informatica all’Università di Modena e Reggio Emilia.</p>
+    </div>
+
+    <div class="corpo">
+        <div class="colonna">
+            <section>
+                <h2>Esperienza <span>03</span></h2>
+                <div class="voce">
+                    <p class="meta">set 2023 — giu 2026 · Sassuolo, Scandiano e dintorni</p>
+                    <h3>Sviluppatore web freelance e consulente SEO</h3>
+                    <p>Siti per officine, centri estetici e negozi di utensileria. Mi sono occupato delle interfacce, della pubblicazione e dell’indicizzazione sui motori di ricerca, e della configurazione delle pagine social aziendali.</p>
+                </div>
+                <div class="voce">
+                    <p class="meta">ago — set 2026 · Sassuolo</p>
+                    <h3>Apprendista software e automazione <small>· Format SRL</small></h3>
+                    <p>Supporto alla programmazione PLC e allo sviluppo di software per sistemi industriali. Script T-SQL su Microsoft SQL Server per backup, gestione e archiviazione dei dati.</p>
+                </div>
+                <div class="voce">
+                    <p class="meta">mag — giu 2025 · Siviglia, Spagna · Erasmus+</p>
+                    <h3>Supporto IT e attività didattiche <small>· Starbotica</small></h3>
+                    <p>Ambienti Windows, account Active Directory, reti locali e periferiche. Risoluzione di problemi hardware e software e documentazione tecnica, in inglese e spagnolo ogni giorno.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Formazione <span>02</span></h2>
+                <div class="voce">
+                    <p class="meta">2026 — oggi · Modena</p>
+                    <h3>Ingegneria Informatica <small>· Università di Modena e Reggio Emilia</small></h3>
+                </div>
+                <div class="voce">
+                    <p class="meta">2021 — 2026 · Sassuolo</p>
+                    <h3>Diploma in Informatica e Telecomunicazioni <small>· IIS A. Volta</small></h3>
+                    <p>Progetto di diploma: Beautify, un gestionale web per più saloni in PHP e MySQL.</p>
+                </div>
+            </section>
+            <section>
+                <h2>Lingue</h2>
+                <ul class="lingue">
+                    <li>Italiano <span>madrelingua</span></li>
+                    <li>Inglese <span>C1</span></li>
+                    <li>Spagnolo <span>B1</span></li>
+                    <li>Greco <span>B1</span></li>
+                    <li>Cinese <span>A2</span></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="colonna">
+            <section>
+                <h2>Progetti <span>05</span></h2>
+                <ul class="progetti">
+                    <li><b>Synk</b><p>Prenotazioni on-premise per saloni con WhatsApp e Google Calendar.<span class="meta">Node.js · PHP · PostgreSQL</span></p></li>
+                    <li><b>Brat Animator</b><p>Editor di lyric video che lavora tutto nel browser.<span class="meta">JavaScript · Canvas · WebCodecs</span></p></li>
+                    <li><b>piko</b><p>Agente per Windows con un modello locale.<span class="meta">Python · React · Tauri</span></p></li>
+                    <li><b>yag</b><p>Gateway AI con traduzione fra API OpenAI e Anthropic.<span class="meta">C17 · React · TypeScript</span></p></li>
+                    <li><b>Beautify</b><p>Gestionale per più saloni, progetto di diploma.<span class="meta">PHP · MySQL</span></p></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Competenze</h2>
+                <dl class="competenze">
+                    <div><dt class="meta">Web</dt><dd>HTML, CSS, JavaScript, TypeScript, React, SEO</dd></div>
+                    <div><dt class="meta">Backend e dati</dt><dd>Node.js, PHP, Python, FastAPI, PostgreSQL, MySQL, SQLite, T-SQL</dd></div>
+                    <div><dt class="meta">Strumenti</dt><dd>Git, GitHub Actions, Docker, Playwright</dd></div>
+                    <div><dt class="meta">Grafica</dt><dd>Interfacce e contenuti per i social</dd></div>
+                </dl>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="piede meta"><span>Portfolio, casi studio e codice: <b>oakvx.github.io</b></span><span>IT · 1 / 2</span></footer>
+</section>
+
+<!-- ================================ ENGLISH ================================ -->
+<section class="foglio" lang="en">
+    <header class="testa">
+        <div>
+            <h1>Gabriele Lucia <em>oakvx</em></h1>
+            <p class="ruolo">Junior web developer and graphic designer</p>
+        </div>
+        <ul class="contatti">
+            <li><b>gabrielelucia07@gmail.com</b></li>
+            <li>oakvx.github.io</li>
+            <li>github.com/oakvx</li>
+            <li>Sassuolo (MO), Italy</li>
+        </ul>
+    </header>
+
+    <div class="apertura">
+        <p class="stato">Available for freelance projects: websites and similar work. Starting now, Modena area or remote.</p>
+        <p class="profilo">I make websites, software and graphics. Since 2023 I have built websites for local businesses, handling the interface, publishing and Google indexing. I study Computer Engineering at the University of Modena and Reggio Emilia.</p>
+    </div>
+
+    <div class="corpo">
+        <div class="colonna">
+            <section>
+                <h2>Experience <span>03</span></h2>
+                <div class="voce">
+                    <p class="meta">Sep 2023 — Jun 2026 · Sassuolo, Scandiano and nearby</p>
+                    <h3>Freelance web developer and SEO consultant</h3>
+                    <p>Websites for garages, beauty salons and tool shops. I took care of interfaces, publishing and search engine indexing, and set up the businesses’ social media pages.</p>
+                </div>
+                <div class="voce">
+                    <p class="meta">Aug — Sep 2026 · Sassuolo</p>
+                    <h3>Software and automation apprentice <small>· Format SRL</small></h3>
+                    <p>Supported PLC programming and the development of software for industrial systems. Wrote T-SQL scripts on Microsoft SQL Server for data backup, management and archiving.</p>
+                </div>
+                <div class="voce">
+                    <p class="meta">May — Jun 2025 · Seville, Spain · Erasmus+</p>
+                    <h3>IT support and teaching activities <small>· Starbotica</small></h3>
+                    <p>Windows environments, Active Directory accounts, local networks and peripherals. Hardware and software troubleshooting and technical documentation, in English and Spanish every day.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Education <span>02</span></h2>
+                <div class="voce">
+                    <p class="meta">2026 — today · Modena</p>
+                    <h3>Computer Engineering <small>· University of Modena and Reggio Emilia</small></h3>
+                </div>
+                <div class="voce">
+                    <p class="meta">2021 — 2026 · Sassuolo</p>
+                    <h3>Diploma in Computer Science and Telecommunications <small>· IIS A. Volta</small></h3>
+                    <p>Diploma project: Beautify, a web management system for several salons in PHP and MySQL.</p>
+                </div>
+            </section>
+            <section>
+                <h2>Languages</h2>
+                <ul class="lingue">
+                    <li>Italian <span>native</span></li>
+                    <li>English <span>C1</span></li>
+                    <li>Spanish <span>B1</span></li>
+                    <li>Greek <span>B1</span></li>
+                    <li>Chinese <span>A2</span></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="colonna">
+            <section>
+                <h2>Projects <span>05</span></h2>
+                <ul class="progetti">
+                    <li><b>Synk</b><p>On-premise booking for salons with WhatsApp and Google Calendar.<span class="meta">Node.js · PHP · PostgreSQL</span></p></li>
+                    <li><b>Brat Animator</b><p>Lyric video editor that runs entirely in the browser.<span class="meta">JavaScript · Canvas · WebCodecs</span></p></li>
+                    <li><b>piko</b><p>A Windows agent with a local model.<span class="meta">Python · React · Tauri</span></p></li>
+                    <li><b>yag</b><p>AI gateway translating between the OpenAI and Anthropic APIs.<span class="meta">C17 · React · TypeScript</span></p></li>
+                    <li><b>Beautify</b><p>Management system for several salons, diploma project.<span class="meta">PHP · MySQL</span></p></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Skills</h2>
+                <dl class="competenze">
+                    <div><dt class="meta">Web</dt><dd>HTML, CSS, JavaScript, TypeScript, React, SEO</dd></div>
+                    <div><dt class="meta">Backend and data</dt><dd>Node.js, PHP, Python, FastAPI, PostgreSQL, MySQL, SQLite, T-SQL</dd></div>
+                    <div><dt class="meta">Tools</dt><dd>Git, GitHub Actions, Docker, Playwright</dd></div>
+                    <div><dt class="meta">Graphics</dt><dd>Interfaces and social media content</dd></div>
+                </dl>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="piede meta"><span>Portfolio, case studies and code: <b>oakvx.github.io</b></span><span>EN · 2 / 2</span></footer>
+</section>
+
+</body>
+</html>

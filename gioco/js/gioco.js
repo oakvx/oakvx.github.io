@@ -656,6 +656,8 @@ export async function avvia(ctx) {
     emi.color.lerp(cCielo.set(atmo.cielo), k);
     emi.groundColor.lerp(cTerra.set(atmo.terra), k);
     emi.intensity += (atmo.intensita * 0.55 - emi.intensity) * k;   // il resto lo fa il panorama HDR
+    // quanto conta il panorama HDR: una stanza al buio (middleman) lo spegne con atmosfera.ambiente
+    scene.environmentIntensity += ((atmo.ambiente ?? 1) - scene.environmentIntensity) * k;
   }
 
   function aggiornaLuci(t) {

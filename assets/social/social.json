@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-28T07:43:24.184Z",
+ "aggiornato": "2026-11-28T16:51:11.458Z",
  "account": {
   "tiktok:oakvx.sh": {
    "piattaforma": "tiktok",
@@ -8,16 +8,20 @@
     [
      "2026-11-26T22:36:45.799Z",
      17210
+    ],
+    [
+     "2026-11-28T16:51:11.458Z",
+     17209
     ]
    ],
    "nome": "γκαμπρή! 🎏",
-   "follower": 17210,
+   "follower": 17209,
    "seguiti": 204,
-   "miPiace": 3538391,
+   "miPiace": 3538401,
    "video": 27,
    "privato": false,
    "avatar": "assets/social/avatar-oakvx-sh.jpg",
-   "aggiornato": "2026-11-28T07:43:24.184Z",
+   "aggiornato": "2026-11-28T16:51:11.458Z",
    "errore": null
   },
   "tiktok:uvst.oakvx": {
@@ -32,11 +36,11 @@
    "nome": "γκαμπρή 🦅‼️",
    "follower": 117,
    "seguiti": 42,
-   "miPiace": 37254,
+   "miPiace": 37256,
    "video": 14,
    "privato": false,
    "avatar": "assets/social/avatar-uvst-oakvx.jpg",
-   "aggiornato": "2026-11-27T21:42:14.232Z",
+   "aggiornato": "2026-11-28T16:51:11.458Z",
    "errore": null
   }
  }

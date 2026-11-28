@@ -190,7 +190,7 @@ em, i { font-style: italic; }
 
 .sezione {
     position: relative;
-    padding: clamp(5rem, calc(var(--u) * 11), 8.5rem) var(--bordo);
+    padding: clamp(3.5rem, calc(var(--u) * 7.5), 6rem) var(--bordo);
 }
 
 .regola {
@@ -576,7 +576,7 @@ html.sparo-arrivo::after {
 
 .colophon {
     position: relative; z-index: 1;
-    padding: clamp(6rem, calc(var(--u) * 13), 9.12rem) var(--bordo) 0;
+    padding: clamp(4.5rem, calc(var(--u) * 9), 6.5rem) var(--bordo) 0;
     border-top: 1px solid var(--linea);
     overflow: hidden;
 }
@@ -725,6 +725,15 @@ html.sparo-arrivo::after {
 @media (max-width: 560px) {
     .apertura__ruoli, .apertura__azione { grid-column: 1 / -1; justify-self: start; }
 }
+/* Sul telefono la scultura scende fino al testo: una velatura del nero lo tiene leggibile. */
+@media (max-width: 900px) {
+    .apertura__piede { position: relative; }
+    .apertura__piede::before {
+        content: ""; position: absolute; z-index: -1; pointer-events: none;
+        inset: 0 calc(var(--bordo) * -1) -3.4rem;
+        background: linear-gradient(to bottom, rgb(5 5 5 / .5), rgb(5 5 5 / .8) 2.5rem);
+    }
+}
 
 
 
@@ -751,8 +760,9 @@ html.sparo-arrivo::after {
 .apertura__nota::before { content: ""; position: absolute; top: 50%; height: 1px; width: 3.2rem; background: var(--bianco-40); }
 .apertura__nota--a { top: 12%; right: 100%; margin-right: 1rem; }
 .apertura__nota--a::before { left: calc(100% + .6rem); transform: rotate(18deg); transform-origin: left center; }
-.apertura__nota--b { bottom: 8%; left: 92%; margin-left: 3.8rem; }
-.apertura__nota--b::before { right: calc(100% + .6rem); transform: rotate(-16deg); transform-origin: right center; }
+/* La seconda nota sta sotto la prima: a destra della scultura c'è la colonna dei numeri dal vivo. */
+.apertura__nota--b { top: calc(12% + 1.9em); right: 100%; margin-right: 1rem; }
+.apertura__nota--b::before { content: none; }
 @media (max-width: 1100px) { .apertura__nota { display: none; } }
 
 /* Colonna dei numeri dal vivo, a destra della scultura */
@@ -801,7 +811,7 @@ html.sparo-arrivo::after {
 /* Manifesto: le parole si accendono mentre scorri. */
 .manifesto {
     display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gola);
-    padding-block: clamp(8rem, calc(var(--u) * 18), 12.16rem);
+    padding-block: clamp(5rem, calc(var(--u) * 11), 8rem);
 }
 .manifesto > .t-meta { grid-column: 1 / span 3; padding-top: 1.2em; }
 .manifesto__testo {
@@ -907,7 +917,8 @@ html.sparo-arrivo::after {
 .area { grid-column: span 4; display: grid; align-content: start; gap: 1.2rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
 .area:nth-child(2) { margin-top: 6rem; }
 .area:nth-child(3) { margin-top: 12rem; }
-.area__n { font: italic 400 4.8rem/.8 var(--serif); color: var(--cremisi); letter-spacing: -.03em; }
+/* .area p lo renderebbe grigio: il numerale resta cremisi ovunque. */
+.area__n, .area .area__n { font: italic 400 4.8rem/.8 var(--serif); color: var(--cremisi); letter-spacing: -.03em; }
 .area h3 { font: 400 clamp(1.8rem, calc(var(--u) * 2.6), 2.6rem)/1 var(--serif); letter-spacing: -.03em; }
 .area p { color: var(--bianco-60); }
 .area ul { display: grid; gap: .25rem; }
@@ -1120,8 +1131,9 @@ html.sparo-arrivo::after {
 .ritratto__angolo { position: absolute; z-index: 2; padding: .8rem 1rem; }
 .ritratto__angolo--a { left: 0; top: 0; }
 .ritratto__angolo--b { right: 0; top: 0; text-align: right; }
-.ritratto__angolo--c { left: 0; bottom: 0; }
-.ritratto__angolo--d { right: 0; bottom: 0; text-align: right; }
+/* Ogni angolo resta nella sua metà: la linea verticale del mirino non taglia le didascalie. */
+.ritratto__angolo--c { left: 0; bottom: 0; max-width: 50%; }
+.ritratto__angolo--d { right: 0; bottom: 0; text-align: right; max-width: 50%; }
 .ritratto__testo { grid-column: 9 / span 4; display: grid; gap: 1.4rem; align-content: center; }
 .ritratto__testo p { color: var(--bianco-80); }
 .ritratto__testo p:first-of-type::first-letter {
@@ -1285,6 +1297,13 @@ html.sparo-arrivo::after {
 .caso-link a:first-child:hover { background: var(--bianco); border-color: var(--bianco); }
 @media (max-width: 900px) {
     .caso-apertura__intro, .caso-scheda { grid-column: 1 / -1; }
+    /* Sul telefono la scheda tecnica è la stessa tabella del desktop: etichetta a sinistra, valore a destra. */
+    .caso-scheda { grid-template-columns: 1fr; gap: 0; }
+    .caso-scheda > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: .9rem; padding: .65rem 0; border-top: 1px solid var(--linea-forte); }
+    .caso-scheda > div:last-child { border-bottom: 1px solid var(--linea); }
+    .caso-scheda dt { margin: 0; }
+    .caso-scheda dd { font-size: .85rem; }
+    .caso-apertura__meta { justify-content: flex-start; column-gap: 1.4rem; row-gap: .35rem; }
 }
 
 .caso-figura {
@@ -1295,6 +1314,7 @@ html.sparo-arrivo::after {
 }
 .caso-figura img { width: 100%; transform: scale(var(--scala, 1.08)); transform-origin: center; will-change: transform; }
 .caso-figura figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0 0; background: var(--nero); }
+.caso-figura figcaption > :last-child { flex: none; white-space: nowrap; }
 
 .caso-capo {
     display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gola); row-gap: 1.6rem;
@@ -1832,6 +1852,14 @@ html.sparo-arrivo::after {
 @media (min-width: 901px) {
     .archivio__elenco--tutti { grid-template-columns: repeat(3, 1fr); }
     .archivio__elenco--tutti .repo { border-bottom: 1px solid var(--linea); }
+    /* Sette casi studio su tre colonne: due schede larghe danno il ritmo e chiudono la griglia senza buchi. */
+    .archivio__elenco--casi .repo:nth-child(1), .archivio__elenco--casi .repo:nth-child(4) { grid-column: span 2; }
+}
+/* Casi studio in Lavori: il nome in Fraunces, come le schede dei lavori in home. I repository restano in Cascadia. */
+.archivio__elenco--casi .repo__nome {
+    font: 400 clamp(1.9rem, calc(var(--u) * 3.2), 2.9rem)/1 var(--serif);
+    letter-spacing: -.028em;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
 }
 
 /* Servizi */
@@ -1848,7 +1876,7 @@ html.sparo-arrivo::after {
 .stile__palette li { display: grid; gap: .6rem; }
 .stile__campione { display: block; aspect-ratio: 3 / 4; background: var(--c); border: 1px solid var(--linea-forte); }
 .stile__caratteri { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
-.stile__caratteri article { display: grid; gap: .8rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
+.stile__caratteri article { display: grid; align-content: start; gap: .8rem; padding-top: 1.4rem; border-top: 1px solid var(--linea-forte); }
 .stile__campione-testo { font-size: calc(var(--u) * 6); line-height: 1; margin: 0; }
 .stile__serif { font-family: var(--serif); }
 .stile__sans { font-family: var(--sans); }

@@ -1113,6 +1113,283 @@
         }
     }
 
+    /* ----------------------------------------------------------------------
+       Titoli in Fraunces che respirano vicino al cursore: peso e morbidezza
+       crescono lettera per lettera, come sotto una lente. Le larghezze delle
+       lettere vengono bloccate prima, così le righe non si spostano.
+       ---------------------------------------------------------------------- */
+    function initRespiro() {
+        if (!finePointer.matches) return;
+        $$('.sezione-titolo[data-split], .colophon__titolo[data-split]').forEach(h => {
+            let lettere = null, centri = [], raf = 0, mx = 0, my = 0, attivo = false, timer = 0;
+            const prepara = () => {
+                if (lettere) return;
+                lettere = [];
+                $$('.parola > span', h).forEach(sp => {
+                    const testo = sp.textContent;
+                    sp.textContent = '';
+                    [...testo].forEach(ch => {
+                        const l = document.createElement('span');
+                        l.className = 'respiro__l';
+                        l.textContent = ch;
+                        sp.append(l);
+                        lettere.push(l);
+                    });
+                });
+            };
+            const misura = () => { centri = lettere.map(l => { const r = l.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }); };
+            const disegna = () => {
+                raf = 0;
+                if (!attivo) return;
+                const raggio = parseFloat(getComputedStyle(h).fontSize) * 1.6;
+                lettere.forEach((l, i) => {
+                    const f = Math.max(0, 1 - Math.hypot(mx - centri[i][0], my - centri[i][1]) / raggio);
+                    const e = f * f * (3 - 2 * f);
+                    l.style.fontVariationSettings = e > .01 ? `"opsz" 144, "SOFT" ${(50 + e * 50).toFixed(0)}, "WONK" ${e > .55 ? 1 : 0}, "wght" ${(400 + e * 260).toFixed(0)}` : '';
+                });
+            };
+            const entra = () => {
+                if (calm() || !h.classList.contains('visto')) return;
+                clearTimeout(timer);
+                prepara();
+                if (!attivo) {
+                    // larghezze a riposo, prima di toccare qualsiasi asse
+                    lettere.forEach(l => { l.style.width = ''; });
+                    const larghe = lettere.map(l => l.getBoundingClientRect().width);
+                    lettere.forEach((l, i) => { l.style.width = larghe[i] + 'px'; });
+                    h.classList.add('respira');
+                    attivo = true;
+                }
+                misura();
+            };
+            const spegni = () => {
+                attivo = false;
+                if (!lettere) return;
+                lettere.forEach(l => { l.style.fontVariationSettings = ''; });
+                timer = setTimeout(() => { if (attivo) return; h.classList.remove('respira'); lettere.forEach(l => { l.style.width = ''; }); }, 700);
+            };
+            h.addEventListener('pointerenter', entra);
+            h.addEventListener('pointermove', e => {
+                mx = e.clientX; my = e.clientY;
+                if (!attivo) entra();
+                if (attivo && !raf) raf = requestAnimationFrame(disegna);
+            });
+            h.addEventListener('pointerleave', spegni);
+            addEventListener('scroll', () => { if (attivo) misura(); }, { passive: true });
+            addEventListener('resize', () => { if (attivo) spegni(); });
+            addEventListener('nero:movimento', () => { if (calm()) spegni(); });
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       Archivo che si stira con la velocità di scorrimento (asse wdth).
+       Il titolo d'apertura compensa con scaleX: cambia il disegno, non l'ingombro.
+       ---------------------------------------------------------------------- */
+    function initStira() {
+        const voci = [
+            ...$$('.apertura__titolo').map(el => ({ el, da: 62, a: 100, compensa: true })),
+            ...$$('.strumenti__elenco').map(el => ({ el, da: 62, a: 78 })),
+        ];
+        if (!voci.length) return;
+        const visibili = new Set();
+        let v = 0, lastY = scrollY, raf = 0;
+        // larghezza dell'Archivo bold al variare di wdth, per la compensazione
+        const larghezza = s => 216 + (s - 62) * (101 / 38);
+        const applica = (voce, k) => {
+            const s = voce.da + (voce.a - voce.da) * k;
+            if (k < .002) {
+                voce.el.style.removeProperty('--stira');
+                if (voce.compensa) voce.el.style.removeProperty('--stira-x');
+                return;
+            }
+            voce.el.style.setProperty('--stira', s.toFixed(1) + '%');
+            if (voce.compensa) voce.el.style.setProperty('--stira-x', (larghezza(voce.da) / larghezza(s)).toFixed(4));
+        };
+        const loop = () => {
+            const dy = scrollY - lastY;
+            lastY = scrollY;
+            v += (dy - v) * .14;
+            const k = Math.min(1, Math.abs(v) / 38);
+            visibili.forEach(voce => applica(voce, k));
+            if (Math.abs(v) < .05 && Math.abs(dy) < .5) { v = 0; visibili.forEach(voce => applica(voce, 0)); raf = 0; return; }
+            raf = visibili.size && !calm() && !document.hidden ? requestAnimationFrame(loop) : 0;
+        };
+        addEventListener('scroll', () => {
+            if (raf) return;
+            if (visibili.size && !calm()) raf = requestAnimationFrame(loop);
+            else lastY = scrollY;
+        }, { passive: true });
+        voci.forEach(voce => quandoVisibile(voce.el, () => visibili.add(voce), () => { visibili.delete(voce); applica(voce, 0); }));
+        addEventListener('nero:movimento', () => { if (calm()) voci.forEach(voce => applica(voce, 0)); });
+    }
+
+    /* ----------------------------------------------------------------------
+       Immagini dei lavori che si sciolgono in particelle al passaggio:
+       il grigio si sfalda e si ricompone a colori. Solo puntatore fine.
+       ---------------------------------------------------------------------- */
+    function initSciogli() {
+        if (!finePointer.matches) return;
+        const ampio = matchMedia('(min-width: 901px)');
+        $$('.lavoro__link').forEach(link => {
+            const img = $('.lavoro__img:not(.contiene)', link);
+            if (!img) return;
+            let canvas = null, g = null, celle = null, raf = 0, dati = null;
+            const PASSO = 5;
+            const prepara = () => {
+                const w = img.clientWidth, h = img.clientHeight;
+                if (!w || !h || !img.complete || !img.naturalWidth) return false;
+                if (dati && dati.w === w && dati.h === h) return true;
+                // campionamento con lo stesso ritaglio di object-fit: cover
+                const sc = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+                const sw = w / sc, sh = h / sc;
+                const sx = (img.naturalWidth - sw) / 2, sy = (img.naturalHeight - sh) / 2;
+                const cols = Math.ceil(w / PASSO), rows = Math.ceil(h / PASSO);
+                const off = document.createElement('canvas');
+                off.width = cols; off.height = rows;
+                const og = off.getContext('2d', { willReadFrequently: true });
+                if (!og) return false;
+                og.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
+                let px;
+                try { px = og.getImageData(0, 0, cols, rows).data; } catch { return false; }
+                celle = [];
+                for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+                    const i = (y * cols + x) * 4;
+                    const r = px[i], gg = px[i + 1], b = px[i + 2];
+                    // stesso grigio del filtro a riposo: grayscale(1) brightness(.75) contrast(1.1)
+                    const l = Math.max(0, Math.min(255, ((.2126 * r + .7152 * gg + .0722 * b) * .75 - 128) * 1.1 + 128));
+                    celle.push({ x: x * PASSO, y: y * PASSO, r, g: gg, b, l, a: Math.random() * Math.PI * 2, s: .35 + Math.random() * .9, d: Math.random() * .35 });
+                }
+                dati = { w, h };
+                if (!canvas) {
+                    canvas = document.createElement('canvas');
+                    canvas.className = 'sciogli';
+                    canvas.setAttribute('aria-hidden', 'true');
+                    link.append(canvas);
+                    g = canvas.getContext('2d');
+                }
+                const dpr = Math.min(2, devicePixelRatio || 1);
+                canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+                canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+                g.setTransform(dpr, 0, 0, dpr, 0, 0);
+                return true;
+            };
+            const posiziona = () => {
+                canvas.style.left = img.offsetLeft + 'px';
+                canvas.style.top = img.offsetTop + 'px';
+            };
+            const corri = (verso, ox, oy) => {
+                cancelAnimationFrame(raf);
+                if (calm() || !ampio.matches || !prepara()) return;
+                posiziona();
+                link.classList.add('sciogli-attivo');
+                const t0 = performance.now(), durata = verso > 0 ? 1100 : 700;
+                const step = now => {
+                    const p = Math.min(1, (now - t0) / durata);
+                    g.clearRect(0, 0, dati.w, dati.h);
+                    for (const c of celle) {
+                        // ogni cella parte con un piccolo ritardo, si allontana dal cursore e torna
+                        const q = Math.max(0, Math.min(1, (p - c.d * .6) / (1 - c.d * .6)));
+                        const onda = Math.sin(Math.PI * q);
+                        const dx = c.x - ox, dy = c.y - oy, dist = Math.hypot(dx, dy) || 1;
+                        const spinta = onda * (14 + 26 * c.s);
+                        const x = c.x + (dx / dist) * spinta + Math.cos(c.a + q * 3) * onda * 9;
+                        const y = c.y + (dy / dist) * spinta + Math.sin(c.a + q * 3) * onda * 9 - onda * 6;
+                        const m = verso > 0 ? q * q * (3 - 2 * q) : 1 - q * q * (3 - 2 * q);
+                        const r = c.l + (c.r - c.l) * m, gg = c.l + (c.g - c.l) * m, b = c.l + (c.b - c.l) * m;
+                        const lato = PASSO * (1 - onda * .55);
+                        g.fillStyle = `rgb(${r | 0},${gg | 0},${b | 0})`;
+                        g.fillRect(x + (PASSO - lato) / 2, y + (PASSO - lato) / 2, lato, lato);
+                    }
+                    if (p < 1) raf = requestAnimationFrame(step);
+                    else { raf = 0; link.classList.remove('sciogli-attivo'); g.clearRect(0, 0, dati.w, dati.h); }
+                };
+                raf = requestAnimationFrame(step);
+            };
+            const punto = e => {
+                const r = img.getBoundingClientRect();
+                return [Math.max(0, Math.min(r.width, e.clientX - r.left)), Math.max(0, Math.min(r.height, e.clientY - r.top))];
+            };
+            link.addEventListener('pointerenter', e => corri(1, ...punto(e)));
+            link.addEventListener('pointerleave', e => corri(-1, ...punto(e)));
+            addEventListener('resize', () => { dati = null; });
+            addEventListener('nero:movimento', () => { if (calm()) { cancelAnimationFrame(raf); raf = 0; link.classList.remove('sciogli-attivo'); } });
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       Etichette in Cascadia che si decodificano quando entrano in vista,
+       come l'uscita di un terminale. Si toccano solo i nodi di testo, e mai
+       quelli che altri script aggiornano dal vivo.
+       ---------------------------------------------------------------------- */
+    function initDecodifica() {
+        if (!('IntersectionObserver' in window)) return;
+        const glifi = '01<>/_-+=*#%&$';
+        const vivo = el => [el, ...el.querySelectorAll('*')].some(n => n.matches('button, [aria-live], [role="status"], time') ||
+            [...n.attributes].some(a => a.name.startsWith('data-') && !a.name.startsWith('data-i18n') && a.name !== 'data-split'));
+        const voci = $$('main .t-meta, .colophon .t-meta').filter(el => {
+            if (el.closest('.testata, .indice, .segnapagina, .ingresso, [aria-hidden="true"]')) return false;
+            const testo = el.textContent.trim();
+            return testo.length > 1 && testo.length <= 72 && !vivo(el);
+        });
+        const corri = (el, ritardo) => {
+            const nodi = [];
+            const walk = n => n.childNodes.forEach(c => { if (c.nodeType === 3 && c.data.trim()) nodi.push([c, c.data]); else if (c.nodeType === 1) walk(c); });
+            walk(el);
+            if (!nodi.length) return;
+            const durata = 380 + Math.min(420, el.textContent.length * 12);
+            const t0 = performance.now() + ritardo;
+            const step = now => {
+                const p = Math.max(0, Math.min(1, (now - t0) / durata));
+                if (calm()) { nodi.forEach(([n, o]) => { n.data = o; }); return; }
+                nodi.forEach(([n, o]) => {
+                    const fatto = Math.floor(p * o.length);
+                    let s = '';
+                    for (let i = 0; i < o.length; i++) s += i < fatto || /\s/.test(o[i]) ? o[i] : glifi[(Math.random() * glifi.length) | 0];
+                    n.data = s;
+                });
+                if (p < 1) requestAnimationFrame(step); else nodi.forEach(([n, o]) => { n.data = o; });
+            };
+            requestAnimationFrame(step);
+        };
+        let lotto = 0, lottoT = 0;
+        const io = new IntersectionObserver(entries => entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            io.unobserve(entry.target);
+            if (calm()) return;
+            const ora = performance.now();
+            if (ora - lottoT > 120) { lotto = 0; lottoT = ora; }
+            corri(entry.target, Math.min(6, lotto++) * 70);
+        }), { rootMargin: '0px 0px -6% 0px' });
+        voci.forEach(el => io.observe(el));
+    }
+
+    /* ----------------------------------------------------------------------
+       La firma "oakvx" del piede si riempie di cremisi dal basso
+       mentre si arriva in fondo alla pagina.
+       ---------------------------------------------------------------------- */
+    function initRiempi() {
+        const firma = $('.colophon__firma');
+        if (!firma) return;
+        let raf = 0;
+        const aggiorna = () => {
+            raf = 0;
+            if (calm()) { firma.style.removeProperty('--riempi'); return; }
+            const r = firma.getBoundingClientRect();
+            // la parte bassa delle lettere esce dal piede (overflow: hidden): si parte da lì
+            const fondo = Math.min(r.bottom, firma.parentElement.getBoundingClientRect().bottom);
+            const resto = Math.max(0, document.documentElement.scrollHeight - innerHeight - scrollY);
+            // 0 quando la firma spunta dal basso, 1 a fine pagina
+            const prima = innerHeight - r.top;
+            const p = prima + resto <= 0 ? 1 : Math.max(0, Math.min(1, prima / (prima + resto)));
+            const riempi = (r.bottom - fondo + p * (fondo - r.top)) / r.height;
+            firma.style.setProperty('--riempi', (Math.min(1, riempi) * 100).toFixed(2) + '%');
+        };
+        const chiedi = () => { if (!raf) raf = requestAnimationFrame(aggiorna); };
+        quandoVisibile(firma, () => { addEventListener('scroll', chiedi, { passive: true }); chiedi(); }, () => removeEventListener('scroll', chiedi));
+        addEventListener('resize', chiedi);
+        addEventListener('nero:movimento', chiedi);
+    }
+
     function init() {
         initLingue();
         initOra();
@@ -1140,6 +1417,11 @@
         initScorriMorbido();
         initUscita();
         initNastro();
+        initRespiro();
+        initStira();
+        initSciogli();
+        initDecodifica();
+        initRiempi();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

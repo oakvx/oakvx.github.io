@@ -1,13 +1,13 @@
 /* Magazzino: un deposito ordinato, dentro la palette del sito. */
 
-.magazzino-apertura { padding: max(8rem, calc(var(--u) * 14)) var(--margine, 4vw) calc(var(--u) * 6); }
+.magazzino-apertura { padding: max(8rem, calc(var(--u) * 14)) var(--bordo) calc(var(--u) * 6); }
 .magazzino-apertura > .t-meta { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .magazzino-saldo b { color: var(--bianco); font-weight: 600; margin-left: .4rem; }
 .magazzino-apertura__titolo { font: 400 clamp(3rem, calc(var(--u) * 9), 8rem)/.9 var(--serif); letter-spacing: -.035em; margin: 2.4rem 0 1.6rem; max-width: 14ch; }
 .magazzino-apertura__titolo em { color: var(--cremisi); }
 .magazzino-apertura__coda { max-width: 34rem; color: var(--bianco-60); font: italic 400 clamp(1.1rem, calc(var(--u) * 1.6), 1.5rem)/1.35 var(--serif); }
 
-.scaffale { padding: calc(var(--u) * 5) var(--margine, 4vw); border-top: 1px solid var(--linea); }
+.scaffale { padding: calc(var(--u) * 5) var(--bordo); border-top: 1px solid var(--linea); }
 .scaffale__testa { display: flex; align-items: baseline; gap: 1.6rem; margin-bottom: 2rem; }
 .scaffale__testa h2 { font: 700 clamp(1.6rem, calc(var(--u) * 3), 2.6rem)/1 var(--sans); font-stretch: 62%; text-transform: uppercase; letter-spacing: .04em; }
 
@@ -43,7 +43,7 @@
 :root.calm .cassa:hover { transform: none; }
 
 /* Tavolo da gioco */
-.gioco { padding: max(7rem, calc(var(--u) * 11)) var(--margine, 4vw) calc(var(--u) * 5); }
+.gioco { padding: max(7rem, calc(var(--u) * 11)) var(--bordo) calc(var(--u) * 5); }
 .gioco__testa { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
 .gioco__titolo { font: 400 clamp(2.4rem, calc(var(--u) * 6), 5rem)/.95 var(--serif); letter-spacing: -.03em; }
 .gioco__titolo em { color: var(--cremisi); }
@@ -84,7 +84,7 @@
 :root.calm .tavolo__carta--mano { transition: none; }
 
 /* come si gioca */
-.regole { padding: calc(var(--u) * 5) var(--margine, 4vw); border-top: 1px solid var(--linea); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 2rem; }
+.regole { padding: calc(var(--u) * 5) var(--bordo); border-top: 1px solid var(--linea); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 2rem; }
 .regole h2 { font: 400 clamp(1.8rem, calc(var(--u) * 3.4), 3rem)/1 var(--serif); }
 .regole ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .6rem; color: var(--bianco-80); }
 @media (max-width: 760px) { .regole { grid-template-columns: 1fr; } .tavolo { padding: .9rem; min-height: 26rem; } }
@@ -118,7 +118,7 @@
 @media (max-width: 760px) { .bj3d__scena { height: 62vh; } .bj3d__azioni { justify-content: center; } }
 
 /* Magazzino 3D */
-.mg3d { margin: 0 var(--margine, 4vw) calc(var(--u) * 4); border: 1px solid var(--linea-forte); background: #050403; }
+.mg3d { margin: 0 var(--bordo) calc(var(--u) * 4); border: 1px solid var(--linea-forte); background: #050403; }
 .mg3d[hidden] { display: none; }
 .mg3d__titolo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .mg3d__scena { position: relative; height: min(74vh, 48rem); min-height: 28rem; overflow: hidden; }
@@ -140,12 +140,15 @@
 .tavolo__pila-n { position: absolute; left: 50%; bottom: -.9rem; transform: translateX(-50%); padding: .15rem .5rem; border: 1px solid var(--linea-forte); background: var(--nero); font: 400 .72rem/1 var(--mono); letter-spacing: .08em; }
 .tavolo__centro:has(.tavolo__pila) { padding-bottom: 1rem; }
 
+/* Le scene 3D partono da sotto la testata: la sua velatura resta sempre accesa, così il testo non finisce sulla lampada. */
+body:has(.pagina--magazzino) .testata::before { opacity: 1; background: linear-gradient(var(--nero) 50%, rgb(5 5 5 / .6) 78%, transparent); }
+
 /* A tutto schermo: la scena riempie lo schermo, i comandi stanno sopra, le regole e l'elenco più giù */
 .pagina--magazzino .mg3d { position: relative; margin: 0; border: 0; height: 100vh; height: 100dvh; min-height: 30rem; }
 .pagina--magazzino .mg3d__scena { position: absolute; inset: 0; height: auto; min-height: 0; }
-.pagina--magazzino .mg3d__barra, .pagina--magazzino .bj3d__barra { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; border: 0; padding: 4rem var(--margine, 4vw) 1.4rem; background: linear-gradient(to top, rgb(5 4 3 / .95) 40%, rgb(5 4 3 / 0)); }
+.pagina--magazzino .mg3d__barra, .pagina--magazzino .bj3d__barra { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; border: 0; padding: 4rem var(--bordo) 1.4rem; background: linear-gradient(to top, rgb(5 4 3 / .95) 40%, rgb(5 4 3 / 0)); }
 .pagina--magazzino .gioco { position: relative; padding: 0; }
-.pagina--magazzino .gioco__testa { position: absolute; z-index: 3; top: 5.4rem; left: var(--margine, 4vw); right: var(--margine, 4vw); margin: 0; pointer-events: none; align-items: flex-start; }
+.pagina--magazzino .gioco__testa { position: absolute; z-index: 3; top: 5.4rem; left: var(--bordo); right: var(--bordo); margin: 0; pointer-events: none; align-items: flex-start; }
 .pagina--magazzino .gioco__testa > * { pointer-events: auto; }
 .pagina--magazzino .gioco__titolo { font-size: clamp(1.7rem, calc(var(--u) * 3.4), 3rem); text-shadow: 0 .1rem 1rem rgb(0 0 0 / .85); }
 .gioco__regole { align-self: center; color: var(--bianco-80); text-decoration: none; padding: .4rem 0; border-bottom: 1px solid var(--linea-forte); }
